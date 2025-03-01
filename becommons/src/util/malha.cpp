@@ -21,7 +21,7 @@ namespace bubble
 
     void malha::descarregar()
     {
-        debug::emitir("malha", "descarregando");
+        depuracao::emitir(debug, "malha", "descarregando");
         glDeleteVertexArrays(1, &VAO);
         glDeleteBuffers(1, &VBO);
         glDeleteBuffers(1, &EBO);

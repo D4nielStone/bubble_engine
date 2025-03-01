@@ -56,4 +56,8 @@ find_library(BULLET_LINEAR_MATH_LIBRARY LinearMath)
 #set(CMAKE_BUILD_TYPE Debug)  # Garante que estamos gerando uma build de depuração
 #set(CMAKE_CXX_FLAGS_DEBUG "-g")  # Adiciona símbolos de depuração
 
-set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O3 -march=native -flto")
+#set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O3 -march=native -flto")
+
+if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+    add_definitions(-D_DEBUG)
+endif()

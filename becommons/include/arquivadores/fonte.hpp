@@ -21,7 +21,7 @@ namespace bubble
         unsigned int id;        // ID da textura
         vetor2<unsigned int> tamanho;    // tamanho do glifo
         vetor2<FT_Int>   apoio;    // offset
-        unsigned int avanco;    // Offset para o avanco do proximo glifo
+        long int avanco;    // Offset para o avanco do proximo glifo
     };
 
 

@@ -414,30 +414,6 @@ src/componentes/transformacao.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/becommons.dir/build.make CMakeFiles/becommons.dir/src/componentes/transformacao.cpp.s
 .PHONY : src/componentes/transformacao.cpp.s
 
-src/depuracao/debug.o: src/depuracao/debug.cpp.o
-.PHONY : src/depuracao/debug.o
-
-# target to build an object file
-src/depuracao/debug.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/becommons.dir/build.make CMakeFiles/becommons.dir/src/depuracao/debug.cpp.o
-.PHONY : src/depuracao/debug.cpp.o
-
-src/depuracao/debug.i: src/depuracao/debug.cpp.i
-.PHONY : src/depuracao/debug.i
-
-# target to preprocess a source file
-src/depuracao/debug.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/becommons.dir/build.make CMakeFiles/becommons.dir/src/depuracao/debug.cpp.i
-.PHONY : src/depuracao/debug.cpp.i
-
-src/depuracao/debug.s: src/depuracao/debug.cpp.s
-.PHONY : src/depuracao/debug.s
-
-# target to generate assembly for a file
-src/depuracao/debug.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/becommons.dir/build.make CMakeFiles/becommons.dir/src/depuracao/debug.cpp.s
-.PHONY : src/depuracao/debug.cpp.s
-
 src/entidades/entidade.o: src/entidades/entidade.cpp.o
 .PHONY : src/entidades/entidade.o
 
@@ -769,9 +745,6 @@ help:
 	@echo "... src/componentes/transformacao.o"
 	@echo "... src/componentes/transformacao.i"
 	@echo "... src/componentes/transformacao.s"
-	@echo "... src/depuracao/debug.o"
-	@echo "... src/depuracao/debug.i"
-	@echo "... src/depuracao/debug.s"
 	@echo "... src/entidades/entidade.o"
 	@echo "... src/entidades/entidade.i"
 	@echo "... src/entidades/entidade.s"

@@ -541,6 +541,8 @@ CMakeFiles/becommons.dir/src/nucleo/sistema_de_renderizacao.cpp.o: \
  /usr/include/bullet/BulletDynamics/Dynamics/btRigidBody.h \
  /source/repos/BubbleEngine/becommons/include/depuracao/debug.hpp \
  /usr/include/c++/13/utility /usr/include/c++/13/bits/stl_relops.h \
+ /usr/include/c++/13/iostream /usr/include/c++/13/istream \
+ /usr/include/c++/13/bits/istream.tcc \
  /source/repos/BubbleEngine/becommons/include/componentes/renderizador.hpp \
  /source/repos/BubbleEngine/becommons/include/arquivadores/modelo.hpp \
  /source/repos/BubbleEngine/becommons/include/util/malha.hpp \
@@ -548,12 +550,11 @@ CMakeFiles/becommons.dir/src/nucleo/sistema_de_renderizacao.cpp.o: \
  /source/repos/BubbleEngine/becommons/include/util/vetor2.hpp \
  /source/repos/BubbleEngine/becommons/include/util/textura.hpp \
  /source/repos/BubbleEngine/becommons/include/arquivadores/shader.hpp \
- /usr/include/c++/13/fstream /usr/include/c++/13/istream \
- /usr/include/c++/13/bits/istream.tcc /usr/include/c++/13/bits/codecvt.h \
+ /usr/include/c++/13/fstream /usr/include/c++/13/bits/codecvt.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/basic_file.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/c++io.h \
  /usr/include/c++/13/bits/fstream.tcc /usr/include/c++/13/sstream \
- /usr/include/c++/13/bits/sstream.tcc /usr/include/c++/13/iostream \
+ /usr/include/c++/13/bits/sstream.tcc \
  /source/repos/BubbleEngine/becommons/include/util/cor.hpp \
  /source/repos/BubbleEngine/becommons/include/util/vetor4.hpp \
  /source/repos/BubbleEngine/becommons/include/util/material.hpp \

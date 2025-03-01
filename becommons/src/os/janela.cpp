@@ -16,13 +16,13 @@ bubble::janela::janela(const char* nome, vet2 bounds, const char* icon_path)
     // inicia glfw
     if (!glfwInit())
     {
-        debug::emitir(Erro, "Iniciando janela glfw");
+        depuracao::emitir(erro, "Iniciando janela glfw");
         abort();
     }
     
     window = glfwCreateWindow(bounds.x, bounds.y, nome, NULL, NULL);
     if (!window) {
-        debug::emitir(Erro, "Janla invalida");
+        depuracao::emitir(erro, "Janla invalida");
         abort();
     };
 
@@ -30,7 +30,7 @@ bubble::janela::janela(const char* nome, vet2 bounds, const char* icon_path)
 
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
     {
-        debug::emitir(Erro, "Glad");
+        depuracao::emitir(erro, "Glad");
         abort();
     }
     

@@ -546,9 +546,10 @@ CMakeFiles/becommons.dir/src/componentes/camera.cpp.o: \
  /source/repos/BubbleEngine/becommons/include/componentes/fisica.hpp \
  /source/repos/BubbleEngine/becommons/include/depuracao/debug.hpp \
  /usr/include/c++/13/utility /usr/include/c++/13/bits/stl_relops.h \
- /usr/include/c++/13/queue /usr/include/c++/13/deque \
- /usr/include/c++/13/bits/stl_deque.h /usr/include/c++/13/bits/deque.tcc \
- /usr/include/c++/13/bits/stl_queue.h \
+ /usr/include/c++/13/iostream /usr/include/c++/13/istream \
+ /usr/include/c++/13/bits/istream.tcc /usr/include/c++/13/queue \
+ /usr/include/c++/13/deque /usr/include/c++/13/bits/stl_deque.h \
+ /usr/include/c++/13/bits/deque.tcc /usr/include/c++/13/bits/stl_queue.h \
  /source/repos/BubbleEngine/becommons/include/nucleo/sistema_de_fisica.hpp \
  /source/repos/BubbleEngine/becommons/include/nucleo/sistema.hpp \
  /usr/include/c++/13/thread /usr/include/c++/13/stop_token \
@@ -564,12 +565,11 @@ CMakeFiles/becommons.dir/src/componentes/camera.cpp.o: \
  /source/repos/BubbleEngine/becommons/include/nucleo/sistema_de_renderizacao.hpp \
  /source/repos/BubbleEngine/becommons/include/nucleo/sistema_de_interface.hpp \
  /source/repos/BubbleEngine/becommons/include/arquivadores/shader.hpp \
- /usr/include/c++/13/fstream /usr/include/c++/13/istream \
- /usr/include/c++/13/bits/istream.tcc /usr/include/c++/13/bits/codecvt.h \
+ /usr/include/c++/13/fstream /usr/include/c++/13/bits/codecvt.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/basic_file.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/c++io.h \
  /usr/include/c++/13/bits/fstream.tcc /usr/include/c++/13/sstream \
- /usr/include/c++/13/bits/sstream.tcc /usr/include/c++/13/iostream \
+ /usr/include/c++/13/bits/sstream.tcc \
  /source/repos/BubbleEngine/becommons/include/componentes/texto.hpp \
  /source/repos/BubbleEngine/becommons/include/componentes/imagem.hpp \
  /source/repos/BubbleEngine/becommons/include/arquivadores/imageloader.hpp \

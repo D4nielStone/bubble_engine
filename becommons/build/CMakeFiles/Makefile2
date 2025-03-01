@@ -81,12 +81,12 @@ clean: CMakeFiles/becommons.dir/clean
 CMakeFiles/becommons.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/becommons.dir/build.make CMakeFiles/becommons.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/becommons.dir/build.make CMakeFiles/becommons.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/source/repos/BubbleEngine/becommons/build/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24 "Built target becommons"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/source/repos/BubbleEngine/becommons/build/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23 "Built target becommons"
 .PHONY : CMakeFiles/becommons.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/becommons.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /source/repos/BubbleEngine/becommons/build/CMakeFiles 24
+	$(CMAKE_COMMAND) -E cmake_progress_start /source/repos/BubbleEngine/becommons/build/CMakeFiles 23
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/becommons.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /source/repos/BubbleEngine/becommons/build/CMakeFiles 0
 .PHONY : CMakeFiles/becommons.dir/rule

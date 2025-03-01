@@ -541,9 +541,11 @@ CMakeFiles/becommons.dir/src/nucleo/sistema_de_codigo.cpp.o: \
  /usr/include/bullet/BulletDynamics/Dynamics/btRigidBody.h \
  /source/repos/BubbleEngine/becommons/include/depuracao/debug.hpp \
  /usr/include/c++/13/utility /usr/include/c++/13/bits/stl_relops.h \
- /usr/include/c++/13/thread /usr/include/c++/13/stop_token \
- /usr/include/c++/13/atomic /usr/include/c++/13/bits/std_thread.h \
- /usr/include/c++/13/semaphore /usr/include/c++/13/bits/semaphore_base.h \
+ /usr/include/c++/13/iostream /usr/include/c++/13/istream \
+ /usr/include/c++/13/bits/istream.tcc /usr/include/c++/13/thread \
+ /usr/include/c++/13/stop_token /usr/include/c++/13/atomic \
+ /usr/include/c++/13/bits/std_thread.h /usr/include/c++/13/semaphore \
+ /usr/include/c++/13/bits/semaphore_base.h \
  /usr/include/c++/13/bits/chrono.h /usr/include/c++/13/ratio \
  /usr/include/c++/13/ctime /usr/include/c++/13/bits/parse_numbers.h \
  /usr/include/c++/13/bits/atomic_timed_wait.h \
@@ -563,12 +565,11 @@ CMakeFiles/becommons.dir/src/nucleo/sistema_de_codigo.cpp.o: \
  /source/repos/BubbleEngine/becommons/include/nucleo/sistema_de_renderizacao.hpp \
  /source/repos/BubbleEngine/becommons/include/nucleo/sistema_de_interface.hpp \
  /source/repos/BubbleEngine/becommons/include/arquivadores/shader.hpp \
- /usr/include/c++/13/fstream /usr/include/c++/13/istream \
- /usr/include/c++/13/bits/istream.tcc /usr/include/c++/13/bits/codecvt.h \
+ /usr/include/c++/13/fstream /usr/include/c++/13/bits/codecvt.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/basic_file.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/c++io.h \
  /usr/include/c++/13/bits/fstream.tcc /usr/include/c++/13/sstream \
- /usr/include/c++/13/bits/sstream.tcc /usr/include/c++/13/iostream \
+ /usr/include/c++/13/bits/sstream.tcc \
  /source/repos/BubbleEngine/becommons/include/componentes/texto.hpp \
  /source/repos/BubbleEngine/becommons/include/componentes/imagem.hpp \
  /source/repos/BubbleEngine/becommons/include/arquivadores/imageloader.hpp \

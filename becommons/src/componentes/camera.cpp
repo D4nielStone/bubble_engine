@@ -27,7 +27,7 @@ void bubble::camera::desenharFB() const
 
 bubble::camera::~camera()
 {
-    debug::emitir("camera", "descarregando");
+    depuracao::emitir(debug, "camera", "descarregando");
     
     desativarFB();
 }

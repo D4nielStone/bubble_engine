@@ -19,8 +19,6 @@ file(REMOVE_RECURSE
   "CMakeFiles/becommons.dir/src/componentes/terreno.cpp.o.d"
   "CMakeFiles/becommons.dir/src/componentes/transformacao.cpp.o"
   "CMakeFiles/becommons.dir/src/componentes/transformacao.cpp.o.d"
-  "CMakeFiles/becommons.dir/src/depuracao/debug.cpp.o"
-  "CMakeFiles/becommons.dir/src/depuracao/debug.cpp.o.d"
   "CMakeFiles/becommons.dir/src/entidades/entidade.cpp.o"
   "CMakeFiles/becommons.dir/src/entidades/entidade.cpp.o.d"
   "CMakeFiles/becommons.dir/src/inputs/inputs.cpp.o"

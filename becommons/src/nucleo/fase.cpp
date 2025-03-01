@@ -274,19 +274,19 @@ void bubble::fase::analizar(const char* diretorio)
 
 	if (doc.HasParseError()) 
 	{
-		debug::emitir(Erro, "Parse da fase");
+		depuracao::emitir(erro, "Parse da fase");
 	}
 	/*----Analise da cena-----*/
 	if (doc.HasMember("nome") && doc["nome"].IsString())
 	{
 		_Mnome = doc["nome"].GetString();
-		debug::emitir("Fase", "Nome definido como " + _Mnome);
+		depuracao::emitir(debug, "Fase", "Nome definido como " + _Mnome);
 	}
 	if (doc.HasMember("selecionada") && doc["selecionada"].IsBool())
 	{
 		if (doc["selecionada"].GetBool())
 		{
-			debug::emitir("Fase", "Fase ativa");
+			depuracao::emitir(debug, "Fase", "Fase ativa");
 		}
 	}
 	/*------------------------*/
@@ -297,7 +297,7 @@ void bubble::fase::pausar()
 {
 	file_de_tarefas.push([this]() 
 		{
-			debug::emitir("fase", "Pausando");
+			depuracao::emitir(debug, "fase", "Pausando");
 			rodando = false;
 			//scodigo.pararThread();
 			//sfisica.pararThread();
@@ -306,7 +306,7 @@ void bubble::fase::pausar()
 
 void bubble::fase::parar()
 {
-	debug::emitir("fase", "Parando");
+	depuracao::emitir(debug, "fase", "Parando");
 	// TODO: snapshot para retornar o rodando do registro
 	rodando = false;
 	//scodigo.pararThread();
@@ -315,7 +315,7 @@ void bubble::fase::parar()
 
 void bubble::fase::iniciar()
 {
-	debug::emitir("fase", "Iniciando");
+	depuracao::emitir(debug, "fase", "Iniciando");
 	if (rodando != false)
 		return;
 

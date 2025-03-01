@@ -41,7 +41,6 @@ target_sources(becommons PRIVATE
     src/componentes/fisica.cpp
     src/componentes/transformacao.cpp
     src/componentes/terreno.cpp
-    src/depuracao/debug.cpp
     src/entidades/entidade.cpp
     src/inputs/inputs.cpp
     src/nucleo/fase.cpp
@@ -71,13 +70,14 @@ target_link_libraries(becommons
     Bullet3Common
 )
 
-# Se você ainda estiver incluindo GLM manualmente, remova isso
-# Não precisa linkar GLM com target_link_libraries, pois é uma biblioteca header-only
-
 # Instalar a biblioteca (se necessário)
 install(TARGETS becommons DESTINATION lib)
 install(DIRECTORY include/ DESTINATION include)
 
-set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O3 -march=native -flto")
+#set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O3 -march=native -flto")
 #set(CMAKE_BUILD_TYPE Debug)  # Garante que estamos gerando uma build de depuração
 #set(CMAKE_CXX_FLAGS_DEBUG "-g")  # Adiciona símbolos de depuração
+
+if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+    add_definitions(-D_DEBUG)
+endif()

@@ -66,7 +66,7 @@ void bubble::codigo::encerrar()
 }
 bubble::codigo::~codigo()
 {
-        debug::emitir("codigo", "descarregando");
+        depuracao::emitir(debug, "codigo", "descarregando");
 
 	encerrar();
 }

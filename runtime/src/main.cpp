@@ -6,17 +6,23 @@
 /// Definindo título da janela
 int main(int argv, char* argc[])
 {
-	std::string projeto_dir = std::filesystem::path(bubble::obterExecDir()).parent_path().parent_path().string() + "/jogos/Golf";
+	std::string DIR_PADRAO = std::filesystem::path(bubble::obterExecDir()).parent_path().parent_path().string() + "/jogos/Golf";
 
 	if(argv > 1)
 	{
-		projeto_dir = argc[1];
+		DIR_PADRAO = argc[1];
 	}
-	debug::emitir(Mensagem, "Iniciando projeto em:" + projeto_dir);
 
-	bubble::projeto runtime(projeto_dir);
-	
-	runtime.rodar();
-
+	try
+	{
+		bubble::projeto runtime(DIR_PADRAO);
+		
+		depuracao::emitir(info, "Iniciando projeto em:" + DIR_PADRAO);
+		runtime.rodar();
+	}
+	catch(const std::exception& e)
+	{
+		depuracao::emitir(erro, e.what());
+	}
 	return 0;
 }

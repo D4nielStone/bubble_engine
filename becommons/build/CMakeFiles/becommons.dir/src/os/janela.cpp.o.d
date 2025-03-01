@@ -567,9 +567,9 @@ CMakeFiles/becommons.dir/src/os/janela.cpp.o: \
  /usr/include/bullet/BulletDynamics/Dynamics/btRigidBody.h \
  /source/repos/BubbleEngine/becommons/include/depuracao/debug.hpp \
  /usr/include/c++/13/utility /usr/include/c++/13/bits/stl_relops.h \
+ /usr/include/c++/13/iostream \
  /source/repos/BubbleEngine/becommons/include/nucleo/sistema_de_renderizacao.hpp \
  /source/repos/BubbleEngine/becommons/include/inputs/inputs.hpp \
- /usr/include/c++/13/iostream \
  /source/repos/BubbleEngine/becommons/include/util/vetor4.hpp \
  /source/repos/BubbleEngine/becommons/include/arquivadores/imageloader.hpp \
  /usr/include/FreeImage.h /usr/include/inttypes.h \

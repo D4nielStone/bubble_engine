@@ -22,7 +22,7 @@ namespace bubble
                 carregarmodelo(std::filesystem::absolute(diretorio).string().c_str());
             }else
             {
-                debug::emitir(Erro, "Diretorio do modelo inexistente.");
+                depuracao::emitir(erro, "Diretorio do modelo inexistente.");
             }
         }
         void definirShader(const char* vertex,const char* frag);

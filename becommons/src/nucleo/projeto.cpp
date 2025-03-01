@@ -12,7 +12,7 @@ bubble::projeto::projeto(const std::string &diretorio) : diretorioDoProjeto(dire
     std::string full_path = diretorio + "/config";
     if(!std::filesystem::exists(full_path)) 
     {
-        debug::emitir(Erro, "Arquivo de projeto não encontrado!");
+        depuracao::emitir(erro, "Arquivo de projeto não encontrado!");
         return;
     }
     std::ifstream file(full_path);
@@ -26,38 +26,38 @@ bubble::projeto::projeto(const std::string &diretorio) : diretorioDoProjeto(dire
     /*      ERROS     */
     if(doc.HasParseError()) 
     {
-        debug::emitir(Erro, "Parse do projeto!");
+        depuracao::emitir(erro, "Parse do projeto!");
         return;
     }
 
     if(!doc.HasMember("lancamento") || !doc["lancamento"].IsString())
     {
-        debug::emitir(Erro, "Defina fase de lancamento em config!");
+        depuracao::emitir(erro, "Defina fase de lancamento em config!");
         return;
     }
     if(!doc.HasMember("janela") || !doc["janela"].IsObject())
     {
-        debug::emitir(Erro, "Defina janela em config!");
+        depuracao::emitir(erro, "Defina janela em config!");
         return;
     }
     if(!doc["janela"].GetObject().HasMember("largura") || !doc["janela"].GetObject()["largura"].IsInt())
     {
-        debug::emitir(Erro, "Defina largura da janela em config!");
+        depuracao::emitir(erro, "Defina largura da janela em config!");
         return;
     }   
     if(!doc["janela"].GetObject().HasMember("altura") || !doc["janela"].GetObject()["altura"].IsInt())
     {
-        debug::emitir(Erro, "Defina altura da janela em config!");
+        depuracao::emitir(erro, "Defina altura da janela em config!");
         return;
     }   
     if(!doc["janela"].GetObject().HasMember("titulo") || !doc["janela"].GetObject()["titulo"].IsString())
     {
-        debug::emitir(Erro, "Defina titulo da janela em config!");
+        depuracao::emitir(erro, "Defina titulo da janela em config!");
         return;
     }    
     if(!doc["janela"].GetObject().HasMember("icone") || !doc["janela"].GetObject()["icone"].IsString())
     {
-        debug::emitir(Erro, "Defina icone da janela em config!");
+        depuracao::emitir(erro, "Defina icone da janela em config!");
         return;
     }   
     /*              */

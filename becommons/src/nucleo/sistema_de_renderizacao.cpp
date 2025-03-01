@@ -21,7 +21,7 @@ namespace bubble
         auto camera = _Mfase->obterCamera();
         if (!camera) 
         {
-            debug::emitir("fase", "Camera não configurada");
+            depuracao::emitir(debug, "fase", "Camera não configurada");
             return;
         }
 

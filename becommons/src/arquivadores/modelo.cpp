@@ -33,7 +33,7 @@ namespace bubble
 
         if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode)
         {
-            debug::emitir(Erro, import.GetErrorString());
+            depuracao::emitir(erro, import.GetErrorString());
             return;
         }
         diretorio = path.substr(0, path.find_last_of('\\'));
