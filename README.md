@@ -30,6 +30,8 @@ Este projeto é desenvolvido utilizando o Visual Studio Code no Linux Mint. Pull
 Este projeto está licenciado sob a [MIT License](https://choosealicense.com/licenses/mit/).
 
 ## Screenshots
-![image](https://github.com/user-attachments/assets/215acec4-dfc3-4be6-8fab-0ba943bb36d0)
-![image](https://github.com/user-attachments/assets/dcd15824-1e2a-4ef1-a0b8-441722cd36d0)
+
+![image](https://github.com/user-attachments/assets/16a070be-32ae-4eb5-b299-5245e563cdc4)
+![image](https://github.com/user-attachments/assets/65968911-e9cd-44c7-868b-81286b40889d)
+
 &#x20;
