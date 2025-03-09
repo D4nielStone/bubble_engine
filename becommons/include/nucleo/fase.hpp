@@ -7,6 +7,7 @@
 
 #pragma once
 #include "entidades/entidade.hpp"
+#include "nucleo/registro.hpp"
 #include "componentes/camera.hpp"
 #include <string>
 #include <memory>

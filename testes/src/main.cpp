@@ -7,6 +7,7 @@
 #include "util/vetor3.hpp"
 #include "util/vetor2.hpp"
 #include "entidades/entidade.hpp"
+#include "nucleo/registro.hpp"
 #include "componentes/fisica.hpp"
 
 betest::registro_testes testes;
@@ -299,6 +300,15 @@ void testarRegistro()
 		ASSERT_TRUE(fisica != nullptr);
 		ASSERT_EQUAL(fisica->meu_objeto, e.id);
 	
+		reg.remover<bubble::fisica>(e.id);
+		ASSERT_TRUE(!reg.tem<bubble::fisica>(e.id));
+    });
+
+    testes.adicionar("removendo_componente_nulo", [](){
+		bubble::registro reg;
+		bubble::entidade e = reg.criar();
+	
+		ASSERT_TRUE(!reg.tem<bubble::fisica>(e.id));
 		reg.remover<bubble::fisica>(e.id);
 		ASSERT_TRUE(!reg.tem<bubble::fisica>(e.id));
     });

@@ -620,6 +620,7 @@ CMakeFiles/becommons.dir/src/api/api_lua.cpp.o: \
  /source/repos/BubbleEngine/becommons/include/api/mat.hpp \
  /source/repos/BubbleEngine/becommons/include/nucleo/fase.hpp \
  /source/repos/BubbleEngine/becommons/include/entidades/entidade.hpp \
+ /source/repos/BubbleEngine/becommons/include/nucleo/registro.hpp \
  /source/repos/BubbleEngine/becommons/include/depuracao/debug.hpp \
  /usr/include/c++/13/queue /usr/include/c++/13/deque \
  /usr/include/c++/13/bits/stl_deque.h /usr/include/c++/13/bits/deque.tcc \

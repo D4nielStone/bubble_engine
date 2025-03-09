@@ -260,20 +260,22 @@ CMakeFiles/becommons.dir/src/os/janela.cpp.o: \
  /usr/include/c++/13/tr1/riemann_zeta.tcc \
  /source/repos/BubbleEngine/becommons/include/nucleo/sistema.hpp \
  /source/repos/BubbleEngine/becommons/include/entidades/entidade.hpp \
- /usr/include/c++/13/unordered_map \
- /usr/include/c++/13/bits/unordered_map.h \
- /usr/include/c++/13/bits/hashtable.h \
- /usr/include/c++/13/bits/hashtable_policy.h \
- /usr/include/c++/13/bits/node_handle.h \
- /usr/include/c++/13/bits/erase_if.h /usr/include/c++/13/memory \
+ /usr/include/c++/13/memory \
  /usr/include/c++/13/bits/stl_raw_storage_iter.h \
  /usr/include/c++/13/bits/shared_ptr_atomic.h \
  /usr/include/c++/13/backward/auto_ptr.h \
  /usr/include/c++/13/bits/ranges_uninitialized.h \
  /usr/include/c++/13/pstl/glue_memory_defs.h \
- /usr/include/c++/13/pstl/execution_defs.h /usr/include/c++/13/functional \
- /usr/include/c++/13/bits/std_function.h \
+ /usr/include/c++/13/pstl/execution_defs.h \
  /source/repos/BubbleEngine/becommons/include/componentes/componente.hpp \
+ /source/repos/BubbleEngine/becommons/include/nucleo/registro.hpp \
+ /usr/include/c++/13/unordered_map \
+ /usr/include/c++/13/bits/unordered_map.h \
+ /usr/include/c++/13/bits/hashtable.h \
+ /usr/include/c++/13/bits/hashtable_policy.h \
+ /usr/include/c++/13/bits/node_handle.h \
+ /usr/include/c++/13/bits/erase_if.h /usr/include/c++/13/functional \
+ /usr/include/c++/13/bits/std_function.h \
  /source/repos/BubbleEngine/becommons/include/componentes/fisica.hpp \
  /source/repos/BubbleEngine/becommons/include/componentes/transformacao.hpp \
  /source/repos/BubbleEngine/becommons/include/util/vetor3.hpp \

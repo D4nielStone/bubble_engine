@@ -15,21 +15,12 @@
 /install
 
 # Ignorar arquivos específicos do sistema operacional
-*.swp          # Arquivos de troca do Vim
 *~              # Arquivos temporários
 *.log           # Arquivos de log
 *.bak           # Arquivos de backup
-*.dSYM          # Arquivos de símbolos de depuração (macOS)
-.DS_Store       # Arquivo de configuração do Finder (macOS)
 
 # Ignorar arquivos gerados por ferramentas de construção
 *.a             # Arquivos de bibliotecas estáticas
 *.o             # Arquivos de objetos compilados
 *.so            # Bibliotecas compartilhadas
 *.d             # Arquivos de dependências gerados
-
-# Ignorar arquivos específicos de editor
-.vscode/
-.idea/
-*.sublime-workspace
-*.sublime-project

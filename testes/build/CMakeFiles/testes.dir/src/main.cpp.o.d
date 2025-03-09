@@ -247,6 +247,7 @@ CMakeFiles/testes.dir/src/main.cpp.o: \
  /usr/include/c++/13/pstl/glue_memory_defs.h \
  /usr/include/c++/13/pstl/execution_defs.h \
  /source/repos/BubbleEngine/testes/../becommons/include/componentes/componente.hpp \
+ /source/repos/BubbleEngine/testes/../becommons/include/nucleo/registro.hpp \
  /source/repos/BubbleEngine/testes/../becommons/include/componentes/fisica.hpp \
  /source/repos/BubbleEngine/testes/../becommons/include/componentes/transformacao.hpp \
  /usr/include/glm/ext/vector_float3.hpp \

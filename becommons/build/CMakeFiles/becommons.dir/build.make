@@ -111,10 +111,24 @@ CMakeFiles/becommons.dir/src/arquivadores/fonte.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/becommons.dir/src/arquivadores/fonte.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /source/repos/BubbleEngine/becommons/src/arquivadores/fonte.cpp -o CMakeFiles/becommons.dir/src/arquivadores/fonte.cpp.s
 
+CMakeFiles/becommons.dir/src/nucleo/registro.cpp.o: CMakeFiles/becommons.dir/flags.make
+CMakeFiles/becommons.dir/src/nucleo/registro.cpp.o: /source/repos/BubbleEngine/becommons/src/nucleo/registro.cpp
+CMakeFiles/becommons.dir/src/nucleo/registro.cpp.o: CMakeFiles/becommons.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/source/repos/BubbleEngine/becommons/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/becommons.dir/src/nucleo/registro.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/becommons.dir/src/nucleo/registro.cpp.o -MF CMakeFiles/becommons.dir/src/nucleo/registro.cpp.o.d -o CMakeFiles/becommons.dir/src/nucleo/registro.cpp.o -c /source/repos/BubbleEngine/becommons/src/nucleo/registro.cpp
+
+CMakeFiles/becommons.dir/src/nucleo/registro.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/becommons.dir/src/nucleo/registro.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /source/repos/BubbleEngine/becommons/src/nucleo/registro.cpp > CMakeFiles/becommons.dir/src/nucleo/registro.cpp.i
+
+CMakeFiles/becommons.dir/src/nucleo/registro.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/becommons.dir/src/nucleo/registro.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /source/repos/BubbleEngine/becommons/src/nucleo/registro.cpp -o CMakeFiles/becommons.dir/src/nucleo/registro.cpp.s
+
 CMakeFiles/becommons.dir/src/arquivadores/imageloader.cpp.o: CMakeFiles/becommons.dir/flags.make
 CMakeFiles/becommons.dir/src/arquivadores/imageloader.cpp.o: /source/repos/BubbleEngine/becommons/src/arquivadores/imageloader.cpp
 CMakeFiles/becommons.dir/src/arquivadores/imageloader.cpp.o: CMakeFiles/becommons.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/source/repos/BubbleEngine/becommons/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/becommons.dir/src/arquivadores/imageloader.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/source/repos/BubbleEngine/becommons/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/becommons.dir/src/arquivadores/imageloader.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/becommons.dir/src/arquivadores/imageloader.cpp.o -MF CMakeFiles/becommons.dir/src/arquivadores/imageloader.cpp.o.d -o CMakeFiles/becommons.dir/src/arquivadores/imageloader.cpp.o -c /source/repos/BubbleEngine/becommons/src/arquivadores/imageloader.cpp
 
 CMakeFiles/becommons.dir/src/arquivadores/imageloader.cpp.i: cmake_force
@@ -128,7 +142,7 @@ CMakeFiles/becommons.dir/src/arquivadores/imageloader.cpp.s: cmake_force
 CMakeFiles/becommons.dir/src/arquivadores/shader.cpp.o: CMakeFiles/becommons.dir/flags.make
 CMakeFiles/becommons.dir/src/arquivadores/shader.cpp.o: /source/repos/BubbleEngine/becommons/src/arquivadores/shader.cpp
 CMakeFiles/becommons.dir/src/arquivadores/shader.cpp.o: CMakeFiles/becommons.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/source/repos/BubbleEngine/becommons/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/becommons.dir/src/arquivadores/shader.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/source/repos/BubbleEngine/becommons/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/becommons.dir/src/arquivadores/shader.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/becommons.dir/src/arquivadores/shader.cpp.o -MF CMakeFiles/becommons.dir/src/arquivadores/shader.cpp.o.d -o CMakeFiles/becommons.dir/src/arquivadores/shader.cpp.o -c /source/repos/BubbleEngine/becommons/src/arquivadores/shader.cpp
 
 CMakeFiles/becommons.dir/src/arquivadores/shader.cpp.i: cmake_force
@@ -142,7 +156,7 @@ CMakeFiles/becommons.dir/src/arquivadores/shader.cpp.s: cmake_force
 CMakeFiles/becommons.dir/src/arquivadores/modelo.cpp.o: CMakeFiles/becommons.dir/flags.make
 CMakeFiles/becommons.dir/src/arquivadores/modelo.cpp.o: /source/repos/BubbleEngine/becommons/src/arquivadores/modelo.cpp
 CMakeFiles/becommons.dir/src/arquivadores/modelo.cpp.o: CMakeFiles/becommons.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/source/repos/BubbleEngine/becommons/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/becommons.dir/src/arquivadores/modelo.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/source/repos/BubbleEngine/becommons/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/becommons.dir/src/arquivadores/modelo.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/becommons.dir/src/arquivadores/modelo.cpp.o -MF CMakeFiles/becommons.dir/src/arquivadores/modelo.cpp.o.d -o CMakeFiles/becommons.dir/src/arquivadores/modelo.cpp.o -c /source/repos/BubbleEngine/becommons/src/arquivadores/modelo.cpp
 
 CMakeFiles/becommons.dir/src/arquivadores/modelo.cpp.i: cmake_force
@@ -156,7 +170,7 @@ CMakeFiles/becommons.dir/src/arquivadores/modelo.cpp.s: cmake_force
 CMakeFiles/becommons.dir/src/componentes/camera.cpp.o: CMakeFiles/becommons.dir/flags.make
 CMakeFiles/becommons.dir/src/componentes/camera.cpp.o: /source/repos/BubbleEngine/becommons/src/componentes/camera.cpp
 CMakeFiles/becommons.dir/src/componentes/camera.cpp.o: CMakeFiles/becommons.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/source/repos/BubbleEngine/becommons/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/becommons.dir/src/componentes/camera.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/source/repos/BubbleEngine/becommons/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/becommons.dir/src/componentes/camera.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/becommons.dir/src/componentes/camera.cpp.o -MF CMakeFiles/becommons.dir/src/componentes/camera.cpp.o.d -o CMakeFiles/becommons.dir/src/componentes/camera.cpp.o -c /source/repos/BubbleEngine/becommons/src/componentes/camera.cpp
 
 CMakeFiles/becommons.dir/src/componentes/camera.cpp.i: cmake_force
@@ -170,7 +184,7 @@ CMakeFiles/becommons.dir/src/componentes/camera.cpp.s: cmake_force
 CMakeFiles/becommons.dir/src/componentes/codigo.cpp.o: CMakeFiles/becommons.dir/flags.make
 CMakeFiles/becommons.dir/src/componentes/codigo.cpp.o: /source/repos/BubbleEngine/becommons/src/componentes/codigo.cpp
 CMakeFiles/becommons.dir/src/componentes/codigo.cpp.o: CMakeFiles/becommons.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/source/repos/BubbleEngine/becommons/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/becommons.dir/src/componentes/codigo.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/source/repos/BubbleEngine/becommons/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/becommons.dir/src/componentes/codigo.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/becommons.dir/src/componentes/codigo.cpp.o -MF CMakeFiles/becommons.dir/src/componentes/codigo.cpp.o.d -o CMakeFiles/becommons.dir/src/componentes/codigo.cpp.o -c /source/repos/BubbleEngine/becommons/src/componentes/codigo.cpp
 
 CMakeFiles/becommons.dir/src/componentes/codigo.cpp.i: cmake_force
@@ -184,7 +198,7 @@ CMakeFiles/becommons.dir/src/componentes/codigo.cpp.s: cmake_force
 CMakeFiles/becommons.dir/src/componentes/fisica.cpp.o: CMakeFiles/becommons.dir/flags.make
 CMakeFiles/becommons.dir/src/componentes/fisica.cpp.o: /source/repos/BubbleEngine/becommons/src/componentes/fisica.cpp
 CMakeFiles/becommons.dir/src/componentes/fisica.cpp.o: CMakeFiles/becommons.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/source/repos/BubbleEngine/becommons/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/becommons.dir/src/componentes/fisica.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/source/repos/BubbleEngine/becommons/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/becommons.dir/src/componentes/fisica.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/becommons.dir/src/componentes/fisica.cpp.o -MF CMakeFiles/becommons.dir/src/componentes/fisica.cpp.o.d -o CMakeFiles/becommons.dir/src/componentes/fisica.cpp.o -c /source/repos/BubbleEngine/becommons/src/componentes/fisica.cpp
 
 CMakeFiles/becommons.dir/src/componentes/fisica.cpp.i: cmake_force
@@ -198,7 +212,7 @@ CMakeFiles/becommons.dir/src/componentes/fisica.cpp.s: cmake_force
 CMakeFiles/becommons.dir/src/componentes/transformacao.cpp.o: CMakeFiles/becommons.dir/flags.make
 CMakeFiles/becommons.dir/src/componentes/transformacao.cpp.o: /source/repos/BubbleEngine/becommons/src/componentes/transformacao.cpp
 CMakeFiles/becommons.dir/src/componentes/transformacao.cpp.o: CMakeFiles/becommons.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/source/repos/BubbleEngine/becommons/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/becommons.dir/src/componentes/transformacao.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/source/repos/BubbleEngine/becommons/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/becommons.dir/src/componentes/transformacao.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/becommons.dir/src/componentes/transformacao.cpp.o -MF CMakeFiles/becommons.dir/src/componentes/transformacao.cpp.o.d -o CMakeFiles/becommons.dir/src/componentes/transformacao.cpp.o -c /source/repos/BubbleEngine/becommons/src/componentes/transformacao.cpp
 
 CMakeFiles/becommons.dir/src/componentes/transformacao.cpp.i: cmake_force
@@ -212,7 +226,7 @@ CMakeFiles/becommons.dir/src/componentes/transformacao.cpp.s: cmake_force
 CMakeFiles/becommons.dir/src/componentes/terreno.cpp.o: CMakeFiles/becommons.dir/flags.make
 CMakeFiles/becommons.dir/src/componentes/terreno.cpp.o: /source/repos/BubbleEngine/becommons/src/componentes/terreno.cpp
 CMakeFiles/becommons.dir/src/componentes/terreno.cpp.o: CMakeFiles/becommons.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/source/repos/BubbleEngine/becommons/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/becommons.dir/src/componentes/terreno.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/source/repos/BubbleEngine/becommons/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/becommons.dir/src/componentes/terreno.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/becommons.dir/src/componentes/terreno.cpp.o -MF CMakeFiles/becommons.dir/src/componentes/terreno.cpp.o.d -o CMakeFiles/becommons.dir/src/componentes/terreno.cpp.o -c /source/repos/BubbleEngine/becommons/src/componentes/terreno.cpp
 
 CMakeFiles/becommons.dir/src/componentes/terreno.cpp.i: cmake_force
@@ -222,20 +236,6 @@ CMakeFiles/becommons.dir/src/componentes/terreno.cpp.i: cmake_force
 CMakeFiles/becommons.dir/src/componentes/terreno.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/becommons.dir/src/componentes/terreno.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /source/repos/BubbleEngine/becommons/src/componentes/terreno.cpp -o CMakeFiles/becommons.dir/src/componentes/terreno.cpp.s
-
-CMakeFiles/becommons.dir/src/entidades/entidade.cpp.o: CMakeFiles/becommons.dir/flags.make
-CMakeFiles/becommons.dir/src/entidades/entidade.cpp.o: /source/repos/BubbleEngine/becommons/src/entidades/entidade.cpp
-CMakeFiles/becommons.dir/src/entidades/entidade.cpp.o: CMakeFiles/becommons.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/source/repos/BubbleEngine/becommons/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/becommons.dir/src/entidades/entidade.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/becommons.dir/src/entidades/entidade.cpp.o -MF CMakeFiles/becommons.dir/src/entidades/entidade.cpp.o.d -o CMakeFiles/becommons.dir/src/entidades/entidade.cpp.o -c /source/repos/BubbleEngine/becommons/src/entidades/entidade.cpp
-
-CMakeFiles/becommons.dir/src/entidades/entidade.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/becommons.dir/src/entidades/entidade.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /source/repos/BubbleEngine/becommons/src/entidades/entidade.cpp > CMakeFiles/becommons.dir/src/entidades/entidade.cpp.i
-
-CMakeFiles/becommons.dir/src/entidades/entidade.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/becommons.dir/src/entidades/entidade.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /source/repos/BubbleEngine/becommons/src/entidades/entidade.cpp -o CMakeFiles/becommons.dir/src/entidades/entidade.cpp.s
 
 CMakeFiles/becommons.dir/src/inputs/inputs.cpp.o: CMakeFiles/becommons.dir/flags.make
 CMakeFiles/becommons.dir/src/inputs/inputs.cpp.o: /source/repos/BubbleEngine/becommons/src/inputs/inputs.cpp
@@ -382,6 +382,7 @@ becommons_OBJECTS = \
 "CMakeFiles/becommons.dir/src/api/api_lua.cpp.o" \
 "CMakeFiles/becommons.dir/usr/include/glad/glad.c.o" \
 "CMakeFiles/becommons.dir/src/arquivadores/fonte.cpp.o" \
+"CMakeFiles/becommons.dir/src/nucleo/registro.cpp.o" \
 "CMakeFiles/becommons.dir/src/arquivadores/imageloader.cpp.o" \
 "CMakeFiles/becommons.dir/src/arquivadores/shader.cpp.o" \
 "CMakeFiles/becommons.dir/src/arquivadores/modelo.cpp.o" \
@@ -390,7 +391,6 @@ becommons_OBJECTS = \
 "CMakeFiles/becommons.dir/src/componentes/fisica.cpp.o" \
 "CMakeFiles/becommons.dir/src/componentes/transformacao.cpp.o" \
 "CMakeFiles/becommons.dir/src/componentes/terreno.cpp.o" \
-"CMakeFiles/becommons.dir/src/entidades/entidade.cpp.o" \
 "CMakeFiles/becommons.dir/src/inputs/inputs.cpp.o" \
 "CMakeFiles/becommons.dir/src/nucleo/fase.cpp.o" \
 "CMakeFiles/becommons.dir/src/nucleo/sistema_de_codigo.cpp.o" \
@@ -408,6 +408,7 @@ becommons_EXTERNAL_OBJECTS =
 libbecommons.a: CMakeFiles/becommons.dir/src/api/api_lua.cpp.o
 libbecommons.a: CMakeFiles/becommons.dir/usr/include/glad/glad.c.o
 libbecommons.a: CMakeFiles/becommons.dir/src/arquivadores/fonte.cpp.o
+libbecommons.a: CMakeFiles/becommons.dir/src/nucleo/registro.cpp.o
 libbecommons.a: CMakeFiles/becommons.dir/src/arquivadores/imageloader.cpp.o
 libbecommons.a: CMakeFiles/becommons.dir/src/arquivadores/shader.cpp.o
 libbecommons.a: CMakeFiles/becommons.dir/src/arquivadores/modelo.cpp.o
@@ -416,7 +417,6 @@ libbecommons.a: CMakeFiles/becommons.dir/src/componentes/codigo.cpp.o
 libbecommons.a: CMakeFiles/becommons.dir/src/componentes/fisica.cpp.o
 libbecommons.a: CMakeFiles/becommons.dir/src/componentes/transformacao.cpp.o
 libbecommons.a: CMakeFiles/becommons.dir/src/componentes/terreno.cpp.o
-libbecommons.a: CMakeFiles/becommons.dir/src/entidades/entidade.cpp.o
 libbecommons.a: CMakeFiles/becommons.dir/src/inputs/inputs.cpp.o
 libbecommons.a: CMakeFiles/becommons.dir/src/nucleo/fase.cpp.o
 libbecommons.a: CMakeFiles/becommons.dir/src/nucleo/sistema_de_codigo.cpp.o

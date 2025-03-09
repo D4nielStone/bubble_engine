@@ -414,30 +414,6 @@ src/componentes/transformacao.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/becommons.dir/build.make CMakeFiles/becommons.dir/src/componentes/transformacao.cpp.s
 .PHONY : src/componentes/transformacao.cpp.s
 
-src/entidades/entidade.o: src/entidades/entidade.cpp.o
-.PHONY : src/entidades/entidade.o
-
-# target to build an object file
-src/entidades/entidade.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/becommons.dir/build.make CMakeFiles/becommons.dir/src/entidades/entidade.cpp.o
-.PHONY : src/entidades/entidade.cpp.o
-
-src/entidades/entidade.i: src/entidades/entidade.cpp.i
-.PHONY : src/entidades/entidade.i
-
-# target to preprocess a source file
-src/entidades/entidade.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/becommons.dir/build.make CMakeFiles/becommons.dir/src/entidades/entidade.cpp.i
-.PHONY : src/entidades/entidade.cpp.i
-
-src/entidades/entidade.s: src/entidades/entidade.cpp.s
-.PHONY : src/entidades/entidade.s
-
-# target to generate assembly for a file
-src/entidades/entidade.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/becommons.dir/build.make CMakeFiles/becommons.dir/src/entidades/entidade.cpp.s
-.PHONY : src/entidades/entidade.cpp.s
-
 src/inputs/inputs.o: src/inputs/inputs.cpp.o
 .PHONY : src/inputs/inputs.o
 
@@ -509,6 +485,30 @@ src/nucleo/projeto.s: src/nucleo/projeto.cpp.s
 src/nucleo/projeto.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/becommons.dir/build.make CMakeFiles/becommons.dir/src/nucleo/projeto.cpp.s
 .PHONY : src/nucleo/projeto.cpp.s
+
+src/nucleo/registro.o: src/nucleo/registro.cpp.o
+.PHONY : src/nucleo/registro.o
+
+# target to build an object file
+src/nucleo/registro.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/becommons.dir/build.make CMakeFiles/becommons.dir/src/nucleo/registro.cpp.o
+.PHONY : src/nucleo/registro.cpp.o
+
+src/nucleo/registro.i: src/nucleo/registro.cpp.i
+.PHONY : src/nucleo/registro.i
+
+# target to preprocess a source file
+src/nucleo/registro.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/becommons.dir/build.make CMakeFiles/becommons.dir/src/nucleo/registro.cpp.i
+.PHONY : src/nucleo/registro.cpp.i
+
+src/nucleo/registro.s: src/nucleo/registro.cpp.s
+.PHONY : src/nucleo/registro.s
+
+# target to generate assembly for a file
+src/nucleo/registro.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/becommons.dir/build.make CMakeFiles/becommons.dir/src/nucleo/registro.cpp.s
+.PHONY : src/nucleo/registro.cpp.s
 
 src/nucleo/sistema.o: src/nucleo/sistema.cpp.o
 .PHONY : src/nucleo/sistema.o
@@ -745,9 +745,6 @@ help:
 	@echo "... src/componentes/transformacao.o"
 	@echo "... src/componentes/transformacao.i"
 	@echo "... src/componentes/transformacao.s"
-	@echo "... src/entidades/entidade.o"
-	@echo "... src/entidades/entidade.i"
-	@echo "... src/entidades/entidade.s"
 	@echo "... src/inputs/inputs.o"
 	@echo "... src/inputs/inputs.i"
 	@echo "... src/inputs/inputs.s"
@@ -757,6 +754,9 @@ help:
 	@echo "... src/nucleo/projeto.o"
 	@echo "... src/nucleo/projeto.i"
 	@echo "... src/nucleo/projeto.s"
+	@echo "... src/nucleo/registro.o"
+	@echo "... src/nucleo/registro.i"
+	@echo "... src/nucleo/registro.s"
 	@echo "... src/nucleo/sistema.o"
 	@echo "... src/nucleo/sistema.i"
 	@echo "... src/nucleo/sistema.s"

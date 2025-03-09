@@ -6,6 +6,7 @@
 
 #pragma once
 #include "entidades/entidade.hpp"
+#include "nucleo/registro.hpp"
 
  /**
   * @class Sistema

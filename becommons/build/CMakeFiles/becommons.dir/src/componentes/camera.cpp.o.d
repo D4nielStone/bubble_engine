@@ -541,6 +541,7 @@ CMakeFiles/becommons.dir/src/componentes/camera.cpp.o: \
  /usr/include/c++/13/pstl/execution_defs.h \
  /source/repos/BubbleEngine/becommons/include/nucleo/fase.hpp \
  /source/repos/BubbleEngine/becommons/include/entidades/entidade.hpp \
+ /source/repos/BubbleEngine/becommons/include/nucleo/registro.hpp \
  /usr/include/c++/13/unordered_map \
  /usr/include/c++/13/bits/unordered_map.h \
  /usr/include/c++/13/bits/hashtable.h \

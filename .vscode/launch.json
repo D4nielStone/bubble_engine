@@ -1,0 +1,35 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        
+
+        {
+            "name": "C++ Debug",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/runtime/build/runtime", 
+            "args": [
+                "${input:projectSelection}"
+            ],
+            
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}/runtime",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb", 
+            "setupCommands": [
+                // { "text": "-enable-pretty-printing", "description": "Enable pretty printing", "ignoreFailures": true }
+            ],
+            "preLaunchTask": "PreLaunch Task"
+        }
+    ],
+    "inputs": [
+        {
+            "id": "projectSelection",
+            "type": "pickString",
+            "description": "Escolha o diretório do projeto para depuração",
+            "options": ["/source/repos/BubbleEngine/jogos/Golf", "/source/repos/BubbleEngine/jogos/terreno"],
+            "default": "/source/repos/BubbleEngine/jogos/terreno"
+        }
+    ]
+}

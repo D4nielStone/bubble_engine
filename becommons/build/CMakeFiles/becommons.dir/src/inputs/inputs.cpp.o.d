@@ -369,6 +369,7 @@ CMakeFiles/becommons.dir/src/inputs/inputs.cpp.o: \
  /usr/include/c++/13/pstl/glue_memory_defs.h \
  /usr/include/c++/13/pstl/execution_defs.h \
  /source/repos/BubbleEngine/becommons/include/componentes/componente.hpp \
+ /source/repos/BubbleEngine/becommons/include/nucleo/registro.hpp \
  /source/repos/BubbleEngine/becommons/include/componentes/fisica.hpp \
  /source/repos/BubbleEngine/becommons/include/componentes/transformacao.hpp \
  /source/repos/BubbleEngine/becommons/include/util/vetor3.hpp \
