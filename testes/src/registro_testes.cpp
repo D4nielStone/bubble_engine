@@ -39,7 +39,7 @@ void betest::registro_testes::rodarTestes()
         }
         catch (const std::exception &e)
         {
-            std::cout << "[" << i << "/" << total << "]"
+            std::cout << "[" << std::setw(3) << static_cast<int>((i / total) * 100) << "%]"
                       << "\033[31m[FALHOU]\033[0m  " << teste.second.first << teste.first << "\n"
                       << "            \033[31m[ERRO] " << e.what() << "\n";
         }
