@@ -1,18 +1,18 @@
 # Ignorar arquivos de compilação do CMake
-/build
-/CMakeFiles
-/CMakeCache.txt
-/cmake_install.cmake
-/Dockerfile
-/Makefile
-/Makefile.in
+*/build
+*/CMakeFiles
+*/CMakeCache.txt
+*/cmake_install.cmake
+*/Dockerfile
+*/Makefile
+*/Makefile.in
 
 # Ignorar pastas de dependências e binários
-/bin
-/lib
-/lib64
-/out
-/install
+*/bin
+*/lib
+*/lib64
+*/out
+*/install
 
 # Ignorar arquivos específicos do sistema operacional
 *~              # Arquivos temporários
