@@ -1,4 +1,0 @@
-/source/repos/BubbleEngine/testes/build/CMakeFiles/testes.dir
-/source/repos/BubbleEngine/testes/build/CMakeFiles/glad.dir
-/source/repos/BubbleEngine/testes/build/CMakeFiles/edit_cache.dir
-/source/repos/BubbleEngine/testes/build/CMakeFiles/rebuild_cache.dir

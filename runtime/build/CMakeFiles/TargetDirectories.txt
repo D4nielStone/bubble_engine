@@ -1,4 +1,0 @@
-/source/repos/BubbleEngine/runtime/build/CMakeFiles/runtime.dir
-/source/repos/BubbleEngine/runtime/build/CMakeFiles/glad.dir
-/source/repos/BubbleEngine/runtime/build/CMakeFiles/edit_cache.dir
-/source/repos/BubbleEngine/runtime/build/CMakeFiles/rebuild_cache.dir

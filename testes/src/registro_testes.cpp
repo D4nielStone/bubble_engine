@@ -3,6 +3,7 @@
 #include <stack>
 #include <utility>
 #include <iostream>
+#include <iomanip>
 
 betest::registro_testes::registro_testes()
 {
@@ -22,7 +23,7 @@ void betest::registro_testes::rodarTestes()
 {
     depuracao::emitir(info, "Iniciando testes unitários. Total de " + std::to_string(testes.size()) + " teste(s).");
     size_t total = testes.size();
-    size_t i = 0;
+    float i = 0;
 
     while (!testes.empty())
     {
@@ -33,7 +34,7 @@ void betest::registro_testes::rodarTestes()
         try
         {
             teste.second.second(); // Executa a função de teste
-            std::cout << "[" << i << "/" << total << "]"
+            std::cout << "[" << std::setw(3) << static_cast<int>((i / total) * 100) << "%]"
                       << "\033[32m[PASSOU]\033[0m  " << teste.second.first << " " << teste.first << "\n";
         }
         catch (const std::exception &e)

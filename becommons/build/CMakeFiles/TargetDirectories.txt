@@ -1,7 +1,0 @@
-/source/repos/BubbleEngine/becommons/build/CMakeFiles/becommons.dir
-/source/repos/BubbleEngine/becommons/build/CMakeFiles/edit_cache.dir
-/source/repos/BubbleEngine/becommons/build/CMakeFiles/rebuild_cache.dir
-/source/repos/BubbleEngine/becommons/build/CMakeFiles/list_install_components.dir
-/source/repos/BubbleEngine/becommons/build/CMakeFiles/install.dir
-/source/repos/BubbleEngine/becommons/build/CMakeFiles/install/local.dir
-/source/repos/BubbleEngine/becommons/build/CMakeFiles/install/strip.dir

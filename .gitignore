@@ -23,4 +23,9 @@
 *.a             # Arquivos de bibliotecas estáticas
 *.o             # Arquivos de objetos compilados
 *.so            # Bibliotecas compartilhadas
-*.d             # Arquivos de dependências gerados
+*.d             # Arquivos de dependências gerados 
+
+
+*.gamestate
+*.internal
+*.make
