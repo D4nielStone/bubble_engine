@@ -15,9 +15,9 @@ int main(int argv, char* argc[])
 
 	try
 	{
-		bubble::projeto runtime(DIR_PADRAO);
-		
 		depuracao::emitir(info, "Iniciando projeto em:" + DIR_PADRAO);
+		
+		bubble::projeto runtime(DIR_PADRAO);
 		runtime.rodar();
 	}
 	catch(const std::exception& e)

@@ -13,11 +13,11 @@
 
 namespace bubble
 {
-	class sistemaInterface : public sistema
+	class sistema_interface : public sistema
 	{
 	public:
-		sistemaInterface() = default;
-		~sistemaInterface() override;
+		sistema_interface() = default;
+		~sistema_interface() override;
 		void atualizar() override;
 		void inicializar(bubble::fase* fase_ptr) override;
 		static void desenharTexto(shader& s, const texto& t);

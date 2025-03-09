@@ -4,7 +4,7 @@
 #include "componentes/transformacao.hpp"
 #include "componentes/fisica.hpp"
 
-bubble::sistemaFisica::sistemaFisica()
+bubble::sistema_fisica::sistema_fisica()
 {
     configColisao = new btDefaultCollisionConfiguration();
     expedidor = new btCollisionDispatcher(configColisao);
@@ -13,7 +13,7 @@ bubble::sistemaFisica::sistemaFisica()
     mundoDinamico = new btDiscreteDynamicsWorld(expedidor, faseAmpla, solucionador, configColisao);
     mundoDinamico->setGravity(btVector3(0, -10, 0));
 }
-bubble::sistemaFisica::~sistemaFisica()
+bubble::sistema_fisica::~sistema_fisica()
 {
     pararThread();
 
@@ -26,7 +26,7 @@ bubble::sistemaFisica::~sistemaFisica()
 }
 
 
-void bubble::sistemaFisica::atualizar()
+void bubble::sistema_fisica::atualizar()
 {
     mundoDinamico->stepSimulation(instanciaJanela->_Mtempo.obterDeltaTime());
     reg->cada<bubble::fisica, bubble::transformacao>([&](const uint32_t entidade)
@@ -37,9 +37,9 @@ void bubble::sistemaFisica::atualizar()
     );
 }
 
-void bubble::sistemaFisica::inicializar(bubble::fase* f)
+void bubble::sistema_fisica::inicializar(bubble::fase* f)
 {
-    sistemaFisica::sistema::inicializar(f);
+    sistema_fisica::sistema::inicializar(f);
     mundoDinamicoPrincipal = mundoDinamico;
     reg->cada<bubble::fisica, bubble::transformacao>([&](const uint32_t entidade)
         {
@@ -53,7 +53,7 @@ void bubble::sistemaFisica::inicializar(bubble::fase* f)
     );
 }
 
-void bubble::sistemaFisica::iniciarThread()
+void bubble::sistema_fisica::iniciarThread()
 {
     rodando = true;
     fisicaThread = std::thread([this]() {
@@ -65,7 +65,7 @@ void bubble::sistemaFisica::iniciarThread()
         });
 }
 
-void bubble::sistemaFisica::pararThread()
+void bubble::sistema_fisica::pararThread()
 {
     rodando = false;
     if (fisicaThread.joinable()) {
@@ -73,13 +73,13 @@ void bubble::sistemaFisica::pararThread()
     }
 }
 
-void bubble::sistemaFisica::remover(btRigidBody*& corpo)
+void bubble::sistema_fisica::remover(btRigidBody*& corpo)
 {
     if (mundoDinamico)
         mundoDinamico->removeRigidBody(corpo);
 }
 
-btDiscreteDynamicsWorld* bubble::sistemaFisica::mundo()
+btDiscreteDynamicsWorld* bubble::sistema_fisica::mundo()
 {
     return mundoDinamico;
 }

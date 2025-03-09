@@ -145,8 +145,8 @@ void bubble::shader::setCor(const std::string& name, const bubble::cor& cor) con
     glUniform4f(glGetUniformLocation(ID, name.c_str()), cor.r, cor.g, cor.b, cor.a);
 }
 
-void bubble::shader::setVec4(const std::string& name, const vetor4<int>& vec4 ) const {
-    glUniform4f(glGetUniformLocation(ID, name.c_str()), vec4.x, vec4.y, vec4.w, vec4.h);
+void bubble::shader::setVec4(const std::string& name, const vet4& vec4 ) const {
+    glUniform4f(glGetUniformLocation(ID, name.c_str()), vec4.x, vec4.y, vec4.z, vec4.w);
 }
 void bubble::shader::setVec3(const std::string& name, const float& r, const float& g, const float& b) const {
     glUniform3f(glGetUniformLocation(ID, name.c_str()), r, g, b);

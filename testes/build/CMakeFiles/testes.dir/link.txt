@@ -1,0 +1,1 @@
+/usr/bin/c++ -g CMakeFiles/testes.dir/src/registro_testes.cpp.o CMakeFiles/testes.dir/src/main.cpp.o -o testes  libglad.a /source/repos/BubbleEngine/testes/../becommons/build/libbecommons.a -lBulletDynamics -lLinearMath -lBulletCollision -lBullet3Common /usr/lib/x86_64-linux-gnu/libglfw.so.3.3 -lassimp -llua5.3 -lfreeimage -lfreetype 

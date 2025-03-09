@@ -3,11 +3,13 @@
 #include "nucleo/fase.hpp"
 #include "nucleo/projeto.hpp"
 #include "componentes/renderizador.hpp"
+#include "depuracao/assert.hpp"
 
 // Construtor para forma gen�rica
 bubble::fisica::fisica(btCollisionShape* forma, btScalar massa, btVector3 posicaoInicial, camada camada) 
     : forma(forma), malha(false), massa(massa), posicaoInicial(posicaoInicial), camada_colisao(camada)
 {
+    ASSERT(forma != nullptr);
     init();
 }
 void bubble::fisica::init()
@@ -35,10 +37,11 @@ bubble::fisica::fisica(bool malha, btScalar massa, btVector3 posicaoInicial, cam
 // Destrutor
 bubble::fisica::~fisica()
 {
-    projeto_atual->fase_atual->sfisica.remover(corpoRigido);
-    delete corpoRigido;
-    delete estadoDeMovimento;
-    delete forma;
+
+    if(corpoRigido)projeto_atual->fase_atual->sfisica.remover(corpoRigido);
+    if(corpoRigido)delete corpoRigido;
+    if(estadoDeMovimento)delete estadoDeMovimento;
+    if(forma)delete forma;
 }
 
 // Obter o corpo r�gido

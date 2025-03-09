@@ -91,7 +91,6 @@ namespace bubble
 				entidades.erase(it); // Remove a entidade se n�o houver mais componentes.
 			}
 		}
-		depuracao::emitir(debug, "registro", "entidade removida: " + std::to_string(ent));
 	}
 
 	template<typename T>

@@ -112,13 +112,13 @@ glm::mat4 bubble::camera::obtViewMatrix() {
     return viewMatrix;
 }
 
-void bubble::camera::viewport(const vet2& viewp)
+void bubble::camera::viewport(const bubble::vetor2<double>& viewp)
 {
     viewportFBO = viewp;
 }
 
 glm::mat4 bubble::camera::obtProjectionMatrix() {
-    vet2 viewp;
+    bubble::vetor2<double> viewp;
     if (flag_fb)
         viewp = viewportFBO;
     else if(viewport_ptr)
@@ -146,7 +146,7 @@ glm::mat4 bubble::camera::obtProjectionMatrix() {
     return projMatriz;
 }
 
-bubble::raio bubble::camera::pontoParaRaio(vet2 screenPoint) const 
+bubble::raio bubble::camera::pontoParaRaio(bubble::vetor2<double> screenPoint) const 
 {
     glm::vec3 worldSpaceDirection = telaParaMundo(screenPoint, 0.0f);
 
@@ -157,7 +157,7 @@ bubble::raio bubble::camera::pontoParaRaio(vet2 screenPoint) const
     return ray;
 }
 
-glm::vec3 bubble::camera::telaParaMundo(const vet2 &screenPoint, float profundidade) const
+glm::vec3 bubble::camera::telaParaMundo(const bubble::vetor2<double> &screenPoint, float profundidade) const
 {
     float ndcX = (2.0f * screenPoint.x) / viewportFBO.x - 1.0f;
     float ndcY = 1.0f - (2.0f * screenPoint.y) / viewportFBO.y;

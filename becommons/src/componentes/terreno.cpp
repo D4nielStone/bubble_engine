@@ -29,7 +29,7 @@ void bubble::terreno::carregarHeightMap(unsigned char* dados, int largura, int a
         {
             vertice v;
             v.posicao = vet3(i, heightmap[j][i], j);
-            v.uvcoords = bubble::vetor2<float>(i / (float)largura, j / (float)altura);
+            v.uvcoords = bubble::vetor2<double>(i / (float)largura, j / (float)altura);
         
             vertices.push_back(v);
         }

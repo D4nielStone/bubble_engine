@@ -67,7 +67,7 @@ bubble::projeto::projeto(const std::string &diretorio) : diretorioDoProjeto(dire
     std::string icon_path = doc["janela"].GetObject()["icone"].GetString();
 
     instanciaJanela = new bubble::janela(nome_janela,
-     vet2(doc["janela"].GetObject()["largura"].GetInt(), doc["janela"].GetObject()["altura"].GetInt()),
+     bubble::vetor2<double>(doc["janela"].GetObject()["largura"].GetInt(), doc["janela"].GetObject()["altura"].GetInt()),
     (diretorio + "/" + icon_path).c_str());
 
 	projeto_atual->fase_atual = new bubble::fase(diretorio + "/" + doc["lancamento"].GetString() + ".fase");

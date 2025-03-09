@@ -86,14 +86,14 @@ namespace bubble
             // uvs
             if (mesh->mTextureCoords[0])
             {
-                bubble::vetor2<float> vec;
+                bubble::vetor2<double> vec;
 
                 vec.x = mesh->mTextureCoords[0][i].x;
                 vec.y = mesh->mTextureCoords[0][i].y;
                 vertex.uvcoords = vec;
             }
             else
-                vertex.uvcoords = bubble::vetor2(0.0f, 0.0f);
+                vertex.uvcoords = bubble::vetor2<double>(0.0f, 0.0f);
 
             vertices.push_back(vertex);
         }

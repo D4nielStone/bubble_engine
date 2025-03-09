@@ -46,7 +46,7 @@ namespace bubble
     /// @brief posiciona o cursor do mouse em uma posição na tela.
     /// @param pos 
     void posicionarCursor(double x, double y);
-    vet2 obterMouse();
+    bubble::vetor2<double> obterMouse();
     bubble::vetor2<int> tamanhoJanela();
     bool pressionada(const std::string &tecla);
 }

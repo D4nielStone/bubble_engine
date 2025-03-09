@@ -12,14 +12,14 @@
 
 namespace bubble
 {
-	class sistemaCodigo : public sistema
+	class sistema_codigo : public sistema
 	{
 	private:
 		std::atomic<bool> rodando{ false }; // Controle da thread
 		std::thread codigoThread;
 	public:
-		sistemaCodigo() = default;
-		~sistemaCodigo();
+		sistema_codigo() = default;
+		~sistema_codigo();
 		void atualizar() override;
 		void inicializar(bubble::fase* fase_ptr) override;
 		void iniciarThread();

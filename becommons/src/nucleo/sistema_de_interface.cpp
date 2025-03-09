@@ -16,14 +16,14 @@ glm::mat4 projection{1.f};
 
 namespace bubble
 {
-    sistemaInterface::~sistemaInterface()
+    sistema_interface::~sistema_interface()
     {
         glDeleteBuffers(1, &text_VBO);
         glDeleteBuffers(1, &img_VBO);
         glDeleteVertexArrays(1, &text_VAO);
         glDeleteVertexArrays(1, &img_VAO);
     }
-    void sistemaInterface::atualizar()
+    void sistema_interface::atualizar()
     {
         glDisable(GL_DEPTH_TEST);
         glDisable(GL_CULL_FACE);
@@ -40,7 +40,7 @@ namespace bubble
         );
     }
 
-    void sistemaInterface::inicializar(bubble::fase* fase_ptr)
+    void sistema_interface::inicializar(bubble::fase* fase_ptr)
     {
         this->_Mfase = fase_ptr;
         this->reg = _Mfase->obterRegistro();
@@ -103,7 +103,7 @@ namespace bubble
 
     }
 
-    void bubble::sistemaInterface::desenharTexto(shader& s, const bubble::texto &_texto)
+    void bubble::sistema_interface::desenharTexto(shader& s, const bubble::texto &_texto)
     {
         auto text = _texto;
         // activate corresponding render state	
@@ -152,7 +152,7 @@ namespace bubble
         glBindVertexArray(0);
         glBindTexture(GL_TEXTURE_2D, 0);
     }
-    void bubble::sistemaInterface::desenharImagem(shader& s, const bubble::imagem& img)
+    void bubble::sistema_interface::desenharImagem(shader& s, const bubble::imagem& img)
     {
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, img.id);

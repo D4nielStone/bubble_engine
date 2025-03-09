@@ -39,10 +39,10 @@ namespace bubble
 		void analizar(const char* diretorio);
 		std::shared_ptr<camera> obterCamera() const;
 		registro* obterRegistro();
-		sistemaFisica sfisica;
-		sistemaRenderizacao srender;
-		sistemaInterface sinterface;
-		sistemaCodigo scodigo;	
+		sistema_fisica sfisica;
+		sistema_renderizacao srender;
+		sistema_interface sinterface;
+		sistema_codigo scodigo;	
 	private:
 		bool inicializacao = true;
 		const char* diretorio;

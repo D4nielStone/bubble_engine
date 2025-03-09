@@ -3,15 +3,15 @@
 
 # compile C with /usr/bin/cc
 # compile CXX with /usr/bin/c++
-C_DEFINES = -D_DEBUG
+C_DEFINES = 
 
 C_INCLUDES = -I/source/repos/BubbleEngine/becommons/include -I/usr/include/lua5.3 -I/usr/include/glm -I/usr/include/GLFW -I/usr/include/glad -I/usr/include/assimp -I/usr/include/FreeImage -I/usr/include/rapidjson -I/usr/include/bullet -I/usr/include/freetype2 -I/source/repos/BubbleEngine/becommons/src
 
-C_FLAGS = -g
+C_FLAGS = -O3 -DNDEBUG
 
-CXX_DEFINES = -D_DEBUG
+CXX_DEFINES = 
 
 CXX_INCLUDES = -I/source/repos/BubbleEngine/becommons/include -I/usr/include/lua5.3 -I/usr/include/glm -I/usr/include/GLFW -I/usr/include/glad -I/usr/include/assimp -I/usr/include/FreeImage -I/usr/include/rapidjson -I/usr/include/bullet -I/usr/include/freetype2 -I/source/repos/BubbleEngine/becommons/src
 
-CXX_FLAGS = -g -std=gnu++20
+CXX_FLAGS = -O3 -DNDEBUG -std=gnu++20
 

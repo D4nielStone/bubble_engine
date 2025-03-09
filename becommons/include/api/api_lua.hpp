@@ -62,7 +62,7 @@ namespace bapi
 				addData<int>("x", &bubble::vetor2<int>::x).
 				addData<int>("y", &bubble::vetor2<int>::y).
 				endClass().
-				beginClass<vet2>("vetor2d").		///< define vetor2
+				beginClass<bubble::vetor2<double>>("vetor2d").		///< define vetor2
 				addConstructor<void(*)(double, double)>().
 				addData<double>("x", &bubble::vetor2<double>::x).
 				addData<double>("y", &bubble::vetor2<double>::y).
@@ -85,8 +85,8 @@ namespace bapi
 				beginClass<bubble::imagem>("imagem").			///< define transformacao
 				addConstructor<void(*)(std::string)>().
 				addConstructor<void(*)(unsigned int)>().
-				addData<vet2>("padding", &bubble::imagem::padding, true).
-				addData<vet2>("limite", &bubble::imagem::limite, true).
+				addData<bubble::vetor2<double>>("padding", &bubble::imagem::padding, true).
+				addData<bubble::vetor2<double>>("limite", &bubble::imagem::limite, true).
 				addData<bubble::cor>("difusa", &bubble::imagem::difusa, true).
 				addFunction("definirID", &bubble::imagem::definirID).
 				endClass().

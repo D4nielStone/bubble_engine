@@ -13,8 +13,8 @@ namespace bubble
 	{
 		constexpr static componente::mascara mascara = componente::COMPONENTE_IMAGEM;
 		std::string arquivo	{ "" };
-		vet2 limite			{ 20, 20 };
-		vet2 padding			{ 0,0 };
+		bubble::vetor2<double> limite			{ 20, 20 };
+		bubble::vetor2<double> padding			{ 0,0 };
 		bool flip					{ false };
 		unsigned int id;
 		cor difusa					{ 1.f, 1.f, 1.f, 1.f };

@@ -8,7 +8,7 @@ std::mutex mtx;
 
 namespace bubble
 {
-    void sistemaCodigo::atualizar()
+    void sistema_codigo::atualizar()
     {
         std::lock_guard<std::mutex> lock(mtx); // Protege o acesso ao registro
         reg->cada<codigo>([&](const uint32_t entidade)
@@ -19,7 +19,7 @@ namespace bubble
         );
     }
 
-    void sistemaCodigo::inicializar(bubble::fase* fase_ptr)
+    void sistema_codigo::inicializar(bubble::fase* fase_ptr)
     {
         std::lock_guard<std::mutex> lock(mtx); // Protege o registro durante a inicializa��o
         this->_Mfase = fase_ptr;
@@ -33,7 +33,7 @@ namespace bubble
         );
     }
 
-    void sistemaCodigo::iniciarThread() {
+    void sistema_codigo::iniciarThread() {
         rodando = true;
         codigoThread = std::thread([this]() {
             while (rodando) {
@@ -44,7 +44,7 @@ namespace bubble
             });
     }
 
-    void sistemaCodigo::pararThread() {
+    void sistema_codigo::pararThread() {
         // Chama a fun��o `encerrar` para todos os componentes de c�digo
         std::lock_guard<std::mutex> lock(mtx); // Protege o registro durante o encerramento
        
@@ -54,6 +54,6 @@ namespace bubble
         }
     }
 
-    sistemaCodigo::~sistemaCodigo() {
+    sistema_codigo::~sistema_codigo() {
     }
 }

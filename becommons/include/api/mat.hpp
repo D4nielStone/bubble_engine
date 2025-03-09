@@ -19,7 +19,7 @@ namespace bubble
 	{
 		return a + t * (b - a);
 	}
-	inline static float distancia2(const vet2& a, const vet2& b)
+	inline static float distancia2(const bubble::vetor2<double>& a, const bubble::vetor2<double>& b)
 	{
 		float dx = b.x - a.x;
 		float dy = b.y - a.y;

@@ -10,7 +10,7 @@ void errorCallback(int error, const char* description) {
 bubble::janela::~janela()
 {
 }
-bubble::janela::janela(const char* nome, vet2 bounds, const char* icon_path)
+bubble::janela::janela(const char* nome, bubble::vetor2<double> bounds, const char* icon_path)
 {
     glfwSetErrorCallback(errorCallback);
     // inicia glfw
@@ -50,9 +50,9 @@ bubble::janela::janela(const char* nome, vet2 bounds, const char* icon_path)
     glfwSetWindowUserPointer(window, this);
 
     bubble::vetor4<int> tam{};
-    glfwGetWindowSize(window, &tam.w, &tam.h);
-    tamanho.y = tam.h;
-    tamanho.x = tam.w;
+    glfwGetWindowSize(window, &tam.z, &tam.w);
+    tamanho.y = tam.w;
+    tamanho.x = tam.z;
 }
 
 void bubble::janela::poll() const

@@ -7,7 +7,7 @@ namespace bubble
 {
 	struct vertice
 	{
-		vetor3<float> posicao, normal;
-		vetor2<float> uvcoords;
+		vet3 posicao, normal;
+		bubble::vetor2<double> uvcoords;
 	};
 }

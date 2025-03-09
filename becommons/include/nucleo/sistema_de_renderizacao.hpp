@@ -10,10 +10,10 @@
 
 namespace bubble
 {
-	class sistemaRenderizacao : public sistema
+	class sistema_renderizacao : public sistema
 	{
 	public:
-		sistemaRenderizacao() = default;
+		sistema_renderizacao() = default;
 		void atualizar() override;
 		void inicializar(bubble::fase* fase_ptr) override;
 	};

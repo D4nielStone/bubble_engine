@@ -26,10 +26,10 @@ namespace bubble
 	struct janela
 	{
 		tempo _Mtempo;
-		vet2 tamanho;
+		bubble::vetor2<double> tamanho;
 		GLFWwindow* window;
 		bubble::inputs inputs;
-		janela(const char* nome, vet2 bounds = vet2(600, 400), const char* icon_path = nullptr);
+		janela(const char* nome, bubble::vetor2<double> bounds = bubble::vetor2<double>(600, 400), const char* icon_path = nullptr);
 		~janela();
 		void poll() const;
 		void swap();

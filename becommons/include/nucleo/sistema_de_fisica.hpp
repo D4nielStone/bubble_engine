@@ -16,10 +16,10 @@ namespace bubble
 {
     inline static btDiscreteDynamicsWorld* mundoDinamicoPrincipal;
     
-    class sistemaFisica : public sistema {
+    class sistema_fisica : public sistema {
     public:
-         sistemaFisica();
-        ~sistemaFisica();
+         sistema_fisica();
+        ~sistema_fisica();
 
         void atualizar() override;
         void inicializar(bubble::fase* f) override;

@@ -13,7 +13,7 @@
 
 namespace bubble
 {
-    void sistemaRenderizacao::atualizar()
+    void sistema_renderizacao::atualizar()
     {
         glEnable(GL_DEPTH_TEST);
         glEnable(GL_CULL_FACE);
@@ -81,7 +81,7 @@ namespace bubble
     }
     }
 
-    void sistemaRenderizacao::inicializar(bubble::fase* fase_ptr)
+    void sistema_renderizacao::inicializar(bubble::fase* fase_ptr)
     {
         this->_Mfase = fase_ptr;
         this->reg = _Mfase->obterRegistro();
