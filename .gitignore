@@ -1,4 +1,5 @@
 # Ignorar arquivos de compilação do CMake
+jogos/releases
 */build
 */CMakeFiles
 */CMakeCache.txt
