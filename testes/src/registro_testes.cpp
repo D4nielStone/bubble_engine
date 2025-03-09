@@ -7,6 +7,7 @@
 
 betest::registro_testes::registro_testes()
 {
+    
 }
 
 void betest::registro_testes::adicionar(const std::string &nome, funcao_teste func)
