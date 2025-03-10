@@ -21,6 +21,25 @@
                 // { "text": "-enable-pretty-printing", "description": "Enable pretty printing", "ignoreFailures": true }
             ],
             "preLaunchTask": "PreLaunch Task"
+        },
+        {
+            "name": "C++ Debug",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/testes/build/testes", 
+            "args": [
+                "${input:projectSelection}"
+            ],
+            
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}/testes",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb", 
+            "setupCommands": [
+                // { "text": "-enable-pretty-printing", "description": "Enable pretty printing", "ignoreFailures": true }
+            ],
+            "preLaunchTask": ""
         }
     ],
     "inputs": [

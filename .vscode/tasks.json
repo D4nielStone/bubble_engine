@@ -36,6 +36,38 @@
             }
         },
         {
+            "label": "Limpar testes",
+            "type": "shell",
+            "command": "rm",
+            "args": [
+                "-r",
+                "build/*"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/testes"
+            },
+            "problemMatcher": [],
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "Rodar testes",
+            "type": "shell",
+            "command": "./testes",
+            "args": [
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/testes/build"
+            },
+            "problemMatcher": [],
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            }
+        },
+        {
             "label": "CMake build runtime",
             "type": "shell",
             "command": "cmake",
@@ -65,7 +97,7 @@
             },
             "problemMatcher": [],
             "group": {
-                "kind": "build",
+                "kind": "test",
                 "isDefault": true
             }
         },
@@ -116,7 +148,7 @@
             },
             "problemMatcher": [],
             "group": {
-                "kind": "build",
+                "kind": "test",
                 "isDefault": true
             }
         },

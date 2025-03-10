@@ -175,7 +175,7 @@ void testarVetor3()
     // Teste de desigualdade
     testes.adicionar("desigualdade", [](){
         vet3 v1(1.0f, 2.0f, 3.0f);
-        vet3 v2(1.0f, 2.0f, 3.0f);
+        vet3 v2(1.0f, 1.0f, 3.0f);
         ASSERT_TRUE(v1 != v2);
     });
 
@@ -274,44 +274,137 @@ void testarUtils()
     testarVetor2();
 }
 
+// componentes de teste
+struct CompA : bubble::componente { 
+    static constexpr bubble::componente::mascara mascara = static_cast<bubble::componente::mascara>(1);
+};
+struct CompB : bubble::componente { 
+    static constexpr bubble::componente::mascara mascara = static_cast<bubble::componente::mascara>(1 << 1);
+};
+
 void testarRegistro()
 {
     testes.classe("BUBBLE", "REGISTRO");
-
+    
     // Teste de inicialização
+    
     testes.adicionar("criando_entidades", [](){
         bubble::registro reg;
         bubble::entidade e1 = reg.criar();
         bubble::entidade e2 = reg.criar();
-    
+        
         ASSERT_TRUE(e1.id != e2.id);  // IDs devem ser diferentes
         ASSERT_EQUAL(e1.mascara, bubble::componente::COMPONENTE_NONE);
         ASSERT_EQUAL(e2.mascara, bubble::componente::COMPONENTE_NONE);
     });
 
-    testes.adicionar("adicionando_removento_componentes", [](){
+    testes.adicionar("tem/nao_tem_componente", [](){
+        bubble::registro reg;
+        bubble::entidade e = reg.criar();
+    
+        ASSERT_TRUE(!reg.tem<bubble::fisica>(e.id));
+        reg.adicionar<bubble::fisica>(e);
+        ASSERT_TRUE(reg.tem<bubble::fisica>(e.id));
+    });
+    
+    testes.adicionar("obtendo_componente", [](){
 		bubble::registro reg;
 		bubble::entidade e = reg.criar();
 	
-		reg.adicionar<bubble::fisica>(e, false, 0.0f, btVector3(0.0f, 0.0f, 0.0f));
-		ASSERT_TRUE(reg.tem<bubble::fisica>(e.id));
-	
-		auto fisica = reg.obter<bubble::fisica>(e.id);
-		ASSERT_TRUE(fisica != nullptr);
-		ASSERT_EQUAL(fisica->meu_objeto, e.id);
-	
-		reg.remover<bubble::fisica>(e.id);
 		ASSERT_TRUE(!reg.tem<bubble::fisica>(e.id));
-    });
 
-    testes.adicionar("removendo_componente_nulo", [](){
-		bubble::registro reg;
-		bubble::entidade e = reg.criar();
-	
-		ASSERT_TRUE(!reg.tem<bubble::fisica>(e.id));
-		reg.remover<bubble::fisica>(e.id);
-		ASSERT_TRUE(!reg.tem<bubble::fisica>(e.id));
+        reg.adicionar<bubble::fisica>(e);
+
+		ASSERT_TRUE(reg.obter<bubble::fisica>(e.id)!=nullptr);
     });
+    
+    testes.adicionar("removendo_componente_nulo", [](){
+            bubble::registro reg;
+            bubble::entidade e = reg.criar();
+        
+            ASSERT_TRUE(!reg.tem<bubble::fisica>(e.id));
+            reg.remover<bubble::fisica>(e.id);
+            ASSERT_TRUE(!reg.tem<bubble::fisica>(e.id));
+            ASSERT_TRUE(!reg.obter<bubble::fisica>(e.id));
+        });
+        
+        testes.adicionar("adicionando_removento_componentes", [](){
+            bubble::registro reg;
+            bubble::entidade e = reg.criar();
+            
+            reg.adicionar<CompA>(e);
+            ASSERT_TRUE(reg.tem<CompA>(e.id));
+        
+            auto componente = reg.obter<CompA>(e.id);
+            ASSERT_TRUE(componente != nullptr);
+            ASSERT_EQUAL(componente->meu_objeto, e.id);
+        
+            reg.remover<CompA>(e.id);
+            ASSERT_TRUE(!reg.tem<CompA>(e.id));
+        });
+        
+        testes.adicionar("iteracao_com_multiplos_componentes", []() {
+            bubble::registro reg;
+            
+            // cria combinações de entidades
+            auto e1 = reg.criar();
+            auto e2 = reg.criar();
+            auto e3 = reg.criar();
+            
+            reg.adicionar<CompA>(e1);
+            reg.adicionar<CompB>(e1);  // tem ambos
+            
+            reg.adicionar<CompA>(e2);   // apenas CompA
+            
+            reg.adicionar<CompB>(e3);   // apenas CompB
+        
+            // testa iterações para entidades com ambos
+            int count = 0;
+            reg.cada<CompA, CompB>([&](uint32_t entity) {
+                count++;
+                ASSERT_EQUAL(entity, e1.id);
+            });
+            ASSERT_EQUAL(count, 1);
+        });
+        
+        testes.adicionar("iteracao_sem_matches", []() {
+            bubble::registro reg;
+            
+            // cria entidades sem componentes
+            auto e = reg.criar();
+        
+            int count = 0;
+            reg.cada<bubble::fisica>([&](uint32_t) { count++; });
+            ASSERT_EQUAL(count, 0);
+        });
+        
+        testes.adicionar("limpeza_entidade_sem_componentes", []() {
+            bubble::registro reg;
+            auto e = reg.criar();
+        
+            // adiciona e remove componente
+            reg.adicionar<bubble::fisica>(e, false, 0.0f, btVector3(0.0f, 0.0f, 0.0f));
+            reg.remover<bubble::fisica>(e.id);
+        
+            // entidade deve ser removida do mapa
+            ASSERT_TRUE(reg.obterComponentes(e.id) == bubble::componente::COMPONENTE_NONE);
+            ASSERT_TRUE(reg.entidades.find(e.id) == reg.entidades.end());
+        });
+        
+        testes.adicionar("multiplos_componentes_mascara", []() {
+            bubble::registro reg;
+            auto e = reg.criar();
+        
+            reg.adicionar<CompA>(e);
+            reg.adicionar<CompB>(e);
+            ASSERT_EQUAL(reg.obterComponentes(e.id), (CompA::mascara | CompB::mascara));
+        
+            reg.remover<CompA>(e.id);
+            ASSERT_EQUAL(reg.obterComponentes(e.id), CompB::mascara);
+        
+            reg.adicionar<CompA>(e);
+            ASSERT_EQUAL(reg.obterComponentes(e.id), (CompA::mascara | CompB::mascara));
+        });
 }
 
 void testarNucleo()

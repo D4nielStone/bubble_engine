@@ -2,7 +2,7 @@
 
 #pragma once
 #include <string>
-#include <stack>
+#include <vector>
 #include <functional>
 
 namespace betest
@@ -11,7 +11,7 @@ namespace betest
     class registro_testes
     {
         private:
-            std::stack<std::pair<std::string, std::pair<std::string, funcao_teste>>> testes;
+            std::vector<std::pair<std::string, std::pair<std::string, funcao_teste>>> testes;
             std::string prefixo_atual{"[BUBBLE][TESTES]"};
         public:
             registro_testes();

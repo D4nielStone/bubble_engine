@@ -13,6 +13,7 @@
  #include "componentes/componente.hpp"
  #include "componentes/fisica.hpp"
  #include "depuracao/debug.hpp"
+ #include "depuracao/assert.hpp"
 
 namespace bubble
 {
@@ -21,16 +22,14 @@ namespace bubble
 	* @brief gerencia as entidades
 	* @brief nucleo do sistema ECS
 	*/
-	class registro
+	struct registro
 	{
-	private:
 		/// proximo id livre
 		uint32_t proxima_entidade{ 0 };
 		/// Armazena mascara da entidade associada
 		std::unordered_map<uint32_t, bubble::componente::mascara> mascaras;
 		/// Armazena componentes da entidade associada
 		std::unordered_map<uint32_t, std::unordered_map<bubble::componente::mascara, std::shared_ptr<bubble::componente>>> entidades;
-	public:
 		/* Cria nova entidade */
 		entidade criar();
 		/* Retorna todos os componentes da entidade */
@@ -72,13 +71,19 @@ namespace bubble
 	inline void registro::remover(const uint32_t& ent)
 	{
 		auto it = entidades.find(ent);
-		if (it != entidades.end()) {
-			it->second.erase(T::mascara);
-			mascaras[ent] &= ~T::mascara; // Remove o bit correspondente ao componente.
-			if (it->second.empty()) {
-				entidades.erase(it); // Remove a entidade se n�o houver mais componentes.
-			}
-		}
+		if(it == entidades.end())
+		return;
+
+		it->second.erase(T::mascara);
+			
+		auto mask = mascaras.find(ent);
+		if(mask == mascaras.end())
+		return;
+			
+		mask->second &= ~T::mascara; // Remove o bit correspondente ao componente.
+		if(!it->second.empty())
+		return;
+		entidades.erase(it); // Remove a entidade se n�o houver mais componentes.
 	}
 
 	template<typename T>
