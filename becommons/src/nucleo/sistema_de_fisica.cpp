@@ -18,11 +18,11 @@ bubble::sistema_fisica::~sistema_fisica()
     pararThread();
 
     // Libere os outros componentes
-    delete solucionador;
-    delete faseAmpla;
-    delete expedidor;
-    delete configColisao;
-    delete mundoDinamico;
+    if(solucionador)delete solucionador;
+    if(faseAmpla)delete faseAmpla;
+    if(expedidor)delete expedidor;
+    if(configColisao)delete configColisao;
+    if(mundoDinamico)delete mundoDinamico;
 }
 
 

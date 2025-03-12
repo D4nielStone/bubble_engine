@@ -71,6 +71,7 @@ bubble::projeto::projeto(const std::string &diretorio) : diretorioDoProjeto(dire
     (diretorio + "/" + icon_path).c_str());
 
 	projeto_atual->fase_atual = new bubble::fase(diretorio + "/" + doc["lancamento"].GetString() + ".fase");
+	projeto_atual->fase_atual->carregar();
 	projeto_atual->fase_atual->iniciar();
 }
 

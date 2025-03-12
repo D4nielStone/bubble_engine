@@ -18,10 +18,10 @@ namespace bubble
 {
     sistema_interface::~sistema_interface()
     {
-        glDeleteBuffers(1, &text_VBO);
-        glDeleteBuffers(1, &img_VBO);
-        glDeleteVertexArrays(1, &text_VAO);
-        glDeleteVertexArrays(1, &img_VAO);
+        if(text_VBO != 0)glDeleteBuffers(1, &text_VBO);
+        if(img_VBO != 0)glDeleteBuffers(1, &img_VBO);
+        if(text_VAO != 0)glDeleteVertexArrays(1, &text_VAO);
+        if(img_VAO != 0)glDeleteVertexArrays(1, &img_VAO);
     }
     void sistema_interface::atualizar()
     {

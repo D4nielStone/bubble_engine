@@ -38,6 +38,7 @@ namespace bubble
 		void atualizar(double deltaTime);
 		void definirCamera(const entidade &ent);
 		void analizar(const char* diretorio);
+		void carregar();
 		std::shared_ptr<camera> obterCamera() const;
 		registro* obterRegistro();
 		sistema_fisica sfisica;

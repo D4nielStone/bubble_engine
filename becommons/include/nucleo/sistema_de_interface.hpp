@@ -23,7 +23,7 @@ namespace bubble
 		static void desenharTexto(shader& s, const texto& t);
 		static void desenharImagem(shader& s, const imagem& img);
 	private:
-		inline static unsigned int text_VAO, text_VBO;
-		inline static unsigned int img_VAO, img_VBO, img_EBO;
+		inline static unsigned int text_VAO = 0, text_VBO = 0;
+		inline static unsigned int img_VAO= 0, img_VBO = 0, img_EBO = 0;
 	};
 }

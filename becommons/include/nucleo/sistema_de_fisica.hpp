@@ -32,11 +32,11 @@ namespace bubble
         std::atomic<bool> rodando{ false }; // Controle da thread
         std::thread fisicaThread;
 
-        btDefaultCollisionConfiguration* configColisao;
-        btCollisionDispatcher* expedidor;
-        btBroadphaseInterface* faseAmpla;
-        btSequentialImpulseConstraintSolver* solucionador;
-        btDiscreteDynamicsWorld* mundoDinamico;
+        btDefaultCollisionConfiguration* configColisao{nullptr};
+        btCollisionDispatcher* expedidor{nullptr};
+        btBroadphaseInterface* faseAmpla{nullptr};
+        btSequentialImpulseConstraintSolver* solucionador{nullptr};
+        btDiscreteDynamicsWorld* mundoDinamico{nullptr};
     };
 
     // Fun��o de Raycast

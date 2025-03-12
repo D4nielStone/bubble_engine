@@ -8,6 +8,7 @@
 #include "util/vetor2.hpp"
 #include "entidades/entidade.hpp"
 #include "nucleo/registro.hpp"
+#include "nucleo/fase.hpp"
 #include "componentes/fisica.hpp"
 
 betest::registro_testes testes;
@@ -282,6 +283,21 @@ struct CompB : bubble::componente {
     static constexpr bubble::componente::mascara mascara = static_cast<bubble::componente::mascara>(1 << 1);
 };
 
+void testarFase()
+{
+    testes.classe("BUBBLE", "FASE");
+    
+    // Teste de construtor com diretório
+    testes.adicionar("construtor_com_diretorio", [](){
+        
+        const char* diretorio = "teste_fase.fase";
+
+        bubble::fase fase(diretorio);
+    
+        ASSERT_EQUAL(fase.nome(), "fase_teste");
+    });
+}
+
 void testarRegistro()
 {
     testes.classe("BUBBLE", "REGISTRO");
@@ -410,6 +426,7 @@ void testarRegistro()
 void testarNucleo()
 {
     testarRegistro();
+    testarFase();
 }
 
 int main()
