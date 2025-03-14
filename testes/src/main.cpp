@@ -290,7 +290,7 @@ void testarFase()
     // Teste de construtor com diretório
     testes.adicionar("construtor_com_diretorio", [](){
         
-        const char* diretorio = "teste_fase.fase";
+        const char* diretorio = "../assets/teste_fase.fase";
 
         bubble::fase fase(diretorio);
     

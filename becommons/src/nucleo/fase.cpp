@@ -49,12 +49,6 @@ fase::fase(const char* diretorio) : diretorio(diretorio)
 
 fase::fase(const std::string& diretorio) : diretorio(diretorio.c_str())
 {
-	srender.inicializar(this);
-	sinterface.inicializar(this);
-
-	/// efetua a analise do json
-	projeto_atual->fase_atual = this;
-
 	if(std::filesystem::exists(diretorio))
 		analizar(diretorio.c_str());
 	else if (std::filesystem::exists(std::filesystem::absolute(diretorio)))

@@ -1,10 +1,6 @@
 
 -- Autor Daniel Oliveira (c) 2025 --
 
-function iniciar()
-    print("Iniciando o jogo...")
-end
-
 function atualizar()
     -- Suaviza a rotação da câmera com base no movimento do mouse
     local sensibilidade = 0.1

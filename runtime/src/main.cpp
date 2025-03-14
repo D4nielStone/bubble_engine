@@ -18,6 +18,7 @@ int main(int argv, char* argc[])
 		depuracao::emitir(info, "Iniciando projeto em:" + DIR_PADRAO);
 		
 		bubble::projeto runtime(DIR_PADRAO);
+		runtime.fase_atual->iniciar();
 		runtime.rodar();
 	}
 	catch(const std::exception& e)

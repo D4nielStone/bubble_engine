@@ -51,6 +51,6 @@ namespace bubble
 		registro reg;
 		std::shared_ptr<camera> camera_atual{ nullptr };
 		bool rodando = false;
-		std::string _Mnome;
+		std::string _Mnome {""};
 	};
 }
