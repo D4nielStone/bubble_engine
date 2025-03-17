@@ -26,7 +26,6 @@ void bubble::fisica::init()
     corpoRigido->setRestitution(0.8f);
     corpoRigido->setCcdMotionThreshold(0.01f); // Pequeno movimento necess�rio para ativar o CCD
     corpoRigido->setCcdSweptSphereRadius(0.05f); // Define um raio de varredura para detectar colis�es
-
 }
 // Construtor para cria��o de malha
 bubble::fisica::fisica(bool malha, btScalar massa, btVector3 posicaoInicial, camada camada)
@@ -38,7 +37,7 @@ bubble::fisica::fisica(bool malha, btScalar massa, btVector3 posicaoInicial, cam
 bubble::fisica::~fisica()
 {
 
-    if(corpoRigido)projeto_atual->fase_atual->sfisica.remover(corpoRigido);
+    if(corpoRigido && projeto_atual->fase_atual)projeto_atual->fase_atual->sfisica.remover(corpoRigido);
     if(corpoRigido)delete corpoRigido;
     if(estadoDeMovimento)delete estadoDeMovimento;
     if(forma)delete forma;
@@ -91,11 +90,13 @@ void bubble::fisica::criarMalha()
 // Atualizar transforma��o
 void bubble::fisica::atualizarTransformacao()
 {
+    _Mtransformacao = projeto_atual->fase_atual->obterRegistro()->obter<bubble::transformacao>(meu_objeto).get();
+    forma->setLocalScaling(btVector3(_Mtransformacao->escala.x, _Mtransformacao->escala.y, _Mtransformacao->escala.z));
+
     if (massa == 0)  return;
     btTransform bt;
     estadoDeMovimento->getWorldTransform(bt);
 
-    _Mtransformacao = projeto_atual->fase_atual->obterRegistro()->obter<bubble::transformacao>(meu_objeto).get();
     _Mtransformacao->posicao = { bt.getOrigin().getX(), bt.getOrigin().getY(), bt.getOrigin().getZ() };
     _Mtransformacao->rotacao = { bt.getRotation().getX(), bt.getRotation().getY(), bt.getRotation().getZ() };
 }
@@ -161,4 +162,29 @@ glm::vec3 bubble::fisica::obterPosicao() const
         bt.getOrigin().getY(),
         bt.getOrigin().getZ()
     };
+}
+
+void bubble::fisica::definirFatorLinear(const glm::vec3& fator)
+{
+        corpoRigido->setLinearVelocity(btVector3(fator.x, fator.y, fator.z)); // Reset velocity to avoid unwanted movement
+        corpoRigido->activate(); 
+}
+
+void bubble::fisica::definirFatorAngular(const glm::vec3& fator){
+        corpoRigido->setAngularVelocity(btVector3(fator.x, fator.y, fator.z)); // Reset velocity to avoid unwanted movement
+        corpoRigido->activate(); 
+}
+
+void bubble::fisica::definirRestituicao(const float fator){
+        corpoRigido->setRestitution(fator); // Reset velocity to avoid unwanted movement
+        corpoRigido->activate(); 
+}
+void bubble::fisica::definirFriccao(const float fator){
+        corpoRigido->setFriction(fator); // Reset velocity to avoid unwanted movement
+        corpoRigido->activate(); 
+}
+void bubble::fisica::definirRaioCcd(const float fator)
+{
+    corpoRigido->setCcdSweptSphereRadius(fator);
+    corpoRigido->activate();
 }

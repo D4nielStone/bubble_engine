@@ -96,6 +96,8 @@ namespace bapi
 				addData("frase", &bubble::texto::frase).
 				addData("fonte", &bubble::texto::fonte).
 				addData("cor", &bubble::texto::cor).
+				addData("refPos", &bubble::texto::posicao_referencial).
+				addData("refPosAtiva", &bubble::texto::pf_ativa).
 				endClass().
 				beginClass<bubble::camera>("camera").			///< define camera
 				addConstructor<void(*)()>().

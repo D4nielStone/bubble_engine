@@ -3,6 +3,7 @@
 #include "util/material.hpp"
 #include "depuracao/debug.hpp"
 
+
 namespace bubble
 {
     malha::malha(std::vector<vertice>& vertices, std::vector<unsigned int>& indices, bubble::material& material)

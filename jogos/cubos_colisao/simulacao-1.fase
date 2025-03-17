@@ -1,0 +1,143 @@
+{
+	"nome": "teste1",
+	"entidades": [
+		{
+			"componentes": [
+				{
+					"tipo": "transformacao",
+					"posicao": [0, -1.5, 0],
+					"rotacao": [0, 0, 0],
+					"escala": [20, 1, 10]
+				},
+				{
+					"tipo": "renderizador",
+
+					"diretorio": "/objetos/plano.obj"
+				},
+                {
+                    "tipo": "fisica",
+                    "forma": "plano",
+                    "posicao_inicial": [0, -1.5, 0],
+                    "massa": 0.0
+                }
+			]
+		},
+		{
+			"componentes": [
+				{
+					"tipo": "transformacao",
+					"posicao": [0, 0, 0],
+					"rotacao": [0, 0, 0],
+					"escala": [1, 1, 1]
+				},
+				{
+					"tipo": "camera",
+					"posicao": [10, 1,10],
+					"ceu": [93, 83,114, 255.0],
+					"escala": 10.0,
+					"ortho": true
+				},
+                {
+                    "tipo": "codigo",
+                    "diretorio": "/camera_mov.lua"
+                }
+			]
+		},
+		{
+            "componentes":[
+            	{
+                	"tipo": "luz_direcional",
+                	"direcao": [0.7, 0.7, 0.7],
+                	"ambiente": [0.3, 0.3, 0.3],
+                	"difusa": [0.9, 0.9, 0.9],
+                	"especular": [1, 1, 1]
+            	}
+			]
+        },
+		{
+			"componentes": [
+				{
+					"tipo": "transformacao",
+					"posicao": [0, 0, 0],
+					"rotacao": [0, 0, 0],
+					"escala": [1, 1, 1]
+				},
+				{
+					"tipo": "renderizador",
+					"diretorio": "/objetos/cubo.obj"
+				},
+                {
+                    "tipo": "fisica",
+                    "forma": "caixa",
+                    "posicao_inicial": [0,0,0],
+                    "massa": 1.0
+                }
+			]
+		},{
+			"componentes": [
+				{
+					"tipo": "transformacao",
+					"posicao": [15, 0, 0],
+					"rotacao": [0, 0, 0],
+					"escala": [2, 2, 2]
+				},
+				{
+					"tipo": "renderizador",
+					"diretorio": "/objetos/cubo.obj"
+				},
+                {
+                    "tipo": "fisica",
+                    "forma": "caixa",
+                    "posicao_inicial": [15, 0,0],
+                    "massa": 100.0
+                },
+                {
+                    "tipo": "codigo",
+                    "diretorio": "/main.lua"
+                }
+			]
+		},
+        {
+            "componentes":[
+                {
+                    "tipo": "texto",
+                    "frase": "ADJHIOP",
+                    "escala": 0.72
+                },
+                {
+                    "tipo": "codigo",
+                    "diretorio": "/text.lua"
+                }
+            ]
+        },
+        {
+            "componentes":[
+                {
+                    "tipo": "texto",
+                    "frase": "ADJHIOP",
+                    "escala": 0.72
+                } 
+            ]
+        },
+        {
+			"componentes": [
+				{
+					"tipo": "transformacao",
+					"posicao": [-15, 5, 0],
+					"rotacao": [0, 0, 0],
+					"escala": [1, 10, 10]
+				},
+				{
+					"tipo": "renderizador",
+					"diretorio": "/objetos/cubo.obj"
+				},
+                {
+                    "tipo": "fisica",
+                    "forma": "caixa",
+                    "posicao_inicial": [-15, 5, 0],
+                    "massa": 0.0
+                }
+			]
+		}
+	]
+}

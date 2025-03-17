@@ -9,6 +9,7 @@
 bubble::entidade bubble::registro::criar()
 {
     proxima_entidade++;
+    ordem.push_front(proxima_entidade);
     depuracao::emitir(debug, "registro", "nova entidade: " + std::to_string(proxima_entidade ));
     return { proxima_entidade, componente::COMPONENTE_NONE };
 }

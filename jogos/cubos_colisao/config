@@ -1,0 +1,10 @@
+{
+    "lancamento": "simulacao-1",
+    "janela":
+    {
+        "largura": 1000,
+        "altura": 400,
+        "titulo": "Simulação de cubos colidindo - Experimento Greg Gbur",
+        "icone": "icone.png"
+    }
+}

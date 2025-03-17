@@ -8,6 +8,7 @@
 #pragma once
 #include "string"
 #include "nucleo/fase.hpp"
+#include <memory>
 
 namespace bubble
 {
@@ -17,12 +18,12 @@ namespace bubble
             std::string diretorioDoProjeto;
             /// @brief construtor
             /// @param diretorio 
-            inline static bubble::fase* fase_atual{ nullptr };
+            inline static std::shared_ptr<bubble::fase> fase_atual{ nullptr };
             projeto() = default;
             projeto(const std::string& diretorio);
             void rodar();
             void fase(const std::string& nome);
-            bubble::fase* obterFaseAtual();
+	    std::shared_ptr<bubble::fase> obterFaseAtual();
     };
     inline projeto* projeto_atual{nullptr}; 
 }

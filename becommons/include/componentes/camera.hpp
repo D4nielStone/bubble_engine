@@ -65,6 +65,8 @@ namespace bubble
 		raio pontoParaRaio(bubble::vetor2<double> screenPoint) const;
 
 		glm::vec3 telaParaMundo(const bubble::vetor2<double>& screenPoint, float profundidade) const;
+
+        bubble::vetor2<int> mundoParaTela(const glm::vec3& mundoPos);
 		
 		/// @brief 
 		/// @param pos 

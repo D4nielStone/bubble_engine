@@ -6,14 +6,15 @@
  */
 
  #pragma once
- #include <unordered_map>
- #include <memory>
- #include <functional>
- #include "entidades/entidade.hpp"
- #include "componentes/componente.hpp"
- #include "componentes/fisica.hpp"
- #include "depuracao/debug.hpp"
- #include "depuracao/assert.hpp"
+#include <unordered_map>
+#include <deque>
+#include <memory>
+#include <functional>
+#include "entidades/entidade.hpp"
+#include "componentes/componente.hpp"
+#include "componentes/fisica.hpp"
+#include "depuracao/debug.hpp"
+#include "depuracao/assert.hpp"
 
 namespace bubble
 {
@@ -24,6 +25,7 @@ namespace bubble
 	*/
 	struct registro
 	{
+        std::deque<uint32_t> ordem;
 		/// proximo id livre
 		uint32_t proxima_entidade{ 0 };
 		/// Armazena mascara da entidade associada
@@ -98,7 +100,7 @@ namespace bubble
 	template<typename ...comps, typename Func>
 	inline void registro::cada(Func func)
 	{
-		for (auto& [entity, componentes] : entidades) {
+		for (auto& entity : ordem) {
 			if ((tem<comps>(entity) && ...)) {
 				func(entity);
 			}

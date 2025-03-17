@@ -88,12 +88,18 @@ void bapi::definirFisica(lua_State* L)
 		endClass().
 		beginClass<bubble::fisica>("fisica").			///< define transformacao
 		addConstructor<void(*)()>().
+		addData("massa", &bubble::fisica::massa).
 		addFunction("aplicarForca", &bubble::fisica::aplicarForca).
 		addFunction("defVelocidade", &bubble::fisica::aplicarVelocidade).
 		addFunction("obtVelocidade", &bubble::fisica::obterVelocidade).
 		addFunction("defPosicao", &bubble::fisica::definirPosicao).
 		addFunction("obtPosicao", &bubble::fisica::obterPosicao).
 		addFunction("defRotacao", &bubble::fisica::definirRotacao).
+		addFunction("defFatorLinear", &bubble::fisica::definirFatorLinear).
+		addFunction("defFriccao", &bubble::fisica::definirFriccao).
+		addFunction("defRestituicao", &bubble::fisica::definirRestituicao).
+		addFunction("defFatorAngular", &bubble::fisica::definirFatorAngular).
+		addFunction("defRaioCcd", &bubble::fisica::definirRaioCcd).
 		addFunction("corpoRigido", &bubble::fisica::obterCorpoRigido).
 		endClass().
 		beginNamespace("fisica").

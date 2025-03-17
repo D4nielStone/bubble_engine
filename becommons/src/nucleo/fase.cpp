@@ -13,6 +13,8 @@
 #include "componentes/imagem.hpp"
 #include "componentes/luz_direcional.hpp"
 #include "os/janela.hpp"
+#include "arquivadores/imageloader.hpp"
+#include "depuracao/assert.hpp"
 #include "os/sistema.hpp"
 #include <iostream>
 
@@ -33,7 +35,16 @@ void fase::carregar()
 	sinterface.inicializar(this);
 
 	/// efetua a analise do json
-	projeto_atual->fase_atual = this;
+	projeto_atual->fase_atual = shared_from_this();
+}
+
+void fase::descarregar()
+{
+	parar();
+
+	reg.entidades.clear();
+
+	projeto_atual->fase_atual = nullptr;	
 }
 
 fase::fase(const char* diretorio) : diretorio(diretorio)
@@ -139,6 +150,14 @@ static void analizarEntidades(const Document& doc, fase* f)
 					auto path = projeto_atual->diretorioDoProjeto + std::string(componente["diretorio"].GetString());
 					reg->adicionar<renderizador>(id, new modelo(path.c_str()));
 					auto render = reg->obter<renderizador>(id.id);
+					
+					if(componente.HasMember("albedo") && componente["albedo"].IsString())
+                    {
+                        auto path_ =projeto_atual->diretorioDoProjeto + std::string(componente["albedo"].GetString());
+                        bubble::textura tex = {bubble::textureLoader::obterInstancia().carregarTextura(path_, 3553U),"texture_diffuse", path_};
+                        render->modelo->malhas[0].material.texturas.push_back(tex);
+                    }
+
 					/// extrai sahder
 					if (componente.HasMember("vertex_shader") && componente.HasMember("fragment_shader"))
 					{
@@ -349,6 +368,7 @@ void bubble::fase::definirCamera(const entidade& ent)
 
 std::shared_ptr<bubble::camera> bubble::fase::obterCamera() const
 {
+	ASSERT(camera_atual != nullptr);
 	return camera_atual;
 }
 

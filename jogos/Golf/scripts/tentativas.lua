@@ -18,7 +18,7 @@ local et = 0.0
 function iniciar()
     -- Set text color
     gamestate.load()
-    eu.texto.cor = cor(0, 0.5, 0.5, 1)
+    eu.texto.cor = cor(0, 0.5, 0.2, 1)
     golf = entidade(1)
     
     -- Check if the current phase is "Tutorial"

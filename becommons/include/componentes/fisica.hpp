@@ -25,17 +25,22 @@ namespace bubble
         void aplicarForca(const glm::vec3& vetor);
         void aplicarVelocidade(const glm::vec3& vetor);
         void definirPosicao(const glm::vec3& posicao); 
-        void definirRotacao(const glm::vec3& rotacao);
+        void definirFatorLinear(const glm::vec3& fator);
+        void definirFatorAngular(const glm::vec3& fator);
+        void definirFriccao(const float fator);
+        void definirRestituicao(const float fator);
+        void definirRaioCcd(const float fator);
+       void definirRotacao(const glm::vec3& rotacao);
         glm::vec3 obterVelocidade() const;
         glm::vec3 obterPosicao() const;
         void init();
+        btScalar massa;
 
     private:
         bool malha{ false };
         btCollisionShape* forma;
         btDefaultMotionState* estadoDeMovimento;
         btRigidBody* corpoRigido{ nullptr };
-        btScalar massa;
         btVector3 posicaoInicial;
         transformacao* _Mtransformacao;
     };

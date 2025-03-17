@@ -84,7 +84,6 @@ glm::mat4 bubble::camera::obtViewMatrix() {
         transform = projeto_atual->fase_atual->obterRegistro()->obter<transformacao>(meu_objeto);
 
     posicao = transform->posicao;
-    glm::vec3 up = transform->cima;
 
     // Recalcular os vetores de referência
     glm::vec3 frente = glm::vec3(
@@ -93,11 +92,13 @@ glm::mat4 bubble::camera::obtViewMatrix() {
         sin(glm::radians(transform->rotacao.y)) * cos(glm::radians(transform->rotacao.x))
     );
     forward = glm::normalize(frente);
-        
-    direita = glm::normalize(glm::cross(forward, glm::vec3(0.0f, 1.0f, 0.0f)));  // Mantém eixo Y fixo
+
+    cima = glm::vec3(0,1,0);
+
+    direita = glm::normalize(glm::cross(forward, cima));
     cima = glm::normalize(glm::cross(direita, forward));
 
-    // Atualiza os vetores na transformação
+    // Atualiza a transformação
     transform->cima = cima;
 
     glm::vec3 alvo;
@@ -108,10 +109,10 @@ glm::mat4 bubble::camera::obtViewMatrix() {
         alvo = posicao + forward;
     }
 
-    viewMatrix = glm::lookAt(posicao, alvo, up);
+    // Agora, passa o vetor 'cima' atualizado para a viewMatrix
+    viewMatrix = glm::lookAt(posicao, alvo, cima);
     return viewMatrix;
 }
-
 void bubble::camera::viewport(const bubble::vetor2<double>& viewp)
 {
     viewportFBO = viewp;
@@ -168,6 +169,20 @@ glm::vec3 bubble::camera::telaParaMundo(const bubble::vetor2<double> &screenPoin
 
     glm::vec4 worldCoords = glm::inverse(viewMatrix) * eyeCoords;
     return glm::normalize(glm::vec3(worldCoords));
+}
+
+bubble::vetor2<int> bubble::camera::mundoParaTela(const glm::vec3 &mundoPos)
+{
+    glm::vec4 clipSpacePos = projMatriz * viewMatrix * glm::vec4(mundoPos, 1.0f);
+    glm::vec3 ndcPos = glm::vec3(clipSpacePos) / clipSpacePos.w;
+
+    int screenWidth = viewport_ptr->x;
+    int screenHeight = viewport_ptr->y;
+
+    bubble::vetor2<int> screenPos;
+    screenPos.x = (ndcPos.x * 0.5f + 0.5f) * screenWidth;
+    screenPos.y = (1.0f - (ndcPos.y * 0.5f + 0.5f)) * screenHeight; // Inverter Y
+    return screenPos;
 }
 
 void bubble::camera::mover(glm::vec3 &pos)

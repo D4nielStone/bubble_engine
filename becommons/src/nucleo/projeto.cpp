@@ -70,7 +70,7 @@ bubble::projeto::projeto(const std::string &diretorio) : diretorioDoProjeto(dire
      bubble::vetor2<double>(doc["janela"].GetObject()["largura"].GetInt(), doc["janela"].GetObject()["altura"].GetInt()),
     (diretorio + "/" + icon_path).c_str());
 
-	projeto_atual->fase_atual = new bubble::fase(diretorio + "/" + doc["lancamento"].GetString() + ".fase");
+	projeto_atual->fase_atual = std::make_shared<bubble::fase>(diretorio + "/" + doc["lancamento"].GetString() + ".fase");
 	projeto_atual->fase_atual->carregar();
 }
 
@@ -89,14 +89,13 @@ void bubble::projeto::fase(const std::string &nome)
 {
     bubble::file_de_tarefas.push([this, nome]()
     {
-    projeto_atual->fase_atual->parar();
-    delete projeto_atual->fase_atual;
-    projeto_atual->fase_atual = new bubble::fase(diretorioDoProjeto + "/" + nome + ".fase");
+    	projeto_atual->fase_atual->descarregar();
+    	projeto_atual->fase_atual = std::make_shared<bubble::fase>(diretorioDoProjeto + "/" + nome + ".fase");
 	projeto_atual->fase_atual->iniciar();
     }
     );
 }
-bubble::fase * bubble::projeto::obterFaseAtual()
+std::shared_ptr<bubble::fase> bubble::projeto::obterFaseAtual()
 {
-return fase_atual;
+	return fase_atual;
 }

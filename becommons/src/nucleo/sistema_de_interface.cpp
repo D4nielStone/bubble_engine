@@ -9,6 +9,7 @@
 #include "componentes/texto.hpp"
 #include "arquivadores/fonte.hpp"
 #include "os/janela.hpp"
+#include "nucleo/projeto.hpp"
 
 bubble::shader* shader_texto{ nullptr };
 bubble::shader* shader_imagem{ nullptr };
@@ -103,9 +104,39 @@ namespace bubble
 
     }
 
+    float obterLarguraTexto(const bubble::texto& texto) {
+        auto& caracteres = bubble::gerenciadorFontes::obterInstancia().obter(texto.fonte);
+        if (caracteres.empty()) {
+            return 0.0f;
+        }
+
+        float larguraTotal = 0.0f;
+        for (char32_t c : texto.frase) {
+           auto it = caracteres.find(c);
+           if (it != caracteres.end()) {
+               const bubble::caractere& ch = it->second;
+            // Calculate advance in pixels (same logic as in desenharTexto)
+                larguraTotal += (ch.avanco >> 6) * texto.escala;
+            }
+        }
+    return larguraTotal;
+}
+
+    void calcularReferencial(bubble::texto &_texto)
+    {
+        glm::vec3 worldPosition = _texto.posicao_referencial; 
+        _texto.padding = projeto_atual->fase_atual->obterCamera()->mundoParaTela(worldPosition);
+        _texto.padding.x -= obterLarguraTexto(_texto)/2;
+    }
+
     void bubble::sistema_interface::desenharTexto(shader& s, const bubble::texto &_texto)
     {
-        auto text = _texto;
+        bubble::texto text = _texto;
+
+        if(_texto.pf_ativa)
+            calcularReferencial(text);
+
+
         // activate corresponding render state	
         s.use();
         s.setCor("textColor", text.cor);

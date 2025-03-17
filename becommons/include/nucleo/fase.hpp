@@ -24,7 +24,7 @@
 namespace bubble
 {
 	inline std::queue<std::function<void()>> file_de_tarefas;
-	class fase
+	class fase : public std::enable_shared_from_this<fase>
 	{
 	public:
 		fase(const char* diretorio);
@@ -39,6 +39,7 @@ namespace bubble
 		void definirCamera(const entidade &ent);
 		void analizar(const char* diretorio);
 		void carregar();
+		void descarregar();
 		std::shared_ptr<camera> obterCamera() const;
 		registro* obterRegistro();
 		sistema_fisica sfisica;
@@ -49,7 +50,7 @@ namespace bubble
 		bool inicializacao = true;
 		const char* diretorio;
 		registro reg;
-		std::shared_ptr<camera> camera_atual{ nullptr };
+	 	std::shared_ptr<camera> camera_atual{ nullptr };
 		bool rodando = false;
 		std::string _Mnome {""};
 	};

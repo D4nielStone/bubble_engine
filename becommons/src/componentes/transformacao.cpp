@@ -11,5 +11,8 @@ void bubble::transformacao::apontarEntidade(const uint32_t& ent)
 
 void bubble::transformacao::apontarV3(const glm::vec3& pos)
 {
+    if(!alvo)
 	*alvo = pos;
+    else
+        alvo = new glm::vec3(pos);
 }

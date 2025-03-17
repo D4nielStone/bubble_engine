@@ -3,6 +3,7 @@
 #pragma once
 #include "componente.hpp"
 #include "util/cor.hpp"
+#include <glm/glm.hpp>
 #include "util/vetor2.hpp"
 #include <string>
 
@@ -15,6 +16,7 @@ namespace bubble
 		const float escala;
 		bubble::vetor2<int> padding{0,0};
 		bubble::cor cor;
+        glm::vec3 posicao_referencial; bool pf_ativa = false;// posicao de 3d para 2d
 		texto(const std::string& texto, float escala = 1.f) : frase(texto), escala(escala), cor({ 1.f, 1.f, 1.f, 1.f }), padding({0, 0}) {}
 	};
 } 
