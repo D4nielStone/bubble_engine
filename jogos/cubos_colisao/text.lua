@@ -7,10 +7,12 @@ local textoII
 
 function iniciar()
     textoII = entidade(7).texto
+    textoIII = entidade(9).texto
     textoII.refPosAtiva = true
-    textoII.fonte = script_path() .. "/minecraft_font.ttf" 
+    textoII.fonte = script_path() .. "minecraft_font.ttf" 
+    textoIII.fonte = script_path() .. "minecraft_font.ttf" 
     eu.texto.refPosAtiva = true
-    eu.texto.fonte = script_path() .. "/minecraft_font.ttf" --Adiciona fonte
+    eu.texto.fonte = script_path() .. "minecraft_font.ttf" --Adiciona fonte
 end
 function atualizar()
     eu.texto.frase = "Massa: " .. tostring(entidade(4).fisica.massa) -- Mostra massa

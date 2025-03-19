@@ -11,7 +11,9 @@ bubble::sistema_fisica::sistema_fisica()
     faseAmpla = new btDbvtBroadphase();
     solucionador = new btSequentialImpulseConstraintSolver();
     mundoDinamico = new btDiscreteDynamicsWorld(expedidor, faseAmpla, solucionador, configColisao);
-    mundoDinamico->setGravity(btVector3(0, -10, 0));
+    mundoDinamico->setGravity(btVector3(0, -9.8, 0));
+    mundoDinamico->getSolverInfo().m_numIterations = 100;
+
 }
 bubble::sistema_fisica::~sistema_fisica()
 {
@@ -28,7 +30,7 @@ bubble::sistema_fisica::~sistema_fisica()
 
 void bubble::sistema_fisica::atualizar()
 {
-    mundoDinamico->stepSimulation(instanciaJanela->_Mtempo.obterDeltaTime());
+    mundoDinamico->stepSimulation(instanciaJanela->_Mtempo.obterDeltaTime() * velocidade, 1, 1.f / 1000.f);
     reg->cada<bubble::fisica, bubble::transformacao>([&](const uint32_t entidade)
         {
             /// adiciona corpos rigidos

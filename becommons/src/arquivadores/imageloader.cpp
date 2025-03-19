@@ -398,7 +398,7 @@ GLuint bubble::textureLoader::carregarTextura(const std::string& caminho, double
 
     return id;
 }
-GLuint bubble::textureLoader::carregarTextura(const std::string& caminho, GLuint tipo_textura)
+GLuint bubble::textureLoader::carregarTextura(const std::string& caminho)
 {
     // Verificar se a textura j� foi carregada
     if (texturasCarregadas.find(caminho) != texturasCarregadas.end()) {
@@ -406,7 +406,7 @@ GLuint bubble::textureLoader::carregarTextura(const std::string& caminho, GLuint
     }
 
     // Carregar nova textura
-    GLuint id = texturaDoArquivo(caminho.c_str(), tipo_textura);
+    GLuint id = texturaDoArquivo(caminho.c_str(), GL_TEXTURE_2D);
     texturasCarregadas[caminho] = id; // Armazena o ID da textura no mapa
 
     return id;

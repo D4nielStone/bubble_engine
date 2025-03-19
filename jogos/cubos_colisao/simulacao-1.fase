@@ -7,12 +7,18 @@
 					"tipo": "transformacao",
 					"posicao": [0, -1.5, 0],
 					"rotacao": [0, 0, 0],
-					"escala": [20, 1, 10]
+					"escala": [30, 1, 10]
 				},
 				{
 					"tipo": "renderizador",
-
-					"diretorio": "/objetos/plano.obj"
+                    "malhas": [
+                        {
+                            "id": "all",
+                            "cor_difusa": [255, 255, 255, 255],
+                            "albedo": "textura.png"
+                        }
+                    ],
+					"diretorio": "objetos/plano.obj"
 				},
                 {
                     "tipo": "fisica",
@@ -33,13 +39,14 @@
 				{
 					"tipo": "camera",
 					"posicao": [10, 1,10],
-					"ceu": [93, 83,114, 255.0],
-					"escala": 10.0,
+					"ceu": [0, 0, 0, 255],
+					"escala": 17.0,
+					"zfar": 300,
 					"ortho": true
 				},
                 {
                     "tipo": "codigo",
-                    "diretorio": "/camera_mov.lua"
+                    "diretorio": "camera_mov.lua"
                 }
 			]
 		},
@@ -47,10 +54,10 @@
             "componentes":[
             	{
                 	"tipo": "luz_direcional",
-                	"direcao": [0.7, 0.7, 0.7],
-                	"ambiente": [0.3, 0.3, 0.3],
-                	"difusa": [0.9, 0.9, 0.9],
-                	"especular": [1, 1, 1]
+                	"direcao": [0.7, -0.7, -0.7],
+                	"ambiente": [0.1, 0.1, 0.1],
+                	"difusa": [0.5, 0.5, 0.5],
+                	"especular": [0.1, 0.2, 0]
             	}
 			]
         },
@@ -58,18 +65,24 @@
 			"componentes": [
 				{
 					"tipo": "transformacao",
-					"posicao": [0, 0, 0],
+					"posicao": [0, -1, 0],
 					"rotacao": [0, 0, 0],
 					"escala": [1, 1, 1]
 				},
 				{
 					"tipo": "renderizador",
-					"diretorio": "/objetos/cubo.obj"
+					"diretorio": "objetos/cubo.obj",
+					"malhas": [
+                        {
+                            "id": "all",
+                            "cor_difusa": [10, 255, 100, 255]
+                        }
+                    ]
 				},
                 {
                     "tipo": "fisica",
                     "forma": "caixa",
-                    "posicao_inicial": [0,0,0],
+                    "posicao_inicial": [0,-0.5,0],
                     "massa": 1.0
                 }
 			]
@@ -79,21 +92,28 @@
 					"tipo": "transformacao",
 					"posicao": [15, 0, 0],
 					"rotacao": [0, 0, 0],
-					"escala": [2, 2, 2]
+					"escala": [3, 3, 3]
 				},
 				{
 					"tipo": "renderizador",
-					"diretorio": "/objetos/cubo.obj"
+					"malhas": [
+                        {
+                            "id": "all",
+                            "cor_difusa": [10, 40, 255, 255]
+                        }
+                    ],
+					"diretorio": "objetos/cubo.obj"
 				},
                 {
                     "tipo": "fisica",
                     "forma": "caixa",
-                    "posicao_inicial": [15, 0,0],
-                    "massa": 100.0
+                    "posicao_inicial": [15, 1.5,0],
+                    "massa": 10000.0
+                    
                 },
                 {
                     "tipo": "codigo",
-                    "diretorio": "/main.lua"
+                    "diretorio": "main.lua"
                 }
 			]
 		},
@@ -102,11 +122,11 @@
                 {
                     "tipo": "texto",
                     "frase": "ADJHIOP",
-                    "escala": 0.72
+                    "escala": 0.62
                 },
                 {
                     "tipo": "codigo",
-                    "diretorio": "/text.lua"
+                    "diretorio": "text.lua"
                 }
             ]
         },
@@ -115,7 +135,7 @@
                 {
                     "tipo": "texto",
                     "frase": "ADJHIOP",
-                    "escala": 0.72
+                    "escala": 0.62
                 } 
             ]
         },
@@ -123,21 +143,64 @@
 			"componentes": [
 				{
 					"tipo": "transformacao",
-					"posicao": [-15, 5, 0],
+					"posicao": [-30, 98.5, 0],
 					"rotacao": [0, 0, 0],
-					"escala": [1, 10, 10]
+					"escala": [0.3, 100, 10]
 				},
 				{
 					"tipo": "renderizador",
-					"diretorio": "/objetos/cubo.obj"
+					"diretorio": "objetos/cubo.obj"
 				},
                 {
                     "tipo": "fisica",
                     "forma": "caixa",
-                    "posicao_inicial": [-15, 5, 0],
+                    "posicao_inicial": [-30, 98.5, 0],
                     "massa": 0.0
                 }
 			]
-		}
+		},
+        {
+            "componentes":[
+                {
+                    "tipo": "texto",
+                    "frase": "a",
+                    "escala": 1
+                } 
+            ]
+        },
+		{
+			"componentes": [
+				{
+					"tipo": "transformacao",
+					"posicao": [0, 98.5, -10],
+					"rotacao": [0, 0, 0],
+					"escala": [30, 100, 0.3]
+				},
+				{
+					"tipo": "renderizador",
+					"diretorio": "objetos/cubo.obj"
+				},
+                {
+                    "tipo": "fisica",
+                    "forma": "caixa",
+                    "posicao_inicial": [0, 98.5, -10],
+                    "massa": 0.0
+                }
+			]
+		},
+        {
+            "componentes":
+            [
+                {
+					"tipo": "transformacao",
+					"posicao": [0, 1, -10],
+					"rotacao": [0, 0, 0],
+					"escala": [30, 100, 0.3]
+				},
+                {
+                    "tipo": "camera"
+                }
+            ]
+        }
 	]
 }

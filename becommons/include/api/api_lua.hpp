@@ -5,6 +5,8 @@
 #include "util/vetor2.hpp"
 #include "util/raio.hpp"                
 #include "util/cor.hpp"                
+#include "util/malha.hpp"                
+#include "util/material.hpp"                
 #include "componentes/texto.hpp"
 #include "componentes/imagem.hpp"
 #include "componentes/fisica.hpp"     
@@ -12,6 +14,7 @@
 #include <cstdint>
 #include <bullet/btBulletDynamicsCommon.h>
 #include "componentes/transformacao.hpp"
+#include "componentes/renderizador.hpp"
 #include <lua.hpp>
 #include <LuaBridge/LuaBridge.h>
 #include "mat.hpp"
@@ -25,54 +28,23 @@ namespace bapi
 		bubble::camera* _Mcamera{ nullptr };
 		bubble::texto* _Mtexto{ nullptr };
 		bubble::imagem* _Mimagem{ nullptr };
-    bubble::luz_direcional* _MluzDir{nullptr};
+        bubble::luz_direcional* _MluzDir{nullptr};
+        bubble::renderizador* _Mrenderizador{nullptr};
 		uint32_t id;
 		static void definir(lua_State* L)
 		{
 			luabridge::getGlobalNamespace(L). 
-				beginClass<glm::vec3>("vetor3").		///< define vetor3
-				addConstructor<void(*)(float, float, float)>().
-				addData<float>("x", &glm::vec3::x).
-				addData<float>("y", &glm::vec3::y).
-				addData<float>("z", &glm::vec3::z).
-				endClass().
-        beginClass<vet3>("vet3").		///< define vetor3
-				addConstructor<void(*)(float, float, float)>().
-				addData<float>("x", &vet3::x).
-				addData<float>("y", &vet3::y).
-				addData<float>("z", &vet3::z).
-				endClass().
-        beginClass<bubble::luz_direcional>("luz_direcional").
-        addConstructor<void(*)()>().
-        addData<vet3>("direcao", &bubble::luz_direcional::direcao).
-        addData<vet3>("especular", &bubble::luz_direcional::especular).
-        addData<vet3>("difusa", &bubble::luz_direcional::difusa).
-        addData<vet3>("ambiente", &bubble::luz_direcional::ambiente).
-        endClass().
-				beginClass<bubble::cor>("cor").		///< define cor
-				addConstructor<void(*)(float, float, float, float)>().
-				addData<float>("r", &bubble::cor::r).
-				addData<float>("g", &bubble::cor::g).
-				addData<float>("b", &bubble::cor::b).
-				addData<float>("a", &bubble::cor::a).
-				endClass().
-				beginClass<bubble::vetor2<int>>("vetor2i").		///< define vetor3
-				addConstructor<void(*)(int, int)>().
-				addConstructor<void(*)(float, float)>().
-				addData<int>("x", &bubble::vetor2<int>::x).
-				addData<int>("y", &bubble::vetor2<int>::y).
-				endClass().
-				beginClass<bubble::vetor2<double>>("vetor2d").		///< define vetor2
-				addConstructor<void(*)(double, double)>().
-				addData<double>("x", &bubble::vetor2<double>::x).
-				addData<double>("y", &bubble::vetor2<double>::y).
-				endClass().
-				beginClass<bubble::cor>("cor").		///< define vetor3
-				addConstructor<void(*)(float, float, float, float)>().
-				addData<float>("r", &bubble::cor::r).
-				addData<float>("g", &bubble::cor::g).
-				addData<float>("b", &bubble::cor::b).
-				addData<float>("a", &bubble::cor::a).
+			    beginClass<bubble::malha>("malha").
+			    addConstructor<void(*)()>().
+			    addData("material", &bubble::malha::material).
+			    endClass().
+			    beginClass<bubble::modelo>("modelo").
+			    addConstructor<void(*)()>().
+			    addFunction("obtMalha", &bubble::modelo::obterMalha).
+			    endClass().
+				beginClass<bubble::renderizador>("renderizador").			///< define transformacao
+				addConstructor<void(*)()>().
+				addData("modelo", &bubble::renderizador::modelo).
 				endClass().
 				beginClass<bubble::transformacao>("transformacao").			///< define transformacao
 				addConstructor<void(*)()>().
@@ -125,6 +97,7 @@ namespace bapi
 				addData("fisica", &bapi::entidade::_Mfisica, true).
 	 			addData("id", &bapi::entidade::id, false).
         addData("luzDir", &bapi::entidade::_MluzDir, true).
+                addData("renderizador", &bapi::entidade::_Mrenderizador).
 				addFunction("destruir", &bapi::entidade::destruir).
 				endClass();
 		};

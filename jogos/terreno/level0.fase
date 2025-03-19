@@ -7,7 +7,7 @@
             [
             {
                 "tipo": "luz_direcional",
-                "direcao": [-0.5, -0.5, 0],
+                "direcao": [-0.5, -0.5, -0.5],
                 "ambiente": [0.1, 0.1, 0.1],
                 "difusa": [0.5,0.5,0.5],
                 "especular": [0.5, 0.5, 0.5]

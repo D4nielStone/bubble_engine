@@ -81,6 +81,17 @@ static void analizarMalha(bubble::malha* m, const rapidjson::Value& malha)
 		malha["cor_difusa"].GetArray()[2].GetFloat() / 255,
 		malha["cor_difusa"].GetArray()[3].GetFloat() / 255,
 	};
+	
+	// textura
+	if(malha.HasMember("albedo"))
+        {
+            auto path_ = projeto_atual->diretorioDoProjeto + std::string(malha["albedo"].GetString());
+            bubble::textura tex = bubble::textura(bubble::textureLoader::obterInstancia().carregarTextura(path_), path_);
+            m->material.texturas["textura_difusa"] = tex;
+        }
+	/// Uv mundo
+	if (malha.HasMember("uv_mundo"))
+		m->material.uvMundo = malha["uv_mundo"].GetBool();
 	/// recebe luz
 	if (malha.HasMember("recebe_luz"))
 		m->material.recebe_luz = malha["recebe_luz"].GetBool();
@@ -104,8 +115,9 @@ static void analizarCamera(bubble::entidade& ent, const Value& value, bubble::fa
 	reg->adicionar<camera>(ent);
 	fase->definirCamera(ent);
 	fase->obterCamera()->viewport_ptr = &instanciaJanela->tamanho;
-	if (value.HasMember("olhar"))
-		reg->obter<transformacao>(ent.id)->apontarEntidade(value["apontarEntidade"].GetInt());
+	
+if(value.HasMember("zfar"))
+        fase->obterCamera()->corte_longo = value["zfar"].GetFloat();
 	if (value.HasMember("escala"))
 		fase->obterCamera()->escala = value["escala"].GetFloat();
 	if (value.HasMember("ortho"))
@@ -151,12 +163,6 @@ static void analizarEntidades(const Document& doc, fase* f)
 					reg->adicionar<renderizador>(id, new modelo(path.c_str()));
 					auto render = reg->obter<renderizador>(id.id);
 					
-					if(componente.HasMember("albedo") && componente["albedo"].IsString())
-                    {
-                        auto path_ =projeto_atual->diretorioDoProjeto + std::string(componente["albedo"].GetString());
-                        bubble::textura tex = {bubble::textureLoader::obterInstancia().carregarTextura(path_, 3553U),"texture_diffuse", path_};
-                        render->modelo->malhas[0].material.texturas.push_back(tex);
-                    }
 
 					/// extrai sahder
 					if (componente.HasMember("vertex_shader") && componente.HasMember("fragment_shader"))
@@ -233,13 +239,12 @@ static void analizarEntidades(const Document& doc, fase* f)
 				else if (std::strcmp(tipo_str, "terreno") == 0)
 				{
 					reg->adicionar<terreno>(id, projeto_atual->diretorioDoProjeto + componente["textura"].GetString());
-					if (componente.HasMember("textura_difusa") && componente["textura_difusa"].IsString())
+					if (componente.HasMember("albedo") && componente["albedo"].IsString())
 					{
-						bubble::textura tex;
-						tex.path = projeto_atual->diretorioDoProjeto +componente["textura_difusa"].GetString();
-						tex.id = bubble::textureLoader::obterInstancia().carregarTextura(tex.path, 3553U);
-						tex.tipo = "texture_diffuse";
-						reg->obter<terreno>(id.id)->_Mmalha.material.texturas.push_back(tex);
+						bubble::textura tex(
+						bubble::textureLoader::obterInstancia().carregarTextura(tex.path),
+						projeto_atual->diretorioDoProjeto +componente["albedo"].GetString());
+						reg->obter<terreno>(id.id)->_Mmalha.material.texturas["textura_difusa"] = tex;
 						reg->obter<terreno>(id.id)->_Mmalha.material.uvMundo = true;
 					}
 				}

@@ -42,6 +42,8 @@ void bapi::entidade::destruir() const
 bapi::entidade::entidade(const uint32_t& id) : id(id)
 {
 	if (projeto_atual->fase_atual->obterRegistro()->tem<bubble::transformacao>(id))
+		_Mrenderizador = projeto_atual->fase_atual->obterRegistro()->obter<bubble::renderizador>(id).get();
+	if (projeto_atual->fase_atual->obterRegistro()->tem<bubble::transformacao>(id))
 		_Mtransformacao = projeto_atual->fase_atual->obterRegistro()->obter<bubble::transformacao>(id).get();
 	if (projeto_atual->fase_atual->obterRegistro()->tem<bubble::camera>(id))
 		_Mcamera = projeto_atual->fase_atual->obterRegistro()->obter<bubble::camera>(id).get();
@@ -54,57 +56,80 @@ bapi::entidade::entidade(const uint32_t& id) : id(id)
 	if (projeto_atual->fase_atual->obterRegistro()->tem<bubble::luz_direcional>(id))
 		_MluzDir = projeto_atual->fase_atual->obterRegistro()->obter<bubble::luz_direcional>(id).get(); 
 }
+
+int numColisoes(btRigidBody* objA, btRigidBody* objB) {
+
+     // Criar o seu callback de colisão
+    MyContactCallback contactCallback;
+
+    // Simulação de uma etapa
+    projeto_atual->fase_atual->sfisica.mundo()->performDiscreteCollisionDetection();
+
+    // Obter os resultados de colisão
+    projeto_atual->fase_atual->sfisica.mundo()->contactPairTest(objA, objB, contactCallback);
+    return contactCallback.colisoes;
+}
+
+void defVelFisica(const float v)
+{
+    projeto_atual->fase_atual->sfisica.velocidade = v;
+}
+
 void bapi::definirFisica(lua_State* L)
 {
-	luabridge::getGlobalNamespace(L).
-		beginClass<bubble::fase>("fase").		///< define fase
-		addConstructor<void(*)(const char*)>().
-		addFunction("pausar", &bubble::fase::pausar).
-		addFunction("parar", &bubble::fase::parar).
-		addFunction("iniciar", &bubble::fase::iniciar).
-		addFunction("nome", &bubble::fase::nome).
-		endClass().
-		beginClass<bubble::projeto>("projeto").		///< define projeto
-		addConstructor<void(*)(const std::string&)>().
-		addFunction("abrirFase", &bubble::projeto::fase).
-		addFunction("faseAtual", &bubble::projeto::obterFaseAtual).
-		endClass().
-		beginClass<btCollisionObject>("objetoDeColisao").			///< define transformacao
-		addConstructor<void(*)()>().
-		endClass().
-		beginClass<btRigidBody>("corpoRigido").			///< define transformacao
-		endClass().
-		beginClass<bubble::raio>("raio").			///< define transformacao
-		addConstructor<void(*)()>().
-		addData("origem", &bubble::raio::origem).
-		addData("direcao", &bubble::raio::direcao).
-		endClass().
-		beginClass<bubble::resultadoRaio>("resultadoRaio").			///< define transformacao
-		addConstructor<void(*)()>().
-		addData("objetoAtingido", &bubble::resultadoRaio::objetoAtingido, false).
-		addData("atingiu", &bubble::resultadoRaio::atingiu, false).
-		addData("pontoDeColisao", &bubble::resultadoRaio::pontoDeColisao, false).
-		addData("normalAtingida", &bubble::resultadoRaio::normalAtingida, false).
-		endClass().
-		beginClass<bubble::fisica>("fisica").			///< define transformacao
-		addConstructor<void(*)()>().
-		addData("massa", &bubble::fisica::massa).
-		addFunction("aplicarForca", &bubble::fisica::aplicarForca).
-		addFunction("defVelocidade", &bubble::fisica::aplicarVelocidade).
-		addFunction("obtVelocidade", &bubble::fisica::obterVelocidade).
-		addFunction("defPosicao", &bubble::fisica::definirPosicao).
-		addFunction("obtPosicao", &bubble::fisica::obterPosicao).
-		addFunction("defRotacao", &bubble::fisica::definirRotacao).
-		addFunction("defFatorLinear", &bubble::fisica::definirFatorLinear).
-		addFunction("defFriccao", &bubble::fisica::definirFriccao).
-		addFunction("defRestituicao", &bubble::fisica::definirRestituicao).
-		addFunction("defFatorAngular", &bubble::fisica::definirFatorAngular).
-		addFunction("defRaioCcd", &bubble::fisica::definirRaioCcd).
-		addFunction("corpoRigido", &bubble::fisica::obterCorpoRigido).
-		endClass().
-		beginNamespace("fisica").
-		addFunction("raioIntersecta", &bubble::raioIntersecta).
-		endNamespace();
+
+    luabridge::getGlobalNamespace(L).
+        beginClass<bubble::fase>("fase").
+        addConstructor<void(*)(const char*)>().
+        addFunction("pausar", &bubble::fase::pausar).
+        addFunction("parar", &bubble::fase::parar).
+        addFunction("iniciar", &bubble::fase::iniciar).
+        addFunction("nome", &bubble::fase::nome).
+        endClass().
+        beginClass<bubble::projeto>("projeto").
+        addConstructor<void(*)(const std::string&)>().
+        addFunction("abrirFase", &bubble::projeto::fase).
+        addFunction("faseAtual", &bubble::projeto::obterFaseAtual).
+        endClass().
+        beginClass<btCollisionObject>("objetoDeColisao").
+        addConstructor<void(*)()>().
+        endClass().
+        beginClass<btRigidBody>("corpoRigido").
+        endClass().
+        beginClass<bubble::raio>("raio").
+        addConstructor<void(*)()>().
+        addData("origem", &bubble::raio::origem).
+        addData("direcao", &bubble::raio::direcao).
+        endClass().
+        beginClass<bubble::resultadoRaio>("resultadoRaio").
+        addConstructor<void(*)()>().
+        addData("objetoAtingido", &bubble::resultadoRaio::objetoAtingido, false).
+        addData("atingiu", &bubble::resultadoRaio::atingiu, false).
+        addData("pontoDeColisao", &bubble::resultadoRaio::pontoDeColisao, false).
+        addData("normalAtingida", &bubble::resultadoRaio::normalAtingida, false).
+        endClass().
+        beginClass<bubble::fisica>("fisica").
+        addConstructor<void(*)()>().
+        addData("massa", &bubble::fisica::massa).
+        addFunction("aplicarForca", &bubble::fisica::aplicarForca).
+        addFunction("defVelocidade", &bubble::fisica::aplicarVelocidade).
+        addFunction("obtVelocidade", &bubble::fisica::obterVelocidade).
+        addFunction("defPosicao", &bubble::fisica::definirPosicao).
+        addFunction("obtPosicao", &bubble::fisica::obterPosicao).
+        addFunction("defRotacao", &bubble::fisica::definirRotacao).
+        addFunction("defFatorLinear", &bubble::fisica::definirFatorLinear).
+        addFunction("defFriccao", &bubble::fisica::definirFriccao).
+        addFunction("defRestituicao", &bubble::fisica::definirRestituicao).
+        addFunction("defFatorAngular", &bubble::fisica::definirFatorAngular).
+        addFunction("defRaioCcd", &bubble::fisica::definirRaioCcd).
+        addFunction("corpoRigido", &bubble::fisica::obterCorpoRigido).
+        endClass().
+
+        beginNamespace("fisica").
+        addFunction("raioIntersecta", &bubble::raioIntersecta).
+        addFunction("numColisoes", &numColisoes). 
+        addFunction("defVelocidade", &defVelFisica). 
+        endNamespace();
 }
 
 void bapi::definirTempo(lua_State *L)
@@ -131,15 +156,80 @@ void bapi::definirInputs(lua_State *L)
 		.addFunction("cursor", &bubble::posicionarCursor)
 		.endNamespace();
 }
+
+float clamp_float(float v, float min, float max) {
+    return std::clamp(v, min, max);
+}
+
 void bapi::definirUtils(lua_State *L)
 {
 	luabridge::getGlobalNamespace(L)
 		.beginNamespace("util")
 		.addFunction("lerp", &lerp<float>)
 		.addFunction("lerpV3", &bubble::lerpV3)
-		.addFunction("clamp", &std::clamp<float>)
+		.addFunction("clamp", &clamp_float)
 		.addFunction("distanciaV3", &bubble::distancia3)
 		.addFunction("distanciaV2", &bubble::distancia2)
-		.addFunction("normalizarV3", &glm::normalize<3, float, glm::packed_highp>)
-		.endNamespace();
+		.addFunction("normalizarV3", &glm::normalize<3, float, glm::packed_highp>) 
+		.endNamespace()
+		.beginClass<glm::vec3>("vetor3")
+		.addConstructor<void(*)(float, float, float)>()
+		.addData<float>("x", &glm::vec3::x)
+		.addData<float>("y", &glm::vec3::y)
+		.addData<float>("z", &glm::vec3::z)
+		.endClass()
+        .beginClass<vet3>("vet3")
+		.addConstructor<void(*)(float, float, float)>()
+		.addData<float>("x", &vet3::x)
+		.addData<float>("y", &vet3::y)
+		.addData<float>("z", &vet3::z)
+		.endClass()
+        .beginClass<bubble::luz_direcional>("luz_direcional")
+        .addConstructor<void(*)()>()
+        .addData<vet3>("direcao", &bubble::luz_direcional::direcao)
+        .addData<vet3>("especular", &bubble::luz_direcional::especular)
+        .addData<vet3>("difusa", &bubble::luz_direcional::difusa)
+        .addData<vet3>("ambiente", &bubble::luz_direcional::ambiente)
+        .endClass()
+		.beginClass<bubble::cor>("cor")
+		.addConstructor<void(*)(float, float, float, float)>()
+		.addData<float>("r", &bubble::cor::r)
+		.addData<float>("g", &bubble::cor::g)
+		.addData<float>("b", &bubble::cor::b)
+		.addData<float>("a", &bubble::cor::a)
+		.endClass()
+		.beginClass<bubble::vetor2<int>>("vetor2i")
+		.addConstructor<void(*)(int, int)>()
+		.addConstructor<void(*)(float, float)>()
+		.addData<int>("x", &bubble::vetor2<int>::x)
+		.addData<int>("y", &bubble::vetor2<int>::y)
+		.endClass()
+		.beginClass<bubble::vetor2<double>>("vetor2d")
+		.addConstructor<void(*)(double, double)>()
+		.addData<double>("x", &bubble::vetor2<double>::x)
+		.addData<double>("y", &bubble::vetor2<double>::y)
+		.endClass()
+		.beginClass<bubble::cor>("cor")
+		.addConstructor<void(*)(float, float, float, float)>()
+		.addData<float>("r", &bubble::cor::r)
+		.addData<float>("g", &bubble::cor::g)
+		.addData<float>("b", &bubble::cor::b)
+		.addData<float>("a", &bubble::cor::a)
+		.endClass()
+		.beginClass<bubble::textura>("textura")
+		.addConstructor<void(*)(unsigned int, std::string)>()
+		.addData("id", &bubble::textura::id)
+		.addData("caminho", &bubble::textura::path)
+		.endClass();
+
+    luabridge::getGlobalNamespace(L)
+        .beginClass<bubble::material>("material")
+		.addConstructor<void(*)()>()
+		.addData<bubble::cor>("corDifusa", &bubble::material::difusa)
+		.addData<bubble::cor>("corEspecular", &bubble::material::especular)
+		.addProperty("albedo", 
+            &bubble::material::getTexturaDifusa, 
+            &bubble::material::setTexturaDifusa
+        )
+		.endClass();
 }

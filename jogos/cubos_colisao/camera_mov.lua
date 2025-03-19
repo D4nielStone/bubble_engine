@@ -3,14 +3,15 @@ local velocidade = 0.02
 local distancia = 20
 local anguloX = 0
 local anguloY = 0
+local cuboI
 
 function iniciar()
-    eu.transformacao:apontarEntidade(1)
+    cuboI = entidade(4).transformacao.posicao
+    eu.transformacao:apontarEntidade(4)
 end
 
 function atualizar()
     local mouseAtual = inputs:mouse()
-    if inputs.pressionada("MouseE") then
         local mouseDeltaX = mouseAtual.x - mouseAnterior.x
         local mouseDeltaY = mouseAtual.y - mouseAnterior.y
 
@@ -19,10 +20,9 @@ function atualizar()
         anguloY = math.max(-math.pi / 2, math.min(math.pi / 2, anguloY + mouseDeltaY * velocidade))
 
         -- Calcula nova posição da câmera usando coordenadas esféricas
-        eu.transformacao.posicao.x = util.lerp(eu.transformacao.posicao.x, math.cos(anguloY) * math.cos(anguloX) * distancia, 0.1)
-        eu.transformacao.posicao.y = util.lerp(eu.transformacao.posicao.y, math.sin(anguloY) * distancia, 0.1)
-        eu.transformacao.posicao.z = util.lerp(eu.transformacao.posicao.z, math.cos(anguloY) * math.sin(anguloX) * distancia, 0.1)
-    end
+        eu.transformacao.posicao.x = util.lerp(eu.transformacao.posicao.x, math.cos(anguloY) * math.cos(anguloX) * distancia + cuboI.x, 0.1)
+        eu.transformacao.posicao.y = util.lerp(eu.transformacao.posicao.y, math.sin(anguloY) * distancia + cuboI.y, 0.1)
+        eu.transformacao.posicao.z = util.lerp(eu.transformacao.posicao.z, math.cos(anguloY) * math.sin(anguloX) * distancia + cuboI.z, 0.1)
 
     mouseAnterior.x = mouseAtual.x
     mouseAnterior.y = mouseAtual.y

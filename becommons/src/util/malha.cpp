@@ -31,29 +31,27 @@ namespace bubble
     {
         if(sobrepor)
             glDepthFunc(GL_ALWAYS);
-        unsigned int diffuseNr = 1;
-        unsigned int specularNr = 1;
 
+        shader.setBool("recebe_luz", material.recebe_luz);
         shader.setFloat("material.brilho", material.brilho);
         shader.setCor("material.cor_especular", material.especular);
         shader.setCor("material.cor_difusa", material.difusa);
         shader.setBool("uvMundo", material.uvMundo);
-        for (unsigned int i = 0; i < material.texturas.size(); i++)
-        {
-            glActiveTexture(GL_TEXTURE0 + i); // activate proper texture unit before binding
-            // retrieve texture number (the N in diffuse_textureN)
-            std::string number;
-            std::string name = material.texturas[i].tipo;
-            if (name == "texture_diffuse")
-                number = std::to_string(diffuseNr++);
-            else if (name == "texture_specular")
-                number = std::to_string(specularNr++);
 
-            shader.setInt((name + number).c_str(), i);
-            shader.setBool((name + number + "_bool").c_str(), true);
-            glBindTexture(GL_TEXTURE_2D, material.texturas[i].id);
+        // texturas
+        size_t i = 0;
+        for (auto &textura : material.texturas)
+        {
+            if(textura.second.id == 0) continue;
+            glActiveTexture(GL_TEXTURE0 + i); // activate proper texture unit before binding
+
+            std::string name = textura.first;
+            shader.setInt(name.c_str(), i);
+            shader.setBool((name + "_bool").c_str(), true);
+
+            glBindTexture(GL_TEXTURE_2D, textura.second.id);
+            i++;
         }
-        shader.setBool("recebe_luz", material.recebe_luz);
         glActiveTexture(GL_TEXTURE0);
 
         glBindVertexArray(VAO);
@@ -73,19 +71,12 @@ namespace bubble
         }
         glBindVertexArray(0);
 
-        diffuseNr = 1;
-        specularNr = 1;
         //desativa texturas
-        for (unsigned int i = 0; i < material.texturas.size(); i++)
+        for (auto &textura : material.texturas)
         {
-            std::string number;
-            std::string name = material.texturas[i].tipo;
-            if (name == "texture_diffuse")
-                number = std::to_string(diffuseNr++);
-            else if (name == "texture_specular")
-                number = std::to_string(specularNr++);
-            shader.setBool((name + number + "_bool").c_str(), false);
+            shader.setBool((textura.first + "_bool").c_str(), false);
         }
+
         if(sobrepor)
             glDepthFunc(GL_LESS);
     }

@@ -18,7 +18,8 @@ namespace bubble
         glEnable(GL_DEPTH_TEST);
         glEnable(GL_CULL_FACE);
 
-        auto camera = _Mfase->obterCamera();
+        reg->cada<camera>([&](const uint32_t ent) {
+        auto camera = reg->obter<bubble::camera>(ent);        
         if (!camera) 
         {
             depuracao::emitir(debug, "fase", "Camera não configurada");
@@ -73,12 +74,15 @@ namespace bubble
             terr->desenhar(s);
         });
 
-    if(camera->flag_fb){
-        glBindFramebuffer(GL_FRAMEBUFFER, 0);
-        glClearColor(1, 1, 1, 1);
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        glViewport(0, 0, instanciaJanela->tamanho.x, instanciaJanela->tamanho.y);
-    }
+        if(camera->flag_fb ){
+            glBindFramebuffer(GL_FRAMEBUFFER, 0);
+            glClearColor(1, 1, 1, 1);
+            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+            glViewport(0, 0, instanciaJanela->tamanho.x, instanciaJanela->tamanho.y);
+        }
+
+    });
+
     }
 
     void sistema_renderizacao::inicializar(bubble::fase* fase_ptr)

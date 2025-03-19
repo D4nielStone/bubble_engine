@@ -33,7 +33,7 @@ namespace bubble
         int width, height, channels;
         unsigned char* data;
     };
-    int texturaDoArquivo(const std::string& directory, int* width = nullptr, int* height = nullptr);
+    int texturaDoArquivo(const std::string& directory, int* width, int* height);
     int texturaDoArquivo(const std::string& directory, double* width = nullptr, double* height = nullptr);
     int texturaDoArquivo(const std::string& directory, GLuint tipo_textura);
     int texturaDoArquivo(unsigned char* data, unsigned int width, unsigned int height, int format);
@@ -41,9 +41,9 @@ namespace bubble
     {
     public:
         static textureLoader& obterInstancia();
-        GLuint carregarTextura(const std::string& caminho, int* width = nullptr, int* height = nullptr);
+        GLuint carregarTextura(const std::string& caminho, int* width, int* height);
         GLuint carregarTextura(const std::string& caminho, double* width, double* height);
-        GLuint carregarTextura(const std::string& caminho, GLuint tipo_textura = GL_TEXTURE_2D);
+        GLuint carregarTextura(const std::string& caminho);
         GLuint carregarSkybox(const char*, std::vector<std::string> faces);
         GLuint carregarAiTexture(const aiTexture* texture);
     private:

@@ -166,12 +166,12 @@ glm::vec3 bubble::fisica::obterPosicao() const
 
 void bubble::fisica::definirFatorLinear(const glm::vec3& fator)
 {
-        corpoRigido->setLinearVelocity(btVector3(fator.x, fator.y, fator.z)); // Reset velocity to avoid unwanted movement
+        corpoRigido->setLinearFactor(btVector3(fator.x, fator.y, fator.z)); // Reset velocity to avoid unwanted movement
         corpoRigido->activate(); 
 }
 
 void bubble::fisica::definirFatorAngular(const glm::vec3& fator){
-        corpoRigido->setAngularVelocity(btVector3(fator.x, fator.y, fator.z)); // Reset velocity to avoid unwanted movement
+        corpoRigido->setAngularFactor(btVector3(fator.x, fator.y, fator.z)); // Reset velocity to avoid unwanted movement
         corpoRigido->activate(); 
 }
 
@@ -185,6 +185,8 @@ void bubble::fisica::definirFriccao(const float fator){
 }
 void bubble::fisica::definirRaioCcd(const float fator)
 {
+    corpoRigido->setContactProcessingThreshold(0.0001f);
+    corpoRigido->setCcdMotionThreshold(0.0001f);
     corpoRigido->setCcdSweptSphereRadius(fator);
     corpoRigido->activate();
 }

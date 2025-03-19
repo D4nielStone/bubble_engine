@@ -18,8 +18,8 @@ struct Material
 uniform Material material;
 
 uniform vec3 viewPos;
-uniform sampler2D texture_diffuse1;
-uniform bool texture_diffuse1_bool;
+uniform sampler2D textura_difusa;
+uniform bool textura_difusa_bool;
 uniform bool uvMundo;
 
 uniform bool recebe_luz;
@@ -36,17 +36,17 @@ vec4 baseColor;
 vec3 CalcDirLight(DirLight light, vec3 normal, vec3 viewDir);
 void main()
 {
-    vec2 novoUv = uvMundo ? Position.xz : Uv;
+    vec2 novoUv = uvMundo ? Position.xz * 0.1 : Uv;
     // Verifica se a textura existe ou se deve usar a cor base 
-    vec4 texColor = texture(texture_diffuse1, novoUv);
-    baseColor = (texture_diffuse1_bool) ? texColor : material.cor_difusa;
+    vec4 texColor = texture(textura_difusa, novoUv);
+    baseColor = (textura_difusa_bool) ? texColor : material.cor_difusa;
 
     vec3 norm = normalize(Normal);
     vec3 viewDir = normalize(viewPos - Position);
     
     vec3 result = recebe_luz ? CalcDirLight(dirLight, norm, viewDir) : vec3(baseColor);
 
-    FragColor = vec4(result, baseColor.a);
+    FragColor = vec4(result, 1.f);
 }
 
 vec3 CalcDirLight(DirLight light, vec3 normal, vec3 viewDir)

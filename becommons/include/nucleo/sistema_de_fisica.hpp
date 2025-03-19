@@ -7,13 +7,33 @@
 
 #pragma once
 #include "sistema.hpp"
+#include <iostream>
 #include "util/raio.hpp"
 #include <bullet/btBulletDynamicsCommon.h>
 #include <thread>
 #include <atomic>
 
+class MyContactCallback : public btCollisionWorld::ContactResultCallback
+{
+public:
+    int colisoes = 0;
+    btScalar addSingleResult 	( 	btManifoldPoint &  	cp,
+		const btCollisionObjectWrapper *  	colObj0Wrap,
+		int  	partId0,
+		int  	index0,
+		const btCollisionObjectWrapper *  	colObj1Wrap,
+		int  	partId1,
+		int  	index1 
+	) 	 override
+    {
+        colisoes ++;
+        return 0;
+    }
+};
+
 namespace bubble
 {
+
     inline static btDiscreteDynamicsWorld* mundoDinamicoPrincipal;
     
     class sistema_fisica : public sistema {
@@ -27,7 +47,7 @@ namespace bubble
         void pararThread();
         void remover(btRigidBody*& corpo);
         btDiscreteDynamicsWorld* mundo();
-
+        inline static float velocidade = 1.f;
     private:
         std::atomic<bool> rodando{ false }; // Controle da thread
         std::thread fisicaThread;

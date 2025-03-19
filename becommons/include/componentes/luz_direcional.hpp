@@ -10,7 +10,7 @@ namespace bubble
         vet3 direcao, ambiente, difusa, especular;
         luz_direcional() = default;
         explicit  luz_direcional(vet3 direcao, vet3 ambiente, vet3 difusa, vet3 especular) :
-        direcao(direcao), ambiente(ambiente), especular(especular)
+        direcao(direcao), ambiente(ambiente), difusa(difusa), especular(especular)
         {
 
         }

@@ -62,7 +62,7 @@ namespace bubble
     {
         std::vector<bubble::vertice> vertices;
         std::vector<unsigned int> indices;
-        std::vector<textura> texturas;
+        std::unordered_map<std::string, textura> texturas;
 
         for (unsigned int i = 0; i < mesh->mNumVertices; i++)
         {
@@ -109,19 +109,15 @@ namespace bubble
         // processa materiais
         aiMaterial* material = scene->mMaterials[mesh->mMaterialIndex];
 
-        // 1. diffuse maps
-        std::vector<textura> diffuseMaps = carregarMaterialETexturas(material, aiTextureType_DIFFUSE, "texture_diffuse");
-        texturas.insert(texturas.end(), diffuseMaps.begin(), diffuseMaps.end());
-        // 2. specular maps
-        std::vector<textura> specularMaps = carregarMaterialETexturas(material, aiTextureType_SPECULAR, "texture_specular");
-        texturas.insert(texturas.end(), specularMaps.begin(), specularMaps.end());
-        // 3. normal maps
-        std::vector<textura> normalMaps = carregarMaterialETexturas(material, aiTextureType_HEIGHT, "texture_normal");
-        texturas.insert(texturas.end(), normalMaps.begin(), normalMaps.end());
-        // 4. height maps
-        std::vector<textura> heightMaps = carregarMaterialETexturas(material, aiTextureType_AMBIENT, "texture_height");
-        texturas.insert(texturas.end(), heightMaps.begin(), heightMaps.end());
-
+        // 1. diffusa
+        texturas["textura_difusa"] = carregarTextura(material, aiTextureType_DIFFUSE);
+        // 1. especular
+        texturas["textura_especular"] = carregarTextura(material, aiTextureType_SPECULAR);
+        // 1. normal
+        texturas["textura_normal"] = carregarTextura(material, aiTextureType_NORMALS);
+        // 1. height
+        texturas["textura_height"] = carregarTextura(material, aiTextureType_HEIGHT);
+        
         /// extrai cor difusa
         aiColor4D diffuse_color;
         bubble::cor difusa;
@@ -137,14 +133,19 @@ namespace bubble
         return bubble::malha(vertices, indices, mat);
     }
 
-    std::vector<textura> modelo::carregarMaterialETexturas(aiMaterial* mat, aiTextureType type, std::string typeName) const
+    // Carrega Textura assimp2bubble
+    textura modelo::carregarTextura(aiMaterial* mat, aiTextureType type) const
     {
-        std::vector<textura> textures;
-        for (unsigned int i = 0; i < mat->GetTextureCount(type); i++)
+        textura tex;
+        if (mat->GetTextureCount(type) > 0)
         {
             aiString str;
-            mat->GetTexture(type, i, &str);
+            mat->GetTexture(type, 0, &str);
+
+            tex.path = std::string(str.C_Str());
+            tex.id = textureLoader::obterInstancia().carregarTextura(tex.path);
         }
-        return textures;
+
+        return tex;
     }
 }

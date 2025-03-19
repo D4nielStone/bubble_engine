@@ -12,6 +12,7 @@ namespace bubble
     class modelo
     {
     public:
+        modelo() = default;
         modelo(const char* diretorio)
         {
             if (std::filesystem::exists(diretorio))
@@ -25,9 +26,16 @@ namespace bubble
                 depuracao::emitir(erro, "Diretorio do modelo inexistente.");
             }
         }
+
+        malha* obterMalha(const int i)
+        {
+            if(i < malhas.size()) {
+                return &malhas[i];
+            }
+            return nullptr;
+        }
         void definirShader(const char* vertex,const char* frag);
         bubble::shader& shader();
-        malha* obterMalha(int idx) { return &malhas[idx]; };
         void desenhar(bubble::shader& shader);
         std::vector<malha> malhas;
     private:
@@ -39,7 +47,6 @@ namespace bubble
         void carregarmodelo(const std::string& path);
         void processarNo(aiNode* node, const aiScene* scene);
         malha processarMalha(aiMesh* mesh, const aiScene* scene);
-        std::vector<textura> carregarMaterialETexturas(aiMaterial* mat, aiTextureType type,
-            std::string typeName) const;
+        textura carregarTextura(aiMaterial* mat, aiTextureType type) const;
     };
 }
