@@ -288,11 +288,12 @@ void testarFase()
     testes.classe("BUBBLE", "FASE");
     
     // Teste de construtor com diretório
-    testes.adicionar("construtor_com_diretorio", [](){
+    testes.adicionar("parse_nome", [](){
         
         const char* diretorio = "../assets/teste_fase.fase";
 
         bubble::fase fase(diretorio);
+        fase.carregar();
     
         ASSERT_EQUAL(fase.nome(), "fase_teste");
     });
@@ -431,6 +432,7 @@ void testarNucleo()
 
 int main()
 {
+    depuracao::debug_ativo = false;
 	testarUtils();
     testarNucleo();
     testes.rodarTestes();

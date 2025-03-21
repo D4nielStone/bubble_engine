@@ -43,6 +43,7 @@ bubble::janela::janela(const char* nome, bubble::vetor2<double> bounds, const ch
     // ativa blend
     glEnable(GL_BLEND); 
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    
 
     glfwSetCursorPosCallback(window,bubble::mousePosCallBack);
     glfwSetMouseButtonCallback(window, bubble::mouseButtonCallBack);

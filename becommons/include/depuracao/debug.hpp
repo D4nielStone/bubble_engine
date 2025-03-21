@@ -14,6 +14,7 @@ enum nivel
 };
 namespace depuracao
 {
+    inline bool debug_ativo{true};
     inline std::vector<std::string> msgs;
 
     inline void cout(const std::string &msg)
@@ -22,7 +23,7 @@ namespace depuracao
     }
     inline void emitir(const nivel& n, const std::string& msg)
     {
-        #ifdef _DEBUG
+        if(!debug_ativo)return;
         std::string prefixo_nivel, cor;
         switch (n)
         {
@@ -34,12 +35,10 @@ namespace depuracao
         }
     
         std::cout << cor << prefixo_nivel << "\033[0m" << msg << "\n";
-    
-        #endif
     }
     inline void emitir(const nivel& n, const std::string& prefixo, const std::string& msg)
     {
-        #ifdef _DEBUG
+        if(!debug_ativo)return;
         std::string prefixo_nivel, cor;
         switch (n)
         {
@@ -51,8 +50,6 @@ namespace depuracao
         }
     
         std::cout << cor << prefixo_nivel << "\033[0m" << "[" << prefixo << "]" << msg << "\n";
-    
-        #endif
     }
     
     inline std::vector<std::string> obterMensagems()

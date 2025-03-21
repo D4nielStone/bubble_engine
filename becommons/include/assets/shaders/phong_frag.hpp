@@ -7,7 +7,6 @@ in vec3 Normal;
 in vec3 Position;
 
 #define PI 3.14159265359
-#define NUM_POINT_LIGHTS 1
 
 struct Material {
     vec4 albedo;
@@ -23,18 +22,8 @@ struct DirLight {
     vec3 ambient;
 };
 
-struct PointLight {
-    vec3 position;
-    vec3 color;
-    float intensity;
-    float constant;
-    float linear;
-    float quadratic;
-};
-
 uniform Material material;
 uniform DirLight dirLight;
-uniform PointLight pointLights[5];
 uniform vec3 viewPos;
 
 uniform sampler2D tex_albedo;
@@ -106,13 +95,13 @@ void main() {
     vec2 novoUv = uvMundo ? Position.xz * 0.1 : Uv;
 
     vec4 albedo = use_tex_albedo ? texture(tex_albedo, novoUv) : material.albedo;
-    float metallic = use_tex_metallic ? texture(tex_metallic, novoUv).r : material.metallic;
-    float roughness = use_tex_roughness ? texture(tex_roughness, novoUv).r : material.roughness;
+    float metallic = use_tex_metallic ? texture(tex_metallic, novoUv).r *2: material.metallic;
+    float roughness = use_tex_roughness ? texture(tex_roughness, novoUv).r*0.1: material.roughness;
     float ao = use_tex_ao ? texture(tex_ao, novoUv).r : material.ao;
 
     vec3 N = normalize(Normal);
     if(use_tex_normal) {
-        N = texture(tex_normal, novoUv).rgb * 2 - 1;
+        N = texture(tex_normal, novoUv).rgb * 2.0 - 1.0;
         N = normalize(N);
     }
 
@@ -120,23 +109,12 @@ void main() {
 
     vec3 result;
     if (recebe_luz) {
-        vec3 ambient = dirLight.ambient * albedo.rgb * ao;
-        vec3 Lo = vec3(0.0);
-
-        // Directional light
+        // Luz ambiente com intensidade aplicada
+        vec3 ambient = dirLight.ambient * albedo.rgb * ao * dirLight.intensity;
+        // Luz direcional
         vec3 L_dir = normalize(-dirLight.direction);
         vec3 radiance_dir = dirLight.color * dirLight.intensity;
-        Lo += calculateLightLo(L_dir, radiance_dir, N, V, albedo.rgb, metallic, roughness);
-
-        // Point lights
-        for (int i = 0; i < NUM_POINT_LIGHTS; ++i) {
-            PointLight light = pointLights[i];
-            vec3 L_point = normalize(light.position - Position);
-            float distance = length(light.position - Position);
-            float attenuation = 1.0 / (light.constant + light.linear * distance + light.quadratic * (distance * distance));
-            vec3 radiance_point = light.color * light.intensity * attenuation;
-            Lo += calculateLightLo(L_point, radiance_point, N, V, albedo.rgb, metallic, roughness);
-        }
+        vec3 Lo = calculateLightLo(L_dir, radiance_dir, N, V, albedo.rgb, metallic, roughness);
 
         result = ambient + Lo;
     } else {

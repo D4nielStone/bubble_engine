@@ -1,23 +1,22 @@
 #include "nucleo/fase.hpp"
-#include "nucleo/projeto.hpp"
-#include <rapidjson/rapidjson.h>
-#include <rapidjson/document.h>
-#include <filesystem>
-#include "componentes/codigo.hpp"
-#include "componentes/texto.hpp"
-#include "componentes/transformacao.hpp"
-#include "componentes/terreno.hpp"
-#include "componentes/propriedades.hpp"
-#include "componentes/fisica.hpp"
-#include "componentes/renderizador.hpp"
-#include "componentes/imagem.hpp"
-#include "componentes/luz_direcional.hpp"
-#include "componentes/luz_pontual.hpp"
-#include "os/janela.hpp"
 #include "arquivadores/imageloader.hpp"
-#include "depuracao/assert.hpp"
-#include "os/sistema.hpp"
+#include "util/malha.hpp"
+#include "nucleo/projeto.hpp"
+#include "os/janela.hpp"
+#include "componentes/renderizador.hpp"
+#include "componentes/luz_pontual.hpp"
+#include "componentes/camera.hpp"
+#include "componentes/codigo.hpp"
+#include "componentes/terreno.hpp"
+#include "componentes/luz_direcional.hpp"
+#include "componentes/transformacao.hpp"
+#include "componentes/texto.hpp"
+#include "componentes/imagem.hpp"
+#include "entidades/entidade.hpp"
+#include <filesystem>
 #include <iostream>
+#include <typeinfo>
+#include <rapidjson/document.h>
 
 using namespace rapidjson;
 using namespace bubble;
@@ -32,44 +31,68 @@ fase::~fase()
 
 void fase::carregar()
 {
-	srender.inicializar(this);
-	sinterface.inicializar(this);
-
-	/// efetua a analise do json
-	projeto_atual->obterFaseAtual() = shared_from_this();
+    if(carregada)
+    descarregar();
+    carregada = true;
+    
+    if(std::filesystem::exists(diretorio))
+		analizar(diretorio);	
+    else
+    {
+        depuracao::emitir(erro, "Erro no parsing de: " + diretorio);
+    }
 }
 
 void fase::descarregar()
 {
-	parar();
-
-	reg.entidades.clear();
-
-	projeto_atual->obterFaseAtual() = nullptr;	
+    carregada = false;
+    reg.entidades.clear();
 }
 
 fase::fase(const char* diretorio) : diretorio(diretorio)
 {
-	if(std::filesystem::exists(diretorio))
-		analizar(diretorio);
-	else if (std::filesystem::exists(std::filesystem::absolute(diretorio)))
-	{
-		
-		analizar(std::filesystem::absolute(diretorio).string().c_str());
-	}
+	
 }
 
-fase::fase(const std::string& diretorio) : diretorio(diretorio.c_str())
+fase::fase(const std::string& diretorio) : diretorio(diretorio)
 {
-	if(std::filesystem::exists(diretorio))
-		analizar(diretorio.c_str());
-	else if (std::filesystem::exists(std::filesystem::absolute(diretorio)))
-	{
-		
-		analizar(std::filesystem::absolute(diretorio).string().c_str());
-	}
+	
 }
 
+void bubble::fase::pausar()
+{
+			depuracao::emitir(debug, "fase", "Pausando");
+			rodando = false;
+}
+
+void bubble::fase::parar()
+{
+	depuracao::emitir(debug, "fase", "Parando");
+	// TODO: snapshot para retornar o rodando do registro
+	rodando = false;
+}
+
+void bubble::fase::iniciar()
+{
+	depuracao::emitir(debug, "fase", "Iniciando");
+	if (rodando != false)
+		return;
+    rodando = true;
+}
+
+bubble::registro* bubble::fase::obterRegistro()
+{
+	return &reg;
+}
+
+void bubble::fase::nome(const std::string& nome)
+{
+	_Mnome = nome;
+}
+std::string bubble::fase::nome() const
+{
+	return _Mnome;
+}
 static void analizarMalha(bubble::malha* m, const rapidjson::Value& malha)
 {
 	/// cor difusa
@@ -114,19 +137,22 @@ static void analizarCamera(bubble::entidade& ent, const Value& value, bubble::fa
 	auto reg = fase->obterRegistro();
 
 	reg->adicionar<camera>(ent);
-	fase->definirCamera(ent);
-	fase->obterCamera()->viewport_ptr = &instanciaJanela->tamanho;
+	auto cam = fase->obterRegistro()->obter<camera>(ent.id);
+	cam->viewport_ptr = &instanciaJanela->tamanho;
 	
-if(value.HasMember("zfar"))
-        fase->obterCamera()->corte_longo = value["zfar"].GetFloat();
+if(value.HasMember("fov"))
+        cam->fov = value["fov"].GetFloat();
 	if (value.HasMember("escala"))
-		fase->obterCamera()->escala = value["escala"].GetFloat();
+if(value.HasMember("zfar"))
+        cam->corte_longo = value["zfar"].GetFloat();
+	if (value.HasMember("escala"))
+		cam->escala = value["escala"].GetFloat();
 	if (value.HasMember("ortho"))
-		fase->obterCamera()->flag_orth = value["ortho"].GetBool();
+		cam->flag_orth = value["ortho"].GetBool();
 	if (value.HasMember("ceu"))
 	{
 		auto ceu = value["ceu"].GetArray();
-		fase->obterCamera()->ceu =
+		cam->ceu =
 		{
 			ceu[0].GetFloat() / 255,
 			ceu[1].GetFloat() / 255,
@@ -192,8 +218,6 @@ static void analizarEntidades(const Document& doc, fase* f)
 						}
 					}
 				}
-				else if (std::strcmp(tipo_str, "propriedades") == 0)
-					reg->adicionar<propriedades>(id);
 				else if (std::strcmp(tipo_str, "transformacao") == 0)
 				{
 					reg->adicionar<transformacao>(id);
@@ -287,7 +311,7 @@ static void analizarEntidades(const Document& doc, fase* f)
 	}
 }
 
-void bubble::fase::analizar(const char* diretorio)
+void bubble::fase::analizar(const std::string& diretorio)
 {
 	std::ifstream file(diretorio);
 	std::stringstream sb;
@@ -305,89 +329,6 @@ void bubble::fase::analizar(const char* diretorio)
 		_Mnome = doc["nome"].GetString();
 		depuracao::emitir(debug, "Fase", "Nome definido como " + _Mnome);
 	}
-	if (doc.HasMember("selecionada") && doc["selecionada"].IsBool())
-	{
-		if (doc["selecionada"].GetBool())
-		{
-			depuracao::emitir(debug, "Fase", "Fase ativa");
-		}
-	}
 	/*------------------------*/
 	analizarEntidades(doc, this);
-}
-
-void bubble::fase::pausar()
-{
-	file_de_tarefas.push([this]() 
-		{
-			depuracao::emitir(debug, "fase", "Pausando");
-			rodando = false;
-			//scodigo.pararThread();
-			//sfisica.pararThread();
-		});
-}
-
-void bubble::fase::parar()
-{
-	depuracao::emitir(debug, "fase", "Parando");
-	// TODO: snapshot para retornar o rodando do registro
-	rodando = false;
-	//scodigo.pararThread();
-	//sfisica.pararThread();
-}
-
-void bubble::fase::iniciar()
-{
-	depuracao::emitir(debug, "fase", "Iniciando");
-	if (rodando != false)
-		return;
-
-	if (inicializacao)
-	{
-		/// o sistema de c�digo apenas inicia ao come�ar a fase
-		/// no modo de joo
-		inicializacao = false;
-		sfisica.inicializar(this);
-		scodigo.inicializar(this);
-	}
-	// capturar snapshot do registro
-	rodando = true;
-	//scodigo.iniciarThread();
-	//sfisica.iniciarThread();
-}
-
-void bubble::fase::atualizar(double deltaTime)
-{
-	sfisica.atualizar();
-	scodigo.atualizar();
-	srender.atualizar(); 
-	sinterface.atualizar();
-	while (!file_de_tarefas.empty())
-	{
-		auto func = file_de_tarefas.front();
-		func();
-		file_de_tarefas.pop();
-	}
-}
-
-void bubble::fase::definirCamera(const entidade& ent)
-{
-	if (reg.tem<camera>(ent.id))
-		camera_atual = reg.obter<camera>(ent.id);
-}
-
-std::shared_ptr<bubble::camera> bubble::fase::obterCamera() const
-{
-	ASSERT(camera_atual != nullptr);
-	return camera_atual;
-}
-
-bubble::registro* bubble::fase::obterRegistro()
-{
-	return &reg;
-}
-
-std::string bubble::fase::nome() const
-{
-	return _Mnome;
 }

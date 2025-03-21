@@ -1,21 +1,56 @@
+#include "nucleo/sistema_de_interface.hpp"
 #include "nucleo/projeto.hpp"
 #include "nucleo/fase.hpp"
 #include "os/janela.hpp"
 #include "filesystem"
 #include "string"
-#include "iostream"
+#include <iostream>
 #include <rapidjson/rapidjson.h>
+#include <memory>
 #include <rapidjson/document.h> 
+#include <fstream>
 
-bubble::projeto::projeto(const std::string &diretorio, const modoDeExecucao m) : diretorioDoProjeto(diretorio)
+#include "nucleo/sistema_de_fisica.hpp"
+#include "nucleo/sistema_de_renderizacao.hpp"
+#include "nucleo/sistema_de_codigo.hpp"
+
+using namespace bubble;
+
+void projeto::rodar()
 {
+    while(!glfwWindowShouldClose(instanciaJanela->window))
+	{
+		instanciaJanela->poll();
+        if(fase_atual->rodando){
+        sistemas["fisica"]->atualizar();        
+        sistemas["codigo"]->atualizar();        
+        }
+        sistemas["render"]->atualizar();        
+        sistemas["interface"]->atualizar();        
+
+		instanciaJanela->swap();
+	}
+}
+
+projeto::projeto(const std::string &diretorio, const modoDeExecucao m) : diretorioDoProjeto(diretorio)
+{
+    auto doc = obterDoc();
+    criarJanela(doc);
+}
+
+rapidjson::Document projeto::obterDoc()
+{
+    // torna projeto atual
+    if(projeto_atual) delete projeto_atual;
     projeto_atual = this;
-    std::string full_path = diretorio + "/config";
+    std::string full_path = diretorioDoProjeto + "/config";
     if(!std::filesystem::exists(full_path)) 
     {
         depuracao::emitir(erro, "Arquivo de projeto não encontrado!");
-        return;
+        abort();
     }
+
+    // executa o parsing
     std::ifstream file(full_path);
     std::stringstream sb;
     
@@ -24,6 +59,11 @@ bubble::projeto::projeto(const std::string &diretorio, const modoDeExecucao m) :
     rapidjson::Document doc;
     doc.Parse(sb.str().c_str());
 
+    return doc;
+}
+
+void projeto::criarJanela(rapidjson::Document& doc)
+{
     /*      ERROS     */
     if(doc.HasParseError()) 
     {
@@ -69,33 +109,50 @@ bubble::projeto::projeto(const std::string &diretorio, const modoDeExecucao m) :
 
     instanciaJanela = new bubble::janela(nome_janela,
      bubble::vetor2<double>(doc["janela"].GetObject()["largura"].GetInt(), doc["janela"].GetObject()["altura"].GetInt()),
-    (diretorio + "/" + icon_path).c_str());
+    (diretorioDoProjeto + "/" + icon_path).c_str());
 
-	fase_atual = std::make_shared<bubble::fase>(diretorio + "/" + doc["lancamento"].GetString() + ".fase");
+    fase(diretorioDoProjeto + doc["lancamento"].GetString());
 }
 
-void bubble::projeto::rodar()
+void projeto::fase(const std::string &nome)
 {
-    while(!glfwWindowShouldClose(instanciaJanela->window))
-	{
-		instanciaJanela->poll();
-
-		fase_atual->atualizar(0.016666);
-
-		instanciaJanela->swap();
-	}
+    depuracao::emitir(info, "carregando fase em: " + nome + ".fase");
+    
+    fase_atual = std::make_shared<bubble::fase>(nome + ".fase");
+    fase_atual->carregar();
+    iniciarSistemasRuntime(fase_atual.get());
 }
-void bubble::projeto::fase(const std::string &nome)
+
+void projeto::iniciarSistemasRuntime(bubble::fase* f)
 {
-    bubble::file_de_tarefas.push([this, nome]()
+    sistemas["fisica"] = new sistema_fisica();
+    sistemas["interface"] = new sistema_interface();
+    sistemas["render"] = new sistema_renderizacao();
+    sistemas["codigo"] = new sistema_codigo();
+
+    for(auto& sistema : sistemas)
     {
-    	projeto_atual->obterFaseAtual()->descarregar();
-    	projeto_atual->obterFaseAtual() = std::make_shared<bubble::fase>(diretorioDoProjeto + "/" + nome + ".fase");
-	projeto_atual->obterFaseAtual()->iniciar();
+        sistema.second->inicializar(f);
     }
-    );
 }
-std::shared_ptr<bubble::fase> bubble::projeto::obterFaseAtual()
+void projeto::iniciarSistemasEditor(bubble::fase* f)
+{
+    sistemas["fisica"] = new sistema_fisica();
+    sistemas["interface"] = new sistema_interface();
+    sistemas["render"] = new sistema_renderizacao();
+
+    for(auto& sistema : sistemas)
+    {
+        sistema.second->inicializar(f);
+    }
+}
+
+std::shared_ptr<fase> projeto::obterFaseAtual()
 {
 	return fase_atual;
+}
+
+sistema_fisica* projeto::sfisica()
+{
+    return dynamic_cast<sistema_fisica*>(sistemas["fisica"]);
 }

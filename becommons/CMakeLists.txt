@@ -30,9 +30,9 @@ target_include_directories(becommons PUBLIC ${CMAKE_SOURCE_DIR}/src)
 
 # Adicionar os arquivos de código fonte da biblioteca
 target_sources(becommons PRIVATE
-src/api/api_lua.cpp
-/usr/include/glad/glad.c
-src/arquivadores/fonte.cpp
+    src/api/api_lua.cpp
+    /usr/include/glad/glad.c
+    src/arquivadores/fonte.cpp
     src/nucleo/registro.cpp
     src/arquivadores/imageloader.cpp
     src/arquivadores/shader.cpp

@@ -75,10 +75,24 @@ void bubble::sistema_fisica::pararThread()
     }
 }
 
-void bubble::sistema_fisica::remover(btRigidBody*& corpo)
+bool bubble::sistema_fisica::remover(btRigidBody*& corpo)
 {
-    if (mundoDinamico)
-        mundoDinamico->removeRigidBody(corpo);
+    if (!mundoDinamico) {
+        return false; // Retorna falso se o mundo não existir
+    }
+
+    if (!corpo) {
+        return false; // Retorna falso se o corpo for inválido
+    }
+
+    if (mundoDinamico->getCollisionObjectArray().findLinearSearch(corpo) == mundoDinamico->getNumCollisionObjects()) {
+        return false; // Retorna falso se o corpo não estiver no mundo
+    }
+
+    mundoDinamico->removeRigidBody(corpo);
+    corpo = nullptr; // Evita uso de ponteiro inválido
+
+    return true;
 }
 
 btDiscreteDynamicsWorld* bubble::sistema_fisica::mundo()

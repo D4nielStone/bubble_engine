@@ -125,7 +125,7 @@ namespace bubble
     void calcularReferencial(bubble::texto &_texto)
     {
         glm::vec3 worldPosition = _texto.posicao_referencial; 
-        _texto.padding = projeto_atual->obterFaseAtual()->obterCamera()->mundoParaTela(worldPosition);
+        //_texto.padding = projeto_atual->obterFaseAtual()->obterCamera()->mundoParaTela(worldPosition);
         _texto.padding.x -= obterLarguraTexto(_texto)/2;
     }
 

@@ -52,9 +52,10 @@ namespace bubble
             auto transform = reg->obter<transformacao>(ent_ren);
 
             if (!render || !transform || !render->modelo) {
-                depuracao::emitir(debug, "fase", "Renderizador ou transformação inválida");
+                depuracao::emitir(debug, "render", "Renderizador ou transformação inválida");
                 return;
             }
+
 
             auto s = render->modelo->shader();
             s.use();
@@ -65,7 +66,7 @@ namespace bubble
             s.setFloat("dirLight.intensity", ld.intensidade);
 
             for(size_t i = 0; i < lps.size(); i++) {
-                s.setVec3("pointLights["+std::to_string(i)+"].position", lps[i].position);
+            s.setVec3("pointLights["+std::to_string(i)+"].position", lps[i].position);
                 s.setVec3("pointLights["+std::to_string(i)+"].color", lps[i].color);
                 s.setFloat("pointLights["+std::to_string(i)+"].intensity", lps[i].intensity);
                 s.setFloat("pointLights["+std::to_string(i)+"].constant", lps[i].constant);

@@ -63,16 +63,16 @@ int numColisoes(btRigidBody* objA, btRigidBody* objB) {
     MyContactCallback contactCallback;
 
     // Simulação de uma etapa
-    projeto_atual->obterFaseAtual()->sfisica.mundo()->performDiscreteCollisionDetection();
+    projeto_atual->sfisica()->mundo()->performDiscreteCollisionDetection();
 
     // Obter os resultados de colisão
-    projeto_atual->obterFaseAtual()->sfisica.mundo()->contactPairTest(objA, objB, contactCallback);
+    projeto_atual->sfisica()->mundo()->contactPairTest(objA, objB, contactCallback);
     return contactCallback.colisoes;
 }
 
 void defVelFisica(const float v)
 {
-    projeto_atual->obterFaseAtual()->sfisica.velocidade = v;
+    projeto_atual->sfisica()->velocidade = v;
 }
 
 void bapi::definirFisica(lua_State* L)
@@ -84,7 +84,6 @@ void bapi::definirFisica(lua_State* L)
         addFunction("pausar", &bubble::fase::pausar).
         addFunction("parar", &bubble::fase::parar).
         addFunction("iniciar", &bubble::fase::iniciar).
-        addFunction("nome", &bubble::fase::nome).
         endClass().
         beginClass<bubble::projeto>("projeto").
         addConstructor<void(*)(const std::string&)>().

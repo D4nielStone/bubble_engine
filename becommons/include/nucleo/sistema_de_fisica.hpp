@@ -45,7 +45,7 @@ namespace bubble
         void inicializar(bubble::fase* f) override;
         void iniciarThread();
         void pararThread();
-        void remover(btRigidBody*& corpo);
+        bool remover(btRigidBody*& corpo);
         btDiscreteDynamicsWorld* mundo();
         inline static float velocidade = 1.f;
     private:

@@ -25,6 +25,7 @@ namespace bubble
 	*/
 	struct registro
 	{
+	    ~registro(){entidades.clear(); mascaras.clear();}
         std::deque<uint32_t> ordem;
 		/// proximo id livre
 		uint32_t proxima_entidade{ 0 };

@@ -10,7 +10,6 @@ namespace bubble
 {
     void sistema_codigo::atualizar()
     {
-        std::lock_guard<std::mutex> lock(mtx); // Protege o acesso ao registro
         reg->cada<codigo>([&](const uint32_t entidade)
             {
                 auto componente_codigo = reg->obter<codigo>(entidade);
@@ -21,7 +20,6 @@ namespace bubble
 
     void sistema_codigo::inicializar(bubble::fase* fase_ptr)
     {
-        std::lock_guard<std::mutex> lock(mtx); // Protege o registro durante a inicializa��o
         this->_Mfase = fase_ptr;
         this->reg = _Mfase->obterRegistro();
 

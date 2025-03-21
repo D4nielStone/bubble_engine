@@ -98,7 +98,7 @@
                             "albedo": [10, 40, 255, 255]
                         }
                     ],
-					"diretorio": "objetos/tv/scene.gltf"
+					"diretorio": "objetos/tv<F2>/"	
 				},
                 {
                     "tipo": "fisica",
@@ -137,26 +137,6 @@
                     "escala": 1
                 } 
             ]
-        },
-		{
-			"componentes": [
-				{
-					"tipo": "transformacao",
-					"posicao": [0, 98.5, -10],
-					"rotacao": [0, 0, 0],
-					"escala": [30, 100, 0.3]
-				},
-				{
-					"tipo": "renderizador",
-					"diretorio": "objetos/cubo.obj"
-				},
-                {
-                    "tipo": "fisica",
-                    "forma": "caixa",
-                    "posicao_inicial": [0, 98.5, -10],
-                    "massa": 0.0
-                }
-			]
-		}
-	]
+        }
+    ]
 }

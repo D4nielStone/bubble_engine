@@ -1,13 +1,13 @@
 local mouseAnterior = vetor2d(0, 0)
 local velocidade = 0.02
-local distancia = 10
+local distancia = 300
 local anguloX = 0
 local anguloY = 0
 local cuboI
 
 function iniciar()
-    cuboI = entidade(4).transformacao.posicao
-    eu.transformacao:apontarEntidade(4)
+    cuboI = entidade(2).transformacao.posicao
+    eu.transformacao:apontarEntidade(2)
 end
 
 function atualizar()

@@ -11,6 +11,8 @@
                 },
                 {
                     "tipo": "camera",
+                    "zfar": 500,
+                    "fov": 30,
                     "ceu": [20, 20, 20, 255]
                 },
                 {
@@ -23,20 +25,24 @@
             "componentes":[
                 {
                     "tipo": "transformacao",
-                    "posicao": [3, 0, 0],
+                    "posicao": [0, 0, 0],
                     "rotacao": [0,0,90],
                     "escala": [1,1,1]
                 },
                 {
                     "tipo": "renderizador",
-                    "diretorio": "objetos/revolver/scene.gltf"
+                    "diretorio": "objetos/tv/scene.gltf"
                 }
             ]
         },
 		{
             "componentes":[
             	{
-                	"tipo": "luz_pontual"
+                	"tipo": "luz_direcional",
+                	"direcao": [1, 1, 1],
+                	"cor": [1, 1, 1],
+                	"ambiente": [0.5, 0.5, 0.5],
+                	"intensidade": 1
                 }
 			]
         }
