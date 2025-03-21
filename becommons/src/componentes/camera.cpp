@@ -81,7 +81,7 @@ void bubble::camera::desativarFB()
 
 glm::mat4 bubble::camera::obtViewMatrix() {
     if (!transform)
-        transform = projeto_atual->fase_atual->obterRegistro()->obter<transformacao>(meu_objeto);
+        transform = projeto_atual->obterFaseAtual()->obterRegistro()->obter<transformacao>(meu_objeto);
 
     posicao = transform->posicao;
 
@@ -188,7 +188,7 @@ bubble::vetor2<int> bubble::camera::mundoParaTela(const glm::vec3 &mundoPos)
 void bubble::camera::mover(glm::vec3 &pos)
 {
     if (!transform)
-        transform = projeto_atual->fase_atual->obterRegistro()->obter<transformacao>(meu_objeto);
+        transform = projeto_atual->obterFaseAtual()->obterRegistro()->obter<transformacao>(meu_objeto);
 
     
 

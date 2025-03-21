@@ -33,9 +33,10 @@ namespace bubble
             glDepthFunc(GL_ALWAYS);
 
         shader.setBool("recebe_luz", material.recebe_luz);
-        shader.setFloat("material.brilho", material.brilho);
-        shader.setCor("material.cor_especular", material.especular);
-        shader.setCor("material.cor_difusa", material.difusa);
+        shader.setCor("material.albedo", material.albedo);
+        shader.setFloat("material.metallic", material.metallic);
+        shader.setFloat("material.ao", material.ao);
+        shader.setFloat("material.roughness", material.roughness);
         shader.setBool("uvMundo", material.uvMundo);
 
         // texturas
@@ -47,7 +48,7 @@ namespace bubble
 
             std::string name = textura.first;
             shader.setInt(name.c_str(), i);
-            shader.setBool((name + "_bool").c_str(), true);
+            shader.setBool(("use_" + name).c_str(), true);
 
             glBindTexture(GL_TEXTURE_2D, textura.second.id);
             i++;
@@ -74,7 +75,7 @@ namespace bubble
         //desativa texturas
         for (auto &textura : material.texturas)
         {
-            shader.setBool((textura.first + "_bool").c_str(), false);
+            shader.setBool(("use_" + textura.first).c_str(), false);
         }
 
         if(sobrepor)

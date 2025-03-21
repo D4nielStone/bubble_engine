@@ -5,7 +5,8 @@ namespace bubble
 {
     struct cor
     {
-        float r = 1.0, g = 1.0, b = 1.0, a = 1.0;
+        float r = 1.f, g = 1.f, b = 1.f, a = 1.f;
+        cor(const float& f) : r(f), g(f), b(f), a(1.f) {}
         cor(const float& r, const float& g, const float& b, const float& a) : r(r), g(g), b(b), a(a) {};
         cor(const float& r, const float& g, const float& b) : r(r), g(g), b(b) {};
         cor() = default;

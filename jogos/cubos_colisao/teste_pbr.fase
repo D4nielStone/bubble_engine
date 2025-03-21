@@ -1,0 +1,44 @@
+{
+    "nome": "PBR",
+    "entidades":[
+        {
+            "componentes":[
+                {
+                    "tipo": "transformacao",
+                    "posicao": [0, 0, 0],
+                    "rotacao": [0,0,0],
+                    "escala": [1,1,1]
+                },
+                {
+                    "tipo": "camera",
+                    "ceu": [20, 20, 20, 255]
+                },
+                {
+                    "tipo": "codigo",
+                    "diretorio": "camera_mov.lua"
+                }
+            ]
+        },
+        {
+            "componentes":[
+                {
+                    "tipo": "transformacao",
+                    "posicao": [3, 0, 0],
+                    "rotacao": [0,0,90],
+                    "escala": [1,1,1]
+                },
+                {
+                    "tipo": "renderizador",
+                    "diretorio": "objetos/revolver/scene.gltf"
+                }
+            ]
+        },
+		{
+            "componentes":[
+            	{
+                	"tipo": "luz_pontual"
+                }
+			]
+        }
+    ]
+}

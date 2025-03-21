@@ -86,14 +86,14 @@ namespace bubble
             // uvs
             if (mesh->mTextureCoords[0])
             {
-                bubble::vetor2<double> vec;
+                vet2 vec;
 
                 vec.x = mesh->mTextureCoords[0][i].x;
                 vec.y = mesh->mTextureCoords[0][i].y;
                 vertex.uvcoords = vec;
             }
             else
-                vertex.uvcoords = bubble::vetor2<double>(0.0f, 0.0f);
+                vertex.uvcoords = vet2(0.0f, 0.0f);
 
             vertices.push_back(vertex);
         }
@@ -110,13 +110,17 @@ namespace bubble
         aiMaterial* material = scene->mMaterials[mesh->mMaterialIndex];
 
         // 1. diffusa
-        texturas["textura_difusa"] = carregarTextura(material, aiTextureType_DIFFUSE);
-        // 1. especular
-        texturas["textura_especular"] = carregarTextura(material, aiTextureType_SPECULAR);
-        // 1. normal
-        texturas["textura_normal"] = carregarTextura(material, aiTextureType_NORMALS);
-        // 1. height
-        texturas["textura_height"] = carregarTextura(material, aiTextureType_HEIGHT);
+        texturas["tex_albedo"] = carregarTextura(material, aiTextureType_DIFFUSE);
+        // 2. metallico
+        texturas["tex_metallic"] = carregarTextura(material, aiTextureType_METALNESS);
+        // 3. roughness
+        texturas["tex_roughness"] = carregarTextura(material, aiTextureType_DIFFUSE_ROUGHNESS);
+        // 4. normal
+        texturas["tex_normal"] = carregarTextura(material, aiTextureType_NORMALS);
+        // 5. ao
+        texturas["tex_ao"] = carregarTextura(material, aiTextureType_AMBIENT_OCCLUSION);
+        // 6. height
+        texturas["tex_height"] = carregarTextura(material, aiTextureType_HEIGHT);
         
         /// extrai cor difusa
         aiColor4D diffuse_color;
@@ -142,7 +146,7 @@ namespace bubble
             aiString str;
             mat->GetTexture(type, 0, &str);
 
-            tex.path = std::string(str.C_Str());
+            tex.path = std::filesystem::path(diretorio).parent_path().string() + "/" + std::string(str.C_Str());
             tex.id = textureLoader::obterInstancia().carregarTextura(tex.path);
         }
 

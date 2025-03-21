@@ -7,10 +7,10 @@ namespace bubble
 {
     struct luz_direcional : public componente
     {
-        vet3 direcao, ambiente, difusa, especular;
+        vet3 direcao, ambiente, cor; float intensidade = 1.f;
         luz_direcional() = default;
-        explicit  luz_direcional(vet3 direcao, vet3 ambiente, vet3 difusa, vet3 especular) :
-        direcao(direcao), ambiente(ambiente), difusa(difusa), especular(especular)
+        explicit  luz_direcional(vet3 direcao, vet3 ambiente, vet3 cor, float intensidade) :
+        direcao(direcao), ambiente(ambiente), cor(cor), intensidade(intensidade)
         {
 
         }

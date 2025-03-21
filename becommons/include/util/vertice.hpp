@@ -8,6 +8,6 @@ namespace bubble
 	struct vertice
 	{
 		vet3 posicao, normal;
-		bubble::vetor2<double> uvcoords;
+		vet2 uvcoords;
 	};
 }

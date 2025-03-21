@@ -6,7 +6,7 @@
 /// Definindo título da janela
 int main(int argv, char* argc[])
 {
-	std::string DIR_PADRAO = std::filesystem::path(bubble::obterExecDir()).parent_path().parent_path().string() + "/jogos/Golf";
+	std::string DIR_PADRAO = std::filesystem::path(bubble::obterExecDir()).parent_path().parent_path().string() + "/jogos/cubos_colisao/";
 
 	if(argv > 1)
 	{
@@ -18,7 +18,8 @@ int main(int argv, char* argc[])
 		depuracao::emitir(info, "Iniciando projeto em:" + DIR_PADRAO);
 		
 		bubble::projeto runtime(DIR_PADRAO);
-		runtime.fase_atual->iniciar();
+		runtime.obterFaseAtual()->carregar();
+		runtime.obterFaseAtual()->iniciar();
 		runtime.rodar();
 	}
 	catch(const std::exception& e)

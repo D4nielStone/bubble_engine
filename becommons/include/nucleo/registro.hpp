@@ -100,7 +100,7 @@ namespace bubble
 	template<typename ...comps, typename Func>
 	inline void registro::cada(Func func)
 	{
-		for (auto& entity : ordem) {
+		for (auto entity : ordem) {
 			if ((tem<comps>(entity) && ...)) {
 				func(entity);
 			}

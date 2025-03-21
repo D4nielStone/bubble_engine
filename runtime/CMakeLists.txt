@@ -4,7 +4,7 @@ project(runtime)
 set(CMAKE_CXX_STANDARD 20)
 
 add_library(becommons STATIC IMPORTED)
-set_target_properties(becommons PROPERTIES IMPORTED_LOCATION ${CMAKE_SOURCE_DIR}/../becommons/build/libbecommons.a)
+set_target_properties(becommons PROPERTIES IMPORTED_LOCATION ${CMAKE_SOURCE_DIR}/../becommons/out/libbecommons.a)
 
 find_package(Lua REQUIRED)
 find_package(glfw3 REQUIRED)

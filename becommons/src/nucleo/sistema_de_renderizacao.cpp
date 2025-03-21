@@ -3,6 +3,7 @@
 #include "componentes/renderizador.hpp"
 #include "componentes/transformacao.hpp"
 #include "componentes/luz_direcional.hpp"
+#include "componentes/luz_pontual.hpp"
 #include "componentes/camera.hpp"
 #include "componentes/terreno.hpp"
 #include "nucleo/fase.hpp"
@@ -11,79 +12,82 @@
 #include "os/janela.hpp"
 #include "depuracao/debug.hpp"
 
+#define MAX_LPS 5
+
 namespace bubble
 {
-    void sistema_renderizacao::atualizar()
-    {
-        glEnable(GL_DEPTH_TEST);
-        glEnable(GL_CULL_FACE);
+   void sistema_renderizacao::atualizar() {
+    glEnable(GL_DEPTH_TEST);
+    glEnable(GL_CULL_FACE);
 
-        reg->cada<camera>([&](const uint32_t ent) {
-        auto camera = reg->obter<bubble::camera>(ent);        
-        if (!camera) 
-        {
+    reg->cada<camera>([&](const uint32_t ent) {
+        auto camera = reg->obter<bubble::camera>(ent);
+        if (!camera) {
             depuracao::emitir(debug, "fase", "Camera não configurada");
             return;
         }
 
         camera->desenharFB();
-
         luz_direcional ld;
 
-        reg->cada<luz_direcional>([&](const uint32_t ent) {
-            if(reg->tem<luz_direcional>(ent)) ld = *reg->obter<luz_direcional>(ent);
+        std::vector<luz_pontual> lps;
+        lps.reserve(MAX_LPS);
+
+        reg->cada<luz_pontual>([&](const uint32_t ent) {
+            if (lps.size() >= MAX_LPS) return;
+            lps.push_back(*reg->obter<luz_pontual>(ent));
         });
+
+        reg->cada<luz_direcional>([&](const uint32_t ent) {
+            ld = *reg->obter<luz_direcional>(ent);
+        });
+
         reg->cada<transformacao>([&](const uint32_t ent) {
             auto transform = reg->obter<transformacao>(ent);
-            transform->calcular();
-            });
+                transform->calcular();
+        });
+
         reg->cada<renderizador, transformacao>([&](const uint32_t ent_ren) {
             auto render = reg->obter<renderizador>(ent_ren);
             auto transform = reg->obter<transformacao>(ent_ren);
-            
-            auto s = render->modelo->shader();
 
+            if (!render || !transform || !render->modelo) {
+                depuracao::emitir(debug, "fase", "Renderizador ou transformação inválida");
+                return;
+            }
+
+            auto s = render->modelo->shader();
             s.use();
             s.setMat4("view", glm::value_ptr(camera->obtViewMatrix()));
             s.setVec3("dirLight.direction", ld.direcao);
             s.setVec3("dirLight.ambient", ld.ambiente);
-            s.setVec3("dirLight.specular", ld.especular);
-            s.setVec3("dirLight.diffuse", ld.difusa);
-            s.setVec3("viewPos", camera->posicao.x,camera->posicao.y,camera->posicao.z);
+            s.setVec3("dirLight.color", ld.cor);
+            s.setFloat("dirLight.intensity", ld.intensidade);
+
+            for(size_t i = 0; i < lps.size(); i++) {
+                s.setVec3("pointLights["+std::to_string(i)+"].position", lps[i].position);
+                s.setVec3("pointLights["+std::to_string(i)+"].color", lps[i].color);
+                s.setFloat("pointLights["+std::to_string(i)+"].intensity", lps[i].intensity);
+                s.setFloat("pointLights["+std::to_string(i)+"].constant", lps[i].constant);
+                s.setFloat("pointLights["+std::to_string(i)+"].linear", lps[i].linear);
+                s.setFloat("pointLights["+std::to_string(i)+"].quadratic", lps[i].quadratic);
+            }
+
+            s.setVec3("viewPos", camera->posicao.x, camera->posicao.y, camera->posicao.z);
             s.setMat4("projection", glm::value_ptr(camera->obtProjectionMatrix()));
             s.setVec2("resolution", instanciaJanela->tamanho.x, instanciaJanela->tamanho.y);
             s.setMat4("modelo", transform->obter());
             render->modelo->desenhar(s);
-            });
-        reg->cada<terreno, transformacao>([&](const uint32_t ent) {
-            auto terr = reg->obter<terreno>(ent);
-            auto transform = reg->obter<transformacao>(ent);
-            
-            auto s = terr->shader();
-
-            s.use();
-            s.setMat4("view", glm::value_ptr(camera->obtViewMatrix()));
-            s.setVec3("dirLight.direction", ld.direcao);
-            s.setVec3("dirLight.ambient", ld.ambiente);
-            s.setVec3("dirLight.specular", ld.especular);
-            s.setVec3("dirLight.diffuse", ld.difusa);
-            s.setVec3("viewPos", camera->posicao.x,camera->posicao.y,camera->posicao.z);
-            s.setMat4("projection", glm::value_ptr(camera->obtProjectionMatrix()));
-            s.setVec2("resolution", instanciaJanela->tamanho.x, instanciaJanela->tamanho.y);
-            s.setMat4("modelo", transform->obter());
-            terr->desenhar(s);
         });
 
-        if(camera->flag_fb ){
+        if (camera->flag_fb) {
             glBindFramebuffer(GL_FRAMEBUFFER, 0);
             glClearColor(1, 1, 1, 1);
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
             glViewport(0, 0, instanciaJanela->tamanho.x, instanciaJanela->tamanho.y);
         }
-
     });
-
-    }
+} 
 
     void sistema_renderizacao::inicializar(bubble::fase* fase_ptr)
     {

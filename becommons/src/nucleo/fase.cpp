@@ -12,6 +12,7 @@
 #include "componentes/renderizador.hpp"
 #include "componentes/imagem.hpp"
 #include "componentes/luz_direcional.hpp"
+#include "componentes/luz_pontual.hpp"
 #include "os/janela.hpp"
 #include "arquivadores/imageloader.hpp"
 #include "depuracao/assert.hpp"
@@ -35,7 +36,7 @@ void fase::carregar()
 	sinterface.inicializar(this);
 
 	/// efetua a analise do json
-	projeto_atual->fase_atual = shared_from_this();
+	projeto_atual->obterFaseAtual() = shared_from_this();
 }
 
 void fase::descarregar()
@@ -44,7 +45,7 @@ void fase::descarregar()
 
 	reg.entidades.clear();
 
-	projeto_atual->fase_atual = nullptr;	
+	projeto_atual->obterFaseAtual() = nullptr;	
 }
 
 fase::fase(const char* diretorio) : diretorio(diretorio)
@@ -73,28 +74,28 @@ static void analizarMalha(bubble::malha* m, const rapidjson::Value& malha)
 {
 	/// cor difusa
 
-	if (malha.HasMember("cor_difusa"))
-		m->material.difusa =
+	if (malha.HasMember("albedo"))
+		m->material.albedo =
 	{
-		malha["cor_difusa"].GetArray()[0].GetFloat() / 255,
-		malha["cor_difusa"].GetArray()[1].GetFloat() / 255,
-		malha["cor_difusa"].GetArray()[2].GetFloat() / 255,
-		malha["cor_difusa"].GetArray()[3].GetFloat() / 255,
+		malha["albedo"].GetArray()[0].GetFloat() / 255,
+		malha["albedo"].GetArray()[1].GetFloat() / 255,
+		malha["albedo"].GetArray()[2].GetFloat() / 255,
+		malha["albedo"].GetArray()[3].GetFloat() / 255,
 	};
 	
 	// textura
-	if(malha.HasMember("albedo"))
+	if(malha.HasMember("texAlbedo"))
         {
-            auto path_ = projeto_atual->diretorioDoProjeto + std::string(malha["albedo"].GetString());
+            auto path_ = projeto_atual->diretorioDoProjeto + std::string(malha["texAlbedo"].GetString());
             bubble::textura tex = bubble::textura(bubble::textureLoader::obterInstancia().carregarTextura(path_), path_);
-            m->material.texturas["textura_difusa"] = tex;
+            m->material.texturas["tex_albedo"] = tex;
         }
 	/// Uv mundo
-	if (malha.HasMember("uv_mundo"))
-		m->material.uvMundo = malha["uv_mundo"].GetBool();
+	if (malha.HasMember("uvMundo"))
+		m->material.uvMundo = malha["uvMundo"].GetBool();
 	/// recebe luz
-	if (malha.HasMember("recebe_luz"))
-		m->material.recebe_luz = malha["recebe_luz"].GetBool();
+	if (malha.HasMember("recebeLuz"))
+		m->material.recebe_luz = malha["recebeLuz"].GetBool();
 	/// sobrepor
 	if (malha.HasMember("sobrepor"))
 		m->sobrepor = malha["sobrepor"].GetBool();
@@ -218,13 +219,17 @@ static void analizarEntidades(const Document& doc, fase* f)
 				{
 					reg->adicionar<codigo>(id,projeto_atual->diretorioDoProjeto + componente["diretorio"].GetString());
 				}
+				else if (std::strcmp(tipo_str, "luz_pontual") == 0)
+				{
+					reg->adicionar<luz_pontual>(id);
+				}
 				else if (std::strcmp(tipo_str, "luz_direcional") == 0)
 				{
 					reg->adicionar<luz_direcional>(id, 
 					vet3(componente["direcao"].GetArray()[0].GetFloat(),componente["direcao"].GetArray()[1].GetFloat(),componente["direcao"].GetArray()[2].GetFloat()),
 					vet3(componente["ambiente"].GetArray()[0].GetFloat(),componente["ambiente"].GetArray()[1].GetFloat(),componente["ambiente"].GetArray()[2].GetFloat()),
-					vet3(componente["difusa"].GetArray()[0].GetFloat(),componente["difusa"].GetArray()[1].GetFloat(),componente["difusa"].GetArray()[2].GetFloat()),
-					vet3(componente["especular"].GetArray()[0].GetFloat(),componente["especular"].GetArray()[1].GetFloat(),componente["especular"].GetArray()[2].GetFloat())
+					vet3(componente["cor"].GetArray()[0].GetFloat(),componente["cor"].GetArray()[1].GetFloat(),componente["cor"].GetArray()[2].GetFloat()),
+					componente["intensidade"].GetFloat()
 					);
 				}
 				else if (std::strcmp(tipo_str, "imagem") == 0)
@@ -244,7 +249,7 @@ static void analizarEntidades(const Document& doc, fase* f)
 						bubble::textura tex(
 						bubble::textureLoader::obterInstancia().carregarTextura(tex.path),
 						projeto_atual->diretorioDoProjeto +componente["albedo"].GetString());
-						reg->obter<terreno>(id.id)->_Mmalha.material.texturas["textura_difusa"] = tex;
+						reg->obter<terreno>(id.id)->_Mmalha.material.texturas["tex_albedo"] = tex;
 						reg->obter<terreno>(id.id)->_Mmalha.material.uvMundo = true;
 					}
 				}

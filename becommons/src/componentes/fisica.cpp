@@ -37,7 +37,7 @@ bubble::fisica::fisica(bool malha, btScalar massa, btVector3 posicaoInicial, cam
 bubble::fisica::~fisica()
 {
 
-    if(corpoRigido && projeto_atual->fase_atual)projeto_atual->fase_atual->sfisica.remover(corpoRigido);
+    if(corpoRigido && projeto_atual->obterFaseAtual())projeto_atual->obterFaseAtual()->sfisica.remover(corpoRigido);
     if(corpoRigido)delete corpoRigido;
     if(estadoDeMovimento)delete estadoDeMovimento;
     if(forma)delete forma;
@@ -59,7 +59,7 @@ btRigidBody* bubble::fisica::obterCorpoRigido()
 void bubble::fisica::criarMalha()
 {
     // Obt�m as malhas do modelo associado ao objeto
-    auto modelo = projeto_atual->fase_atual->obterRegistro()->obter<bubble::renderizador>(meu_objeto)->modelo;
+    auto modelo = projeto_atual->obterFaseAtual()->obterRegistro()->obter<bubble::renderizador>(meu_objeto)->modelo;
     auto& malhas = modelo->malhas;
 
     // Criar o btTriangleIndexVertexArray para todas as malhas
@@ -90,7 +90,7 @@ void bubble::fisica::criarMalha()
 // Atualizar transforma��o
 void bubble::fisica::atualizarTransformacao()
 {
-    _Mtransformacao = projeto_atual->fase_atual->obterRegistro()->obter<bubble::transformacao>(meu_objeto).get();
+    _Mtransformacao = projeto_atual->obterFaseAtual()->obterRegistro()->obter<bubble::transformacao>(meu_objeto).get();
     forma->setLocalScaling(btVector3(_Mtransformacao->escala.x, _Mtransformacao->escala.y, _Mtransformacao->escala.z));
 
     if (massa == 0)  return;

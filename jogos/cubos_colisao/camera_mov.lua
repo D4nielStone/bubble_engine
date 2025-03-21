@@ -1,6 +1,6 @@
 local mouseAnterior = vetor2d(0, 0)
 local velocidade = 0.02
-local distancia = 20
+local distancia = 10
 local anguloX = 0
 local anguloY = 0
 local cuboI

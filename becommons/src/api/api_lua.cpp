@@ -16,45 +16,45 @@ T lerp(T start, T end, T alpha) {
 
 void bapi::entidade::destruir() const
 {
-	auto componentes = projeto_atual->fase_atual->obterRegistro()->obterComponentes(id);
+	auto componentes = projeto_atual->obterFaseAtual()->obterRegistro()->obterComponentes(id);
 	if (componentes & bubble::componente::COMPONENTE_CAM)
-		projeto_atual->fase_atual->obterRegistro()->remover<camera>(id);
+		projeto_atual->obterFaseAtual()->obterRegistro()->remover<camera>(id);
 	if (componentes & bubble::componente::COMPONENTE_RENDER)
-		projeto_atual->fase_atual->obterRegistro()->remover<renderizador>(id);
+		projeto_atual->obterFaseAtual()->obterRegistro()->remover<renderizador>(id);
 	if (componentes & bubble::componente::COMPONENTE_TRANSFORMACAO)
-		projeto_atual->fase_atual->obterRegistro()->remover<transformacao>(id);
+		projeto_atual->obterFaseAtual()->obterRegistro()->remover<transformacao>(id);
 	if (componentes & bubble::componente::COMPONENTE_CODIGO)
-		projeto_atual->fase_atual->obterRegistro()->remover<codigo>(id);
+		projeto_atual->obterFaseAtual()->obterRegistro()->remover<codigo>(id);
 	if (componentes & bubble::componente::COMPONENTE_FISICA)
-		projeto_atual->fase_atual->obterRegistro()->remover<fisica>(id);
+		projeto_atual->obterFaseAtual()->obterRegistro()->remover<fisica>(id);
 	if (
       componentes & bubble::componente::COMPONENTE_TEXTO)
-		projeto_atual->fase_atual->obterRegistro()->remover<texto>(id);
+		projeto_atual->obterFaseAtual()->obterRegistro()->remover<texto>(id);
 	if (
       componentes & bubble::componente::COMPONENTE_IMAGEM)
-		projeto_atual->fase_atual->obterRegistro()->remover<imagem>(id);
+		projeto_atual->obterFaseAtual()->obterRegistro()->remover<imagem>(id);
 	if (
       componentes & bubble::componente::COMPONENTE_LUZ_DIRECIONAL)
-		projeto_atual->fase_atual->obterRegistro()->remover<luz_direcional>(id);
+		projeto_atual->obterFaseAtual()->obterRegistro()->remover<luz_direcional>(id);
 
 }
 
 bapi::entidade::entidade(const uint32_t& id) : id(id)
 {
-	if (projeto_atual->fase_atual->obterRegistro()->tem<bubble::transformacao>(id))
-		_Mrenderizador = projeto_atual->fase_atual->obterRegistro()->obter<bubble::renderizador>(id).get();
-	if (projeto_atual->fase_atual->obterRegistro()->tem<bubble::transformacao>(id))
-		_Mtransformacao = projeto_atual->fase_atual->obterRegistro()->obter<bubble::transformacao>(id).get();
-	if (projeto_atual->fase_atual->obterRegistro()->tem<bubble::camera>(id))
-		_Mcamera = projeto_atual->fase_atual->obterRegistro()->obter<bubble::camera>(id).get();
-	if (projeto_atual->fase_atual->obterRegistro()->tem<bubble::texto>(id))
-		_Mtexto = projeto_atual->fase_atual->obterRegistro()->obter<bubble::texto>(id).get();
-	if (projeto_atual->fase_atual->obterRegistro()->tem<bubble::imagem>(id))
-		_Mimagem = projeto_atual->fase_atual->obterRegistro()->obter<bubble::imagem>(id).get();
-	if (projeto_atual->fase_atual->obterRegistro()->tem<bubble::fisica>(id))
-		_Mfisica = projeto_atual->fase_atual->obterRegistro()->obter<bubble::fisica>(id).get();
-	if (projeto_atual->fase_atual->obterRegistro()->tem<bubble::luz_direcional>(id))
-		_MluzDir = projeto_atual->fase_atual->obterRegistro()->obter<bubble::luz_direcional>(id).get(); 
+	if (projeto_atual->obterFaseAtual()->obterRegistro()->tem<bubble::transformacao>(id))
+		_Mrenderizador = projeto_atual->obterFaseAtual()->obterRegistro()->obter<bubble::renderizador>(id).get();
+	if (projeto_atual->obterFaseAtual()->obterRegistro()->tem<bubble::transformacao>(id))
+		_Mtransformacao = projeto_atual->obterFaseAtual()->obterRegistro()->obter<bubble::transformacao>(id).get();
+	if (projeto_atual->obterFaseAtual()->obterRegistro()->tem<bubble::camera>(id))
+		_Mcamera = projeto_atual->obterFaseAtual()->obterRegistro()->obter<bubble::camera>(id).get();
+	if (projeto_atual->obterFaseAtual()->obterRegistro()->tem<bubble::texto>(id))
+		_Mtexto = projeto_atual->obterFaseAtual()->obterRegistro()->obter<bubble::texto>(id).get();
+	if (projeto_atual->obterFaseAtual()->obterRegistro()->tem<bubble::imagem>(id))
+		_Mimagem = projeto_atual->obterFaseAtual()->obterRegistro()->obter<bubble::imagem>(id).get();
+	if (projeto_atual->obterFaseAtual()->obterRegistro()->tem<bubble::fisica>(id))
+		_Mfisica = projeto_atual->obterFaseAtual()->obterRegistro()->obter<bubble::fisica>(id).get();
+	if (projeto_atual->obterFaseAtual()->obterRegistro()->tem<bubble::luz_direcional>(id))
+		_MluzDir = projeto_atual->obterFaseAtual()->obterRegistro()->obter<bubble::luz_direcional>(id).get(); 
 }
 
 int numColisoes(btRigidBody* objA, btRigidBody* objB) {
@@ -63,16 +63,16 @@ int numColisoes(btRigidBody* objA, btRigidBody* objB) {
     MyContactCallback contactCallback;
 
     // Simulação de uma etapa
-    projeto_atual->fase_atual->sfisica.mundo()->performDiscreteCollisionDetection();
+    projeto_atual->obterFaseAtual()->sfisica.mundo()->performDiscreteCollisionDetection();
 
     // Obter os resultados de colisão
-    projeto_atual->fase_atual->sfisica.mundo()->contactPairTest(objA, objB, contactCallback);
+    projeto_atual->obterFaseAtual()->sfisica.mundo()->contactPairTest(objA, objB, contactCallback);
     return contactCallback.colisoes;
 }
 
 void defVelFisica(const float v)
 {
-    projeto_atual->fase_atual->sfisica.velocidade = v;
+    projeto_atual->obterFaseAtual()->sfisica.velocidade = v;
 }
 
 void bapi::definirFisica(lua_State* L)
@@ -135,7 +135,7 @@ void bapi::definirFisica(lua_State* L)
 void bapi::definirTempo(lua_State *L)
 {
 	std::function<double()> obterDeltaTimeFunc = []() -> double {
-		if (!projeto_atual->fase_atual) {
+		if (!projeto_atual->obterFaseAtual()) {
 			return 0.0;
 		}
 		return instanciaJanela->_Mtempo.obterDeltaTime();
@@ -187,9 +187,9 @@ void bapi::definirUtils(lua_State *L)
         .beginClass<bubble::luz_direcional>("luz_direcional")
         .addConstructor<void(*)()>()
         .addData<vet3>("direcao", &bubble::luz_direcional::direcao)
-        .addData<vet3>("especular", &bubble::luz_direcional::especular)
-        .addData<vet3>("difusa", &bubble::luz_direcional::difusa)
+        .addData<vet3>("cor", &bubble::luz_direcional::cor)
         .addData<vet3>("ambiente", &bubble::luz_direcional::ambiente)
+        .addData("intensidade", &bubble::luz_direcional::intensidade)
         .endClass()
 		.beginClass<bubble::cor>("cor")
 		.addConstructor<void(*)(float, float, float, float)>()
@@ -225,11 +225,29 @@ void bapi::definirUtils(lua_State *L)
     luabridge::getGlobalNamespace(L)
         .beginClass<bubble::material>("material")
 		.addConstructor<void(*)()>()
-		.addData<bubble::cor>("corDifusa", &bubble::material::difusa)
-		.addData<bubble::cor>("corEspecular", &bubble::material::especular)
-		.addProperty("albedo", 
-            &bubble::material::getTexturaDifusa, 
-            &bubble::material::setTexturaDifusa
+		.addData<bubble::cor>("albedo", &bubble::material::albedo)
+		.addData("matalico", &bubble::material::metallic)
+		.addData("roughness", &bubble::material::roughness)
+		.addData("ao", &bubble::material::ao)
+		.addProperty("texAlbedo", 
+            &bubble::material::getTexturaAlbedo, 
+            &bubble::material::setTexturaAlbedo
         )
-		.endClass();
+        .addProperty("texMetalica", 
+            &bubble::material::getTexturaMetallic, 
+            &bubble::material::setTexturaMetallic
+        )
+        .addProperty("texRoughness", 
+            &bubble::material::getTexturaRoughness, 
+            &bubble::material::setTexturaRoughness
+        )
+        .addProperty("texNormal", 
+            &bubble::material::getTexturaNormal, 
+            &bubble::material::setTexturaNormal
+        )
+		.addProperty("texAO", 
+            &bubble::material::getTexturaAO, 
+            &bubble::material::setTexturaAO
+        )
+        .endClass();
 }

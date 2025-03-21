@@ -6,7 +6,8 @@
 #include "iostream"
 #include <rapidjson/rapidjson.h>
 #include <rapidjson/document.h> 
-bubble::projeto::projeto(const std::string &diretorio) : diretorioDoProjeto(diretorio)
+
+bubble::projeto::projeto(const std::string &diretorio, const modoDeExecucao m) : diretorioDoProjeto(diretorio)
 {
     projeto_atual = this;
     std::string full_path = diretorio + "/config";
@@ -70,8 +71,7 @@ bubble::projeto::projeto(const std::string &diretorio) : diretorioDoProjeto(dire
      bubble::vetor2<double>(doc["janela"].GetObject()["largura"].GetInt(), doc["janela"].GetObject()["altura"].GetInt()),
     (diretorio + "/" + icon_path).c_str());
 
-	projeto_atual->fase_atual = std::make_shared<bubble::fase>(diretorio + "/" + doc["lancamento"].GetString() + ".fase");
-	projeto_atual->fase_atual->carregar();
+	fase_atual = std::make_shared<bubble::fase>(diretorio + "/" + doc["lancamento"].GetString() + ".fase");
 }
 
 void bubble::projeto::rodar()
@@ -80,7 +80,7 @@ void bubble::projeto::rodar()
 	{
 		instanciaJanela->poll();
 
-		projeto_atual->fase_atual->atualizar(0.01666);
+		fase_atual->atualizar(0.016666);
 
 		instanciaJanela->swap();
 	}
@@ -89,9 +89,9 @@ void bubble::projeto::fase(const std::string &nome)
 {
     bubble::file_de_tarefas.push([this, nome]()
     {
-    	projeto_atual->fase_atual->descarregar();
-    	projeto_atual->fase_atual = std::make_shared<bubble::fase>(diretorioDoProjeto + "/" + nome + ".fase");
-	projeto_atual->fase_atual->iniciar();
+    	projeto_atual->obterFaseAtual()->descarregar();
+    	projeto_atual->obterFaseAtual() = std::make_shared<bubble::fase>(diretorioDoProjeto + "/" + nome + ".fase");
+	projeto_atual->obterFaseAtual()->iniciar();
     }
     );
 }
