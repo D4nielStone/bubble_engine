@@ -6,7 +6,7 @@
 
 int main(int argv, char* argc[])
 {
-	std::string DIR_PADRAO = std::filesystem::path(bubble::obterExecDir()).parent_path().parent_path().string() + "/jogos/cubos_colisao/";
+	std::string DIR_PADRAO = "";
 
 	if(argv > 1)
 	{

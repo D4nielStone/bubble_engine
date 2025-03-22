@@ -42,6 +42,7 @@ namespace bubble
 	        /// @gets para Sistemas
 	        sistema_fisica* sfisica();
         private:
+            void criarProjetoVazio(const std::string& path, const char* nome);
             std::unordered_map<std::string, sistema*> sistemas;
             rapidjson::Document obterDoc();
             void criarJanela(rapidjson::Document& doc);

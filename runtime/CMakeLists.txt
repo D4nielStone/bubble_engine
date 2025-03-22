@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.28)
 project(runtime)
 
 set(CMAKE_CXX_STANDARD 20)
@@ -24,6 +24,7 @@ target_link_libraries(runtime PRIVATE glad)
 
 target_include_directories(runtime PRIVATE 
     ../becommons/include
+    ./include
     /usr/include/lua5.3
     /usr/include/glm
     /usr/include/GLFW
@@ -59,5 +60,3 @@ add_definitions(-D_DEBUG)
 
 # Definir flags de compilação no modo Debug
 set(CMAKE_CXX_FLAGS_DEBUG "-g -O0 -Wall -Wextra")
-
-

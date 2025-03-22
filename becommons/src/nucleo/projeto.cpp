@@ -8,6 +8,8 @@
 #include <rapidjson/rapidjson.h>
 #include <memory>
 #include <rapidjson/document.h> 
+#include <rapidjson/writer.h> 
+#include <rapidjson/stringbuffer.h> 
 #include <fstream>
 
 #include "nucleo/sistema_de_fisica.hpp"
@@ -38,26 +40,85 @@ projeto::projeto(const std::string &diretorio, const modoDeExecucao m) : diretor
     criarJanela(doc);
 }
 
+void projeto::criarProjetoVazio(const std::string& novo_diretorio, const char* nome)
+{
+        // Cria diretório do projeto
+        std::filesystem::create_directories(novo_diretorio + "/" + nome);
+        
+        diretorioDoProjeto = novo_diretorio + "/" + nome;
+        
+        // Criar um novo JSON de configuração
+        rapidjson::Document newDoc;
+        newDoc.SetObject();
+        rapidjson::Document::AllocatorType& allocator = newDoc.GetAllocator();
+
+        rapidjson::Value _janela(rapidjson::kObjectType);
+        _janela.AddMember("largura", 800, allocator);
+        _janela.AddMember("altura",  460, allocator);
+        _janela.AddMember("titulo",  rapidjson::Value(nome, allocator), allocator);
+        _janela.AddMember("icone",   rapidjson::Value("icon.ico", allocator), allocator);
+
+        newDoc.AddMember("nome", rapidjson::Value(nome, allocator), allocator);
+        newDoc.AddMember("lancamento", rapidjson::Value("/fases/main", allocator), allocator);
+        newDoc.AddMember("janela", _janela, allocator);
+
+        // Salvar o JSON no arquivo
+        std::ofstream ofs(diretorioDoProjeto + "/config.json");
+        if (ofs.is_open()) {
+            rapidjson::StringBuffer buffer;
+            rapidjson::Writer<rapidjson::StringBuffer> writer(buffer);
+            newDoc.Accept(writer);
+            ofs << buffer.GetString();
+            ofs.close();
+        }
+
+
+}
+
 rapidjson::Document projeto::obterDoc()
 {
-    // torna projeto atual
-    if(projeto_atual) delete projeto_atual;
+    // Torna projeto atual
     projeto_atual = this;
-    std::string full_path = diretorioDoProjeto + "/config";
-    if(!std::filesystem::exists(full_path)) 
+
+    // procura recursivamente por config.json
+    std::string caminhoEncontrado = diretorioDoProjeto;
+    
+    if(std::filesystem::exists(diretorioDoProjeto))
+    for (const auto& entry : std::filesystem::recursive_directory_iterator(diretorioDoProjeto)) {
+            if (entry.is_regular_file() && entry.path().filename() == "config.json") {
+                caminhoEncontrado = entry.path().parent_path().string();
+            }
+        }
+
+    std::string full_path = caminhoEncontrado + "/config.json";
+
+    if (!std::filesystem::exists(full_path)) 
     {
-        depuracao::emitir(erro, "Arquivo de projeto não encontrado!");
-        abort();
+        depuracao::emitir(alerta, "Arquivo de projeto não encontrado. Digite um nome para criar um novo projeto:");
+        std::string resp;
+        std::cin >> resp;
+
+        criarProjetoVazio(diretorioDoProjeto, resp.c_str());
+
+        return obterDoc();
     }
 
-    // executa o parsing
+    // Executa o parsing
     std::ifstream file(full_path);
     std::stringstream sb;
-    
     sb << file.rdbuf();
+    file.close();
 
     rapidjson::Document doc;
     doc.Parse(sb.str().c_str());
+
+    diretorioDoProjeto = caminhoEncontrado;
+
+    if (doc.HasParseError()) {
+        depuracao::emitir(erro, "Erro ao analisar o JSON de configuração.");
+    } else {
+        depuracao::emitir(info, "Iniciando projeto " + std::string(doc["nome"].GetString()) + " em: " + diretorioDoProjeto);
+    }
 
     return doc;
 }
