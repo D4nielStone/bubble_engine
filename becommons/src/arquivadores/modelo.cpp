@@ -5,6 +5,13 @@
 #include "depuracao/debug.hpp"
 #include "arquivadores/imageloader.hpp"
 #include <filesystem>
+#include "assets/objetos/cubo.hpp"
+#include "map"
+
+std::map<std::string, bubble::malha> primitivas = 
+{
+    {"cubo", malha_cubo}
+};
 
 namespace bubble
 {
@@ -28,6 +35,12 @@ namespace bubble
 
     void modelo::carregarmodelo(const std::string& path)
     {
+        if(primitivas.find(std::filesystem::path(path).filename().string()) != primitivas.end())
+        {
+            malhas.push_back(primitivas[std::filesystem::path(path).filename().string()]);
+            malhas[0].definirBuffers();
+            return;
+        }
         Assimp::Importer import;
         const aiScene* scene = import.ReadFile(path, aiProcess_Triangulate | aiProcess_FlipUVs | aiProcess_JoinIdenticalVertices);
 
@@ -134,7 +147,9 @@ namespace bubble
         }
         bubble::material mat(texturas, difusa);
 
-        return bubble::malha(vertices, indices, mat);
+        bubble::malha m_(vertices, indices, mat);
+        m_.definirBuffers();
+        return m_;
     }
 
     // Carrega Textura assimp2bubble

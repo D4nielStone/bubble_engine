@@ -69,7 +69,7 @@ int main(int argc, char* argv[]) {
     }
     
     try {
-        bubble::projeto editor(DIR_PADRAO, bubble::projeto::editor);
+        bubble::projeto editor(DIR_PADRAO);
         editor.rodar();
     } catch (const std::exception& e) {
         depuracao::emitir(erro, e.what());

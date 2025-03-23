@@ -34,7 +34,7 @@ void projeto::rodar()
 	}
 }
 
-projeto::projeto(const std::string &diretorio, const modoDeExecucao m) : diretorioDoProjeto(diretorio)
+projeto::projeto(const std::string &diretorio) : diretorioDoProjeto(diretorio)
 {
     auto doc = obterDoc();
     criarJanela(doc);
@@ -61,7 +61,7 @@ void projeto::criarProjetoVazio(const std::string& novo_diretorio, const char* n
         newDoc.AddMember("nome", rapidjson::Value(nome, allocator), allocator);
         newDoc.AddMember("lancamento", rapidjson::Value("/fases/main", allocator), allocator);
         newDoc.AddMember("janela", _janela, allocator);
-
+        
         // Salvar o JSON no arquivo
         std::ofstream ofs(diretorioDoProjeto + "/config.json");
         if (ofs.is_open()) {
@@ -72,7 +72,56 @@ void projeto::criarProjetoVazio(const std::string& novo_diretorio, const char* n
             ofs.close();
         }
 
-
+        
+        // Diretório de fases
+        if(std::filesystem::create_directories(diretorioDoProjeto + "/fases"))
+        {
+            std::ofstream fase_file(diretorioDoProjeto + "/fases/main.fase");
+            if(fase_file.is_open())
+            {
+                fase_file << R"({
+    "nome": "FaseMain",
+    "entidades":[
+        {
+            "componentes":[
+                {
+                    "tipo": "luz_direcional",
+                    "direcao": [1, 1, 1],
+                    "cor": [1, 1, 1],
+                    "ambiente": [0.1, 0.1, 0.1],
+                    "intensidade": 1.0
+                },
+                {
+                    "tipo": "transformacao",
+                    "posicao": [0,0,2],
+                    "rotacao": [0,0,0],
+                    "escala": [1, 1, 1]
+                },
+                {
+                    "tipo": "renderizador",
+                    "modelo": "/cubo"
+                }
+            ]
+        },
+        {
+            "componentes":[
+                {
+                    "tipo": "transformacao",
+                    "posicao": [0,0,0],
+                    "rotacao": [0,90,0],
+                    "escala": [1, 1, 1]
+                },
+                {
+                    "tipo": "camera"
+                }
+            ]
+        }
+    ]
+}
+)";
+                fase_file.close();
+            }
+        }
 }
 
 rapidjson::Document projeto::obterDoc()
@@ -164,7 +213,6 @@ void projeto::criarJanela(rapidjson::Document& doc)
     }   
     /*              */
 
-
     const char* nome_janela = doc["janela"].GetObject()["titulo"].GetString();
     std::string icon_path = doc["janela"].GetObject()["icone"].GetString();
 
@@ -181,26 +229,15 @@ void projeto::fase(const std::string &nome)
     
     fase_atual = std::make_shared<bubble::fase>(nome + ".fase");
     fase_atual->carregar();
-    iniciarSistemasRuntime(fase_atual.get());
+    iniciarSistemas(fase_atual.get());
 }
 
-void projeto::iniciarSistemasRuntime(bubble::fase* f)
+void projeto::iniciarSistemas(bubble::fase* f)
 {
     sistemas["fisica"] = new sistema_fisica();
     sistemas["interface"] = new sistema_interface();
     sistemas["render"] = new sistema_renderizacao();
     sistemas["codigo"] = new sistema_codigo();
-
-    for(auto& sistema : sistemas)
-    {
-        sistema.second->inicializar(f);
-    }
-}
-void projeto::iniciarSistemasEditor(bubble::fase* f)
-{
-    sistemas["fisica"] = new sistema_fisica();
-    sistemas["interface"] = new sistema_interface();
-    sistemas["render"] = new sistema_renderizacao();
 
     for(auto& sistema : sistemas)
     {

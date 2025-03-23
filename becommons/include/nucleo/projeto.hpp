@@ -18,17 +18,10 @@ namespace bubble
 {
     struct projeto
     {
-            /// @brief modo de execução do projeto
-            enum modoDeExecucao
-            {
-                editor,
-                runtime
-            };
-
             std::string diretorioDoProjeto;
             /// @brief construtor
             /// @param diretorio 
-            projeto(const std::string& diretorio, const modoDeExecucao = runtime);
+            projeto(const std::string& diretorio);
             projeto() = default;
             
             /// @brief inicia mainloop
@@ -46,8 +39,7 @@ namespace bubble
             std::unordered_map<std::string, sistema*> sistemas;
             rapidjson::Document obterDoc();
             void criarJanela(rapidjson::Document& doc);
-            void iniciarSistemasRuntime(bubble::fase*);
-            void iniciarSistemasEditor(bubble::fase*);
+            void iniciarSistemas(bubble::fase*);
             inline static std::shared_ptr<bubble::fase> fase_atual{ nullptr };
     };
     inline projeto* projeto_atual{nullptr}; 

@@ -11,8 +11,6 @@ namespace bubble
         this->vertices = vertices;
         this->indices = indices;
         this->material = material;
-
-        definirBuffers();
     }
 
     malha::~malha()

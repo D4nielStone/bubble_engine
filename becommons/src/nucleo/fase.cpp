@@ -186,16 +186,11 @@ static void analizarEntidades(const Document& doc, fase* f)
 				}
 				else if (std::strcmp(tipo_str, "renderizador") == 0)
 				{
-					auto path = projeto_atual->diretorioDoProjeto + std::string(componente["diretorio"].GetString());
+					auto path = projeto_atual->diretorioDoProjeto + std::string(componente["modelo"].GetString());
 					reg->adicionar<renderizador>(id, new modelo(path.c_str()));
 					auto render = reg->obter<renderizador>(id.id);
 					
 
-					/// extrai sahder
-					if (componente.HasMember("vertex_shader") && componente.HasMember("fragment_shader"))
-					{
-						render->modelo->definirShader((projeto_atual->diretorioDoProjeto +componente["vertex_shader"].GetString()).c_str(), (projeto_atual->diretorioDoProjeto +componente["fragment_shader"].GetString()).c_str());
-					}
 					/// extrai material
 					if (componente.HasMember("malhas"))
 					{
@@ -208,7 +203,7 @@ static void analizarEntidades(const Document& doc, fase* f)
 								m = render->modelo->obterMalha(malha["id"].GetInt());
 								analizarMalha(m, malha);
 							}
-							else if (malha["id"].IsString())
+							else if (malha["id"].IsString() && malha["id"] == "*")
 							{
 								for (auto& m : render->modelo->malhas)
 								{
@@ -222,13 +217,23 @@ static void analizarEntidades(const Document& doc, fase* f)
 				{
 					reg->adicionar<transformacao>(id);
 					auto tr = reg->obter<transformacao>(id.id);
-					auto pos = componente["posicao"].GetArray();
-					tr->posicao = { pos[0].GetFloat(), pos[1].GetFloat(), pos[2].GetFloat() };
-					auto rot = componente["rotacao"].GetArray();
-					tr->rotacao = { rot[0].GetFloat(), rot[1].GetFloat(), rot[2].GetFloat() };
-					auto esc = componente["escala"].GetArray();
-					tr->escala = { esc[0].GetFloat(), esc[1].GetFloat(), esc[2].GetFloat() };
-				}
+					if(componente.HasMember("posicao"))
+                    {
+                        auto pos = componente["posicao"].GetArray();
+					    tr->posicao = { pos[0].GetFloat(), pos[1].GetFloat(), pos[2].GetFloat() };
+                    }
+                    if(componente.HasMember("rotacao"))
+                    {
+                        auto rot = componente["rotacao"].GetArray();
+					    tr->rotacao = { rot[0].GetFloat(), rot[1].GetFloat(), rot[2].GetFloat() };
+                    }
+                    if(componente.HasMember("escala"))
+                    {
+                        auto esc = componente["escala"].GetArray();
+					    tr->escala = { esc[0].GetFloat(), esc[1].GetFloat(), esc[2].GetFloat() };
+				
+				    }
+                }
 				else if (std::strcmp(tipo_str, "texto") == 0)
 				{
 					std::string frase{};

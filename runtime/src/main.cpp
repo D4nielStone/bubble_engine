@@ -4,9 +4,12 @@
 #include "depuracao/debug.hpp"
 #include <filesystem>
 
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/wait.h>
 int main(int argv, char* argc[])
 {
-	std::string DIR_PADRAO = "";
+	std::string DIR_PADRAO = std::string(std::getenv("HOME")) + "/bubble/jogos";
 
 	if(argv > 1)
 	{
@@ -17,7 +20,7 @@ int main(int argv, char* argc[])
 	{
 		depuracao::emitir(info, "Iniciando projeto em:" + DIR_PADRAO);
 		
-		bubble::projeto runtime(DIR_PADRAO, bubble::projeto::runtime);
+		bubble::projeto runtime(DIR_PADRAO);
 	    runtime.obterFaseAtual()->iniciar();
 	    runtime.rodar();
 	}

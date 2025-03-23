@@ -15,16 +15,7 @@ namespace bubble
         modelo() = default;
         modelo(const char* diretorio)
         {
-            if (std::filesystem::exists(diretorio))
-                carregarmodelo(diretorio);
-            else if (std::filesystem::exists(std::filesystem::absolute(diretorio)))
-            {
-
                 carregarmodelo(std::filesystem::absolute(diretorio).string().c_str());
-            }else
-            {
-                depuracao::emitir(erro, "Diretorio do modelo inexistente.");
-            }
         }
 
         malha* obterMalha(const int i)
