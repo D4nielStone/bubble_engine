@@ -17,7 +17,7 @@ void executarRuntime(const std::vector<std::string>& argumentos = {}) {
 
     // Salvar o executável no disco
     std::ofstream out(execPath, std::ios::binary);
-    out.write(reinterpret_cast<const char*>(__runtime_out_runtime), __runtime_out_runtime_len);
+    out.write(reinterpret_cast<const char*>(runtime), runtime_len);
     out.close();
 
     // Garantir permissão de execução

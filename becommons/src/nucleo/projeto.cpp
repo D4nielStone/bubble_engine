@@ -93,13 +93,17 @@ void projeto::criarProjetoVazio(const std::string& novo_diretorio, const char* n
                 },
                 {
                     "tipo": "transformacao",
-                    "posicao": [0,0,2],
+                    "posicao": [0,0,5],
                     "rotacao": [0,0,0],
                     "escala": [1, 1, 1]
                 },
                 {
                     "tipo": "renderizador",
                     "modelo": "/cubo"
+                },
+                {
+                    "tipo": "codigo",
+                    "diretorio": "/codigos/rotacao.lua"
                 }
             ]
         },
@@ -117,9 +121,30 @@ void projeto::criarProjetoVazio(const std::string& novo_diretorio, const char* n
             ]
         }
     ]
-}
-)";
+})";
                 fase_file.close();
+            }
+    }
+    
+        // Diretorio de codigos
+        if(std::filesystem::create_directories(diretorioDoProjeto + "/codigos"))
+        {
+            std::ofstream codigo_file(diretorioDoProjeto + "/codigos/rotacao.lua");
+            if(codigo_file.is_open())
+            {
+                codigo_file << R"(
+-- Autor Daniel O. Santos copyright 2025
+local vel = 6
+
+function iniciar()
+end
+function atualizar()
+    eu.transformacao.rotacao.y = eu.transformacao.rotacao.y + vel * tempo.obterDeltaTime()
+    eu.transformacao.rotacao.x = eu.transformacao.rotacao.x + vel * tempo.obterDeltaTime()
+end
+
+                )";
+                codigo_file.close();
             }
         }
 }

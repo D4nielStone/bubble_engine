@@ -18,8 +18,8 @@ if [[ -f "$RUNTIME_DIR/runtime" ]]; then
 
     if [[ "$NEW_HASH" != "$OLD_HASH" ]]; then
         echo "Gerando novo runtime_embutido.hpp..."
-        xxd -i "$RUNTIME_DIR/runtime" > "$HEADER_FILE"
-        echo "$NEW_HASH" > "$HASH_FILE"  # Salva o novo hash
+        cd "$RUNTIME_DIR" && xxd -i "runtime" > "../../$HEADER_FILE"
+        cd ../../ && echo "$NEW_HASH" > "$HASH_FILE"  # Salva o novo hash
     else
         echo "Nenhuma mudança no runtime, pulando xxd."
     fi
