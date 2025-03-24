@@ -3,7 +3,52 @@
 #include "os/sistema.hpp"
 #include "depuracao/debug.hpp"
 #include "filesystem"
+#include "componentes/camera_editor.hpp"
 #include "util/runtime.hpp"
+//#include "ui/bubble_gui.hpp"
+
+struct sistema_cam_editor : public bubble::sistema
+{
+        sistema_cam_editor()
+        {
+        }
+        void atualizar() override
+        {
+            cam.atualizarMovimentacao();
+        }
+        bubble::camera_editor cam;
+};
+void ini(const std::string& DIR_PADRAO)
+{
+    // Cria projeto
+    bubble::projeto editor(DIR_PADRAO);
+   
+    // TODO: sistema de parsing e interface
+    
+    // Camera editor
+    sistema_cam_editor scam_e;
+    scam_e.cam.viewport_ptr = &bubble::instanciaJanela->tamanho;
+    editor.adicionar(&scam_e);
+    editor.srender()->definirCamera(&scam_e.cam);
+
+    /*
+    // Adiciona sistema de GUI
+    bgui::bubble_gui gui;
+    
+    // Adiciona ancora à ancora principal
+    auto aI = gui.adicionar<bgui::ancora>(bgui::ancora_principal, bgui::ancora::horizontal);
+    gui.adicionar<imagem>(aI, camera_editor->textura);
+
+    editor.adicionar(&gui);
+    */
+    // Defini o nome da janela
+    bubble::instanciaJanela->nome(
+            (std::string("editor (c) Bubble 2025 :: Projeto ") 
+             + bubble::instanciaJanela->nome()).c_str());
+
+    // Inicia main loop
+    editor.rodar();
+}
 
 int main(int argc, char* argv[]) {
     // Definir diretório do projeto
@@ -27,14 +72,9 @@ int main(int argc, char* argv[]) {
     }
     
     try {
-        bubble::projeto editor(DIR_PADRAO);
-        bubble::instanciaJanela->nome((std::string("editor bubble (c)2025 - Projeto: ") + bubble::instanciaJanela->nome()).c_str());
-
-        std::vector<std::string> args = {DIR_PADRAO};
-
-        executarRuntime(args);
-        editor.rodar();
-    } catch (const std::exception& e) {
+            ini(DIR_PADRAO);
+        }
+    catch (const std::exception& e) {
         depuracao::emitir(erro, e.what());
     }
 

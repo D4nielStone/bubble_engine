@@ -49,10 +49,6 @@ projeto::~projeto()
     {
         delete sistema.second;
     }
-    for(auto& sistema : sistemas_adicionais)
-    {
-        delete sistema;
-    }
     sistemas.clear();
     sistemas_adicionais.clear();
 }
@@ -307,4 +303,8 @@ std::shared_ptr<fase> projeto::obterFaseAtual()
 sistema_fisica* projeto::sfisica()
 {
     return dynamic_cast<sistema_fisica*>(sistemas["fisica"]);
+}
+sistema_renderizacao* projeto::srender()
+{
+    return dynamic_cast<sistema_renderizacao*>(sistemas["render"]);
 }

@@ -26,7 +26,7 @@ if [[ -f "$RUNTIME_DIR/runtime" ]]; then
 fi
 
 # Compilar o editor
-mkdir -p "$EDITOR_OUT"
+cd $BASE_DIR && mkdir -p "$EDITOR_OUT"
 cd "$EDITOR_OUT" && cmake .. && cmake --build .
 
 # Executar o editor

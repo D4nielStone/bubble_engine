@@ -11,6 +11,7 @@ struct GLFWwindow;
 
 namespace bubble
 {
+    // inputMode: não serve mais:
     enum inputMode {
         Editor,
         Game,

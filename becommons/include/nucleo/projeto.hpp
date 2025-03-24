@@ -12,6 +12,7 @@
 #include <memory>
 #include "nucleo/sistema.hpp"
 #include "nucleo/sistema_de_fisica.hpp"
+#include "nucleo/sistema_de_renderizacao.hpp"
 
 namespace bubble
 {
@@ -36,6 +37,7 @@ namespace bubble
 
 	        /// @gets para Sistemas
 	        sistema_fisica* sfisica();
+	        sistema_renderizacao* srender();
         private:
             void criarProjetoVazio(const std::string& path, const char* nome);
             std::unordered_map<std::string, sistema*> sistemas;

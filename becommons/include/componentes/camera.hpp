@@ -70,6 +70,6 @@ namespace bubble
 		
 		/// @brief 
 		/// @param pos 
-		void mover(glm::vec3& pos);
+		void mover(glm::vec3 pos);
 	};
 }

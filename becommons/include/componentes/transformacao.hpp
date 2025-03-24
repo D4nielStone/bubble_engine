@@ -12,7 +12,7 @@
 
 /**
  * @file transformacao.hpp
- * @brief Calcula a mtriz de kodelo para um objeto 3d qualquer
+ * @brief Calcula a mtriz de modelo para um objeto 3d qualquer
  *
 */
 
@@ -27,7 +27,7 @@ namespace bubble
 		static constexpr mascara mascara = COMPONENTE_TRANSFORMACAO;
 
 		transformacao(const vet3& p = vet3(0.f,0.f,0.f),
-			const vet3& r = vet3(0.f, 0.f, 0.f), 
+			const vet3& r = vet3(0.f, 90.f, 0.f), 
 			const vet3& e = vet3(1.f, 1.f, 1.f)) :
 			posicao({ p.x,p.y,p.z }),
 			rotacao({ r.x,r.y,r.z }),

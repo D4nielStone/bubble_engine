@@ -185,7 +185,7 @@ bubble::vetor2<int> bubble::camera::mundoParaTela(const glm::vec3 &mundoPos)
     return screenPos;
 }
 
-void bubble::camera::mover(glm::vec3 &pos)
+void bubble::camera::mover(glm::vec3 pos)
 {
     if (!transform)
         transform = projeto_atual->obterFaseAtual()->obterRegistro()->obter<transformacao>(meu_objeto);

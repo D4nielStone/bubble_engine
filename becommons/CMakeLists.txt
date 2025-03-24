@@ -38,6 +38,7 @@ target_sources(becommons PRIVATE
     src/arquivadores/shader.cpp
     src/arquivadores/modelo.cpp
     src/componentes/camera.cpp
+    src/componentes/camera_editor.cpp
     src/componentes/codigo.cpp
     src/componentes/fisica.cpp
     src/componentes/transformacao.cpp

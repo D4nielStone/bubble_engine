@@ -14,20 +14,47 @@
 
 #define MAX_LPS 5
 
-namespace bubble
-{
-   void sistema_renderizacao::atualizar() {
+using namespace bubble;
+
+void sistema_renderizacao::atualizar() {
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_CULL_FACE);
+   
+    reg->cada<camera>([&](const uint32_t ent){
+            auto cam = reg->obter<camera>(ent);
+            if (cam.get() == camera_principal) return;
+            atualizarCamera(cam.get());
+            });
+    atualizarCamera(camera_principal);
+} 
 
-    reg->cada<camera>([&](const uint32_t ent) {
-        auto camera = reg->obter<bubble::camera>(ent);
-        if (!camera) {
-            depuracao::emitir(debug, "fase", "Camera não configurada");
+void sistema_renderizacao::inicializar(bubble::fase* fase_ptr)
+{
+        this->_Mfase = fase_ptr;
+        this->reg = _Mfase->obterRegistro();
+
+        reg->cada<camera>([&](const uint32_t e){
+                camera_principal = reg->obter<camera>(e).get();
+                });
+
+        glCullFace(GL_BACK);
+}
+void sistema_renderizacao::definirCamera(bubble::camera* cam)
+{
+    camera_principal = cam;
+}
+
+void sistema_renderizacao::atualizarCamera(bubble::camera* cam)
+{
+        if (!cam) {
             return;
         }
 
-        camera->desenharFB();
+        // Pula camera sem buffer e não principal
+        if(!cam->flag_fb && cam!=camera_principal)
+        return;
+
+        cam->desenharFB();
         luz_direcional ld;
 
         std::vector<luz_pontual> lps;
@@ -59,7 +86,7 @@ namespace bubble
 
             auto s = render->modelo->shader();
             s.use();
-            s.setMat4("view", glm::value_ptr(camera->obtViewMatrix()));
+            s.setMat4("view", glm::value_ptr(cam->obtViewMatrix()));
             s.setVec3("dirLight.direction", ld.direcao);
             s.setVec3("dirLight.ambient", ld.ambiente);
             s.setVec3("dirLight.color", ld.cor);
@@ -74,27 +101,16 @@ namespace bubble
                 s.setFloat("pointLights["+std::to_string(i)+"].quadratic", lps[i].quadratic);
             }
 
-            s.setVec3("viewPos", camera->posicao.x, camera->posicao.y, camera->posicao.z);
-            s.setMat4("projection", glm::value_ptr(camera->obtProjectionMatrix()));
+            s.setVec3("viewPos", cam->posicao.x, cam->posicao.y, cam->posicao.z);
+            s.setMat4("projection", glm::value_ptr(cam->obtProjectionMatrix()));
             s.setVec2("resolution", instanciaJanela->tamanho.x, instanciaJanela->tamanho.y);
             s.setMat4("modelo", transform->obter());
             render->modelo->desenhar(s);
         });
-
-        if (camera->flag_fb) {
-            glBindFramebuffer(GL_FRAMEBUFFER, 0);
+        // Caso tenha Frama buffer, limpa a tela
+        if (cam->flag_fb) {
             glClearColor(1, 1, 1, 1);
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
             glViewport(0, 0, instanciaJanela->tamanho.x, instanciaJanela->tamanho.y);
         }
-    });
-} 
-
-    void sistema_renderizacao::inicializar(bubble::fase* fase_ptr)
-    {
-        this->_Mfase = fase_ptr;
-        this->reg = _Mfase->obterRegistro();
-
-        glCullFace(GL_BACK);
     }
-}
