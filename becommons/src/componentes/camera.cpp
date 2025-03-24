@@ -20,7 +20,7 @@ void bubble::camera::desenharFB() const
     }
     glClearColor(ceu.r, ceu.g, ceu.b, ceu.a);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    if(viewport_ptr)
+    if(viewport_ptr && !flag_fb)
     glViewport(0, 0, viewport_ptr->x, viewport_ptr->y);
 }
 
@@ -38,7 +38,6 @@ bubble::camera::camera(const bool orth)
 
 void bubble::camera::ativarFB()
 {
-    if (flag_fb) return;
     flag_fb = true;
 
     glGenFramebuffers(1, &fbo);

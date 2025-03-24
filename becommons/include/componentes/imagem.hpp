@@ -20,7 +20,7 @@ namespace bubble
 		cor difusa					{ 1.f, 1.f, 1.f, 1.f };
 		imagem(const std::string& diretorio) : arquivo(diretorio) 
 		{
-			std::string dir{};
+			std::string dir = diretorio;
 			if (std::filesystem::exists(diretorio))
 				dir = (diretorio);
 			else if (std::filesystem::exists(std::filesystem::absolute(diretorio)))

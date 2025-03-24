@@ -109,6 +109,7 @@ void sistema_renderizacao::atualizarCamera(bubble::camera* cam)
         });
         // Caso tenha Frama buffer, limpa a tela
         if (cam->flag_fb) {
+            glBindFramebuffer(GL_FRAMEBUFFER, 0);
             glClearColor(1, 1, 1, 1);
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
             glViewport(0, 0, instanciaJanela->tamanho.x, instanciaJanela->tamanho.y);

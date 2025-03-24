@@ -32,8 +32,9 @@ void projeto::rodar()
         sistemas["codigo"]->atualizar();        
         }
         sistemas["render"]->atualizar();        
-        sistemas["interface"]->atualizar();        
 
+        if(fase_atual->rodando)
+        sistemas["interface"]->atualizar();        
         for(auto& s : sistemas_adicionais)
         {
             s->atualizar();

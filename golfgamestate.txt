@@ -1,0 +1,4 @@
+won=false
+lost=true
+trys=-1
+level=0
