@@ -10,7 +10,6 @@
 #include <string>
 #include <rapidjson/document.h>
 #include <memory>
-#include <unordered_map>
 #include "nucleo/sistema.hpp"
 #include "nucleo/sistema_de_fisica.hpp"
 
@@ -23,7 +22,8 @@ namespace bubble
             /// @param diretorio 
             projeto(const std::string& diretorio);
             projeto() = default;
-            
+            ~projeto();
+
             /// @brief inicia mainloop
             void rodar();
             
@@ -32,11 +32,14 @@ namespace bubble
             void fase(const std::string& dir);
 	        std::shared_ptr<bubble::fase> obterFaseAtual();
 
+            void adicionar(sistema*);
+
 	        /// @gets para Sistemas
 	        sistema_fisica* sfisica();
         private:
             void criarProjetoVazio(const std::string& path, const char* nome);
             std::unordered_map<std::string, sistema*> sistemas;
+            std::vector<sistema*> sistemas_adicionais;
             rapidjson::Document obterDoc();
             void criarJanela(rapidjson::Document& doc);
             void iniciarSistemas(bubble::fase*);

@@ -21,6 +21,7 @@ bubble::janela::janela(const char* nome, bubble::vetor2<double> bounds, const ch
     }
     
     window = glfwCreateWindow(bounds.x, bounds.y, nome, NULL, NULL);
+    _Mnome = nome;
     if (!window) {
         depuracao::emitir(erro, "Janla invalida");
         abort();
@@ -77,7 +78,13 @@ void bubble::janela::viewport() const
     glViewport(0, 0, tamanho.x, tamanho.y);
 }
 
-void bubble::janela::nome(const char* novo_nome) const
+void bubble::janela::nome(const char* novo_nome)
 {
     glfwSetWindowTitle(window, novo_nome);
+    _Mnome = novo_nome;
+}
+
+std::string bubble::janela::nome() const
+{
+    return _Mnome;
 }

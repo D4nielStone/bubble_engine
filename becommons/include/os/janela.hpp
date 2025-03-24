@@ -26,6 +26,7 @@ namespace bubble
 	struct janela
 	{
 		tempo _Mtempo;
+        std::string _Mnome{""};
 		bubble::vetor2<double> tamanho;
 		GLFWwindow* window;
 		bubble::inputs inputs;
@@ -34,7 +35,8 @@ namespace bubble
 		void poll() const;
 		void swap();
 		void viewport() const;
-		void nome(const char* novo_nome) const;
+        std::string nome() const;
+		void nome(const char* novo_nome);
 	};
 	inline janela* instanciaJanela{ nullptr };
 }

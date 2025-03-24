@@ -10,15 +10,19 @@
 #include <rapidjson/document.h> 
 #include <rapidjson/writer.h> 
 #include <rapidjson/stringbuffer.h> 
+#include <unordered_map>
 #include <fstream>
 
 #include "nucleo/sistema_de_fisica.hpp"
 #include "nucleo/sistema_de_renderizacao.hpp"
 #include "nucleo/sistema_de_codigo.hpp"
 
+
+
 using namespace bubble;
 
 void projeto::rodar()
+
 {
     while(!glfwWindowShouldClose(instanciaJanela->window))
 	{
@@ -30,8 +34,27 @@ void projeto::rodar()
         sistemas["render"]->atualizar();        
         sistemas["interface"]->atualizar();        
 
+        for(auto& s : sistemas_adicionais)
+        {
+            s->atualizar();
+        }
+
 		instanciaJanela->swap();
 	}
+}
+
+projeto::~projeto()
+{
+    for(auto& sistema : sistemas)
+    {
+        delete sistema.second;
+    }
+    for(auto& sistema : sistemas_adicionais)
+    {
+        delete sistema;
+    }
+    sistemas.clear();
+    sistemas_adicionais.clear();
 }
 
 projeto::projeto(const std::string &diretorio) : diretorioDoProjeto(diretorio)
@@ -268,6 +291,12 @@ void projeto::iniciarSistemas(bubble::fase* f)
     {
         sistema.second->inicializar(f);
     }
+}
+
+void projeto::adicionar(sistema* s)
+{
+    s->inicializar(fase_atual.get());
+    sistemas_adicionais.push_back(s);
 }
 
 std::shared_ptr<fase> projeto::obterFaseAtual()
