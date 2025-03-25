@@ -11,10 +11,6 @@
 #include "os/janela.hpp"
 #include "nucleo/projeto.hpp"
 
-bubble::shader* shader_texto{ nullptr };
-bubble::shader* shader_imagem{ nullptr };
-glm::mat4 projection{1.f};
-
 namespace bubble
 {
     sistema_interface::~sistema_interface()
@@ -28,7 +24,6 @@ namespace bubble
     {
         glDisable(GL_DEPTH_TEST);
         glDisable(GL_CULL_FACE);
-        projection = glm::ortho(0.0, instanciaJanela->tamanho.x, 0.0, instanciaJanela->tamanho.y);
         reg->cada<bubble::texto>([&](const uint32_t ent) 
             {
                 desenharTexto(*shader_texto, *reg->obter<bubble::texto>(ent));
@@ -131,6 +126,7 @@ namespace bubble
 
     void bubble::sistema_interface::desenharTexto(shader& s, const bubble::texto &_texto)
     {
+        projection = glm::ortho(0.0, instanciaJanela->tamanho.x, 0.0, instanciaJanela->tamanho.y);
         bubble::texto text = _texto;
 
         if(_texto.pf_ativa)
@@ -185,6 +181,7 @@ namespace bubble
     }
     void bubble::sistema_interface::desenharImagem(shader& s, const bubble::imagem& img)
     {
+        projection = glm::ortho(0.0, instanciaJanela->tamanho.x, 0.0, instanciaJanela->tamanho.y);
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, img.id);
         s.use();

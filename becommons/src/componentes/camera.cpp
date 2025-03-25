@@ -1,4 +1,5 @@
 #include <glad/glad.h>
+#include "depuracao/debug.hpp"
 #include "componentes/camera.hpp"
 #include "componentes/transformacao.hpp"
 #include "nucleo/fase.hpp"
@@ -20,8 +21,10 @@ void bubble::camera::desenharFB() const
     }
     glClearColor(ceu.r, ceu.g, ceu.b, ceu.a);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    if(viewport_ptr && !flag_fb)
+    if(viewport_ptr)
     glViewport(0, 0, viewport_ptr->x, viewport_ptr->y);
+    else
+    glViewport(0, 0, viewportFBO.x, viewportFBO.y);
 }
 
 
@@ -119,6 +122,10 @@ void bubble::camera::viewport(const bubble::vetor2<double>& viewp)
 
 glm::mat4 bubble::camera::obtProjectionMatrix() {
     bubble::vetor2<double> viewp;
+    if(viewport_ptr)
+    {viewportFBO.x = viewport_ptr->x;
+        viewportFBO.y = viewport_ptr->y;
+    }
     if (flag_fb)
         viewp = viewportFBO;
     else if(viewport_ptr)

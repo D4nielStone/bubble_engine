@@ -1,23 +1,22 @@
+#include "sistemas/bubble_gui.hpp"
 #include "os/janela.hpp"
 #include "nucleo/projeto.hpp"
-#include "os/sistema.hpp"
 #include "depuracao/debug.hpp"
 #include "filesystem"
-#include "componentes/camera_editor.hpp"
 #include "util/runtime.hpp"
-//#include "ui/bubble_gui.hpp"
+#include "sistemas/editor.hpp"
 
-struct sistema_cam_editor : public bubble::sistema
+struct caixa_editor : bubble::caixa
 {
-        sistema_cam_editor()
-        {
-        }
-        void atualizar() override
-        {
-            cam.atualizarMovimentacao();
-        }
-        bubble::camera_editor cam;
+    caixa_editor(bubble::camera_editor* cam)
+    {    
+        ajuste = bubble::caixa::cobrir;
+        imagem = new bubble::imagem(cam->textura);
+        imagem->flip = true;
+        cam->viewport_ptr = &imagem->limite;
+    }
 };
+
 void ini(const std::string& DIR_PADRAO)
 {
     // Cria projeto
@@ -26,25 +25,28 @@ void ini(const std::string& DIR_PADRAO)
     // TODO: sistema de parsing e interface
     
     // Camera editor
-    sistema_cam_editor scam_e;
-    scam_e.cam.viewport_ptr = &bubble::instanciaJanela->tamanho;
-    editor.adicionar(&scam_e);
-    editor.srender()->definirCamera(&scam_e.cam);
+    bubble::sistema_editor s_e;
+    s_e.cam.ativarFB(); // Ativa framebuffer
+    editor.adicionar(&s_e);
+    editor.srender()->definirCamera(&s_e.cam);
 
-    /*
     // Adiciona sistema de GUI
-    bgui::bubble_gui gui;
+    bubble::bubble_gui gui;
     
     // Adiciona ancora à ancora principal
-    auto aI = gui.adicionar<bgui::ancora>(bgui::ancora_principal, bgui::ancora::horizontal);
-    gui.adicionar<imagem>(aI, camera_editor->textura);
+    auto ancoras_ab = gui.dividir(gui.ancora_principal, bubble::ancora::horizontal);
+    auto& divisao_a = gui.ancoras[ancoras_ab.second];
+    
+    // Adiciona caixa de editor
+    divisao_a->corpo = caixa_editor(&s_e.cam);
 
+    // Adiciona sistema de gui ao projeto
     editor.adicionar(&gui);
-    */
-    // Defini o nome da janela
+
+    // Define o nome da janela
     bubble::instanciaJanela->nome(
-            (std::string("editor (c) Bubble 2025 :: Projeto ") 
-             + bubble::instanciaJanela->nome()).c_str());
+            (std::string("editor (c) Bubble 2025 :: Projeto ::--") 
+             + bubble::instanciaJanela->nome() + "--::").c_str());
 
     // Inicia main loop
     editor.rodar();

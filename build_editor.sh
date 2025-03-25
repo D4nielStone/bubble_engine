@@ -5,8 +5,8 @@ BASE_DIR=$(dirname "$0")
 EDITOR_DIR="$BASE_DIR/editor"
 RUNTIME_DIR="$BASE_DIR/runtime/out"
 EDITOR_OUT="$EDITOR_DIR/out"
-HEADER_FILE="$EDITOR_DIR/include/runtime_embutido.hpp"
-HASH_FILE="$EDITOR_DIR/include/runtime.hash"
+HEADER_FILE="$EDITOR_DIR/include/assets/runtime_embutido.hpp"
+HASH_FILE="$EDITOR_DIR/include/assets/runtime.hash"
 
 # Compilar o runtime primeiro
 ./$BASE_DIR/build_runtime.sh
@@ -18,8 +18,12 @@ if [[ -f "$RUNTIME_DIR/runtime" ]]; then
 
     if [[ "$NEW_HASH" != "$OLD_HASH" ]]; then
         echo "Gerando novo runtime_embutido.hpp..."
-        cd "$RUNTIME_DIR" && xxd -i "runtime" > "../../$HEADER_FILE"
-        cd ../../ && echo "$NEW_HASH" > "$HASH_FILE"  # Salva o novo hash
+        xxd -i -n runtime "$RUNTIME_DIR/runtime" > "$HEADER_FILE"
+        echo "$NEW_HASH" > "$HASH_FILE"  # Salva o novo hash
+        # Adicionar "inline " antes das declarações do array e do tamanho
+        sed -i 's/^unsigned char /inline unsigned char /' "$HEADER_FILE"
+        sed -i 's/^unsigned int /inline unsigned int /' "$HEADER_FILE"
+
     else
         echo "Nenhuma mudança no runtime, pulando xxd."
     fi

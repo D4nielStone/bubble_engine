@@ -16,6 +16,9 @@ namespace bubble
 	class sistema_interface : public sistema
 	{
 	public:
+        inline static glm::mat4 projection{1.f};
+        inline static bubble::shader* shader_texto{ nullptr };
+        inline static bubble::shader* shader_imagem{ nullptr };
 		sistema_interface() = default;
 		~sistema_interface() override;
 		void atualizar() override;

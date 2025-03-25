@@ -1,15 +1,25 @@
-#include <vector>
 #include <iostream>
+#include <vector>
 #include <fstream>
 #include <filesystem>
 #include <unistd.h>
 #include <sys/types.h>
-#include <sys/wait.h>
+#include <sys/stat.h>
 #include <cstring>
-#include "runtime_embutido.hpp"
+#include <cstdlib>
 
-inline void executarRuntime(const std::vector<std::string>& argumentos = {}) {
-    // Caminho temporário para o runtime
+#include "assets/runtime_embutido.hpp"
+
+inline bool runtimeRodando() {
+    return system("pidof runtime_embutido > /dev/null") == 0;
+}
+
+inline void iniciarRuntime(const std::vector<std::string>& argumentos = {}) {
+    if (runtimeRodando()) {
+        std::cout << "Runtime já está em execução. Ignorando nova instância.\n";
+        return;
+    }
+
     std::string execPath = "/tmp/runtime_embutido";
 
     // Salvar o executável no disco
@@ -22,24 +32,26 @@ inline void executarRuntime(const std::vector<std::string>& argumentos = {}) {
 
     // Criar o array de argumentos para execvp()
     std::vector<char*> args;
-    args.push_back((char*)execPath.c_str());  // Primeiro argumento: executável
+    args.push_back((char*)execPath.c_str());
 
     for (const auto& arg : argumentos) {
-        args.push_back((char*)arg.c_str());  // Adiciona argumentos passados
+        args.push_back((char*)arg.c_str());
     }
-    args.push_back(nullptr);  // O último elemento precisa ser nullptr
+    args.push_back(nullptr);
 
     // Criar processo filho
     pid_t pid = fork();
 
-    if (pid == 0) {  // Processo filho
+    if (pid == 0) { // Processo filho
+        setsid(); // Criar nova sessão
         execvp(args[0], args.data());
-        std::cerr << "Erro ao executar o programa!" << std::endl;
+        std::cerr << "Erro ao executar o runtime!" << std::endl;
         exit(1);
-    } else if (pid > 0) {  // Processo pai
-        int status;
-        waitpid(pid, &status, 0);
-    } else {
+    } 
+    else if (pid > 0) {
+        std::cout << "Runtime iniciado em segundo plano (PID: " << pid << ")\n";
+    } 
+    else {
         std::cerr << "Erro ao criar processo!" << std::endl;
     }
 }

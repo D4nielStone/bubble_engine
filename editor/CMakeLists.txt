@@ -16,6 +16,8 @@ find_package(Freetype REQUIRED)
 find_package(assimp REQUIRED)
 
 add_executable(editor 
+    src/sistemas/editor.cpp
+    src/sistemas/bubble_gui.cpp
     src/main.cpp
 )
 

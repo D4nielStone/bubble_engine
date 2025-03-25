@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/editor.dir/src/sistemas/editor.cpp.o CMakeFiles/editor.dir/src/main.cpp.o -o /source/repos/bubble_engine/editor  libglad.a /source/repos/bubble_engine/editor/../becommons/out/libbecommons.a -lBulletDynamics -lLinearMath -lBulletCollision -lBullet3Common /usr/lib/x86_64-linux-gnu/libglfw.so.3.3 -lassimp -llua5.3 -lfreeimage -lfreetype 
