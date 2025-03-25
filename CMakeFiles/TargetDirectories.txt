@@ -1,4 +1,0 @@
-/source/repos/bubble_engine/CMakeFiles/editor.dir
-/source/repos/bubble_engine/CMakeFiles/glad.dir
-/source/repos/bubble_engine/CMakeFiles/edit_cache.dir
-/source/repos/bubble_engine/CMakeFiles/rebuild_cache.dir
