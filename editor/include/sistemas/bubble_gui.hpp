@@ -4,6 +4,7 @@
 #include <unordered_map>
 #include <memory>
 #include "util/vetor4.hpp"
+#include "util/caixa.hpp"
 
 /**
  *
@@ -15,36 +16,6 @@
 typedef uint32_t ID;
 namespace bubble
 {
-    /*
-     * @struct caixa
-     * @brief funciona como uma div em css
-     *
-     **/
-    struct caixa
-    {
-        enum flag_tam
-        {
-            nenhum,
-            conter,         //< Imagem dentro da caixa
-            automatico,     //< Imagem no tamanho original
-            cobrir          //< Imagem preenche a caixa
-        };
-        flag_tam ajuste = automatico;
-        vet4 limites {0, 0, 100, 100};
-        caixa* filho{nullptr};
-        bubble::imagem* imagem{nullptr};
-
-        caixa& operator=(const caixa& outra)
-        {
-            if(this != &outra)
-            {
-                limites = outra.limites;
-                imagem = outra.imagem;
-                ajuste = outra.ajuste;
-            }
-            return *this;
-        }
-    };
 
     /*
      * @struct ancora
@@ -73,12 +44,18 @@ namespace bubble
             vertical,
             central
         };
+        enum flag_tamanho
+        {
+            proporcional,
+            fixo
+        };
         
         caixa corpo;
         vet4 limites {0, 0, 100, 100};
         ID ancora_a{0}, ancora_b{0}; // Se igual à 0, não dividir
         orientacao ori_atual;
         float proporcao = 0.5f;
+        flag_tamanho tamanho = proporcional;
         ID id;
     };
     class bubble_gui : public bubble::sistema

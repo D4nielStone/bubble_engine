@@ -126,7 +126,7 @@ namespace bubble
 
     void bubble::sistema_interface::desenharTexto(shader& s, const bubble::texto &_texto)
     {
-        projection = glm::ortho(0.0, instanciaJanela->tamanho.x, 0.0, instanciaJanela->tamanho.y);
+        projection = glm::ortho(0.0, instanciaJanela->tamanho.x, instanciaJanela->tamanho.y, 0.0);
         bubble::texto text = _texto;
 
         if(_texto.pf_ativa)
@@ -181,7 +181,7 @@ namespace bubble
     }
     void bubble::sistema_interface::desenharImagem(shader& s, const bubble::imagem& img)
     {
-        projection = glm::ortho(0.0, instanciaJanela->tamanho.x, 0.0, instanciaJanela->tamanho.y);
+        projection = glm::ortho(0.0, instanciaJanela->tamanho.x, instanciaJanela->tamanho.y, 0.0);
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, img.id);
         s.use();

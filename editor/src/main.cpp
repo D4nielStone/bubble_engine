@@ -5,17 +5,7 @@
 #include "filesystem"
 #include "util/runtime.hpp"
 #include "sistemas/editor.hpp"
-
-struct caixa_editor : bubble::caixa
-{
-    caixa_editor(bubble::camera_editor* cam)
-    {    
-        ajuste = bubble::caixa::cobrir;
-        imagem = new bubble::imagem(cam->textura);
-        imagem->flip = true;
-        cam->viewport_ptr = &imagem->limite;
-    }
-};
+#include "util/caixas.hpp"
 
 void ini(const std::string& DIR_PADRAO)
 {
@@ -34,11 +24,16 @@ void ini(const std::string& DIR_PADRAO)
     bubble::bubble_gui gui;
     
     // Adiciona ancora à ancora principal
-    auto ancoras_ab = gui.dividir(gui.ancora_principal, bubble::ancora::horizontal);
+    auto anc_p_div = gui.dividir(gui.ancora_principal, bubble::ancora::vertical); //< ancora a = menu
+    auto ancoras_ab = gui.dividir(anc_p_div.second, bubble::ancora::horizontal);
+    
     auto& divisao_a = gui.ancoras[ancoras_ab.second];
     
+    gui.ancoras[anc_p_div.first]->tamanho = bubble::ancora::fixo; // menu fixo
+    gui.ancoras[anc_p_div.first]->limites.w = 35; // tamanho menu
+    
     // Adiciona caixa de editor
-    divisao_a->corpo = caixa_editor(&s_e.cam);
+    divisao_a->corpo = bubble::caixa_editor(&s_e.cam);
 
     // Adiciona sistema de gui ao projeto
     editor.adicionar(&gui);
