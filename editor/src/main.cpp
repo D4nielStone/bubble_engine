@@ -11,24 +11,24 @@ using namespace bubble;
 void configurarInterface(bubble::bubble_gui* gui, bubble::sistema_editor* se)
 {
     // head
-    gui->adicionarFlags("raiz", flags::modular);
-    gui->obterCaixa("raiz")->m_orientacao_modular = caixa::orientacao::vertical;
+    gui->adicionarFlags("raiz", flags_caixa::modular);
+    gui->obterElemento("raiz")->m_orientacao_modular = caixa::orientacao::vertical;
 
     // menu
-    gui->adicionarCaixa("raiz", "menu");
-    gui->adicionarFlags("menu", flags::largura_proporcional);
-    gui->obterCaixa("menu")->m_largura = 1.0;
-    gui->obterCaixa("menu")->m_altura = 30;
+    gui->adiElemento<caixa>("raiz", "menu");
+    gui->adicionarFlags("menu", flags_caixa::largura_proporcional);
+    gui->obterElemento("menu")->m_largura = 1.0;
+    gui->obterElemento("menu")->m_altura = 30;
 
     // editor
-    gui->adicionarCaixa("raiz", "editor");
-    gui->adicionarFlags("editor", flags::largura_proporcional | flags::crescimento_vertical);
-    gui->obterCaixa("editor")->m_largura = 1.0;
-    gui->obterCaixa("editor")->m_imagem_fundo = std::make_unique<imagem>(se->cam.textura);
+    // adiciona imagem com buffer da camera do editor
+    gui->adiElemento<elementos::imagem>("raiz", "imagem_editor", se->cam.textura);
+    gui->adicionarFlags("imagem_editor", flags_caixa::largura_proporcional | flags_caixa::crescimento_vertical);
+    gui->obterElemento("imagem_editor")->m_largura = 1.0;
 
-    se->cam.viewport_ptr = &gui->obterCaixa("editor")->m_imagem_fundo->limite;
+    se->cam.viewport_ptr = &dynamic_cast<elementos::imagem*>(gui->obterElemento("imagem_editor"))->m_imagem_tamanho;
 
-    gui->obterCaixa("editor")->m_crescimento_modular = 1; // Ocupa todo o espaço disponível
+    gui->obterElemento("imagem_editor")->m_crescimento_modular = 1; // Ocupa todo o espaço disponível
 }
 
 void ini(const std::string& DIR_PADRAO)

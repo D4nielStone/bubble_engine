@@ -4,7 +4,7 @@
 #include <unordered_map>
 #include <memory>
 #include "util/vetor4.hpp"
-#include "util/caixa.hpp"
+#include "elementos/imagem.hpp"
 
 /**
  *
@@ -15,6 +15,8 @@
 
 namespace bubble
 { 
+	inline static unsigned int ret_VAO= 0, ret_VBO = 0, ret_EBO = 0;
+    inline static void renderizarImagem(shader*, const unsigned int, const bool, const vet4&);
     class bubble_gui : public bubble::sistema
     {
         private:
@@ -23,17 +25,18 @@ namespace bubble
             void atualizarFilhos(caixa*);
         public:
             bubble_gui();
-            void adicionarFlags(const std::string& id, flags); 
+            void adicionarFlags(const std::string& id, flags_caixa); 
             void atualizar() override;
-
-            void adicionarCaixa(const std::string& pai_id, const std::string& nova_id) {
-                if (auto pai = obterCaixa(pai_id)) {
-                    auto nova_caixa = pai->adicionarFilho(nova_id);
+            
+            template <typename T, typename ...Args>
+            void adiElemento(const std::string& pai_id, const std::string& nova_id, Args&&... args) {
+                if (auto pai = obterElemento(pai_id)) {
+                    auto nova_caixa = pai->adicionarFilho<T>(nova_id, std::forward<Args>(args)...);
                     caixas[nova_id] = nova_caixa;
                 }
             }
 
-            caixa* obterCaixa(const std::string& id) {
+            caixa* obterElemento(const std::string& id) {
             auto it = caixas.find(id);
             if (it != caixas.end()) {
                 return it->second;

@@ -4,12 +4,12 @@
 inline const char* quad_vert =
 R"(
 #version 330 core
+layout (location = 0) in vec4 aPos;
 
-uniform vec2 posicoes[256]
 uniform mat4 projecao;
 
 void main()
 {
-gl_Position = vec4(posicoes[gl_InstanceID], 0.0, 1.0);
+gl_Position = projecao * aPos;
 }
 )";
