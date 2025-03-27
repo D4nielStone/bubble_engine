@@ -29,6 +29,12 @@ void configurarInterface(bubble::bubble_gui* gui, bubble::sistema_editor* se)
     se->cam.viewport_ptr = &dynamic_cast<elementos::imagem*>(gui->obterElemento("imagem_editor"))->m_imagem_tamanho;
 
     gui->obterElemento("imagem_editor")->m_crescimento_modular = 1; // Ocupa todo o espaço disponível
+    
+    // menu (teste)
+    gui->adiElemento<caixa>("raiz", "menu2");
+    gui->adicionarFlags("menu2", flags_caixa::largura_proporcional);
+    gui->obterElemento("menu2")->m_largura = 1.0;
+    gui->obterElemento("menu2")->m_altura = 30;
 }
 
 void ini(const std::string& DIR_PADRAO)
