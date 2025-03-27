@@ -122,20 +122,19 @@ void bubble::camera::viewport(const bubble::vetor2<double>& viewp)
 
 glm::mat4 bubble::camera::obtProjectionMatrix() {
     bubble::vetor2<double> viewp;
-    if(viewport_ptr)
-    {viewportFBO.x = viewport_ptr->x;
-        viewportFBO.y = viewport_ptr->y;
-    }
-    if (flag_fb)
+    if (flag_fb && !viewport_ptr)
         viewp = viewportFBO;
     else if(viewport_ptr)
+    {
         viewp = *viewport_ptr;
+        viewportFBO = *viewport_ptr;
+    }
     else return glm::mat4(1.f);
 
     if (flag_orth)
     {
         float largura = viewp.x;
-        float altura = viewp.y;
+        float altura = viewp.y != 0.0f ? viewp.y : 1.0f;
         aspecto = largura / altura;
         left = -escala * aspecto;
         right = escala * aspecto;

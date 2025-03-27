@@ -5,15 +5,37 @@
 #include "filesystem"
 #include "util/runtime.hpp"
 #include "sistemas/editor.hpp"
-#include "util/caixas.hpp"
+
+using namespace bubble;
+
+void configurarInterface(bubble::bubble_gui* gui, bubble::sistema_editor* se)
+{
+    // head
+    gui->adicionarFlags("raiz", flags::modular);
+    gui->obterCaixa("raiz")->m_orientacao_modular = caixa::orientacao::vertical;
+
+    // menu
+    gui->adicionarCaixa("raiz", "menu");
+    gui->adicionarFlags("menu", flags::largura_proporcional);
+    gui->obterCaixa("menu")->m_largura = 1.0;
+    gui->obterCaixa("menu")->m_altura = 30;
+
+    // editor
+    gui->adicionarCaixa("raiz", "editor");
+    gui->adicionarFlags("editor", flags::largura_proporcional | flags::crescimento_vertical);
+    gui->obterCaixa("editor")->m_largura = 1.0;
+    gui->obterCaixa("editor")->m_imagem_fundo = std::make_unique<imagem>(se->cam.textura);
+
+    se->cam.viewport_ptr = &gui->obterCaixa("editor")->m_imagem_fundo->limite;
+
+    gui->obterCaixa("editor")->m_crescimento_modular = 1; // Ocupa todo o espaço disponível
+}
 
 void ini(const std::string& DIR_PADRAO)
 {
     // Cria projeto
     bubble::projeto editor(DIR_PADRAO);
    
-    // TODO: sistema de parsing e interface
-    
     // Camera editor
     bubble::sistema_editor s_e;
     s_e.cam.ativarFB(); // Ativa framebuffer
@@ -22,18 +44,10 @@ void ini(const std::string& DIR_PADRAO)
 
     // Adiciona sistema de GUI
     bubble::bubble_gui gui;
-    
-    // Adiciona ancora à ancora principal
-    auto anc_p_div = gui.dividir(gui.ancora_principal, bubble::ancora::vertical); //< ancora a = menu
-    auto ancoras_ab = gui.dividir(anc_p_div.second, bubble::ancora::horizontal);
-    
-    auto& divisao_a = gui.ancoras[ancoras_ab.second];
-    
-    gui.ancoras[anc_p_div.first]->tamanho = bubble::ancora::fixo; // menu fixo
-    gui.ancoras[anc_p_div.first]->limites.w = 35; // tamanho menu
-    
-    // Adiciona caixa de editor
-    divisao_a->corpo = bubble::caixa_editor(&s_e.cam);
+   
+    /*  Config da interface   */
+    configurarInterface(&gui, &s_e);
+    /*                        */
 
     // Adiciona sistema de gui ao projeto
     editor.adicionar(&gui);
