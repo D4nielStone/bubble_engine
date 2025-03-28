@@ -11,34 +11,51 @@ using namespace bubble;
 void configurarInterface(bubble::bubble_gui* gui, bubble::sistema_editor* se)
 {
     // head
-    gui->adicionarFlags("raiz", flags_caixa::modular);
-    gui->obterElemento("raiz")->m_orientacao_modular = caixa::orientacao::vertical;
+    gui->adiFlags("raiz", flags_caixa::modular);
 
     // menu
-    gui->adiElemento<caixa>("raiz", "menu");
-    gui->adicionarFlags("menu", flags_caixa::largura_proporcional);
-    gui->obterElemento("menu")->m_largura = 1.0;
-    gui->obterElemento("menu")->m_altura = 30;
+    gui->novoEstilo();
+        gui->adiElemento<caixa>("raiz", "menu");
+        
+        gui->defFlags       (flags_caixa::altura_percentual | flags_caixa::modular);
+        gui->defLargura     (                          35.f);
+        gui->defAltura      (                           1.f);
+        gui->defOrientacao  (   caixa::orientacao::vertical);
+        gui->defPaddingG    (                      5.f, 5.f);
+        gui->defCorFundo    (    cor(0.1f, 0.1f, 0.1f, 1.f));
+
+    gui->novoEstilo();
+        gui->adiElemento<elementos::imagem>("menu", "btn1", "cube.png", true);
+        gui->adiElemento<elementos::imagem>("menu", "btn2", "cube.png", true);
+        gui->adiElemento<elementos::imagem>("menu", "btn3", "cube.png", true);
+    
+        gui->defLargura     (                          25.f);
+        gui->defAltura      (                          25.f);
+        gui->defCorFundo    (    cor(0.0f, 0.0f, 0.0f, 0.f));
 
     // editor
-    // adiciona imagem com buffer da camera do editor
-    gui->adiElemento<elementos::imagem>("raiz", "imagem_editor", se->cam.textura);
-    gui->adicionarFlags("imagem_editor", flags_caixa::largura_proporcional | flags_caixa::crescimento_vertical);
-    gui->obterElemento("imagem_editor")->m_largura = 1.0;
+    gui->novoEstilo();
+        gui->adiElemento<elementos::imagem>("raiz", "imagem_editor", se->cam.textura);
+        
+        gui->defFlags       (flags_caixa::altura_percentual | flags_caixa::modular);
+        gui->defAltura      (                           1.f);
+        gui->defOrientacao  ( caixa::orientacao::horizontal);
+        gui->defCorFundo    (    cor(0.0f, 0.0f, 0.0f, 0.f));
+        gui->defCrescimentoM(                           1.f);
+    // define ponteiro viewport
+        se->cam.viewport_ptr = &static_cast<elementos::imagem*>(gui->obterElemento("imagem_editor"))->m_imagem_tamanho;
 
-    se->cam.viewport_ptr = &dynamic_cast<elementos::imagem*>(gui->obterElemento("imagem_editor"))->m_imagem_tamanho;
-
-    gui->obterElemento("imagem_editor")->m_crescimento_modular = 1; // Ocupa todo o espaço disponível
-    
-    // menu (teste)
-    gui->adiElemento<caixa>("raiz", "menu2");
-    gui->adicionarFlags("menu2", flags_caixa::largura_proporcional);
-    gui->obterElemento("menu2")->m_largura = 1.0;
-    gui->obterElemento("menu2")->m_altura = 30;
+    // botão de play
+    gui->novoEstilo();
+        gui->adiElemento<elementos::imagem>("imagem_editor", "btn_play", "Play.png");
+        gui->defPadding         (15.f, 15.f);
+        gui->defLargura         (        30);
+        gui->defAltura          (        30);
+        gui->defCorFundo        (cor(0.0f, 0.0f, 0.0f, 0.0f));
 }
-
 void ini(const std::string& DIR_PADRAO)
 {
+    glfwWindowHint(GLFW_MAXIMIZED, GLFW_TRUE);
     // Cria projeto
     bubble::projeto editor(DIR_PADRAO);
    
@@ -60,8 +77,8 @@ void ini(const std::string& DIR_PADRAO)
 
     // Define o nome da janela
     bubble::instanciaJanela->nome(
-            (std::string("editor (c) Bubble 2025 :: Projeto ::--") 
-             + bubble::instanciaJanela->nome() + "--::").c_str());
+            (std::string("editor (c) Bubble 2025 | ") 
+             + bubble::instanciaJanela->nome()).c_str());
 
     // Inicia main loop
     editor.rodar();

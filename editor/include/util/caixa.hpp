@@ -1,19 +1,16 @@
 /** @copyright Copyright (c) 2025 Daniel Oliveira */
 #include "componentes/imagem.hpp"
 #include "util/vetor4.hpp"
+#include "util/vetor2.hpp"
 #include <string>    
 
 namespace bubble
 {
         enum class flags_caixa : uint32_t {
             nenhuma           = 0,
-            largura_proporcional = 1 << 0,   // 1
-            altura_proporcional  = 1 << 1,   // 2
-            crescimento_vertical = 1 << 2,   // 4
-            crescimento_horizontal = 1 << 3, // 8
-            fixo_na_tela       = 1 << 4,    // 16
-            borda_visivel      = 1 << 5,    //...
-            modular            = 1 << 6      
+            largura_percentual = 1 << 0,   // 1
+            altura_percentual  = 1 << 1,   // 2
+            modular            = 1 << 2,   // 4   
         };
         inline flags_caixa operator|(flags_caixa a, flags_caixa b) {
             return static_cast<flags_caixa>(static_cast<uint32_t>(a) | static_cast<uint32_t>(b));
@@ -50,17 +47,19 @@ namespace bubble
         }
 
         std::string m_id;
-        flags_caixa m_flags_caixa = flags_caixa::modular;
+        flags_caixa m_flags_caixa = flags_caixa::nenhuma;
         caixa::orientacao m_orientacao_modular = caixa::orientacao::horizontal;
         
-        // Dimensões
-        float m_largura = 0.0f;
-        float m_altura = 0.0f;
+        // Estilo
+        float m_largura = 1.0f;
+        float m_altura = 1.0f;
         float m_crescimento_modular = 0.0f; // Fator de crescimento em layouts modulares
-        vet4 m_limites {0, 0, 20, 20};
-        
-        // Aparência
-        //std::unique_ptr<quadrado> m_fundo{nullptr};
+        unsigned int m_espessura_borda = 2;
+        vet2 m_padding = {0.0f, 0.0f};
+        vet2 m_padding_geral = {0.0f, 0.0f};
+        vet4 m_limites  {0, 0, 20, 20};
+        cor m_cor_borda {0.1f, 0.1f, 0.1f, 0.f};
+        cor m_cor_fundo {0.5f, 0.5f, 0.5f, 1.f};
         
         // Hierarquia
         std::vector<std::unique_ptr<caixa>> m_filhos;

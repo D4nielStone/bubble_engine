@@ -3,7 +3,6 @@
 
 #pragma once
 #include "shaders/quad_frag.hpp"
-#include "shaders/quad_vert.hpp"
 #include "shaders/texto_frag.hpp"
 #include "shaders/texto_vert.hpp"
 #include "shaders/imagem_frag.hpp"

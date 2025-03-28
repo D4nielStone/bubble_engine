@@ -3,18 +3,40 @@
 #include "depuracao/debug.hpp"
 
 using namespace bubble;
-void bubble::renderizarImagem(shader* s, const unsigned int id, const bool flip, const vet4& limites)
+inline shader* quad_shader{nullptr};
+void bubble::renderizarImagem(elementos::imagem* img)
 {
     glm::mat4 proj = glm::ortho(0.0, instanciaJanela->tamanho.x, instanciaJanela->tamanho.y, 0.0);
     glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, id);
-    s->use();
-    s->setVec2("quadrado.posicao", limites.x, limites.y);
-    s->setVec2("quadrado.tamanho", limites.z, limites.w);
-    s->setCor("difusa", { 1.f, 1.f, 1.f, 1.f });
-    s->setInt("textura", 0);
-    s->setInt("flip", flip);
-    s->setMat4("projecao", glm::value_ptr(proj));
+    glBindTexture(GL_TEXTURE_2D, img->m_imagem_id);
+    img->m_imagem_shader->use();
+    img->m_imagem_shader->setVec2("quadrado.posicao", img->m_limites.x, img->m_limites.y);
+    img->m_imagem_shader->setVec2("quadrado.tamanho", img->m_limites.z, img->m_limites.w);
+    img->m_imagem_shader->setVec2("resolucao_textura", img->m_limites.z, img->m_limites.w);
+    img->m_imagem_shader->setCor("cor_borda", img->m_cor_borda);
+    img->m_imagem_shader->setInt("textura", 0);
+    img->m_imagem_shader->setInt("tamanho_bordas", img->m_espessura_borda);
+    img->m_imagem_shader->setBool("mostrar_bordas", img->m_cor_borda.a != 0);
+    img->m_imagem_shader->setBool("flip", img->m_imagem_flip);
+    img->m_imagem_shader->setMat4("projecao", glm::value_ptr(proj));
+        /*  desenho  */
+    glBindVertexArray(ret_VAO);
+    glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+    glBindVertexArray(0);
+}
+
+void bubble::renderizarFundo(caixa* it_caixa)
+{
+    glm::mat4 proj = glm::ortho(0.0, instanciaJanela->tamanho.x, instanciaJanela->tamanho.y, 0.0);
+    quad_shader->use();
+    quad_shader->setVec2("quadrado.posicao", it_caixa->m_limites.x, it_caixa->m_limites.y);
+    quad_shader->setVec2("quadrado.tamanho", it_caixa->m_limites.z, it_caixa->m_limites.w);
+    quad_shader->setVec2("resolucao_textura", it_caixa->m_limites.z, it_caixa->m_limites.w);
+    quad_shader->setCor("cor_borda", it_caixa->m_cor_borda);
+    quad_shader->setCor("cor", it_caixa->m_cor_fundo);
+    quad_shader->setInt("tamanho_bordas", it_caixa->m_espessura_borda);
+    quad_shader->setBool("mostrar_bordas", it_caixa->m_cor_borda.a != 0);
+    quad_shader->setMat4("projecao", glm::value_ptr(proj));
         /*  desenho  */
     glBindVertexArray(ret_VAO);
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
@@ -26,7 +48,9 @@ bubble_gui::bubble_gui()
     raiz = std::make_unique<caixa>();
     raiz->m_id = "raiz";
     caixas["raiz"] = raiz.get();
-    
+   
+    quad_shader = new shader("imagem.vert", "quad.frag");
+
     /*--------------BUFFERS--------------*/
         // definiçãoo de dados do quadrado (posição e UV)
         float vertices[] = {
@@ -70,7 +94,7 @@ bubble_gui::bubble_gui()
         glBindVertexArray(0);
 }
 
-void bubble_gui::adicionarFlags(const std::string& id, flags_caixa f) {
+void bubble_gui::adiFlags(const std::string& id, flags_caixa f) {
     if (auto caixa = obterElemento(id)) {
         caixa->m_flags_caixa |= f;
     }
@@ -87,7 +111,10 @@ void bubble_gui::atualizar()
 
 inline void desenhar_caixa(caixa* c)
 {
-    // TODO desenho do fundo
+    if(c->m_cor_fundo.a != 0)
+    {
+        renderizarFundo(c);
+    }
     
     glDisable(GL_CULL_FACE);
     glDisable(GL_DEPTH_TEST);
@@ -95,7 +122,7 @@ inline void desenhar_caixa(caixa* c)
         // Renderizar imagem
         img->m_imagem_tamanho.x = c->m_limites.z; // o m_imagem_tamanho serve para de ponteiro para viewport da camera
         img->m_imagem_tamanho.y = c->m_limites.w;
-        renderizarImagem(img->m_imagem_shader, img->m_imagem_id, img->m_imagem_flip, img->m_limites);
+        renderizarImagem(img);
     }
 }
 
@@ -117,7 +144,7 @@ void bubble_gui::atualizarFilhos(caixa* it_caixa)
         for(auto& filho : it_caixa->m_filhos)
         {
             if(is_horizontal) {
-                if(filho->tem_flag(flags_caixa::largura_proporcional))
+                if(filho->tem_flag(flags_caixa::largura_percentual))
                 {
                     // adicionar proporcionalmente
                     espaco_fixo += espaco_disponivel * filho->m_largura;
@@ -126,7 +153,7 @@ void bubble_gui::atualizarFilhos(caixa* it_caixa)
                     espaco_fixo += filho->m_largura;
                 }
             } else {
-                if(filho->tem_flag(flags_caixa::altura_proporcional))
+                if(filho->tem_flag(flags_caixa::altura_percentual))
                 {
                     espaco_fixo += espaco_disponivel * filho->m_altura;
                 } else {
@@ -141,14 +168,14 @@ void bubble_gui::atualizarFilhos(caixa* it_caixa)
         float unidade_crescimento = crescimento_total > 0 ? espaco_restante / crescimento_total : 0;
         
         // segunda passagem: aplicar dimensões e proporções
-        float cursor = 0.0f;
+        float cursor = is_horizontal ? it_caixa->m_limites.x : it_caixa->m_limites.y;
         for(auto& filho : it_caixa->m_filhos)
         {
             // calcular tamanho principal
             float tamanho_principal = 0.0f;
             if(is_horizontal) {
-                if (filho->tem_flag(flags_caixa::largura_proporcional)) {
-                    tamanho_principal =  espaco_disponivel * filho->m_largura;
+                if (filho->tem_flag(flags_caixa::largura_percentual)) {
+                    tamanho_principal =  espaco_disponivel * filho->m_largura ;
                 } else {
                     tamanho_principal = filho->m_largura;
                 }
@@ -158,15 +185,20 @@ void bubble_gui::atualizarFilhos(caixa* it_caixa)
                 filho->m_limites.z = tamanho_principal;
 
                 // posicionar horizontalmente
-                filho->m_limites.x = cursor;
-                cursor += tamanho_principal;
+                cursor += filho->m_padding.x + it_caixa->m_padding_geral.x;
 
+                filho->m_limites.x = cursor;
+                filho->m_limites.y = filho->m_padding.y + it_caixa->m_padding_geral.y;
+                
+                cursor += tamanho_principal+filho->m_padding.x + it_caixa->m_padding_geral.x;
                 // altura proporcional ao pai
-                if(filho->tem_flag(flags_caixa::altura_proporcional)) {
+                if(filho->tem_flag(flags_caixa::altura_percentual)) {
                     filho->m_limites.w = it_caixa->m_altura * filho->m_altura;
+                } else {
+                    filho->m_limites.w = filho->m_altura;
                 }
             } else {
-                if (filho->tem_flag(flags_caixa::altura_proporcional)) {
+                if (filho->tem_flag(flags_caixa::altura_percentual)) {
                     tamanho_principal = espaco_disponivel * filho->m_altura;
                 } else {
                     tamanho_principal = filho->m_altura;
@@ -177,19 +209,23 @@ void bubble_gui::atualizarFilhos(caixa* it_caixa)
                 filho->m_limites.w = tamanho_principal;
                 
                 // posicionar verticalmente
+                cursor += filho->m_padding.y + it_caixa->m_padding_geral.y;
                 filho->m_limites.y = cursor;
-                cursor += tamanho_principal;
-
+                filho->m_limites.x = filho->m_padding.x + it_caixa->m_padding_geral.x;
+                
+                cursor += tamanho_principal + filho->m_padding.y + it_caixa->m_padding_geral.y;
                 // largura proporcional ao pai
-                if (filho->tem_flag(flags_caixa::largura_proporcional)) {
+                if (filho->tem_flag(flags_caixa::largura_percentual)) {
                     filho->m_limites.z = it_caixa->m_largura * filho->m_largura;
+                }else {
+                    filho->m_limites.z = filho->m_largura;
                 }
             }
         }
     }
     // atualizar recursivamente e desenhar
+    desenhar_caixa(it_caixa);
     for (auto& filho : it_caixa->m_filhos) {
         atualizarFilhos(filho.get());
     }    
-    desenhar_caixa(it_caixa);
 }

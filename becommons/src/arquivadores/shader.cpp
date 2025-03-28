@@ -7,7 +7,6 @@
 inline std::vector<std::pair<std::pair<const char*, const char*>, unsigned int>> shaders;
 // Mapeia os shaders na memória para facilitar o acesso aos shaders embutidos
 inline const std::unordered_map<std::string, const char*> shader_memoria{
-    {"quad.vert", quad_vert},
     {"quad.frag", quad_frag},
     {"imagem.vert", imagem_vert},
     {"imagem.frag", imagem_frag},

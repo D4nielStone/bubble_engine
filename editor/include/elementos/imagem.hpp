@@ -21,7 +21,7 @@ namespace bubble{
 		    ~imagem() override {
 		        delete m_imagem_shader;
 		    }
-		    imagem(const std::string& diretorio) : m_imagem_path(diretorio), m_imagem_shader(new shader("imagem.vert", "imagem.frag")) 
+		    imagem(const std::string& diretorio, const bool f = false) : m_imagem_flip(f), m_imagem_path(diretorio), m_imagem_shader(new shader("imagem.vert", "imagem.frag")) 
 		    {
 			    if (!std::filesystem::exists(diretorio) && std::filesystem::exists(std::filesystem::absolute(diretorio)))
 			    {
