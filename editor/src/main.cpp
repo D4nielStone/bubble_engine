@@ -18,10 +18,28 @@ void configurarInterface(bubble::projeto& proj)
         return;
     }
     gui->adiFlags("raiz", flags_caixa::modular);
-    
+    gui->obterElemento("raiz")->m_orientacao_modular = caixa::orientacao::vertical;
+
     // menu
     gui->novoEstilo();
         gui->adiElemento<caixa>("raiz", "menu");
+        gui->defFlags       (flags_caixa::modular | flags_caixa::largura_percentual);
+        gui->defAltura      (                          35.f);
+        gui->defLargura      (                           1.f);
+        gui->defOrientacao  (   caixa::orientacao::horizontal);
+        gui->defPaddingG    (                      5.f, 5.f);
+        gui->defCorFundo    (    cor(0.f, 0.f, 0.f, 1.f));
+    
+    gui->novoEstilo();
+        gui->adiElemento<caixa>("raiz", "raiz_b");
+        gui->defFlags       (flags_caixa::modular | flags_caixa::largura_percentual);
+        gui->defLargura      (                           1.f);
+        gui->defOrientacao  (   caixa::orientacao::horizontal);
+        gui->defCorFundo    (    cor(0.f, 0.f, 0.f, 0.f));
+        gui->defCrescimentoM(                           1.f);
+    // entidades
+    gui->novoEstilo();
+        gui->adiElemento<caixa>("raiz_b", "entidades");
         
         gui->defFlags       (flags_caixa::altura_percentual | flags_caixa::modular);
         gui->defLargura     (                          35.f);
@@ -40,7 +58,7 @@ void configurarInterface(bubble::projeto& proj)
             if(comp.find(componente::COMPONENTE_TRANSFORMACAO) != comp.end())icone =    "Transformacao.png";
             if(comp.find(componente::COMPONENTE_CODIGO) != comp.end())icone =           "Codigo.png";
             if(comp.find(componente::COMPONENTE_CAM) != comp.end())icone =              "Camera.png";
-            gui->adiElemento<elementos::imagem>("menu", "entidade " + std::to_string(entidade), icone);
+            gui->adiElemento<elementos::imagem>("entidades", "entidade " + std::to_string(entidade), icone);
         }
 
         gui->defLargura     (                          25.f);
@@ -49,7 +67,7 @@ void configurarInterface(bubble::projeto& proj)
 
     // editor
     gui->novoEstilo();
-        gui->adiElemento<elementos::imagem>("raiz", "imagem_editor", se->cam.textura, true);
+        gui->adiElemento<elementos::imagem>("raiz_b", "imagem_editor", se->cam.textura, true);
         
         gui->defFlags       (flags_caixa::altura_percentual | flags_caixa::modular);
         gui->defAltura      (                           1.f);
@@ -67,7 +85,7 @@ void configurarInterface(bubble::projeto& proj)
         gui->defAltura          (        30);
         gui->defCorFundo        (cor(0.0f, 0.0f, 0.0f, 0.0f));
     gui->novoEstilo();
-        gui->adiElemento<caixa>("raiz", "componentes");
+        gui->adiElemento<caixa>("raiz_b", "componentes");
         gui->defFlags       (flags_caixa::altura_percentual | flags_caixa::modular);
         gui->defAltura      (                           1.f);
         gui->defCrescimentoM(                          0.6f);
