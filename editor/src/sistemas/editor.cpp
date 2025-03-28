@@ -27,7 +27,7 @@ void sistema_editor::executarRuntime()
     rodando.store(true);
 
     // Inicia a thread de monitoramento
-    threadRuntime = std::thread(&sistema_editor::monitorarRuntime, this);
+    threadRuntime = std::thread(&sistema_editor::monitorarRuntime);
     threadRuntime.detach(); // Libera a thread para rodar em segundo plano
 }
 

@@ -4,7 +4,7 @@
 #include <unordered_map>
 #include <memory>
 #include "util/vetor4.hpp"
-#include "elementos/imagem.hpp"
+#include "elementos/botao.hpp"
 #include <set>
 
 /**
@@ -81,6 +81,11 @@ namespace bubble
             void defPadding(const float v1, const float v2){
                 for(auto& id : estilo_atual){
                     obterElemento(id)->m_padding = {v1, v2};
+                }
+            }
+            void defCorBorda(const cor v){
+                for(auto& id : estilo_atual){
+                    obterElemento(id)->m_cor_borda = v;
                 }
             }
             void defCorFundo(const cor v){

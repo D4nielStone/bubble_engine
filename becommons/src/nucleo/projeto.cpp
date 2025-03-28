@@ -37,7 +37,7 @@ void projeto::rodar()
         sistemas["interface"]->atualizar();        
         for(auto& s : sistemas_adicionais)
         {
-            s->atualizar();
+            s.second->atualizar();
         }
 
 		instanciaJanela->swap();
@@ -110,16 +110,20 @@ void projeto::criarProjetoVazio(const std::string& novo_diretorio, const char* n
                     "cor": [1, 1, 1],
                     "ambiente": [0.1, 0.1, 0.1],
                     "intensidade": 1.0
+                }
+            ]
+        },
+        {
+            "componentes":[
+                {
+                    "tipo": "renderizador",
+                    "modelo": "/cubo"
                 },
                 {
                     "tipo": "transformacao",
                     "posicao": [0,0,5],
                     "rotacao": [0,0,0],
                     "escala": [1, 1, 1]
-                },
-                {
-                    "tipo": "renderizador",
-                    "modelo": "/cubo"
                 },
                 {
                     "tipo": "codigo",
@@ -290,10 +294,10 @@ void projeto::iniciarSistemas(bubble::fase* f)
     }
 }
 
-void projeto::adicionar(sistema* s)
+void projeto::adicionar(const std::string nome, sistema* s)
 {
     s->inicializar(fase_atual.get());
-    sistemas_adicionais.push_back(s);
+    sistemas_adicionais[nome] = s;
 }
 
 std::shared_ptr<fase> projeto::obterFaseAtual()
@@ -308,4 +312,12 @@ sistema_fisica* projeto::sfisica()
 sistema_renderizacao* projeto::srender()
 {
     return dynamic_cast<sistema_renderizacao*>(sistemas["render"]);
+}
+sistema* projeto::obterSistema(const std::string nome)
+{
+    if(sistemas_adicionais.find(nome) != sistemas_adicionais.end())
+    {
+        return sistemas_adicionais[nome];
+    }
+    return nullptr;
 }

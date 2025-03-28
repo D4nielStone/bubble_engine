@@ -118,11 +118,20 @@ inline void desenhar_caixa(caixa* c)
     
     glDisable(GL_CULL_FACE);
     glDisable(GL_DEPTH_TEST);
+    
+    if(auto btn = dynamic_cast<elementos::botao*>(c)){
+        // Renderizar imagem
+        renderizarImagem(btn);
+        btn->atualizarFuncao();
+        return;
+    }
+    
     if(auto img = dynamic_cast<elementos::imagem*>(c)){
         // Renderizar imagem
-        img->m_imagem_tamanho.x = c->m_limites.z; // o m_imagem_tamanho serve para de ponteiro para viewport da camera
-        img->m_imagem_tamanho.y = c->m_limites.w;
+        img->m_imagem_tamanho.x = img->m_limites.z; // o m_imagem_tamanho serve para de ponteiro para viewport da camera
+        img->m_imagem_tamanho.y = img->m_limites.w;
         renderizarImagem(img);
+        return;
     }
 }
 

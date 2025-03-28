@@ -13,15 +13,15 @@ namespace bubble{
 	    class imagem : public bubble::caixa
 	    {
             public:
-            shader* m_imagem_shader                        {nullptr};
-            std::string m_imagem_path	            { "" };
-		    bubble::vetor2<double> m_imagem_tamanho {100.0, 100.0};
-		    bool m_imagem_flip                      { false };
-		    unsigned int m_imagem_id                { 0 };
-		    ~imagem() override {
-		        delete m_imagem_shader;
-		    }
-		    imagem(const std::string& diretorio, const bool f = false) : m_imagem_flip(f), m_imagem_path(diretorio), m_imagem_shader(new shader("imagem.vert", "imagem.frag")) 
+                shader* m_imagem_shader                 {nullptr};
+                std::string m_imagem_path	            { "" };
+		        bubble::vetor2<double> m_imagem_tamanho {100.0, 100.0};
+		        bool m_imagem_flip                      { false };
+		        unsigned int m_imagem_id                { 0 };
+		        ~imagem() override {
+		            delete m_imagem_shader;
+		        }
+		        imagem(const std::string& diretorio, const bool f = false) : m_imagem_flip(f), m_imagem_path(diretorio), m_imagem_shader(new shader("imagem.vert", "imagem.frag")) 
 		    {
 			    if (!std::filesystem::exists(diretorio) && std::filesystem::exists(std::filesystem::absolute(diretorio)))
 			    {
@@ -33,7 +33,7 @@ namespace bubble{
                 m_limites.z = m_imagem_tamanho.x;
 			    m_limites.w = m_imagem_tamanho.y;
 		    }
-		    imagem(unsigned int id) : m_imagem_id(id), m_imagem_shader(new shader("imagem.vert", "imagem.frag")) {}
+		    imagem(unsigned int id, const bool f = false) : m_imagem_id(id), m_imagem_flip(f), m_imagem_shader(new shader("imagem.vert", "imagem.frag")) {}
 	    };
     } // elementos
 } // bubble

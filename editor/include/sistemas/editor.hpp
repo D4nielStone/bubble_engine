@@ -9,13 +9,13 @@ namespace bubble{
     struct sistema_editor : public bubble::sistema {
 
     void atualizar();
-    void executarRuntime();
+    static void executarRuntime();
     
     bubble::camera_editor cam;
 private:
-    std::thread threadRuntime;
-    std::atomic<bool> rodando{false}; // Variável para controlar a execução da thread
+    inline static std::thread threadRuntime;
+    inline static std::atomic<bool> rodando{false}; // Variável para controlar a execução da thread
 
-    void monitorarRuntime();
+    static void monitorarRuntime();
 };
 }

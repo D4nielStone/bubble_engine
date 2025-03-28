@@ -25,6 +25,17 @@ namespace bubble
 	*/
 	struct janela
 	{
+    enum class cursor : int
+    {
+        mao = 0x00036004,
+        i   = 0x00036002,
+        seta= 0x00036001,
+        re_h= 0x00036005,
+        re_v= 0x00036006
+    };
+        private:
+	    cursor m_cursor = cursor::seta;
+        public:
 		tempo _Mtempo;
         std::string _Mnome{""};
 		bubble::vetor2<double> tamanho;
@@ -33,6 +44,14 @@ namespace bubble
 		janela(const char* nome, bubble::vetor2<double> bounds = bubble::vetor2<double>(600, 400), const char* icon_path = nullptr);
 		~janela();
 		void poll() const;
+        inline void defCursor(const cursor c)
+        {
+            if(c == m_cursor) return;
+            m_cursor = c;
+            auto cursor_glfw = glfwCreateStandardCursor((int)c);
+            if(cursor_glfw)
+            glfwSetCursor(window, cursor_glfw);
+        }
 		void swap();
 		void viewport() const;
         std::string nome() const;

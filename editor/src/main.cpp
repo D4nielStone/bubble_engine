@@ -8,11 +8,17 @@
 
 using namespace bubble;
 
-void configurarInterface(bubble::bubble_gui* gui, bubble::sistema_editor* se)
+void configurarInterface(bubble::projeto& proj)
 {
+    bubble_gui* gui = static_cast<bubble_gui*>(proj.obterSistema("bubble_gui"));
+    sistema_editor* se = static_cast<sistema_editor*>(proj.obterSistema("editor"));
     // head
+    if(!gui) {
+        depuracao::emitir(erro, "interface", "sistema de gui inválido");
+        return;
+    }
     gui->adiFlags("raiz", flags_caixa::modular);
-
+    
     // menu
     gui->novoEstilo();
         gui->adiElemento<caixa>("raiz", "menu");
@@ -25,17 +31,25 @@ void configurarInterface(bubble::bubble_gui* gui, bubble::sistema_editor* se)
         gui->defCorFundo    (    cor(0.1f, 0.1f, 0.1f, 1.f));
 
     gui->novoEstilo();
-        gui->adiElemento<elementos::imagem>("menu", "btn1", "cube.png", true);
-        gui->adiElemento<elementos::imagem>("menu", "btn2", "cube.png", true);
-        gui->adiElemento<elementos::imagem>("menu", "btn3", "cube.png", true);
-    
+        
+        for(auto& [entidade, comp] : proj.obterFaseAtual()->obterRegistro()->entidades)
+        {
+            std::string icone = "cube.png";
+            if(comp.find(componente::COMPONENTE_LUZ_DIRECIONAL) != comp.end()) icone =  "Iluminacao.png";
+            if(comp.find(componente::COMPONENTE_RENDER) != comp.end())icone =           "Renderizador.png";
+            if(comp.find(componente::COMPONENTE_TRANSFORMACAO) != comp.end())icone =    "Transformacao.png";
+            if(comp.find(componente::COMPONENTE_CODIGO) != comp.end())icone =           "Codigo.png";
+            if(comp.find(componente::COMPONENTE_CAM) != comp.end())icone =              "Camera.png";
+            gui->adiElemento<elementos::imagem>("menu", "entidade " + std::to_string(entidade), icone);
+        }
+
         gui->defLargura     (                          25.f);
         gui->defAltura      (                          25.f);
         gui->defCorFundo    (    cor(0.0f, 0.0f, 0.0f, 0.f));
 
     // editor
     gui->novoEstilo();
-        gui->adiElemento<elementos::imagem>("raiz", "imagem_editor", se->cam.textura);
+        gui->adiElemento<elementos::imagem>("raiz", "imagem_editor", se->cam.textura, true);
         
         gui->defFlags       (flags_caixa::altura_percentual | flags_caixa::modular);
         gui->defAltura      (                           1.f);
@@ -47,11 +61,18 @@ void configurarInterface(bubble::bubble_gui* gui, bubble::sistema_editor* se)
 
     // botão de play
     gui->novoEstilo();
-        gui->adiElemento<elementos::imagem>("imagem_editor", "btn_play", "Play.png");
+        gui->adiElemento<elementos::botao>("imagem_editor", "btn_play", "Play.png", sistema_editor::executarRuntime);
         gui->defPadding         (15.f, 15.f);
         gui->defLargura         (        30);
         gui->defAltura          (        30);
         gui->defCorFundo        (cor(0.0f, 0.0f, 0.0f, 0.0f));
+    gui->novoEstilo();
+        gui->adiElemento<caixa>("raiz", "componentes");
+        gui->defFlags       (flags_caixa::altura_percentual | flags_caixa::modular);
+        gui->defAltura      (                           1.f);
+        gui->defCrescimentoM(                          0.6f);
+        gui->defOrientacao  ( caixa::orientacao::vertical);
+        gui->defCorFundo    (    cor(0.1f, 0.1f, 0.1f, 1.f));
 }
 void ini(const std::string& DIR_PADRAO)
 {
@@ -62,18 +83,18 @@ void ini(const std::string& DIR_PADRAO)
     // Camera editor
     bubble::sistema_editor s_e;
     s_e.cam.ativarFB(); // Ativa framebuffer
-    editor.adicionar(&s_e);
+    editor.adicionar("editor", &s_e);
     editor.srender()->definirCamera(&s_e.cam);
 
     // Adiciona sistema de GUI
     bubble::bubble_gui gui;
    
-    /*  Config da interface   */
-    configurarInterface(&gui, &s_e);
-    /*                        */
-
     // Adiciona sistema de gui ao projeto
-    editor.adicionar(&gui);
+    editor.adicionar("bubble_gui", &gui);
+
+    /*  Config da interface   */
+    configurarInterface(editor);
+    /*                        */
 
     // Define o nome da janela
     bubble::instanciaJanela->nome(

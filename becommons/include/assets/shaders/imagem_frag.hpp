@@ -15,7 +15,7 @@ void main()
 {
     // Obtemos a cor base da textura
     vec4 cor_textura;
-    if (!flip)
+    if (flip)
         cor_textura = texture(textura, vec2(Uv.x, -Uv.y));
     else
         cor_textura = texture(textura, Uv);
@@ -28,14 +28,7 @@ void main()
         float borda = tamanho_bordas; // Define a espessura da borda
         if (Uv.x < bordax || Uv.x > 1.0 - bordax || Uv.y < borday || Uv.y > 1.0 - borday)
         {
-            if(Uv.x > 0 || Uv.x < 1 || Uv.y > 0 || Uv.y < 1)
-            {
             FragColor = cor_borda; // Cor da borda
-            }
-            else
-            {
-            FragColor = vec4(0.f,0,0,0);
-            }
             return;
         }
     }

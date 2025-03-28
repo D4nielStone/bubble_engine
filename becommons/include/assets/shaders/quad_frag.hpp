@@ -18,7 +18,6 @@ void main()
     // Detectar borda com base nas coordenadas UV
     if (mostrar_bordas)
     {
-        float borda = tamanho_bordas; // Define a espessura da borda
         if (Uv.x < bordax || Uv.x > 1.0 - bordax || Uv.y < borday || Uv.y > 1.0 - borday)
         {
             FragColor = cor_borda; // Cor da borda
