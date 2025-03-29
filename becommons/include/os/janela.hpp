@@ -35,6 +35,7 @@ namespace bubble
     };
         private:
 	    cursor m_cursor = cursor::seta;
+	    cursor m_cursor_antigo = cursor::seta;
         public:
 		tempo _Mtempo;
         std::string _Mnome{""};
@@ -43,14 +44,11 @@ namespace bubble
 		bubble::inputs inputs;
 		janela(const char* nome, bubble::vetor2<double> bounds = bubble::vetor2<double>(600, 400), const char* icon_path = nullptr);
 		~janela();
-		void poll() const;
+		void poll();
         inline void defCursor(const cursor c)
         {
             if(c == m_cursor) return;
             m_cursor = c;
-            auto cursor_glfw = glfwCreateStandardCursor((int)c);
-            if(cursor_glfw)
-            glfwSetCursor(window, cursor_glfw);
         }
 		void swap();
 		void viewport() const;

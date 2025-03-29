@@ -62,7 +62,7 @@ namespace bubble
         vet2 m_padding_geral = {0.0f, 0.0f};
         vet4 m_limites  {0, 0, 20, 20};
         cor m_cor_borda {0.1f, 0.1f, 0.1f, 0.f};
-        cor m_cor_fundo {0.5f, 0.5f, 0.5f, 1.f};
+        cor m_cor_fundo {0.5f, 0.5f, 0.5f, 0.f};
         
         // Hierarquia
         std::vector<std::unique_ptr<caixa>> m_filhos;

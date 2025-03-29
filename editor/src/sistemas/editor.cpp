@@ -5,7 +5,7 @@
 #include "nucleo/projeto.hpp"
 
 using namespace bubble;
-
+std::string numero_entidade = "";
 void sistema_editor::configurarInterface(bubble::projeto& proj)
 {
     bubble_gui* gui = static_cast<bubble_gui*>(proj.obterSistema("bubble_gui"));
@@ -21,12 +21,18 @@ void sistema_editor::configurarInterface(bubble::projeto& proj)
     gui->novoEstilo();
         gui->adiElemento<caixa>("raiz", "menu");
         gui->defFlags       (flags_caixa::modular | flags_caixa::largura_percentual);
-        gui->defAltura      (                          35.f);
-        gui->defLargura      (                           1.f);
+        gui->defAltura      (                          32.f);
+        gui->defLargura     (                           1.f);
         gui->defOrientacao  (   caixa::orientacao::horizontal);
         gui->defPaddingG    (                      5.f, 5.f);
-        gui->defCorFundo    (    cor(0.15f, 0.15f, 0.15f, 1.15f));
-    
+        gui->defCorFundo    (    cor(0.15f, 0.15f, 0.15f, 1.f));
+    gui->novoEstilo();
+        gui->adiElemento<elementos::botao>("menu", "arquivo", [](){}, "Arquivo");
+        gui->adiElemento<elementos::botao>("menu", "editar", [](){}, "Editor");
+        gui->adiElemento<elementos::botao>("menu", "visualizar", [](){}, "Visualizar");
+        gui->adiElemento<elementos::botao>("menu", "ajuda", [](){}, "Ajuda");
+        gui->defCorFundo    (    cor(0.2f, 0.2f, 0.2f, 1.f));
+        gui->defPaddingG       (5.f, 5.f);
     gui->novoEstilo();
         gui->adiElemento<caixa>("raiz", "raiz_b");
         gui->defFlags       (flags_caixa::modular | flags_caixa::largura_percentual);
@@ -55,7 +61,10 @@ void sistema_editor::configurarInterface(bubble::projeto& proj)
             if(comp.find(componente::COMPONENTE_TRANSFORMACAO) != comp.end())icone =    "Transformacao.png";
             if(comp.find(componente::COMPONENTE_CODIGO) != comp.end())icone =           "Codigo.png";
             if(comp.find(componente::COMPONENTE_CAM) != comp.end())icone =              "Camera.png";
-            gui->adiElemento<elementos::imagem>("entidades", "entidade " + std::to_string(entidade), icone);
+            gui->adiElemento<elementos::botao>("entidades",
+                    std::to_string(entidade),
+                    [entidade, numero_entidade](){numero_entidade = "entidade " + std::to_string(entidade);},
+                    new elementos::imagem(icone));
         }
 
         gui->defLargura     (                          25.f);
@@ -70,11 +79,13 @@ void sistema_editor::configurarInterface(bubble::projeto& proj)
         gui->defAltura      (                           1.f);
         gui->defOrientacao  ( caixa::orientacao::horizontal);
         gui->defCorFundo    (    cor(0.0f, 0.0f, 0.0f, 0.f));
+        gui->defCorBorda    (   cor(0.98f, 0.76f, 0.09f, 1.f));
         gui->defCrescimentoM(                           1.f);
+        gui->defTamanhoBorda(                           5.f);
     // define ponteiro viewport
         cam.viewport_ptr = &static_cast<elementos::imagem*>(gui->obterElemento("imagem_editor"))->m_imagem_tamanho;
     gui->novoEstilo();
-        gui->adiElemento<elementos::botao>("imagem_editor", "btn_play", "Play.png", sistema_editor::executarRuntime);
+        gui->adiElemento<elementos::botao>("imagem_editor", "btn_play", sistema_editor::executarRuntime, new elementos::imagem("Play.png"));
         gui->defPadding         (15.f, 15.f);
         gui->defLargura         (        30);
         gui->defAltura          (        30);
@@ -89,10 +100,11 @@ void sistema_editor::configurarInterface(bubble::projeto& proj)
     // texto
     gui->novoEstilo();
         gui->adiElemento<elementos::texto>("componentes", "texto1", "Componentes", 0.7f, elementos::flags_texto::alinhamento_central);
-        gui->defCorFundo        (cor(0.2f, 0.0f, 0.2f, 1.0f));
+        gui->adiElemento<elementos::texto>("componentes", "texto2", &numero_entidade, 0.7f, elementos::flags_texto::alinhamento_central);
+        gui->defCorFundo    (   cor(0.98f, 0.76f, 0.09f, 1.f));
         gui->defFlags       (flags_caixa::largura_percentual );
         gui->defLargura         (1.f);
-        gui->defAltura         (14.f);
+        gui->defAltura         (16.8f);
     // botão de play
 }
 

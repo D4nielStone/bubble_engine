@@ -57,18 +57,24 @@ bubble::janela::janela(const char* nome, bubble::vetor2<double> bounds, const ch
     tamanho.x = tam.z;
 }
 
-void bubble::janela::poll() const
+void bubble::janela::poll()
 {
-
     glfwPollEvents();
-}
-
-void bubble::janela::swap() 
-{
     int w, h;
     glfwGetWindowSize(window, &w, &h);
     tamanho.y = h;
     tamanho.x = w;
+}
+
+void bubble::janela::swap() 
+{
+    if(m_cursor != m_cursor_antigo) 
+    {
+        auto cursor_glfw = glfwCreateStandardCursor((int)m_cursor);
+        if(cursor_glfw)
+        glfwSetCursor(window, cursor_glfw);
+        m_cursor_antigo = m_cursor;
+    }
     _Mtempo.calcularDT();
     glfwSwapBuffers(window);
 }

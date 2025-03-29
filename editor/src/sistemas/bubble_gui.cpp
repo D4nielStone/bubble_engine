@@ -7,6 +7,40 @@ using namespace bubble;
 
 glm::mat4 proj(1.f);
 inline shader* quad_shader{nullptr};
+inline void desenhar_caixa(caixa* c)
+{
+    if(c->m_cor_fundo.a != 0)
+    {
+        renderizarFundo(c);
+    }
+    
+    if(auto txt = dynamic_cast<elementos::texto*>(c)){
+        // Renderizar texto 
+        renderizarTexto(txt);
+    }else
+    if(auto btn = dynamic_cast<elementos::botao*>(c)){
+        // Renderizar botao
+        btn->atualizarFuncao();
+        
+        if(btn->m_imagem)
+            renderizarImagem(btn->m_imagem);
+        if(btn->m_texto)
+            renderizarTexto(btn->m_texto);
+    }else
+    
+    if(auto img = dynamic_cast<elementos::imagem*>(c)){
+        // Renderizar imagem
+        img->m_imagem_tamanho.x = img->m_limites.z; // o m_imagem_tamanho serve para de ponteiro para viewport da camera
+        img->m_imagem_tamanho.y = img->m_limites.w;
+        renderizarImagem(img);
+    }
+
+    for(auto& filho : c->m_filhos)
+    {
+        desenhar_caixa(filho.get());
+    }
+}
+
 void bubble::renderizarImagem(elementos::imagem* img)
 {
     glActiveTexture(GL_TEXTURE0);
@@ -64,6 +98,8 @@ void bubble::renderizarTexto(elementos::texto* tex)
         {
             x_linha += tex->m_limites.z / 2 - tex->obterLargura(tex->m_texto_frase)/2;
         }
+        if(tex->m_texto_frase_ptr) tex->m_texto_frase = *tex->m_texto_frase_ptr;
+        
         for(char32_t ca : tex->m_texto_frase)
         {
             if(ca == '\n') {y_linha += (20 * tex->m_texto_escala); x_linha = tex->m_limites.x; continue;}
@@ -176,43 +212,20 @@ void bubble_gui::atualizar()
     glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
     glClearColor(1, 1, 1, 1);
 
+    instanciaJanela->defCursor(janela::cursor::seta);
 
     proj = glm::ortho(0.0, instanciaJanela->tamanho.x, instanciaJanela->tamanho.y, 0.0);
-    obterElemento("raiz")->m_limites = {0.f, 0.f,
+    
+    raiz->m_limites = {0.f, 0.f,
         static_cast<float>(instanciaJanela->tamanho.x),
         static_cast<float>(instanciaJanela->tamanho.y)};
-    obterElemento("raiz")->m_altura = static_cast<float>(instanciaJanela->tamanho.y);
-    obterElemento("raiz")->m_largura = static_cast<float>(instanciaJanela->tamanho.x);
-    atualizarFilhos(obterElemento("raiz"));
-    glCullFace(GL_BACK);
-}
+    raiz->m_altura = static_cast<float>(instanciaJanela->tamanho.y);
+    raiz->m_largura = static_cast<float>(instanciaJanela->tamanho.x);
+    atualizarFilhos(raiz.get());
+    
+    desenhar_caixa(raiz.get());
 
-inline void desenhar_caixa(caixa* c)
-{
-    if(c->m_cor_fundo.a != 0)
-    {
-        renderizarFundo(c);
-    }
-    
-    if(auto txt = dynamic_cast<elementos::texto*>(c)){
-        // Renderizar texto 
-        renderizarTexto(txt);
-        return;
-    }
-    if(auto btn = dynamic_cast<elementos::botao*>(c)){
-        // Renderizar botao
-        renderizarImagem(btn);
-        btn->atualizarFuncao();
-        return;
-    }
-    
-    if(auto img = dynamic_cast<elementos::imagem*>(c)){
-        // Renderizar imagem
-        img->m_imagem_tamanho.x = img->m_limites.z; // o m_imagem_tamanho serve para de ponteiro para viewport da camera
-        img->m_imagem_tamanho.y = img->m_limites.w;
-        renderizarImagem(img);
-        return;
-    }
+    glCullFace(GL_BACK);
 }
 
 void bubble_gui::atualizarFilhos(caixa* it_caixa)
@@ -220,7 +233,12 @@ void bubble_gui::atualizarFilhos(caixa* it_caixa)
     if (!it_caixa) {
         return; // Evita acesso inválido caso a caixa não exista
     }
-
+    /*
+    depuracao::emitir(info, it_caixa->m_id, std::to_string(it_caixa->m_limites.x));
+    depuracao::emitir(info, it_caixa->m_id, std::to_string(it_caixa->m_limites.y));
+    depuracao::emitir(info, it_caixa->m_id, std::to_string(it_caixa->m_limites.z));
+    depuracao::emitir(info, it_caixa->m_id, std::to_string(it_caixa->m_limites.w));
+    */
     // Se a caixa for modular, atualizar limites dos filhos
     if(it_caixa->tem_flag(flags_caixa::modular)){
         // passo 1: calcular métricas
@@ -279,7 +297,7 @@ void bubble_gui::atualizarFilhos(caixa* it_caixa)
                 filho->m_limites.x = cursor;
                 filho->m_limites.y = it_caixa->m_limites.y + filho->m_padding.y + it_caixa->m_padding_geral.y;
                 
-                cursor += tamanho_principal + filho->m_padding.x + it_caixa->m_padding_geral.x;
+                cursor += tamanho_principal + filho->m_padding.x;
                 // altura proporcional ao pai
                 if(filho->tem_flag(flags_caixa::altura_percentual)) {
                     filho->m_limites.w = it_caixa->m_limites.w * filho->m_altura;
@@ -302,7 +320,7 @@ void bubble_gui::atualizarFilhos(caixa* it_caixa)
                 filho->m_limites.y = cursor;
                 filho->m_limites.x = it_caixa->m_limites.x + filho->m_padding.x + it_caixa->m_padding_geral.x;
                 
-                cursor += tamanho_principal + filho->m_padding.y + it_caixa->m_padding_geral.y;
+                cursor += tamanho_principal + filho->m_padding.y;
                 // largura proporcional ao pai
                 if (filho->tem_flag(flags_caixa::largura_percentual)) {
                     filho->m_limites.z = it_caixa->m_limites.z * filho->m_largura;
@@ -312,8 +330,7 @@ void bubble_gui::atualizarFilhos(caixa* it_caixa)
             }
         }
     }
-    // atualizar recursivamente e desenhar
-    desenhar_caixa(it_caixa);
+    // atualizar recursivamente
     for (auto& filho : it_caixa->m_filhos) {
         atualizarFilhos(filho.get());
     }    

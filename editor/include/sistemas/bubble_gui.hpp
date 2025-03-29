@@ -33,7 +33,6 @@ namespace bubble
             bubble_gui();
             void adiFlags(const std::string& id, flags_caixa); 
             void atualizar() override;
-            
             template <typename T, typename ...Args>
             void adiElemento(const std::string& pai_id, const std::string& nova_id, Args&&... args) {
                 estilo_atual.insert(nova_id);
@@ -98,6 +97,11 @@ namespace bubble
             void defCrescimentoM(const float v){
                 for(auto& id : estilo_atual){
                     obterElemento(id)->m_crescimento_modular = v;
+                }
+            }
+            void defTamanhoBorda(const float v){
+                for(auto& id : estilo_atual){
+                    obterElemento(id)->m_espessura_borda = v;
                 }
             }
     };
