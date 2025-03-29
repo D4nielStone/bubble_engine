@@ -5,6 +5,7 @@
 #include <memory>
 #include "util/vetor4.hpp"
 #include "elementos/botao.hpp"
+#include "elementos/texto.hpp"
 #include <set>
 
 /**
@@ -16,9 +17,10 @@
 
 namespace bubble
 { 
-	inline static unsigned int ret_VAO= 0, ret_VBO = 0, ret_EBO = 0;
+	inline static unsigned int ret_VAO= 0, ret_VBO = 0, ret_EBO = 0, text_VBO = 0, text_VAO = 0;
     inline static void renderizarImagem(elementos::imagem*);
     inline static void renderizarFundo(caixa*);
+    inline static void renderizarTexto(elementos::texto*);
     class bubble_gui : public bubble::sistema
     {
         private:

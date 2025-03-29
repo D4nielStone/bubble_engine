@@ -3,10 +3,12 @@
 #include "depuracao/debug.hpp"
 
 using namespace bubble;
+
+
+glm::mat4 proj(1.f);
 inline shader* quad_shader{nullptr};
 void bubble::renderizarImagem(elementos::imagem* img)
 {
-    glm::mat4 proj = glm::ortho(0.0, instanciaJanela->tamanho.x, instanciaJanela->tamanho.y, 0.0);
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, img->m_imagem_id);
     img->m_imagem_shader->use();
@@ -27,7 +29,6 @@ void bubble::renderizarImagem(elementos::imagem* img)
 
 void bubble::renderizarFundo(caixa* it_caixa)
 {
-    glm::mat4 proj = glm::ortho(0.0, instanciaJanela->tamanho.x, instanciaJanela->tamanho.y, 0.0);
     quad_shader->use();
     quad_shader->setVec2("quadrado.posicao", it_caixa->m_limites.x, it_caixa->m_limites.y);
     quad_shader->setVec2("quadrado.tamanho", it_caixa->m_limites.z, it_caixa->m_limites.w);
@@ -43,6 +44,62 @@ void bubble::renderizarFundo(caixa* it_caixa)
     glBindVertexArray(0);
 }
 
+void bubble::renderizarTexto(elementos::texto* tex)
+{
+
+        // activate corresponding render state	
+        tex->m_texto_shader->use();
+        tex->m_texto_shader->setCor("textColor", tex->m_texto_cor);
+        tex->m_texto_shader->setMat4("projecao", glm::value_ptr(proj));
+
+        glActiveTexture(GL_TEXTURE0);
+        glBindVertexArray(text_VAO);
+
+        // iterate through all characters
+        std::string::const_iterator c;
+        auto& chs = bubble::gerenciadorFontes::obterInstancia().obter(tex->m_texto_fonte);
+        float y_linha = (20 * tex->m_texto_escala);
+        float x_linha = tex->m_limites.x; 
+        if(((uint32_t)tex->m_texto_flags & (uint32_t)elementos::flags_texto::alinhamento_central)!=0) 
+        {
+            x_linha += tex->m_limites.z / 2 - tex->obterLargura(tex->m_texto_frase)/2;
+        }
+        for(char32_t ca : tex->m_texto_frase)
+        {
+            if(ca == '\n') {y_linha += (20 * tex->m_texto_escala); x_linha = tex->m_limites.x; continue;}
+            if (chs.empty())
+                return;
+            bubble::caractere ch = chs.at(ca);
+            
+            float xpos = x_linha + ch.apoio.x * tex->m_texto_escala;
+            float ypos = tex->m_limites.y - ch.apoio.y * tex->m_texto_escala + y_linha;
+
+            float w = ch.tamanho.x * tex->m_texto_escala;
+            float h = ch.tamanho.y * tex->m_texto_escala;
+            // update VBO for each character
+            float vertices[6][4] = {
+                { xpos,     ypos + h,   0.0f, 1.0f },
+                { xpos,     ypos,       0.0f, 0.0f },
+                { xpos + w, ypos,       1.0f, 0.0f },
+
+                { xpos,     ypos + h,   0.0f, 1.0f },
+                { xpos + w, ypos,       1.0f, 0.0f },
+                { xpos + w, ypos + h,   1.0f, 1.0f }
+            };
+            // render glyph texture over quad
+            glBindTexture(GL_TEXTURE_2D, ch.id);
+            // update content of VBO memory
+            glBindBuffer(GL_ARRAY_BUFFER, text_VBO);
+            glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(vertices), vertices);
+            glBindBuffer(GL_ARRAY_BUFFER, 0);
+            // render quad
+            glDrawArrays(GL_TRIANGLES, 0, 6);
+            // now advance cursors for next glyph (note that advance is number of 1/64 pixels)
+            x_linha += (ch.avanco >> 6) * tex->m_texto_escala; // bitshift by 6 to get value in pixels (2^6 = 64)
+        }
+        glBindVertexArray(0);
+        glBindTexture(GL_TEXTURE_2D, 0);
+    }
 bubble_gui::bubble_gui()
 {
     raiz = std::make_unique<caixa>();
@@ -52,6 +109,19 @@ bubble_gui::bubble_gui()
     quad_shader = new shader("imagem.vert", "quad.frag");
 
     /*--------------BUFFERS--------------*/
+        /*---------------texto---------------*/
+        glGenVertexArrays(1, &text_VAO);
+        glGenBuffers(1, &text_VBO);
+        glBindVertexArray(text_VAO);
+        glBindBuffer(GL_ARRAY_BUFFER, text_VBO);
+        glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 6 * 4, NULL, GL_DYNAMIC_DRAW);
+        glEnableVertexAttribArray(0);
+        glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(float), 0);
+        glBindBuffer(GL_ARRAY_BUFFER, 0);
+        glBindVertexArray(0);
+        
+        /*----------------quad---------------*/
+
         // definiçãoo de dados do quadrado (posição e UV)
         float vertices[] = {
             // posição (x, y)    // UV (u, v)
@@ -101,12 +171,20 @@ void bubble_gui::adiFlags(const std::string& id, flags_caixa f) {
 }
 void bubble_gui::atualizar()
 {
+    glCullFace(GL_FRONT);
+    glDisable(GL_DEPTH_TEST);
+    glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
+    glClearColor(1, 1, 1, 1);
+
+
+    proj = glm::ortho(0.0, instanciaJanela->tamanho.x, instanciaJanela->tamanho.y, 0.0);
     obterElemento("raiz")->m_limites = {0.f, 0.f,
         static_cast<float>(instanciaJanela->tamanho.x),
         static_cast<float>(instanciaJanela->tamanho.y)};
     obterElemento("raiz")->m_altura = static_cast<float>(instanciaJanela->tamanho.y);
     obterElemento("raiz")->m_largura = static_cast<float>(instanciaJanela->tamanho.x);
     atualizarFilhos(obterElemento("raiz"));
+    glCullFace(GL_BACK);
 }
 
 inline void desenhar_caixa(caixa* c)
@@ -116,11 +194,13 @@ inline void desenhar_caixa(caixa* c)
         renderizarFundo(c);
     }
     
-    glDisable(GL_CULL_FACE);
-    glDisable(GL_DEPTH_TEST);
-    
+    if(auto txt = dynamic_cast<elementos::texto*>(c)){
+        // Renderizar texto 
+        renderizarTexto(txt);
+        return;
+    }
     if(auto btn = dynamic_cast<elementos::botao*>(c)){
-        // Renderizar imagem
+        // Renderizar botao
         renderizarImagem(btn);
         btn->atualizarFuncao();
         return;
@@ -145,7 +225,7 @@ void bubble_gui::atualizarFilhos(caixa* it_caixa)
     if(it_caixa->tem_flag(flags_caixa::modular)){
         // passo 1: calcular métricas
         const bool is_horizontal = it_caixa->m_orientacao_modular == caixa::orientacao::horizontal;
-        float espaco_disponivel = is_horizontal ? it_caixa->m_largura : it_caixa->m_altura;
+        float espaco_disponivel = is_horizontal ? it_caixa->m_limites.z : it_caixa->m_limites.w;
         float crescimento_total = 0.0f;
         float espaco_fixo = 0.0f;
         
@@ -197,12 +277,12 @@ void bubble_gui::atualizarFilhos(caixa* it_caixa)
                 cursor += filho->m_padding.x + it_caixa->m_padding_geral.x;
 
                 filho->m_limites.x = cursor;
-                filho->m_limites.y = filho->m_padding.y + it_caixa->m_padding_geral.y;
+                filho->m_limites.y = it_caixa->m_limites.y + filho->m_padding.y + it_caixa->m_padding_geral.y;
                 
-                cursor += tamanho_principal+filho->m_padding.x + it_caixa->m_padding_geral.x;
+                cursor += tamanho_principal + filho->m_padding.x + it_caixa->m_padding_geral.x;
                 // altura proporcional ao pai
                 if(filho->tem_flag(flags_caixa::altura_percentual)) {
-                    filho->m_limites.w = it_caixa->m_altura * filho->m_altura;
+                    filho->m_limites.w = it_caixa->m_limites.w * filho->m_altura;
                 } else {
                     filho->m_limites.w = filho->m_altura;
                 }
@@ -220,12 +300,12 @@ void bubble_gui::atualizarFilhos(caixa* it_caixa)
                 // posicionar verticalmente
                 cursor += filho->m_padding.y + it_caixa->m_padding_geral.y;
                 filho->m_limites.y = cursor;
-                filho->m_limites.x = filho->m_padding.x + it_caixa->m_padding_geral.x;
+                filho->m_limites.x = it_caixa->m_limites.x + filho->m_padding.x + it_caixa->m_padding_geral.x;
                 
                 cursor += tamanho_principal + filho->m_padding.y + it_caixa->m_padding_geral.y;
                 // largura proporcional ao pai
                 if (filho->tem_flag(flags_caixa::largura_percentual)) {
-                    filho->m_limites.z = it_caixa->m_largura * filho->m_largura;
+                    filho->m_limites.z = it_caixa->m_limites.z * filho->m_largura;
                 }else {
                     filho->m_limites.z = filho->m_largura;
                 }

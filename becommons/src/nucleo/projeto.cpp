@@ -35,6 +35,7 @@ void projeto::rodar()
 
         if(fase_atual->rodando)
         sistemas["interface"]->atualizar();        
+
         for(auto& s : sistemas_adicionais)
         {
             s.second->atualizar();

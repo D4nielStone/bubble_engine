@@ -1,4 +1,5 @@
 /** @copyright Copyright (c) 2025 Daniel Oliveira */
+#pragma once
 #include "componentes/imagem.hpp"
 #include "util/vetor4.hpp"
 #include "util/vetor2.hpp"
@@ -10,7 +11,9 @@ namespace bubble
             nenhuma           = 0,
             largura_percentual = 1 << 0,   // 1
             altura_percentual  = 1 << 1,   // 2
-            modular            = 1 << 2,   // 4   
+            modular            = 1 << 2,   // 4
+            alinhamento_central= 1 << 3,
+            alinhamento_fim    = 1 << 4,
         };
         inline flags_caixa operator|(flags_caixa a, flags_caixa b) {
             return static_cast<flags_caixa>(static_cast<uint32_t>(a) | static_cast<uint32_t>(b));

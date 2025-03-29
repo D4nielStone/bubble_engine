@@ -41,7 +41,6 @@ namespace bubble
 
         // Obt�m um ponteiro para os caracteres de uma fonte j� carregada
         const std::map<char32_t, caractere>& obter(const std::string& nome_da_fonte) const;
-
     private:
         FT_Library ft; // biblioteca FreeType
         std::map<std::string, std::map<char32_t, caractere>> fontes; // Mapa para armazenar as fontes carregadas

@@ -15,8 +15,8 @@ namespace bubble
 	{
         private:
             void atualizarCamera(bubble::camera*);
-            bubble::camera* camera_principal{nullptr};
 	    public:
+            bubble::camera* camera_principal{nullptr};
 	        void definirCamera(bubble::camera*);
 	    	sistema_renderizacao() = default;
 		    void atualizar() override;

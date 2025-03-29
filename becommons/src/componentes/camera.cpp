@@ -179,14 +179,20 @@ glm::vec3 bubble::camera::telaParaMundo(const bubble::vetor2<double> &screenPoin
 bubble::vetor2<int> bubble::camera::mundoParaTela(const glm::vec3 &mundoPos)
 {
     glm::vec4 clipSpacePos = projMatriz * viewMatrix * glm::vec4(mundoPos, 1.0f);
+
+    // Validação de w para evitar divisões inválidas
+    if (clipSpacePos.w <= 0.0001f) {
+        return bubble::vetor2<int>(-1, -1); // ou outro tratamento adequado
+    }
+
     glm::vec3 ndcPos = glm::vec3(clipSpacePos) / clipSpacePos.w;
 
     int screenWidth = viewport_ptr->x;
     int screenHeight = viewport_ptr->y;
 
     bubble::vetor2<int> screenPos;
-    screenPos.x = (ndcPos.x * 0.5f + 0.5f) * screenWidth;
-    screenPos.y = (1.0f - (ndcPos.y * 0.5f + 0.5f)) * screenHeight; // Inverter Y
+    screenPos.x = static_cast<int>(std::round((ndcPos.x * 0.5f + 0.5f) * screenWidth));
+    screenPos.y = static_cast<int>(std::round((1.0f - (ndcPos.y * 0.5f + 0.5f)) * screenHeight)); // Inverter Y
     return screenPos;
 }
 
