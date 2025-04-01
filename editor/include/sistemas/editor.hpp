@@ -9,6 +9,8 @@ namespace bubble{
 
     struct sistema_editor : public bubble::sistema {
     
+    std::string texto_entidade = "entidade 1";
+    int entidade_atual = 1;
     sistema_editor();
     void inicializar(fase*) override;
     void atualizar() override;

@@ -7,6 +7,7 @@
 
  #pragma once
 #include <unordered_map>
+#include <map>
 #include <deque>
 #include <memory>
 #include <functional>
@@ -26,13 +27,12 @@ namespace bubble
 	struct registro
 	{
 	    ~registro(){entidades.clear(); mascaras.clear();}
-        std::deque<uint32_t> ordem;
 		/// proximo id livre
 		uint32_t proxima_entidade{ 0 };
 		/// Armazena mascara da entidade associada
 		std::unordered_map<uint32_t, bubble::componente::mascara> mascaras;
 		/// Armazena componentes da entidade associada
-		std::unordered_map<uint32_t, std::unordered_map<bubble::componente::mascara, std::shared_ptr<bubble::componente>>> entidades;
+		std::map<uint32_t, std::unordered_map<bubble::componente::mascara, std::shared_ptr<bubble::componente>>> entidades;
 		/* Cria nova entidade */
 		entidade criar();
 		/* Retorna todos os componentes da entidade */
@@ -101,7 +101,7 @@ namespace bubble
 	template<typename ...comps, typename Func>
 	inline void registro::cada(Func func)
 	{
-		for (auto entity : ordem) {
+		for (auto [entity, components] : entidades) { 
 			if ((tem<comps>(entity) && ...)) {
 				func(entity);
 			}

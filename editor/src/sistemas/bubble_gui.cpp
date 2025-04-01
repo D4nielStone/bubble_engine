@@ -233,104 +233,127 @@ void bubble_gui::atualizarFilhos(caixa* it_caixa)
     if (!it_caixa) {
         return; // Evita acesso inválido caso a caixa não exista
     }
-    /*
-    depuracao::emitir(info, it_caixa->m_id, std::to_string(it_caixa->m_limites.x));
-    depuracao::emitir(info, it_caixa->m_id, std::to_string(it_caixa->m_limites.y));
-    depuracao::emitir(info, it_caixa->m_id, std::to_string(it_caixa->m_limites.z));
-    depuracao::emitir(info, it_caixa->m_id, std::to_string(it_caixa->m_limites.w));
-    */
+
     // Se a caixa for modular, atualizar limites dos filhos
     if(it_caixa->tem_flag(flags_caixa::modular)){
-        // passo 1: calcular métricas
+        // Define qual é a dimensão principal e a secundária
+        // Se horizontal: principal = largura (z), secundária = altura (w)
+        // Se vertical: principal = altura (w), secundária = largura (z)
         const bool is_horizontal = it_caixa->m_orientacao_modular == caixa::orientacao::horizontal;
-        float espaco_disponivel = is_horizontal ? it_caixa->m_limites.z : it_caixa->m_limites.w;
-        float crescimento_total = 0.0f;
-        float espaco_fixo = 0.0f;
+       float espaco_disponivel_principal = is_horizontal ? it_caixa->m_limites.z : it_caixa->m_limites.w;
+        float espaco_disponivel_secundario = is_horizontal ? it_caixa->m_limites.w : it_caixa->m_limites.z; 
+        // Variáveis para a dimensão principal
+        float crescimento_total_principal = 0.0f;
+        float espaco_fixo_principal = 0.0f;
+        // Para a secundária – neste exemplo não usamos crescimento, mas o espaço fixo é calculado
+        float espaco_fixo_secundario = 0.0f;
         
-        // primeira passagem: calcular espaço fixo e crescimento total
+        // Primeira passagem: calcular espaço fixo e crescimento para a dimensão principal;
+        // e espaço fixo para a secundária, conforme as flags
         for(auto& filho : it_caixa->m_filhos)
         {
             if(is_horizontal) {
-                if(filho->tem_flag(flags_caixa::largura_percentual))
-                {
-                    // adicionar proporcionalmente
-                    espaco_fixo += espaco_disponivel * filho->m_largura;
+                // Dimensão principal (largura)
+                if(filho->tem_flag(flags_caixa::largura_percentual)) {
+                    espaco_fixo_principal += espaco_disponivel_principal * filho->m_largura;
                 } else {
-                    // adiciona em pixels
-                    espaco_fixo += filho->m_largura;
+                    espaco_fixo_principal += filho->m_largura;
+                }
+                crescimento_total_principal += filho->m_crescimento_modular;
+                
+                // Dimensão secundária (altura)
+                if(filho->tem_flag(flags_caixa::altura_percentual)) {
+                    espaco_fixo_secundario += espaco_disponivel_secundario * filho->m_altura;
+                } else {
+                    espaco_fixo_secundario += filho->m_altura;
                 }
             } else {
-                if(filho->tem_flag(flags_caixa::altura_percentual))
-                {
-                    espaco_fixo += espaco_disponivel * filho->m_altura;
+                // Dimensão principal (altura)
+                if(filho->tem_flag(flags_caixa::altura_percentual)) {
+                    espaco_fixo_principal += espaco_disponivel_principal * filho->m_altura;
                 } else {
-                    espaco_fixo += filho->m_altura;
+                    espaco_fixo_principal += filho->m_altura;
+                }
+                crescimento_total_principal += filho->m_crescimento_modular;
+                
+                // Dimensão secundária (largura)
+                if(filho->tem_flag(flags_caixa::largura_percentual)) {
+                    espaco_fixo_secundario += espaco_disponivel_secundario * filho->m_largura;
+                } else {
+                    espaco_fixo_secundario += filho->m_largura;
                 }
             }
-            crescimento_total += filho->m_crescimento_modular;
         }
-        // calcular espaço modular restante
-        float espaco_restante = espaco_disponivel - espaco_fixo;
-        espaco_restante = std::max(espaco_restante, 0.0f);
-        float unidade_crescimento = crescimento_total > 0 ? espaco_restante / crescimento_total : 0;
         
-        // segunda passagem: aplicar dimensões e proporções
-        float cursor = is_horizontal ? it_caixa->m_limites.x : it_caixa->m_limites.y;
+        // Calcular espaço modular restante para a dimensão principal
+        float espaco_restante_principal = espaco_disponivel_principal - espaco_fixo_principal;
+        espaco_restante_principal = std::max(espaco_restante_principal, 0.0f);
+        float unidade_crescimento = (crescimento_total_principal > 0) ? (espaco_restante_principal / crescimento_total_principal) : 0;
+        
+        // Segunda passagem: aplicar dimensões e posicionamento para ambas as direções
+        float cursor_principal = is_horizontal ? it_caixa->m_limites.x : it_caixa->m_limites.y;
+        float cursor_secundario = is_horizontal ? it_caixa->m_limites.y : it_caixa->m_limites.x;
+        
         for(auto& filho : it_caixa->m_filhos)
         {
-            // calcular tamanho principal
             float tamanho_principal = 0.0f;
+            float tamanho_secundario = 0.0f;
+            
             if(is_horizontal) {
+                // Para a largura (principal)
                 if (filho->tem_flag(flags_caixa::largura_percentual)) {
-                    tamanho_principal =  espaco_disponivel * filho->m_largura ;
+                    tamanho_principal = espaco_disponivel_principal * filho->m_largura;
                 } else {
                     tamanho_principal = filho->m_largura;
                 }
                 tamanho_principal += filho->m_crescimento_modular * unidade_crescimento;
-
-                // atualizar largura
-                filho->m_limites.z = tamanho_principal;
-
-                // posicionar horizontalmente
-                cursor += filho->m_padding.x + it_caixa->m_padding_geral.x;
-
-                filho->m_limites.x = cursor;
-                filho->m_limites.y = it_caixa->m_limites.y + filho->m_padding.y + it_caixa->m_padding_geral.y;
                 
-                cursor += tamanho_principal + filho->m_padding.x;
-                // altura proporcional ao pai
-                if(filho->tem_flag(flags_caixa::altura_percentual)) {
-                    filho->m_limites.w = it_caixa->m_limites.w * filho->m_altura;
-                } else {
-                    filho->m_limites.w = filho->m_altura;
-                }
-            } else {
+                // Para a altura (secundária)
                 if (filho->tem_flag(flags_caixa::altura_percentual)) {
-                    tamanho_principal = espaco_disponivel * filho->m_altura;
+                    tamanho_secundario = espaco_disponivel_secundario * filho->m_altura;
+                } else {
+                    tamanho_secundario = filho->m_altura;
+                }
+                
+                // Posicionamento horizontal
+                cursor_principal += filho->m_padding.x + it_caixa->m_padding_geral.x;
+                filho->m_limites.x = cursor_principal;
+                filho->m_limites.z = tamanho_principal;
+                cursor_principal += tamanho_principal + filho->m_padding.x;
+                
+                // Posicionamento vertical
+                filho->m_limites.y = cursor_secundario + filho->m_padding.y + it_caixa->m_padding_geral.y;
+                filho->m_limites.w = tamanho_secundario;
+            } else {
+                // Quando vertical, a altura é a dimensão principal
+                if (filho->tem_flag(flags_caixa::altura_percentual)) {
+                    tamanho_principal = espaco_disponivel_principal * filho->m_altura;
                 } else {
                     tamanho_principal = filho->m_altura;
                 }
                 tamanho_principal += filho->m_crescimento_modular * unidade_crescimento;
                 
-                // atualizar altura
-                filho->m_limites.w = tamanho_principal;
-                
-                // posicionar verticalmente
-                cursor += filho->m_padding.y + it_caixa->m_padding_geral.y;
-                filho->m_limites.y = cursor;
-                filho->m_limites.x = it_caixa->m_limites.x + filho->m_padding.x + it_caixa->m_padding_geral.x;
-                
-                cursor += tamanho_principal + filho->m_padding.y;
-                // largura proporcional ao pai
+                // Para a largura (secundária)
                 if (filho->tem_flag(flags_caixa::largura_percentual)) {
-                    filho->m_limites.z = it_caixa->m_limites.z * filho->m_largura;
-                }else {
-                    filho->m_limites.z = filho->m_largura;
+                    tamanho_secundario = espaco_disponivel_secundario * filho->m_largura - it_caixa->m_padding_geral.x*2;
+                } else {
+                    tamanho_secundario = filho->m_largura;
                 }
+                
+                // Posicionamento vertical
+                cursor_principal += filho->m_padding.y + it_caixa->m_padding_geral.y;
+                filho->m_limites.y = cursor_principal;
+                filho->m_limites.w = tamanho_principal;
+                cursor_principal += tamanho_principal + filho->m_padding.y;
+                
+                // Posicionamento horizontal
+                filho->m_limites.x = cursor_secundario + filho->m_padding.x + it_caixa->m_padding_geral.x;
+                filho->m_limites.z = tamanho_secundario;
             }
         }
     }
-    // atualizar recursivamente
+    
+    // Atualizar recursivamente os filhos
     for (auto& filho : it_caixa->m_filhos) {
         atualizarFilhos(filho.get());
     }    

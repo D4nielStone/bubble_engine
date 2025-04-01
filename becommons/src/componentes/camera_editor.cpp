@@ -9,6 +9,7 @@ camera_editor::camera_editor()
     mousex_antigo = bubble::obterMouse().x;
     mousey_antigo = bubble::obterMouse().y;
     transform = std::make_shared<transformacao>();
+    ceu = cor(0.2, 0.2, 0.2, 1.f);
 };
 
 void camera_editor::atualizarMovimentacao()

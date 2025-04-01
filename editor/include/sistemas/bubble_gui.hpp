@@ -59,12 +59,24 @@ namespace bubble
                     obterElemento(id)->m_flags_caixa = v;
                 }
             }
-            void defLargura(const float v){
+            void defLargura(const double v){
+                for(auto& id : estilo_atual){
+                    obterElemento(id)->m_largura = v;
+                    obterElemento(id)->m_flags_caixa |= flags_caixa::largura_percentual;
+                }
+            }
+            void defAltura(const double v){
+                for(auto& id : estilo_atual){
+                    obterElemento(id)->m_altura = v;
+                    obterElemento(id)->m_flags_caixa |= flags_caixa::altura_percentual;
+                }
+            }
+            void defLargura(const int v){
                 for(auto& id : estilo_atual){
                     obterElemento(id)->m_largura = v;
                 }
             }
-            void defAltura(const float v){
+            void defAltura(const int v){
                 for(auto& id : estilo_atual){
                     obterElemento(id)->m_altura = v;
                 }
@@ -74,12 +86,12 @@ namespace bubble
                     obterElemento(id)->m_orientacao_modular = v;
                 }
             }
-            void defPaddingG(const float v1, const float v2){
+            void defPaddingG(const int v1, const int v2){
                 for(auto& id : estilo_atual){
                     obterElemento(id)->m_padding_geral = {v1, v2};
                 }
             }
-            void defPadding(const float v1, const float v2){
+            void defPadding(const int v1, const int v2){
                 for(auto& id : estilo_atual){
                     obterElemento(id)->m_padding = {v1, v2};
                 }
@@ -99,7 +111,7 @@ namespace bubble
                     obterElemento(id)->m_crescimento_modular = v;
                 }
             }
-            void defTamanhoBorda(const float v){
+            void defTamanhoBorda(const int v){
                 for(auto& id : estilo_atual){
                     obterElemento(id)->m_espessura_borda = v;
                 }
