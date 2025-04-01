@@ -99,7 +99,7 @@ void sistema_editor::configurarInterface(bubble::projeto& proj)
         gui->adiElemento<caixa>("raiz_b", "componentes");
         gui->defFlags        (flags_caixa::altura_percentual | flags_caixa::modular);
         gui->defAltura       (                           1.0);
-        gui->defLargura      (0.5);
+        gui->defCrescimentoM (0.5);
         gui->defOrientacao   ( caixa::orientacao::vertical);
         gui->defCorFundo     (    cor(0.1f, 0.1f, 0.1f, 1.f));
     // texto
