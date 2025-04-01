@@ -288,7 +288,7 @@ void bubble_gui::atualizarFilhos(caixa* it_caixa)
         // Calcular espaço modular restante para a dimensão principal
         float espaco_restante_principal = espaco_disponivel_principal - espaco_fixo_principal;
         espaco_restante_principal = std::max(espaco_restante_principal, 0.0f);
-        float unidade_crescimento = (crescimento_total_principal > 0) ? (espaco_restante_principal / crescimento_total_principal) : 0;
+        float unidade_crescimento = (crescimento_total_principal > 0) ? (espaco_restante_principal /  crescimento_total_principal) : 0;
         
         // Segunda passagem: aplicar dimensões e posicionamento para ambas as direções
         float cursor_principal = is_horizontal ? it_caixa->m_limites.x : it_caixa->m_limites.y;
