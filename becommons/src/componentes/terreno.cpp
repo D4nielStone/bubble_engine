@@ -13,9 +13,8 @@ void bubble::terreno::carregarHeightMap(unsigned char* dados, int largura, int a
         for (int i = 0; i < largura; i++)
         {
             // Cada pixel tem 4 bytes (ARGB). 
-            // Acessa o canal desejado (ex: Red = índice 1, Alpha = índice 0)
-            int indiceARGB = (j * largura + i) * 4; // Base para os 4 canais
-            heightmap[j][i] = dados[indiceARGB + 1] / 255.0f; // Usando canal Red (substitua +1 pelo canal desejado)
+            int indiceARGB = (j * largura + i) * 4;
+            heightmap[j][i] = dados[indiceARGB] / 255.0f;
         }
     }
 
@@ -28,7 +27,7 @@ void bubble::terreno::carregarHeightMap(unsigned char* dados, int largura, int a
         for (int i = 0; i < largura; i++)
         {
             vertice v;
-            v.posicao = vet3(i, heightmap[j][i], j);
+            v.posicao = vet3(i/(float)(largura-1), heightmap[j][i], j/(float)(altura-1));
             v.uvcoords = vet2(i / (float)largura, j / (float)altura);
         
             vertices.push_back(v);

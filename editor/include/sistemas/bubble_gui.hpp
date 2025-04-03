@@ -41,6 +41,25 @@ namespace bubble
                     caixas[nova_id] = nova_caixa;
                 }
             }
+            void removerElemento(const std::string& id)
+            {
+                if(caixas.find(id) == caixas.end()) return;
+                for(auto& filho : caixas[id]->m_filhos)
+                {
+                    caixas.erase(filho->m_id);
+                }
+                caixas[id]->m_filhos.clear();
+                caixas.erase(id);
+            }
+            void removerFilhos(const std::string& id)
+            {
+                if(caixas.find(id) == caixas.end()) return;
+                for(auto& filho : caixas[id]->m_filhos)
+                {
+                    caixas.erase(filho->m_id);
+                }
+                caixas[id]->m_filhos.clear();
+            }
 
             caixa* obterElemento(const std::string& id) {
             auto it = caixas.find(id);

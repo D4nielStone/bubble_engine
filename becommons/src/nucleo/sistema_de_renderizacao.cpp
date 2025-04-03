@@ -79,6 +79,38 @@ void sistema_renderizacao::atualizarCamera(bubble::camera* cam)
                 transform->calcular();
         });
 
+        reg->cada<terreno, transformacao>([&](const uint32_t ent_ren) {
+            auto terr = reg->obter<terreno>(ent_ren);
+            auto transform = reg->obter<transformacao>(ent_ren);
+
+            if (!terr || !transform) {
+                return;
+            }
+
+
+            auto s = terr->shader();
+            s.use();
+            s.setMat4("view", glm::value_ptr(cam->obtViewMatrix()));
+            s.setVec3("dirLight.direction", ld.direcao);
+            s.setVec3("dirLight.ambient", ld.ambiente);
+            s.setVec3("dirLight.color", ld.cor);
+            s.setFloat("dirLight.intensity", ld.intensidade);
+
+            for(size_t i = 0; i < lps.size(); i++) {
+            s.setVec3("pointLights["+std::to_string(i)+"].position", lps[i].position);
+                s.setVec3("pointLights["+std::to_string(i)+"].color", lps[i].color);
+                s.setFloat("pointLights["+std::to_string(i)+"].intensity", lps[i].intensity);
+                s.setFloat("pointLights["+std::to_string(i)+"].constant", lps[i].constant);
+                s.setFloat("pointLights["+std::to_string(i)+"].linear", lps[i].linear);
+                s.setFloat("pointLights["+std::to_string(i)+"].quadratic", lps[i].quadratic);
+            }
+
+            s.setVec3("viewPos", cam->posicao.x, cam->posicao.y, cam->posicao.z);
+            s.setMat4("projection", glm::value_ptr(cam->obtProjectionMatrix()));
+            s.setVec2("resolution", instanciaJanela->tamanho.x, instanciaJanela->tamanho.y);
+            s.setMat4("modelo", transform->obter());
+            terr->desenhar(s);
+        });
         reg->cada<renderizador, transformacao>([&](const uint32_t ent_ren) {
             auto render = reg->obter<renderizador>(ent_ren);
             auto transform = reg->obter<transformacao>(ent_ren);

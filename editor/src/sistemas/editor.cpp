@@ -52,30 +52,6 @@ void sistema_editor::configurarInterface(bubble::projeto& proj)
         gui->defPaddingG    (                      5, 5);
         gui->defCorFundo    (    cor(0.1f, 0.1f, 0.1f, 1.f));
 
-    gui->novoEstilo();
-        
-        for(auto& [entidade, comp] : proj.obterFaseAtual()->obterRegistro()->entidades)
-        {
-            std::string icone = "cube.png";
-            if(comp.find(componente::COMPONENTE_LUZ_DIRECIONAL) != comp.end()) icone =  "Iluminacao.png";
-            if(comp.find(componente::COMPONENTE_RENDER) != comp.end())icone =           "Renderizador.png";
-            if(comp.find(componente::COMPONENTE_TRANSFORMACAO) != comp.end())icone =    "Transformacao.png";
-            if(comp.find(componente::COMPONENTE_CODIGO) != comp.end())icone =           "Codigo.png";
-            if(comp.find(componente::COMPONENTE_CAM) != comp.end())icone =              "Camera.png";
-            gui->adiElemento<elementos::botao>("entidades",
-                    std::to_string(entidade),
-                    [entidade, this]()
-                    {
-                        entidade_atual = entidade;
-                        texto_entidade = "entidade " + std::to_string(entidade_atual);
-                    },
-                    new elementos::imagem(icone));
-        }
-
-        gui->defLargura     (                          25);
-        gui->defAltura      (                          25);
-        gui->defCorFundo    (    cor(0.0f, 0.0f, 0.0f, 0.f));
-
     // editor
     gui->novoEstilo();
         gui->adiElemento<elementos::imagem>("raiz_b", "imagem_editor", cam.textura, true);
@@ -84,9 +60,9 @@ void sistema_editor::configurarInterface(bubble::projeto& proj)
         gui->defAltura      (                           1.0);
         gui->defOrientacao  ( caixa::orientacao::horizontal);
         gui->defCorFundo    (    cor(0.0f, 0.0f, 0.0f, 0.f));
-        gui->defCorBorda    (   cor(0.98f, 0.76f, 0.09f, 1.f));
+        gui->defCorBorda    (    cor(0.07f, 0.07f, 0.07f, 1.f));
         gui->defCrescimentoM(                           1.f);
-        gui->defTamanhoBorda(                           5);
+        gui->defTamanhoBorda(                           4);
     // define ponteiro viewport
         cam.viewport_ptr = &static_cast<elementos::imagem*>(gui->obterElemento("imagem_editor"))->m_imagem_tamanho;
     gui->novoEstilo();
@@ -104,27 +80,18 @@ void sistema_editor::configurarInterface(bubble::projeto& proj)
         gui->defCorFundo     (    cor(0.1f, 0.1f, 0.1f, 1.f));
     // texto
     gui->novoEstilo();
-        gui->adiElemento<elementos::texto>("componentes", "texto1", "Componentes", 0.7f, elementos::flags_texto::alinhamento_central);
         gui->adiElemento<elementos::texto>("componentes", "texto2", &texto_entidade, 0.7f, elementos::flags_texto::alinhamento_central);
-        gui->defCorFundo     (cor(0.05f, 0.05f, 0.05f, 1.f));
+        gui->defCorFundo     (cor(0.07f, 0.07f, 0.07f, 1.f));
         gui->defFlags        (flags_caixa::largura_percentual );
         gui->defLargura      (1.0);
         gui->defAltura       (17);
-
-
-    // componentes
     gui->novoEstilo();
-    int i = 0;
-    if (!projeto_atual->obterFaseAtual()->obterRegistro()->entidades.empty())
-        for (auto& componente : projeto_atual->obterFaseAtual()->obterRegistro()->entidades)
-        {
-            i++;
-            gui->adiElemento<caixa>("componentes", std::to_string(i));
-            gui->defLargura (1.0);
-            gui->defAltura  (100);
-            gui->defCorBorda(cor(0.15, 0.15, 0.15, 1));
-            gui->defCorFundo(cor(0.2, 0.2, 0.2, 1));
-        }
+        gui->adiElemento<caixa>("componentes", "area_comps");
+        gui->defCorFundo     (    cor(0.f, 0.0f, 0.0f, 0.f));
+        gui->defFlags        (flags_caixa::largura_percentual | flags_caixa::modular);
+        gui->defLargura       (                           1.0);
+        gui->defCrescimentoM (1);
+        gui->defOrientacao   ( caixa::orientacao::vertical);
 }
 
 sistema_editor::sistema_editor()
@@ -142,6 +109,8 @@ void sistema_editor::inicializar(fase* f)
     projeto_atual->adicionar("bubble_gui", new bubble_gui());
     /*  Config da interface   */
     configurarInterface(*projeto_atual);
+    atualizarEntidades();
+    atualizarComponentes();
     /*                        */
 }
 
@@ -152,7 +121,19 @@ void sistema_editor::atualizar()
     {
         executarRuntime();
     }
-
+    // Verifica se o número de entidades mudou
+    size_t num_entidades_atual = projeto_atual->obterFaseAtual()->obterRegistro()->entidades.size();
+    if (num_entidades_atual != num_entidades_anterior)
+    {
+        atualizarEntidades(); // Atualiza a interface de entidades
+        num_entidades_anterior = num_entidades_atual; // Atualiza a referência
+    }
+    // Verifica se a entidade atual mudou
+    if (entidade_anterior != entidade_atual)
+    {
+        atualizarComponentes(); 
+        entidade_anterior = entidade_atual;
+    }
     // camera
     cam.atualizarMovimentacao();
 }
@@ -184,5 +165,66 @@ void sistema_editor::monitorarRuntime()
         }
 
         std::this_thread::sleep_for(std::chrono::milliseconds(500)); 
+    }
+}
+void sistema_editor::atualizarEntidades()
+{
+    bubble_gui* gui = static_cast<bubble_gui*>(projeto_atual->obterSistema("bubble_gui"));
+    // head
+    if(!gui) {
+        depuracao::emitir(erro, "interface", "sistema de gui inválido");
+        return;
+    }
+
+    // Remove os botões antigos para evitar duplicatas
+    gui->removerFilhos("entidades");
+
+    gui->novoEstilo();
+    // Adiciona os botões para cada entidade existente
+    for (auto& [entidade, comp] : projeto_atual->obterFaseAtual()->obterRegistro()->entidades)
+    {
+        std::string icone = "cube.png";
+        gui->adiElemento<elementos::botao>("entidades",
+            std::to_string(entidade),
+            [entidade, this]()
+            {
+                entidade_atual = entidade;
+                texto_entidade = "id:" + std::to_string(entidade_atual);
+            },
+            new elementos::imagem(icone));
+    }
+        gui->defLargura     (                          25);
+        gui->defAltura      (                          25);
+        gui->defCorFundo    (    cor(0.0f, 0.0f, 0.0f, 0.f));
+
+    // editor
+}
+void sistema_editor::atualizarComponentes()
+{
+    bubble_gui* gui = static_cast<bubble_gui*>(projeto_atual->obterSistema("bubble_gui"));
+    if (!gui) return;
+
+    // Remove os botões antigos para evitar duplicatas
+    gui->removerFilhos("area_comps");
+
+    gui->novoEstilo();
+    size_t i = 0;
+    for (auto& [mascara, componente] : projeto_atual->obterFaseAtual()->obterRegistro()->entidades[entidade_atual]) 
+    {
+        i++;
+        std::string icone = "cube.png";
+            if(mascara == componente::COMPONENTE_LUZ_DIRECIONAL) icone =  "Iluminacao.png";
+            if(mascara == componente::COMPONENTE_LUZ_PONTUAL) icone =  "Iluminacao.png";
+            if(mascara == componente::COMPONENTE_RENDER) icone =           "Renderizador.png";
+            if(mascara == componente::COMPONENTE_TRANSFORMACAO) icone =    "Transformacao.png";
+            if(mascara == componente::COMPONENTE_CODIGO) icone =           "Codigo.png";
+            if(mascara == componente::COMPONENTE_CAM) icone =              "Camera.png";
+            if(mascara == componente::COMPONENTE_TERRENO) icone =              "Terreno.png";
+        gui->adiElemento<elementos::imagem>("area_comps",
+            "componente"+std::to_string(i),
+            icone);
+        gui->defLargura     (                          25);
+        gui->defAltura      (                          25);
+        gui->defCorFundo    (    cor(0.0f, 0.0f, 0.0f, 0.f));
     }
 }
