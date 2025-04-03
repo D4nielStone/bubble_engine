@@ -11,6 +11,12 @@
 
 const std::map<const std::string, std::pair<BYTE*, const unsigned int>> imagems_memoria
 {
+    {"skybox_right.png", std::pair(DaylightBox_Right, DaylightBox_Right_size)},
+    {"skybox_left.png", std::pair(DaylightBox_Left, DaylightBox_Left_size)},
+    {"skybox_top.png", std::pair(DaylightBox_Top, DaylightBox_Top_size)},
+    {"skybox_back.png", std::pair(DaylightBox_Back, DaylightBox_Back_size)},
+    {"skybox_bottom.png", std::pair(DaylightBox_Bottom, DaylightBox_Bottom_size)},
+    {"skybox_front.png", std::pair(DaylightBox_Front, DaylightBox_Front_size)},
     {"icon.ico", std::pair(icon_png, icon_png_len)},
     {"banner.png", std::pair(banner_png, banner_png_len)},
     {"arco_cor.png", std::pair(arco_cor_png, arco_cor_png_len)},
@@ -144,9 +150,7 @@ void bubble::imageLoader::embutida(BYTE* data, const unsigned int tamanho)
     // Detecta o formato da imagem no stream de mem�ria
     FREE_IMAGE_FORMAT format = FreeImage_GetFileTypeFromMemory(memoryStream, 0);
     if (format == FIF_UNKNOWN) {
-        fprintf(stderr, "Formato de imagem desconhecido.");
-        FreeImage_CloseMemory(memoryStream);
-        return;
+        format = FIF_PNG;
     }
 
     // Carrega a imagem do stream de mem�ria
@@ -471,4 +475,41 @@ GLuint bubble::textureLoader::carregarAiTexture(const aiTexture* texture)
         FreeImage_CloseMemory(fiMemory);
     }
     return ID;
+}
+GLuint bubble::textureLoader::carregarSkyboxMemoria(const std::vector<std::string> faces) {
+    GLuint textureID;
+    glGenTextures(1, &textureID);
+    glBindTexture(GL_TEXTURE_CUBE_MAP, textureID);
+
+    int width, height, nrChannels;
+    // Itera sobre cada face do skybox
+    for (unsigned int i = 0; i < faces.size(); i++) {
+        auto it = imagems_memoria.find(faces[i]);
+        if (it != imagems_memoria.end()) {
+            bubble::imageLoader img;
+            // Carrega a imagem diretamente da memória
+            img.embutida(it->second.first, it->second.second);
+            width = img.obterLargura();
+            height = img.obterAltura();
+            nrChannels = img.obterCanal();
+
+            if (img.carregado) {
+                glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i,
+                    0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, img.obterDados());
+            } else {
+                std::cerr << "Falha ao carregar a textura da skybox da memória: " << faces[i] << std::endl;
+            }
+        } else {
+            std::cerr << "Imagem não encontrada na memória: " << faces[i] << std::endl;
+        }
+    }
+
+    // Define os parâmetros da textura do cubo
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
+
+    return textureID;
 }

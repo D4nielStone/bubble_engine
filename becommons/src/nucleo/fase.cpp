@@ -272,7 +272,8 @@ static void analizarEntidades(const Document& doc, fase* f)
 				}
 				else if (std::strcmp(tipo_str, "terreno") == 0)
 				{
-					reg->adicionar<terreno>(id, projeto_atual->diretorioDoProjeto + componente["textura"].GetString());
+				    if(componente.HasMember("ruido"))
+					reg->adicionar<terreno>(id, projeto_atual->diretorioDoProjeto + componente["ruido"].GetString());
 					if (componente.HasMember("albedo") && componente["albedo"].IsString())
 					{
 						bubble::textura tex(

@@ -13,6 +13,7 @@
 #include <unordered_map>
 #include <fstream>
 
+#include "GLFW/glfw3.h"
 #include "nucleo/sistema_de_fisica.hpp"
 #include "nucleo/sistema_de_renderizacao.hpp"
 #include "nucleo/sistema_de_codigo.hpp"

@@ -1,7 +1,6 @@
 /** @copyright Copyright (c) 2025 Daniel Oliveira */
 #pragma once
 #include "componentes/camera.hpp"
-#include "componentes/transformacao.hpp"
 
 namespace bubble
 {

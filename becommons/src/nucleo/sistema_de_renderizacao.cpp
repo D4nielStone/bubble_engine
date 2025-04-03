@@ -52,9 +52,14 @@ void sistema_renderizacao::atualizarCamera(bubble::camera* cam)
 
         // Pula camera sem buffer e não principal
         if(!cam->flag_fb && cam!=camera_principal)
-        return;
+        {
+            return;
+        }
 
         cam->desenharFB();
+        
+        if(cam->m_skybox)cam->m_skybox->desenhar(cam->obtViewMatrix(), cam->obtProjectionMatrix());
+        else depuracao::emitir(info, "Camera sem skybox");
         luz_direcional ld;
 
         std::vector<luz_pontual> lps;

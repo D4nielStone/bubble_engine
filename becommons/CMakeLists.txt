@@ -52,6 +52,7 @@ target_sources(becommons PRIVATE
     src/nucleo/sistema.cpp
     src/nucleo/projeto.cpp
     src/util/malha.cpp
+    src/util/skybox.cpp
     src/os/janela.cpp
 )
 

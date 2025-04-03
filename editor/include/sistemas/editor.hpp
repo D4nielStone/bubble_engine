@@ -1,4 +1,6 @@
 /** @copyright Copyright (c) 2025 Daniel Oliveira */
+
+#pragma once
 #include "nucleo/sistema.hpp"
 #include "nucleo/projeto.hpp"
 #include "componentes/camera_editor.hpp"

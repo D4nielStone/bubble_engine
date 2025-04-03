@@ -29,7 +29,7 @@ namespace bubble
         bubble::shader& shader();
         void desenhar(bubble::shader& shader);
         std::vector<malha> malhas;
-    private:
+    protected:
         // dados de malha
 
         std::string diretorio;

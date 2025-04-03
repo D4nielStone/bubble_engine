@@ -23,7 +23,6 @@ namespace bubble
         void descarregar();
         void desenhar(bubble::shader& shader);
         void definirBuffers();
-    private:
         //  dados de renderizacao
         unsigned int VAO, VBO, EBO;
 

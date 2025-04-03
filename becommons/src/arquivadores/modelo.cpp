@@ -6,11 +6,13 @@
 #include "arquivadores/imageloader.hpp"
 #include <filesystem>
 #include "assets/objetos/cubo.hpp"
+#include "assets/objetos/esfera.hpp"
 #include "map"
 
 std::map<std::string, bubble::malha> primitivas = 
 {
-    {"cubo", malha_cubo}
+    {"cubo", malha_cubo},
+    {"esfera", malha_esfera}
 };
 
 namespace bubble
@@ -38,7 +40,7 @@ namespace bubble
         if(primitivas.find(std::filesystem::path(path).filename().string()) != primitivas.end())
         {
             malhas.push_back(primitivas[std::filesystem::path(path).filename().string()]);
-            malhas[0].definirBuffers();
+            malhas.back().definirBuffers();
             return;
         }
         Assimp::Importer import;

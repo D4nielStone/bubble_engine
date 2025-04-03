@@ -25,10 +25,10 @@ namespace bubble
         unsigned char* obterDados() const;
         GLFWimage converterParaGlfw();
         bool carregado;
-    private:
         void flipVertical();
         void carregarImagem(const std::string& filepath);
         void embutida(BYTE* data, const unsigned int tamanho);
+    private:
         const char* path;
         int width, height, channels;
         unsigned char* data;
@@ -45,10 +45,19 @@ namespace bubble
         GLuint carregarTextura(const std::string& caminho, double* width, double* height);
         GLuint carregarTextura(const std::string& caminho);
         GLuint carregarSkybox(const char*, std::vector<std::string> faces);
+        GLuint carregarSkyboxMemoria(const std::vector<std::string> faces = 
+                {
+"skybox_right.png",
+"skybox_left.png", 
+"skybox_top.png",
+"skybox_bottom.png",
+"skybox_front.png",                
+"skybox_back.png", 
+                }); 
         GLuint carregarAiTexture(const aiTexture* texture);
-    private:
         std::unordered_map<std::string, GLuint> texturasCarregadas;
 
+    private:
         // Construtor privado para Singleton
         textureLoader() {}
 

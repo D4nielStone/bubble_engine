@@ -1,4 +1,5 @@
 #include <glad/glad.h>
+#include "GLFW/glfw3.h"
 #include "os/janela.hpp"
 #include "depuracao/debug.hpp"
 #include "arquivadores/imageloader.hpp"

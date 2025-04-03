@@ -7,7 +7,6 @@
 
 #pragma once
 #include "tempo.hpp"
-#include <GLFW/glfw3.h>
 #include "util/vetor2.hpp"
 #include "nucleo/sistema.hpp"
 #include "nucleo/sistema_de_renderizacao.hpp"
@@ -16,6 +15,7 @@
 #include <memory>
 #include <unordered_map>
 
+struct GLFWwindow;
 namespace bubble
 {
 	/**

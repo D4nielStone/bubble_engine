@@ -10,6 +10,7 @@
 #include <glm/ext/matrix_transform.hpp>
 #include "transformacao.hpp"
 #include <memory>
+#include "util/skybox.hpp"
 
 namespace bubble
 {
@@ -24,6 +25,7 @@ namespace bubble
 		 * @brief configuracao da camera;
 		 */
 
+        skybox* m_skybox{nullptr};
 		cor ceu				{0.43F, 0.78F, 0.86F, 1.0F};
 
 		glm::vec3 forward, direita, cima, posicao;
@@ -52,8 +54,7 @@ namespace bubble
 		void desenharFB() const;
 
 		~camera();
-		camera() = default;
-		camera(const bool ortho);
+		camera(const bool ortho = false);
 
 		void ativarFB();
 		void desativarFB();

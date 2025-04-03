@@ -12,8 +12,8 @@ inline const std::unordered_map<std::string, const char*> shader_memoria{
     {"imagem.frag", imagem_frag},
     {"texto.vert", texto_vert},
     {"texto.frag", texto_frag},
-    {"skybox.vert", skybox_vert},
-    {"skybox.frag", skybox_frag},
+    {"skybox.vs", skybox_vert},
+    {"skybox.fs", skybox_frag},
     {"phong.vert", phong_vert},
     {"phong.frag", phong_frag}
 };

@@ -32,6 +32,7 @@ bubble::camera::~camera()
 {
     depuracao::emitir(debug, "camera", "descarregando");
     
+    delete m_skybox;
     desativarFB();
 }
 
@@ -84,6 +85,8 @@ void bubble::camera::desativarFB()
 glm::mat4 bubble::camera::obtViewMatrix() {
     if (!transform)
         transform = projeto_atual->obterFaseAtual()->obterRegistro()->obter<transformacao>(meu_objeto);
+    if(!m_skybox)
+        m_skybox = (new skybox());
 
     posicao = transform->posicao;
 
