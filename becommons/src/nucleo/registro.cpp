@@ -10,7 +10,11 @@ bubble::entidade bubble::registro::criar()
 {
     proxima_entidade++;
     depuracao::emitir(debug, "registro", "nova entidade: " + std::to_string(proxima_entidade ));
-    return { proxima_entidade, componente::COMPONENTE_NONE };
+    bubble::entidade ent ={ proxima_entidade, componente::COMPONENTE_NONE };
+
+    adicionar<bubble::transformacao>(ent);
+
+    return ent;
 }
 
 bubble::componente::mascara bubble::registro::obterComponentes(const uint32_t& id) const {
@@ -19,4 +23,11 @@ bubble::componente::mascara bubble::registro::obterComponentes(const uint32_t& i
         return it->second; // Retorna a m�scara associada � entidade.
     }
     return componente::COMPONENTE_NONE; // Retorna uma m�scara vazia se a entidade n�o existir.
+}
+
+void bubble::registro::remover(const uint32_t& ent)
+{
+    entidades[ent].clear();
+    entidades.erase(ent);
+    mascaras.erase(ent);
 }

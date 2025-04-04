@@ -119,7 +119,7 @@ void bubble::renderizarTexto(elementos::texto* tex)
             float w = ch.tamanho.x * tex->m_texto_escala;
             float h = ch.tamanho.y * tex->m_texto_escala;
 
-            if(ypos + h > tex->m_limites.y + tex->m_limites.w) break;
+            if(ypos > tex->m_limites.y + tex->m_limites.w) break;
             // update VBO for each character
             float vertices[6][4] = {
                 { xpos,     ypos + h,   0.0f, 1.0f },
@@ -302,7 +302,7 @@ void bubble_gui::atualizarFilhos(caixa* it_caixa)
         // Segunda passagem: aplicar dimensões e posicionamento para ambas as direções
         float cursor_principal = is_horizontal ? it_caixa->m_limites.x : it_caixa->m_limites.y;
         float cursor_secundario = is_horizontal ? it_caixa->m_limites.y : it_caixa->m_limites.x;
-        float smooth = 0.3f;
+        float smooth = std::min<float>(12.f * instanciaJanela->_Mtempo.obterDeltaTime(), 1.f);
 
         for(auto& filho : it_caixa->m_filhos)
         {

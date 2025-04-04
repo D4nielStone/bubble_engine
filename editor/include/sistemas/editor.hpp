@@ -12,7 +12,7 @@ namespace bubble{
     struct sistema_editor : public bubble::sistema {
     
     std::string texto_entidade = "id:1";
-    int entidade_atual = 1;
+    uint32_t entidade_atual = 1;
     sistema_editor();
     void atualizarEntidades();
     void atualizarComponentes();

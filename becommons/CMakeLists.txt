@@ -51,6 +51,7 @@ target_sources(becommons PRIVATE
     src/nucleo/sistema_de_renderizacao.cpp
     src/nucleo/sistema.cpp
     src/nucleo/projeto.cpp
+    src/sistemas/bubble_gui.cpp
     src/util/malha.cpp
     src/util/skybox.cpp
     src/os/janela.cpp

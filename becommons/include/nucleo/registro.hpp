@@ -44,7 +44,8 @@ namespace bubble
 		/* Remove um componente a uma entidade */
 		template <typename T>
 		void remover(const uint32_t& ent);
-
+        
+        void remover(const uint32_t& ent);
 
 		/* Verifica se uma entidade possui um componente */
 		template <typename T>

@@ -17,6 +17,9 @@ namespace bubble{
         public:
             imagem* m_imagem{ nullptr };
             texto* m_texto{ nullptr };
+            botao(std::function<void()> f, texto* txt) : m_botao_funcao(f), m_texto(txt)
+            {
+            }
             botao(std::function<void()> f, const std::string& txt) : m_botao_funcao(f), m_texto(new texto(txt))
             {
             }

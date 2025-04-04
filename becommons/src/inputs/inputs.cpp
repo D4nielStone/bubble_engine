@@ -14,6 +14,7 @@ static const std::unordered_map<int, std::string> keyMap = {
 {GLFW_KEY_A, "A"},
 {GLFW_KEY_S, "S"},
 {GLFW_KEY_D, "D"},
+{GLFW_KEY_X, "X"},
 {GLFW_KEY_E, "E"},
 {GLFW_KEY_Q, "Q"},
 {GLFW_KEY_RIGHT, "Dire"},

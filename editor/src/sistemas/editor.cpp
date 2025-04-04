@@ -5,6 +5,7 @@
 #include "nucleo/projeto.hpp"
 
 using namespace bubble;
+bool gatilho_ = true;
 void sistema_editor::configurarInterface(bubble::projeto& proj)
 {
     bubble_gui* gui = static_cast<bubble_gui*>(proj.obterSistema("bubble_gui"));
@@ -41,7 +42,7 @@ void sistema_editor::configurarInterface(bubble::projeto& proj)
         gui->defCorFundo    (    cor(0.05f, 0.05f, 0.05f, 1.f));
         gui->defCrescimentoM(                            0.2f);
     gui->novoEstilo();
-        gui->adiElemento<elementos::texto>("raiz_c", "console", depuracao::obterMensagens());
+        gui->adiElemento<elementos::texto>("raiz_c", "console", depuracao::obterMensagens(), 0.5f);
         gui->defAltura(1.0);
         // items menu
     gui->novoEstilo();
@@ -112,6 +113,7 @@ void sistema_editor::configurarInterface(bubble::projeto& proj)
         gui->defFlags        (flags_caixa::largura_percentual | flags_caixa::modular);
         gui->defLargura       (                           1.0);
         gui->defAltura       (                           25);
+        gui->defPaddingG     (                           5,5);
         gui->defOrientacao   ( caixa::orientacao::horizontal);
 }
 
@@ -140,6 +142,7 @@ void sistema_editor::atualizar()
     // inputs
     if(instanciaJanela->inputs.isKeyPressed("F5"))
     {
+        projeto_atual->salvar();
         executarRuntime();
     }
     // Verifica se o número de entidades mudou
@@ -156,6 +159,22 @@ void sistema_editor::atualizar()
         entidade_anterior = entidade_atual;
     }
     // camera
+    if(instanciaJanela->inputs.isKeyPressed("Shif"))
+    {
+        if(gatilho_ && instanciaJanela->inputs.isKeyPressed("A"))
+        {
+        projeto_atual->obterFaseAtual()->obterRegistro()->criar();
+        gatilho_ = false;
+        }else if(gatilho_ && instanciaJanela->inputs.isKeyPressed("X"))
+        {
+projeto_atual->obterFaseAtual()->obterRegistro()->remover(entidade_atual);
+        gatilho_ = false;
+        }
+        else if(!instanciaJanela->inputs.isKeyPressed("X") && !instanciaJanela->inputs.isKeyPressed("A"))
+        {
+        gatilho_ = true;
+        }
+    }
     cam.atualizarMovimentacao();
 }
 
@@ -199,26 +218,34 @@ void sistema_editor::atualizarEntidades()
 
     // Remove os botões antigos para evitar duplicatas
     gui->removerFilhos("entidades");
-
+    
+    if(!projeto_atual->obterFaseAtual()->obterRegistro()->entidades.empty())
+    {
     gui->novoEstilo();
     // Adiciona os botões para cada entidade existente
-    for (auto& [entidade, comp] : projeto_atual->obterFaseAtual()->obterRegistro()->entidades)
+    for (auto& [id, comp] : projeto_atual->obterFaseAtual()->obterRegistro()->entidades)
     {
         std::string icone = "cube.png";
         gui->adiElemento<elementos::botao>("entidades",
-            std::to_string(entidade),
-            [entidade, this]()
+            std::to_string(id),
+            [id, this]()
             {
-                entidade_atual = entidade;
+                entidade_atual = id;
                 texto_entidade = "id:" + std::to_string(entidade_atual);
             },
             new elementos::imagem(icone));
+                entidade_atual = id;
+                texto_entidade = "id:" + std::to_string(entidade_atual);
     }
         gui->defLargura     (                          25);
         gui->defAltura      (                          25);
         gui->defCorFundo    (    cor(0.0f, 0.0f, 0.0f, 0.f));
-
-    // editor
+    } else 
+    {
+        entidade_atual = 0;
+        texto_entidade = "Nenhuma entidade selecionada";
+    }
+    atualizarComponentes();
 }
 void sistema_editor::atualizarComponentes()
 {
@@ -227,7 +254,7 @@ void sistema_editor::atualizarComponentes()
 
     // Remove os botões antigos para evitar duplicatas
     gui->removerFilhos("area_comps");
-
+    if(entidade_atual == 0) return;
     gui->novoEstilo();
     size_t i = 0;
     for (auto& [mascara, componente] : projeto_atual->obterFaseAtual()->obterRegistro()->entidades[entidade_atual]) 
@@ -244,8 +271,8 @@ void sistema_editor::atualizarComponentes()
         gui->adiElemento<elementos::imagem>("area_comps",
             "componente"+std::to_string(i),
             icone);
+    }
         gui->defLargura     (                          25);
         gui->defAltura      (                          25);
         gui->defCorFundo    (    cor(0.0f, 0.0f, 0.0f, 0.f));
-    }
 }

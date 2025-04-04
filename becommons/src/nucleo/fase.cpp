@@ -215,7 +215,6 @@ static void analizarEntidades(const Document& doc, fase* f)
 				}
 				else if (std::strcmp(tipo_str, "transformacao") == 0)
 				{
-					reg->adicionar<transformacao>(id);
 					auto tr = reg->obter<transformacao>(id.id);
 					if(componente.HasMember("posicao"))
                     {
