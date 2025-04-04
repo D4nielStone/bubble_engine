@@ -56,6 +56,7 @@ namespace bubble
         caixa::orientacao m_orientacao_modular = caixa::orientacao::horizontal;
         
         // Estilo
+        bool m_ativo {true};
         float m_largura = 1.0f;
         float m_altura = 1.0f;
         float m_crescimento_modular = 0.0f; // Fator de crescimento em layouts modulares

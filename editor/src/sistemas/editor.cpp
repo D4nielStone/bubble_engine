@@ -26,14 +26,6 @@ void sistema_editor::configurarInterface(bubble::projeto& proj)
         gui->defOrientacao  (   caixa::orientacao::horizontal);
         gui->defPaddingG    (                      5, 5);
         gui->defCorFundo    (    cor(0.15f, 0.15f, 0.15f, 1.f));
-    // items menu
-    gui->novoEstilo();
-        gui->adiElemento<elementos::botao>("menu", "arquivo", [](){}, "Arquivo");
-        gui->adiElemento<elementos::botao>("menu", "editar", [](){}, "Editar");
-        gui->adiElemento<elementos::botao>("menu", "visualizar", [](){}, "Exibir");
-        gui->adiElemento<elementos::botao>("menu", "ajuda", [](){}, "Ajuda");
-        gui->defCorFundo    (cor(0.2f, 0.2f, 0.2f, 1.f));
-        gui->defPaddingG    (5, 5);
     gui->novoEstilo();
         gui->adiElemento<caixa>("raiz", "raiz_b");
         gui->defFlags       (flags_caixa::modular);
@@ -41,6 +33,35 @@ void sistema_editor::configurarInterface(bubble::projeto& proj)
         gui->defOrientacao  (   caixa::orientacao::horizontal);
         gui->defCorFundo    (    cor(0.f, 0.f, 1.f, 0.f));
         gui->defCrescimentoM(                            1.0f);
+    gui->novoEstilo();
+        gui->adiElemento<caixa>("raiz", "raiz_c");
+        gui->defFlags       (flags_caixa::modular);
+        gui->defLargura     (                           1.0);
+        gui->defOrientacao  (   caixa::orientacao::horizontal);
+        gui->defCorFundo    (    cor(0.05f, 0.05f, 0.05f, 1.f));
+        gui->defCrescimentoM(                            0.2f);
+    gui->novoEstilo();
+        gui->adiElemento<elementos::texto>("raiz_c", "console", depuracao::obterMensagens());
+        gui->defAltura(1.0);
+        // items menu
+    gui->novoEstilo();
+        gui->adiElemento<elementos::botao>("menu", "rc", [gui](){
+                if(gui->obterElemento("raiz_c")->m_crescimento_modular == 0)
+                {
+                    
+                gui->obterElemento("raiz_c")->m_crescimento_modular = 0.2;
+                gui->obterElemento("raiz_c")->m_ativo = true;
+                }
+                else
+                {gui->obterElemento("raiz_c")->m_crescimento_modular = 0;
+                gui->obterElemento("raiz_c")->m_ativo = false;
+                }}, "Mostrar Console");
+        gui->adiElemento<elementos::botao>("menu", "arquivo", [](){}, "Arquivo");
+        gui->adiElemento<elementos::botao>("menu", "editar", [](){}, "Editar");
+        gui->adiElemento<elementos::botao>("menu", "visualizar", [](){}, "Exibir");
+        gui->adiElemento<elementos::botao>("menu", "ajuda", [](){}, "Ajuda");
+        gui->defCorFundo    (cor(0.2f, 0.2f, 0.2f, 1.f));
+        gui->defPaddingG    (5, 5);
     // entidades
     gui->novoEstilo();
         gui->adiElemento<caixa>("raiz_b", "entidades");
@@ -87,11 +108,11 @@ void sistema_editor::configurarInterface(bubble::projeto& proj)
         gui->defAltura       (17);
     gui->novoEstilo();
         gui->adiElemento<caixa>("componentes", "area_comps");
-        gui->defCorFundo     (    cor(0.f, 0.0f, 0.0f, 0.f));
+        gui->defCorFundo     (    cor(0.08f, 0.08f, 0.08f, 1.f));
         gui->defFlags        (flags_caixa::largura_percentual | flags_caixa::modular);
         gui->defLargura       (                           1.0);
-        gui->defCrescimentoM (1);
-        gui->defOrientacao   ( caixa::orientacao::vertical);
+        gui->defAltura       (                           25);
+        gui->defOrientacao   ( caixa::orientacao::horizontal);
 }
 
 sistema_editor::sistema_editor()

@@ -14,6 +14,8 @@ camera_editor::camera_editor()
 
 void camera_editor::atualizarMovimentacao()
 {
+    if(!m_skybox)
+        m_skybox = (new skybox());
     auto inputs = bubble::instanciaJanela->inputs;
     float delta = bubble::instanciaJanela->_Mtempo.obterDeltaTime();
 

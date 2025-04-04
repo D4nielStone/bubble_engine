@@ -1,6 +1,7 @@
 #include "sistemas/bubble_gui.hpp"
 #include "os/janela.hpp"
 #include "depuracao/debug.hpp"
+#include <cmath>
 
 using namespace bubble;
 
@@ -9,6 +10,7 @@ glm::mat4 proj(1.f);
 inline shader* quad_shader{nullptr};
 inline void desenhar_caixa(caixa* c)
 {
+    if(!c->m_ativo) return;
     if(c->m_cor_fundo.a != 0)
     {
         renderizarFundo(c);
@@ -37,6 +39,7 @@ inline void desenhar_caixa(caixa* c)
 
     for(auto& filho : c->m_filhos)
     {
+        if(filho->m_ativo)
         desenhar_caixa(filho.get());
     }
 }
@@ -100,9 +103,12 @@ void bubble::renderizarTexto(elementos::texto* tex)
         }
         if(tex->m_texto_frase_ptr) tex->m_texto_frase = *tex->m_texto_frase_ptr;
         
-        for(char32_t ca : tex->m_texto_frase)
+        std::string texto_final = tex->m_texto_frase;
+
+        for(char32_t ca : texto_final)
         {
             if(ca == '\n') {y_linha += (20 * tex->m_texto_escala); x_linha = tex->m_limites.x; continue;}
+            
             if (chs.empty())
                 return;
             bubble::caractere ch = chs.at(ca);
@@ -112,6 +118,8 @@ void bubble::renderizarTexto(elementos::texto* tex)
 
             float w = ch.tamanho.x * tex->m_texto_escala;
             float h = ch.tamanho.y * tex->m_texto_escala;
+
+            if(ypos + h > tex->m_limites.y + tex->m_limites.w) break;
             // update VBO for each character
             float vertices[6][4] = {
                 { xpos,     ypos + h,   0.0f, 1.0f },
@@ -210,7 +218,7 @@ void bubble_gui::atualizar()
     glCullFace(GL_FRONT);
     glDisable(GL_DEPTH_TEST);
     glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
-    glClearColor(1, 1, 1, 1);
+    glClearColor(0, 0, 0, 1);
 
     instanciaJanela->defCursor(janela::cursor::seta);
 
@@ -230,7 +238,7 @@ void bubble_gui::atualizar()
 
 void bubble_gui::atualizarFilhos(caixa* it_caixa)
 {
-    if (!it_caixa) {
+    if (!it_caixa || !it_caixa->m_ativo) {
         return; // Evita acesso inválido caso a caixa não exista
     }
 
@@ -252,6 +260,7 @@ void bubble_gui::atualizarFilhos(caixa* it_caixa)
         // e espaço fixo para a secundária, conforme as flags
         for(auto& filho : it_caixa->m_filhos)
         {
+            if(!filho->m_ativo) continue;
             if(is_horizontal) {
                 // Dimensão principal (largura)
                 if(filho->tem_flag(flags_caixa::largura_percentual)) {
@@ -293,9 +302,11 @@ void bubble_gui::atualizarFilhos(caixa* it_caixa)
         // Segunda passagem: aplicar dimensões e posicionamento para ambas as direções
         float cursor_principal = is_horizontal ? it_caixa->m_limites.x : it_caixa->m_limites.y;
         float cursor_secundario = is_horizontal ? it_caixa->m_limites.y : it_caixa->m_limites.x;
-        
+        float smooth = 0.3f;
+
         for(auto& filho : it_caixa->m_filhos)
         {
+            if(!filho->m_ativo) continue;
             float tamanho_principal = 0.0f;
             float tamanho_secundario = 0.0f;
             
@@ -343,12 +354,13 @@ void bubble_gui::atualizarFilhos(caixa* it_caixa)
                 // Posicionamento vertical
                 cursor_principal += filho->m_padding.y + it_caixa->m_padding_geral.y;
                 filho->m_limites.y = cursor_principal;
-                filho->m_limites.w = tamanho_principal;
+                filho->m_limites.w = std::lerp(filho->m_limites.w, tamanho_principal, smooth);
                 cursor_principal += tamanho_principal + filho->m_padding.y;
                 
                 // Posicionamento horizontal
                 filho->m_limites.x = cursor_secundario + filho->m_padding.x + it_caixa->m_padding_geral.x;
-                filho->m_limites.z = tamanho_secundario;
+                filho->m_limites.z = std::lerp(filho->m_limites.z, tamanho_secundario, smooth);
+
             }
         }
     }

@@ -12,6 +12,7 @@ namespace bubble{
         {
         private:
             bool gatilho = false;
+            bool* m_interruptor{nullptr};
             std::function<void()> m_botao_funcao;
         public:
             imagem* m_imagem{ nullptr };
@@ -20,6 +21,12 @@ namespace bubble{
             {
             }
             botao(std::function<void()> f, imagem* img) : m_botao_funcao(f), m_imagem(img)
+            {
+            }
+            botao(bool* ptr, imagem* img) : m_interruptor(ptr), m_imagem(img)
+            {
+            }
+            botao(bool* ptr, const std::string& txt) : m_interruptor(ptr), m_texto(new texto(txt))
             {
             }
             ~botao(){}
@@ -50,6 +57,11 @@ namespace bubble{
                     instanciaJanela->defCursor(janela::cursor::mao);
                     if(!gatilho && instanciaJanela->inputs.isKeyPressed("MouseE"))
                     {
+                        if(m_interruptor) 
+                        {
+                            if(*m_interruptor) *m_interruptor = false;
+                            else               *m_interruptor = true;
+                        }else
                         m_botao_funcao();
                     }
                 }

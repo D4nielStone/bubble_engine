@@ -108,7 +108,7 @@ void projeto::criarProjetoVazio(const std::string& novo_diretorio, const char* n
             "componentes":[
                 {
                     "tipo": "luz_direcional",
-                    "direcao": [1, 1, 1],
+                    "direcao": [-0.25, -0.75, 1],
                     "cor": [1, 1, 1],
                     "ambiente": [0.1, 0.1, 0.1],
                     "intensidade": 1.0
@@ -123,7 +123,21 @@ void projeto::criarProjetoVazio(const std::string& novo_diretorio, const char* n
                 },
                 {
                     "tipo": "transformacao",
-                    "posicao": [0,0,5],
+                    "posicao": [0,-2, 15],
+                    "rotacao": [0,0,0],
+                    "escala": [10, 0.25, 10]
+                }
+            ]
+        },
+        {
+            "componentes":[
+                {
+                    "tipo": "renderizador",
+                    "modelo": "/cubo"
+                },
+                {
+                    "tipo": "transformacao",
+                    "posicao": [0,0,15],
                     "rotacao": [0,0,0],
                     "escala": [1, 1, 1]
                 },
