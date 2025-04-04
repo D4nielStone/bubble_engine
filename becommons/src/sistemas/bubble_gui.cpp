@@ -150,6 +150,15 @@ bubble_gui::bubble_gui()
     raiz->m_id = "raiz";
     caixas["raiz"] = raiz.get();
    
+}
+
+void bubble_gui::inicializar(fase* f)
+{
+    definirBuffers();
+}
+
+void bubble_gui::definirBuffers()
+{
     quad_shader = new shader("imagem.vert", "quad.frag");
 
     /*--------------BUFFERS--------------*/
@@ -208,7 +217,7 @@ bubble_gui::bubble_gui()
         glBindVertexArray(0);
 }
 
-void bubble_gui::adiFlags(const std::string& id, flags_caixa f) {
+void bubble_gui::adicionarFlags(const std::string& id, flags_caixa f) {
     if (auto caixa = obterElemento(id)) {
         caixa->m_flags_caixa |= f;
     }
@@ -302,8 +311,10 @@ void bubble_gui::atualizarFilhos(caixa* it_caixa)
         // Segunda passagem: aplicar dimensões e posicionamento para ambas as direções
         float cursor_principal = is_horizontal ? it_caixa->m_limites.x : it_caixa->m_limites.y;
         float cursor_secundario = is_horizontal ? it_caixa->m_limites.y : it_caixa->m_limites.x;
-        float smooth = std::min<float>(12.f * instanciaJanela->_Mtempo.obterDeltaTime(), 1.f);
-
+        
+        float smooth = -1;
+        if(instanciaJanela)
+            smooth = std::min<float>(12.f * instanciaJanela->_Mtempo.obterDeltaTime(), 1.f);
         for(auto& filho : it_caixa->m_filhos)
         {
             if(!filho->m_ativo) continue;
@@ -329,11 +340,17 @@ void bubble_gui::atualizarFilhos(caixa* it_caixa)
                 // Posicionamento horizontal
                 cursor_principal += filho->m_padding.x + it_caixa->m_padding_geral.x;
                 filho->m_limites.x = cursor_principal;
+                if(smooth>0)
+                filho->m_limites.z = std::lerp(filho->m_limites.z, tamanho_principal, smooth);
+                else
                 filho->m_limites.z = tamanho_principal;
                 cursor_principal += tamanho_principal + filho->m_padding.x;
                 
                 // Posicionamento vertical
                 filho->m_limites.y = cursor_secundario + filho->m_padding.y + it_caixa->m_padding_geral.y;
+                if(smooth>0)
+                filho->m_limites.w = std::lerp(filho->m_limites.w, tamanho_secundario, smooth);
+                else
                 filho->m_limites.w = tamanho_secundario;
             } else {
                 // Quando vertical, a altura é a dimensão principal
@@ -354,12 +371,18 @@ void bubble_gui::atualizarFilhos(caixa* it_caixa)
                 // Posicionamento vertical
                 cursor_principal += filho->m_padding.y + it_caixa->m_padding_geral.y;
                 filho->m_limites.y = cursor_principal;
+                if(smooth>0)
                 filho->m_limites.w = std::lerp(filho->m_limites.w, tamanho_principal, smooth);
+                else
+                filho->m_limites.w = tamanho_principal;
                 cursor_principal += tamanho_principal + filho->m_padding.y;
                 
                 // Posicionamento horizontal
                 filho->m_limites.x = cursor_secundario + filho->m_padding.x + it_caixa->m_padding_geral.x;
+                if(smooth>0)
                 filho->m_limites.z = std::lerp(filho->m_limites.z, tamanho_secundario, smooth);
+                else
+                filho->m_limites.z = tamanho_secundario;
 
             }
         }

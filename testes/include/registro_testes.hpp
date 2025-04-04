@@ -13,6 +13,7 @@ namespace betest
         private:
             std::vector<std::pair<std::string, std::pair<std::string, funcao_teste>>> testes;
             std::string prefixo_atual{"[BUBBLE][TESTES]"};
+            unsigned int n_falhas {0};
         public:
             registro_testes();
             /// @brief adiciona testes

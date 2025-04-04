@@ -60,12 +60,12 @@ namespace bubble
 		std::shared_ptr<T> obter(const uint32_t& entity);
 	};
 
-	/* Defini��es de templates */
+	/* Definições de templates */
 
 	template<typename T, typename ...Args>
 	void registro::adicionar(entidade& ent, Args&&... args) {
-		ent.mascara |= T::mascara;
-		mascaras[ent.id] = ent.mascara; // Atualiza a m�scara no mapa auxiliar
+		mascaras[ent.id] |= T::mascara; // Atualiza a máscara no mapa auxiliar
+		ent.mascara |= mascaras[ent.id];
 		entidades[ent.id][T::mascara] = std::make_shared<T>(std::forward<Args>(args)...); // Adiciona o componente
 		entidades[ent.id][T::mascara]->meu_objeto = ent.id;
 	}
@@ -87,7 +87,7 @@ namespace bubble
 		mask->second &= ~T::mascara; // Remove o bit correspondente ao componente.
 		if(!it->second.empty())
 		return;
-		entidades.erase(it); // Remove a entidade se n�o houver mais componentes.
+		entidades.erase(it); // Remove a entidade se não houver mais componentes.
 	}
 
 	template<typename T>

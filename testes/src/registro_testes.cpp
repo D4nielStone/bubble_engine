@@ -25,6 +25,7 @@ void betest::registro_testes::rodarTestes()
     depuracao::emitir(info, "Iniciando testes unitários. Total de " + std::to_string(testes.size()) + " teste(s).");
     size_t total = testes.size();
     float i = 0;
+    n_falhas = 0;
 
     for(auto &teste : testes)
     {
@@ -41,6 +42,9 @@ void betest::registro_testes::rodarTestes()
             std::cout << "\033[0m[" << std::setw(3) << static_cast<int>((i / total) * 100) << "%]"
                       << "\033[31m[FALHOU]\033[0m  " << teste.second.first << " " << teste.first << "\n"
                       << "            \033[31m[ERRO] " << e.what() << "\n";
+            n_falhas ++;
         }
     }
+    if(n_falhas > 0)
+    std::cout << "\033[31m[FALHAS]\033[0m Total de " << n_falhas << " falhas detectadas.\n";
 }

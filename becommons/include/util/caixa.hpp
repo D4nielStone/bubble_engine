@@ -57,8 +57,8 @@ namespace bubble
         
         // Estilo
         bool m_ativo {true};
-        float m_largura = 1.0f;
-        float m_altura = 1.0f;
+        float m_largura = 20.f;
+        float m_altura = 20.f;
         float m_crescimento_modular = 0.0f; // Fator de crescimento em layouts modulares
         unsigned int m_espessura_borda = 2;
         bubble::vetor2<int> m_padding = {0, 0};

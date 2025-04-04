@@ -28,13 +28,16 @@ namespace bubble
             std::unordered_map<std::string, caixa*> caixas;
             std::set<std::string> estilo_atual;
             
-            void atualizarFilhos(caixa*);
         public:
             bubble_gui();
-            void adiFlags(const std::string& id, flags_caixa); 
+            
+            void atualizarFilhos(caixa*);
+            void definirBuffers();
+            void adicionarFlags(const std::string& id, flags_caixa); 
+            void inicializar(fase*) override;
             void atualizar() override;
             template <typename T, typename ...Args>
-            void adiElemento(const std::string& pai_id, const std::string& nova_id, Args&&... args) {
+            void adicionarElemento(const std::string& pai_id, const std::string& nova_id, Args&&... args) {
                 estilo_atual.insert(nova_id);
                 if (auto pai = obterElemento(pai_id)) {
                     auto nova_caixa = pai->adicionarFilho<T>(nova_id, std::forward<Args>(args)...);
