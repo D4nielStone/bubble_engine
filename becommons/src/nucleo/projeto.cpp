@@ -71,8 +71,12 @@ projeto::~projeto()
 projeto::projeto(const std::string &diretorio) : diretorioDoProjeto(diretorio)
 {
     imageLoader::init();
-    auto doc = obterDoc();
+    auto doc = carregarProjeto();
     criarJanela(doc);
+}
+projeto::projeto()
+{
+    imageLoader::init();
 }
 
 void projeto::criarProjetoVazio(const std::string& novo_diretorio, const char* nome)
@@ -206,7 +210,7 @@ end
         }
 }
 
-rapidjson::Document projeto::obterDoc()
+rapidjson::Document projeto::carregarProjeto()
 {
     // Torna projeto atual
     projeto_atual = this;
@@ -232,7 +236,7 @@ rapidjson::Document projeto::obterDoc()
 
         criarProjetoVazio(diretorioDoProjeto, resp.c_str());
 
-        return obterDoc();
+        return carregarProjeto();
     }
 
     // Executa o parsing
@@ -362,7 +366,7 @@ sistema* projeto::obterSistema(const std::string nome)
     return nullptr;
 }
 
-void projeto::salvarTudo()
+void projeto::salvarFases()
 {
     depuracao::emitir(info, "salvando projeto.");
     for(auto& [nome, fase] : m_fases)
@@ -370,7 +374,7 @@ void projeto::salvarTudo()
         fase->salvar();
     }
 }
-void projeto::salvar(const std::string& nome)
+void projeto::salvarProjeto(const std::string& nome)
 {
 
     depuracao::emitir(info, "salvando fase " + nome);

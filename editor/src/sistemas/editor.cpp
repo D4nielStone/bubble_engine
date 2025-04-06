@@ -97,7 +97,7 @@ void sistema_editor::configurarInterface(bubble::projeto& proj)
         cam.viewport_ptr = &static_cast<elementos::imagem*>(gui->obterElemento("imagem_editor"))->m_imagem_tamanho;
     gui->novoEstilo();
         gui->adicionarElemento<elementos::botao>("imagem_editor", "btn_play", [](){
-                    projeto_atual->salvarTudo();
+                    projeto_atual->salvarFases();
                     sistema_editor::executarRuntime();
                 }, new elementos::imagem("Play.png"));
         gui->defPadding      (15, 15);
@@ -153,12 +153,12 @@ void sistema_editor::atualizar()
     // inputs
     if(instanciaJanela->inputs.isKeyPressed("F5"))
     {
-        projeto_atual->salvarTudo();
+        projeto_atual->salvarFases();
         executarRuntime();
     }
     if(instanciaJanela->inputs.isKeyPressed("Ctrl") && instanciaJanela->inputs.isKeyPressed("S"))
     {
-        projeto_atual->salvarTudo();
+        projeto_atual->salvarFases();
     }
     // Verifica se o número de entidades mudou
     size_t num_entidades_atual = projeto_atual->obterFaseAtual()->obterRegistro()->entidades.size();
