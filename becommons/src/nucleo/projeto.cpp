@@ -1,41 +1,53 @@
-#include "nucleo/sistema_de_interface.hpp"
-#include "nucleo/projeto.hpp"
-#include "nucleo/fase.hpp"
+/** @copyright Copyright (c) 2025 Daniel Oliveira */
+
 #include "os/janela.hpp"
-#include "filesystem"
-#include "string"
+#include "nucleo/projeto.hpp"
+#include "nucleo/sistema_de_fisica.hpp"
+#include "nucleo/sistema_de_renderizacao.hpp"
+#include "nucleo/sistema_de_codigo.hpp"
+#include "nucleo/sistema_de_interface.hpp"
+
+#include <string>
 #include <iostream>
 #include <rapidjson/rapidjson.h>
 #include <memory>
 #include <rapidjson/document.h> 
 #include <rapidjson/writer.h> 
 #include <rapidjson/stringbuffer.h> 
-#include <unordered_map>
 #include <fstream>
-
-#include "GLFW/glfw3.h"
-#include "nucleo/sistema_de_fisica.hpp"
-#include "nucleo/sistema_de_renderizacao.hpp"
-#include "nucleo/sistema_de_codigo.hpp"
-
-
+#include <filesystem>
+#include <GLFW/glfw3.h>
 
 using namespace bubble;
 
+// Main loop
 void projeto::rodar()
 
 {
     while(!glfwWindowShouldClose(instanciaJanela->window))
 	{
-		instanciaJanela->poll();
-        if(fase_atual->rodando){
-        sistemas["fisica"]->atualizar();        
-        sistemas["codigo"]->atualizar();        
+        if(!instanciaJanela) {
+            depuracao::emitir(erro, "Janela não definida!");
+            return;
         }
-        sistemas["render"]->atualizar();        
+		instanciaJanela->poll();
+        if(!obterFaseAtual()) {
+            depuracao::emitir(erro, "Fase atual não definida!");
+            return;
+        }
+        if(obterFaseAtual()->rodando)
+        {
+            if(sistemas.find("fisica") != sistemas.end())
+                sistemas["fisica"]->atualizar();        
+            if(sistemas.find("codigo") != sistemas.end())
+                sistemas["codigo"]->atualizar();        
+        }
+        if(sistemas.find("render") != sistemas.end())
+            sistemas["render"]->atualizar();        
 
-        if(fase_atual->rodando)
-        sistemas["interface"]->atualizar();        
+        if(obterFaseAtual()->rodando)
+            if(sistemas.find("interface") != sistemas.end())
+                sistemas["interface"]->atualizar();        
 
         for(auto& s : sistemas_adicionais)
         {
@@ -58,6 +70,7 @@ projeto::~projeto()
 
 projeto::projeto(const std::string &diretorio) : diretorioDoProjeto(diretorio)
 {
+    imageLoader::init();
     auto doc = obterDoc();
     criarJanela(doc);
 }
@@ -95,7 +108,7 @@ void projeto::criarProjetoVazio(const std::string& novo_diretorio, const char* n
         }
 
         
-        // Diretório de fases
+        // Diretório de m_fases
         if(std::filesystem::create_directories(diretorioDoProjeto + "/fases"))
         {
             std::ofstream fase_file(diretorioDoProjeto + "/fases/main.fase");
@@ -206,6 +219,7 @@ rapidjson::Document projeto::obterDoc()
 
     std::string full_path = caminhoEncontrado + "/config.json";
 
+    // Se não existe diretório, criar projeto
     if (!std::filesystem::exists(full_path)) 
     {
         depuracao::emitir(alerta, "Arquivo de projeto não encontrado. Digite um nome para criar um novo projeto:");
@@ -285,16 +299,22 @@ void projeto::criarJanela(rapidjson::Document& doc)
      bubble::vetor2<double>(doc["janela"].GetObject()["largura"].GetInt(), doc["janela"].GetObject()["altura"].GetInt()),
     (diretorioDoProjeto + "/" + icon_path).c_str());
 
-    fase(diretorioDoProjeto + doc["lancamento"].GetString());
+    // Cria fase atual
+    carregar(doc["lancamento"].GetString());
 }
 
-void projeto::fase(const std::string &nome)
+void projeto::carregar(const std::string &n)
 {
+    auto nome = diretorioDoProjeto + n;
     depuracao::emitir(info, "carregando fase em: " + nome + ".fase");
     
-    fase_atual = std::make_shared<bubble::fase>(nome + ".fase");
-    fase_atual->carregar();
-    iniciarSistemas(fase_atual.get());
+    // Torna atual
+    fase_atual = nome;
+    // Adiciona ao map de m_fases
+    m_fases[nome] = std::make_shared<bubble::fase>(nome + ".fase");
+
+    m_fases[nome]->carregar();
+    iniciarSistemas(m_fases[nome].get());
 }
 
 void projeto::iniciarSistemas(bubble::fase* f)
@@ -312,13 +332,13 @@ void projeto::iniciarSistemas(bubble::fase* f)
 
 void projeto::adicionar(const std::string nome, sistema* s)
 {
-    s->inicializar(fase_atual.get());
+    s->inicializar(obterFaseAtual().get());
     sistemas_adicionais[nome] = s;
 }
 
 std::shared_ptr<fase> projeto::obterFaseAtual()
 {
-	return fase_atual;
+	return m_fases[fase_atual];
 }
 
 sistema_fisica* projeto::sfisica()

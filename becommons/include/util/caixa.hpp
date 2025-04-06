@@ -15,7 +15,8 @@ namespace bubble
             alinhamento_central= 1 << 3,
             alinhamento_fim    = 1 << 4,
             largura_auto       = 1 << 5,
-            altura_auto        = 1 << 6
+            altura_auto        = 1 << 6,
+            mesma_linha        = 1 << 7
         };
         inline flags_caixa operator|(flags_caixa a, flags_caixa b) {
             return static_cast<flags_caixa>(static_cast<uint32_t>(a) | static_cast<uint32_t>(b));
@@ -60,7 +61,7 @@ namespace bubble
         float m_largura = 20.f;
         float m_altura = 20.f;
         float m_crescimento_modular = 0.0f; // Fator de crescimento em layouts modulares
-        unsigned int m_espessura_borda = 2;
+        unsigned int m_espessura_borda = 1;
         bubble::vetor2<int> m_padding = {0, 0};
         bubble::vetor2<int> m_padding_geral = {0, 0};
         vet4 m_limites  {0, 0, 20, 20};

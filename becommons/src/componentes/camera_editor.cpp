@@ -6,6 +6,7 @@ using namespace bubble;
 
 camera_editor::camera_editor()
 {
+    m_skybox = new skybox();
     mousex_antigo = bubble::obterMouse().x;
     mousey_antigo = bubble::obterMouse().y;
     transform = std::make_shared<transformacao>();
@@ -14,8 +15,6 @@ camera_editor::camera_editor()
 
 void camera_editor::atualizarMovimentacao()
 {
-    if(!m_skybox)
-        m_skybox = (new skybox());
     auto inputs = bubble::instanciaJanela->inputs;
     float delta = bubble::instanciaJanela->_Mtempo.obterDeltaTime();
 

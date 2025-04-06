@@ -59,7 +59,6 @@ void sistema_renderizacao::atualizarCamera(bubble::camera* cam)
         cam->desenharFB();
         
         if(cam->m_skybox)cam->m_skybox->desenhar(cam->obtViewMatrix(), cam->obtProjectionMatrix());
-        else depuracao::emitir(info, "Camera sem skybox");
         luz_direcional ld;
 
         std::vector<luz_pontual> lps;

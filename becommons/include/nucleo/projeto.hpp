@@ -27,12 +27,23 @@ namespace bubble
 
             /// @brief inicia mainloop
             void rodar();
-            
-            /// @brief cria nova fase e torna atual
-            /// @param dir diretório da fase
-            void fase(const std::string& dir);
-	        std::shared_ptr<bubble::fase> obterFaseAtual();
 
+            /// @brief salva todas as fases do projeto
+            void salvarTudo(){};
+            /// @brief salva fase pelo nome
+            /// @param nome nome da fase
+            void salvar(const std::string& nome){};
+            /// @brief carrega todas as fases da pasta do projeto
+            void carregarTudo(){};
+            /// @brief carrega fase pelo nome no diretório do projeto e torna atual
+            /// @param nome diretório e nome da fase
+            void carregar(const std::string& nome);
+
+            /// @param dir diretório da fase
+	        std::shared_ptr<bubble::fase> obterFaseAtual();
+	        std::shared_ptr<bubble::fase> obterFase(const std::string& nome){return nullptr;};
+
+            /// @brief adiciona sistema
             void adicionar(const std::string, sistema*);
 
 	        /// @gets para Sistemas
@@ -43,10 +54,11 @@ namespace bubble
             void criarProjetoVazio(const std::string& path, const char* nome);
             std::unordered_map<std::string, sistema*> sistemas;
             std::unordered_map<std::string, sistema*> sistemas_adicionais;
+            std::unordered_map<std::string, std::shared_ptr<bubble::fase>> m_fases;
             rapidjson::Document obterDoc();
             void criarJanela(rapidjson::Document& doc);
             void iniciarSistemas(bubble::fase*);
-            inline static std::shared_ptr<bubble::fase> fase_atual{ nullptr };
+            std::string fase_atual;
     };
     inline projeto* projeto_atual{nullptr}; 
 }

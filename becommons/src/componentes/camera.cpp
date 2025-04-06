@@ -32,12 +32,40 @@ bubble::camera::~camera()
 {
     depuracao::emitir(debug, "camera", "descarregando");
     
-    delete m_skybox;
+    if(m_skybox)delete m_skybox;
     desativarFB();
 }
 
 bubble::camera::camera(const bool orth)
     : flag_orth(orth) {
+}
+        
+bool bubble::camera::analizar(const rapidjson::Value& value)
+{
+	viewport_ptr = &instanciaJanela->tamanho;
+	
+    if(value.HasMember("fov"))
+        fov = value["fov"].GetFloat();
+    if(value.HasMember("zfar"))
+        corte_longo = value["zfar"].GetFloat();
+	if (value.HasMember("escala"))
+		escala = value["escala"].GetFloat();
+	if (value.HasMember("ortho"))
+		flag_orth = value["ortho"].GetBool();
+	if (value.HasMember("ceu"))
+	{
+		auto _ceu = value["ceu"].GetArray();
+		ceu =
+		{
+			_ceu[0].GetFloat() / 255,
+			_ceu[1].GetFloat() / 255,
+			_ceu[2].GetFloat() / 255,
+			_ceu[3].GetFloat() / 255,
+		};
+	}
+	if (!value.HasMember("skybox") || !value["skybox"].IsBool()) return true;
+    m_skybox = new skybox();
+	return true;
 }
 
 void bubble::camera::ativarFB()
@@ -83,8 +111,6 @@ void bubble::camera::desativarFB()
 }
 
 glm::mat4 bubble::camera::obtViewMatrix() {
-    if(!m_skybox)    
-    m_skybox = (new skybox());
     if (!transform)
         transform = projeto_atual->obterFaseAtual()->obterRegistro()->obter<transformacao>(meu_objeto);
 

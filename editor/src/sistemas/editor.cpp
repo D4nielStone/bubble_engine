@@ -18,11 +18,12 @@ void sistema_editor::configurarInterface(bubble::projeto& proj)
     gui->adicionarFlags("raiz", flags_caixa::modular);
     gui->obterElemento("raiz")->m_orientacao_modular = caixa::orientacao::vertical;
 
+    gui->obterElemento("raiz")->m_cor_fundo = cor(0.15f, 0.15f, 0.15f, 1.f);
     // menu
     gui->novoEstilo();
         gui->adicionarElemento<caixa>("raiz", "menu");
         gui->defFlags       (flags_caixa::modular);
-        gui->defAltura      (                            32);
+        gui->defAltura      (                            30);
         gui->defLargura     (                           1.0);
         gui->defOrientacao  (   caixa::orientacao::horizontal);
         gui->defPaddingG    (                      5, 5);
@@ -42,7 +43,7 @@ void sistema_editor::configurarInterface(bubble::projeto& proj)
         gui->defCorFundo    (    cor(0.05f, 0.05f, 0.05f, 1.f));
         gui->defCrescimentoM(                            0.2f);
     gui->novoEstilo();
-        gui->adicionarElemento<elementos::texto>("raiz_c", "console", depuracao::obterMensagens(), 0.5f);
+        gui->adicionarElemento<elementos::texto>("raiz_c", "console", depuracao::obterMensagens(), 0.65f);
         gui->defAltura(1.0);
         // items menu
     gui->novoEstilo();
@@ -54,15 +55,22 @@ void sistema_editor::configurarInterface(bubble::projeto& proj)
                 gui->obterElemento("raiz_c")->m_ativo = true;
                 }
                 else
-                {gui->obterElemento("raiz_c")->m_crescimento_modular = 0;
+                {
+                gui->obterElemento("raiz_c")->m_crescimento_modular = 0;
                 gui->obterElemento("raiz_c")->m_ativo = false;
                 }}, "Mostrar Console");
+        gui->obterElemento("raiz_c")->m_ativo = false;
+        gui->obterElemento("raiz_c")->m_crescimento_modular = 0;
         gui->adicionarElemento<elementos::botao>("menu", "arquivo", [](){}, "Arquivo");
         gui->adicionarElemento<elementos::botao>("menu", "editar", [](){}, "Editar");
         gui->adicionarElemento<elementos::botao>("menu", "visualizar", [](){}, "Exibir");
         gui->adicionarElemento<elementos::botao>("menu", "ajuda", [](){}, "Ajuda");
-        gui->defCorFundo    (cor(0.2f, 0.2f, 0.2f, 1.f));
+        gui->adicionarElemento<elementos::botao>("menu", "add_primitivas", [](){}, new elementos::imagem("cubo_branco"));
+        gui->defCorBorda    (cor(1.f, 1.f, 1.f, 1.f));
+        gui->defCorFundo    (cor(0.15f, 0.15f, 0.15f, 1.f));
         gui->defPaddingG    (5, 5);
+        gui->defAltura(22);
+        gui->defLargura(22);
     // entidades
     gui->novoEstilo();
         gui->adicionarElemento<caixa>("raiz_b", "entidades");
@@ -88,7 +96,10 @@ void sistema_editor::configurarInterface(bubble::projeto& proj)
     // define ponteiro viewport
         cam.viewport_ptr = &static_cast<elementos::imagem*>(gui->obterElemento("imagem_editor"))->m_imagem_tamanho;
     gui->novoEstilo();
-        gui->adicionarElemento<elementos::botao>("imagem_editor", "btn_play", sistema_editor::executarRuntime, new elementos::imagem("Play.png"));
+        gui->adicionarElemento<elementos::botao>("imagem_editor", "btn_play", [](){
+                    projeto_atual->salvarTudo();
+                    sistema_editor::executarRuntime();
+                }, new elementos::imagem("Play.png"));
         gui->defPadding      (15, 15);
         gui->defLargura      (        30);
         gui->defAltura       (        30);
@@ -112,8 +123,8 @@ void sistema_editor::configurarInterface(bubble::projeto& proj)
         gui->defCorFundo     (    cor(0.08f, 0.08f, 0.08f, 1.f));
         gui->defFlags        (flags_caixa::largura_percentual | flags_caixa::modular);
         gui->defLargura       (                           1.0);
-        gui->defAltura       (                           25);
-        gui->defPaddingG     (                           5,5);
+        gui->defAltura       (                           35);
+        gui->defPaddingG     (                           5, 5);
         gui->defOrientacao   ( caixa::orientacao::horizontal);
 }
 
@@ -142,7 +153,7 @@ void sistema_editor::atualizar()
     // inputs
     if(instanciaJanela->inputs.isKeyPressed("F5"))
     {
-        //projeto_atual->salvar();
+        projeto_atual->salvarTudo();
         executarRuntime();
     }
     // Verifica se o número de entidades mudou
@@ -268,9 +279,10 @@ void sistema_editor::atualizarComponentes()
             if(mascara == componente::COMPONENTE_CODIGO) icone =           "Codigo.png";
             if(mascara == componente::COMPONENTE_CAM) icone =              "Camera.png";
             if(mascara == componente::COMPONENTE_TERRENO) icone =              "Terreno.png";
-        gui->adicionarElemento<elementos::imagem>("area_comps",
-            "componente"+std::to_string(i),
-            icone);
+        gui->adicionarElemento<elementos::botao>("area_comps",
+            icone.erase(icone.size() - 3),
+            [](){},
+            new elementos::imagem(icone));
     }
         gui->defLargura     (                          25);
         gui->defAltura      (                          25);

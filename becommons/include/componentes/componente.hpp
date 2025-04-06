@@ -8,6 +8,7 @@
 #pragma once
 #include <cstdint>
 #include <type_traits>
+#include <rapidjson/document.h>
 
 namespace bubble
 {
@@ -42,6 +43,7 @@ namespace bubble
 		uint32_t meu_objeto{ 0 };
 		componente() = default;
 		virtual ~componente() = default;
+	    virtual bool analizar(const rapidjson::Value& obj) {return true;};
 	};
 	inline componente::mascara operator|(componente::mascara lhs, componente::mascara rhs) {
 		using T = std::underlying_type_t<componente::mascara>;

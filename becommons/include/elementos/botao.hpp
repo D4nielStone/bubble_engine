@@ -1,6 +1,7 @@
 /** @copyright Copyright (c) 2025 Daniel Oliveira */
 #pragma once
 #include "imagem.hpp"
+#include "util/caixa.hpp"
 #include "texto.hpp"
 #include "os/janela.hpp"
 #include "inputs/inputs.hpp"
@@ -35,6 +36,7 @@ namespace bubble{
             ~botao(){}
             void atualizarFuncao()
             {
+                m_cor_borda.a = 0.f;
                 if(m_imagem)
                 {
                     m_imagem->m_limites.z = m_largura;
@@ -57,6 +59,7 @@ namespace bubble{
                 if(m.x > m_limites.x && m.x < m_limites.z + m_limites.x &&
                    m.y > m_limites.y && m.y < m_limites.w + m_limites.y)
                 {
+                    m_cor_borda.a = 1.f;
                     instanciaJanela->defCursor(janela::cursor::mao);
                     if(!gatilho && instanciaJanela->inputs.isKeyPressed("MouseE"))
                     {
@@ -71,6 +74,6 @@ namespace bubble{
                 if(!gatilho && instanciaJanela->inputs.isKeyPressed("MouseE"))
                     gatilho = true;
             }
-        };
+        };  
     } // elementos
 } // bubble

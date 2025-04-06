@@ -9,6 +9,7 @@
 #include "nucleo/registro.hpp"
 #include <string>
 #include <memory>
+#include <rapidjson/document.h>
 
 /**
  * @struct fase
@@ -40,6 +41,7 @@ namespace bubble
 		void descarregar();
 		registro* obterRegistro();
 	private:
+	    void analizarEntidades(const rapidjson::Document&);
 	    bool carregada{false};
 		void analizar(const std::string& diretorio);
         std::string diretorio;

@@ -26,6 +26,7 @@ namespace bubble
 		glm::mat4 matrizmodelo;
 		static constexpr mascara mascara = COMPONENTE_TRANSFORMACAO;
 
+        bool analizar(const rapidjson::Value&) override;
 		transformacao(const vet3& p = vet3(0.f,0.f,0.f),
 			const vet3& r = vet3(0.f, 90.f, 0.f), 
 			const vet3& e = vet3(1.f, 1.f, 1.f)) :

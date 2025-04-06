@@ -2,6 +2,7 @@
 /** @copyright Copyright (c) 2025 Daniel Oliveira */
 
 #pragma once
+#include "imagems/cubo_branco.hpp"
 #include "imagems/folder.hpp"
 #include "imagems/banner.hpp"
 #include "imagems/icon.hpp"

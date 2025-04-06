@@ -52,6 +52,7 @@ namespace bubble
 		bubble::vetor2<double> viewportFBO{ 400, 400 };
 
 		void desenharFB() const;
+        bool analizar(const rapidjson::Value&) override;
 
 		~camera();
 		camera(const bool ortho = false);

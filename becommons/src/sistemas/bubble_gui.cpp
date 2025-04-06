@@ -39,7 +39,9 @@ inline void desenhar_caixa(caixa* c)
 
     for(auto& filho : c->m_filhos)
     {
-        if(filho->m_ativo)
+        if(filho->m_ativo 
+                && filho->m_limites.x < c->m_limites.x + c->m_limites.z
+                && filho->m_limites.y < c->m_limites.y + c->m_limites.w)
         desenhar_caixa(filho.get());
     }
 }
@@ -116,10 +118,10 @@ void bubble::renderizarTexto(elementos::texto* tex)
             float xpos = x_linha + ch.apoio.x * tex->m_texto_escala;
             float ypos = tex->m_limites.y - ch.apoio.y * tex->m_texto_escala + y_linha;
 
+            if(y_linha > tex->m_limites.y + tex->m_limites.w) break;
             float w = ch.tamanho.x * tex->m_texto_escala;
             float h = ch.tamanho.y * tex->m_texto_escala;
 
-            if(ypos > tex->m_limites.y + tex->m_limites.w) break;
             // update VBO for each character
             float vertices[6][4] = {
                 { xpos,     ypos + h,   0.0f, 1.0f },
@@ -236,8 +238,6 @@ void bubble_gui::atualizar()
     raiz->m_limites = {0.f, 0.f,
         static_cast<float>(instanciaJanela->tamanho.x),
         static_cast<float>(instanciaJanela->tamanho.y)};
-    raiz->m_altura = static_cast<float>(instanciaJanela->tamanho.y);
-    raiz->m_largura = static_cast<float>(instanciaJanela->tamanho.x);
     atualizarFilhos(raiz.get());
     
     desenhar_caixa(raiz.get());
@@ -314,7 +314,7 @@ void bubble_gui::atualizarFilhos(caixa* it_caixa)
         
         float smooth = -1;
         if(instanciaJanela)
-            smooth = std::min<float>(12.f * instanciaJanela->_Mtempo.obterDeltaTime(), 1.f);
+            smooth = std::min<float>(10.f * instanciaJanela->_Mtempo.obterDeltaTime(), 0.9f);
         for(auto& filho : it_caixa->m_filhos)
         {
             if(!filho->m_ativo) continue;

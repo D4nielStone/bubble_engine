@@ -44,6 +44,26 @@ void bubble::codigo::iniciar() const
 	}
 }
 
+bool bubble::codigo::analizar(const rapidjson::Value& value) 
+{
+    if(!value.HasMember("diretorio")) return false;
+    arquivo = bubble::projeto_atual->diretorioDoProjeto + value["diretorio"].GetString();
+	L = luaL_newstate();
+	luaL_openlibs(L);
+
+	bapi::definirFisica(L);
+	bapi::definirTempo(L);
+	bapi::definirUtils(L);
+	bapi::definirInputs(L);
+	bapi::entidade::definir(L);
+
+	if (luaL_dofile(L, arquivo.c_str()) != LUA_OK) {
+        std::cerr << "Erro ao carregar o script Lua: " << lua_tostring(L, -1) << std::endl;
+        lua_pop(L, 1);  // Limpa a mensagem de erro
+    }
+    return true;
+};
+
 void bubble::codigo::atualizar() const
 {
 	lua_getglobal(L, "atualizar");

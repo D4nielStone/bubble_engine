@@ -15,7 +15,7 @@ namespace bubble
 	struct codigo : componente
 	{
 		static constexpr mascara mascara = COMPONENTE_CODIGO;
-		const std::string arquivo;
+		std::string arquivo;
 		lua_State* L;
 
 		/**
@@ -26,6 +26,8 @@ namespace bubble
 		* @brief limpa recursos
 		*/
 		~codigo();
+		codigo() = default;
+        bool analizar(const rapidjson::Value&) override;
 		void iniciar() const;
 		void encerrar();
 		void atualizar() const;

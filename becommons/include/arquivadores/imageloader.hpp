@@ -14,6 +14,8 @@ namespace bubble
     class  imageLoader
     {
     public:
+        static void init() { FreeImage_Initialise(); }
+        static void shutdown() { FreeImage_DeInitialise(); }
         imageLoader();
         imageLoader(const std::string& filepath);
         ~imageLoader();

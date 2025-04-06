@@ -8,9 +8,11 @@
 #include <filesystem>
 #include "depuracao/debug.hpp"
 #include <iostream>
+#include <memory>
 
 const std::map<const std::string, std::pair<BYTE*, const unsigned int>> imagems_memoria
 {
+    {"cubo_branco", std::pair(cubo_branco, cubo_branco_len)},
     {"skybox_right.png", std::pair(DaylightBox_Right, DaylightBox_Right_size)},
     {"skybox_left.png", std::pair(DaylightBox_Left, DaylightBox_Left_size)},
     {"skybox_top.png", std::pair(DaylightBox_Top, DaylightBox_Top_size)},
@@ -34,8 +36,7 @@ const std::map<const std::string, std::pair<BYTE*, const unsigned int>> imagems_
     {"Transformacao.png", std::pair(transformacao_png, transformacao_png_len)},
     {"folder.png", std::pair(folder_png, folder_png_len)}
 };
-std::unordered_map<std::string, bubble::imageLoader*>imagens_carregadas;
-
+std::unordered_map<std::string, std::shared_ptr<bubble::imageLoader>> imagens_carregadas;
 bubble::imageLoader::imageLoader()
 {
 }
@@ -69,16 +70,14 @@ void bubble::imageLoader::carregarImagem(const std::string& filepath)
     auto it = imagens_carregadas.find(filepath);
     if (it != imagens_carregadas.end())
     {
-        data = it->second->data;
-        channels = it->second->channels;
-        width = it->second->width;
-        height = it->second->height;
+        data = imagens_carregadas[filepath]->data;
+        channels = imagens_carregadas[filepath]->channels;
+        width = imagens_carregadas[filepath]->width;
+        height = imagens_carregadas[filepath]->height;
         carregado = true;
         return;
     }
      depuracao::emitir(debug, "imageLoader", "nova imagem: " + filepath);
-    //Inicializa o FreeImage  
-    FreeImage_Initialise();
 
     const std::string nome_arquivo = std::filesystem::path(filepath).filename().string();
     if (imagems_memoria.find(nome_arquivo) != imagems_memoria.end())
@@ -132,11 +131,9 @@ void bubble::imageLoader::carregarImagem(const std::string& filepath)
 
     // Indica que a imagem foi carregada com sucesso  
     carregado = true;
-    imagens_carregadas.insert(std::pair(path, this));
     flipVertical();
+    imagens_carregadas[filepath] = std::make_shared<bubble::imageLoader>(*this);
 
-    // Finaliza o FreeImage  
-    FreeImage_DeInitialise();
 }
 void bubble::imageLoader::embutida(BYTE* data, const unsigned int tamanho) 
 {
@@ -186,10 +183,7 @@ void bubble::imageLoader::embutida(BYTE* data, const unsigned int tamanho)
 
     // Indica que a imagem foi carregada com sucesso  
     carregado = true;
-    imagens_carregadas.insert(std::pair(path, this));
     flipVertical();
-
-    FreeImage_DeInitialise();
 
     return;
 }
@@ -421,8 +415,8 @@ GLuint bubble::textureLoader::carregarSkybox(const char* path_pai, std::vector<s
     glGenTextures(1, &textureID);
     glBindTexture(GL_TEXTURE_CUBE_MAP, textureID);
 
-    int width, height, nrChannels;
     for (unsigned int i = 0; i < faces.size(); i++) {
+        int width, height, nrChannels;
         std::string caminhoCompleto = std::string(path_pai) + "/" + faces[i];
         bubble::imageLoader img(caminhoCompleto.c_str());
         unsigned char* data = img.obterDados();
@@ -430,7 +424,7 @@ GLuint bubble::textureLoader::carregarSkybox(const char* path_pai, std::vector<s
         height = img.obterAltura();
         nrChannels = img.obterCanal();
 
-        if (img.carregado) {
+        if (img.carregado && data) {
             glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i,
                 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
         }
@@ -492,10 +486,16 @@ GLuint bubble::textureLoader::carregarSkyboxMemoria(const std::vector<std::strin
             width = img.obterLargura();
             height = img.obterAltura();
             nrChannels = img.obterCanal();
-
+        unsigned int format;
+        if (nrChannels == 1)
+            format = GL_RED;
+        else if (nrChannels == 3)
+            format = GL_RGB;
+        else if (nrChannels == 4)
+            format = GL_RGBA;
             if (img.carregado) {
                 glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i,
-                    0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, img.obterDados());
+                    0, format, width, height, 0, format, GL_UNSIGNED_BYTE, img.obterDados());
             } else {
                 std::cerr << "Falha ao carregar a textura da skybox da memória: " << faces[i] << std::endl;
             }
