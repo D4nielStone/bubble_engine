@@ -29,10 +29,10 @@ namespace bubble
             void rodar();
 
             /// @brief salva todas as fases do projeto
-            void salvarTudo(){};
+            void salvarTudo();
             /// @brief salva fase pelo nome
             /// @param nome nome da fase
-            void salvar(const std::string& nome){};
+            void salvar(const std::string& nome);
             /// @brief carrega todas as fases da pasta do projeto
             void carregarTudo(){};
             /// @brief carrega fase pelo nome no diretório do projeto e torna atual

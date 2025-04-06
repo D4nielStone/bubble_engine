@@ -42,6 +42,16 @@ void fase::carregar()
     }
 }
 
+void fase::salvar()
+{
+    if(std::filesystem::exists(diretorio))
+		serializar(diretorio);	
+    else
+    {
+        depuracao::emitir(erro, "Erro ao serializar em: " + diretorio);
+    }
+}
+
 void fase::descarregar()
 {
     carregada = false;
@@ -165,6 +175,9 @@ void bubble::fase::analizarEntidades(const Document& doc)
 	}
 }
 
+void bubble::fase::serializar(const std::string& diretorio)
+{
+}
 void bubble::fase::analizar(const std::string& diretorio)
 {
 	std::ifstream file(diretorio);

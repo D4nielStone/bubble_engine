@@ -357,3 +357,21 @@ sistema* projeto::obterSistema(const std::string nome)
     }
     return nullptr;
 }
+
+void projeto::salvarTudo()
+{
+    depuracao::emitir(info, "salvando projeto.");
+    for(auto& fase : m_fases)
+    {
+        fase->salvar();
+    }
+}
+void projeto::salvar(const std::string& nome)
+{
+
+    depuracao::emitir(info, "salvando fase " + nome);
+    if(m_fases.find(nome) != m_fases.end())
+        m_fases[nome]->salvar();
+    else
+        depuracao::emitir(erro, "fase inexistente.");
+}
