@@ -29,10 +29,10 @@ namespace bubble
         bubble::shader& shader();
         void desenhar(bubble::shader& shader);
         std::vector<malha> malhas;
+        std::string diretorio;
     protected:
         // dados de malha
 
-        std::string diretorio;
         bubble::shader* _Mshader{nullptr};
 
         void carregarmodelo(const std::string& path);

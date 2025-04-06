@@ -35,3 +35,28 @@ bool bubble::transformacao::analizar(const rapidjson::Value& value)
     } else return false;
     return true;
 };
+
+bool bubble::transformacao::serializar(rapidjson::Value& value, rapidjson::Document::AllocatorType& allocator) const
+{
+    // posição Vetor 3
+    rapidjson::Value pos(rapidjson::kArrayType);
+    pos.PushBack(posicao.x, allocator);
+    pos.PushBack(posicao.y, allocator);
+    pos.PushBack(posicao.z, allocator);
+    value.AddMember("posicao", pos, allocator);
+
+    // rotação Vetor 3
+    rapidjson::Value rot(rapidjson::kArrayType);
+    rot.PushBack(rotacao.x, allocator);
+    rot.PushBack(rotacao.y, allocator);
+    rot.PushBack(rotacao.z, allocator);
+    value.AddMember("rotacao", rot, allocator);
+    
+    // escala Vetor 3
+    rapidjson::Value esc(rapidjson::kArrayType);
+    esc.PushBack(escala.x, allocator);
+    esc.PushBack(escala.y, allocator);
+    esc.PushBack(escala.z, allocator);
+    value.AddMember("escala", esc, allocator);
+    return true;
+}

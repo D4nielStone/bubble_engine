@@ -47,7 +47,8 @@ void bubble::codigo::iniciar() const
 bool bubble::codigo::analizar(const rapidjson::Value& value) 
 {
     if(!value.HasMember("diretorio")) return false;
-    arquivo = bubble::projeto_atual->diretorioDoProjeto + value["diretorio"].GetString();
+    arquivo = value["diretorio"].GetString();
+    arquivoCompleto = bubble::projeto_atual->diretorioDoProjeto + arquivo; 
 	L = luaL_newstate();
 	luaL_openlibs(L);
 
@@ -57,12 +58,18 @@ bool bubble::codigo::analizar(const rapidjson::Value& value)
 	bapi::definirInputs(L);
 	bapi::entidade::definir(L);
 
-	if (luaL_dofile(L, arquivo.c_str()) != LUA_OK) {
+	if (luaL_dofile(L, arquivoCompleto.c_str()) != LUA_OK) {
         std::cerr << "Erro ao carregar o script Lua: " << lua_tostring(L, -1) << std::endl;
         lua_pop(L, 1);  // Limpa a mensagem de erro
     }
     return true;
 };
+
+bool bubble::codigo::serializar(rapidjson::Value& value, rapidjson::Document::AllocatorType& allocator) const
+{
+    value.AddMember("diretorio", rapidjson::Value(arquivo.c_str(), allocator), allocator);
+    return true;
+}
 
 void bubble::codigo::atualizar() const
 {

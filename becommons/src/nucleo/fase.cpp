@@ -16,6 +16,7 @@
 #include <filesystem>
 #include <iostream>
 #include <typeinfo>
+#include <rapidjson/prettywriter.h>
 
 using namespace rapidjson;
 using namespace bubble;
@@ -113,7 +114,10 @@ void bubble::fase::analizarEntidades(const Document& doc)
 	for (auto& entidade : doc["entidades"].GetArray())
 	{
 		// Cria entidade
-        bubble::entidade ent = reg.criar();
+		uint32_t id = 0;
+		if(entidade.HasMember("id") && entidade["id"].IsInt())
+            id = entidade["id"].GetInt();
+        bubble::entidade ent = reg.criar(id);
 		
 		// Itera os componentes
 		if (!entidade.HasMember("componentes") && entidade["componentes"].IsArray())
@@ -177,6 +181,53 @@ void bubble::fase::analizarEntidades(const Document& doc)
 
 void bubble::fase::serializar(const std::string& diretorio)
 {
+    Document doc;
+    doc.SetObject();
+    Document::AllocatorType& allocator = doc.GetAllocator();
+
+    // Nome da fase
+    doc.AddMember("nome", Value(_Mnome.c_str(), allocator), allocator);
+
+    // Array de entidades
+    Value entidades_v(kArrayType);
+
+    for (auto& [id, componentes] : reg.entidades)
+    {
+        Value entidade_v(kObjectType);
+        Value componentes_v(kArrayType);
+
+        // Serializar componentes
+        for(auto& [mask, componente] : componentes)
+        {
+            Value componente_v(kObjectType);
+            // Adiciona tipo baseado na mascara
+            if(mask == componente::COMPONENTE_CAM)
+            componente_v.AddMember("tipo", "camera", allocator);
+            if(mask == componente::COMPONENTE_RENDER)
+            componente_v.AddMember("tipo", "renderizador", allocator);
+            if(mask == componente::COMPONENTE_LUZ_DIRECIONAL)
+            componente_v.AddMember("tipo", "luz_direcional", allocator);
+            if(mask == componente::COMPONENTE_TRANSFORMACAO)
+            componente_v.AddMember("tipo", "transformacao", allocator);
+            if(mask == componente::COMPONENTE_CODIGO)
+            componente_v.AddMember("tipo", "codigo", allocator);
+
+            componente->serializar(componente_v, allocator);
+            componentes_v.PushBack(componente_v, allocator);
+        }
+        entidade_v.AddMember("id", id, allocator);
+        entidade_v.AddMember("componentes", componentes_v, allocator);
+        entidades_v.PushBack(entidade_v, allocator);
+    }
+
+    doc.AddMember("entidades", entidades_v, allocator);
+
+    // Escrevendo no arquivo
+    std::ofstream ofs(diretorio);
+    StringBuffer buffer;
+    PrettyWriter<StringBuffer> writer(buffer);
+    doc.Accept(writer);
+    ofs << buffer.GetString();
 }
 void bubble::fase::analizar(const std::string& diretorio)
 {

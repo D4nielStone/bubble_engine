@@ -156,6 +156,10 @@ void sistema_editor::atualizar()
         projeto_atual->salvarTudo();
         executarRuntime();
     }
+    if(instanciaJanela->inputs.isKeyPressed("Ctrl") && instanciaJanela->inputs.isKeyPressed("S"))
+    {
+        projeto_atual->salvarTudo();
+    }
     // Verifica se o número de entidades mudou
     size_t num_entidades_atual = projeto_atual->obterFaseAtual()->obterRegistro()->entidades.size();
     if (num_entidades_atual != num_entidades_anterior)

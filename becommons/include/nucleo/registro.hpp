@@ -27,14 +27,12 @@ namespace bubble
 	struct registro
 	{
 	    ~registro(){entidades.clear(); mascaras.clear();}
-		/// proximo id livre
-		uint32_t proxima_entidade{ 0 };
 		/// Armazena mascara da entidade associada
 		std::unordered_map<uint32_t, bubble::componente::mascara> mascaras;
 		/// Armazena componentes da entidade associada
 		std::map<uint32_t, std::unordered_map<bubble::componente::mascara, std::shared_ptr<bubble::componente>>> entidades;
 		/* Cria nova entidade */
-		entidade criar();
+		entidade criar(const uint32_t id = 0);
 		/* Retorna todos os componentes da entidade */
 		componente::mascara obterComponentes(const uint32_t& id) const;
 		/* Adiciona um componente a uma entidade */

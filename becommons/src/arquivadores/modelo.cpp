@@ -39,6 +39,7 @@ namespace bubble
     {
         if(primitivas.find(std::filesystem::path(path).filename().string()) != primitivas.end())
         {
+            diretorio = path;
             malhas.push_back(primitivas[std::filesystem::path(path).filename().string()]);
             malhas.back().definirBuffers();
             return;

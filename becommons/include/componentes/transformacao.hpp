@@ -27,6 +27,7 @@ namespace bubble
 		static constexpr mascara mascara = COMPONENTE_TRANSFORMACAO;
 
         bool analizar(const rapidjson::Value&) override;
+        bool serializar(rapidjson::Value& value, rapidjson::Document::AllocatorType& allocator) const override;
 		transformacao(const vet3& p = vet3(0.f,0.f,0.f),
 			const vet3& r = vet3(0.f, 90.f, 0.f), 
 			const vet3& e = vet3(1.f, 1.f, 1.f)) :

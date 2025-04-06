@@ -118,6 +118,7 @@ void projeto::criarProjetoVazio(const std::string& novo_diretorio, const char* n
     "nome": "FaseMain",
     "entidades":[
         {
+            "id": 1,
             "componentes":[
                 {
                     "tipo": "luz_direcional",
@@ -129,6 +130,7 @@ void projeto::criarProjetoVazio(const std::string& novo_diretorio, const char* n
             ]
         },
         {
+            "id": 2,
             "componentes":[
                 {
                     "tipo": "renderizador",
@@ -143,6 +145,7 @@ void projeto::criarProjetoVazio(const std::string& novo_diretorio, const char* n
             ]
         },
         {
+            "id": 3,
             "componentes":[
                 {
                     "tipo": "renderizador",
@@ -161,6 +164,7 @@ void projeto::criarProjetoVazio(const std::string& novo_diretorio, const char* n
             ]
         },
         {
+            "id": 4,
             "componentes":[
                 {
                     "tipo": "transformacao",
@@ -361,7 +365,7 @@ sistema* projeto::obterSistema(const std::string nome)
 void projeto::salvarTudo()
 {
     depuracao::emitir(info, "salvando projeto.");
-    for(auto& fase : m_fases)
+    for(auto& [nome, fase] : m_fases)
     {
         fase->salvar();
     }

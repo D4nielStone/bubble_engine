@@ -44,8 +44,8 @@ namespace bubble
 	private:
 	    void analizarEntidades(const rapidjson::Document&);
 	    bool carregada{false};
-		static void analizar(const std::string& diretorio);
-		static void serializar(const std::string& diretorio);
+		void analizar(const std::string& diretorio);
+		void serializar(const std::string& diretorio);
         std::string diretorio;
 		registro reg;
 		std::string _Mnome {""};

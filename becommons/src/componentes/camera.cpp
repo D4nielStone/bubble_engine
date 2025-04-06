@@ -63,11 +63,37 @@ bool bubble::camera::analizar(const rapidjson::Value& value)
 			_ceu[3].GetFloat() / 255,
 		};
 	}
-	if (!value.HasMember("skybox") || !value["skybox"].IsBool()) return true;
+	if (value.HasMember("skybox") && !value["skybox"].GetBool()) return true;
     m_skybox = new skybox();
 	return true;
 }
+bool bubble::camera::serializar(rapidjson::Value& value, rapidjson::Document::AllocatorType& allocator) const
+{
+    // fov
+    value.AddMember("fov", fov, allocator);
 
+    // zfar
+    value.AddMember("zfar", corte_longo, allocator);
+
+    // escala
+    value.AddMember("escala", escala, allocator);
+
+    // ortho flag
+    value.AddMember("ortho", flag_orth, allocator);
+
+    // ceu (vetor RGBA)
+    rapidjson::Value cor_ceu(rapidjson::kArrayType);
+    cor_ceu.PushBack(static_cast<int>(ceu.r * 255), allocator);
+    cor_ceu.PushBack(static_cast<int>(ceu.g * 255), allocator);
+    cor_ceu.PushBack(static_cast<int>(ceu.b * 255), allocator);
+    cor_ceu.PushBack(static_cast<int>(ceu.a * 255), allocator);
+    value.AddMember("ceu", cor_ceu, allocator);
+
+    // skybox (flag)
+    value.AddMember("skybox", m_skybox != nullptr, allocator);
+
+    return true;
+}
 void bubble::camera::ativarFB()
 {
     flag_fb = true;

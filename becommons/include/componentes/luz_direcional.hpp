@@ -14,6 +14,30 @@ namespace bubble
         {
 
         }
+        bool serializar(rapidjson::Value& value, rapidjson::Document::AllocatorType& allocator) const override
+        {
+            rapidjson::Value direcao_v(rapidjson::kArrayType);
+            rapidjson::Value cor_v(rapidjson::kArrayType);
+            rapidjson::Value ambiente_v(rapidjson::kArrayType);
+
+            direcao_v.PushBack(direcao.x , allocator);
+            direcao_v.PushBack(direcao.y , allocator);
+            direcao_v.PushBack(direcao.z , allocator);
+
+            cor_v.PushBack(cor.x , allocator);
+            cor_v.PushBack(cor.y , allocator);
+            cor_v.PushBack(cor.z , allocator);
+            
+            ambiente_v.PushBack(ambiente.x , allocator);
+            ambiente_v.PushBack(ambiente.y , allocator);
+            ambiente_v.PushBack(ambiente.z , allocator);
+
+            value.AddMember("direcao", direcao_v, allocator);
+            value.AddMember("ambiente", ambiente_v, allocator);
+            value.AddMember("cor", cor_v, allocator);
+            value.AddMember("intensidade", intensidade, allocator);
+            return true;
+        }
         bool analizar(const rapidjson::Value& value) override
         {
             if(!value.HasMember("direcao") || !value["direcao"].IsArray()) return false;

@@ -48,6 +48,7 @@ namespace bubble
 	struct renderizador : componente
 	{
 		bubble::modelo* modelo;
+        std::string diretorio;
 		static constexpr mascara mascara = COMPONENTE_RENDER;
 
 		renderizador(bubble::modelo* malha) : modelo(malha)
@@ -57,7 +58,8 @@ namespace bubble
         {
             if(value.HasMember("modelo") && value["modelo"].IsString())
             {
-				std::string path = bubble::projeto_atual->diretorioDoProjeto + std::string(value["modelo"].GetString());
+                diretorio = std::string(value["modelo"].GetString());
+				std::string path = bubble::projeto_atual->diretorioDoProjeto + diretorio;
                 if(modelo) delete modelo;
                 modelo = new bubble::modelo(path.c_str());
             }
@@ -86,6 +88,12 @@ namespace bubble
 			}
 			return true;
         };
+        bool serializar(rapidjson::Value& value, rapidjson::Document::AllocatorType& allocator) const override
+        {
+            value.AddMember("modelo", rapidjson::Value(diretorio.c_str(), allocator), allocator);
+            return true;
+        };
+        
         renderizador() = default;
 		renderizador(const char* diretorio ) : modelo(new bubble::modelo(diretorio)) {};
 		~renderizador()

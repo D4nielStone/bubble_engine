@@ -6,11 +6,20 @@
 #include "componentes/renderizador.hpp"
 #include "arquivadores/shader.hpp"
 
-bubble::entidade bubble::registro::criar()
+bubble::entidade bubble::registro::criar(const uint32_t id)
 {
-    proxima_entidade++;
-    depuracao::emitir(debug, "registro", "nova entidade: " + std::to_string(proxima_entidade ));
-    bubble::entidade ent ={ proxima_entidade, componente::COMPONENTE_NONE };
+    // Se o id é 0, cria com id livre
+    // se não, cria com o parâmetro "id"
+    uint32_t id_atual = id;
+    // Se tem id em uso ou é inválido( igual à 0 )
+    uint32_t proxima_entidade = 0;
+    while(id_atual == 0 || entidades.find(id_atual) != entidades.end())
+    {
+        proxima_entidade++;
+        id_atual = proxima_entidade;
+    }
+    depuracao::emitir(debug, "registro", "nova entidade: " + std::to_string(id_atual));
+    bubble::entidade ent ={ id_atual , componente::COMPONENTE_NONE };
 
     adicionar<bubble::transformacao>(ent);
 

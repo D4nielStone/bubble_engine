@@ -53,8 +53,9 @@ namespace bubble
 
 		void desenharFB() const;
         bool analizar(const rapidjson::Value&) override;
+        bool serializar(rapidjson::Value& value, rapidjson::Document::AllocatorType& allocator) const override;
 
-		~camera();
+        ~camera();
 		camera(const bool ortho = false);
 
 		void ativarFB();

@@ -16,6 +16,7 @@ namespace bubble
 	{
 		static constexpr mascara mascara = COMPONENTE_CODIGO;
 		std::string arquivo;
+		std::string arquivoCompleto;
 		lua_State* L;
 
 		/**
@@ -28,6 +29,7 @@ namespace bubble
 		~codigo();
 		codigo() = default;
         bool analizar(const rapidjson::Value&) override;
+        bool serializar(rapidjson::Value& value, rapidjson::Document::AllocatorType& allocator) const override;
 		void iniciar() const;
 		void encerrar();
 		void atualizar() const;

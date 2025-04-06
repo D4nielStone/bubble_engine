@@ -9,6 +9,8 @@
 #include <cstdint>
 #include <type_traits>
 #include <rapidjson/document.h>
+#include <rapidjson/writer.h>
+#include <rapidjson/stringbuffer.h>
 
 namespace bubble
 {
@@ -44,6 +46,7 @@ namespace bubble
 		componente() = default;
 		virtual ~componente() = default;
 	    virtual bool analizar(const rapidjson::Value& obj) {return true;};
+        virtual bool serializar(rapidjson::Value& value, rapidjson::Document::AllocatorType& allocator) const{return true;};
 	};
 	inline componente::mascara operator|(componente::mascara lhs, componente::mascara rhs) {
 		using T = std::underlying_type_t<componente::mascara>;
