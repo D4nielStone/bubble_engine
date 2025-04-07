@@ -4,7 +4,8 @@
 #include <filesystem>
 #include "assets/shaders_na_memoria.hpp"
 
-inline std::vector<std::pair<std::pair<const char*, const char*>, unsigned int>> shaders;
+using namespace bubble;
+
 // Mapeia os shaders na memória para facilitar o acesso aos shaders embutidos
 inline const std::unordered_map<std::string, const char*> shader_memoria{
     {"quad.frag", quad_frag},
@@ -18,6 +19,11 @@ inline const std::unordered_map<std::string, const char*> shader_memoria{
     {"phong.frag", phong_frag}
 };
 
+void bubble::descarregarShaders()
+{
+    shaders.clear();
+}
+
 bubble::shaderException::shaderException(const char* msg) : msg_(msg) {}
 
 const char* bubble::shaderException::what() const noexcept {
@@ -29,14 +35,13 @@ bubble::shader::shader(const char* vertexPath, const char* fragmentPath) {
 }
 
 void bubble::shader::compilar(const char* vertexPath, const char* fragmentPath) {
+    vert = vertexPath; frag = fragmentPath;
     // Verifica se o shader já foi compilado
-    for (const auto& shader : shaders) {
-        if (shader.first.first == vertexPath && shader.first.second == fragmentPath) {
-            ID = shader.second;
-            return;
-        }
+    if(shaders.find(fragmentPath) != shaders.end())
+    {
+        ID = shaders[fragmentPath];
+        return;
     }
-
     // Cria o programa shader
     try {
         ID = glCreateProgram();
@@ -113,11 +118,20 @@ void bubble::shader::compilar(const char* vertexPath, const char* fragmentPath) 
     glDeleteShader(fragmentshader);
 
     
-    shaders.push_back({ {vertexPath, fragmentPath}, ID });
+    shaders[fragmentPath] = ID;
 }
 
-void bubble::shader::use() const {
-    glUseProgram(ID);
+void bubble::shader::use() 
+{
+    if(shaders.find(frag) != shaders.end())
+    {
+        glUseProgram(ID);
+    }
+    else
+    {
+        compilar(vert.c_str(), frag.c_str());
+
+    }
 }
 
 void bubble::shader::setBool(const std::string& name, const bool& value) const {

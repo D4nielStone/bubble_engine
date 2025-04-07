@@ -6,6 +6,7 @@
 #include <assimp/scene.h>
 #include <vector>
 #include <glad/glad.h>
+#include <memory>
 
 struct GLFWimage;
 
@@ -15,7 +16,7 @@ namespace bubble
     {
     public:
         static void init() { FreeImage_Initialise(); }
-        static void shutdown() { FreeImage_DeInitialise(); }
+        static void shutdown(); 
         imageLoader();
         imageLoader(const std::string& filepath);
         ~imageLoader();
@@ -39,6 +40,7 @@ namespace bubble
     int texturaDoArquivo(const std::string& directory, double* width = nullptr, double* height = nullptr);
     int texturaDoArquivo(const std::string& directory, GLuint tipo_textura);
     int texturaDoArquivo(unsigned char* data, unsigned int width, unsigned int height, int format);
+    inline std::unordered_map<std::string, std::shared_ptr<bubble::imageLoader>> imagens_carregadas;
     class  textureLoader
     {
     public:

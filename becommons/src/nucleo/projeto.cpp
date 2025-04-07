@@ -22,20 +22,15 @@ using namespace bubble;
 
 // Main loop
 void projeto::rodar()
-
 {
-    while(!glfwWindowShouldClose(instanciaJanela->window))
-	{
         if(!instanciaJanela) {
             depuracao::emitir(erro, "Janela não definida!");
             return;
         }
+    while(!glfwWindowShouldClose(instanciaJanela->window))
+	{
 		instanciaJanela->poll();
-        if(!obterFaseAtual()) {
-            depuracao::emitir(erro, "Fase atual não definida!");
-            return;
-        }
-        if(obterFaseAtual()->rodando)
+        if(obterFaseAtual() && obterFaseAtual()->rodando)
         {
             if(sistemas.find("fisica") != sistemas.end())
                 sistemas["fisica"]->atualizar();        
@@ -45,7 +40,7 @@ void projeto::rodar()
         if(sistemas.find("render") != sistemas.end())
             sistemas["render"]->atualizar();        
 
-        if(obterFaseAtual()->rodando)
+        if(obterFaseAtual() && obterFaseAtual()->rodando)
             if(sistemas.find("interface") != sistemas.end())
                 sistemas["interface"]->atualizar();        
 
@@ -303,15 +298,15 @@ void projeto::criarJanela(rapidjson::Document& doc)
     const char* nome_janela = doc["janela"].GetObject()["titulo"].GetString();
     std::string icon_path = doc["janela"].GetObject()["icone"].GetString();
 
-    instanciaJanela = new bubble::janela(nome_janela,
+    instanciaJanela = new bubble::janela(nome_janela, true,
      bubble::vetor2<double>(doc["janela"].GetObject()["largura"].GetInt(), doc["janela"].GetObject()["altura"].GetInt()),
     (diretorioDoProjeto + "/" + icon_path).c_str());
 
     // Cria fase atual
-    carregar(doc["lancamento"].GetString());
+    carregarFase(doc["lancamento"].GetString());
 }
 
-void projeto::carregar(const std::string &n)
+void projeto::carregarFase(const std::string &n)
 {
     auto nome = diretorioDoProjeto + n;
     depuracao::emitir(info, "carregando fase em: " + nome + ".fase");
@@ -340,13 +335,19 @@ void projeto::iniciarSistemas(bubble::fase* f)
 
 void projeto::adicionar(const std::string nome, sistema* s)
 {
+    if(obterFaseAtual())
     s->inicializar(obterFaseAtual().get());
+    else
+        s->inicializar(nullptr);
     sistemas_adicionais[nome] = s;
 }
 
 std::shared_ptr<fase> projeto::obterFaseAtual()
 {
+    if(m_fases.find(fase_atual) != m_fases.end())
 	return m_fases[fase_atual];
+    else
+        return nullptr;
 }
 
 sistema_fisica* projeto::sfisica()
@@ -374,7 +375,7 @@ void projeto::salvarFases()
         fase->salvar();
     }
 }
-void projeto::salvarProjeto(const std::string& nome)
+void projeto::salvarFase(const std::string& nome)
 {
 
     depuracao::emitir(info, "salvando fase " + nome);

@@ -33,7 +33,13 @@ namespace bubble
 
     gerenciadorFontes::~gerenciadorFontes()
     {
+        fontes.clear();
         FT_Done_FreeType(ft);
+    }
+
+    void gerenciadorFontes::limparFontes()
+    {
+        gerenciadorFontes::obterInstancia().fontes.clear();
     }
 
     void gerenciadorFontes::carregar(const std::string& nome_da_fonte, unsigned int resolucao)

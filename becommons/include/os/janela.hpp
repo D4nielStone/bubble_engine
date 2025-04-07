@@ -25,14 +25,14 @@ namespace bubble
 	*/
 	struct janela
 	{
-    enum class cursor : int
-    {
+        enum class cursor : int
+        {
         mao = 0x00036004,
         i   = 0x00036002,
         seta= 0x00036001,
         re_h= 0x00036005,
         re_v= 0x00036006
-    };
+        };
         private:
 	    cursor m_cursor = cursor::seta;
 	    cursor m_cursor_antigo = cursor::seta;
@@ -43,6 +43,7 @@ namespace bubble
 		GLFWwindow* window;
 		bubble::inputs inputs;
 		janela(const char* nome, bubble::vetor2<double> bounds = bubble::vetor2<double>(600, 400), const char* icon_path = nullptr);
+		janela(const char* nome, const bool f, bubble::vetor2<double> bounds = bubble::vetor2<double>(600, 400), const char* icon_path = nullptr);
 		~janela();
 		void poll();
         inline void defCursor(const cursor c)

@@ -87,7 +87,7 @@ void bapi::definirFisica(lua_State* L)
         endClass().
         beginClass<bubble::projeto>("projeto").
         addConstructor<void(*)(const std::string&)>().
-        addFunction("abrirFase", &bubble::projeto::carregar).
+        addFunction("carregarFase", &bubble::projeto::carregarFase).
         addFunction("faseAtual", &bubble::projeto::obterFaseAtual).
         endClass().
         beginClass<btCollisionObject>("objetoDeColisao").

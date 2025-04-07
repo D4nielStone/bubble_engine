@@ -43,6 +43,7 @@ namespace bubble{
                 , m_texto_flags(flags)
             {
                 m_largura = obterLargura(m_texto_frase);
+                m_limites.z = obterLargura(m_texto_frase);
             }
             texto(std::string* frase,
                     const float escala = 0.7f,
@@ -54,6 +55,7 @@ namespace bubble{
                 , m_texto_flags(flags)
             {
                 m_largura = obterLargura(m_texto_frase);
+                m_limites.z = obterLargura(m_texto_frase);
             }
             float obterLargura(const std::string& frase) {
                 if(m_texto_frase_ptr) m_texto_frase = *m_texto_frase_ptr;

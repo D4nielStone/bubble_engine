@@ -8,7 +8,8 @@
 #include <filesystem>
 #include "depuracao/debug.hpp"
 #include <iostream>
-#include <memory>
+
+using namespace bubble;
 
 const std::map<const std::string, std::pair<BYTE*, const unsigned int>> imagems_memoria
 {
@@ -36,7 +37,8 @@ const std::map<const std::string, std::pair<BYTE*, const unsigned int>> imagems_
     {"Transformacao.png", std::pair(transformacao_png, transformacao_png_len)},
     {"folder.png", std::pair(folder_png, folder_png_len)}
 };
-std::unordered_map<std::string, std::shared_ptr<bubble::imageLoader>> imagens_carregadas;
+void imageLoader::shutdown()
+{ FreeImage_DeInitialise(); imagens_carregadas.clear(); }
 bubble::imageLoader::imageLoader()
 {
 }

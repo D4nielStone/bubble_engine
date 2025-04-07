@@ -8,15 +8,17 @@
 namespace bubble
 {
         enum class flags_caixa : uint32_t {
-            nenhuma           = 0,
-            largura_percentual = 1 << 0,   // 1
-            altura_percentual  = 1 << 1,   // 2
-            modular            = 1 << 2,   // 4
-            alinhamento_central= 1 << 3,
-            alinhamento_fim    = 1 << 4,
-            largura_auto       = 1 << 5,
-            altura_auto        = 1 << 6,
-            mesma_linha        = 1 << 7
+            nenhuma             = 0,
+            largura_percentual  = 1 << 0,   // 1
+            altura_percentual   = 1 << 1,   // 2
+            modular             = 1 << 2,   // 4
+            alinhamento_central = 1 << 3,
+            alinhamento_fim     = 1 << 4,
+            largura_auto        = 1 << 5,
+            altura_auto         = 1 << 6,
+            mesma_linha         = 1 << 7,
+            largura_justa       = 1 << 8,
+            altura_justa        = 1 << 9
         };
         inline flags_caixa operator|(flags_caixa a, flags_caixa b) {
             return static_cast<flags_caixa>(static_cast<uint32_t>(a) | static_cast<uint32_t>(b));

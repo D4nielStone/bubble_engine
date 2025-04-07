@@ -19,7 +19,7 @@ namespace bubble
 { 
 	inline static unsigned int ret_VAO= 0, ret_VBO = 0, ret_EBO = 0, text_VBO = 0, text_VAO = 0;
     inline static void renderizarImagem(elementos::imagem*);
-    inline static void renderizarFundo(caixa*);
+    inline static void renderizarFundo(caixa*, bubble::shader*);
     inline static void renderizarTexto(elementos::texto*);
     class bubble_gui : public bubble::sistema
     {
@@ -27,15 +27,18 @@ namespace bubble
             std::unique_ptr<caixa> raiz;
             std::unordered_map<std::string, caixa*> caixas;
             std::set<std::string> estilo_atual;
-            
+            shader* quad_shader{nullptr};
+            void desenhar_caixa(caixa* c);
         public:
             bubble_gui();
-            
+            ~bubble_gui();
+
             void atualizarFilhos(caixa*);
             void definirBuffers();
             void adicionarFlags(const std::string& id, flags_caixa); 
             void inicializar(fase*) override;
             void atualizar() override;
+
             template <typename T, typename ...Args>
             void adicionarElemento(const std::string& pai_id, const std::string& nova_id, Args&&... args) {
                 estilo_atual.insert(nova_id);

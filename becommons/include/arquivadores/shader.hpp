@@ -21,10 +21,13 @@ namespace bubble
     private:
         std::string msg_;
     };
+    
+    void descarregarShaders();
 
     class shader
     {
     public:
+        std::string vert, frag;
         // the program ID
         unsigned int ID;
 
@@ -32,7 +35,7 @@ namespace bubble
         shader() { compilar("assets/shaders/phong.vert", "assets/shaders/phong.frag"); };
         shader(const char* vertexPath, const char* fragmentPath);
         // use/activate the shader
-        void use() const;
+        void use();
         // utility uniform functions
         void compilar(const char* vertexPath, const char* fragmentPath);
         void setBool(const std::string& name, const bool& value) const;
@@ -48,4 +51,5 @@ namespace bubble
         bool checkCompileErrors(unsigned int shader, const std::string& type);
         bool checkLinkErrors(unsigned int shader);
     };
+    inline std::unordered_map<std::string, unsigned int> shaders;
 }

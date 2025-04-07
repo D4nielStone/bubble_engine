@@ -22,7 +22,7 @@ void sistema_editor::configurarInterface(bubble::projeto& proj)
     // menu
     gui->novoEstilo();
         gui->adicionarElemento<caixa>("raiz", "menu");
-        gui->defFlags       (flags_caixa::modular);
+        gui->defFlags       (flags_caixa::modular | flags_caixa::alinhamento_central);
         gui->defAltura      (                            30);
         gui->defLargura     (                           1.0);
         gui->defOrientacao  (   caixa::orientacao::horizontal);
