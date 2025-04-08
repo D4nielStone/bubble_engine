@@ -46,7 +46,7 @@ namespace bubble{
                 }
                 if(m_texto)
                 {
-                    m_altura = m_texto->m_texto_escala * 24 + m_padding_geral.y;
+                    m_altura = m_texto->m_texto_escala + m_padding_geral.y;
                     m_largura = m_texto->obterLargura(m_texto->m_texto_frase) + m_padding_geral.x;
                     
                     m_texto->m_limites.x = m_limites.x + m_padding_geral.x/2;

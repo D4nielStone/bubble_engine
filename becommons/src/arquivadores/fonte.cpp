@@ -6,7 +6,7 @@
 
 namespace bubble
 {
-    std::map<const std::string, std::pair<const unsigned char*, unsigned int>> fontes_memoria
+    std::map<std::string, std::pair<const unsigned char*, unsigned int>> fontes_memoria
     {
         {"consolas.ttf", std::pair(Consolas_ttf, Consolas_ttf_len)},
         {"consolai.ttf", std::pair(consolai_ttf, consolai_ttf_len)},
@@ -42,11 +42,11 @@ namespace bubble
         gerenciadorFontes::obterInstancia().fontes.clear();
     }
 
-    void gerenciadorFontes::carregar(const std::string& nome_da_fonte, unsigned int resolucao)
+    void gerenciadorFontes::carregar(const std::string& nome_da_fonte, const unsigned int resolucao)
     {
-        if (fontes.find(nome_da_fonte) != fontes.end())
+        if (fontes.find({nome_da_fonte, resolucao}) != fontes.end())
         {
-            return; // Fonte j� carregada
+            return; // Fonte já carregada
         }
 
         FT_Face face{};
@@ -64,11 +64,6 @@ namespace bubble
                     throw std::runtime_error("Erro ao carregar a fonte: " + nome_da_fonte);
                 }
             }
-            else {
-                //Fonte n�o encontrada
-                return;
-            }
-
 
         FT_Set_Pixel_Sizes(face, 0, resolucao);
 
@@ -109,23 +104,23 @@ namespace bubble
                 vetor2<FT_Int>{face->glyph->bitmap_left, face->glyph->bitmap_top},
                 face->glyph->advance.x
             };
-            caracteres.insert(caracteres.end(), std::pair(c, character));
+            caracteres.emplace(c, character);
         }
 
-        fontes[nome_da_fonte] = caracteres;
+        fontes.emplace(FonteID(nome_da_fonte, resolucao), caracteres);
 
         FT_Done_Face(face);
     }
 
-    const std::map<char32_t, caractere>& gerenciadorFontes::obter(const std::string& nome_da_fonte) const
+    const std::map<char32_t, caractere>& gerenciadorFontes::obter(const std::string& nome_da_fonte, const unsigned int resolucao) const
     {
-        auto it = fontes.find(nome_da_fonte);
+        auto it = fontes.find({nome_da_fonte, resolucao});
         if (it != fontes.end())
         {
             return it->second;
         }
-        obterInstancia().carregar(nome_da_fonte, 20);
-        auto it_ = fontes.find(nome_da_fonte);
+        obterInstancia().carregar(nome_da_fonte, resolucao);
+        auto it_ = fontes.find({nome_da_fonte, resolucao});
             return it_->second;
         
     }

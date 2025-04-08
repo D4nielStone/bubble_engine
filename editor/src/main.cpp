@@ -14,27 +14,33 @@ void ini(const std::string& DIR_PADRAO)
 {
 
     if(!std::filesystem::exists(DIR_PADRAO))
-        depuracao::emitir(alerta, "Diretório do projeto inexistente.");
+        {
+            depuracao::emitir(alerta, "Diretório do projeto inexistente.");
+            if(!std::filesystem::create_directories(DIR_PADRAO))
+            {
+                depuracao::emitir(erro, "criando dir padrao.");
+                return;
+            }
+        }
     bubble::instanciaJanela = new bubble::janela("gerenciador de projetos | Daniel O. dos Santos© Bubble 2025", true);
    
     // Sistema de gui
     bubble_gui gui;
     gui.inicializar(nullptr);
     gui.obterElemento("raiz")->m_cor_fundo = {0.18f, 0.18f, 0.18f, 1.f};
-    gui.obterElemento("raiz")->m_orientacao_modular = caixa::orientacao::vertical;
-    gui.adicionarFlags("raiz", flags_caixa::alinhamento_central | flags_caixa::modular);
+    gui.adicionarFlags("raiz", flags_caixa::modular);
     
     gui.novoEstilo();
     gui.adicionarElemento<caixa>("raiz", "barra_lateral");
         gui.defFlags(flags_caixa::modular | flags_caixa::largura_justa);
         gui.defOrientacao(caixa::orientacao::vertical);
         gui.defCorFundo({0.1, 0.1, 0.1, 1});
-        gui.defCrescimentoM(1.f);
         gui.defPaddingG(5, 5);
-        gui.defLargura(0.3);
+        gui.defAltura(1.0);
 
     gui.novoEstilo();
-        gui.adicionarElemento<elementos::texto>("barra_lateral", "texto1", "Projetos encontrados", 1.f);
+        gui.adicionarElemento<elementos::texto>("barra_lateral", "texto1", "Projetos encontrados", 20);
+    gui.novoEstilo();
         for (const auto& entry : std::filesystem::recursive_directory_iterator(DIR_PADRAO)) {
             if (entry.is_regular_file() && entry.path().filename() == "config.json") {
                 auto caminhoEncontrado = entry.path().parent_path().string();
@@ -65,12 +71,16 @@ void ini(const std::string& DIR_PADRAO)
                 gui.defAltura(40);
                 gui.novoEstilo();    
                 gui.adicionarElemento<elementos::texto>("barra_lateral", caminhoEncontrado, caminhoEncontrado);
-                gui.defFlags(flags_caixa::mesma_linha);
             }
         }
+
     gui.novoEstilo();
-        gui.adicionarElemento<elementos::botao>("barra_lateral", "add", [](){}, new elementos::texto("+", 1.3, elementos::flags_texto::alinhamento_central));
-        gui.defAltura(20);
+        gui.adicionarElemento<caixa>("raiz", "area_maior");
+        gui.defFlags(flags_caixa::modular | flags_caixa::alinhamento_central);
+        gui.defAltura(1.0);
+        gui.defCrescimentoM(1.0);
+    gui.novoEstilo();
+        gui.adicionarElemento<elementos::botao>("area_maior", "add", [](){}, new elementos::texto("+", 48));
     while(!glfwWindowShouldClose(instanciaJanela->window))
     {
         instanciaJanela->poll();

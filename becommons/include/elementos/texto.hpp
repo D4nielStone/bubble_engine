@@ -30,11 +30,11 @@ namespace bubble{
             flags_texto m_texto_flags;
             shader* m_texto_shader;
             cor m_texto_cor{1.f, 1.f, 1.f, 1.f};
-            float m_texto_escala;
+            unsigned int m_texto_escala;
             std::string m_texto_frase, m_texto_fonte;
             std::string* m_texto_frase_ptr{nullptr};
             texto(const std::string frase,
-                    const float escala = 0.7f,
+                    const unsigned int escala = 14,
                     const flags_texto flags = flags_texto::padrao,
                     const std::string path_fonte = "consolas.ttf") : m_texto_frase(frase)
                 , m_texto_fonte(path_fonte)
@@ -42,11 +42,12 @@ namespace bubble{
                 , m_texto_shader(new shader("texto.vert", "texto.frag"))
                 , m_texto_flags(flags)
             {
+                m_altura = escala;
                 m_largura = obterLargura(m_texto_frase);
-                m_limites.z = obterLargura(m_texto_frase);
+                m_limites.z = m_largura; m_limites.w = m_altura;
             }
             texto(std::string* frase,
-                    const float escala = 0.7f,
+                    const unsigned int escala = 14,
                     const flags_texto flags = flags_texto::padrao,
                     const std::string path_fonte = "consolas.ttf") : m_texto_frase_ptr(frase)
                 , m_texto_fonte(path_fonte)
@@ -54,12 +55,13 @@ namespace bubble{
                 , m_texto_shader(new shader("texto.vert", "texto.frag"))
                 , m_texto_flags(flags)
             {
+                m_altura = escala;
                 m_largura = obterLargura(m_texto_frase);
-                m_limites.z = obterLargura(m_texto_frase);
+                m_limites.z = m_largura; m_limites.w = m_altura;
             }
             float obterLargura(const std::string& frase) {
                 if(m_texto_frase_ptr) m_texto_frase = *m_texto_frase_ptr;
-                auto& caracteres = bubble::gerenciadorFontes::obterInstancia().obter(m_texto_fonte);
+                auto& caracteres = bubble::gerenciadorFontes::obterInstancia().obter(m_texto_fonte, m_texto_escala);
                 if (caracteres.empty()) {
                     return 0.0f;
                 }
@@ -70,7 +72,7 @@ namespace bubble{
                     auto it = caracteres.find(c);
                     if (it != caracteres.end()) {
                         const bubble::caractere& ch = it->second;
-                        larguraTotal += (ch.avanco >> 6) * m_texto_escala;
+                        larguraTotal += (ch.avanco >> 6);
                     }
                 }
             return larguraTotal;

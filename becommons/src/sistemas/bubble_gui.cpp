@@ -2,11 +2,41 @@
 #include "os/janela.hpp"
 #include "depuracao/debug.hpp"
 #include <cmath>
+#include <functional>
 
 using namespace bubble;
 
-
 glm::mat4 proj(1.f);
+
+inline void atualizarLJ(caixa* it_caixa)
+{
+    const bool is_horizontal = it_caixa->m_orientacao_modular == caixa::orientacao::horizontal;
+    float mais_largo = 0.f; float mais_alto = 0.f;
+    if(!it_caixa->m_ativo) return;
+    for(auto& filho : it_caixa->m_filhos)
+    {
+        if(!filho->m_ativo) continue;
+        if(!is_horizontal && it_caixa->tem_flag(flags_caixa::largura_justa))
+        {
+        // Calcular largura justa
+        mais_largo = std::max(mais_largo, filho->m_largura + filho->m_padding.x*2 + it_caixa->m_padding_geral.x*2);
+        // Definir dimensão da caixa pai
+        it_caixa->m_largura = mais_largo;
+        }
+    }
+}
+
+// Atualizar Hierarquia De Traz pra Frente
+inline void atualizarHDTF(caixa* it_caixa, std::function<void(caixa*)> func) {
+    // Percorre os filhos de trás pra frente
+    for (auto it = it_caixa->m_filhos.rbegin(); it != it_caixa->m_filhos.rend(); ++it) {
+        // Chama recursivamente antes de atualizar a caixa atual
+        atualizarHDTF(it->get(), func);
+        
+        func((*it).get());
+    }
+}
+
 void bubble_gui::desenhar_caixa(caixa* c)
 {
     if(!c->m_ativo) return;
@@ -95,8 +125,8 @@ void bubble::renderizarTexto(elementos::texto* tex)
 
         // iterate through all characters
         std::string::const_iterator c;
-        auto& chs = bubble::gerenciadorFontes::obterInstancia().obter(tex->m_texto_fonte);
-        float y_linha = (20 * tex->m_texto_escala);
+        auto& chs = bubble::gerenciadorFontes::obterInstancia().obter(tex->m_texto_fonte, tex->m_texto_escala);
+        float y_linha = tex->m_texto_escala;
         float x_linha = tex->m_limites.x; 
         if(((uint32_t)tex->m_texto_flags & (uint32_t)elementos::flags_texto::alinhamento_central)!=0) 
         {
@@ -108,18 +138,18 @@ void bubble::renderizarTexto(elementos::texto* tex)
 
         for(char32_t ca : texto_final)
         {
-            if(ca == '\n') {y_linha += (20 * tex->m_texto_escala); x_linha = tex->m_limites.x; continue;}
+            if(ca == '\n') {y_linha += tex->m_texto_escala; x_linha = tex->m_limites.x; continue;}
             
             if (chs.empty())
                 return;
             bubble::caractere ch = chs.at(ca);
             
-            float xpos = x_linha + ch.apoio.x * tex->m_texto_escala;
-            float ypos = tex->m_limites.y - ch.apoio.y * tex->m_texto_escala + y_linha;
+            float xpos = x_linha + ch.apoio.x;
+            float ypos = tex->m_limites.y - ch.apoio.y + y_linha;
 
             if(y_linha > tex->m_limites.y + tex->m_limites.w) break;
-            float w = ch.tamanho.x * tex->m_texto_escala;
-            float h = ch.tamanho.y * tex->m_texto_escala;
+            float w = ch.tamanho.x;
+            float h = ch.tamanho.y;
 
             // update VBO for each character
             float vertices[6][4] = {
@@ -140,7 +170,7 @@ void bubble::renderizarTexto(elementos::texto* tex)
             // render quad
             glDrawArrays(GL_TRIANGLES, 0, 6);
             // now advance cursors for next glyph (note that advance is number of 1/64 pixels)
-            x_linha += (ch.avanco >> 6) * tex->m_texto_escala; // bitshift by 6 to get value in pixels (2^6 = 64)
+            x_linha += (ch.avanco >> 6);
         }
         glBindVertexArray(0);
     }
@@ -149,7 +179,6 @@ bubble_gui::bubble_gui()
     raiz = std::make_unique<caixa>();
     raiz->m_id = "raiz";
     caixas["raiz"] = raiz.get();
-   
 }
 
 void bubble_gui::inicializar(fase* f)
@@ -248,24 +277,29 @@ instanciaJanela->tamanho.y
         static_cast<float>(instanciaJanela->tamanho.y)};
 
 
-    atualizarFilhos(raiz.get());
+    // Ajusta largura de último-primeiro
+    atualizarHDTF(raiz.get(), atualizarLJ);
     
+    atualizarFilhos(raiz.get());
     desenhar_caixa(raiz.get());
 
     glCullFace(GL_BACK);
 }
+
 void bubble_gui::atualizarFilhos(caixa* it_caixa)
 {
     if (!it_caixa || !it_caixa->m_ativo) {
         return; // Evita acesso inválido caso a caixa não exista
     }
-
+    
     // Se a caixa for modular, atualizar limites dos filhos
     if(it_caixa->tem_flag(flags_caixa::modular)){
         // Define qual é a dimensão principal e a secundária
         // Se horizontal: principal = largura (z), secundária = altura (w)
         // Se vertical: principal = altura (w), secundária = largura (z)
+        // Para dimensões justas
         const bool is_horizontal = it_caixa->m_orientacao_modular == caixa::orientacao::horizontal;
+
         float espaco_disponivel_principal = is_horizontal ? it_caixa->m_limites.z : it_caixa->m_limites.w;
         float espaco_disponivel_secundario = is_horizontal ? it_caixa->m_limites.w : it_caixa->m_limites.z; 
         // Variáveis para a dimensão principal
@@ -274,13 +308,13 @@ void bubble_gui::atualizarFilhos(caixa* it_caixa)
         // Para a secundária – neste exemplo não usamos crescimento, mas o espaço fixo é calculado
         float espaco_fixo_secundario = 0.0f;
         
-        // Para dimensões justas
-        float mais_largo = 0.f; float mais_alto = 0.f;
         // Primeira passagem: calcular espaço fixo e crescimento para a dimensão principal;
         // e espaço fixo para a secundária, conforme as flags
+
         for(auto& filho : it_caixa->m_filhos)
         {
             if(!filho->m_ativo) continue;
+                    
             if(is_horizontal) {
                 // Dimensão principal (largura)
                 if(filho->tem_flag(flags_caixa::largura_percentual))
@@ -413,8 +447,6 @@ void bubble_gui::atualizarFilhos(caixa* it_caixa)
             while(i < it_caixa->m_filhos.size()){
                 auto& filho = it_caixa->m_filhos[i];
                 if(!filho->m_ativo) { i++; continue; }
-                    // Calcular largura justa
-                    if(filho->m_limites.z > mais_largo) mais_largo = filho->m_limites.z + filho->m_padding.x*2 + it_caixa->m_padding_geral.x*2;
                 
                 // Se o filho possuir a flag "mesma_linha", processa grupo horizontal
                 if(filho->tem_flag(flags_caixa::mesma_linha)){
@@ -470,11 +502,8 @@ void bubble_gui::atualizarFilhos(caixa* it_caixa)
                 }
             }
         }
-    
-        // Definir dimensão da caixa pai
-        if(it_caixa->tem_flag(flags_caixa::largura_justa)) it_caixa->m_limites.z = mais_largo;
-        if(it_caixa->tem_flag(flags_caixa::altura_justa)) it_caixa->m_limites.w = mais_alto;
     }
+    
     // Atualiza recursivamente os filhos
     for (auto& filho : it_caixa->m_filhos) {
         atualizarFilhos(filho.get());
