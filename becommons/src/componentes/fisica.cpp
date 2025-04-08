@@ -1,3 +1,15 @@
+
+/** @copyright Copyright (c) 2025 Daniel Oliveira */
+/**
+ * @file fisica.cpp
+ *
+ * @author Daniel O. dos Santos
+ * @date 2025-04-08
+ * @version 1.0
+ *
+ * @licence MIT License
+ */
+
 #include "componentes/fisica.hpp"
 #include "componentes/transformacao.hpp"
 #include "nucleo/fase.hpp"

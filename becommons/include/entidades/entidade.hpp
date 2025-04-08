@@ -1,9 +1,14 @@
 /** @copyright Copyright (c) 2025 Daniel Oliveira */
-
 /**
  * @file entidade.hpp
  * @brief Inclusoes e defini��es relacionadas � entidade
+ * @author Daniel O. dos Santos
+ * @date 2025-04-08
+ * @version 1.0
+ *
+ * @licence MIT License
  */
+
 
 #pragma once
 #include <memory>
@@ -26,7 +31,7 @@ namespace bubble
 
 }	///< namespace bubble
 
-// Implementa��o de std::hash para entidade
+// Implementação de std::hash para entidade
 namespace std {
 	template <>
 	struct hash<bubble::entidade> {

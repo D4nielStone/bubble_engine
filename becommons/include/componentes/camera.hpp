@@ -1,4 +1,18 @@
 /** @copyright Copyright (c) 2025 Daniel Oliveira */
+/**
+ * @file camera.hpp
+ * @brief Estrutura básica de câmera.
+ * @brief Viewport, Matrizes etc.
+ *
+ * @author Daniel O. dos Santos
+ * @date 2025-04-08
+ * @version 1.0
+ *
+ * @licence MIT License
+ *
+ * @see camera.cpp
+ */
+
 #pragma once
 #include "componente.hpp"
 #include "util/raio.hpp"
@@ -71,8 +85,6 @@ namespace bubble
 
         bubble::vetor2<int> mundoParaTela(const glm::vec3& mundoPos);
 		
-		/// @brief 
-		/// @param pos 
 		void mover(glm::vec3 pos);
 	};
 }

@@ -1,4 +1,14 @@
+/** @copyright Copyright (c) 2025 Daniel Oliveira */
+/**
+ * @file phong_frag.hpp
+ *
+ * @author Daniel O. dos Santos
+ * @date 2025-04-08
+ * @version 1.0
+ */
+
 inline const char* phong_frag = R"(
+
 #version 330 core
 out vec4 FragColor;
 

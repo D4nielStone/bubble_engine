@@ -1,4 +1,14 @@
 /** @copyright Copyright (c) 2025 Daniel Oliveira */
+/**
+ * @file luz_pontual.hpp
+ *
+ * @author Daniel O. dos Santos
+ * @date 2025-04-08
+ * @version 1.0
+ *
+ * @licence MIT License
+ */
+
 #pragma once
 #include "componente.hpp"
 #include "util/vetor3.hpp"

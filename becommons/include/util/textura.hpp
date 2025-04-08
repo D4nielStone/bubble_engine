@@ -1,4 +1,13 @@
 /** @copyright Copyright (c) 2025 Daniel Oliveira */
+/**
+ * @file textura.hpp
+ * @author Daniel O. dos Santos
+ * @date 2025-04-08
+ * @version 1.0
+ *
+ * @licence MIT License
+ */
+
 #pragma once
 #include <string>
 

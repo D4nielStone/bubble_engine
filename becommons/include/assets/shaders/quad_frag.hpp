@@ -1,4 +1,13 @@
+/** @copyright Copyright (c) 2025 Daniel Oliveira */
+/**
+ * @file quad_frag.hpp
+ *
+ * @author Daniel O. dos Santos
+ * @date 2025-04-08
+ * @version 1.0
+ */
 inline const char* quad_frag = 
+
 R"(
 #version 330 core
 

@@ -1,8 +1,14 @@
 /** @copyright Copyright (c) 2025 Daniel Oliveira */
-
 /**
  * @file sistema_de_interface.hpp
- * @brief Gerencia a interface de jogo
+ *
+ * @author Daniel O. dos Santos
+ * @date 2025-04-08
+ * @version 1.0
+ *
+ * @licence MIT License
+ *
+ * @see sistema_de_interface.cpp
  */
 
 #pragma once

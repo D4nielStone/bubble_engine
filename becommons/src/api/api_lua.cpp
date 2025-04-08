@@ -1,3 +1,14 @@
+/** @copyright Copyright (c) 2025 Daniel Oliveira */
+/**
+ * @file api_lua.cpp
+ *
+ * @author Daniel O. dos Santos
+ * @date 2025-04-08
+ * @version 1.0
+ *
+ * @licence MIT License
+ */
+
 #include "api/api_lua.hpp"
 #include "nucleo/fase.hpp"
 #include "nucleo/projeto.hpp"

@@ -1,4 +1,16 @@
 #include "nucleo/fase.hpp"
+
+/** @copyright Copyright (c) 2025 Daniel Oliveira */
+/**
+ * @file fase.cpp
+ *
+ * @author Daniel O. dos Santos
+ * @date 2025-04-08
+ * @version 1.0
+ *
+ * @licence MIT License
+ */
+
 #include "arquivadores/imageloader.hpp"
 #include "util/malha.hpp"
 #include "nucleo/projeto.hpp"

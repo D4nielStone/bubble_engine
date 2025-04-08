@@ -1,10 +1,15 @@
-
 /** @copyright Copyright (c) 2025 Daniel Oliveira */
-
 /**
  * @file componente.hpp
  * @brief Estrutura base para componetes
+ *
+ * @author Daniel O. dos Santos
+ * @date 2025-04-08
+ * @version 1.0
+ *
+ * @licence MIT License
  */
+
 #pragma once
 #include <cstdint>
 #include <type_traits>

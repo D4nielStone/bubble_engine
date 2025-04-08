@@ -1,5 +1,14 @@
-inline const char* texto_vert = R"(
+/** @copyright Copyright (c) 2025 Daniel Oliveira */
+/**
+ * @file texto_vert.hpp
+ *
+ * @author Daniel O. dos Santos
+ * @date 2025-04-08
+ * @version 1.0
+ */
 
+
+inline const char* texto_vert = R"(
 #version 330 core
 layout (location = 0) in vec4 vertex; // <vec2 pos, vec2 tex>
 out vec2 TexCoords;

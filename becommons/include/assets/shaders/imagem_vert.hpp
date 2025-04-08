@@ -1,4 +1,13 @@
+/** @copyright Copyright (c) 2025 Daniel Oliveira */
+/**
+ * @file imagem_vert.hpp
+ *
+ * @author Daniel O. dos Santos
+ * @date 2025-04-08
+ * @version 1.0
+ */
 inline const char* imagem_vert = R"(
+
 #version 330 core
 layout (location = 0) in vec2 aPos;
 layout (location = 1) in vec2 aUv;

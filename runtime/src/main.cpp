@@ -1,4 +1,16 @@
 /** @copyright Copyright (c) 2025 Daniel Oliveira */
+
+/** @copyright Copyright (c) 2025 Daniel Oliveira */
+/**
+ * @file main.cpp
+ *
+ * @author Daniel O. dos Santos
+ * @date 2025-04-08
+ * @version 1.0
+ *
+ * @licence MIT License
+ */
+
 #include "nucleo/projeto.hpp"
 #include "os/sistema.hpp"
 #include "depuracao/debug.hpp"

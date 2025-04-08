@@ -1,4 +1,17 @@
 /** @copyright Copyright (c) 2025 Daniel Oliveira */
+/**
+ *
+ * @file transformacao.hpp
+ * @brief Calcula a mtriz de modelo para um objeto 3d qualquer
+ * @author Daniel O. dos Santos
+ * @date 2025-04-08
+ * @version 1.0
+ *
+ * @licence MIT License
+ *
+ * @see transformacao.cpp
+ */
+
 #pragma once
 #include "componente.hpp"
 #include "util/vetor3.hpp"
@@ -9,12 +22,6 @@
 #include <glm/ext/matrix_float4x4.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/gtx/quaternion.hpp>
-
-/**
- * @file transformacao.hpp
- * @brief Calcula a mtriz de modelo para um objeto 3d qualquer
- *
-*/
 
 namespace bubble
 {

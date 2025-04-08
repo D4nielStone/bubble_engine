@@ -1,4 +1,17 @@
 /** @copyright Copyright (c) 2025 Daniel Oliveira */
+/**
+ * @file modelo.hpp
+ * @brief Carrega um modelo usando a biblioteca assimp com base em um diretório.
+ *
+ * @author Daniel O. dos Santos
+ * @date 2025-04-08
+ * @version 1.0
+ *
+ * @licence MIT License
+ *
+ * @see modelo.cpp
+ */
+
 #pragma once
 #include "util/malha.hpp"
 #include "depuracao/debug.hpp"

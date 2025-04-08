@@ -1,4 +1,17 @@
 /** @copyright Copyright (c) 2025 Daniel Oliveira */
+/**
+ * @file codigo.hpp
+ * @brief Componente de código para entidades ECS.
+ *
+ * @author Daniel O. dos Santos
+ * @date 2025-04-08
+ * @version 1.0
+ *
+ * @licence MIT License
+ *
+ * @see codigo.cpp
+ */
+
 #pragma once
 #include "componente.hpp"
 #include "transformacao.hpp"

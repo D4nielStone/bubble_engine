@@ -1,3 +1,8 @@
+/** @copyright Copyright (c) 2025 Daniel Oliveira */
+/**
+ * @file esfera.hpp
+ */
+
 #include "util/malha.hpp"
 #include "util/material.hpp"
 #include "util/vertice.hpp"

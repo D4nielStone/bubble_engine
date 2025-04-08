@@ -1,4 +1,16 @@
+/** @copyright Copyright (c) 2025 Daniel Oliveira */
+/**
+ * @file modelo.cpp
+ *
+ * @author Daniel O. dos Santos
+ * @date 2025-04-08
+ * @version 1.0
+ *
+ * @licence MIT License
+ */
+
 #include "arquivadores/modelo.hpp"
+
 #include <assimp/Importer.hpp>
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>

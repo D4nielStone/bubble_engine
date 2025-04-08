@@ -1,8 +1,15 @@
 /** @copyright Copyright (c) 2025 Daniel Oliveira */
-
 /**
  * @file janela.hpp
  * @brief Inicia e gerencia janela glfw
+ *
+ * @author Daniel O. dos Santos
+ * @date 2025-04-08
+ * @version 1.0
+ *
+ * @licence MIT License
+ *
+ * @see janela.cpp
  */
 
 #pragma once

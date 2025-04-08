@@ -1,4 +1,8 @@
 /** @copyright Copyright (c) 2025 Daniel Oliveira */
+/**
+ * @file DaylightBox_Left.hpp
+ */
+
 
 #pragma once
 

@@ -1,3 +1,17 @@
+/** @copyright Copyright (c) 2025 Daniel Oliveira */
+/**
+ * @file shader.hpp
+ * @brief Gerencia os shaders GLSL.
+ *
+ * @author Daniel O. dos Santos
+ * @date 2025-04-08
+ * @version 1.0
+ *
+ * @licence MIT License
+ *
+ * @see shader.cpp
+ */
+
 #pragma once
 #include <string>
 #include <fstream>

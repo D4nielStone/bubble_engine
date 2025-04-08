@@ -1,3 +1,15 @@
+
+/** @copyright Copyright (c) 2025 Daniel Oliveira */
+/**
+ * @file skybox.cpp
+ *
+ * @author Daniel O. dos Santos
+ * @date 2025-04-08
+ * @version 1.0
+ *
+ * @licence MIT License
+ */
+
 #include "glad/glad.h"
 #include "util/skybox.hpp"
 

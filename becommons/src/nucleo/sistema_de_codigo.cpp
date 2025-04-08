@@ -1,4 +1,16 @@
 #include "nucleo/sistema_de_codigo.hpp"
+
+/** @copyright Copyright (c) 2025 Daniel Oliveira */
+/**
+ * @file sistema_de_codigo.cpp
+ *
+ * @author Daniel O. dos Santos
+ * @date 2025-04-08
+ * @version 1.0
+ *
+ * @licence MIT License
+ */
+
 #include "nucleo/fase.hpp"
 #include "componentes/codigo.hpp"
 #include "os/janela.hpp"

@@ -1,4 +1,16 @@
 #include <glad/glad.h>
+
+/** @copyright Copyright (c) 2025 Daniel Oliveira */
+/**
+ * @file malha.cpp
+ *
+ * @author Daniel O. dos Santos
+ * @date 2025-04-08
+ * @version 1.0
+ *
+ * @licence MIT License
+ */
+
 #include "util/malha.hpp"
 #include "util/material.hpp"
 #include "depuracao/debug.hpp"

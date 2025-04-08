@@ -1,4 +1,16 @@
 #include <glad/glad.h>
+
+/** @copyright Copyright (c) 2025 Daniel Oliveira */
+/**
+ * @file janela.cpp
+ *
+ * @author Daniel O. dos Santos
+ * @date 2025-04-08
+ * @version 1.0
+ *
+ * @licence MIT License
+ */
+
 #include "GLFW/glfw3.h"
 #include "os/janela.hpp"
 #include "depuracao/debug.hpp"

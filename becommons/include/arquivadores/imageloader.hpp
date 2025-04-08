@@ -1,4 +1,17 @@
 /** @copyright Copyright (c) 2025 Daniel Oliveira */
+/**
+ * @file imageloader.hpp
+ * @brief Gerencia as imagems/texturas carregadas na engine
+ *
+ * @author Daniel O. dos Santos
+ * @date 2025-04-08
+ * @version 1.0
+ *
+ * @licence MIT License
+ *
+ * @see imageloader.cpp
+ */
+
 #pragma once
 #include <string>
 #include "unordered_map"

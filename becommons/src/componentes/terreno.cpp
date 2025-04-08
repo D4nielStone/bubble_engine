@@ -1,3 +1,15 @@
+
+/** @copyright Copyright (c) 2025 Daniel Oliveira */
+/**
+ * @file terreno.cpp
+ *
+ * @author Daniel O. dos Santos
+ * @date 2025-04-08
+ * @version 1.0
+ *
+ * @licence MIT License
+ */
+
 #include "componentes/terreno.hpp"
 #include "arquivadores/imageloader.hpp"
 #include "depuracao/debug.hpp"

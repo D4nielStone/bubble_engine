@@ -1,8 +1,15 @@
 /** @copyright Copyright (c) 2025 Daniel Oliveira */
-
 /**
  * @file registro.hpp
- * @brief Inclusoes e defini��es relacionadas à registro
+ * @brief Inclusoes e definições relacionadas à registro
+ *
+ * @author Daniel O. dos Santos
+ * @date 2025-04-08
+ * @version 1.0
+ *
+ * @licence MIT License
+ *
+ * @see registro.cpp
  */
 
  #pragma once

@@ -1,9 +1,17 @@
 /** @copyright Copyright (c) 2025 Daniel Oliveira */
-
 /**
  * @file fase.hpp
  * @brief Gerencia sistemas numa fase
+ *
+ * @author Daniel O. dos Santos
+ * @date 2025-04-08
+ * @version 1.0
+ *
+ * @licence MIT License
+ *
+ * @see fase.cpp
  */
+
 
 #pragma once
 #include "nucleo/registro.hpp"

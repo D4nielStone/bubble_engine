@@ -1,5 +1,17 @@
 /** @copyright Copyright (c) 2025 Daniel Oliveira */
 
+/** @copyright Copyright (c) 2025 Daniel Oliveira */
+/**
+ * @file registro.cpp
+ *
+ * @author Daniel O. dos Santos
+ * @date 2025-04-08
+ * @version 1.0
+ *
+ * @licence MIT License
+ */
+
+
 #include "nucleo/registro.hpp"
 #include "entidades/entidade.hpp"
 #include "nucleo/registro.hpp"

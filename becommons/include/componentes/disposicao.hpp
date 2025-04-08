@@ -1,4 +1,17 @@
 /** @copyright Copyright (c) 2025 Daniel Oliveira */
+/**
+ * @file disposicao.hpp
+ * @brief Gerencia a configuração do luabridge para api lua.
+ *
+ * @author Daniel O. dos Santos
+ * @date 2025-04-08
+ * @version 1.0
+ *
+ * @licence MIT License
+ *
+ * @see .cpp
+ */
+
 #pragma once
 #include "componente.hpp"
 #include "texto.hpp"

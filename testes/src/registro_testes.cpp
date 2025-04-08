@@ -1,4 +1,16 @@
 #include "registro_testes.hpp"
+
+/** @copyright Copyright (c) 2025 Daniel Oliveira */
+/**
+ * @file registro_testes.cpp
+ *
+ * @author Daniel O. dos Santos
+ * @date 2025-04-08
+ * @version 1.0
+ *
+ * @licence MIT License
+ */
+
 #include "depuracao/debug.hpp"
 #include <stack>
 #include <utility>

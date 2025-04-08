@@ -1,4 +1,16 @@
 #include <glad/glad.h>
+
+/** @copyright Copyright (c) 2025 Daniel Oliveira */
+/**
+ * @file sistema_de_renderizacao.cpp
+ *
+ * @author Daniel O. dos Santos
+ * @date 2025-04-08
+ * @version 1.0
+ *
+ * @licence MIT License
+ */
+
 #include "nucleo/sistema_de_renderizacao.hpp"
 #include "componentes/renderizador.hpp"
 #include "componentes/transformacao.hpp"

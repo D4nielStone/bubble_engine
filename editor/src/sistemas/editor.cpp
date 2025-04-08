@@ -1,4 +1,16 @@
 #include "sistemas/bubble_gui.hpp"
+
+/** @copyright Copyright (c) 2025 Daniel Oliveira */
+/**
+ * @file editor.cpp
+ *
+ * @author Daniel O. dos Santos
+ * @date 2025-04-08
+ * @version 1.0
+ *
+ * @licence MIT License
+ */
+
 #include "sistemas/editor.hpp"
 #include "util/runtime.hpp"
 #include "os/janela.hpp"

@@ -1,5 +1,14 @@
-
 /** @copyright Copyright (c) 2025 Daniel Oliveira */
+/**
+ * @file shaders_na_memoria.hpp
+ * @brief Includes de shader.
+ *
+ * @author Daniel O. dos Santos
+ * @date 2025-04-08
+ * @version 1.0
+ *
+ * @licence MIT License
+ */
 
 #pragma once
 #include "shaders/quad_frag.hpp"

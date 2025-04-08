@@ -1,5 +1,17 @@
 /** @copyright Copyright (c) 2025 Daniel Oliveira */
 
+/** @copyright Copyright (c) 2025 Daniel Oliveira */
+/**
+ * @file projeto.cpp
+ *
+ * @author Daniel O. dos Santos
+ * @date 2025-04-08
+ * @version 1.0
+ *
+ * @licence MIT License
+ */
+
+
 #include "os/janela.hpp"
 #include "nucleo/projeto.hpp"
 #include "nucleo/sistema_de_fisica.hpp"

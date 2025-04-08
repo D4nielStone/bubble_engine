@@ -1,3 +1,12 @@
+/** @copyright Copyright (c) 2025 Daniel Oliveira */
+/**
+ * @file texto_frag.hpp
+ *
+ * @author Daniel O. dos Santos
+ * @date 2025-04-08
+ * @version 1.0
+ */
+
 inline const char* texto_frag = R"(
 #version 330 core
 in vec2 TexCoords;

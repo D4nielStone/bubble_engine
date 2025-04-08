@@ -1,4 +1,16 @@
 /** @copyright Copyright (c) 2025 Daniel Oliveira */
+/**
+ * @file fonte.hpp
+ * @brief Define estruturas básicas para renderização de textos
+ *
+ * @author Daniel O. dos Santos
+ * @date 2025-04-08
+ * @version 1.0
+ *
+ * @licence MIT License
+ *
+ * @see fonte.cpp
+ */
 
 #pragma once
 #include <glad/glad.h>
@@ -8,10 +20,6 @@
 #include <ft2build.h>
 #include FT_FREETYPE_H
 
-/**
-* @file fonte.hpp
-* @brief defini estruturas basicas para renderizacao de textos
-*/
 typedef std::pair<std::string, unsigned int> FonteID;
 namespace bubble
 {

@@ -1,4 +1,17 @@
 /** @copyright Copyright (c) 2025 Daniel Oliveira */
+/**
+ * @file bubble_gui.hpp
+ * @struct Manuseia a interface do editor
+ *
+ * @author Daniel O. dos Santos
+ * @date 2025-04-08
+ * @version 1.0
+ *
+ * @licence MIT License
+ *
+ * @see bubble_gui.cpp
+ */
+
 #include "componentes/imagem.hpp"
 #include "nucleo/sistema.hpp"
 #include <unordered_map>
@@ -7,13 +20,6 @@
 #include "elementos/botao.hpp"
 #include "elementos/texto.hpp"
 #include <set>
-
-/**
- *
- * @file bubble_gui.hpp
- * @struct Manuseia a interface do editor
- *
- **/
 
 namespace bubble
 { 

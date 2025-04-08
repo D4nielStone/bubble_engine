@@ -1,8 +1,13 @@
 /** @copyright Copyright (c) 2025 Daniel Oliveira */
-
 /**
  * @file tempo.hpp
  * @brief Inicia e gerencia o tempo
+ * @author Daniel O. dos Santos
+ * @date 2025-04-08
+ * @version 1.0
+ *
+ * @licence MIT License
+ *
  */
 
 #include <thread>
