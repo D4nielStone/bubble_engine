@@ -1,0 +1,35 @@
+<map id="becommons/include/componentes/disposicao.hpp" name="becommons/include/componentes/disposicao.hpp">
+<area shape="rect" id="Node000001" title="Gerencia a configuração do luabridge para api lua." alt="" coords="559,5,804,45"/>
+<area shape="rect" id="Node000002" href="$componente_8hpp.html" title="Estrutura base para componetes." alt="" coords="229,181,360,207"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="628,48,502,96,408,139,330,177,328,173,406,134,500,91,626,43"/>
+<area shape="rect" id="Node000008" href="$componentes_2texto_8hpp.html" title=" " alt="" coords="514,101,598,126"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="655,48,586,95,583,91,652,43"/>
+<area shape="rect" id="Node000014" href="$vetor4_8hpp.html" title=" " alt="" coords="623,101,740,126"/>
+<area shape="poly" id="edge14_Node000001_Node000014" title=" " alt="" coords="684,46,684,87,679,87,679,46"/>
+<area shape="rect" id="Node000015" title=" " alt="" coords="765,101,971,126"/>
+<area shape="poly" id="edge16_Node000001_Node000015" title=" " alt="" coords="723,43,832,92,830,97,721,48"/>
+<area shape="rect" id="Node000016" title=" " alt="" coords="996,93,1145,133"/>
+<area shape="poly" id="edge17_Node000001_Node000016" title=" " alt="" coords="767,43,983,90,982,95,766,48"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="5,255,72,280"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="254,209,86,256,85,250,253,204"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="97,255,189,280"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="271,209,181,251,179,246,269,204"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="213,255,376,280"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="297,207,297,241,292,241,292,207"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="401,255,535,280"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="324,204,428,247,426,252,322,209"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="559,255,731,280"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="352,204,576,249,575,255,350,209"/>
+<area shape="poly" id="edge8_Node000008_Node000002" title=" " alt="" coords="519,129,346,180,345,175,517,123"/>
+<area shape="rect" id="Node000009" href="$cor_8hpp.html" title=" " alt="" coords="385,181,479,207"/>
+<area shape="poly" id="edge9_Node000008_Node000009" title=" " alt="" coords="539,128,463,176,460,172,536,124"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="504,181,608,207"/>
+<area shape="poly" id="edge10_Node000008_Node000010" title=" " alt="" coords="559,126,559,167,553,167,553,126"/>
+<area shape="rect" id="Node000011" href="$vetor2_8hpp.html" title=" " alt="" coords="632,181,749,207"/>
+<area shape="poly" id="edge11_Node000008_Node000011" title=" " alt="" coords="577,124,660,172,658,177,575,128"/>
+<area shape="rect" id="Node000013" title=" " alt="" coords="773,181,832,207"/>
+<area shape="poly" id="edge13_Node000008_Node000013" title=" " alt="" coords="590,124,611,131,761,177,760,183,610,136,588,129"/>
+<area shape="rect" id="Node000012" title=" " alt="" coords="797,255,859,280"/>
+<area shape="poly" id="edge12_Node000011_Node000012" title=" " alt="" coords="714,204,795,246,792,251,712,209"/>
+<area shape="poly" id="edge15_Node000014_Node000012" title=" " alt="" coords="724,124,796,148,827,163,846,180,852,195,853,212,844,243,839,241,848,211,847,196,842,183,824,168,794,153,722,129"/>
+</map>

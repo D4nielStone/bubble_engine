@@ -1,0 +1,370 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt-BR">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Bubble Engine: Referência do Arquivo becommons/include/depuracao/assert.hpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Bubble Engine<span id="projectnumber">&#160;1.0b</span>
+   </div>
+   <div id="projectbrief">Game engine eficiente para projetos pequenos</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Gerado por Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Busca');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Carregando...</div>
+<div class="SRStatus" id="Searching">Procurando...</div>
+<div class="SRStatus" id="NoMatches">Nenhuma entrada encontrado</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_0394786a11e0dfde3dca27fdccf84bfd.html">becommons</a></li><li class="navelem"><a class="el" href="dir_9a744b5567c265deacf566b467d8af59.html">include</a></li><li class="navelem"><a class="el" href="dir_93f6fb17ca1aefce61f3d661bd348831.html">depuracao</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#define-members">Definições e Macros</a>  </div>
+  <div class="headertitle"><div class="title">Referência do Arquivo assert.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><code>#include &lt;stdexcept&gt;</code><br />
+<code>#include &lt;cmath&gt;</code><br />
+<code>#include &lt;string&gt;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Gráfico de dependência de inclusões para assert.hpp:</div>
+<div class="dyncontent">
+<div class="center"><img src="assert_8hpp__incl.png" border="0" usemap="#abecommons_2include_2depuracao_2assert_8hpp" alt=""/></div>
+<map name="abecommons_2include_2depuracao_2assert_8hpp" id="abecommons_2include_2depuracao_2assert_8hpp">
+<area shape="rect" title=" " alt="" coords="35,5,260,45"/>
+<area shape="rect" title=" " alt="" coords="5,93,92,119"/>
+<area shape="poly" title=" " alt="" coords="125,48,76,87,73,82,122,43"/>
+<area shape="rect" title=" " alt="" coords="116,93,179,119"/>
+<area shape="poly" title=" " alt="" coords="150,46,150,79,145,79,145,46"/>
+<area shape="rect" title=" " alt="" coords="203,93,262,119"/>
+<area shape="poly" title=" " alt="" coords="170,44,212,82,208,86,166,48"/>
+</map>
+</div>
+</div><div class="textblock"><div class="dynheader">
+Este grafo mostra quais arquivos estão direta ou indiretamente relacionados com esse arquivo:</div>
+<div class="dyncontent">
+<div class="center"><img src="assert_8hpp__dep__incl.png" border="0" usemap="#abecommons_2include_2depuracao_2assert_8hppdep" alt=""/></div>
+<map name="abecommons_2include_2depuracao_2assert_8hppdep" id="abecommons_2include_2depuracao_2assert_8hppdep">
+<area shape="rect" title=" " alt="" coords="447,5,673,45"/>
+<area shape="rect" href="registro_8hpp.html" title="Inclusoes e definições relacionadas à registro." alt="" coords="2048,93,2248,133"/>
+<area shape="poly" title=" " alt="" coords="686,31,2048,104,2047,109,686,36"/>
+<area shape="rect" href="fisica_8cpp.html" title=" " alt="" coords="147,533,365,573"/>
+<area shape="poly" title=" " alt="" coords="434,43,298,65,227,80,159,97,99,119,51,143,19,170,11,185,8,200,8,378,12,408,24,434,43,457,66,477,121,509,179,531,177,536,119,514,63,482,39,461,20,437,7,410,3,379,3,200,6,183,15,167,48,138,97,114,157,92,225,74,297,59,433,38"/>
+<area shape="rect" href="fase_8hpp.html" title="Gerencia sistemas numa fase." alt="" coords="1083,269,1283,309"/>
+<area shape="poly" title=" " alt="" coords="2035,138,1283,273,1282,267,2034,132"/>
+<area shape="rect" href="registro_8cpp.html" title=" " alt="" coords="1847,533,2019,573"/>
+<area shape="poly" title=" " alt="" coords="2262,111,2678,115,2945,123,3218,137,3473,158,3586,172,3685,189,3768,209,3831,231,3855,244,3872,257,3883,272,3887,288,3887,379,3884,404,3876,424,3864,440,3848,452,3807,470,3758,488,3674,500,3501,511,2990,530,2020,553,2020,548,2990,525,3501,505,3673,494,3757,483,3805,465,3845,447,3860,436,3872,421,3879,403,3881,379,3881,288,3878,274,3868,261,3852,248,3829,236,3767,214,3684,194,3585,178,3472,164,3217,142,2944,128,2678,121,2262,117"/>
+<area shape="rect" href="nucleo_2sistema_8hpp.html" title=" " alt="" coords="2172,181,2372,221"/>
+<area shape="poly" title=" " alt="" coords="2188,139,2246,179,2243,183,2185,143"/>
+<area shape="rect" href="projeto_8hpp.html" title="Gerencia configurações do projeto." alt="" coords="1015,357,1215,397"/>
+<area shape="poly" title=" " alt="" coords="1161,322,1132,359,1128,355,1157,319"/>
+<area shape="rect" href="api__lua_8cpp.html" title=" " alt="" coords="920,621,1093,661"/>
+<area shape="poly" title=" " alt="" coords="1069,294,891,298,683,309,488,328,409,342,350,360,276,391,220,423,197,443,177,467,137,534,130,555,131,563,136,571,164,577,233,585,451,602,920,632,920,638,450,607,232,590,163,582,133,576,126,565,125,554,132,532,172,464,194,439,217,419,274,386,348,355,408,337,487,323,683,303,891,293,1068,289"/>
+<area shape="rect" href="codigo_8cpp.html" title=" " alt="" coords="417,621,634,661"/>
+<area shape="poly" title=" " alt="" coords="1069,292,871,294,634,303,517,311,410,323,320,339,253,360,221,376,198,394,179,416,158,447,134,481,115,512,110,526,110,541,114,556,125,572,143,586,170,598,244,617,331,629,417,635,416,640,331,634,243,622,168,604,140,591,121,575,109,558,105,542,105,525,110,510,129,478,154,444,175,413,194,390,218,372,251,355,319,334,410,318,517,306,633,297,870,289,1069,287"/>
+<area shape="poly" title=" " alt="" coords="1069,298,681,321,503,338,440,349,404,360,378,377,354,398,315,447,285,495,266,534,261,532,280,493,310,443,351,394,375,373,402,355,439,343,502,333,681,315,1069,293"/>
+<area shape="rect" href="fase_8cpp.html" title=" " alt="" coords="449,533,621,573"/>
+<area shape="poly" title=" " alt="" coords="1069,297,896,305,703,318,537,336,479,347,447,360,417,387,400,416,396,432,397,448,401,466,410,484,422,499,436,512,470,531,467,535,433,516,418,503,406,487,396,468,392,449,391,431,395,414,413,383,444,355,478,342,536,331,702,313,896,300,1069,292"/>
+<area shape="rect" href="sistema__de__interface_8cpp.html" title=" " alt="" coords="1191,533,1385,573"/>
+<area shape="poly" title=" " alt="" coords="1069,304,861,329,744,347,633,369,537,393,466,422,443,436,430,452,428,467,438,483,453,493,478,501,556,513,658,521,773,525,995,528,1128,531,1191,537,1191,543,1128,536,995,533,773,530,658,526,555,518,477,506,450,498,434,487,423,468,425,450,439,433,463,417,535,388,632,363,743,342,860,324,1069,299"/>
+<area shape="rect" href="sistema__de__renderizacao_8cpp.html" title=" " alt="" coords="897,533,1116,573"/>
+<area shape="poly" title=" " alt="" coords="1069,296,927,302,767,314,620,333,561,345,517,360,483,376,459,392,440,414,422,446,416,467,417,475,421,483,897,537,897,543,419,488,411,477,410,466,418,444,435,411,455,388,481,371,515,355,560,340,619,327,767,309,927,297,1069,291"/>
+<area shape="rect" href="camera_8cpp.html" title=" " alt="" coords="1206,445,1423,485"/>
+<area shape="poly" title=" " alt="" coords="1207,319,1302,444,1298,447,1203,322"/>
+<area shape="rect" href="transformacao_8cpp.html" title=" " alt="" coords="1447,445,1665,485"/>
+<area shape="poly" title=" " alt="" coords="1220,315,1283,361,1336,395,1404,422,1472,443,1470,448,1402,428,1333,400,1280,366,1217,320"/>
+<area shape="rect" href="inputs_8cpp.html" title=" " alt="" coords="1741,445,1910,485"/>
+<area shape="poly" title=" " alt="" coords="1239,313,1324,355,1355,377,1386,395,1438,406,1531,421,1741,450,1740,456,1530,427,1437,412,1384,400,1352,381,1321,360,1237,317"/>
+<area shape="rect" href="sistema_8cpp.html" title=" " alt="" coords="1493,357,1665,397"/>
+<area shape="poly" title=" " alt="" coords="1283,310,1493,355,1492,360,1282,315"/>
+<area shape="rect" href="sistema__de__codigo_8cpp.html" title=" " alt="" coords="2181,445,2360,485"/>
+<area shape="poly" title=" " alt="" coords="1294,310,1360,329,1425,355,1442,366,1453,376,1465,386,1481,395,1540,410,1616,421,1796,432,1977,436,2118,443,2181,450,2181,455,2117,448,1977,441,1796,437,1616,426,1539,415,1479,400,1461,391,1450,380,1439,370,1423,360,1358,334,1293,315"/>
+<area shape="rect" href="sistema__de__fisica_8cpp.html" title=" " alt="" coords="1934,445,2106,485"/>
+<area shape="poly" title=" " alt="" coords="1262,311,1318,331,1375,355,1406,377,1419,386,1437,395,1507,416,1568,428,1623,433,1675,434,1784,432,1847,435,1922,443,1934,445,1934,450,1921,448,1847,440,1784,437,1675,439,1623,438,1568,433,1506,421,1435,400,1416,391,1403,381,1372,360,1316,336,1260,316"/>
+<area shape="rect" href="renderizador_8hpp.html" title=" " alt="" coords="683,445,928,485"/>
+<area shape="poly" title=" " alt="" coords="1034,404,874,448,872,443,1033,398"/>
+<area shape="poly" title=" " alt="" coords="1072,407,1053,425,1038,446,1032,466,1038,484,1048,495,1058,501,1083,507,1108,512,1120,520,1130,532,1138,553,1130,575,1118,591,1103,604,1070,624,1067,619,1100,600,1114,587,1126,572,1132,553,1126,535,1116,524,1106,517,1081,512,1056,506,1044,499,1034,487,1027,466,1034,444,1049,422,1068,403"/>
+<area shape="poly" title=" " alt="" coords="1001,384,841,391,664,403,515,422,464,434,438,447,419,477,415,506,422,537,438,572,459,599,487,619,484,623,456,603,434,575,417,539,409,506,414,475,434,443,462,429,514,416,663,398,840,386,1001,379"/>
+<area shape="poly" title=" " alt="" coords="1001,384,847,390,672,402,508,421,443,433,393,448,357,466,325,489,275,535,271,531,321,485,355,461,391,443,441,428,508,415,671,397,847,385,1001,379"/>
+<area shape="poly" title=" " alt="" coords="1001,382,926,388,841,400,755,419,672,448,646,465,622,487,561,535,557,531,618,483,642,461,669,443,753,414,841,394,925,383,1001,377"/>
+<area shape="poly" title=" " alt="" coords="1080,408,1062,426,1049,446,1044,465,1050,484,1068,494,1105,506,1202,531,1200,536,1103,511,1066,499,1046,487,1038,465,1044,443,1058,423,1076,404"/>
+<area shape="poly" title=" " alt="" coords="1172,400,1272,443,1270,448,1170,405"/>
+<area shape="poly" title=" " alt="" coords="1225,397,1460,443,1459,448,1224,403"/>
+<area shape="rect" href="projeto_8cpp.html" title=" " alt="" coords="2385,445,2557,485"/>
+<area shape="poly" title=" " alt="" coords="1229,382,2372,443,2384,444,2384,450,2372,448,1228,387"/>
+<area shape="rect" href="editor_8hpp.html" title="Gerencia a configuração do luabridge para api lua." alt="" coords="3251,533,3426,573"/>
+<area shape="poly" title=" " alt="" coords="1130,408,1156,449,1174,468,1194,483,1272,489,1469,496,2081,516,3251,547,3251,552,2081,521,1468,502,1272,494,1192,488,1170,472,1152,453,1126,411"/>
+<area shape="rect" href="editor_2src_2main_8cpp.html" title=" " alt="" coords="3153,629,3300,654"/>
+<area shape="poly" title=" " alt="" coords="1101,410,1091,449,1092,467,1100,483,1137,495,1220,509,1462,537,1835,571,2224,598,2605,617,3153,636,3153,641,2604,622,2223,603,1834,576,1461,542,1219,514,1136,500,1097,487,1087,469,1085,448,1096,409"/>
+<area shape="rect" href="editor_8cpp.html" title=" " alt="" coords="3364,621,3511,661"/>
+<area shape="poly" title=" " alt="" coords="1118,410,1126,450,1135,468,1148,483,1169,493,1203,502,1304,515,1435,523,1581,527,2031,531,2672,565,2953,584,3312,619,3364,625,3364,631,3312,624,2952,589,2672,570,2031,536,1581,533,1434,528,1303,520,1202,507,1167,498,1145,487,1130,471,1121,452,1112,412"/>
+<area shape="rect" href="runtime_2src_2main_8cpp.html" title=" " alt="" coords="448,453,608,478"/>
+<area shape="poly" title=" " alt="" coords="1001,395,825,418,627,448,586,455,585,450,626,443,824,413,1000,390"/>
+<area shape="rect" href="api__lua_8hpp.html" title="Gerencia a configuração do luabridge para api lua." alt="" coords="645,533,822,573"/>
+<area shape="poly" title=" " alt="" coords="783,498,751,535,747,531,779,494"/>
+<area shape="poly" title=" " alt="" coords="826,496,852,534,887,571,925,598,964,619,961,624,922,603,884,575,848,537,821,499"/>
+<area shape="poly" title=" " alt="" coords="672,490,365,538,364,532,671,485"/>
+<area shape="poly" title=" " alt="" coords="734,492,595,536,593,531,732,487"/>
+<area shape="poly" title=" " alt="" coords="942,474,1847,543,1847,548,941,480"/>
+<area shape="poly" title=" " alt="" coords="925,485,1191,532,1190,537,924,490"/>
+<area shape="poly" title=" " alt="" coords="863,488,964,531,962,536,861,493"/>
+<area shape="poly" title=" " alt="" coords="807,575,948,619,946,624,806,580"/>
+<area shape="poly" title=" " alt="" coords="676,581,572,624,570,619,674,576"/>
+<area shape="poly" title=" " alt="" coords="3305,584,3244,630,3241,626,3301,580"/>
+<area shape="poly" title=" " alt="" coords="3372,580,3417,619,3414,623,3369,584"/>
+<area shape="poly" title=" " alt="" coords="2159,218,1960,241,1732,272,1451,318,1215,360,1214,355,1450,312,1732,267,1959,236,2158,212"/>
+<area shape="poly" title=" " alt="" coords="2371,222,2571,267,2685,287,2786,295,2963,300,3045,309,3086,319,3127,332,3168,351,3211,375,3255,406,3301,443,3317,464,3329,488,3339,533,3334,534,3324,490,3313,467,3297,447,3251,410,3208,380,3166,356,3125,337,3084,324,3044,315,2963,305,2786,300,2685,292,2570,272,2370,227"/>
+<area shape="poly" title=" " alt="" coords="2159,217,2011,238,1931,253,1851,272,1787,292,1723,316,1619,360,1617,355,1721,311,1785,287,1850,267,1929,248,2010,232,2158,211"/>
+<area shape="rect" href="sistema__de__codigo_8hpp.html" title=" " alt="" coords="2183,357,2383,397"/>
+<area shape="poly" title=" " alt="" coords="2300,230,2312,248,2321,269,2325,289,2321,310,2311,336,2298,359,2294,356,2306,334,2316,309,2320,289,2316,270,2308,251,2296,233"/>
+<area shape="rect" href="sistema__de__fisica_8hpp.html" title="Gerencia a fisica de jogo com o bullet3." alt="" coords="1863,269,2063,309"/>
+<area shape="poly" title=" " alt="" coords="2192,228,2031,272,2030,267,2190,222"/>
+<area shape="rect" href="sistema__de__interface_8hpp.html" title=" " alt="" coords="2731,357,2931,397"/>
+<area shape="poly" title=" " alt="" coords="2346,223,2771,355,2769,360,2344,228"/>
+<area shape="rect" href="sistema__de__renderizacao_8hpp.html" title="Gerencia a renderizacao." alt="" coords="2087,269,2307,309"/>
+<area shape="poly" title=" " alt="" coords="2248,234,2216,271,2212,267,2244,230"/>
+<area shape="rect" href="janela_8hpp.html" title="Inicia e gerencia janela glfw." alt="" coords="2534,357,2706,397"/>
+<area shape="poly" title=" " alt="" coords="2323,225,2583,355,2581,359,2320,230"/>
+<area shape="rect" href="bubble__gui_8hpp.html" title=" " alt="" coords="3524,533,3740,573"/>
+<area shape="poly" title=" " alt="" coords="2386,212,2588,235,2819,267,2896,276,2968,279,3104,276,3228,265,3344,256,3399,256,3452,261,3505,270,3556,287,3607,311,3658,345,3709,388,3760,444,3767,458,3767,472,3761,485,3751,497,3720,518,3685,536,3682,531,3717,514,3747,493,3757,482,3762,471,3762,459,3755,447,3705,392,3655,349,3605,316,3554,292,3503,275,3451,266,3398,262,3344,262,3229,270,3104,281,2968,285,2895,281,2818,272,2587,240,2385,217"/>
+<area shape="poly" title=" " alt="" coords="2337,401,2431,443,2428,448,2335,405"/>
+<area shape="poly" title=" " alt="" coords="2281,411,2276,445,2271,445,2275,411"/>
+<area shape="poly" title=" " alt="" coords="1849,305,1216,369,1215,363,1848,299"/>
+<area shape="poly" title=" " alt="" coords="1923,319,1730,447,1704,469,1677,488,1602,523,1541,543,1397,576,1236,609,1094,631,1093,626,1236,603,1395,571,1539,538,1600,518,1675,483,1701,465,1726,443,1920,314"/>
+<area shape="poly" title=" " alt="" coords="2076,307,2126,311,2170,312,2245,311,2280,313,2316,319,2354,333,2396,355,2420,374,2439,398,2465,444,2461,446,2435,401,2416,378,2393,360,2352,338,2314,324,2279,318,2245,316,2170,318,2126,317,2076,312"/>
+<area shape="poly" title=" " alt="" coords="1976,322,2016,444,2011,446,1971,323"/>
+<area shape="poly" title=" " alt="" coords="2944,377,3040,382,3139,393,3224,412,3256,426,3278,444,3288,465,3285,477,3278,487,3252,498,3202,506,3039,519,2817,528,2565,533,2086,535,1835,536,1385,551,1385,546,1835,531,2086,530,2564,527,2817,522,3038,514,3201,501,3251,493,3274,483,3280,475,3282,466,3274,447,3253,431,3222,417,3138,398,3040,387,2944,382"/>
+<area shape="poly" title=" " alt="" coords="2739,403,2550,448,2549,443,2738,398"/>
+<area shape="poly" title=" " alt="" coords="2074,312,1652,345,1215,373,1215,367,1651,340,2073,307"/>
+<area shape="poly" title=" " alt="" coords="2187,323,2119,487,2095,498,2057,507,1950,520,1810,528,1655,532,1357,533,1179,536,1116,542,1116,537,1179,531,1357,528,1655,526,1810,522,1949,514,2056,502,2093,493,2115,483,2182,321"/>
+<area shape="poly" title=" " alt="" coords="2322,298,2385,318,2414,335,2441,355,2456,376,2465,400,2473,445,2468,445,2460,402,2451,379,2437,359,2411,339,2383,323,2320,303"/>
+<area shape="poly" title=" " alt="" coords="2304,310,2534,356,2533,361,2303,315"/>
+<area shape="poly" title=" " alt="" coords="2676,402,2699,421,2717,444,2724,466,2717,487,2691,517,2665,538,2638,552,2610,559,2546,566,2468,576,2344,594,2180,608,1784,628,1386,638,1094,642,1094,637,1386,633,1783,622,2179,603,2344,588,2468,571,2545,561,2609,554,2636,547,2662,534,2688,514,2712,484,2719,466,2712,447,2695,424,2673,407"/>
+<area shape="poly" title=" " alt="" coords="2641,409,2654,448,2653,469,2643,487,2629,497,2606,506,2537,523,2447,537,2345,549,2149,567,2031,576,1716,600,1470,609,1224,613,908,624,634,637,634,632,908,619,1224,608,1470,603,1715,595,2030,571,2148,562,2344,544,2446,532,2536,517,2604,501,2627,492,2639,484,2648,467,2648,449,2636,411"/>
+<area shape="poly" title=" " alt="" coords="2616,412,2600,453,2587,472,2569,488,2533,498,2463,506,2242,518,1944,526,1606,529,967,532,632,536,621,537,621,532,632,531,967,526,1606,524,1944,520,2242,513,2463,501,2532,493,2567,483,2583,469,2596,450,2611,410"/>
+<area shape="poly" title=" " alt="" coords="2720,394,3010,406,3167,419,3223,429,3242,436,3254,443,3261,454,3264,465,3261,477,3254,487,3229,498,3179,506,3019,519,2800,527,2552,532,2082,535,1835,536,1385,551,1385,546,1835,531,2082,530,2552,527,2800,522,3018,514,3178,501,3227,493,3250,483,3256,474,3258,465,3256,456,3250,447,3240,440,3222,434,3167,424,3009,411,2720,400"/>
+<area shape="poly" title=" " alt="" coords="2631,411,2632,450,2627,470,2615,487,2589,498,2539,506,2376,518,2155,526,1904,531,1179,536,1116,542,1116,536,1179,531,1904,525,2155,521,2376,513,2538,500,2588,492,2612,483,2622,468,2627,450,2626,411"/>
+<area shape="poly" title=" " alt="" coords="2521,390,2395,400,2125,413,1914,418,1704,426,1435,448,1424,449,1424,444,1434,443,1704,421,1914,413,2125,408,2394,395,2520,385"/>
+<area shape="poly" title=" " alt="" coords="2521,390,2395,400,2061,423,1728,448,1665,454,1664,449,1728,443,2061,417,2394,395,2520,384"/>
+<area shape="poly" title=" " alt="" coords="2577,406,2505,448,2502,443,2574,402"/>
+<area shape="poly" title=" " alt="" coords="2720,394,3022,405,3187,418,3246,429,3265,435,3278,443,3284,454,3285,464,3278,486,3270,502,3260,511,3250,521,3241,534,3234,560,3230,586,3229,628,3223,628,3224,585,3228,558,3236,532,3246,517,3256,508,3266,498,3274,484,3280,464,3279,456,3274,447,3263,440,3244,434,3186,423,3022,411,2719,400"/>
+<area shape="poly" title=" " alt="" coords="2719,395,2809,403,2885,404,3015,400,3078,400,3143,406,3216,419,3299,443,3345,457,3382,472,3412,494,3440,532,3448,555,3450,579,3445,622,3440,621,3445,579,3443,556,3435,535,3409,498,3379,476,3344,462,3298,448,3215,424,3142,411,3077,406,3015,406,2885,410,2808,408,2719,400"/>
+<area shape="poly" title=" " alt="" coords="2521,390,2202,418,1922,448,1910,450,1910,444,1921,443,2201,413,2520,384"/>
+<area shape="poly" title=" " alt="" coords="2531,403,2348,448,2347,443,2529,398"/>
+<area shape="poly" title=" " alt="" coords="2520,396,2106,454,2106,449,2520,390"/>
+<area shape="rect" href="botao_8hpp.html" title=" " alt="" coords="3519,445,3745,485"/>
+<area shape="poly" title=" " alt="" coords="2720,395,2926,415,3086,424,3246,430,3450,443,3519,449,3518,454,3449,448,3246,435,3086,429,2925,421,2719,400"/>
+<area shape="rect" href="bubble__gui_8cpp.html" title=" " alt="" coords="3563,621,3751,661"/>
+<area shape="poly" title=" " alt="" coords="2720,394,3275,406,3598,419,3708,429,3742,436,3759,443,3768,465,3770,500,3766,540,3754,575,3731,603,3701,623,3698,619,3727,599,3750,572,3761,539,3765,500,3763,466,3755,447,3740,441,3707,435,3598,425,3275,411,2720,399"/>
+<area shape="rect" href="camera__editor_8cpp.html" title=" " alt="" coords="2785,445,3002,485"/>
+<area shape="poly" title=" " alt="" coords="2694,399,2834,443,2833,448,2692,404"/>
+<area shape="rect" href="janela_8cpp.html" title=" " alt="" coords="3026,453,3241,478"/>
+<area shape="poly" title=" " alt="" coords="2720,395,3062,450,3061,455,2719,400"/>
+<area shape="poly" title=" " alt="" coords="3635,499,3635,533,3629,533,3629,499"/>
+<area shape="poly" title=" " alt="" coords="3530,579,3281,631,3280,626,3529,574"/>
+<area shape="poly" title=" " alt="" coords="3578,581,3481,624,3479,619,3576,576"/>
+<area shape="poly" title=" " alt="" coords="3644,586,3654,620,3649,622,3639,587"/>
+</map>
+</div>
+</div>
+<p><a href="assert_8hpp_source.html">Ir para o código-fonte desse arquivo.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
+Definições e Macros</h2></td></tr>
+<tr class="memitem:ac22830a985e1daed0c9eadba8c6f606e" id="r_ac22830a985e1daed0c9eadba8c6f606e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="assert_8hpp.html#ac22830a985e1daed0c9eadba8c6f606e">ASSERT</a>(condition)</td></tr>
+<tr class="separator:ac22830a985e1daed0c9eadba8c6f606e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aacfac3921a9b81ef7ee71e745b236e48" id="r_aacfac3921a9b81ef7ee71e745b236e48"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="assert_8hpp.html#aacfac3921a9b81ef7ee71e745b236e48">ASSERT_EQUAL</a>(actual,  expected)</td></tr>
+<tr class="separator:aacfac3921a9b81ef7ee71e745b236e48"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae085798e0db4f30216ae31b23475d693" id="r_ae085798e0db4f30216ae31b23475d693"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="assert_8hpp.html#ae085798e0db4f30216ae31b23475d693">ASSERT_TRUE</a>(expression)</td></tr>
+<tr class="separator:ae085798e0db4f30216ae31b23475d693"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a263e04fbc63102f1e4e29c9249e84da3" id="r_a263e04fbc63102f1e4e29c9249e84da3"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="assert_8hpp.html#a263e04fbc63102f1e4e29c9249e84da3">ASSERT_APPROX_EQUAL</a>(a,  b,  epsilon)</td></tr>
+<tr class="separator:a263e04fbc63102f1e4e29c9249e84da3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Descrição detalhada</h2>
+<div class="textblock"><dl class="section copyright"><dt>Copyright</dt><dd>Copyright (c) 2025 Daniel Oliveira</dd></dl>
+<dl class="section author"><dt>Autor</dt><dd>Daniel O. dos Santos </dd></dl>
+<dl class="section date"><dt>Data</dt><dd>2025-04-08 </dd></dl>
+<dl class="section version"><dt>Versão</dt><dd>1.0</dd></dl>
+<p>@licence MIT License </p>
+</div><h2 class="groupheader">Definições e macros</h2>
+<a id="ac22830a985e1daed0c9eadba8c6f606e" name="ac22830a985e1daed0c9eadba8c6f606e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac22830a985e1daed0c9eadba8c6f606e">&#9670;&#160;</a></span>ASSERT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ASSERT</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">condition</td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Valor:</b><div class="fragment"><div class="line">    <span class="keywordflow">do</span> { \</div>
+<div class="line">    if (!(condition)) { \</div>
+<div class="line">        <span class="keywordflow">throw</span> std::runtime_error( \</div>
+<div class="line">            <span class="stringliteral">&quot;ASSERT falhou: &quot;</span> #condition <span class="stringliteral">&quot;, arquivo &quot;</span> __FILE__ <span class="stringliteral">&quot;, linha &quot;</span> + std::to_string(__LINE__) \</div>
+<div class="line">        ); \</div>
+<div class="line">    } \</div>
+<div class="line">} <span class="keywordflow">while</span> (0)</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a263e04fbc63102f1e4e29c9249e84da3" name="a263e04fbc63102f1e4e29c9249e84da3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a263e04fbc63102f1e4e29c9249e84da3">&#9670;&#160;</a></span>ASSERT_APPROX_EQUAL</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ASSERT_APPROX_EQUAL</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">a, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">b, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">epsilon&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Valor:</b><div class="fragment"><div class="line">    <span class="keywordflow">if</span> (std::fabs((a) - (b)) &gt; (epsilon)) { \</div>
+<div class="line">        <span class="keywordflow">throw</span> std::runtime_error( \</div>
+<div class="line">            std::string(<span class="stringliteral">&quot;ASSERT_APPROX_EQUAL falhou: &quot;</span>) + std::to_string(a) + <span class="stringliteral">&quot; != &quot;</span> + std::to_string(b) + \</div>
+<div class="line">            <span class="stringliteral">&quot; (diferença maior que &quot;</span> + std::to_string(epsilon) + <span class="stringliteral">&quot;)&quot;</span> + \</div>
+<div class="line">            <span class="stringliteral">&quot; em &quot;</span> + __FILE__ + <span class="stringliteral">&quot;:&quot;</span> + std::to_string(__LINE__) \</div>
+<div class="line">        ); \</div>
+<div class="line">    }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="aacfac3921a9b81ef7ee71e745b236e48" name="aacfac3921a9b81ef7ee71e745b236e48"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aacfac3921a9b81ef7ee71e745b236e48">&#9670;&#160;</a></span>ASSERT_EQUAL</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ASSERT_EQUAL</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">actual, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">expected&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Valor:</b><div class="fragment"><div class="line"><span class="keywordflow">if</span> ((actual) != (expected)) { \</div>
+<div class="line">    <span class="keywordflow">throw</span> std::runtime_error(<span class="stringliteral">&quot;ASSERT_EQUAL falhou: &quot;</span> #actual <span class="stringliteral">&quot; != &quot;</span> #expected); \</div>
+<div class="line">}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ae085798e0db4f30216ae31b23475d693" name="ae085798e0db4f30216ae31b23475d693"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae085798e0db4f30216ae31b23475d693">&#9670;&#160;</a></span>ASSERT_TRUE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ASSERT_TRUE</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">expression</td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Valor:</b><div class="fragment"><div class="line"><span class="keywordflow">if</span> (!(expression)) { \</div>
+<div class="line">    <span class="keywordflow">throw</span> std::runtime_error(<span class="stringliteral">&quot;ASSERT_TRUE falhou: &quot;</span> #expression <span class="stringliteral">&quot; nao é verdadeiro&quot;</span> ); \</div>
+<div class="line">}</div>
+</div><!-- fragment -->
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Gerado por&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8
+</small></address>
+</body>
+</html>

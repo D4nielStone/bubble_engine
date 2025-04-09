@@ -1,0 +1,228 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt-BR">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Bubble Engine: Código-Fonte de becommons/include/api/api_lua.hpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Bubble Engine<span id="projectnumber">&#160;1.0b</span>
+   </div>
+   <div id="projectbrief">Game engine eficiente para projetos pequenos</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Gerado por Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Busca');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function() { init_codefold(0); });
+/* @license-end */
+</script>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Carregando...</div>
+<div class="SRStatus" id="Searching">Procurando...</div>
+<div class="SRStatus" id="NoMatches">Nenhuma entrada encontrado</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_0394786a11e0dfde3dca27fdccf84bfd.html">becommons</a></li><li class="navelem"><a class="el" href="dir_9a744b5567c265deacf566b467d8af59.html">include</a></li><li class="navelem"><a class="el" href="dir_e07a69a71bd80e8a87e2f4fd89c68eef.html">api</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle"><div class="title">api_lua.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="api__lua_8hpp.html">Ir para a documentação desse arquivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span> </div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#pragma once</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#include &quot;<a class="code" href="camera_8hpp.html">componentes/camera.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="preprocessor">#include &quot;<a class="code" href="vetor2_8hpp.html">util/vetor2.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="preprocessor">#include &quot;<a class="code" href="raio_8hpp.html">util/raio.hpp</a>&quot;</span>                </div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="preprocessor">#include &quot;<a class="code" href="cor_8hpp.html">util/cor.hpp</a>&quot;</span>                </div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="preprocessor">#include &quot;<a class="code" href="malha_8hpp.html">util/malha.hpp</a>&quot;</span>                </div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="preprocessor">#include &quot;<a class="code" href="material_8hpp.html">util/material.hpp</a>&quot;</span>                </div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="preprocessor">#include &quot;<a class="code" href="componentes_2texto_8hpp.html">componentes/texto.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="preprocessor">#include &quot;<a class="code" href="componentes_2imagem_8hpp.html">componentes/imagem.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="preprocessor">#include &quot;<a class="code" href="fisica_8hpp.html">componentes/fisica.hpp</a>&quot;</span>     </div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="preprocessor">#include &quot;<a class="code" href="luz__direcional_8hpp.html">componentes/luz_direcional.hpp</a>&quot;</span>  </div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="preprocessor">#include &lt;cstdint&gt;</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="preprocessor">#include &lt;bullet/btBulletDynamicsCommon.h&gt;</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="preprocessor">#include &quot;<a class="code" href="transformacao_8hpp.html">componentes/transformacao.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="preprocessor">#include &quot;<a class="code" href="renderizador_8hpp.html">componentes/renderizador.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="preprocessor">#include &lt;lua.hpp&gt;</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="preprocessor">#include &lt;LuaBridge/LuaBridge.h&gt;</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="preprocessor">#include &quot;<a class="code" href="mat_8hpp.html">mat.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="keyword">namespace </span>bapi</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>{</div>
+<div class="foldopen" id="foldopen00037" data-start="{" data-end="};">
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno"><a class="line" href="structbapi_1_1entidade.html">   37</a></span>    <span class="keyword">struct </span><a class="code hl_struct" href="structbapi_1_1entidade.html">entidade</a></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    {</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>        <a class="code hl_struct" href="structbubble_1_1transformacao.html">bubble::transformacao</a>* _Mtransformacao{ <span class="keyword">nullptr</span> };</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>        <a class="code hl_struct" href="structbubble_1_1fisica.html">bubble::fisica</a>* _Mfisica{ <span class="keyword">nullptr</span> };</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        <a class="code hl_struct" href="structbubble_1_1camera.html">bubble::camera</a>* _Mcamera{ <span class="keyword">nullptr</span> };</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        <a class="code hl_struct" href="structbubble_1_1texto.html">bubble::texto</a>* _Mtexto{ <span class="keyword">nullptr</span> };</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>        <a class="code hl_struct" href="structbubble_1_1imagem.html">bubble::imagem</a>* _Mimagem{ <span class="keyword">nullptr</span> };</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        <a class="code hl_struct" href="structbubble_1_1luz__direcional.html">bubble::luz_direcional</a>* _MluzDir{<span class="keyword">nullptr</span>};</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>        <a class="code hl_struct" href="structbubble_1_1renderizador.html">bubble::renderizador</a>* _Mrenderizador{<span class="keyword">nullptr</span>};</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>        uint32_t id;</div>
+<div class="foldopen" id="foldopen00047" data-start="{" data-end="}">
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno"><a class="line" href="structbapi_1_1entidade.html#aeb0032787186ce13bfc8ee6d2517c079">   47</a></span>        <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code hl_function" href="structbapi_1_1entidade.html#aeb0032787186ce13bfc8ee6d2517c079">definir</a>(lua_State* L)</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>        {</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>            luabridge::getGlobalNamespace(L). </div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>                beginClass&lt;bubble::malha&gt;(<span class="stringliteral">&quot;malha&quot;</span>).</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>                addConstructor&lt;void(*)()&gt;().</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>                addData(<span class="stringliteral">&quot;material&quot;</span>, &amp;bubble::malha::material).</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>                endClass().</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>                beginClass&lt;bubble::modelo&gt;(<span class="stringliteral">&quot;modelo&quot;</span>).</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>                addConstructor&lt;void(*)()&gt;().</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>                addFunction(<span class="stringliteral">&quot;obtMalha&quot;</span>, &amp;bubble::modelo::obterMalha).</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>                endClass().</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>                beginClass&lt;bubble::renderizador&gt;(<span class="stringliteral">&quot;renderizador&quot;</span>).           </div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>                addConstructor&lt;void(*)()&gt;().</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>                addData(<span class="stringliteral">&quot;modelo&quot;</span>, &amp;bubble::renderizador::modelo).</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>                endClass().</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>                beginClass&lt;bubble::transformacao&gt;(<span class="stringliteral">&quot;transformacao&quot;</span>).         </div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>                addConstructor&lt;void(*)()&gt;().</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>                addData&lt;glm::vec3&gt;(<span class="stringliteral">&quot;posicao&quot;</span>, &amp;bubble::transformacao::posicao, <span class="keyword">true</span>).</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>                addData&lt;glm::vec3&gt;(<span class="stringliteral">&quot;escala&quot;</span>, &amp;bubble::transformacao::escala, <span class="keyword">true</span>).</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>                addData&lt;glm::vec3&gt;(<span class="stringliteral">&quot;rotacao&quot;</span>, &amp;bubble::transformacao::rotacao, <span class="keyword">true</span>).</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>                addFunction(<span class="stringliteral">&quot;apontarEntidade&quot;</span>, &amp;bubble::transformacao::apontarEntidade).</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>                addFunction(<span class="stringliteral">&quot;apontarV3&quot;</span>, &amp;bubble::transformacao::apontarV3).</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>                endClass().</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>                beginClass&lt;bubble::imagem&gt;(<span class="stringliteral">&quot;imagem&quot;</span>).           </div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>                addConstructor&lt;void(*)(std::string)&gt;().</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>                addConstructor&lt;void(*)(unsigned int)&gt;().</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>                addData&lt;bubble::vetor2&lt;double&gt;&gt;(<span class="stringliteral">&quot;padding&quot;</span>, &amp;bubble::imagem::padding, <span class="keyword">true</span>).</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>                addData&lt;<a class="code hl_struct" href="structbubble_1_1vetor2.html">bubble::vetor2&lt;double&gt;</a>&gt;(<span class="stringliteral">&quot;limite&quot;</span>, &amp;bubble::imagem::limite, <span class="keyword">true</span>).</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>                addData&lt;bubble::cor&gt;(<span class="stringliteral">&quot;difusa&quot;</span>, &amp;bubble::imagem::difusa, <span class="keyword">true</span>).</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>                addFunction(<span class="stringliteral">&quot;definirID&quot;</span>, &amp;bubble::imagem::definirID).</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>                endClass().</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>                beginClass&lt;bubble::texto&gt;(<span class="stringliteral">&quot;texto&quot;</span>).</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>                addConstructor&lt;void(*)(const std::string&amp;)&gt;().</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>                addConstructor&lt;void(*)(const std::string&amp;,float)&gt;().</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>                addData(<span class="stringliteral">&quot;frase&quot;</span>, &amp;bubble::texto::frase).</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>                addData(<span class="stringliteral">&quot;fonte&quot;</span>, &amp;bubble::texto::fonte).</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>                addData(<span class="stringliteral">&quot;cor&quot;</span>, &amp;bubble::texto::cor).</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>                addData(<span class="stringliteral">&quot;refPos&quot;</span>, &amp;bubble::texto::posicao_referencial).</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>                addData(<span class="stringliteral">&quot;refPosAtiva&quot;</span>, &amp;bubble::texto::pf_ativa).</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>                endClass().</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>                beginClass&lt;bubble::camera&gt;(<span class="stringliteral">&quot;camera&quot;</span>).           </div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>                addConstructor&lt;void(*)()&gt;().</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>                addFunction(<span class="stringliteral">&quot;pontoParaRaio&quot;</span>, &amp;bubble::camera::pontoParaRaio).</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>                addData(<span class="stringliteral">&quot;fov&quot;</span>, &amp;bubble::camera::fov).</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>                addData(<span class="stringliteral">&quot;corte_curto&quot;</span>, &amp;bubble::camera::corte_curto).</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>                addData(<span class="stringliteral">&quot;framebuffer&quot;</span>, &amp;bubble::camera::textura).</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>                addData(<span class="stringliteral">&quot;corte_longo&quot;</span>, &amp;bubble::camera::corte_longo).</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>                addData(<span class="stringliteral">&quot;frente&quot;</span>, &amp;bubble::camera::forward).</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>                addData(<span class="stringliteral">&quot;ceu&quot;</span>, &amp;bubble::camera::ceu).</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>                addData(<span class="stringliteral">&quot;escala&quot;</span>, &amp;bubble::camera::escala).</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>                addData(<span class="stringliteral">&quot;flag_ortho&quot;</span>, &amp;bubble::camera::flag_orth).</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>                addFunction(<span class="stringliteral">&quot;telaParaMundo&quot;</span>, &amp;bubble::camera::telaParaMundo).</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>                addFunction(<span class="stringliteral">&quot;ativarFB&quot;</span>, &amp;bubble::camera::ativarFB).</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>                addFunction(<span class="stringliteral">&quot;mover&quot;</span>, &amp;bubble::camera::mover).</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>                addFunction(<span class="stringliteral">&quot;desativarFB&quot;</span>, &amp;bubble::camera::desativarFB).</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>                addFunction(<span class="stringliteral">&quot;viewport&quot;</span>, &amp;bubble::camera::viewport).</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>                endClass().</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>                beginClass&lt;bapi::entidade&gt;(<span class="stringliteral">&quot;entidade&quot;</span>).         </div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>                addConstructor&lt;void(*)(int)&gt;().</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>                addData(<span class="stringliteral">&quot;transformacao&quot;</span>, &amp;bapi::entidade::_Mtransformacao, <span class="keyword">true</span>).</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>                addData(<span class="stringliteral">&quot;camera&quot;</span>, &amp;bapi::entidade::_Mcamera, <span class="keyword">true</span>).</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>                addData(<span class="stringliteral">&quot;imagem&quot;</span>, &amp;bapi::entidade::_Mimagem, <span class="keyword">true</span>).</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>                addData(<span class="stringliteral">&quot;texto&quot;</span>, &amp;bapi::entidade::_Mtexto, <span class="keyword">true</span>).</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>                addData(<span class="stringliteral">&quot;fisica&quot;</span>, &amp;bapi::entidade::_Mfisica, <span class="keyword">true</span>).</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>                addData(<span class="stringliteral">&quot;id&quot;</span>, &amp;bapi::entidade::id, <span class="keyword">false</span>).</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>        addData(<span class="stringliteral">&quot;luzDir&quot;</span>, &amp;bapi::entidade::_MluzDir, <span class="keyword">true</span>).</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>                addData(<span class="stringliteral">&quot;renderizador&quot;</span>, &amp;bapi::entidade::_Mrenderizador).</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>                addFunction(<span class="stringliteral">&quot;destruir&quot;</span>, &amp;bapi::entidade::destruir).</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>                endClass();</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>        };</div>
+</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>        <span class="keywordtype">void</span> destruir() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>        <a class="code hl_struct" href="structbapi_1_1entidade.html">entidade</a>(<span class="keyword">const</span> uint32_t&amp; <span class="keywordtype">id</span>);</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>    };</div>
+</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>    <span class="keywordtype">void</span> definirFisica(lua_State* L);</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>    <span class="keywordtype">void</span> definirTempo(lua_State* L);</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>    <span class="keywordtype">void</span> definirUtils(lua_State* L);</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>    <span class="keywordtype">void</span> definirInputs(lua_State* L);</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>}</div>
+<div class="ttc" id="acamera_8hpp_html"><div class="ttname"><a href="camera_8hpp.html">camera.hpp</a></div><div class="ttdoc">Estrutura básica de câmera.</div></div>
+<div class="ttc" id="acomponentes_2imagem_8hpp_html"><div class="ttname"><a href="componentes_2imagem_8hpp.html">imagem.hpp</a></div></div>
+<div class="ttc" id="acomponentes_2texto_8hpp_html"><div class="ttname"><a href="componentes_2texto_8hpp.html">texto.hpp</a></div></div>
+<div class="ttc" id="acor_8hpp_html"><div class="ttname"><a href="cor_8hpp.html">cor.hpp</a></div></div>
+<div class="ttc" id="afisica_8hpp_html"><div class="ttname"><a href="fisica_8hpp.html">fisica.hpp</a></div><div class="ttdoc">Componente de física para entidades ECS.</div></div>
+<div class="ttc" id="aluz__direcional_8hpp_html"><div class="ttname"><a href="luz__direcional_8hpp.html">luz_direcional.hpp</a></div></div>
+<div class="ttc" id="amalha_8hpp_html"><div class="ttname"><a href="malha_8hpp.html">malha.hpp</a></div></div>
+<div class="ttc" id="amat_8hpp_html"><div class="ttname"><a href="mat_8hpp.html">mat.hpp</a></div><div class="ttdoc">Gerencia funçoes matemáticas.</div></div>
+<div class="ttc" id="amaterial_8hpp_html"><div class="ttname"><a href="material_8hpp.html">material.hpp</a></div></div>
+<div class="ttc" id="araio_8hpp_html"><div class="ttname"><a href="raio_8hpp.html">raio.hpp</a></div></div>
+<div class="ttc" id="arenderizador_8hpp_html"><div class="ttname"><a href="renderizador_8hpp.html">renderizador.hpp</a></div></div>
+<div class="ttc" id="astructbapi_1_1entidade_html"><div class="ttname"><a href="structbapi_1_1entidade.html">bapi::entidade</a></div><div class="ttdef"><b>Definição</b> api_lua.hpp:38</div></div>
+<div class="ttc" id="astructbapi_1_1entidade_html_aeb0032787186ce13bfc8ee6d2517c079"><div class="ttname"><a href="structbapi_1_1entidade.html#aeb0032787186ce13bfc8ee6d2517c079">bapi::entidade::definir</a></div><div class="ttdeci">static void definir(lua_State *L)</div><div class="ttdef"><b>Definição</b> api_lua.hpp:47</div></div>
+<div class="ttc" id="astructbubble_1_1camera_html"><div class="ttname"><a href="structbubble_1_1camera.html">bubble::camera</a></div><div class="ttdoc">componente que facilita a manipuacao da matriz de visualizacao e projeco</div><div class="ttdef"><b>Definição</b> camera.hpp:36</div></div>
+<div class="ttc" id="astructbubble_1_1fisica_html"><div class="ttname"><a href="structbubble_1_1fisica.html">bubble::fisica</a></div><div class="ttdef"><b>Definição</b> fisica.hpp:22</div></div>
+<div class="ttc" id="astructbubble_1_1imagem_html"><div class="ttname"><a href="structbubble_1_1imagem.html">bubble::imagem</a></div><div class="ttdef"><b>Definição</b> imagem.hpp:23</div></div>
+<div class="ttc" id="astructbubble_1_1luz__direcional_html"><div class="ttname"><a href="structbubble_1_1luz__direcional.html">bubble::luz_direcional</a></div><div class="ttdef"><b>Definição</b> luz_direcional.hpp:19</div></div>
+<div class="ttc" id="astructbubble_1_1renderizador_html"><div class="ttname"><a href="structbubble_1_1renderizador.html">bubble::renderizador</a></div><div class="ttdef"><b>Definição</b> renderizador.hpp:58</div></div>
+<div class="ttc" id="astructbubble_1_1texto_html"><div class="ttname"><a href="structbubble_1_1texto.html">bubble::texto</a></div><div class="ttdef"><b>Definição</b> texto.hpp:23</div></div>
+<div class="ttc" id="astructbubble_1_1transformacao_html"><div class="ttname"><a href="structbubble_1_1transformacao.html">bubble::transformacao</a></div><div class="ttdef"><b>Definição</b> transformacao.hpp:29</div></div>
+<div class="ttc" id="astructbubble_1_1vetor2_html"><div class="ttname"><a href="structbubble_1_1vetor2.html">bubble::vetor2</a></div><div class="ttdef"><b>Definição</b> vetor2.hpp:20</div></div>
+<div class="ttc" id="atransformacao_8hpp_html"><div class="ttname"><a href="transformacao_8hpp.html">transformacao.hpp</a></div><div class="ttdoc">Calcula a mtriz de modelo para um objeto 3d qualquer.</div></div>
+<div class="ttc" id="avetor2_8hpp_html"><div class="ttname"><a href="vetor2_8hpp.html">vetor2.hpp</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Gerado por&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8
+</small></address>
+</body>
+</html>

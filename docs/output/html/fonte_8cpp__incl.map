@@ -1,0 +1,21 @@
+<map id="becommons/src/arquivadores/fonte.cpp" name="becommons/src/arquivadores/fonte.cpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="412,5,627,45"/>
+<area shape="rect" id="Node000002" href="$fonte_8hpp.html" title="Define estruturas básicas para renderização de textos." alt="" coords="209,93,382,119"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="467,48,342,91,340,86,465,43"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="406,93,633,119"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="522,46,522,79,517,79,517,46"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="657,93,747,119"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="564,43,663,85,661,90,562,48"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="5,167,100,192"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="257,121,106,165,104,160,256,116"/>
+<area shape="rect" id="Node000004" href="$vetor2_8hpp.html" title=" " alt="" coords="125,167,242,192"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="279,121,215,161,212,157,276,116"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="266,167,325,192"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="298,119,298,153,293,153,293,119"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="349,167,399,192"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="310,117,353,156,349,159,306,121"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="423,167,506,192"/>
+<area shape="poly" id="edge7_Node000002_Node000008" title=" " alt="" coords="324,116,425,159,423,164,322,121"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="152,240,215,265"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="186,192,186,226,181,226,181,192"/>
+</map>

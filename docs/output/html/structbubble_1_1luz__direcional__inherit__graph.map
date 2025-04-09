@@ -1,0 +1,5 @@
+<map id="bubble::luz_direcional" name="bubble::luz_direcional">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,79,169,104"/>
+<area shape="rect" id="Node000002" href="$structbubble_1_1componente.html" title="base para as funcionalidades da engine" alt="" coords="10,5,165,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="90,44,90,79,85,79,85,44"/>
+</map>

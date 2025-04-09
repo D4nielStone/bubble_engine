@@ -1,0 +1,13 @@
+<map id="bubble::terreno" name="bubble::terreno">
+<area shape="rect" id="Node000001" title=" " alt="" coords="181,269,302,295"/>
+<area shape="rect" id="Node000002" href="$structbubble_1_1componente.html" title="base para as funcionalidades da engine" alt="" coords="5,181,160,207"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="117,211,221,267,219,271,115,216"/>
+<area shape="rect" id="Node000003" href="$classbubble_1_1malha.html" title=" " alt="" coords="184,181,299,207"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="244,221,244,269,239,269,239,221"/>
+<area shape="rect" id="Node000004" href="$structbubble_1_1material.html" title=" " alt="" coords="177,93,306,119"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="244,133,244,181,239,181,239,133"/>
+<area shape="rect" id="Node000005" href="$structbubble_1_1cor.html" title=" " alt="" coords="194,5,289,31"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="244,45,244,93,239,93,239,45"/>
+<area shape="rect" id="Node000006" href="$classbubble_1_1shader.html" title=" " alt="" coords="323,181,442,207"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="358,217,313,248,268,272,265,267,311,243,355,213"/>
+</map>

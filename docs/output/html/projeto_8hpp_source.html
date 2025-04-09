@@ -1,0 +1,168 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt-BR">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Bubble Engine: Código-Fonte de becommons/include/nucleo/projeto.hpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Bubble Engine<span id="projectnumber">&#160;1.0b</span>
+   </div>
+   <div id="projectbrief">Game engine eficiente para projetos pequenos</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Gerado por Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Busca');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function() { init_codefold(0); });
+/* @license-end */
+</script>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Carregando...</div>
+<div class="SRStatus" id="Searching">Procurando...</div>
+<div class="SRStatus" id="NoMatches">Nenhuma entrada encontrado</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_0394786a11e0dfde3dca27fdccf84bfd.html">becommons</a></li><li class="navelem"><a class="el" href="dir_9a744b5567c265deacf566b467d8af59.html">include</a></li><li class="navelem"><a class="el" href="dir_6d1d8208ac4b46200d5c1cb355b49c73.html">nucleo</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle"><div class="title">projeto.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="projeto_8hpp.html">Ir para a documentação desse arquivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span> </div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#pragma once</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#include &quot;<a class="code" href="fase_8hpp.html">nucleo/fase.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="preprocessor">#include &lt;rapidjson/document.h&gt;</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="preprocessor">#include &lt;memory&gt;</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="preprocessor">#include &quot;<a class="code" href="nucleo_2sistema_8hpp.html">nucleo/sistema.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="preprocessor">#include &quot;<a class="code" href="sistema__de__fisica_8hpp.html">nucleo/sistema_de_fisica.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="preprocessor">#include &quot;<a class="code" href="sistema__de__renderizacao_8hpp.html">nucleo/sistema_de_renderizacao.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="keyword">namespace </span>bubble</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>{</div>
+<div class="foldopen" id="foldopen00026" data-start="{" data-end="};">
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno"><a class="line" href="structbubble_1_1projeto.html">   26</a></span>    <span class="keyword">struct </span><a class="code hl_struct" href="structbubble_1_1projeto.html">projeto</a></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    {</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>            std::string diretorioDoProjeto;</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>            <a class="code hl_function" href="structbubble_1_1projeto.html#abe6a83857095ca48c17eb5939f6b9868">projeto</a>(<span class="keyword">const</span> std::string&amp; diretorio);</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>            <a class="code hl_function" href="structbubble_1_1projeto.html#abe6a83857095ca48c17eb5939f6b9868">projeto</a>();</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>            <a class="code hl_struct" href="structbubble_1_1projeto.html">~projeto</a>();</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>            <span class="keywordtype">void</span> <a class="code hl_function" href="structbubble_1_1projeto.html#a9e7f853a1582f69ba5725c48bf1a7034">rodar</a>();</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>            <span class="keywordtype">void</span> <a class="code hl_function" href="structbubble_1_1projeto.html#a47a6d049b97cea03aa1233af5e525583">salvarFases</a>();</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>            <span class="keywordtype">void</span> <a class="code hl_function" href="structbubble_1_1projeto.html#a016d8efb9aaf106b035cf17218e7ed2c">salvarFase</a>(<span class="keyword">const</span> std::string&amp; nome);</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno"><a class="line" href="structbubble_1_1projeto.html#aaa52ba42ae7c2edac6139f29df15584c">   45</a></span>            <span class="keywordtype">void</span> <a class="code hl_function" href="structbubble_1_1projeto.html#aaa52ba42ae7c2edac6139f29df15584c">carregarFases</a>(){};</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>            <span class="keywordtype">void</span> <a class="code hl_function" href="structbubble_1_1projeto.html#a8df98c60887c31da7c527f25b7dcafba">carregarFase</a>(<span class="keyword">const</span> std::string&amp; nome);</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>            rapidjson::Document <a class="code hl_function" href="structbubble_1_1projeto.html#a06a491572ffa237df613fe7200f5c7a6">carregarProjeto</a>();</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno"><a class="line" href="structbubble_1_1projeto.html#a02f0ddf16a1b7184a27515703a787c18">   53</a></span>            <span class="keywordtype">void</span> <a class="code hl_function" href="structbubble_1_1projeto.html#a02f0ddf16a1b7184a27515703a787c18">salvarProjeto</a>(){};</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno"><a class="line" href="structbubble_1_1projeto.html#a7079cd3d9613ee2b8e63dfc6e1813888">   57</a></span>            std::shared_ptr&lt;bubble::fase&gt; <a class="code hl_function" href="structbubble_1_1projeto.html#a7079cd3d9613ee2b8e63dfc6e1813888">obterFase</a>(<span class="keyword">const</span> std::string&amp; nome){<span class="keywordflow">return</span> <span class="keyword">nullptr</span>;};</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>            std::shared_ptr&lt;bubble::fase&gt; <a class="code hl_function" href="structbubble_1_1projeto.html#adeb60e851f4ff4e4375662a8c82268c8">obterFaseAtual</a>();</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span> </div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>            <span class="keywordtype">void</span> <a class="code hl_function" href="structbubble_1_1projeto.html#a058dfd80d70691dcc2f12cc060ae4fae">adicionar</a>(<span class="keyword">const</span> std::string nome, <a class="code hl_class" href="classbubble_1_1sistema.html">sistema</a>* s);</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span> </div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>            <a class="code hl_class" href="classbubble_1_1sistema__fisica.html">sistema_fisica</a>* <a class="code hl_function" href="structbubble_1_1projeto.html#ae0acb10ea6eea4b01ee2ed19512921b8">sfisica</a>();</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>            <a class="code hl_class" href="classbubble_1_1sistema__renderizacao.html">sistema_renderizacao</a>* srender();</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>            <a class="code hl_class" href="classbubble_1_1sistema.html">sistema</a>* obterSistema(<span class="keyword">const</span> std::string);</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>        <span class="keyword">private</span>:</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno"><a class="line" href="structbubble_1_1projeto.html#a1d74c64677fd23cc03c80d86a720f197">   73</a></span>            <span class="keywordtype">void</span> <a class="code hl_function" href="structbubble_1_1projeto.html#a1d74c64677fd23cc03c80d86a720f197">criarProjetoVazio</a>(<span class="keyword">const</span> std::string&amp; path, <span class="keyword">const</span> <span class="keywordtype">char</span>* nome);</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno"><a class="line" href="structbubble_1_1projeto.html#a6edbc902fad80e7440ae023ee8825ec3">   75</a></span>            std::unordered_map&lt;std::string, sistema*&gt; <a class="code hl_variable" href="structbubble_1_1projeto.html#a6edbc902fad80e7440ae023ee8825ec3">sistemas</a>;</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno"><a class="line" href="structbubble_1_1projeto.html#a28ead987e0145de8dc04f92644d6ad30">   77</a></span>            std::unordered_map&lt;std::string, sistema*&gt; <a class="code hl_variable" href="structbubble_1_1projeto.html#a28ead987e0145de8dc04f92644d6ad30">sistemas_adicionais</a>;</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno"><a class="line" href="structbubble_1_1projeto.html#a7bead9ea7e81cd97a0640446313f5cc3">   79</a></span>            std::unordered_map&lt;std::string, std::shared_ptr&lt;bubble::fase&gt;&gt; <a class="code hl_variable" href="structbubble_1_1projeto.html#a7bead9ea7e81cd97a0640446313f5cc3">m_fases</a>;</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>            <span class="keywordtype">void</span> <a class="code hl_function" href="structbubble_1_1projeto.html#a6c0e3d01485ea2c255362230f950c1df">criarJanela</a>(rapidjson::Document&amp; doc);</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>            <span class="keywordtype">void</span> <a class="code hl_function" href="structbubble_1_1projeto.html#ae071244efe078238c572f0eec19f7e1b">iniciarSistemas</a>(<a class="code hl_struct" href="structbubble_1_1fase.html">bubble::fase</a>*);</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno"><a class="line" href="structbubble_1_1projeto.html#a66594cb994eaa2dcd8f083d65e0265ae">   85</a></span>            std::string <a class="code hl_variable" href="structbubble_1_1projeto.html#a66594cb994eaa2dcd8f083d65e0265ae">fase_atual</a>;</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    };</div>
+</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno"><a class="line" href="projeto_8hpp.html#a8386ca7a0eff2663189d4f0c2d3d260b">   88</a></span>    <span class="keyword">inline</span> <a class="code hl_struct" href="structbubble_1_1projeto.html">projeto</a>* <a class="code hl_variable" href="projeto_8hpp.html#a8386ca7a0eff2663189d4f0c2d3d260b">projeto_atual</a>{<span class="keyword">nullptr</span>}; </div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>}</div>
+<div class="ttc" id="aclassbubble_1_1sistema__fisica_html"><div class="ttname"><a href="classbubble_1_1sistema__fisica.html">bubble::sistema_fisica</a></div><div class="ttdef"><b>Definição</b> sistema_de_fisica.hpp:46</div></div>
+<div class="ttc" id="aclassbubble_1_1sistema__renderizacao_html"><div class="ttname"><a href="classbubble_1_1sistema__renderizacao.html">bubble::sistema_renderizacao</a></div><div class="ttdef"><b>Definição</b> sistema_de_renderizacao.hpp:22</div></div>
+<div class="ttc" id="aclassbubble_1_1sistema_html"><div class="ttname"><a href="classbubble_1_1sistema.html">bubble::sistema</a></div><div class="ttdef"><b>Definição</b> sistema.hpp:25</div></div>
+<div class="ttc" id="afase_8hpp_html"><div class="ttname"><a href="fase_8hpp.html">fase.hpp</a></div><div class="ttdoc">Gerencia sistemas numa fase.</div></div>
+<div class="ttc" id="anucleo_2sistema_8hpp_html"><div class="ttname"><a href="nucleo_2sistema_8hpp.html">sistema.hpp</a></div></div>
+<div class="ttc" id="aprojeto_8hpp_html_a8386ca7a0eff2663189d4f0c2d3d260b"><div class="ttname"><a href="projeto_8hpp.html#a8386ca7a0eff2663189d4f0c2d3d260b">bubble::projeto_atual</a></div><div class="ttdeci">projeto * projeto_atual</div><div class="ttdoc">Instância global do projeto atual.</div><div class="ttdef"><b>Definição</b> projeto.hpp:88</div></div>
+<div class="ttc" id="asistema__de__fisica_8hpp_html"><div class="ttname"><a href="sistema__de__fisica_8hpp.html">sistema_de_fisica.hpp</a></div><div class="ttdoc">Gerencia a fisica de jogo com o bullet3.</div></div>
+<div class="ttc" id="asistema__de__renderizacao_8hpp_html"><div class="ttname"><a href="sistema__de__renderizacao_8hpp.html">sistema_de_renderizacao.hpp</a></div><div class="ttdoc">Gerencia a renderizacao.</div></div>
+<div class="ttc" id="astructbubble_1_1fase_html"><div class="ttname"><a href="structbubble_1_1fase.html">bubble::fase</a></div><div class="ttdef"><b>Definição</b> fase.hpp:29</div></div>
+<div class="ttc" id="astructbubble_1_1projeto_html"><div class="ttname"><a href="structbubble_1_1projeto.html">bubble::projeto</a></div><div class="ttdef"><b>Definição</b> projeto.hpp:27</div></div>
+<div class="ttc" id="astructbubble_1_1projeto_html_a016d8efb9aaf106b035cf17218e7ed2c"><div class="ttname"><a href="structbubble_1_1projeto.html#a016d8efb9aaf106b035cf17218e7ed2c">bubble::projeto::salvarFase</a></div><div class="ttdeci">void salvarFase(const std::string &amp;nome)</div><div class="ttdoc">salva fase pelo nome</div><div class="ttdef"><b>Definição</b> projeto.cpp:247</div></div>
+<div class="ttc" id="astructbubble_1_1projeto_html_a02f0ddf16a1b7184a27515703a787c18"><div class="ttname"><a href="structbubble_1_1projeto.html#a02f0ddf16a1b7184a27515703a787c18">bubble::projeto::salvarProjeto</a></div><div class="ttdeci">void salvarProjeto()</div><div class="ttdoc">salva todas as fases e a configuração do projeto</div><div class="ttdef"><b>Definição</b> projeto.hpp:53</div></div>
+<div class="ttc" id="astructbubble_1_1projeto_html_a058dfd80d70691dcc2f12cc060ae4fae"><div class="ttname"><a href="structbubble_1_1projeto.html#a058dfd80d70691dcc2f12cc060ae4fae">bubble::projeto::adicionar</a></div><div class="ttdeci">void adicionar(const std::string nome, sistema *s)</div><div class="ttdoc">adiciona sistema</div><div class="ttdef"><b>Definição</b> projeto.cpp:205</div></div>
+<div class="ttc" id="astructbubble_1_1projeto_html_a06a491572ffa237df613fe7200f5c7a6"><div class="ttname"><a href="structbubble_1_1projeto.html#a06a491572ffa237df613fe7200f5c7a6">bubble::projeto::carregarProjeto</a></div><div class="ttdeci">rapidjson::Document carregarProjeto()</div><div class="ttdoc">carregar arquivo de configuração e define diretório e outros.</div><div class="ttdef"><b>Definição</b> projeto.cpp:89</div></div>
+<div class="ttc" id="astructbubble_1_1projeto_html_a1d74c64677fd23cc03c80d86a720f197"><div class="ttname"><a href="structbubble_1_1projeto.html#a1d74c64677fd23cc03c80d86a720f197">bubble::projeto::criarProjetoVazio</a></div><div class="ttdeci">void criarProjetoVazio(const std::string &amp;path, const char *nome)</div><div class="ttdoc">cria projeto com cubo, luz direcional e código de rotação.</div></div>
+<div class="ttc" id="astructbubble_1_1projeto_html_a28ead987e0145de8dc04f92644d6ad30"><div class="ttname"><a href="structbubble_1_1projeto.html#a28ead987e0145de8dc04f92644d6ad30">bubble::projeto::sistemas_adicionais</a></div><div class="ttdeci">std::unordered_map&lt; std::string, sistema * &gt; sistemas_adicionais</div><div class="ttdoc">sistemas adicionais</div><div class="ttdef"><b>Definição</b> projeto.hpp:77</div></div>
+<div class="ttc" id="astructbubble_1_1projeto_html_a47a6d049b97cea03aa1233af5e525583"><div class="ttname"><a href="structbubble_1_1projeto.html#a47a6d049b97cea03aa1233af5e525583">bubble::projeto::salvarFases</a></div><div class="ttdeci">void salvarFases()</div><div class="ttdoc">salva todas as fases do projeto</div><div class="ttdef"><b>Definição</b> projeto.cpp:239</div></div>
+<div class="ttc" id="astructbubble_1_1projeto_html_a66594cb994eaa2dcd8f083d65e0265ae"><div class="ttname"><a href="structbubble_1_1projeto.html#a66594cb994eaa2dcd8f083d65e0265ae">bubble::projeto::fase_atual</a></div><div class="ttdeci">std::string fase_atual</div><div class="ttdoc">id para fase atual</div><div class="ttdef"><b>Definição</b> projeto.hpp:85</div></div>
+<div class="ttc" id="astructbubble_1_1projeto_html_a6c0e3d01485ea2c255362230f950c1df"><div class="ttname"><a href="structbubble_1_1projeto.html#a6c0e3d01485ea2c255362230f950c1df">bubble::projeto::criarJanela</a></div><div class="ttdeci">void criarJanela(rapidjson::Document &amp;doc)</div><div class="ttdoc">cria janela glfw e inicia contexto opengl</div><div class="ttdef"><b>Definição</b> projeto.cpp:126</div></div>
+<div class="ttc" id="astructbubble_1_1projeto_html_a6edbc902fad80e7440ae023ee8825ec3"><div class="ttname"><a href="structbubble_1_1projeto.html#a6edbc902fad80e7440ae023ee8825ec3">bubble::projeto::sistemas</a></div><div class="ttdeci">std::unordered_map&lt; std::string, sistema * &gt; sistemas</div><div class="ttdoc">sistemas padrão</div><div class="ttdef"><b>Definição</b> projeto.hpp:75</div></div>
+<div class="ttc" id="astructbubble_1_1projeto_html_a7079cd3d9613ee2b8e63dfc6e1813888"><div class="ttname"><a href="structbubble_1_1projeto.html#a7079cd3d9613ee2b8e63dfc6e1813888">bubble::projeto::obterFase</a></div><div class="ttdeci">std::shared_ptr&lt; bubble::fase &gt; obterFase(const std::string &amp;nome)</div><div class="ttdoc">obtenção de uma fase dentro da lista da fases carregadas</div><div class="ttdef"><b>Definição</b> projeto.hpp:57</div></div>
+<div class="ttc" id="astructbubble_1_1projeto_html_a7bead9ea7e81cd97a0640446313f5cc3"><div class="ttname"><a href="structbubble_1_1projeto.html#a7bead9ea7e81cd97a0640446313f5cc3">bubble::projeto::m_fases</a></div><div class="ttdeci">std::unordered_map&lt; std::string, std::shared_ptr&lt; bubble::fase &gt; &gt; m_fases</div><div class="ttdoc">vetor de fases carregadas</div><div class="ttdef"><b>Definição</b> projeto.hpp:79</div></div>
+<div class="ttc" id="astructbubble_1_1projeto_html_a8df98c60887c31da7c527f25b7dcafba"><div class="ttname"><a href="structbubble_1_1projeto.html#a8df98c60887c31da7c527f25b7dcafba">bubble::projeto::carregarFase</a></div><div class="ttdeci">void carregarFase(const std::string &amp;nome)</div><div class="ttdoc">carrega fase pelo nome no diretório do projeto e torna atual</div><div class="ttdef"><b>Definição</b> projeto.cpp:178</div></div>
+<div class="ttc" id="astructbubble_1_1projeto_html_a9e7f853a1582f69ba5725c48bf1a7034"><div class="ttname"><a href="structbubble_1_1projeto.html#a9e7f853a1582f69ba5725c48bf1a7034">bubble::projeto::rodar</a></div><div class="ttdeci">void rodar()</div><div class="ttdoc">inicia mainloop</div><div class="ttdef"><b>Definição</b> projeto.cpp:36</div></div>
+<div class="ttc" id="astructbubble_1_1projeto_html_aaa52ba42ae7c2edac6139f29df15584c"><div class="ttname"><a href="structbubble_1_1projeto.html#aaa52ba42ae7c2edac6139f29df15584c">bubble::projeto::carregarFases</a></div><div class="ttdeci">void carregarFases()</div><div class="ttdoc">carrega todas as fases da pasta do projeto</div><div class="ttdef"><b>Definição</b> projeto.hpp:45</div></div>
+<div class="ttc" id="astructbubble_1_1projeto_html_abe6a83857095ca48c17eb5939f6b9868"><div class="ttname"><a href="structbubble_1_1projeto.html#abe6a83857095ca48c17eb5939f6b9868">bubble::projeto::projeto</a></div><div class="ttdeci">projeto()</div><div class="ttdoc">construtor para iniciar janela sem carregar arquivos da pasta do projeto.</div><div class="ttdef"><b>Definição</b> projeto.cpp:84</div></div>
+<div class="ttc" id="astructbubble_1_1projeto_html_adeb60e851f4ff4e4375662a8c82268c8"><div class="ttname"><a href="structbubble_1_1projeto.html#adeb60e851f4ff4e4375662a8c82268c8">bubble::projeto::obterFaseAtual</a></div><div class="ttdeci">std::shared_ptr&lt; bubble::fase &gt; obterFaseAtual()</div><div class="ttdoc">obtenção da fase atualmente em execução</div><div class="ttdef"><b>Definição</b> projeto.cpp:214</div></div>
+<div class="ttc" id="astructbubble_1_1projeto_html_ae071244efe078238c572f0eec19f7e1b"><div class="ttname"><a href="structbubble_1_1projeto.html#ae071244efe078238c572f0eec19f7e1b">bubble::projeto::iniciarSistemas</a></div><div class="ttdeci">void iniciarSistemas(bubble::fase *)</div><div class="ttdoc">adiciona sistemas padrão como interface, renderização e física</div><div class="ttdef"><b>Definição</b> projeto.cpp:192</div></div>
+<div class="ttc" id="astructbubble_1_1projeto_html_ae0acb10ea6eea4b01ee2ed19512921b8"><div class="ttname"><a href="structbubble_1_1projeto.html#ae0acb10ea6eea4b01ee2ed19512921b8">bubble::projeto::sfisica</a></div><div class="ttdeci">sistema_fisica * sfisica()</div><div class="ttdoc">@gets para Sistemas</div><div class="ttdef"><b>Definição</b> projeto.cpp:222</div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Gerado por&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8
+</small></address>
+</body>
+</html>

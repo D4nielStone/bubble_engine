@@ -1,0 +1,13 @@
+<map id="becommons/include/componentes/componente.hpp" name="becommons/include/componentes/componente.hpp">
+<area shape="rect" id="Node000001" title="Estrutura base para componetes." alt="" coords="172,5,417,45"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,93,72,119"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="234,48,86,93,85,88,233,43"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="97,93,189,119"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="259,48,179,89,176,84,257,43"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="213,93,376,119"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="297,46,297,79,292,79,292,46"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="401,93,535,119"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="337,43,431,85,429,90,335,48"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="559,93,731,119"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="379,43,581,88,580,93,378,48"/>
+</map>

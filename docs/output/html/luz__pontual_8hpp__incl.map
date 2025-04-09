@@ -1,0 +1,19 @@
+<map id="becommons/include/componentes/luz_pontual.hpp" name="becommons/include/componentes/luz_pontual.hpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="332,5,577,45"/>
+<area shape="rect" id="Node000002" href="$componente_8hpp.html" title="Estrutura base para componetes." alt="" coords="316,93,447,119"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="439,47,404,85,400,81,435,44"/>
+<area shape="rect" id="Node000008" href="$vetor3_8hpp.html" title=" " alt="" coords="599,93,716,119"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="504,43,616,86,614,91,502,48"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="5,167,72,192"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="320,121,86,169,85,164,319,116"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="97,167,189,192"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="344,121,195,165,194,160,342,116"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="213,167,376,192"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="369,121,321,160,318,156,366,117"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="401,167,535,192"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="397,117,445,156,442,160,394,121"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="559,167,731,192"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="424,116,590,160,589,166,423,121"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="755,167,818,192"/>
+<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="679,116,754,157,752,162,677,121"/>
+</map>

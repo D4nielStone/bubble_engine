@@ -1,0 +1,223 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt-BR">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Bubble Engine: Referência do Arquivo becommons/src/arquivadores/modelo.cpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Bubble Engine<span id="projectnumber">&#160;1.0b</span>
+   </div>
+   <div id="projectbrief">Game engine eficiente para projetos pequenos</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Gerado por Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Busca');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Carregando...</div>
+<div class="SRStatus" id="Searching">Procurando...</div>
+<div class="SRStatus" id="NoMatches">Nenhuma entrada encontrado</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_0394786a11e0dfde3dca27fdccf84bfd.html">becommons</a></li><li class="navelem"><a class="el" href="dir_c4122870b4eb0ef02862e41dabd11367.html">src</a></li><li class="navelem"><a class="el" href="dir_ac92d1c51ac5573cf62f382eac9f3d34.html">arquivadores</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#var-members">Variáveis</a>  </div>
+  <div class="headertitle"><div class="title">Referência do Arquivo modelo.cpp</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><code>#include &quot;<a class="el" href="modelo_8hpp_source.html">arquivadores/modelo.hpp</a>&quot;</code><br />
+<code>#include &lt;assimp/Importer.hpp&gt;</code><br />
+<code>#include &lt;assimp/scene.h&gt;</code><br />
+<code>#include &lt;assimp/postprocess.h&gt;</code><br />
+<code>#include &quot;<a class="el" href="debug_8hpp_source.html">depuracao/debug.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="imageloader_8hpp_source.html">arquivadores/imageloader.hpp</a>&quot;</code><br />
+<code>#include &lt;filesystem&gt;</code><br />
+<code>#include &quot;assets/objetos/cubo.hpp&quot;</code><br />
+<code>#include &quot;assets/objetos/esfera.hpp&quot;</code><br />
+<code>#include &quot;map&quot;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Gráfico de dependência de inclusões para modelo.cpp:</div>
+<div class="dyncontent">
+<div class="center"><img src="modelo_8cpp__incl.png" border="0" usemap="#abecommons_2src_2arquivadores_2modelo_8cpp" alt=""/></div>
+<map name="abecommons_2src_2arquivadores_2modelo_8cpp" id="abecommons_2src_2arquivadores_2modelo_8cpp">
+<area shape="rect" title=" " alt="" coords="1211,5,1425,45"/>
+<area shape="rect" href="modelo_8hpp.html" title="Carrega um modelo usando a biblioteca assimp com base em um diretório." alt="" coords="884,93,1072,119"/>
+<area shape="poly" title=" " alt="" coords="1237,48,1041,93,1040,88,1236,43"/>
+<area shape="rect" href="debug_8hpp.html" title=" " alt="" coords="882,240,1045,265"/>
+<area shape="poly" title=" " alt="" coords="1211,36,1113,44,1009,57,916,74,879,84,851,96,819,116,793,138,785,150,782,163,783,176,791,190,806,203,831,215,896,234,894,239,830,220,803,207,787,194,778,178,777,162,781,148,789,135,816,111,849,91,877,79,914,68,1008,51,1112,39,1210,30"/>
+<area shape="rect" title=" " alt="" coords="1209,167,1331,192"/>
+<area shape="poly" title=" " alt="" coords="1212,45,1171,65,1153,78,1139,95,1134,106,1134,115,1147,133,1174,148,1206,160,1204,165,1171,153,1144,137,1129,117,1129,105,1134,92,1150,74,1168,60,1209,41"/>
+<area shape="rect" title=" " alt="" coords="801,167,891,192"/>
+<area shape="poly" title=" " alt="" coords="1211,32,1116,39,1016,50,930,69,896,81,873,95,863,108,856,122,849,154,844,152,851,121,858,105,870,91,894,76,928,64,1016,45,1115,33,1210,27"/>
+<area shape="rect" title=" " alt="" coords="1148,93,1304,119"/>
+<area shape="poly" title=" " alt="" coords="1297,48,1252,86,1248,82,1294,44"/>
+<area shape="rect" title=" " alt="" coords="1329,93,1491,119"/>
+<area shape="poly" title=" " alt="" coords="1342,44,1388,82,1384,86,1339,48"/>
+<area shape="rect" href="imageloader_8hpp.html" title="Gerencia as imagems/texturas carregadas na engine." alt="" coords="1516,93,1736,119"/>
+<area shape="poly" title=" " alt="" coords="1392,43,1568,87,1567,92,1391,48"/>
+<area shape="rect" title=" " alt="" coords="1761,93,1939,119"/>
+<area shape="poly" title=" " alt="" coords="1426,40,1760,89,1759,94,1425,45"/>
+<area shape="rect" title=" " alt="" coords="1963,93,2153,119"/>
+<area shape="poly" title=" " alt="" coords="1426,35,1950,91,1950,96,1425,41"/>
+<area shape="rect" title=" " alt="" coords="2177,93,2227,119"/>
+<area shape="poly" title=" " alt="" coords="1426,25,1570,30,1753,40,1956,60,2164,91,2163,96,1956,65,1752,46,1570,35,1425,30"/>
+<area shape="rect" href="malha_8hpp.html" title=" " alt="" coords="1017,167,1133,192"/>
+<area shape="poly" title=" " alt="" coords="995,117,1050,156,1047,160,992,121"/>
+<area shape="rect" href="textura_8hpp.html" title=" " alt="" coords="1401,313,1499,339"/>
+<area shape="poly" title=" " alt="" coords="1015,116,1147,164,1198,190,1247,203,1288,208,1329,216,1375,238,1411,268,1437,300,1433,303,1407,271,1373,242,1327,221,1287,213,1246,208,1196,194,1145,169,1014,121"/>
+<area shape="rect" href="shader_8hpp.html" title="Gerencia os shaders GLSL." alt="" coords="675,240,857,265"/>
+<area shape="poly" title=" " alt="" coords="972,121,945,156,905,194,862,219,818,238,816,233,860,215,902,190,941,153,968,118"/>
+<area shape="poly" title=" " alt="" coords="979,119,969,227,963,226,974,119"/>
+<area shape="poly" title=" " alt="" coords="1026,116,1210,161,1209,166,1024,121"/>
+<area shape="poly" title=" " alt="" coords="958,121,881,162,878,158,956,116"/>
+<area shape="rect" href="vertice_8hpp.html" title=" " alt="" coords="120,240,215,265"/>
+<area shape="poly" title=" " alt="" coords="1017,188,228,249,228,244,1017,183"/>
+<area shape="rect" title=" " alt="" coords="1315,313,1377,339"/>
+<area shape="poly" title=" " alt="" coords="1134,187,1234,208,1280,222,1310,238,1323,251,1332,267,1344,299,1339,301,1327,270,1319,255,1307,242,1278,227,1233,213,1133,192"/>
+<area shape="poly" title=" " alt="" coords="1134,189,1246,211,1299,225,1336,238,1388,268,1429,302,1426,306,1385,273,1334,242,1297,230,1245,217,1133,194"/>
+<area shape="poly" title=" " alt="" coords="1026,195,830,240,829,234,1025,189"/>
+<area shape="rect" href="material_8hpp.html" title=" " alt="" coords="1166,240,1297,265"/>
+<area shape="poly" title=" " alt="" coords="1101,190,1194,232,1192,237,1099,194"/>
+<area shape="rect" href="vetor3_8hpp.html" title=" " alt="" coords="121,313,213,339"/>
+<area shape="poly" title=" " alt="" coords="170,266,170,300,165,300,165,266"/>
+<area shape="rect" href="vetor2_8hpp.html" title=" " alt="" coords="5,313,97,339"/>
+<area shape="poly" title=" " alt="" coords="150,268,83,308,81,304,147,263"/>
+<area shape="rect" title=" " alt="" coords="136,387,199,412"/>
+<area shape="poly" title=" " alt="" coords="170,339,170,373,165,373,165,339"/>
+<area shape="poly" title=" " alt="" coords="71,336,138,377,135,382,69,341"/>
+<area shape="rect" title=" " alt="" coords="1201,387,1259,412"/>
+<area shape="poly" title=" " alt="" coords="1415,341,1274,387,1272,382,1414,336"/>
+<area shape="poly" title=" " alt="" coords="675,264,474,284,227,316,226,311,473,279,674,259"/>
+<area shape="poly" title=" " alt="" coords="858,261,1301,311,1301,316,858,267"/>
+<area shape="poly" title=" " alt="" coords="746,268,724,282,704,300,693,319,694,328,698,337,723,349,770,360,909,377,1064,388,1187,394,1187,399,1064,393,908,382,769,365,721,354,695,341,689,330,688,318,700,297,721,278,743,263"/>
+<area shape="rect" title=" " alt="" coords="560,313,633,339"/>
+<area shape="poly" title=" " alt="" coords="740,268,638,310,636,305,738,263"/>
+<area shape="rect" title=" " alt="" coords="898,313,973,339"/>
+<area shape="poly" title=" " alt="" coords="794,263,896,305,894,310,792,268"/>
+<area shape="rect" title=" " alt="" coords="709,313,789,339"/>
+<area shape="poly" title=" " alt="" coords="766,266,757,301,752,300,761,265"/>
+<area shape="rect" title=" " alt="" coords="813,313,873,339"/>
+<area shape="poly" title=" " alt="" coords="780,263,822,302,819,306,777,267"/>
+<area shape="rect" title=" " alt="" coords="1167,313,1291,339"/>
+<area shape="poly" title=" " alt="" coords="841,263,1154,310,1153,316,841,268"/>
+<area shape="rect" title=" " alt="" coords="380,313,536,339"/>
+<area shape="poly" title=" " alt="" coords="717,268,521,313,520,308,716,263"/>
+<area shape="rect" href="cor_8hpp.html" title=" " alt="" coords="1048,313,1143,339"/>
+<area shape="poly" title=" " alt="" coords="819,263,1035,309,1034,314,818,268"/>
+<area shape="rect" href="vetor4_8hpp.html" title=" " alt="" coords="238,313,355,339"/>
+<area shape="poly" title=" " alt="" coords="688,268,369,316,369,310,688,263"/>
+<area shape="poly" title=" " alt="" coords="277,341,202,382,200,377,275,336"/>
+<area shape="poly" title=" " alt="" coords="1251,263,1317,304,1314,308,1248,268"/>
+<area shape="poly" title=" " alt="" coords="1267,263,1402,306,1401,312,1266,268"/>
+<area shape="poly" title=" " alt="" coords="1234,266,1232,300,1227,300,1228,266"/>
+<area shape="poly" title=" " alt="" coords="1211,268,1131,309,1128,305,1208,263"/>
+<area shape="poly" title=" " alt="" coords="1040,263,1159,283,1302,310,1301,316,1159,288,1039,268"/>
+<area shape="poly" title=" " alt="" coords="973,264,999,300,1017,320,1038,336,1075,356,1114,371,1187,389,1186,394,1113,376,1073,361,1035,341,1013,324,995,303,968,267"/>
+<area shape="poly" title=" " alt="" coords="961,267,947,302,942,300,956,265"/>
+<area shape="poly" title=" " alt="" coords="930,268,797,311,796,306,928,263"/>
+<area shape="poly" title=" " alt="" coords="945,268,876,308,874,304,943,263"/>
+<area shape="poly" title=" " alt="" coords="1603,121,1563,142,1520,169,1433,241,1368,305,1364,301,1429,237,1516,165,1560,137,1600,116"/>
+<area shape="poly" title=" " alt="" coords="1612,121,1588,141,1566,168,1554,192,1548,215,1546,258,1541,299,1531,320,1513,341,1495,352,1470,362,1406,378,1274,397,1273,392,1405,373,1469,357,1493,347,1510,337,1527,317,1536,298,1541,258,1543,214,1549,190,1561,165,1584,138,1608,117"/>
+<area shape="poly" title=" " alt="" coords="1590,121,1344,195,1314,201,1286,202,1237,202,1216,203,1195,209,1176,221,1156,242,1152,250,1151,258,1159,274,1175,290,1195,304,1192,309,1172,294,1154,277,1146,259,1147,248,1152,238,1172,217,1193,204,1215,198,1237,196,1286,197,1313,195,1343,189,1589,116"/>
+<area shape="poly" title=" " alt="" coords="1569,121,1342,167,1340,161,1568,116"/>
+<area shape="rect" title=" " alt="" coords="1575,167,1677,192"/>
+<area shape="poly" title=" " alt="" coords="1629,119,1629,153,1623,153,1623,119"/>
+<area shape="rect" title=" " alt="" coords="1701,167,1796,192"/>
+<area shape="poly" title=" " alt="" coords="1647,116,1718,157,1716,162,1644,121"/>
+<area shape="rect" title=" " alt="" coords="1821,167,1898,192"/>
+<area shape="poly" title=" " alt="" coords="1664,116,1809,160,1808,165,1663,121"/>
+</map>
+</div>
+</div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
+Variáveis</h2></td></tr>
+<tr class="memitem:a3c23590ee0058364019675f1ab4d5c8c" id="r_a3c23590ee0058364019675f1ab4d5c8c"><td class="memItemLeft" align="right" valign="top">std::map&lt; std::string, <a class="el" href="classbubble_1_1malha.html">bubble::malha</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="modelo_8cpp.html#a3c23590ee0058364019675f1ab4d5c8c">primitivas</a></td></tr>
+<tr class="separator:a3c23590ee0058364019675f1ab4d5c8c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Descrição detalhada</h2>
+<div class="textblock"><dl class="section copyright"><dt>Copyright</dt><dd>Copyright (c) 2025 Daniel Oliveira</dd></dl>
+<dl class="section author"><dt>Autor</dt><dd>Daniel O. dos Santos </dd></dl>
+<dl class="section date"><dt>Data</dt><dd>2025-04-08 </dd></dl>
+<dl class="section version"><dt>Versão</dt><dd>1.0</dd></dl>
+<p>@licence MIT License </p>
+</div><h2 class="groupheader">Variáveis</h2>
+<a id="a3c23590ee0058364019675f1ab4d5c8c" name="a3c23590ee0058364019675f1ab4d5c8c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c23590ee0058364019675f1ab4d5c8c">&#9670;&#160;</a></span>primitivas</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::map&lt;std::string, <a class="el" href="classbubble_1_1malha.html">bubble::malha</a>&gt; primitivas</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Valor inicial:</b><div class="fragment"><div class="line">= </div>
+<div class="line">{</div>
+<div class="line">    {<span class="stringliteral">&quot;cubo&quot;</span>, malha_cubo},</div>
+<div class="line">    {<span class="stringliteral">&quot;esfera&quot;</span>, malha_esfera}</div>
+<div class="line">}</div>
+</div><!-- fragment -->
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Gerado por&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8
+</small></address>
+</body>
+</html>

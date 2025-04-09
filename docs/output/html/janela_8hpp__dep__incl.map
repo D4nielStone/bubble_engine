@@ -1,0 +1,42 @@
+<map id="becommons/include/os/janela.hpp" name="becommons/include/os/janela.hpp">
+<area shape="rect" id="Node000001" title="Inicia e gerencia janela glfw." alt="" coords="1441,5,1613,45"/>
+<area shape="rect" id="Node000002" href="$botao_8hpp.html" title=" " alt="" coords="145,93,371,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="1427,32,978,52,686,71,390,96,372,98,371,93,390,91,685,66,978,47,1427,27"/>
+<area shape="rect" id="Node000004" href="$bubble__gui_8cpp.html" title=" " alt="" coords="5,269,193,309"/>
+<area shape="poly" id="edge19_Node000001_Node000004" title=" " alt="" coords="1428,31,1101,37,682,49,312,68,190,81,153,88,134,96,119,114,107,135,96,183,94,231,98,269,93,269,89,231,90,183,102,133,114,111,131,91,151,83,189,76,311,63,681,44,1101,32,1427,25"/>
+<area shape="rect" id="Node000005" href="$editor_2src_2main_8cpp.html" title=" " alt="" coords="218,277,365,302"/>
+<area shape="poly" id="edge20_Node000001_Node000005" title=" " alt="" coords="1428,30,1181,34,877,45,731,53,604,65,508,79,475,87,454,96,437,109,426,122,415,153,405,186,396,205,383,223,347,255,313,279,310,274,344,251,379,220,392,202,400,185,410,151,422,120,434,105,451,91,473,82,507,73,604,59,731,48,877,40,1181,29,1428,25"/>
+<area shape="rect" id="Node000006" href="$editor_8cpp.html" title=" " alt="" coords="389,269,535,309"/>
+<area shape="poly" id="edge21_Node000001_Node000006" title=" " alt="" coords="1428,29,1185,30,889,38,748,46,626,58,535,75,505,84,486,95,471,114,461,136,452,184,454,231,460,269,455,270,449,232,447,184,456,134,467,111,483,91,503,80,534,69,625,53,747,41,889,33,1185,24,1428,23"/>
+<area shape="rect" id="Node000007" href="$api__lua_8cpp.html" title=" " alt="" coords="497,93,670,133"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="1427,34,1096,55,890,72,684,96,671,98,670,93,683,91,890,67,1096,49,1427,28"/>
+<area shape="rect" id="Node000008" href="$camera_8cpp.html" title=" " alt="" coords="695,93,912,133"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="1428,39,1198,63,925,96,913,98,912,92,924,91,1197,58,1427,34"/>
+<area shape="rect" id="Node000009" href="$camera__editor_8cpp.html" title=" " alt="" coords="936,93,1153,133"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="1428,47,1151,96,1150,91,1427,42"/>
+<area shape="rect" id="Node000010" href="$codigo_8cpp.html" title=" " alt="" coords="1177,93,1395,133"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="1463,52,1340,96,1338,91,1461,47"/>
+<area shape="rect" id="Node000011" href="$transformacao_8cpp.html" title=" " alt="" coords="1419,93,1636,133"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="1530,59,1530,93,1525,93,1525,59"/>
+<area shape="rect" id="Node000012" href="$inputs_8cpp.html" title=" " alt="" coords="1660,93,1829,133"/>
+<area shape="poly" id="edge11_Node000001_Node000012" title=" " alt="" coords="1589,48,1698,91,1696,96,1587,53"/>
+<area shape="rect" id="Node000013" href="$fase_8cpp.html" title=" " alt="" coords="1853,93,2025,133"/>
+<area shape="poly" id="edge12_Node000001_Node000013" title=" " alt="" coords="1627,45,1854,92,1853,97,1626,50"/>
+<area shape="rect" id="Node000014" href="$projeto_8cpp.html" title=" " alt="" coords="2049,93,2221,133"/>
+<area shape="poly" id="edge13_Node000001_Node000014" title=" " alt="" coords="1627,35,1818,59,2038,91,2049,93,2048,98,2038,96,1817,64,1627,41"/>
+<area shape="rect" id="Node000015" href="$sistema__de__codigo_8cpp.html" title=" " alt="" coords="2246,93,2425,133"/>
+<area shape="poly" id="edge14_Node000001_Node000015" title=" " alt="" coords="1627,31,1902,53,2068,70,2234,91,2246,92,2245,98,2234,96,2067,75,1901,58,1627,36"/>
+<area shape="rect" id="Node000016" href="$sistema__de__fisica_8cpp.html" title=" " alt="" coords="2449,93,2621,133"/>
+<area shape="poly" id="edge15_Node000001_Node000016" title=" " alt="" coords="1627,28,1985,47,2211,66,2437,91,2450,92,2449,98,2436,96,2210,71,1985,53,1627,33"/>
+<area shape="rect" id="Node000017" href="$sistema__de__interface_8cpp.html" title=" " alt="" coords="2645,93,2839,133"/>
+<area shape="poly" id="edge16_Node000001_Node000017" title=" " alt="" coords="1627,26,2065,44,2348,63,2634,91,2645,92,2645,97,2634,96,2348,69,2064,50,1627,32"/>
+<area shape="rect" id="Node000018" href="$sistema__de__renderizacao_8cpp.html" title=" " alt="" coords="2863,93,3082,133"/>
+<area shape="poly" id="edge17_Node000001_Node000018" title=" " alt="" coords="1627,26,1847,31,2151,42,2499,62,2852,91,2863,92,2863,97,2851,96,2499,67,2151,48,1847,36,1627,31"/>
+<area shape="rect" id="Node000019" href="$janela_8cpp.html" title=" " alt="" coords="3107,101,3321,126"/>
+<area shape="poly" id="edge18_Node000001_Node000019" title=" " alt="" coords="1627,24,1884,28,2247,38,2667,58,2883,72,3094,91,3150,98,3149,103,3094,96,2882,78,2667,63,2247,43,1884,33,1627,30"/>
+<area shape="rect" id="Node000003" href="$bubble__gui_8hpp.html" title=" " alt="" coords="153,181,369,221"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="262,147,263,181,257,181,256,147"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="215,230,136,272,133,267,212,225"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="275,233,290,275,285,277,270,235"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="319,224,419,267,417,272,317,229"/>
+</map>

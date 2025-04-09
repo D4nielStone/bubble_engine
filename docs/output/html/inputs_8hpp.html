@@ -1,0 +1,260 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt-BR">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Bubble Engine: Referência do Arquivo becommons/include/inputs/inputs.hpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Bubble Engine<span id="projectnumber">&#160;1.0b</span>
+   </div>
+   <div id="projectbrief">Game engine eficiente para projetos pequenos</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Gerado por Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Busca');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Carregando...</div>
+<div class="SRStatus" id="Searching">Procurando...</div>
+<div class="SRStatus" id="NoMatches">Nenhuma entrada encontrado</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_0394786a11e0dfde3dca27fdccf84bfd.html">becommons</a></li><li class="navelem"><a class="el" href="dir_9a744b5567c265deacf566b467d8af59.html">include</a></li><li class="navelem"><a class="el" href="dir_e48180f9230982b0cc0b1e4a3b823aad.html">inputs</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">Componentes</a> &#124;
+<a href="#enum-members">Enumerações</a> &#124;
+<a href="#func-members">Funções</a>  </div>
+  <div class="headertitle"><div class="title">Referência do Arquivo inputs.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><code>#include &lt;iostream&gt;</code><br />
+<code>#include &lt;unordered_map&gt;</code><br />
+<code>#include &lt;functional&gt;</code><br />
+<code>#include &quot;<a class="el" href="vetor2_8hpp_source.html">util/vetor2.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="vetor4_8hpp_source.html">util/vetor4.hpp</a>&quot;</code><br />
+<code>#include &lt;glm/glm.hpp&gt;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Gráfico de dependência de inclusões para inputs.hpp:</div>
+<div class="dyncontent">
+<div class="center"><img src="inputs_8hpp__incl.png" border="0" usemap="#abecommons_2include_2inputs_2inputs_8hpp" alt=""/></div>
+<map name="abecommons_2include_2inputs_2inputs_8hpp" id="abecommons_2include_2inputs_2inputs_8hpp">
+<area shape="rect" title=" " alt="" coords="265,5,463,45"/>
+<area shape="rect" title=" " alt="" coords="5,93,85,119"/>
+<area shape="poly" title=" " alt="" coords="288,48,99,94,98,89,287,43"/>
+<area shape="rect" title=" " alt="" coords="110,93,234,119"/>
+<area shape="poly" title=" " alt="" coords="319,48,214,91,212,86,317,43"/>
+<area shape="rect" title=" " alt="" coords="258,93,345,119"/>
+<area shape="poly" title=" " alt="" coords="351,47,321,84,317,81,347,44"/>
+<area shape="rect" href="vetor2_8hpp.html" title=" " alt="" coords="369,93,487,119"/>
+<area shape="poly" title=" " alt="" coords="382,44,412,81,408,84,377,47"/>
+<area shape="rect" href="vetor4_8hpp.html" title=" " alt="" coords="511,93,628,119"/>
+<area shape="poly" title=" " alt="" coords="414,43,527,86,525,91,412,48"/>
+<area shape="rect" title=" " alt="" coords="652,93,756,119"/>
+<area shape="poly" title=" " alt="" coords="446,43,642,88,641,93,445,48"/>
+<area shape="rect" title=" " alt="" coords="467,167,530,192"/>
+<area shape="poly" title=" " alt="" coords="442,117,480,155,476,159,438,121"/>
+<area shape="poly" title=" " alt="" coords="560,121,522,159,518,155,556,117"/>
+</map>
+</div>
+</div><div class="textblock"><div class="dynheader">
+Este grafo mostra quais arquivos estão direta ou indiretamente relacionados com esse arquivo:</div>
+<div class="dyncontent">
+<div class="center"><img src="inputs_8hpp__dep__incl.png" border="0" usemap="#abecommons_2include_2inputs_2inputs_8hppdep" alt=""/></div>
+<map name="abecommons_2include_2inputs_2inputs_8hppdep" id="abecommons_2include_2inputs_2inputs_8hppdep">
+<area shape="rect" title=" " alt="" coords="1524,5,1721,45"/>
+<area shape="rect" href="botao_8hpp.html" title=" " alt="" coords="2816,181,3043,221"/>
+<area shape="poly" title=" " alt="" coords="1735,38,2798,179,2816,181,2816,187,2797,184,1735,44"/>
+<area shape="rect" href="janela_8hpp.html" title="Inicia e gerencia janela glfw." alt="" coords="1537,93,1709,133"/>
+<area shape="poly" title=" " alt="" coords="1625,59,1625,93,1620,93,1620,59"/>
+<area shape="rect" href="api__lua_8cpp.html" title=" " alt="" coords="5,181,179,221"/>
+<area shape="poly" title=" " alt="" coords="1510,36,1185,59,788,96,489,135,191,184,180,186,179,181,190,179,488,129,788,91,1185,53,1510,31"/>
+<area shape="rect" href="codigo_8cpp.html" title=" " alt="" coords="203,181,421,221"/>
+<area shape="poly" title=" " alt="" coords="1511,43,1041,102,434,184,421,186,421,180,433,179,1041,97,1510,38"/>
+<area shape="rect" href="inputs_8cpp.html" title=" " alt="" coords="3067,181,3237,221"/>
+<area shape="poly" title=" " alt="" coords="1735,33,1975,53,2302,85,2677,127,3055,179,3068,181,3067,186,3054,184,2676,132,2302,90,1974,58,1735,38"/>
+<area shape="rect" href="bubble__gui_8hpp.html" title=" " alt="" coords="2503,269,2719,309"/>
+<area shape="poly" title=" " alt="" coords="2847,228,2681,272,2680,267,2845,222"/>
+<area shape="rect" href="bubble__gui_8cpp.html" title=" " alt="" coords="2046,357,2234,397"/>
+<area shape="poly" title=" " alt="" coords="2495,314,2235,362,2234,356,2494,309"/>
+<area shape="rect" href="editor_2src_2main_8cpp.html" title=" " alt="" coords="1148,365,1295,390"/>
+<area shape="poly" title=" " alt="" coords="2489,301,1295,374,1295,369,2489,295"/>
+<area shape="rect" href="editor_8cpp.html" title=" " alt="" coords="2621,357,2768,397"/>
+<area shape="poly" title=" " alt="" coords="2641,317,2678,355,2674,359,2637,321"/>
+<area shape="poly" title=" " alt="" coords="1722,115,2187,134,2491,153,2798,179,2816,181,2816,186,2797,184,2490,158,2187,140,1722,120"/>
+<area shape="poly" title=" " alt="" coords="1523,122,1446,129,1368,140,1302,158,1278,170,1262,183,1254,201,1262,220,1285,240,1315,259,1353,276,1397,292,1499,317,1613,337,1733,352,1850,362,2046,371,2046,377,1850,367,1732,357,1613,342,1497,323,1395,297,1351,281,1313,264,1281,245,1258,223,1249,201,1258,180,1275,165,1301,153,1367,135,1446,123,1523,116"/>
+<area shape="poly" title=" " alt="" coords="1523,120,1367,127,1193,139,1045,158,995,170,968,183,958,198,953,212,954,226,958,240,980,267,1014,292,1056,314,1101,334,1182,362,1181,367,1099,339,1053,319,1011,296,976,271,954,243,948,227,948,212,953,196,965,179,993,165,1044,153,1193,134,1367,122,1522,115"/>
+<area shape="poly" title=" " alt="" coords="1722,116,2334,145,2623,163,2716,171,2755,179,2769,201,2774,225,2771,250,2764,275,2739,322,2713,359,2708,356,2735,319,2759,273,2766,249,2768,225,2764,203,2752,184,2715,176,2623,168,2333,150,1722,121"/>
+<area shape="poly" title=" " alt="" coords="1523,117,1286,120,956,129,576,149,381,164,191,184,179,185,179,180,190,179,381,159,576,144,956,124,1286,114,1523,112"/>
+<area shape="rect" href="camera_8cpp.html" title=" " alt="" coords="979,181,1197,221"/>
+<area shape="poly" title=" " alt="" coords="1523,133,1197,185,1197,180,1522,128"/>
+<area shape="rect" href="camera__editor_8cpp.html" title=" " alt="" coords="1273,181,1490,221"/>
+<area shape="poly" title=" " alt="" coords="1558,140,1435,184,1433,179,1556,135"/>
+<area shape="poly" title=" " alt="" coords="1523,122,965,149,658,167,434,184,421,185,421,180,433,179,657,161,964,143,1523,116"/>
+<area shape="rect" href="transformacao_8cpp.html" title=" " alt="" coords="1514,181,1731,221"/>
+<area shape="poly" title=" " alt="" coords="1625,147,1625,181,1620,181,1620,147"/>
+<area shape="poly" title=" " alt="" coords="1723,112,1959,114,2290,123,2670,143,2864,159,3055,179,3068,180,3067,186,3054,184,2864,164,2669,149,2290,129,1959,119,1722,117"/>
+<area shape="rect" href="fase_8cpp.html" title=" " alt="" coords="1755,181,1927,221"/>
+<area shape="poly" title=" " alt="" coords="1684,136,1794,179,1792,184,1683,141"/>
+<area shape="rect" href="projeto_8cpp.html" title=" " alt="" coords="1951,181,2123,221"/>
+<area shape="poly" title=" " alt="" coords="1723,133,1952,180,1950,185,1722,138"/>
+<area shape="rect" href="sistema__de__codigo_8cpp.html" title=" " alt="" coords="2148,181,2327,221"/>
+<area shape="poly" title=" " alt="" coords="1723,124,1914,147,2135,179,2148,181,2147,186,2134,184,1913,153,1722,129"/>
+<area shape="rect" href="sistema__de__fisica_8cpp.html" title=" " alt="" coords="2351,181,2523,221"/>
+<area shape="poly" title=" " alt="" coords="1723,118,2001,140,2170,158,2339,179,2352,181,2351,186,2338,184,2169,163,2000,146,1722,124"/>
+<area shape="rect" href="sistema__de__interface_8cpp.html" title=" " alt="" coords="2547,181,2741,221"/>
+<area shape="poly" title=" " alt="" coords="1723,116,2082,137,2309,155,2536,179,2547,180,2547,185,2536,184,2308,160,2082,142,1723,121"/>
+<area shape="rect" href="sistema__de__renderizacao_8cpp.html" title=" " alt="" coords="445,181,664,221"/>
+<area shape="poly" title=" " alt="" coords="1523,122,1150,143,914,161,676,184,665,185,664,180,676,179,914,156,1150,138,1523,116"/>
+<area shape="rect" href="janela_8cpp.html" title=" " alt="" coords="689,189,903,214"/>
+<area shape="poly" title=" " alt="" coords="1523,125,1252,149,923,184,869,191,868,186,922,179,1251,144,1522,120"/>
+</map>
+</div>
+</div>
+<p><a href="inputs_8hpp_source.html">Ir para o código-fonte desse arquivo.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Componentes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbubble_1_1inputs.html">bubble::inputs</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="enum-members" name="enum-members"></a>
+Enumerações</h2></td></tr>
+<tr class="memitem:a9d1c9b151cbdea1236c065c4499829ba" id="r_a9d1c9b151cbdea1236c065c4499829ba"><td class="memItemLeft" align="right" valign="top"><a id="a9d1c9b151cbdea1236c065c4499829ba" name="a9d1c9b151cbdea1236c065c4499829ba"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>inputMode</b> { <b>Editor</b>
+, <b>Game</b>
+, <b>Default</b>
+ }</td></tr>
+<tr class="separator:a9d1c9b151cbdea1236c065c4499829ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Funções</h2></td></tr>
+<tr class="memitem:a9e7e5c81475d584de7216a52d7fcbc65" id="r_a9e7e5c81475d584de7216a52d7fcbc65"><td class="memItemLeft" align="right" valign="top"><a id="a9e7e5c81475d584de7216a52d7fcbc65" name="a9e7e5c81475d584de7216a52d7fcbc65"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>bubble::mousePosCallBack</b> (GLFWwindow *window, double x, double y)</td></tr>
+<tr class="separator:a9e7e5c81475d584de7216a52d7fcbc65"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae0733f5275e54bc7209fc40dcff3110f" id="r_ae0733f5275e54bc7209fc40dcff3110f"><td class="memItemLeft" align="right" valign="top"><a id="ae0733f5275e54bc7209fc40dcff3110f" name="ae0733f5275e54bc7209fc40dcff3110f"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>bubble::callbackKey</b> (GLFWwindow *window, int key, int scancode, int action, int mods)</td></tr>
+<tr class="separator:ae0733f5275e54bc7209fc40dcff3110f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4072e2448721413583e8fab2a7278848" id="r_a4072e2448721413583e8fab2a7278848"><td class="memItemLeft" align="right" valign="top"><a id="a4072e2448721413583e8fab2a7278848" name="a4072e2448721413583e8fab2a7278848"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>bubble::mouseButtonCallBack</b> (GLFWwindow *window, int a, int b, int c)</td></tr>
+<tr class="separator:a4072e2448721413583e8fab2a7278848"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad60977711ca0e18586b9d048b28ebb87" id="r_ad60977711ca0e18586b9d048b28ebb87"><td class="memItemLeft" align="right" valign="top"><a id="ad60977711ca0e18586b9d048b28ebb87" name="ad60977711ca0e18586b9d048b28ebb87"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>bubble::charCallback</b> (GLFWwindow *window, unsigned int codepoint)</td></tr>
+<tr class="separator:ad60977711ca0e18586b9d048b28ebb87"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aec72111db97551473c5671788f4710d8" id="r_aec72111db97551473c5671788f4710d8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="inputs_8hpp.html#aec72111db97551473c5671788f4710d8">bubble::posicionarCursor</a> (double x, double y)</td></tr>
+<tr class="memdesc:aec72111db97551473c5671788f4710d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">posiciona o cursor do mouse em uma posição na tela.  <br /></td></tr>
+<tr class="separator:aec72111db97551473c5671788f4710d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a47c631968e236c1639559ae0494a3c20" id="r_a47c631968e236c1639559ae0494a3c20"><td class="memItemLeft" align="right" valign="top"><a id="a47c631968e236c1639559ae0494a3c20" name="a47c631968e236c1639559ae0494a3c20"></a>
+<a class="el" href="structbubble_1_1vetor2.html">bubble::vetor2</a>&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>bubble::obterMouse</b> ()</td></tr>
+<tr class="separator:a47c631968e236c1639559ae0494a3c20"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae6d583a108172a0329b4349611e9954c" id="r_ae6d583a108172a0329b4349611e9954c"><td class="memItemLeft" align="right" valign="top"><a id="ae6d583a108172a0329b4349611e9954c" name="ae6d583a108172a0329b4349611e9954c"></a>
+<a class="el" href="structbubble_1_1vetor2.html">bubble::vetor2</a>&lt; int &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>bubble::tamanhoJanela</b> ()</td></tr>
+<tr class="separator:ae6d583a108172a0329b4349611e9954c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b6b0785b32193503be166abbe56b54f" id="r_a5b6b0785b32193503be166abbe56b54f"><td class="memItemLeft" align="right" valign="top"><a id="a5b6b0785b32193503be166abbe56b54f" name="a5b6b0785b32193503be166abbe56b54f"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>bubble::pressionada</b> (const std::string &amp;tecla)</td></tr>
+<tr class="separator:a5b6b0785b32193503be166abbe56b54f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Descrição detalhada</h2>
+<div class="textblock"><dl class="section copyright"><dt>Copyright</dt><dd>Copyright (c) 2025 Daniel Oliveira</dd></dl>
+<dl class="section author"><dt>Autor</dt><dd>Daniel O. dos Santos </dd></dl>
+<dl class="section date"><dt>Data</dt><dd>2025-04-08 </dd></dl>
+<dl class="section version"><dt>Versão</dt><dd>1.0</dd></dl>
+<p>@licence MIT License</p>
+<dl class="section see"><dt>Veja também</dt><dd><a class="el" href="inputs_8cpp.html">inputs.cpp</a> </dd></dl>
+</div><h2 class="groupheader">Funções</h2>
+<a id="aec72111db97551473c5671788f4710d8" name="aec72111db97551473c5671788f4710d8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aec72111db97551473c5671788f4710d8">&#9670;&#160;</a></span>posicionarCursor()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bubble::posicionarCursor </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>y</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>posiciona o cursor do mouse em uma posição na tela. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pos</td><td><br  />
+ </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Gerado por&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8
+</small></address>
+</body>
+</html>

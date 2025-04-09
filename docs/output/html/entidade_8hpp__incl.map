@@ -1,0 +1,17 @@
+<map id="becommons/include/entidades/entidade.hpp" name="becommons/include/entidades/entidade.hpp">
+<area shape="rect" id="Node000001" title="Inclusoes e defini��es relacionadas � entidade." alt="" coords="96,5,317,45"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="81,93,159,119"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="187,48,145,86,141,82,184,44"/>
+<area shape="rect" id="Node000003" href="$componente_8hpp.html" title="Estrutura base para componetes." alt="" coords="183,93,406,119"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="230,44,273,82,269,86,226,48"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="5,167,72,192"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="254,121,86,168,85,162,253,116"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="97,167,189,192"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="271,121,181,163,179,158,269,116"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="213,167,376,192"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="297,119,297,153,292,153,292,119"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="401,167,535,192"/>
+<area shape="poly" id="edge6_Node000003_Node000007" title=" " alt="" coords="324,116,428,159,426,164,322,121"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="559,167,731,192"/>
+<area shape="poly" id="edge7_Node000003_Node000008" title=" " alt="" coords="352,116,576,161,575,167,350,121"/>
+</map>

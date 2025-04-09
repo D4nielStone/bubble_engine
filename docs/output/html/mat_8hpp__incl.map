@@ -1,0 +1,11 @@
+<map id="becommons/include/api/mat.hpp" name="becommons/include/api/mat.hpp">
+<area shape="rect" id="Node000001" title="Gerencia funçoes matemáticas." alt="" coords="138,5,315,45"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,93,109,119"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="187,48,96,90,94,85,185,43"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="133,93,320,119"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="229,46,229,79,224,79,224,46"/>
+<area shape="rect" id="Node000004" href="$vetor2_8hpp.html" title=" " alt="" coords="344,93,461,119"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="270,43,365,85,363,90,268,48"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="371,167,434,192"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="405,119,405,153,400,153,400,119"/>
+</map>

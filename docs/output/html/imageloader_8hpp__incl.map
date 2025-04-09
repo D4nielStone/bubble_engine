@@ -1,0 +1,17 @@
+<map id="becommons/include/arquivadores/imageloader.hpp" name="becommons/include/arquivadores/imageloader.hpp">
+<area shape="rect" id="Node000001" title="Gerencia as imagems/texturas carregadas na engine." alt="" coords="304,5,547,45"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,93,64,119"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="316,48,78,96,77,91,315,43"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="89,93,213,119"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="360,48,205,92,203,87,359,43"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="237,93,339,119"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="394,48,322,89,319,84,391,43"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="364,93,487,119"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="428,46,428,79,423,79,423,46"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="511,93,574,119"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="455,43,516,84,513,88,452,48"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="598,93,693,119"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="479,43,601,86,599,91,477,48"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="717,93,795,119"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="505,43,704,90,703,95,504,48"/>
+</map>

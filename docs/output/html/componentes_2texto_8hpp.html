@@ -1,0 +1,162 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt-BR">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Bubble Engine: Referência do Arquivo becommons/include/componentes/texto.hpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Bubble Engine<span id="projectnumber">&#160;1.0b</span>
+   </div>
+   <div id="projectbrief">Game engine eficiente para projetos pequenos</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Gerado por Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Busca');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Carregando...</div>
+<div class="SRStatus" id="Searching">Procurando...</div>
+<div class="SRStatus" id="NoMatches">Nenhuma entrada encontrado</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_0394786a11e0dfde3dca27fdccf84bfd.html">becommons</a></li><li class="navelem"><a class="el" href="dir_9a744b5567c265deacf566b467d8af59.html">include</a></li><li class="navelem"><a class="el" href="dir_111f21dc146a617cd827120506a93450.html">componentes</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">Componentes</a>  </div>
+  <div class="headertitle"><div class="title">Referência do Arquivo texto.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><code>#include &quot;<a class="el" href="componente_8hpp_source.html">componente.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="cor_8hpp_source.html">util/cor.hpp</a>&quot;</code><br />
+<code>#include &lt;glm/glm.hpp&gt;</code><br />
+<code>#include &quot;<a class="el" href="vetor2_8hpp_source.html">util/vetor2.hpp</a>&quot;</code><br />
+<code>#include &lt;string&gt;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Gráfico de dependência de inclusões para texto.hpp:</div>
+<div class="dyncontent">
+<div class="center"><img src="componentes_2texto_8hpp__incl.png" border="0" usemap="#abecommons_2include_2componentes_2texto_8hpp" alt=""/></div>
+<map name="abecommons_2include_2componentes_2texto_8hpp" id="abecommons_2include_2componentes_2texto_8hpp">
+<area shape="rect" title=" " alt="" coords="505,5,751,45"/>
+<area shape="rect" href="componente_8hpp.html" title="Estrutura base para componetes." alt="" coords="277,93,408,119"/>
+<area shape="poly" title=" " alt="" coords="560,48,398,92,397,87,559,43"/>
+<area shape="rect" href="cor_8hpp.html" title=" " alt="" coords="457,93,551,119"/>
+<area shape="poly" title=" " alt="" coords="599,48,535,88,533,84,597,43"/>
+<area shape="rect" title=" " alt="" coords="576,93,680,119"/>
+<area shape="poly" title=" " alt="" coords="631,46,631,79,625,79,625,46"/>
+<area shape="rect" href="vetor2_8hpp.html" title=" " alt="" coords="704,93,821,119"/>
+<area shape="poly" title=" " alt="" coords="662,43,732,84,730,89,659,48"/>
+<area shape="rect" title=" " alt="" coords="845,93,904,119"/>
+<area shape="poly" title=" " alt="" coords="688,43,833,89,832,94,686,48"/>
+<area shape="rect" title=" " alt="" coords="5,167,72,192"/>
+<area shape="poly" title=" " alt="" coords="292,121,86,169,85,164,291,116"/>
+<area shape="rect" title=" " alt="" coords="97,167,189,192"/>
+<area shape="poly" title=" " alt="" coords="311,121,189,164,188,159,310,116"/>
+<area shape="rect" title=" " alt="" coords="213,167,376,192"/>
+<area shape="poly" title=" " alt="" coords="337,121,312,157,308,154,333,118"/>
+<area shape="rect" title=" " alt="" coords="401,167,535,192"/>
+<area shape="poly" title=" " alt="" coords="364,116,437,157,434,162,361,121"/>
+<area shape="rect" title=" " alt="" coords="559,167,731,192"/>
+<area shape="poly" title=" " alt="" coords="392,116,584,161,583,166,391,121"/>
+<area shape="rect" title=" " alt="" coords="755,167,818,192"/>
+<area shape="poly" title=" " alt="" coords="769,118,781,153,776,154,764,120"/>
+</map>
+</div>
+</div><div class="textblock"><div class="dynheader">
+Este grafo mostra quais arquivos estão direta ou indiretamente relacionados com esse arquivo:</div>
+<div class="dyncontent">
+<div class="center"><img src="componentes_2texto_8hpp__dep__incl.png" border="0" usemap="#abecommons_2include_2componentes_2texto_8hppdep" alt=""/></div>
+<map name="abecommons_2include_2componentes_2texto_8hppdep" id="abecommons_2include_2componentes_2texto_8hppdep">
+<area shape="rect" title=" " alt="" coords="575,5,820,45"/>
+<area shape="rect" href="api__lua_8hpp.html" title="Gerencia a configuração do luabridge para api lua." alt="" coords="126,93,303,133"/>
+<area shape="poly" title=" " alt="" coords="576,50,316,96,304,98,303,93,316,91,575,45"/>
+<area shape="rect" href="disposicao_8hpp.html" title="Gerencia a configuração do luabridge para api lua." alt="" coords="328,93,573,133"/>
+<area shape="poly" title=" " alt="" coords="631,52,506,96,504,91,629,47"/>
+<area shape="rect" href="sistema__de__interface_8hpp.html" title=" " alt="" coords="597,93,797,133"/>
+<area shape="poly" title=" " alt="" coords="700,59,700,93,695,93,695,59"/>
+<area shape="rect" href="sistema__de__interface_8cpp.html" title=" " alt="" coords="738,181,931,221"/>
+<area shape="poly" title=" " alt="" coords="760,50,788,68,811,92,824,114,831,138,837,181,832,182,826,139,819,116,807,95,785,72,757,54"/>
+<area shape="rect" href="fase_8cpp.html" title=" " alt="" coords="873,93,1045,133"/>
+<area shape="poly" title=" " alt="" coords="769,47,902,91,901,96,767,52"/>
+<area shape="rect" href="api__lua_8cpp.html" title=" " alt="" coords="5,181,179,221"/>
+<area shape="poly" title=" " alt="" coords="178,143,121,183,118,179,175,139"/>
+<area shape="rect" href="codigo_8cpp.html" title=" " alt="" coords="203,181,421,221"/>
+<area shape="poly" title=" " alt="" coords="248,140,292,179,289,183,245,144"/>
+<area shape="rect" href="projeto_8cpp.html" title=" " alt="" coords="542,181,714,221"/>
+<area shape="poly" title=" " alt="" coords="675,146,645,183,641,179,671,143"/>
+<area shape="poly" title=" " alt="" coords="741,139,806,179,803,184,738,143"/>
+</map>
+</div>
+</div>
+<p><a href="componentes_2texto_8hpp_source.html">Ir para o código-fonte desse arquivo.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Componentes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbubble_1_1texto.html">bubble::texto</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Descrição detalhada</h2>
+<div class="textblock"><dl class="section copyright"><dt>Copyright</dt><dd>Copyright (c) 2025 Daniel Oliveira</dd></dl>
+<dl class="section author"><dt>Autor</dt><dd>Daniel O. dos Santos </dd></dl>
+<dl class="section date"><dt>Data</dt><dd>2025-04-08 </dd></dl>
+<dl class="section version"><dt>Versão</dt><dd>1.0</dd></dl>
+<p>@licence MIT License </p>
+</div></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Gerado por&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8
+</small></address>
+</body>
+</html>

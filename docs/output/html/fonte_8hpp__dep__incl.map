@@ -1,0 +1,22 @@
+<map id="becommons/include/arquivadores/fonte.hpp" name="becommons/include/arquivadores/fonte.hpp">
+<area shape="rect" id="Node000001" title="Define estruturas básicas para renderização de textos." alt="" coords="529,5,771,45"/>
+<area shape="rect" id="Node000002" href="$elementos_2texto_8hpp.html" title=" " alt="" coords="178,93,405,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="559,51,370,96,369,91,557,46"/>
+<area shape="rect" id="Node000008" href="$fonte_8cpp.html" title=" " alt="" coords="429,93,644,133"/>
+<area shape="poly" id="edge8_Node000001_Node000008" title=" " alt="" coords="616,56,563,95,560,91,613,52"/>
+<area shape="rect" id="Node000009" href="$sistema__de__interface_8cpp.html" title=" " alt="" coords="668,93,861,133"/>
+<area shape="poly" id="edge9_Node000001_Node000009" title=" " alt="" coords="688,52,741,91,738,95,685,56"/>
+<area shape="rect" id="Node000010" href="$janela_8cpp.html" title=" " alt="" coords="885,101,1100,126"/>
+<area shape="poly" id="edge10_Node000001_Node000010" title=" " alt="" coords="739,46,948,98,946,103,738,51"/>
+<area shape="rect" id="Node000003" href="$botao_8hpp.html" title=" " alt="" coords="103,181,330,221"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="268,146,235,183,231,179,264,142"/>
+<area shape="rect" id="Node000004" href="$bubble__gui_8hpp.html" title=" " alt="" coords="183,269,399,309"/>
+<area shape="poly" id="edge7_Node000002_Node000004" title=" " alt="" coords="322,142,335,160,345,180,349,201,345,222,331,249,313,271,309,267,326,246,339,220,344,201,339,182,330,163,318,145"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="244,230,277,267,273,271,240,234"/>
+<area shape="rect" id="Node000005" href="$bubble__gui_8cpp.html" title=" " alt="" coords="5,357,193,397"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="238,317,142,360,140,355,236,313"/>
+<area shape="rect" id="Node000006" href="$editor_2src_2main_8cpp.html" title=" " alt="" coords="218,365,365,390"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="294,323,294,364,289,364,289,323"/>
+<area shape="rect" id="Node000007" href="$editor_8cpp.html" title=" " alt="" coords="389,357,535,397"/>
+<area shape="poly" id="edge6_Node000004_Node000007" title=" " alt="" coords="342,313,426,355,423,360,340,318"/>
+</map>

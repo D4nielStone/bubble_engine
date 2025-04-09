@@ -1,0 +1,264 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt-BR">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Bubble Engine: Referência do Arquivo becommons/include/nucleo/sistema_de_fisica.hpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Bubble Engine<span id="projectnumber">&#160;1.0b</span>
+   </div>
+   <div id="projectbrief">Game engine eficiente para projetos pequenos</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Gerado por Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Busca');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Carregando...</div>
+<div class="SRStatus" id="Searching">Procurando...</div>
+<div class="SRStatus" id="NoMatches">Nenhuma entrada encontrado</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_0394786a11e0dfde3dca27fdccf84bfd.html">becommons</a></li><li class="navelem"><a class="el" href="dir_9a744b5567c265deacf566b467d8af59.html">include</a></li><li class="navelem"><a class="el" href="dir_6d1d8208ac4b46200d5c1cb355b49c73.html">nucleo</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">Componentes</a> &#124;
+<a href="#func-members">Funções</a>  </div>
+  <div class="headertitle"><div class="title">Referência do Arquivo sistema_de_fisica.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Gerencia a fisica de jogo com o bullet3.  
+<a href="#details">Mais...</a></p>
+<div class="textblock"><code>#include &quot;<a class="el" href="nucleo_2sistema_8hpp_source.html">sistema.hpp</a>&quot;</code><br />
+<code>#include &lt;iostream&gt;</code><br />
+<code>#include &quot;<a class="el" href="raio_8hpp_source.html">util/raio.hpp</a>&quot;</code><br />
+<code>#include &lt;bullet/btBulletDynamicsCommon.h&gt;</code><br />
+<code>#include &lt;thread&gt;</code><br />
+<code>#include &lt;atomic&gt;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Gráfico de dependência de inclusões para sistema_de_fisica.hpp:</div>
+<div class="dyncontent">
+<div class="center"><img src="sistema__de__fisica_8hpp__incl.png" border="0" usemap="#abecommons_2include_2nucleo_2sistema__de__fisica_8hpp" alt=""/></div>
+<map name="abecommons_2include_2nucleo_2sistema__de__fisica_8hpp" id="abecommons_2include_2nucleo_2sistema__de__fisica_8hpp">
+<area shape="rect" title="Gerencia a fisica de jogo com o bullet3." alt="" coords="1815,5,2015,45"/>
+<area shape="rect" href="nucleo_2sistema_8hpp.html" title=" " alt="" coords="1694,93,1797,119"/>
+<area shape="poly" title=" " alt="" coords="1875,48,1784,90,1782,85,1873,43"/>
+<area shape="rect" title=" " alt="" coords="1745,313,1996,339"/>
+<area shape="poly" title=" " alt="" coords="1912,46,1900,94,1884,209,1875,300,1870,299,1878,208,1895,93,1906,45"/>
+<area shape="rect" title=" " alt="" coords="5,313,85,339"/>
+<area shape="poly" title=" " alt="" coords="1815,36,1466,62,991,106,746,135,518,167,324,203,245,222,180,242,149,256,119,273,71,307,68,303,116,268,146,251,178,238,243,217,323,198,518,162,745,130,990,101,1466,57,1814,31"/>
+<area shape="rect" href="raio_8hpp.html" title=" " alt="" coords="1909,93,2009,119"/>
+<area shape="poly" title=" " alt="" coords="1928,44,1948,80,1943,83,1923,47"/>
+<area shape="rect" title=" " alt="" coords="2033,93,2097,119"/>
+<area shape="poly" title=" " alt="" coords="1952,43,2032,84,2029,89,1950,48"/>
+<area shape="rect" title=" " alt="" coords="2121,93,2188,119"/>
+<area shape="poly" title=" " alt="" coords="1973,43,2109,87,2107,92,1971,48"/>
+<area shape="rect" href="entidade_8hpp.html" title="Inclusoes e defini��es relacionadas � entidade." alt="" coords="1658,240,1833,265"/>
+<area shape="poly" title=" " alt="" coords="1748,119,1748,226,1743,226,1743,119"/>
+<area shape="rect" href="registro_8hpp.html" title="Inclusoes e definições relacionadas à registro." alt="" coords="1275,167,1421,192"/>
+<area shape="poly" title=" " alt="" coords="1694,119,1426,167,1425,162,1693,114"/>
+<area shape="rect" title=" " alt="" coords="1457,313,1535,339"/>
+<area shape="poly" title=" " alt="" coords="1706,268,1549,313,1547,307,1705,263"/>
+<area shape="rect" href="componente_8hpp.html" title="Estrutura base para componetes." alt="" coords="1479,387,1702,412"/>
+<area shape="poly" title=" " alt="" coords="1734,268,1615,379,1611,375,1731,264"/>
+<area shape="rect" title=" " alt="" coords="1557,460,1624,485"/>
+<area shape="poly" title=" " alt="" coords="1593,412,1593,446,1588,446,1588,412"/>
+<area shape="rect" title=" " alt="" coords="1649,460,1741,485"/>
+<area shape="poly" title=" " alt="" coords="1609,410,1668,450,1665,454,1606,414"/>
+<area shape="rect" title=" " alt="" coords="1765,460,1928,485"/>
+<area shape="poly" title=" " alt="" coords="1633,409,1793,454,1792,459,1631,415"/>
+<area shape="rect" title=" " alt="" coords="1202,460,1337,485"/>
+<area shape="poly" title=" " alt="" coords="1540,415,1335,460,1334,454,1538,409"/>
+<area shape="rect" title=" " alt="" coords="1361,460,1533,485"/>
+<area shape="poly" title=" " alt="" coords="1569,414,1484,456,1481,451,1566,410"/>
+<area shape="poly" title=" " alt="" coords="1412,189,1668,235,1667,240,1411,195"/>
+<area shape="poly" title=" " alt="" coords="1351,192,1357,227,1364,246,1375,264,1408,290,1445,308,1443,313,1405,295,1371,267,1360,249,1352,228,1346,193"/>
+<area shape="poly" title=" " alt="" coords="1275,186,1211,194,1153,208,1132,218,1119,231,1116,245,1125,264,1148,284,1183,304,1228,321,1280,337,1391,363,1495,382,1494,387,1390,369,1278,342,1227,326,1181,309,1145,289,1121,267,1111,246,1115,228,1129,214,1151,203,1210,188,1274,181"/>
+<area shape="rect" title=" " alt="" coords="935,240,1059,265"/>
+<area shape="poly" title=" " alt="" coords="1292,195,1068,240,1067,235,1291,189"/>
+<area shape="rect" title=" " alt="" coords="1385,240,1436,265"/>
+<area shape="poly" title=" " alt="" coords="1360,191,1393,228,1389,231,1356,194"/>
+<area shape="rect" title=" " alt="" coords="1461,240,1523,265"/>
+<area shape="poly" title=" " alt="" coords="1372,190,1457,231,1455,236,1370,194"/>
+<area shape="rect" title=" " alt="" coords="1547,240,1634,265"/>
+<area shape="poly" title=" " alt="" coords="1388,189,1539,234,1538,239,1386,195"/>
+<area shape="rect" href="fisica_8hpp.html" title="Componente de física para entidades ECS." alt="" coords="1135,240,1311,265"/>
+<area shape="poly" title=" " alt="" coords="1329,194,1256,235,1254,231,1327,190"/>
+<area shape="rect" href="debug_8hpp.html" title=" " alt="" coords="191,240,353,265"/>
+<area shape="poly" title=" " alt="" coords="1274,188,423,243,368,247,367,241,422,237,1274,182"/>
+<area shape="rect" href="assert_8hpp.html" title=" " alt="" coords="435,240,597,265"/>
+<area shape="poly" title=" " alt="" coords="1275,190,612,246,611,241,1274,184"/>
+<area shape="poly" title=" " alt="" coords="1253,263,1550,379,1548,384,1251,268"/>
+<area shape="rect" href="transformacao_8hpp.html" title="Calcula a mtriz de modelo para um objeto 3d qualquer." alt="" coords="937,313,1082,339"/>
+<area shape="poly" title=" " alt="" coords="1189,268,1058,311,1056,306,1188,263"/>
+<area shape="poly" title=" " alt="" coords="1311,261,1753,309,1753,314,1310,266"/>
+<area shape="poly" title=" " alt="" coords="1082,334,1102,336,1483,382,1482,388,1101,341,1082,339"/>
+<area shape="rect" href="vetor3_8hpp.html" title=" " alt="" coords="1339,387,1456,412"/>
+<area shape="poly" title=" " alt="" coords="1072,336,1326,382,1325,387,1071,341"/>
+<area shape="rect" title=" " alt="" coords="713,387,903,412"/>
+<area shape="poly" title=" " alt="" coords="978,341,854,385,853,379,976,336"/>
+<area shape="rect" title=" " alt="" coords="927,387,1134,412"/>
+<area shape="poly" title=" " alt="" coords="1015,338,1026,373,1021,374,1010,340"/>
+<area shape="rect" title=" " alt="" coords="1158,387,1314,412"/>
+<area shape="poly" title=" " alt="" coords="1047,336,1187,380,1185,385,1045,341"/>
+<area shape="rect" title=" " alt="" coords="514,387,689,412"/>
+<area shape="poly" title=" " alt="" coords="944,341,681,387,680,382,943,336"/>
+<area shape="rect" title=" " alt="" coords="781,460,843,485"/>
+<area shape="poly" title=" " alt="" coords="1339,413,1326,415,1060,447,858,469,857,464,1060,442,1325,409,1338,408"/>
+<area shape="rect" title=" " alt="" coords="110,313,173,339"/>
+<area shape="poly" title=" " alt="" coords="252,268,176,309,173,304,250,263"/>
+<area shape="rect" title=" " alt="" coords="197,313,257,339"/>
+<area shape="poly" title=" " alt="" coords="267,267,244,303,239,300,262,264"/>
+<area shape="rect" title=" " alt="" coords="380,313,439,339"/>
+<area shape="poly" title=" " alt="" coords="295,263,376,305,374,309,293,268"/>
+<area shape="poly" title=" " alt="" coords="236,268,96,312,94,307,235,263"/>
+<area shape="rect" title=" " alt="" coords="281,313,356,339"/>
+<area shape="poly" title=" " alt="" coords="282,264,306,300,301,303,277,267"/>
+<area shape="poly" title=" " alt="" coords="512,267,500,295,490,334,488,375,493,393,503,410,520,424,547,435,618,452,698,462,767,467,767,472,697,467,617,457,545,440,518,428,499,414,488,395,483,375,484,333,495,293,508,265"/>
+<area shape="poly" title=" " alt="" coords="500,268,440,308,437,303,497,263"/>
+<area shape="rect" title=" " alt="" coords="514,313,601,339"/>
+<area shape="poly" title=" " alt="" coords="525,264,546,300,541,303,521,267"/>
+<area shape="poly" title=" " alt="" coords="1956,120,1883,301,1878,299,1951,118"/>
+<area shape="rect" title=" " alt="" coords="1959,167,2063,192"/>
+<area shape="poly" title=" " alt="" coords="1969,117,1996,154,1992,157,1965,121"/>
+</map>
+</div>
+</div><div class="textblock"><div class="dynheader">
+Este grafo mostra quais arquivos estão direta ou indiretamente relacionados com esse arquivo:</div>
+<div class="dyncontent">
+<div class="center"><img src="sistema__de__fisica_8hpp__dep__incl.png" border="0" usemap="#abecommons_2include_2nucleo_2sistema__de__fisica_8hppdep" alt=""/></div>
+<map name="abecommons_2include_2nucleo_2sistema__de__fisica_8hppdep" id="abecommons_2include_2nucleo_2sistema__de__fisica_8hppdep">
+<area shape="rect" title="Gerencia a fisica de jogo com o bullet3." alt="" coords="1257,5,1457,45"/>
+<area shape="rect" href="projeto_8hpp.html" title="Gerencia configurações do projeto." alt="" coords="1189,93,1389,133"/>
+<area shape="poly" title=" " alt="" coords="1336,58,1306,95,1302,91,1332,55"/>
+<area shape="rect" href="api__lua_8cpp.html" title=" " alt="" coords="448,357,621,397"/>
+<area shape="poly" title=" " alt="" coords="1244,31,973,41,806,51,632,66,462,85,307,111,176,144,124,163,83,184,45,210,18,241,10,257,8,274,12,291,23,307,43,318,81,328,193,346,327,359,448,368,448,374,326,365,192,351,79,334,41,323,19,311,7,293,3,274,5,256,13,238,42,206,80,179,122,158,175,139,306,106,461,80,632,60,806,46,973,36,1243,26"/>
+<area shape="rect" href="projeto_8cpp.html" title=" " alt="" coords="1863,181,2035,221"/>
+<area shape="poly" title=" " alt="" coords="1378,55,1410,96,1431,115,1455,131,1508,155,1556,169,1600,175,1642,175,1732,172,1784,172,1844,179,1864,182,1863,187,1844,184,1784,178,1732,177,1642,181,1599,180,1555,174,1507,160,1452,136,1428,120,1406,100,1373,59"/>
+<area shape="rect" href="sistema__de__fisica_8cpp.html" title=" " alt="" coords="1465,93,1637,133"/>
+<area shape="poly" title=" " alt="" coords="1413,49,1509,91,1507,96,1411,53"/>
+<area shape="rect" href="renderizador_8hpp.html" title=" " alt="" coords="472,181,717,221"/>
+<area shape="poly" title=" " alt="" coords="1176,131,736,184,718,186,717,181,736,179,1176,125"/>
+<area shape="poly" title=" " alt="" coords="1175,117,1008,120,794,129,557,150,437,165,320,184,274,190,232,193,158,197,126,204,95,216,66,238,37,271,29,290,31,298,36,307,55,318,92,328,201,345,330,359,448,368,448,373,329,364,200,351,91,333,53,323,33,311,26,300,24,289,32,268,62,234,93,212,124,198,158,192,231,188,273,185,320,179,437,160,557,144,794,124,1008,114,1175,111"/>
+<area shape="rect" href="codigo_8cpp.html" title=" " alt="" coords="965,357,1182,397"/>
+<area shape="poly" title=" " alt="" coords="1403,131,1495,134,1605,136,1658,140,1706,147,1745,160,1773,180,1783,205,1785,243,1780,282,1773,298,1764,311,1735,326,1681,338,1526,357,1345,369,1182,376,1182,370,1345,363,1526,351,1680,333,1733,321,1761,307,1769,296,1775,280,1780,243,1778,207,1768,183,1743,165,1704,153,1657,145,1604,141,1495,139,1403,136"/>
+<area shape="rect" href="fisica_8cpp.html" title=" " alt="" coords="47,269,265,309"/>
+<area shape="poly" title=" " alt="" coords="1175,117,1031,121,852,131,656,151,557,166,461,184,387,203,316,226,199,272,197,267,314,221,386,198,459,179,556,161,655,146,851,126,1031,116,1175,112"/>
+<area shape="rect" href="fase_8cpp.html" title=" " alt="" coords="981,269,1153,309"/>
+<area shape="poly" title=" " alt="" coords="1176,124,1057,134,934,147,833,164,799,173,782,183,776,192,774,201,782,219,803,228,852,240,981,268,980,273,851,245,802,233,778,223,769,201,771,190,778,179,797,168,832,158,934,142,1057,128,1175,119"/>
+<area shape="rect" href="sistema__de__interface_8cpp.html" title=" " alt="" coords="1177,269,1370,309"/>
+<area shape="poly" title=" " alt="" coords="1289,147,1278,269,1272,269,1284,147"/>
+<area shape="rect" href="camera_8cpp.html" title=" " alt="" coords="793,181,1010,221"/>
+<area shape="poly" title=" " alt="" coords="1191,139,987,184,986,179,1190,134"/>
+<area shape="rect" href="transformacao_8cpp.html" title=" " alt="" coords="1034,181,1251,221"/>
+<area shape="poly" title=" " alt="" coords="1246,143,1176,184,1173,179,1244,138"/>
+<area shape="poly" title=" " alt="" coords="1403,130,1408,131,1626,154,1722,163,1844,179,1864,182,1863,187,1844,184,1721,168,1626,159,1408,136,1402,135"/>
+<area shape="rect" href="editor_8hpp.html" title="Gerencia a configuração do luabridge para api lua." alt="" coords="1378,181,1553,221"/>
+<area shape="poly" title=" " alt="" coords="1341,137,1428,179,1426,184,1339,142"/>
+<area shape="rect" href="editor_2src_2main_8cpp.html" title=" " alt="" coords="1395,277,1541,302"/>
+<area shape="poly" title=" " alt="" coords="1309,144,1335,182,1368,219,1409,251,1447,274,1444,279,1406,255,1365,223,1331,185,1305,147"/>
+<area shape="rect" href="editor_8cpp.html" title=" " alt="" coords="1604,269,1751,309"/>
+<area shape="poly" title=" " alt="" coords="1403,130,1408,131,1486,135,1588,137,1639,141,1686,148,1724,161,1751,180,1758,192,1760,204,1750,229,1730,252,1707,271,1703,267,1726,248,1745,226,1754,204,1753,193,1747,183,1722,166,1685,154,1639,146,1588,143,1486,140,1408,136,1402,135"/>
+<area shape="rect" href="runtime_2src_2main_8cpp.html" title=" " alt="" coords="1577,189,1737,214"/>
+<area shape="poly" title=" " alt="" coords="1384,134,1609,186,1608,191,1383,139"/>
+<area shape="rect" href="api__lua_8hpp.html" title="Gerencia a configuração do luabridge para api lua." alt="" coords="779,269,957,309"/>
+<area shape="poly" title=" " alt="" coords="669,223,809,267,807,272,667,228"/>
+<area shape="poly" title=" " alt="" coords="670,225,697,243,718,268,726,290,718,311,699,332,675,348,622,368,620,363,673,343,695,328,714,308,720,290,714,271,693,247,667,230"/>
+<area shape="poly" title=" " alt="" coords="486,227,252,272,251,267,485,221"/>
+<area shape="poly" title=" " alt="" coords="715,221,968,267,981,269,980,274,967,272,714,226"/>
+<area shape="rect" href="registro_8cpp.html" title=" " alt="" coords="289,269,461,309"/>
+<area shape="poly" title=" " alt="" coords="535,229,424,272,422,267,533,224"/>
+<area shape="poly" title=" " alt="" coords="731,214,936,237,1164,267,1177,269,1176,274,1164,272,935,242,731,219"/>
+<area shape="rect" href="sistema__de__renderizacao_8cpp.html" title=" " alt="" coords="485,269,704,309"/>
+<area shape="poly" title=" " alt="" coords="597,235,597,269,592,269,592,235"/>
+<area shape="poly" title=" " alt="" coords="782,315,608,360,607,355,781,310"/>
+<area shape="poly" title=" " alt="" coords="927,312,1029,355,1027,360,924,317"/>
+<area shape="poly" title=" " alt="" coords="1469,235,1470,276,1465,276,1464,235"/>
+<area shape="poly" title=" " alt="" coords="1525,224,1632,267,1630,272,1523,229"/>
+</map>
+</div>
+</div>
+<p><a href="sistema__de__fisica_8hpp_source.html">Ir para o código-fonte desse arquivo.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Componentes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMyContactCallback.html">MyContactCallback</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbubble_1_1sistema__fisica.html">bubble::sistema_fisica</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Funções</h2></td></tr>
+<tr class="memitem:a108bcf8ecbdb03a40c6fa15f3828c64e" id="r_a108bcf8ecbdb03a40c6fa15f3828c64e"><td class="memItemLeft" align="right" valign="top"><a id="a108bcf8ecbdb03a40c6fa15f3828c64e" name="a108bcf8ecbdb03a40c6fa15f3828c64e"></a>
+<a class="el" href="structbubble_1_1resultadoRaio.html">resultadoRaio</a>&#160;</td><td class="memItemRight" valign="bottom"><b>bubble::raioIntersecta</b> (const <a class="el" href="structbubble_1_1raio.html">raio</a> &amp;<a class="el" href="structbubble_1_1raio.html">raio</a>)</td></tr>
+<tr class="separator:a108bcf8ecbdb03a40c6fa15f3828c64e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Descrição detalhada</h2>
+<div class="textblock"><p>Gerencia a fisica de jogo com o bullet3. </p>
+<dl class="section copyright"><dt>Copyright</dt><dd>Copyright (c) 2025 Daniel Oliveira</dd></dl>
+<dl class="section author"><dt>Autor</dt><dd>Daniel O. dos Santos </dd></dl>
+<dl class="section date"><dt>Data</dt><dd>2025-04-08 </dd></dl>
+<dl class="section version"><dt>Versão</dt><dd>1.0</dd></dl>
+<p>@licence MIT License</p>
+<dl class="section see"><dt>Veja também</dt><dd><a class="el" href="sistema__de__fisica_8cpp.html">sistema_de_fisica.cpp</a> </dd></dl>
+</div></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Gerado por&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8
+</small></address>
+</body>
+</html>

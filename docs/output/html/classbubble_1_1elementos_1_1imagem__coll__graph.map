@@ -1,0 +1,15 @@
+<map id="bubble::elementos::imagem" name="bubble::elementos::imagem">
+<area shape="rect" id="Node000001" title=" " alt="" coords="343,196,494,236"/>
+<area shape="rect" id="Node000002" href="$classbubble_1_1caixa.html" title="funciona como uma div em css" alt="" coords="225,108,335,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="310,139,392,194,389,198,307,143"/>
+<area shape="rect" id="Node000003" href="$structbubble_1_1vetor2.html" title=" " alt="" coords="5,5,168,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="108,39,133,61,163,82,194,96,226,106,224,111,192,101,160,86,130,66,105,43"/>
+<area shape="rect" id="Node000004" href="$structbubble_1_1vetor4.html" title=" " alt="" coords="193,5,367,31"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="283,45,283,108,277,108,277,45"/>
+<area shape="rect" id="Node000005" href="$structbubble_1_1cor.html" title=" " alt="" coords="391,5,486,31"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="417,42,356,86,309,110,306,106,353,82,414,37"/>
+<area shape="rect" id="Node000006" href="$classbubble_1_1shader.html" title=" " alt="" coords="359,108,478,133"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="421,147,421,196,416,196,416,147"/>
+<area shape="rect" id="Node000007" href="$structbubble_1_1vetor2.html" title=" " alt="" coords="502,108,693,133"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="583,147,555,174,526,190,495,201,493,196,524,185,552,170,580,143"/>
+</map>

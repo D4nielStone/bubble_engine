@@ -1,0 +1,12 @@
+<map id="bubble::sistema_codigo" name="bubble::sistema_codigo">
+<area shape="rect" id="Node000001" title=" " alt="" coords="104,271,280,296"/>
+<area shape="rect" id="Node000002" href="$classbubble_1_1sistema.html" title=" " alt="" coords="129,196,255,221"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="195,236,195,270,189,270,189,236"/>
+<area shape="rect" id="Node000003" href="$structbubble_1_1fase.html" title=" " alt="" coords="90,108,193,133"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="157,144,173,171,187,194,183,197,168,173,153,147"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="5,5,155,45"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="102,55,136,106,131,109,98,58"/>
+<area shape="rect" id="Node000005" href="$structbubble_1_1registro.html" title="gerencia as entidades" alt="" coords="179,13,303,38"/>
+<area shape="poly" id="edge5_Node000002_Node000005" title=" " alt="" coords="245,52,242,109,236,142,225,173,208,197,203,194,220,171,231,140,237,108,240,52"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="221,49,156,110,152,106,217,45"/>
+</map>

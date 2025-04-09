@@ -1,0 +1,29 @@
+<map id="Gráfico de Hierarquia de Classes" name="Gráfico de Hierarquia de Classes">
+<area shape="rect" id="Node000000" href="$structbubble_1_1componente.html" title="base para as funcionalidades da engine" alt="" coords="5,277,160,303"/>
+<area shape="rect" id="Node000001" href="$structbubble_1_1camera.html" title="componente que facilita a manipuacao da matriz de visualizacao e projeco" alt="" coords="231,5,354,31"/>
+<area shape="poly" id="edge5_Node000000_Node000001" title=" " alt="" coords="87,263,101,215,124,155,159,93,181,65,206,40,230,27,232,31,210,44,185,68,163,96,129,157,106,217,92,265"/>
+<area shape="rect" id="Node000003" href="$structbubble_1_1codigo.html" title=" " alt="" coords="234,55,351,80"/>
+<area shape="poly" id="edge7_Node000000_Node000003" title=" " alt="" coords="91,263,107,225,132,178,165,130,206,89,233,75,235,80,210,93,169,133,136,180,112,227,95,265"/>
+<area shape="rect" id="Node000004" href="$structbubble_1_1disposicao.html" title=" " alt="" coords="221,104,364,129"/>
+<area shape="poly" id="edge8_Node000000_Node000004" title=" " alt="" coords="96,264,140,201,171,167,207,138,230,127,232,132,209,143,174,171,144,204,100,267"/>
+<area shape="rect" id="Node000005" href="$structbubble_1_1fisica.html" title=" " alt="" coords="239,153,347,179"/>
+<area shape="poly" id="edge9_Node000000_Node000005" title=" " alt="" coords="104,266,149,226,207,188,238,175,240,180,209,192,152,230,107,270"/>
+<area shape="rect" id="Node000006" href="$structbubble_1_1imagem.html" title=" " alt="" coords="229,203,357,228"/>
+<area shape="poly" id="edge10_Node000000_Node000006" title=" " alt="" coords="124,269,207,237,243,225,245,231,209,242,126,274"/>
+<area shape="rect" id="Node000007" href="$structbubble_1_1luz__direcional.html" title=" " alt="" coords="211,252,375,277"/>
+<area shape="poly" id="edge11_Node000000_Node000007" title=" " alt="" coords="173,276,210,272,211,277,174,282"/>
+<area shape="rect" id="Node000008" href="$structbubble_1_1luz__pontual.html" title=" " alt="" coords="218,301,367,327"/>
+<area shape="poly" id="edge12_Node000000_Node000008" title=" " alt="" coords="174,298,218,303,217,308,173,303"/>
+<area shape="rect" id="Node000009" href="$structbubble_1_1propriedades.html" title=" " alt="" coords="213,351,372,376"/>
+<area shape="poly" id="edge13_Node000000_Node000009" title=" " alt="" coords="128,305,209,335,248,348,247,353,207,341,126,310"/>
+<area shape="rect" id="Node000010" href="$structbubble_1_1renderizador.html" title=" " alt="" coords="215,400,371,425"/>
+<area shape="poly" id="edge14_Node000000_Node000010" title=" " alt="" coords="108,310,153,348,209,385,240,397,238,402,207,390,150,352,105,314"/>
+<area shape="rect" id="Node000011" href="$structbubble_1_1terreno.html" title=" " alt="" coords="232,449,353,475"/>
+<area shape="poly" id="edge15_Node000000_Node000011" title=" " alt="" coords="100,313,144,374,175,407,209,434,235,447,233,452,207,439,171,410,140,377,96,316"/>
+<area shape="rect" id="Node000012" href="$structbubble_1_1texto.html" title=" " alt="" coords="239,499,347,524"/>
+<area shape="poly" id="edge16_Node000000_Node000012" title=" " alt="" coords="96,315,112,352,137,398,169,444,210,484,240,499,237,504,206,488,165,448,132,401,107,355,91,317"/>
+<area shape="rect" id="Node000013" href="$structbubble_1_1transformacao.html" title=" " alt="" coords="208,548,377,573"/>
+<area shape="poly" id="edge17_Node000000_Node000013" title=" " alt="" coords="93,316,106,363,130,421,164,482,185,509,210,533,230,546,227,550,206,537,181,513,159,485,125,424,101,364,87,317"/>
+<area shape="rect" id="Node000002" href="$structbubble_1_1camera__editor.html" title=" " alt="" coords="425,5,593,31"/>
+<area shape="poly" id="edge6_Node000001_Node000002" title=" " alt="" coords="368,15,425,15,425,21,368,21"/>
+</map>
