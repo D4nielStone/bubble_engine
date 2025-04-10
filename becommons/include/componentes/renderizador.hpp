@@ -113,7 +113,6 @@ namespace BECOMMONS_NS {
 			}
 			delete m_modelo;
 		}
-        private:
         renderizador() = default;
 	};
 }

@@ -16,30 +16,32 @@
 
 
 #pragma once
+#include "editor_namespace.hpp"
 #include "nucleo/sistema.hpp"
 #include "nucleo/projeto.hpp"
+#include "nucleo/fase.hpp"
 #include "componentes/camera_editor.hpp"
 #include <thread>
 #include <atomic>
 
-namespace bubble{
+namespace EDITOR_NS {
 
-    struct sistema_editor : public bubble::sistema {
+    struct sistema_editor : public BECOMMONS_NS::sistema {
     
     std::string texto_entidade = "id:1";
     uint32_t entidade_atual = 1;
     sistema_editor();
     void atualizarEntidades();
     void atualizarComponentes();
-    void inicializar(fase*) override;
+    void inicializar(BECOMMONS_NS::fase*) override;
     void atualizar() override;
     static void executarRuntime();
      
-    bubble::camera_editor cam;
+    BECOMMONS_NS::camera_editor cam;
 private:
     size_t num_entidades_anterior = 0;
     size_t entidade_anterior = 0;
-    void configurarInterface(bubble::projeto& proj);
+    void configurarInterface(BECOMMONS_NS::projeto& proj);
     inline static std::thread threadRuntime;
     inline static std::atomic<bool> rodando{false}; // Variável para controlar a execução da thread
 

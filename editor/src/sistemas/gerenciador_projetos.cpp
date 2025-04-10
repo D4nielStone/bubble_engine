@@ -9,10 +9,13 @@
  * @licence MIT License
  */
 
-#include "editor.hpp"
+#include "becommons/becommons.hpp"
+#include "editor_namespace.hpp"
+#include "sistemas/editor.hpp"
+#include "util/runtime.hpp"
+#include "sistemas/gerenciador_projetos.hpp"
 
-namespace EDITOR_NS
-{
+using namespace EDITOR_NS;
 void gerenciador_projetos::criarProjetoPadrao(const std::string& novo_diretorio, const char* nome)
 {
         // Cria diretório do projeto
@@ -221,4 +224,3 @@ void gerenciador_projetos::iniciar()
         instanciaJanela->swap();
     }
 }
-} // namespace

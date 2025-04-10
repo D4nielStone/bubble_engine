@@ -10,14 +10,16 @@
  * @licence MIT License
  */
 
-#include "editor.hpp"
+#include "becommons/becommons.hpp"
+#include "sistemas/editor.hpp"
+#include "util/runtime.hpp"
 
-namespace EDITOR_NS
-{
+using namespace BECOMMONS_NS;
+using namespace EDITOR_NS;
 bool gatilho_ = true;
-void sistema_editor::configurarInterface(projeto& proj)
+void sistema_editor::configurarInterface(BECOMMONS_NS::projeto& proj)
 {
-    bubble_gui* gui = static_cast<bubble_gui*>(proj.obterSistema("bubble_gui"));
+    bubble_gui* gui = static_cast<BECOMMONS_NS::bubble_gui*>(proj.obterSistema("bubble_gui"));
     // head
     if(!gui) {
         depuracao::emitir(erro, "interface", "sistema de gui inválido");
@@ -160,12 +162,12 @@ void sistema_editor::inicializar(fase* f)
 void sistema_editor::atualizar()
 {
     // inputs
-    if(instanciaJanela->inputs.isKeyPressed("F5"))
+    if(instanciaJanela->m_inputs.isKeyPressed("F5"))
     {
         projeto_atual->salvarFases();
         executarRuntime();
     }
-    if(instanciaJanela->inputs.isKeyPressed("Ctrl") && instanciaJanela->inputs.isKeyPressed("S"))
+    if(instanciaJanela->m_inputs.isKeyPressed("Ctrl") && instanciaJanela->m_inputs.isKeyPressed("S"))
     {
         projeto_atual->salvarFases();
     }
@@ -183,18 +185,18 @@ void sistema_editor::atualizar()
         entidade_anterior = entidade_atual;
     }
     // camera
-    if(instanciaJanela->inputs.isKeyPressed("Shif"))
+    if(instanciaJanela->m_inputs.isKeyPressed("Shif"))
     {
-        if(gatilho_ && instanciaJanela->inputs.isKeyPressed("A"))
+        if(gatilho_ && instanciaJanela->m_inputs.isKeyPressed("A"))
         {
         projeto_atual->obterFaseAtual()->obterRegistro()->criar();
         gatilho_ = false;
-        }else if(gatilho_ && instanciaJanela->inputs.isKeyPressed("X"))
+        }else if(gatilho_ && instanciaJanela->m_inputs.isKeyPressed("X"))
         {
 projeto_atual->obterFaseAtual()->obterRegistro()->remover(entidade_atual);
         gatilho_ = false;
         }
-        else if(!instanciaJanela->inputs.isKeyPressed("X") && !instanciaJanela->inputs.isKeyPressed("A"))
+        else if(!instanciaJanela->m_inputs.isKeyPressed("X") && !instanciaJanela->m_inputs.isKeyPressed("A"))
         {
         gatilho_ = true;
         }
@@ -300,5 +302,4 @@ void sistema_editor::atualizarComponentes()
         gui->defLargura     (                          25);
         gui->defAltura      (                          25);
         gui->defCorFundo    (    cor(0.0f, 0.0f, 0.0f, 0.f));
-}
 }

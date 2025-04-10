@@ -9,7 +9,9 @@
  *
  * @see gerenciador_projetos.cpp
  */
-#include "editor.hpp"
+#include <string>
+#include "becommons/becommons.hpp"
+#include "editor_namespace.hpp"
 
 namespace EDITOR_NS
 {

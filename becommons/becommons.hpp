@@ -58,3 +58,4 @@
 #include "os/janela.hpp"
 #include "os/sistema.hpp"
 #include "os/tempo.hpp"
+#include "sistemas/bubble_gui.hpp"

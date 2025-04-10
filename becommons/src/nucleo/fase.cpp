@@ -158,7 +158,7 @@ void fase::analizarEntidades(const Document& doc)
                 }
             }
             else if (tipo_str == "renderizador") {
-			    reg.adicionar<renderizador>(ent, "");
+			    reg.adicionar<renderizador>(ent);
 			    auto render = reg.obter<renderizador>(ent.id);
                 if(!render->analizar(componente)) {
                     depuracao::emitir(erro, "fase", "Problemas analizando renderizador");

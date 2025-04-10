@@ -25,8 +25,9 @@ add_library(glad STATIC /usr/include/glad/glad.c)
 target_link_libraries(editor PRIVATE glad)
 
 target_include_directories(editor PRIVATE 
+    ${CMAKE_SOURCE_DIR}
     ../becommons/include
-    ../becommons
+    ../
     ./include
     /usr/include/lua5.3
     /usr/include/glm
