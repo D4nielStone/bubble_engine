@@ -38,8 +38,7 @@ public:
     }
 };
 
-namespace BECOMMONS_NS
-{
+namespace BECOMMONS_NS {
 
     inline static btDiscreteDynamicsWorld* mundoDinamicoPrincipal;
     

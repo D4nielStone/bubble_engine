@@ -19,7 +19,8 @@
 #include <filesystem>
 #include "assets/objetos/cubo.hpp"
 #include "assets/objetos/esfera.hpp"
-#include "map"
+#include <map>
+#include "util/material.hpp"
 
 std::map<std::string, malha> primitivas = 
 {
@@ -29,22 +30,22 @@ std::map<std::string, malha> primitivas =
 
 namespace BECOMMONS_NS
 {
-    void modelo::desenhar(namespace BECOMMONS_NSshader& shader)
+    void modelo::desenhar(shader& shader)
     {
         for (unsigned int i = 0; i < malhas.size(); i++)
             malhas[i].desenhar(shader);
     }
 
-    namespace BECOMMONS_NSshader& modelo::shader()
+    shader& modelo::obterShader()
     {
-        if (!m_shader) m_shader = new namespace BECOMMONS_NSshader();
+        if (!m_shader) m_shader = new shader();
         return *m_shader;
     }
 
     void modelo::definirShader(const char* vertex, const char* frag)
     {
         if (m_shader) delete m_shader;
-        m_shader = new namespace BECOMMONS_NSshader(vertex, frag);
+        m_shader = new shader(vertex, frag);
     }
 
     void modelo::carregarmodelo(const std::string& path)
@@ -88,15 +89,15 @@ namespace BECOMMONS_NS
 
     malha modelo::processarMalha(aiMesh* mesh, const aiScene* scene)
     {
-        std::vector<namespace BECOMMONS_NSvertice> vertices;
+        std::vector<vertice> vertices;
         std::vector<unsigned int> indices;
         std::unordered_map<std::string, textura> texturas;
 
         for (unsigned int i = 0; i < mesh->mNumVertices; i++)
         {
-            namespace BECOMMONS_NSvertice vertex;
+            vertice vertex;
             // processa coordenadas de vertice
-            namespace BECOMMONS_NSvetor3<float> vector;
+            vetor3<float> vector;
             vector.x = mesh->mVertices[i].x;
             vector.y = mesh->mVertices[i].y;
             vector.z = mesh->mVertices[i].z;
@@ -140,7 +141,7 @@ namespace BECOMMONS_NS
         // 1. diffusa
         texturas["tex_albedo"] = carregarTextura(material, aiTextureType_DIFFUSE);
         // 2. metallico
-        texturas["tex_metallic"] = carregarTextura(material, aiTextureTypem_ETALNESS);
+        texturas["tex_metallic"] = carregarTextura(material, aiTextureType_METALNESS);
         // 3. roughness
         texturas["tex_roughness"] = carregarTextura(material, aiTextureType_DIFFUSE_ROUGHNESS);
         // 4. normal
@@ -152,15 +153,15 @@ namespace BECOMMONS_NS
         
         /// extrai cor difusa
         aiColor4D diffuse_color;
-        namespace BECOMMONS_NScor difusa;
-        if (AI_SUCCESS == material->Get(AIm_ATKEY_COLOR_DIFFUSE, diffuse_color))
+        cor difusa;
+        if (AI_SUCCESS == material->Get(AI_MATKEY_COLOR_DIFFUSE, diffuse_color))
         {
             difusa.r = diffuse_color.r;
             difusa.g = diffuse_color.g;
             difusa.b = diffuse_color.b;
             difusa.a = diffuse_color.a;
         }
-        material mat(texturas, difusa);
+        BECOMMONS_NS::material mat(texturas, difusa);
 
         malha m_(vertices, indices, mat);
         m_.definirBuffers();

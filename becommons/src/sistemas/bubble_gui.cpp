@@ -1,5 +1,3 @@
-#include "sistemas/bubble_gui.hpp"
-
 /** @copyright Copyright (c) 2025 Daniel Oliveira */
 /**
  * @file bubble_gui.cpp
@@ -11,12 +9,14 @@
  * @licence MIT License
  */
 
+#include "namespace.hpp"
+#include "sistemas/bubble_gui.hpp"
 #include "os/janela.hpp"
 #include "depuracao/debug.hpp"
 #include <cmath>
 #include <functional>
 
-using BECOMMONS_NS;
+using namespace BECOMMONS_NS;
 
 glm::mat4 proj(1.f);
 
@@ -87,7 +87,7 @@ void bubble_gui::desenhar_caixa(caixa* c)
     }
 }
 
-void BECOMMONS_NSrenderizarImagem(elementos::imagem* img)
+void BECOMMONS_NS::renderizarImagem(elementos::imagem* img)
 {
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, img->m_imagem_id);
@@ -107,7 +107,7 @@ void BECOMMONS_NSrenderizarImagem(elementos::imagem* img)
     glBindVertexArray(0);
 }
 
-void BECOMMONS_NSrenderizarFundo(caixa* it_caixa, bubble::shader* quad_shader)
+void BECOMMONS_NS::renderizarFundo(caixa* it_caixa, BECOMMONS_NS::shader* quad_shader)
 {
     quad_shader->use();
     quad_shader->setVec2("quadrado.posicao", it_caixa->m_limites.x, it_caixa->m_limites.y);
@@ -124,7 +124,7 @@ void BECOMMONS_NSrenderizarFundo(caixa* it_caixa, bubble::shader* quad_shader)
     glBindVertexArray(0);
 }
 
-void BECOMMONS_NSrenderizarTexto(elementos::texto* tex)
+void BECOMMONS_NS::renderizarTexto(elementos::texto* tex)
 {
 
         // activate corresponding render state	
@@ -137,7 +137,7 @@ void BECOMMONS_NSrenderizarTexto(elementos::texto* tex)
 
         // iterate through all characters
         std::string::const_iterator c;
-        auto& chs = BECOMMONS_NSgerenciadorFontes::obterInstancia().obter(tex->m_texto_fonte, tex->m_texto_escala);
+        auto& chs = gerenciadorFontes::obterInstancia().obter(tex->m_texto_fonte, tex->m_texto_escala);
         float y_linha = tex->m_texto_escala;
         float x_linha = tex->m_limites.x; 
         if(((uint32_t)tex->m_texto_flags & (uint32_t)elementos::flags_texto::alinhamento_central)!=0) 
@@ -154,7 +154,7 @@ void BECOMMONS_NSrenderizarTexto(elementos::texto* tex)
             
             if (chs.empty())
                 return;
-            BECOMMONS_NScaractere ch = chs.at(ca);
+            caractere ch = chs.at(ca);
             
             float xpos = x_linha + ch.apoio.x;
             float ypos = tex->m_limites.y - ch.apoio.y + y_linha;

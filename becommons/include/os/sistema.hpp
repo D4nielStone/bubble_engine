@@ -16,8 +16,7 @@
 #include <limits.h>
 #include "namespace.hpp"
 
-namespace BECOMMONS_NS
-{
+namespace BECOMMONS_NS {
 inline static std::string obterExecDir() {
     char path[PATH_MAX];
     ssize_t count = readlink("/proc/self/exe", path, PATH_MAX);

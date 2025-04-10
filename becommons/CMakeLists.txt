@@ -4,6 +4,7 @@ project(becommons)
 set(CMAKE_CXX_STANDARD 20)
 
 include_directories(
+    ${CMAKE_SOURCE_DIR}
     ${CMAKE_SOURCE_DIR}/include
     /usr/include/lua5.3
     /usr/include/glm
@@ -39,6 +40,7 @@ target_sources(becommons PRIVATE
     src/arquivadores/modelo.cpp
     src/componentes/camera.cpp
     src/componentes/camera_editor.cpp
+    src/componentes/luz_direcional.cpp
     src/componentes/codigo.cpp
     src/componentes/fisica.cpp
     src/componentes/transformacao.cpp

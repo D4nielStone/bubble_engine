@@ -10,6 +10,7 @@
  * @licence MIT License
  */
 
+#include "namespace.hpp"
 #include <glad/glad.h>
 #include "GLFW/glfw3.h"
 #include "os/janela.hpp"
@@ -17,22 +18,21 @@
 #include "arquivadores/imageloader.hpp"
 #include "arquivadores/shader.hpp"
 #include "arquivadores/fonte.hpp"
+#include "inputs/inputs.hpp"
 
-using BECOMMONS_NS;
+using namespace BECOMMONS_NS;
 
 // Callback de erro
-//
-//
 void errorCallback(int error, const char* description) {
     std::cerr << "GLFW Error (" << error << "): " << description << std::endl;
 }
 
-BECOMMONS_NSjanela::~janela()
+janela::~janela()
 {
-    BECOMMONS_NSdescarregarShaders();
-    BECOMMONS_NSgerenciadorFontes::limparFontes();
+    descarregarShaders();
+    gerenciadorFontes::limparFontes();
 }
-BECOMMONS_NSjanela::janela(const char* nome, bubble::vetor2<double> bounds, const char* icon_path)
+janela::janela(const char* nome, BECOMMONS_NS::vetor2<double> bounds, const char* icon_path)
 {
     glfwSetErrorCallback(errorCallback);
     // inicia glfw
@@ -59,27 +59,27 @@ BECOMMONS_NSjanela::janela(const char* nome, bubble::vetor2<double> bounds, cons
     
     if(icon_path)
     {
-    BECOMMONS_NSimageLoader _icone(icon_path);
+    imageLoader _icone(icon_path);
     auto glfw_icone = _icone.converterParaGlfw();
     glfwSetWindowIcon(window, 1, &glfw_icone);
     }
     // ativa blend
     glEnable(GL_BLEND); 
-    glBlendFunc(GL_SRC_ALPHA, GL_ONEm_INUS_SRC_ALPHA);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     
 
-    glfwSetCursorPosCallback(window,BECOMMONS_NSmousePosCallBack);
-    glfwSetMouseButtonCallback(window, BECOMMONS_NSmouseButtonCallBack);
-    glfwSetKeyCallback(window,BECOMMONS_NScallbackKey);
+    glfwSetCursorPosCallback(window,mousePosCallBack);
+    glfwSetMouseButtonCallback(window, mouseButtonCallBack);
+    glfwSetKeyCallback(window,callbackKey);
     glfwSetWindowUserPointer(window, this);
 
-    BECOMMONS_NSvetor4<int> tam{};
+    vetor4<int> tam{};
     glfwGetWindowSize(window, &tam.z, &tam.w);
     tamanho.y = tam.w;
     tamanho.x = tam.z;
 }
 
-BECOMMONS_NSjanela::janela(const char* nome, const bool f, bubble::vetor2<double> bounds , const char* icon_path)
+janela::janela(const char* nome, const bool f, BECOMMONS_NS::vetor2<double> bounds , const char* icon_path)
 {
     glfwSetErrorCallback(errorCallback);
     // inicia glfw
@@ -89,7 +89,7 @@ BECOMMONS_NSjanela::janela(const char* nome, const bool f, bubble::vetor2<double
         abort();
     }
 if(f)
-    glfwWindowHint(GLFWm_AXIMIZED, GLFW_TRUE);
+    glfwWindowHint(GLFW_MAXIMIZED, GLFW_TRUE);
     window = glfwCreateWindow(bounds.x, bounds.y, nome, NULL, NULL);
     m_nome = nome;
     if (!window) {
@@ -107,26 +107,26 @@ if(f)
     
     if(icon_path)
     {
-    BECOMMONS_NSimageLoader _icone(icon_path);
+    imageLoader _icone(icon_path);
     auto glfw_icone = _icone.converterParaGlfw();
     glfwSetWindowIcon(window, 1, &glfw_icone);
     }
     // ativa blend
     glEnable(GL_BLEND); 
-    glBlendFunc(GL_SRC_ALPHA, GL_ONEm_INUS_SRC_ALPHA);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     
 
-    glfwSetCursorPosCallback(window,BECOMMONS_NSmousePosCallBack);
-    glfwSetMouseButtonCallback(window, BECOMMONS_NSmouseButtonCallBack);
-    glfwSetKeyCallback(window,BECOMMONS_NScallbackKey);
+    glfwSetCursorPosCallback(window,mousePosCallBack);
+    glfwSetMouseButtonCallback(window, mouseButtonCallBack);
+    glfwSetKeyCallback(window,callbackKey);
     glfwSetWindowUserPointer(window, this);
 
-    BECOMMONS_NSvetor4<int> tam{};
+    vetor4<int> tam{};
     glfwGetWindowSize(window, &tam.z, &tam.w);
     tamanho.y = tam.w;
     tamanho.x = tam.z;
 }
-void BECOMMONS_NSjanela::poll()
+void janela::poll()
 {
     glfwPollEvents();
     int w, h;
@@ -135,7 +135,7 @@ void BECOMMONS_NSjanela::poll()
     tamanho.x = w;
 }
 
-void BECOMMONS_NSjanela::swap() 
+void janela::swap() 
 {
     if(m_cursor != m_cursor_antigo) 
     {
@@ -148,18 +148,18 @@ void BECOMMONS_NSjanela::swap()
     glfwSwapBuffers(window);
 }
 
-void BECOMMONS_NSjanela::viewport() const
+void janela::viewport() const
 {
     glViewport(0, 0, tamanho.x, tamanho.y);
 }
 
-void BECOMMONS_NSjanela::nome(const char* novo_nome)
+void janela::nome(const char* novo_nome)
 {
     glfwSetWindowTitle(window, novo_nome);
     m_nome = novo_nome;
 }
 
-std::string BECOMMONS_NSjanela::nome() const
+std::string janela::nome() const
 {
     return m_nome;
 }

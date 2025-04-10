@@ -26,8 +26,7 @@
 #include "componentes/transformacao.hpp"
 #include "componentes/renderizador.hpp"
 
-namespace BECOMMONS_NS
-{
+namespace BECOMMONS_NS {
     namespace api{
 	struct entidade
 	{

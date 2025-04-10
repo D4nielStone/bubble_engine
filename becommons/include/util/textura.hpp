@@ -11,8 +11,7 @@
 #pragma once
 #include <string>
 
-namespace BECOMMONS_NS
-{
+namespace BECOMMONS_NS {
     struct textura {
         unsigned int id{0};
         std::string path{""};

@@ -24,8 +24,7 @@
  * @struct fase
  */
 
-namespace BECOMMONS_NS
-{
+namespace BECOMMONS_NS {
 	struct fase : public std::enable_shared_from_this<fase>
 	{
 		bool rodando{false};

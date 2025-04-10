@@ -13,10 +13,10 @@
 #include <string>
 #include "namespace.hpp"
 #include "componente.hpp"
+#include "util/malha.hpp"
 #include "arquivadores/shader.hpp"
 
-namespace BECOMMONS_NS
-{
+namespace BECOMMONS_NS {
     struct terreno : public componente
     {
         static constexpr mascara mascara = {COMPONENTE_TERRENO};
@@ -28,7 +28,7 @@ namespace BECOMMONS_NS
         {
             return m_shader;
         }
-            malha* m_malha;
+        malha m_malha;
         private:
             shader m_shader;
             std::string diretorio;

@@ -13,9 +13,8 @@
 #pragma once
 #include <thread>
 #include <chrono>
-#include "becommons.hpp"
-namespace BECOMMONS_NS
-{
+#include "namespace.hpp"
+namespace BECOMMONS_NS {
     struct tempo {
         tempo() : tempoCorrido(std::chrono::high_resolution_clock::now()) {}
 

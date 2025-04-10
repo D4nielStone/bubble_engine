@@ -21,8 +21,7 @@
 #include "namespace.hpp"
 #include "entidades/entidade.hpp"
 
-namespace BECOMMONS_NS
-{
+namespace BECOMMONS_NS {
     /**
 	* @struct registro
 	* @brief gerencia as entidades

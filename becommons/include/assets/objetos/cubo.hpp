@@ -3,10 +3,13 @@
  * @file cubo.hpp
  */
 
-#include "util/malha*.hpp"
+#include "namespace.hpp"
+#include "util/malha.hpp"
 #include "util/material.hpp"
 #include "util/vertice.hpp"
 #include <vector>
+
+using namespace BECOMMONS_NS;
 
 inline std::vector<vertice> vertices = {
     // Positions (8 vertices matching the OBJ file)
@@ -62,5 +65,5 @@ inline std::vector<unsigned int> indices = {
     20, 21, 22, 20, 22, 23
 };
 
-inline material material;
-inline malha* malha*_cubo(vertices, indices, material);
+inline material m_material;
+inline malha malha_cubo(vertices, indices, m_material);

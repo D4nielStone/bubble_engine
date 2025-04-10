@@ -16,8 +16,11 @@
 #include "nucleo/registro.hpp"
 #include "componentes/renderizador.hpp"
 #include "arquivadores/shader.hpp"
+#include "depuracao/debug.hpp"
 
-BECOMMONS_NSentidade bubble::registro::criar(const uint32_t id)
+using namespace BECOMMONS_NS;
+
+entidade registro::criar(const uint32_t id)
 {
     // Se o id é 0, cria com id livre
     // se não, cria com o parâmetro "id"
@@ -30,14 +33,14 @@ BECOMMONS_NSentidade bubble::registro::criar(const uint32_t id)
         id_atual = proxima_entidade;
     }
     depuracao::emitir(debug, "registro", "nova entidade: " + std::to_string(id_atual));
-    BECOMMONS_NSentidade ent ={ id_atual , componente::COMPONENTE_NONE };
+    entidade ent ={ id_atual , componente::COMPONENTE_NONE };
 
-    adicionar<BECOMMONS_NStransformacao>(ent);
+    adicionar<transformacao>(ent);
 
     return ent;
 }
 
-BECOMMONS_NScomponente::mascara bubble::registro::obterComponentes(const uint32_t& id) const {
+componente::mascara registro::obterComponentes(const uint32_t& id) const {
     auto it = mascaras.find(id);
     if (it != mascaras.end()) {
         return it->second; // Retorna a m�scara associada � entidade.
@@ -45,7 +48,7 @@ BECOMMONS_NScomponente::mascara bubble::registro::obterComponentes(const uint32_
     return componente::COMPONENTE_NONE; // Retorna uma m�scara vazia se a entidade n�o existir.
 }
 
-void BECOMMONS_NSregistro::remover(const uint32_t& ent)
+void registro::remover(const uint32_t& ent)
 {
     entidades[ent].clear();
     entidades.erase(ent);

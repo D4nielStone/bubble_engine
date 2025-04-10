@@ -17,8 +17,7 @@
 #include "componentes/texto.hpp"
 #include "componentes/imagem.hpp"
 
-namespace BECOMMONS_NS
-{
+namespace BECOMMONS_NS {
 	class sistema_interface : public sistema
 	{
 	public:

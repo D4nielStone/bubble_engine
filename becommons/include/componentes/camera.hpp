@@ -22,9 +22,9 @@
 #include "transformacao.hpp"
 #include "util/skybox.hpp"
 #include "util/cor.hpp"
+#include "util/raio.hpp"
 
-namespace BECOMMONS_NS
-{
+namespace BECOMMONS_NS {
 	/**
 	 * @struct camera
 	 * @brief componente que facilita a manipuacao da matriz de visualizacao e projeco
@@ -40,7 +40,7 @@ namespace BECOMMONS_NS
 		cor ceu				{0.43F, 0.78F, 0.86F, 1.0F};
 
 		glm::vec3 forward, direita, cima, posicao;
-		std::unique_ptr<transformacao> transform{ nullptr };
+		transformacao* transform{ nullptr };
 
 		glm::mat4 viewMatrix = glm::mat4(1.f), projMatriz = glm::mat4(1.f);
 

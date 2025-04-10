@@ -20,12 +20,11 @@
 #include <assimp/scene.h>
 #include <vector>
 #include <memory>
-#include "becommons.hpp"
+#include "namespace.hpp"
 
 struct GLFWimage;
 
-namespace BECOMMONS_NS
-{
+namespace BECOMMONS_NS {
     class  imageLoader
     {
     public:

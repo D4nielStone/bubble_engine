@@ -1,4 +1,3 @@
-
 /** @copyright Copyright (c) 2025 Daniel Oliveira */
 /**
  * @file inputs.cpp
@@ -10,13 +9,13 @@
  * @licence MIT License
  */
 
+#include <glad/glad.h>
 #include "inputs/inputs.hpp"
 #include <iostream>
 #include <unordered_map>
 #include <stdexcept>
 #include "depuracao/debug.hpp"
 #include "nucleo/fase.hpp"
-#include "glad/glad.h"
 #include <GLFW/glfw3.h>
 #include "os/janela.hpp"
 
@@ -44,8 +43,8 @@ static const std::unordered_map<int, std::string> keyMap = {
 {GLFW_KEY_KP_ENTER, "Ente"},
 {GLFW_KEY_DELETE, "Del"},
 {GLFW_KEY_F5, "F5"},
-{GLFWm_OUSE_BUTTONm_IDDLE, "Scrl"},
-{GLFWm_OUSE_BUTTON_LEFT, "MouseE"}
+{GLFW_MOUSE_BUTTON_MIDDLE, "Scrl"},
+{GLFW_MOUSE_BUTTON_LEFT, "MouseE"}
 };
 
 inputMode inputs::getInputMode() const {
@@ -108,9 +107,9 @@ static std::string glfwkeyTokey(int glfwkey) {
     return it != keyMap.end() ? it->second : "Erro";
 }
 // Callback de teclado GLFW
-void namespace BECOMMONS_NScallbackKey(GLFWwindow* window, int key, int scancode, int action, int mods) 
+void BECOMMONS_NS::callbackKey(GLFWwindow* window, int key, int scancode, int action, int mods) 
 {
-    auto &input = instanciaJanela->inputs;
+    auto &input = instanciaJanela->m_inputs;
     input.mods = mods;
     input.teclado_action = action;
 
@@ -126,18 +125,18 @@ void namespace BECOMMONS_NScallbackKey(GLFWwindow* window, int key, int scancode
 }
 
 // Callback de posi��o do mouse
-void mousePosCallBack(GLFWwindow* window, double x, double y)
+void BECOMMONS_NS::mousePosCallBack(GLFWwindow* window, double x, double y)
 {
-    auto& input = instanciaJanela->inputs;
+    auto& input = instanciaJanela->m_inputs;
 
         input.mousex = x;
         input.mousey = y;
     
 }
 // Callback de clique do mouse
-void mouseButtonCallBack(GLFWwindow* window, int button, int action, int mods)
+void BECOMMONS_NS::mouseButtonCallBack(GLFWwindow* window, int button, int action, int mods)
 {
-    auto& input = instanciaJanela->inputs;
+    auto& input = instanciaJanela->m_inputs;
 
     // Processar o clique do mouse
     input.mouseEnter = action;
@@ -154,9 +153,9 @@ void mouseButtonCallBack(GLFWwindow* window, int button, int action, int mods)
     }
 }
 // Callback para caracteres
-void namespace BECOMMONS_NScharCallback(GLFWwindow* window, unsigned int codepoint)
+void BECOMMONS_NS::charCallback(GLFWwindow* window, unsigned int codepoint)
 {
-    auto& input = instanciaJanela->inputs;
+    auto& input = instanciaJanela->m_inputs;
 
     // Converte o c�digo Unicode para um caractere UTF-8
     std::string utf8_char;
@@ -184,7 +183,7 @@ void namespace BECOMMONS_NScharCallback(GLFWwindow* window, unsigned int codepoi
     }
 
     // Ajusta para letras mai�sculas/min�sculas se a tecla SHIFT estiver pressionada
-    if (input.mods & GLFWm_OD_SHIFT && utf8_char.length() == 1) {
+    if (input.mods & GLFW_MOD_SHIFT && utf8_char.length() == 1) {
         utf8_char[0] = toupper(utf8_char[0]);
     }
 
@@ -192,30 +191,30 @@ void namespace BECOMMONS_NScharCallback(GLFWwindow* window, unsigned int codepoi
     input.char_press = true;
 }
 
-void namespace BECOMMONS_NSposicionarCursor(double x, double y)
+void BECOMMONS_NS::posicionarCursor(double x, double y)
 {
-    auto& input = instanciaJanela->inputs;
+    auto& input = instanciaJanela->m_inputs;
     
     input.mousex = x;
     input.mousey = y;
     glfwSetCursorPos(instanciaJanela->window, x, y);
 }
 
-namespace BECOMMONS_NSvetor2<double> bubble::obterMouse()
+vetor2<double> BECOMMONS_NS::obterMouse()
 {
-    auto& input = instanciaJanela->inputs;
+    auto& input = instanciaJanela->m_inputs;
 
-        return namespace BECOMMONS_NSvetor2<double>( input.mousex, input.mousey );
+        return vetor2<double>( input.mousex, input.mousey );
 };
 
-namespace BECOMMONS_NSvetor2<int> bubble::tamanhoJanela()
+vetor2<int> BECOMMONS_NS::tamanhoJanela()
 {
-    return namespace BECOMMONS_NSvetor2<int>( instanciaJanela->tamanho.x, instanciaJanela->tamanho.y );
+    return vetor2<int>( instanciaJanela->tamanho.x, instanciaJanela->tamanho.y );
 };
 
-bool namespace BECOMMONS_NSpressionada(const std::string &letra)
+bool BECOMMONS_NS::pressionada(const std::string &letra)
 {
-    auto& input = instanciaJanela->inputs;
+    auto& input = instanciaJanela->m_inputs;
 
     return input.isKeyPressed(letra);
 }

@@ -9,11 +9,11 @@
  *
  * @licence MIT License
  */
-
+#include "namespace.hpp"
 #include "nucleo/sistema.hpp"
 #include "nucleo/fase.hpp"
 
-void BECOMMONS_NSsistema::inicializar(bubble::fase* fase_ptr)
+void BECOMMONS_NS::sistema::inicializar(BECOMMONS_NS::fase* fase_ptr)
 {
 	this->m_fase = fase_ptr;
 	this->reg= m_fase->obterRegistro();

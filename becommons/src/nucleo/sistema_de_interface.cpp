@@ -10,6 +10,7 @@
  * @licence MIT License
  */
 
+#include "namespace.hpp"
 #include <glad/glad.h>
 #include "nucleo/sistema_de_interface.hpp"
 #include "componentes/renderizador.hpp"
@@ -23,8 +24,7 @@
 #include "os/janela.hpp"
 #include "nucleo/projeto.hpp"
 
-BECOMMONS_NS
-{
+namespace BECOMMONS_NS {
     sistema_interface::~sistema_interface()
     {
         if(text_VBO != 0)glDeleteBuffers(1, &text_VBO);
@@ -36,25 +36,25 @@ BECOMMONS_NS
     {
         glDisable(GL_DEPTH_TEST);
         glDisable(GL_CULL_FACE);
-        reg->cada<BECOMMONS_NStexto>([&](const uint32_t ent) 
+        reg->cada<texto>([&](const uint32_t ent) 
             {
-                desenharTexto(*shader_texto, *reg->obter<BECOMMONS_NStexto>(ent));
+                desenharTexto(*shader_texto, *reg->obter<texto>(ent));
             }
         );
-        reg->cada<BECOMMONS_NSimagem>([&](const uint32_t ent) 
+        reg->cada<imagem>([&](const uint32_t ent) 
             {
-                desenharImagem(*shader_imagem, *reg->obter<BECOMMONS_NSimagem>(ent));
+                desenharImagem(*shader_imagem, *reg->obter<imagem>(ent));
             }
         );
     }
 
-    void sistema_interface::inicializar(BECOMMONS_NSfase* fase_ptr)
+    void sistema_interface::inicializar(fase* fase_ptr)
     {
         this->m_fase = fase_ptr;
         this->reg = m_fase->obterRegistro();
 
-        if (!shader_texto) shader_texto = new BECOMMONS_NSshader("texto.vert", "texto.frag");
-        if (!shader_imagem) shader_imagem = new BECOMMONS_NSshader("imagem.vert", "imagem.frag");
+        if (!shader_texto) shader_texto = new shader("texto.vert", "texto.frag");
+        if (!shader_imagem) shader_imagem = new shader("imagem.vert", "imagem.frag");
         /*---------------texto---------------*/
         glGenVertexArrays(1, &text_VAO);
         glGenBuffers(1, &text_VBO);
@@ -111,8 +111,8 @@ BECOMMONS_NS
 
     }
 
-    float obterLarguraTexto(const BECOMMONS_NStexto& texto) {
-        auto& caracteres = BECOMMONS_NSgerenciadorFontes::obterInstancia().obter(texto.fonte);
+    float obterLarguraTexto(const texto& texto) {
+        auto& caracteres = gerenciadorFontes::obterInstancia().obter(texto.fonte);
         if (caracteres.empty()) {
             return 0.0f;
         }
@@ -121,7 +121,7 @@ BECOMMONS_NS
         for (char32_t c : texto.frase) {
            auto it = caracteres.find(c);
            if (it != caracteres.end()) {
-               const BECOMMONS_NScaractere& ch = it->second;
+               const caractere& ch = it->second;
             // Calculate advance in pixels (same logic as in desenharTexto)
                 larguraTotal += (ch.avanco >> 6) * texto.escala;
             }
@@ -129,17 +129,17 @@ BECOMMONS_NS
     return larguraTotal;
 }
 
-    void calcularReferencial(BECOMMONS_NStexto &_texto)
+    void calcularReferencial(texto &_texto)
     {
         glm::vec3 worldPosition = _texto.posicao_referencial; 
         _texto.padding = projeto_atual->srender()->camera_principal->mundoParaTela(worldPosition);
         _texto.padding.x -= obterLarguraTexto(_texto)/2;
     }
 
-    void BECOMMONS_NSsistema_interface::desenharTexto(shader& s, const bubble::texto &_texto)
+    void sistema_interface::desenharTexto(shader& s, const BECOMMONS_NS::texto &_texto)
     {
         projection = glm::ortho(0.0, instanciaJanela->tamanho.x, instanciaJanela->tamanho.y, 0.0);
-        BECOMMONS_NStexto text = _texto;
+        texto text = _texto;
 
         if(_texto.pf_ativa)
             calcularReferencial(text);
@@ -147,7 +147,7 @@ BECOMMONS_NS
 
         // activate corresponding render state	
         s.use();
-        s.setCor("textColor", text.cor);
+        s.setCor("textColor", text.m_cor);
         s.setMat4("projecao", glm::value_ptr(projection));
 
         glActiveTexture(GL_TEXTURE0);
@@ -155,12 +155,12 @@ BECOMMONS_NS
 
         // iterate through all characters
         std::string::const_iterator c;
-        auto& chs = BECOMMONS_NSgerenciadorFontes::obterInstancia().obter(text.fonte);
+        auto& chs = gerenciadorFontes::obterInstancia().obter(text.fonte);
         for(char32_t ca : text.frase)
         {
             if (chs.empty())
                 return;
-            BECOMMONS_NScaractere ch = chs.at(ca);
+            caractere ch = chs.at(ca);
             
             float xpos = text.padding.x + ch.apoio.x * text.escala;
             float ypos = text.padding.y - (ch.tamanho.y - ch.apoio.y) * text.escala;
@@ -191,7 +191,7 @@ BECOMMONS_NS
         glBindVertexArray(0);
         glBindTexture(GL_TEXTURE_2D, 0);
     }
-    void BECOMMONS_NSsistema_interface::desenharImagem(shader& s, const bubble::imagem& img)
+    void sistema_interface::desenharImagem(shader& s, const BECOMMONS_NS::imagem& img)
     {
         projection = glm::ortho(0.0, instanciaJanela->tamanho.x, instanciaJanela->tamanho.y, 0.0);
         glActiveTexture(GL_TEXTURE0);

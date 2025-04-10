@@ -16,8 +16,7 @@
 #include <thread>
 #include <atomic>
 
-namespace BECOMMONS_NS
-{
+namespace BECOMMONS_NS {
 	class sistema_codigo : public sistema
 	{
 	private:

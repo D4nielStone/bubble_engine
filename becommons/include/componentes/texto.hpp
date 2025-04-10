@@ -17,8 +17,7 @@
 #include "util/cor.hpp"
 #include "componente.hpp"
 
-namespace BECOMMONS_NS
-{
+namespace BECOMMONS_NS {
 	struct texto : componente
 	{
 		constexpr static componente::mascara mascara = componente::COMPONENTE_TEXTO;

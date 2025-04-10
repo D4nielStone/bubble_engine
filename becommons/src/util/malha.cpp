@@ -10,19 +10,19 @@
  * @licence MIT License
  */
 
+#include "namespace.hpp"
 #include <glad/glad.h>
 #include "util/malha.hpp"
 #include "util/material.hpp"
 #include "depuracao/debug.hpp"
+#include "util/vertice.hpp"
 
-
-BECOMMONS_NS
-{
-    malha::malha(std::vector<vertice>& vertices, std::vector<unsigned int>& indices, BECOMMONS_NSmaterial& material)
+namespace BECOMMONS_NS {
+    malha::malha(std::vector<vertice>& vertices, std::vector<unsigned int>& indices, material& material)
     {
         this->vertices = vertices;
         this->indices = indices;
-        this->material = material;
+        this->m_material = material;
     }
 
     malha::~malha()
@@ -37,21 +37,21 @@ BECOMMONS_NS
         glDeleteBuffers(1, &VBO);
         glDeleteBuffers(1, &EBO);
     }
-    void malha::desenhar(BECOMMONS_NSshader &shader)
+    void malha::desenhar(shader &shader)
     {
-        if(sobrepor)
+        if(m_sobrepor)
             glDepthFunc(GL_ALWAYS);
 
-        shader.setBool("recebe_luz", material.recebe_luz);
-        shader.setCor("material.albedo", material.albedo);
-        shader.setFloat("material.metallic", material.metallic);
-        shader.setFloat("material.ao", material.ao);
-        shader.setFloat("material.roughness", material.roughness);
-        shader.setBool("uvMundo", material.uvMundo);
+        shader.setBool("recebe_luz", m_material.recebe_luz);
+        shader.setCor("material.albedo", m_material.albedo);
+        shader.setFloat("material.metallic", m_material.metallic);
+        shader.setFloat("material.ao", m_material.ao);
+        shader.setFloat("material.roughness", m_material.roughness);
+        shader.setBool("uvMundo", m_material.uvMundo);
 
         // texturas
         size_t i = 0;
-        for (auto &textura : material.texturas)
+        for (auto &textura : m_material.texturas)
         {
             if(textura.second.id == 0) continue;
             glActiveTexture(GL_TEXTURE0 + i); // activate proper texture unit before binding
@@ -83,12 +83,12 @@ BECOMMONS_NS
         glBindVertexArray(0);
 
         //desativa texturas
-        for (auto &textura : material.texturas)
+        for (auto &textura : m_material.texturas)
         {
             shader.setBool(("use_" + textura.first).c_str(), false);
         }
 
-        if(sobrepor)
+        if(m_sobrepor)
             glDepthFunc(GL_LESS);
     }
 

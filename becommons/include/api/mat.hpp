@@ -14,10 +14,9 @@
 #pragma once
 #include <glm/glm.hpp>
 #include <glm/detail/type_vec3.hpp>
-#include "becommons.hpp"
+#include "namespace.hpp"
 
-namespace BECOMMONS_NS
-{
+namespace BECOMMONS_NS {
 	inline static float distancia3(const glm::vec3& a, const glm::vec3& b)
 	{
 		float dx = b.x - a.x;

@@ -10,9 +10,10 @@
  * @licence MIT License
  */
 
-#include "becommons.hpp"
+#include "namespace.hpp"
+#include "util/skybox.hpp"
 
-using BECOMMONS_NS;
+using namespace BECOMMONS_NS;
 
 void skybox::desenhar(glm::mat4 view, glm::mat4 proj)
         {
@@ -21,11 +22,11 @@ void skybox::desenhar(glm::mat4 view, glm::mat4 proj)
             glBindVertexArray(malhas.back().VAO);
             
             glm::mat4 nview = glm::mat4(glm::mat3(view));
-            shader().use();
-            shader().setMat4("view", glm::value_ptr(nview));
-            shader().setMat4("projection", glm::value_ptr(proj));
+            obterShader().use();
+            obterShader().setMat4("view", glm::value_ptr(nview));
+            obterShader().setMat4("projection", glm::value_ptr(proj));
             
-            glBindTexture(GL_TEXTURE_CUBEm_AP, id_skybox);
+            glBindTexture(GL_TEXTURE_CUBE_MAP, id_skybox);
             glDrawElements(GL_TRIANGLES, malhas.back().indices.size(), GL_UNSIGNED_INT, 0);
             
             glBindVertexArray(0);

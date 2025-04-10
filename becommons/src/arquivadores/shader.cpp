@@ -29,22 +29,22 @@ inline const std::unordered_map<std::string, const char*> shader_memoria{
     {"phong.frag", phong_frag}
 };
 
-void descarregarShaders()
+void BECOMMONS_NS::descarregarShaders()
 {
     shaders.clear();
 }
 
-namespace BECOMMONS_NSshaderException::shaderException(const char* msg) : msg_(msg) {}
+shaderException::shaderException(const char* msg) : msg_(msg) {}
 
-const char* namespace BECOMMONS_NSshaderException::what() const noexcept {
+const char* shaderException::what() const noexcept {
     return msg_.c_str();
 }
 
-namespace BECOMMONS_NSshader::shader(const char* vertexPath, const char* fragmentPath) {
+shader::shader(const char* vertexPath, const char* fragmentPath) {
     compilar(vertexPath, fragmentPath);
 }
 
-void namespace BECOMMONS_NSshader::compilar(const char* vertexPath, const char* fragmentPath) {
+void shader::compilar(const char* vertexPath, const char* fragmentPath) {
     vert = vertexPath; frag = fragmentPath;
     // Verifica se o shader já foi compilado
     if(shaders.find(fragmentPath) != shaders.end())
@@ -131,7 +131,7 @@ void namespace BECOMMONS_NSshader::compilar(const char* vertexPath, const char* 
     shaders[fragmentPath] = ID;
 }
 
-void namespace BECOMMONS_NSshader::use() 
+void shader::use() 
 {
     if(shaders.find(frag) != shaders.end())
     {
@@ -144,45 +144,45 @@ void namespace BECOMMONS_NSshader::use()
     }
 }
 
-void namespace BECOMMONS_NSshader::setBool(const std::string& name, const bool& value) const {
+void shader::setBool(const std::string& name, const bool& value) const {
     glUniform1i(glGetUniformLocation(ID, name.c_str()), value);
 }
 
-void namespace BECOMMONS_NSshader::setFloat(const std::string& name, const float& value) const {
+void shader::setFloat(const std::string& name, const float& value) const {
     glUniform1f(glGetUniformLocation(ID, name.c_str()), value);
 }
 
-void namespace BECOMMONS_NSshader::setInt(const std::string& name, const int& value) const {
+void shader::setInt(const std::string& name, const int& value) const {
     glUniform1i(glGetUniformLocation(ID, name.c_str()), value);
 }
 
-void namespace BECOMMONS_NSshader::setMat4(const std::string& name, const float* value) const {
+void shader::setMat4(const std::string& name, const float* value) const {
     glUniformMatrix4fv(glGetUniformLocation(ID, name.c_str()), 1, GL_FALSE, value);
 }
 
-void namespace BECOMMONS_NSshader::setMat3(const std::string& name, const float* value) const {
+void shader::setMat3(const std::string& name, const float* value) const {
     glUniformMatrix3fv(glGetUniformLocation(ID, name.c_str()), 1, GL_FALSE, value);
 }
 
-void namespace BECOMMONS_NSshader::setCor(const std::string& name, const bubble::cor& cor) const {
+void shader::setCor(const std::string& name, const BECOMMONS_NS::cor& cor) const {
     glUniform4f(glGetUniformLocation(ID, name.c_str()), cor.r, cor.g, cor.b, cor.a);
 }
 
-void namespace BECOMMONS_NSshader::setVec4(const std::string& name, const vet4& vec4 ) const {
+void shader::setVec4(const std::string& name, const vet4& vec4 ) const {
     glUniform4f(glGetUniformLocation(ID, name.c_str()), vec4.x, vec4.y, vec4.z, vec4.w);
 }
-void namespace BECOMMONS_NSshader::setVec3(const std::string& name, const float& r, const float& g, const float& b) const {
+void shader::setVec3(const std::string& name, const float& r, const float& g, const float& b) const {
     glUniform3f(glGetUniformLocation(ID, name.c_str()), r, g, b);
 }
-void namespace BECOMMONS_NSshader::setVec3(const std::string& name, const vet3& vet) const {
+void shader::setVec3(const std::string& name, const fvet3& vet) const {
     glUniform3f(glGetUniformLocation(ID, name.c_str()), vet.x, vet.y, vet.z);
 }
 
-void namespace BECOMMONS_NSshader::setVec2(const std::string& name, const float& r, const float& g) const {
+void shader::setVec2(const std::string& name, const float& r, const float& g) const {
     glUniform2f(glGetUniformLocation(ID, name.c_str()), r, g);
 }
 
-bool namespace BECOMMONS_NSshader::checkCompileErrors(unsigned int shader, const std::string& type) {
+bool shader::checkCompileErrors(unsigned int shader, const std::string& type) {
     GLint success;
     GLchar infoLog[1024];
 
@@ -205,7 +205,7 @@ bool namespace BECOMMONS_NSshader::checkCompileErrors(unsigned int shader, const
     return true;
 }
 
-bool namespace BECOMMONS_NSshader::checkLinkErrors(unsigned int program) {
+bool shader::checkLinkErrors(unsigned int program) {
     GLint success;
     GLchar infoLog[1024];
 

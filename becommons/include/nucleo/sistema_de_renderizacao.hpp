@@ -16,8 +16,7 @@
 #include "sistema.hpp"
 #include "componentes/camera.hpp"
 
-namespace BECOMMONS_NS
-{
+namespace BECOMMONS_NS {
 	class sistema_renderizacao : public sistema
 	{
         private:

@@ -16,10 +16,9 @@
 #include <rapidjson/document.h>
 #include <rapidjson/writer.h>
 #include <rapidjson/stringbuffer.h>
-#include "becommons.hpp"
+#include "namespace.hpp"
 
-namespace BECOMMONS_NS
-{
+namespace BECOMMONS_NS {
 	// Operadores bit a bit para mascara
 
 	/**

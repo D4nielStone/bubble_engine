@@ -17,19 +17,22 @@
 #include "api/mat.hpp"
 #include "inputs/inputs.hpp"
 #include "os/janela.hpp"
+#include "depuracao/debug.hpp"
 #include "os/sistema.hpp"
 #include <cmath>
 
-namespace BECOMMONS_NScodigo::codigo(const std::string& arquivo) : L(luaL_newstate()), arquivo(arquivo)
+using namespace BECOMMONS_NS;
+
+codigo::codigo(const std::string& arquivo) : L(luaL_newstate()), arquivo(arquivo)
 
 {
 	luaL_openlibs(L);
 
-	bapi::definirFisica(L);
-	bapi::definirTempo(L);
-	bapi::definirUtils(L);
-	bapi::definirInputs(L);
-	bapi::entidade::definir(L);
+	api::definirFisica(L);
+	api::definirTempo(L);
+	api::definirUtils(L);
+	api::definirInputs(L);
+	api::entidade::definir(L);
 
 	if (luaL_dofile(L, arquivo.c_str()) != LUA_OK) {
         std::cerr << "Erro ao carregar o script Lua: " << lua_tostring(L, -1) << std::endl;
@@ -37,10 +40,10 @@ namespace BECOMMONS_NScodigo::codigo(const std::string& arquivo) : L(luaL_newsta
     }
 }
 
-void namespace BECOMMONS_NScodigo::iniciar() const
+void codigo::iniciar() const
 {
 
-	luabridge::setGlobal(L, new bapi::entidade(meu_objeto), "eu");
+	luabridge::setGlobal(L, new api::entidade(meu_objeto), "eu");
 	luabridge::setGlobal(L, &projeto_atual, "projetoAtual");
 	// Tentar obter a fun��o "iniciar" definida localmente no script
 	lua_getglobal(L, "iniciar");
@@ -56,19 +59,19 @@ void namespace BECOMMONS_NScodigo::iniciar() const
 	}
 }
 
-bool namespace BECOMMONS_NScodigo::analizar(const rapidjson::Value& value) 
+bool codigo::analizar(const rapidjson::Value& value) 
 {
     if(!value.HasMember("diretorio")) return false;
     arquivo = value["diretorio"].GetString();
-    arquivoCompleto = namespace BECOMMONS_NSprojeto_atual->diretorioDoProjeto + arquivo; 
+    arquivoCompleto = projeto_atual->diretorioDoProjeto + arquivo; 
 	L = luaL_newstate();
 	luaL_openlibs(L);
 
-	bapi::definirFisica(L);
-	bapi::definirTempo(L);
-	bapi::definirUtils(L);
-	bapi::definirInputs(L);
-	bapi::entidade::definir(L);
+	api::definirFisica(L);
+	api::definirTempo(L);
+	api::definirUtils(L);
+	api::definirInputs(L);
+	api::entidade::definir(L);
 
 	if (luaL_dofile(L, arquivoCompleto.c_str()) != LUA_OK) {
         std::cerr << "Erro ao carregar o script Lua: " << lua_tostring(L, -1) << std::endl;
@@ -77,13 +80,13 @@ bool namespace BECOMMONS_NScodigo::analizar(const rapidjson::Value& value)
     return true;
 };
 
-bool namespace BECOMMONS_NScodigo::serializar(rapidjson::Value& value, rapidjson::Document::AllocatorType& allocator) const
+bool codigo::serializar(rapidjson::Value& value, rapidjson::Document::AllocatorType& allocator) const
 {
     value.AddMember("diretorio", rapidjson::Value(arquivo.c_str(), allocator), allocator);
     return true;
 }
 
-void namespace BECOMMONS_NScodigo::atualizar() const
+void codigo::atualizar() const
 {
 	lua_getglobal(L, "atualizar");
 	if (lua_isfunction(L, -1)) {
@@ -93,7 +96,7 @@ void namespace BECOMMONS_NScodigo::atualizar() const
 	    std::cerr << "Função 'atualizar' não definida no Lua!" << std::endl;
 	}
 }
-void namespace BECOMMONS_NScodigo::encerrar()
+void codigo::encerrar()
 {
 	if (L) {
 		lua_pushnil(L);
@@ -103,7 +106,7 @@ void namespace BECOMMONS_NScodigo::encerrar()
 		L = nullptr;
 	}
 }
-namespace BECOMMONS_NScodigo::~codigo()
+codigo::~codigo()
 {
         depuracao::emitir(debug, "codigo", "descarregando");
 

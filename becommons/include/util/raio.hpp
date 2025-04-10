@@ -11,10 +11,9 @@
 #pragma once
 #include <glm/glm.hpp>
 #include <bullet/btBulletDynamicsCommon.h>
-#include "becommons.hpp"
+#include "namespace.hpp"
 
-namespace BECOMMONS_NS
-{
+namespace BECOMMONS_NS {
     // Estrutura para armazenar os resultados do Raycast
     struct raio
     {

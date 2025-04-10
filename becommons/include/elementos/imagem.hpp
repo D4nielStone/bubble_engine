@@ -13,7 +13,7 @@
 #pragma once
 #include <string>
 #include <filesystem>
-#include "becommons.hpp"
+#include "namespace.hpp"
 
 namespace BECOMMONS_NS{
     namespace elementos{

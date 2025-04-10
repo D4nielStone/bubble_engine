@@ -13,8 +13,7 @@
 #include <cmath>
 #include "namespace.hpp"
 
-namespace BECOMMONS_NS
-{
+namespace BECOMMONS_NS {
     template<class T>
     struct vetor2
     {

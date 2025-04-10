@@ -22,8 +22,7 @@
 #include "sistema_de_fisica.hpp"
 #include "sistema_de_renderizacao.hpp"
 
-namespace BECOMMONS_NS
-{
+namespace BECOMMONS_NS {
     struct projeto
     {
             std::string diretorioDoProjeto;

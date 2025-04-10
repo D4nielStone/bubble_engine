@@ -26,6 +26,7 @@ target_link_libraries(editor PRIVATE glad)
 
 target_include_directories(editor PRIVATE 
     ../becommons/include
+    ../becommons
     ./include
     /usr/include/lua5.3
     /usr/include/glm

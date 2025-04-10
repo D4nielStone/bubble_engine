@@ -11,17 +11,16 @@
  */
 
 #pragma once
+#include <GLFW/glfw3.h>
 #include <iostream>
 #include <unordered_map>
 #include <functional>
 #include <glm/glm.hpp>
-#include "becommons.hpp"
+#include "namespace.hpp"
+#include "util/vetor2.hpp"
 
-struct GLFWwindow;
-
-namespace BECOMMONS_NS
-{
-    // inputMode: não serve mais:
+namespace BECOMMONS_NS {
+    //! OBSOLETO
     enum inputMode {
         Editor,
         Game,

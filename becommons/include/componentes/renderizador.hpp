@@ -14,47 +14,47 @@
 #include "nucleo/projeto.hpp"
 #include "util/malha.hpp"
 #include "arquivadores/modelo.hpp"
+#include "componente.hpp"
 
-inline void analizarMalha(malha* m, const rapidjson::Value& malha)
-{
-	/// cor difusa
-	if (malha.HasMember("albedo"))
-		m->m_material.albedo =
-	{
-		malha["albedo"].GetArray()[0].GetFloat() / 255,
-		malha["albedo"].GetArray()[1].GetFloat() / 255,
-		malha["albedo"].GetArray()[2].GetFloat() / 255,
-		malha["albedo"].GetArray()[3].GetFloat() / 255,
-	};
+namespace BECOMMONS_NS {
+    inline void analizarMalha(malha* m, const rapidjson::Value& malha)
+    {
+	    /// cor difusa
+	    if (malha.HasMember("albedo"))
+	    	m->m_material.albedo =
+	    {
+	    	malha["albedo"].GetArray()[0].GetFloat() / 255,
+		    malha["albedo"].GetArray()[1].GetFloat() / 255,
+		    malha["albedo"].GetArray()[2].GetFloat() / 255,
+		    malha["albedo"].GetArray()[3].GetFloat() / 255,
+	    };
 	
-	// textura
-	if(malha.HasMember("texAlbedo"))
+	    // textura
+	    if(malha.HasMember("texAlbedo"))
         {
             std::string path_ = projeto_atual->diretorioDoProjeto + std::string(malha["texAlbedo"].GetString());
             textura tex = textura(textureLoader::obterInstancia().carregarTextura(path_), path_);
             m->m_material.texturas["tex_albedo"] = tex;
         }
-	/// Uv mundo
-	if (malha.HasMember("uvMundo"))
-		m->m_material.uvMundo = malha["uvMundo"].GetBool();
-	/// recebe luz
-	if (malha.HasMember("recebeLuz"))
-		m->m_material.recebe_luz = malha["recebeLuz"].GetBool();
-	/// sobrepor
-	if (malha.HasMember("sobrepor"))
-		m->m_sobrepor = malha["sobrepor"].GetBool();
-	/// itera instancias
-	if (malha.HasMember("instancias"))
-	{
-		for (auto& instancia : malha["instancias"].GetArray())
-		{
-			m->instancias_pos.push_back( glm::vec3(instancia[0].GetFloat(),instancia[1].GetFloat(),instancia[2].GetFloat()));
-		}
-	}
-}
+	    /// Uv mundo
+	    if (malha.HasMember("uvMundo"))
+	    	m->m_material.uvMundo = malha["uvMundo"].GetBool();
+	    /// recebe luz
+	    if (malha.HasMember("recebeLuz"))
+	    	m->m_material.recebe_luz = malha["recebeLuz"].GetBool();
+	    /// sobrepor
+	    if (malha.HasMember("sobrepor"))
+	    	m->m_sobrepor = malha["sobrepor"].GetBool();
+	    /// itera instancias
+	    if (malha.HasMember("instancias"))
+	    {
+	    	for (auto& instancia : malha["instancias"].GetArray())
+	    	{
+	    		m->instancias_pos.push_back( glm::vec3(instancia[0].GetFloat(),instancia[1].GetFloat(),instancia[2].GetFloat()));
+	    	}
+	    }
+    }
 
-namespace BECOMMONS_NS
-{
 	struct renderizador : componente
 	{
 		modelo* m_modelo;
@@ -76,9 +76,9 @@ namespace BECOMMONS_NS
             else return false;
 			
 			// extrai material
-			if (value.HasMember("malha*s"))
+			if (value.HasMember("malhas"))
 			{
-				for (auto& v_malha : value["malha*s"].GetArray())
+				for (auto& v_malha : value["malhas"].GetArray())
 				{
 				    if(!v_malha.HasMember("id")) return false;
 					malha* m_malha;

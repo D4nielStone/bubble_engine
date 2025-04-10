@@ -18,9 +18,9 @@
 #include "namespace.hpp"
 #include "util/malha.hpp"
 #include "componente.hpp"
+#include "transformacao.hpp"
 
-namespace BECOMMONS_NS
-{
+namespace BECOMMONS_NS {
     struct fisica : componente {
         static constexpr mascara mascara { COMPONENTE_FISICA };
         enum camada {

@@ -12,10 +12,10 @@
  */
 
 #pragma once
-#include "becommons.hpp"
+#include "namespace.hpp"
+#include "camera.hpp"
 
-namespace BECOMMONS_NS
-{
+namespace BECOMMONS_NS {
     struct camera_editor : camera
     {
         float sens = 10.f, mousex_antigo, mousey_antigo;

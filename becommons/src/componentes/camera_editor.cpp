@@ -21,13 +21,13 @@ camera_editor::camera_editor()
     m_skybox = new skybox();
     mousex_antigo = obterMouse().x;
     mousey_antigo = obterMouse().y;
-    transform = std::make_shared<transformacao>();
+    transform = new transformacao();
     ceu = cor(0.2, 0.2, 0.2, 1.f);
 };
 
 void camera_editor::atualizarMovimentacao()
 {
-    auto inputs = instanciaJanela->inputs;
+    auto inputs = instanciaJanela->m_inputs;
     float delta = instanciaJanela->m_tempo.obterDeltaTime();
 
     // Movement

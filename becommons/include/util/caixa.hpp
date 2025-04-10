@@ -12,10 +12,9 @@
 #pragma once
 #include <string>    
 #include <memory>
-#include "becommons.hpp"
+#include "namespace.hpp"
 
-namespace BECOMMONS_NS
-{
+namespace BECOMMONS_NS {
         enum class flags_caixa : uint32_t {
             nenhuma             = 0,
             largura_percentual  = 1 << 0,   // 1

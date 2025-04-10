@@ -12,16 +12,18 @@
 #pragma once
 #include <string>
 #include <filesystem>
-#include "becommons.hpp"
+#include "namespace.hpp"
+#include "arquivadores/imageloader.hpp"
+#include "componente.hpp"
+#include "util/vetor2.hpp"
 
-namespace BECOMMONS_NS
-{
+namespace BECOMMONS_NS {
 	struct imagem : componente
 	{
 		constexpr static componente::mascara mascara = componente::COMPONENTE_IMAGEM;
 		std::string arquivo	{ "" };
-		vetor2<double> limite			{ 20, 20 };
-		vetor2<double> padding			{ 0,0 };
+		dvet2 limite			{ 20.0, 20.0 };
+		dvet2 padding			{ 0.0,0.0 };
 		bool flip					{ false };
 		unsigned int id;
 		cor difusa					{ 1.f, 1.f, 1.f, 1.f };

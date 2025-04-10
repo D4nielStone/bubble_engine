@@ -16,8 +16,7 @@
 #include "textura.hpp"
 #include "cor.hpp"
 
-namespace BECOMMONS_NS
-{
+namespace BECOMMONS_NS {
     struct material
     {
         material() = default;

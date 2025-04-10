@@ -18,6 +18,7 @@
 #include "os/janela.hpp"
 #include "inputs/inputs.hpp"
 #include "util/malha.hpp"
+#include "api/mat.hpp"
 
 using namespace BECOMMONS_NS;
 
@@ -157,7 +158,7 @@ void defVelFisica(const float v)
     projeto_atual->sfisica()->velocidade = v;
 }
 
-void definirFisica(lua_State* L)
+void BECOMMONS_NS::api::definirFisica(lua_State* L)
 {
 
     luabridge::getGlobalNamespace(L).
@@ -213,7 +214,7 @@ void definirFisica(lua_State* L)
         endNamespace();
 }
 
-void definirTempo(lua_State *L)
+void BECOMMONS_NS::api::definirTempo(lua_State *L)
 {
 	std::function<double()> obterDeltaTimeFunc = []() -> double {
 		if (!projeto_atual->obterFaseAtual()) {
@@ -227,7 +228,7 @@ void definirTempo(lua_State *L)
 		.endNamespace();
 }
 
-void definirInputs(lua_State *L)
+void BECOMMONS_NS::api::definirInputs(lua_State *L)
 {
 	luabridge::getGlobalNamespace(L)
 		.beginNamespace("inputs")
@@ -242,7 +243,7 @@ float clamp_float(float v, float min, float max) {
     return std::clamp(v, min, max);
 }
 
-void definirUtils(lua_State *L)
+void BECOMMONS_NS::api::definirUtils(lua_State *L)
 {
 	luabridge::getGlobalNamespace(L)
 		.beginNamespace("util")
@@ -259,17 +260,17 @@ void definirUtils(lua_State *L)
 		.addData<float>("y", &glm::vec3::y)
 		.addData<float>("z", &glm::vec3::z)
 		.endClass()
-        .beginClass<vet3>("vet3")
+        .beginClass<fvet3>("fvet3")
 		.addConstructor<void(*)(float, float, float)>()
-		.addData<float>("x", &vet3::x)
-		.addData<float>("y", &vet3::y)
-		.addData<float>("z", &vet3::z)
+		.addData<float>("x", &fvet3::x)
+		.addData<float>("y", &fvet3::y)
+		.addData<float>("z", &fvet3::z)
 		.endClass()
         .beginClass<luz_direcional>("luz_direcional")
         .addConstructor<void(*)()>()
-        .addData<vet3>("direcao", &luz_direcional::direcao)
-        .addData<vet3>("cor", &luz_direcional::cor)
-        .addData<vet3>("ambiente", &luz_direcional::ambiente)
+        .addData<fvet3>("direcao", &luz_direcional::direcao)
+        .addData<fvet3>("cor", &luz_direcional::cor)
+        .addData<fvet3>("ambiente", &luz_direcional::ambiente)
         .addData("intensidade", &luz_direcional::intensidade)
         .endClass()
 		.beginClass<cor>("cor")
@@ -306,7 +307,7 @@ void definirUtils(lua_State *L)
     luabridge::getGlobalNamespace(L)
         .beginClass<material>("material")
 		.addConstructor<void(*)()>()
-		.addData<cor>("albedo", &bubble::material::albedo)
+		.addData<cor>("albedo", &BECOMMONS_NS::material::albedo)
 		.addData("matalico", &material::metallic)
 		.addData("roughness", &material::roughness)
 		.addData("ao", &material::ao)

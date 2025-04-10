@@ -23,8 +23,7 @@
 #include FT_FREETYPE_H
 
 typedef std::pair<std::string, unsigned int> FonteID;
-namespace BECOMMONS_NS
-{
+namespace BECOMMONS_NS {
     // Estrutura base da letra
     struct caractere
     {

@@ -28,6 +28,7 @@
 #include <filesystem>
 #include <iostream>
 #include <typeinfo>
+#include "depuracao/debug.hpp"
 #include <rapidjson/prettywriter.h>
 
 using namespace rapidjson;
@@ -102,7 +103,7 @@ void fase::iniciar()
     rodando = true;
 }
 
-registro* bubble::fase::obterRegistro()
+registro* fase::obterRegistro()
 {
 	return &reg;
 }
@@ -129,7 +130,7 @@ void fase::analizarEntidades(const Document& doc)
 		uint32_t id = 0;
 		if(entidade.HasMember("id") && entidade["id"].IsInt())
             id = entidade["id"].GetInt();
-        namespace BECOMMONS_NSentidade ent = reg.criar(id);
+        BECOMMONS_NS::entidade ent = reg.criar(id);
 		
 		// Itera os componentes
 		if (!entidade.HasMember("componentes") && entidade["componentes"].IsArray())
@@ -149,15 +150,15 @@ void fase::analizarEntidades(const Document& doc)
 			
 			// Deserialização de componentes
 			if      (tipo_str == "camera") {
-			    reg.adicionar<namespace BECOMMONS_NScamera>(ent);
-			    auto cam = reg.obter<namespace BECOMMONS_NScamera>(ent.id);
+			    reg.adicionar<camera>(ent);
+			    auto cam = reg.obter<camera>(ent.id);
                 if(!cam->analizar(componente)) {
                     depuracao::emitir(erro, "fase", "Problemas analizando camera");
                     return;
                 }
             }
             else if (tipo_str == "renderizador") {
-			    reg.adicionar<renderizador>(ent);
+			    reg.adicionar<renderizador>(ent, "");
 			    auto render = reg.obter<renderizador>(ent.id);
                 if(!render->analizar(componente)) {
                     depuracao::emitir(erro, "fase", "Problemas analizando renderizador");
@@ -165,23 +166,23 @@ void fase::analizarEntidades(const Document& doc)
                 }
             }
             else if (tipo_str == "codigo") {
-			    reg.adicionar<namespace BECOMMONS_NScodigo>(ent);
-			    auto code = reg.obter<namespace BECOMMONS_NScodigo>(ent.id);
+			    reg.adicionar<codigo>(ent);
+			    auto code = reg.obter<codigo>(ent.id);
                 if(!code->analizar(componente)) {
                     depuracao::emitir(erro, "fase", "Problemas analizando codigo");
                     return;
                 }
             }
             else if (tipo_str == "transformacao") {
-			    auto transf = reg.obter<namespace BECOMMONS_NStransformacao>(ent.id);
+			    auto transf = reg.obter<transformacao>(ent.id);
                 if(!transf->analizar(componente)) {
                     depuracao::emitir(erro, "fase", "Problemas analizando transformacao");
                     return;
                 }
             }
             else if (tipo_str == "luz_direcional") {
-			    reg.adicionar<namespace BECOMMONS_NSluz_direcional>(ent);
-			    auto ld = reg.obter<namespace BECOMMONS_NSluz_direcional>(ent.id);
+			    reg.adicionar<luz_direcional>(ent);
+			    auto ld = reg.obter<luz_direcional>(ent.id);
                 if(!ld->analizar(componente)) {
                     depuracao::emitir(erro, "fase", "Problemas analizando luz direcional");
                     return;

@@ -15,8 +15,7 @@
 #include "arquivadores/modelo.hpp"
 #include <glm/glm.hpp>
 
-namespace BECOMMONS_NS
-{
+namespace BECOMMONS_NS {
     class skybox : protected modelo
     {
         public:

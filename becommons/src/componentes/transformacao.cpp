@@ -15,20 +15,22 @@
 #include "nucleo/projeto.hpp"
 #include "os/janela.hpp"
 
-void namespace BECOMMONS_NStransformacao::apontarEntidade(const uint32_t& ent)
+using namespace BECOMMONS_NS;
+
+void transformacao::apontarEntidade(const uint32_t& ent)
 {
-	if (!projeto_atual->obterFaseAtual()->obterRegistro()->tem<namespace BECOMMONS_NStransformacao>(ent))return;
-	alvo = &projeto_atual->obterFaseAtual()->obterRegistro()->obter<namespace BECOMMONS_NStransformacao>(ent)->posicao;
+	if (!projeto_atual->obterFaseAtual()->obterRegistro()->tem<transformacao>(ent))return;
+	alvo = &projeto_atual->obterFaseAtual()->obterRegistro()->obter<transformacao>(ent)->posicao;
 }
 
-void namespace BECOMMONS_NStransformacao::apontarV3(const glm::vec3& pos)
+void transformacao::apontarV3(const glm::vec3& pos)
 {
     if(!alvo)
 	*alvo = pos;
     else
         alvo = new glm::vec3(pos);
 }
-bool namespace BECOMMONS_NStransformacao::analizar(const rapidjson::Value& value)
+bool transformacao::analizar(const rapidjson::Value& value)
 {
 	if(value.HasMember("posicao"))
     {
@@ -48,7 +50,7 @@ bool namespace BECOMMONS_NStransformacao::analizar(const rapidjson::Value& value
     return true;
 };
 
-bool namespace BECOMMONS_NStransformacao::serializar(rapidjson::Value& value, rapidjson::Document::AllocatorType& allocator) const
+bool transformacao::serializar(rapidjson::Value& value, rapidjson::Document::AllocatorType& allocator) const
 {
     // posição Vetor 3
     rapidjson::Value pos(rapidjson::kArrayType);

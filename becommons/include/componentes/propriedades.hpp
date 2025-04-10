@@ -11,10 +11,10 @@
 
 #pragma once
 #include <string>
-#include "becommons.hpp"
+#include "namespace.hpp"
+#include "componente.hpp"
 
-namespace BECOMMONS_NS
-{
+namespace BECOMMONS_NS {
 	struct propriedades : componente
 	{
 		

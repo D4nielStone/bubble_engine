@@ -11,11 +11,10 @@
 
 #pragma once
 #include <cmath>
-#include "becommons.hpp"
-/* Defini��o da estrutura vetor4 */
+#include "namespace.hpp"
+/* Definição da estrutura vetor4 */
 
-namespace BECOMMONS_NS
-{
+namespace BECOMMONS_NS {
     template<class T>
     struct vetor4
     {

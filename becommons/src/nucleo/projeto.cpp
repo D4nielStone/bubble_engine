@@ -11,12 +11,14 @@
  */
 
 
+#include "namespace.hpp"
 #include "os/janela.hpp"
 #include "nucleo/projeto.hpp"
 #include "nucleo/sistema_de_fisica.hpp"
 #include "nucleo/sistema_de_renderizacao.hpp"
 #include "nucleo/sistema_de_codigo.hpp"
 #include "nucleo/sistema_de_interface.hpp"
+#include "depuracao/debug.hpp"
 
 #include <string>
 #include <iostream>
@@ -29,7 +31,7 @@
 #include <filesystem>
 #include <GLFW/glfw3.h>
 
-using BECOMMONS_NS;
+using namespace BECOMMONS_NS;
 
 // Main loop
 void projeto::rodar()
@@ -166,8 +168,8 @@ void projeto::criarJanela(rapidjson::Document& doc)
     const char* nome_janela = doc["janela"].GetObject()["titulo"].GetString();
     std::string icon_path = doc["janela"].GetObject()["icone"].GetString();
 
-    instanciaJanela = new BECOMMONS_NSjanela(nome_janela, true,
-     BECOMMONS_NSvetor2<double>(doc["janela"].GetObject()["largura"].GetInt(), doc["janela"].GetObject()["altura"].GetInt()),
+    instanciaJanela = new janela(nome_janela, true,
+     vetor2<double>(doc["janela"].GetObject()["largura"].GetInt(), doc["janela"].GetObject()["altura"].GetInt()),
     (diretorioDoProjeto + "/" + icon_path).c_str());
 
     // Cria fase atual
@@ -182,13 +184,13 @@ void projeto::carregarFase(const std::string &n)
     // Torna atual
     fase_atual = nome;
     // Adiciona ao map de m_fases
-    m_fases[nome] = std::make_shared<BECOMMONS_NSfase>(nome + ".fase");
+    m_fases[nome] = std::make_shared<fase>(nome + ".fase");
 
     m_fases[nome]->carregar();
     iniciarSistemas(m_fases[nome].get());
 }
 
-void projeto::iniciarSistemas(BECOMMONS_NSfase* f)
+void projeto::iniciarSistemas(fase* f)
 {
     sistemas["fisica"] = new sistema_fisica();
     sistemas["interface"] = new sistema_interface();

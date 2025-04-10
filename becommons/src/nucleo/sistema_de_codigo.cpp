@@ -10,6 +10,7 @@
  * @licence MIT License
  */
 
+#include "namespace.hpp"
 #include "nucleo/sistema_de_codigo.hpp"
 #include "nucleo/fase.hpp"
 #include "componentes/codigo.hpp"
@@ -18,8 +19,7 @@
 
 std::mutex mtx;
 
-BECOMMONS_NS
-{
+namespace BECOMMONS_NS {
     void sistema_codigo::atualizar()
     {
         reg->cada<codigo>([&](const uint32_t entidade)
@@ -30,7 +30,7 @@ BECOMMONS_NS
         );
     }
 
-    void sistema_codigo::inicializar(BECOMMONS_NSfase* fase_ptr)
+    void sistema_codigo::inicializar(fase* fase_ptr)
     {
         this->m_fase = fase_ptr;
         this->reg = m_fase->obterRegistro();

@@ -3,7 +3,7 @@
  * @file esfera.hpp
  */
 
-#include "util/malha*.hpp"
+#include "util/malha.hpp"
 #include "util/material.hpp"
 #include "util/vertice.hpp"
 #include <vector>
@@ -31,10 +31,10 @@ inline std::vector<vertice> create_sphere_vertices(float radius, int sectors, in
             float y = xy * sinf(sectorAngle);
             
             // Position
-            vet3 position(x, y, z);
+            fvet3 position(x, y, z);
             
             // Normal (normalized position vector)
-            vet3 normal = position;
+            fvet3 normal = position;
             normal.normalizar();
             
             // UV coordinates
@@ -78,5 +78,4 @@ inline std::vector<vertice> sphere_vertices = create_sphere_vertices(1.0f, 36, 1
 inline std::vector<unsigned int> sphere_indices = create_sphere_indices(36, 18);
 
 inline material material_esf;
-inline malha* malha*_esfera(sphere_vertices, sphere_indices, material_esf);
-
+inline malha malha_esfera(sphere_vertices, sphere_indices, material_esf);

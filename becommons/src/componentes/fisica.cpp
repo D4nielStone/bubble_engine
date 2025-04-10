@@ -17,9 +17,11 @@
 #include "componentes/renderizador.hpp"
 #include "depuracao/assert.hpp"
 
+using namespace BECOMMONS_NS;
+
 // Construtor para forma gen�rica
 fisica::fisica(btCollisionShape* forma, btScalar massa, btVector3 posicaoInicial, camada camada) 
-    : forma(forma), malha(false), massa(massa), posicaoInicial(posicaoInicial), camada_colisao(camada)
+    : forma(forma), usar_malha(false), massa(massa), posicaoInicial(posicaoInicial), camada_colisao(camada)
 {
     ASSERT(forma != nullptr);
     init();
@@ -41,7 +43,7 @@ void fisica::init()
 }
 // Construtor para cria��o de malha
 fisica::fisica(bool malha, btScalar massa, btVector3 posicaoInicial, camada camada)
-    : malha(malha), massa(0), posicaoInicial(posicaoInicial), camada_colisao(camada)
+    : usar_malha(malha), massa(0), posicaoInicial(posicaoInicial), camada_colisao(camada)
 {
 }
 
@@ -59,10 +61,10 @@ fisica::~fisica()
 btRigidBody* fisica::obterCorpoRigido()
 {
 
-    if (malha &&!corpoRigido) {
+    if (usar_malha &&!corpoRigido) {
         criarMalha();
         init();
-        malha = false; // Garante que as malhas sejam criadas apenas uma vez
+        usar_malha = false; // Garante que as malhas sejam criadas apenas uma vez
     }
     return corpoRigido;
 }
@@ -71,7 +73,7 @@ btRigidBody* fisica::obterCorpoRigido()
 void fisica::criarMalha()
 {
     // Obt�m as malhas do modelo associado ao objeto
-    auto modelo = projeto_atual->obterFaseAtual()->obterRegistro()->obter<renderizador>(meu_objeto)->modelo;
+    auto modelo = projeto_atual->obterFaseAtual()->obterRegistro()->obter<renderizador>(meu_objeto)->m_modelo;
     auto& malhas = modelo->malhas;
 
     // Criar o btTriangleIndexVertexArray para todas as malhas
@@ -102,7 +104,7 @@ void fisica::criarMalha()
 // Atualizar transforma��o
 void fisica::atualizarTransformacao()
 {
-    m_transformacao = projeto_atual->obterFaseAtual()->obterRegistro()->obter<namespace BECOMMONS_NStransformacao>(meu_objeto).get();
+    m_transformacao = projeto_atual->obterFaseAtual()->obterRegistro()->obter<transformacao>(meu_objeto).get();
     forma->setLocalScaling(btVector3(m_transformacao->escala.x, m_transformacao->escala.y, m_transformacao->escala.z));
 
     if (massa == 0)  return;

@@ -21,9 +21,9 @@
 #include "namespace.hpp"
 #include "tempo.hpp"
 #include "util/vetor2.hpp"
+#include "inputs/inputs.hpp"
 
-namespace BECOMMONS_NS
-{
+namespace BECOMMONS_NS {
 	/**
 	* @struct janela
 	* @brief facilita o uso da janela glfw
@@ -61,7 +61,6 @@ namespace BECOMMONS_NS
 		void viewport() const;
         std::string nome() const;
 		void nome(const char* novo_nome);
-        private:
             janela() = default;
 	};
 	inline janela* instanciaJanela{ nullptr };

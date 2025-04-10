@@ -14,9 +14,10 @@
 #include <glm/glm.hpp>
 #include "namespace.hpp"
 #include "material.hpp"
+#include "vertice.hpp"
+#include "arquivadores/shader.hpp"
 
-namespace BECOMMONS_NS
-{
+namespace BECOMMONS_NS {
     class malha
     {
         public:

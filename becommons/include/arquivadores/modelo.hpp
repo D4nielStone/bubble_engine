@@ -19,8 +19,7 @@
 #include "util/malha.hpp"
 #include "shader.hpp"
 
-namespace BECOMMONS_NS
-{
+namespace BECOMMONS_NS {
     class modelo
     {
         public:
@@ -47,7 +46,7 @@ namespace BECOMMONS_NS
 
         void carregarmodelo(const std::string& path);
         void processarNo(aiNode* node, const aiScene* scene);
-        malha* processarMalha(aiMesh* mesh, const aiScene* scene);
+        malha processarMalha(aiMesh* mesh, const aiScene* scene);
         textura carregarTextura(aiMaterial* mat, aiTextureType type) const;
     };
 }

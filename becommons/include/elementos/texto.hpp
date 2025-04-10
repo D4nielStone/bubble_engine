@@ -10,7 +10,7 @@
  */
 
 #pragma once
-#include "becommons.hpp"
+#include "namespace.hpp"
 
 namespace BECOMMONS_NS{
     namespace elementos{

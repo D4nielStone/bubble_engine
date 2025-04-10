@@ -12,17 +12,25 @@
  * @see bubble_gui.cpp
  */
 
+#include <glad/glad.h>
 #include <unordered_map>
 #include <memory>
 #include <set>
-#include "becommons.hpp"
+#include "namespace.hpp"
+#include "nucleo/sistema.hpp"
+#include "arquivadores/shader.hpp"
+#include "arquivadores/imageloader.hpp"
+#include "arquivadores/fonte.hpp"
+#include "util/caixa.hpp"
+#include "elementos/botao.hpp"
+#include "elementos/imagem.hpp"
+#include "elementos/texto.hpp"
 
-namespace BECOMMONS_NS
-{ 
+namespace BECOMMONS_NS { 
 	inline static unsigned int ret_VAO= 0, ret_VBO = 0, ret_EBO = 0, text_VBO = 0, text_VAO = 0;
-    inline static void renderizarImagem(elementos::imagem*);
-    inline static void renderizarFundo(caixa*, shader*);
-    inline static void renderizarTexto(elementos::texto*);
+    static void renderizarImagem(elementos::imagem*);
+    static void renderizarFundo(caixa*, shader*);
+    static void renderizarTexto(elementos::texto*);
     class bubble_gui : public sistema
     {
         private:

@@ -17,7 +17,9 @@
 #include "util/vetor3.hpp"
 #include <iostream>
 
-void namespace BECOMMONS_NSterreno::carregarHeightMap(unsigned char* dados, int largura, int altura)
+using namespace BECOMMONS_NS;
+
+void terreno::carregarHeightMap(unsigned char* dados, int largura, int altura)
 {
     heightmap = std::vector<std::vector<float>>(altura, std::vector<float>(largura));
     for (int j = 0; j < altura; j++)
@@ -30,7 +32,7 @@ void namespace BECOMMONS_NSterreno::carregarHeightMap(unsigned char* dados, int 
         }
     }
 
-        std::vector<namespace BECOMMONS_NSvertice> vertices;
+        std::vector<vertice> vertices;
     std::vector<unsigned int> indices;
 
     // Criar vértices do terreno
@@ -39,7 +41,7 @@ void namespace BECOMMONS_NSterreno::carregarHeightMap(unsigned char* dados, int 
         for (int i = 0; i < largura; i++)
         {
             vertice v;
-            v.posicao = vet3(i/(float)(largura-1), heightmap[j][i], j/(float)(altura-1));
+            v.posicao = fvet3(i/(float)(largura-1), heightmap[j][i], j/(float)(altura-1));
             v.uvcoords = vetor2<float>(i / (float)largura, j / (float)altura);
         
             vertices.push_back(v);
@@ -71,7 +73,7 @@ void namespace BECOMMONS_NSterreno::carregarHeightMap(unsigned char* dados, int 
     // Inicializar as normais como (0, 0, 0)
     for (auto &v : vertices)
     {   
-    v.normal = vet3(0.0f, 0.0f, 0.0f);
+    v.normal = fvet3(0.0f, 0.0f, 0.0f);
     }
 
     // Percorrer os triângulos e calcular as normais das faces
@@ -86,7 +88,7 @@ void namespace BECOMMONS_NSterreno::carregarHeightMap(unsigned char* dados, int 
     glm::vec3 v3 = {vertices[i3].posicao.x,vertices[i3].posicao.y,vertices[i3].posicao.z};
 
     glm::vec3 _normal = glm::normalize(glm::cross(v2 - v1, v3 - v1));
-    vet3 normal = vet3(
+    fvet3 normal = fvet3(
         _normal.x,
         _normal.y,
         _normal.z
@@ -110,7 +112,7 @@ void namespace BECOMMONS_NSterreno::carregarHeightMap(unsigned char* dados, int 
 }
 
 // Construtor do terreno
-namespace BECOMMONS_NSterreno::terreno(const std::string &path) : diretorio(path)
+terreno::terreno(const std::string &path) : diretorio(path)
 {
     // Carregar imagem como Heightmap
     imageLoader imagem(path);
@@ -120,7 +122,7 @@ namespace BECOMMONS_NSterreno::terreno(const std::string &path) : diretorio(path
 }
 
 // Método para desenhar o terreno
-void namespace BECOMMONS_NSterreno::desenhar(bubble::shader &_shader)
+void terreno::desenhar(shader &_shader)
 {
     m_malha.desenhar(_shader);
 }

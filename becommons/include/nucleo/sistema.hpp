@@ -20,8 +20,7 @@
   * @brief Classe base para sistemas do loop principal
   */
 
-namespace BECOMMONS_NS
-{
+namespace BECOMMONS_NS {
     class fase;
     class sistema {
     public:

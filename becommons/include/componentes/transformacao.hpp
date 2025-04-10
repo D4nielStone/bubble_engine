@@ -13,7 +13,9 @@
  */
 
 #pragma once
-#include "becommons.hpp"
+#include "namespace.hpp"
+#include "componente.hpp"
+#include "util/vetor3.hpp"
 
 #define GLM_ENABLE_EXPERIMENTAL
 
@@ -22,10 +24,10 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/gtx/quaternion.hpp>
 
-namespace BECOMMONS_NS
-{
-	struct transformacao : componente
+namespace BECOMMONS_NS {
+	class transformacao : public componente
 	{
+    public:
 		glm::vec3 cima{ 0,1,0 };
 		glm::vec3 posicao{}, rotacao{}, escala{};
 		glm::vec3* alvo{ nullptr };
@@ -34,9 +36,9 @@ namespace BECOMMONS_NS
 
         bool analizar(const rapidjson::Value&) override;
         bool serializar(rapidjson::Value& value, rapidjson::Document::AllocatorType& allocator) const override;
-		transformacao(const vet3& p = vet3(0.f,0.f,0.f),
-			const vet3& r = vet3(0.f, 90.f, 0.f), 
-			const vet3& e = vet3(1.f, 1.f, 1.f)) :
+		transformacao(const fvet3& p = fvet3(0.f,0.f,0.f),
+			const fvet3& r = fvet3(0.f, 90.f, 0.f), 
+			const fvet3& e = fvet3(1.f, 1.f, 1.f)) :
 			posicao({ p.x,p.y,p.z }),
 			rotacao({ r.x,r.y,r.z }),
 			escala({ e.x,e.y,e.z })

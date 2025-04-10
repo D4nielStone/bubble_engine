@@ -13,11 +13,10 @@
 #include "vetor2.hpp"
 #include "vetor3.hpp"
 
-namespace BECOMMONS_NS
-{
+namespace BECOMMONS_NS {
 	struct vertice
 	{
-		vet3 posicao, normal;
+		fvet3 posicao, normal;
 		fvet2 uvcoords;
 	};
 }

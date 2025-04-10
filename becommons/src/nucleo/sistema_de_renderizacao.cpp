@@ -10,6 +10,7 @@
  * @licence MIT License
  */
 
+#include "namespace.hpp"
 #include <glad/glad.h>
 #include "nucleo/sistema_de_renderizacao.hpp"
 #include "componentes/renderizador.hpp"
@@ -26,7 +27,7 @@
 
 #define MAX_LPS 5
 
-using BECOMMONS_NS;
+using namespace BECOMMONS_NS;
 
 void sistema_renderizacao::atualizar() {
     glEnable(GL_DEPTH_TEST);
@@ -40,7 +41,7 @@ void sistema_renderizacao::atualizar() {
     atualizarCamera(camera_principal);
 } 
 
-void sistema_renderizacao::inicializar(BECOMMONS_NSfase* fase_ptr)
+void sistema_renderizacao::inicializar(fase* fase_ptr)
 {
         this->m_fase = fase_ptr;
         this->reg = m_fase->obterRegistro();
@@ -51,12 +52,12 @@ void sistema_renderizacao::inicializar(BECOMMONS_NSfase* fase_ptr)
 
         glCullFace(GL_BACK);
 }
-void sistema_renderizacao::definirCamera(BECOMMONS_NScamera* cam)
+void sistema_renderizacao::definirCamera(camera* cam)
 {
     camera_principal = cam;
 }
 
-void sistema_renderizacao::atualizarCamera(BECOMMONS_NScamera* cam)
+void sistema_renderizacao::atualizarCamera(camera* cam)
 {
         if (!cam) {
             return;
@@ -99,7 +100,7 @@ void sistema_renderizacao::atualizarCamera(BECOMMONS_NScamera* cam)
             }
 
 
-            auto s = terr->shader();
+            auto s = terr->obterShader();
             s.use();
             s.setMat4("view", glm::value_ptr(cam->obtViewMatrix()));
             s.setVec3("dirLight.direction", ld.direcao);
@@ -126,13 +127,13 @@ void sistema_renderizacao::atualizarCamera(BECOMMONS_NScamera* cam)
             auto render = reg->obter<renderizador>(ent_ren);
             auto transform = reg->obter<transformacao>(ent_ren);
 
-            if (!render || !transform || !render->modelo) {
+            if (!render || !transform || !render->m_modelo) {
                 depuracao::emitir(debug, "render", "Renderizador ou transformação inválida");
                 return;
             }
 
 
-            auto s = render->modelo->shader();
+            auto s = render->m_modelo->obterShader();
             s.use();
             s.setMat4("view", glm::value_ptr(cam->obtViewMatrix()));
             s.setVec3("dirLight.direction", ld.direcao);
@@ -153,7 +154,7 @@ void sistema_renderizacao::atualizarCamera(BECOMMONS_NScamera* cam)
             s.setMat4("projection", glm::value_ptr(cam->obtProjectionMatrix()));
             s.setVec2("resolution", instanciaJanela->tamanho.x, instanciaJanela->tamanho.y);
             s.setMat4("modelo", transform->obter());
-            render->modelo->desenhar(s);
+            render->m_modelo->desenhar(s);
         });
         // Caso tenha Frama buffer, limpa a tela
         if (cam->flag_fb) {

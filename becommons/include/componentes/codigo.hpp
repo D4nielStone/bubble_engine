@@ -15,14 +15,15 @@
 #pragma once
 #include <string>
 #include <lua.hpp>
-#include "becommons.hpp"
+#include <rapidjson/rapidjson.h>
+#include "namespace.hpp"
+#include "componente.hpp"
 
 extern "C" {
 #include <lua5.3/lua.h>
 }
 
-namespace BECOMMONS_NS
-{
+namespace BECOMMONS_NS {
 	struct codigo : componente
 	{
 		static constexpr mascara mascara = COMPONENTE_CODIGO;
