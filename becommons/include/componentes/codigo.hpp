@@ -13,17 +13,15 @@
  */
 
 #pragma once
-#include "componente.hpp"
-#include "transformacao.hpp"
 #include <string>
-#include "depuracao/debug.hpp"
 #include <lua.hpp>
+#include "becommons.hpp"
 
 extern "C" {
 #include <lua5.3/lua.h>
 }
 
-namespace bubble
+namespace BECOMMONS_NS
 {
 	struct codigo : componente
 	{

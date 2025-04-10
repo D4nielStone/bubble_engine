@@ -9,14 +9,15 @@
  */
 
 #pragma once
-#include "vetor3.hpp"
+#include "namespace.hpp"
 #include "vetor2.hpp"
+#include "vetor3.hpp"
 
-namespace bubble
+namespace BECOMMONS_NS
 {
 	struct vertice
 	{
 		vet3 posicao, normal;
-		vet2 uvcoords;
+		fvet2 uvcoords;
 	};
 }

@@ -18,7 +18,7 @@
 #include "nucleo/projeto.hpp"
 #include "os/janela.hpp"
 
-void bubble::camera::desenharFB() const
+void namespace BECOMMONS_NScamera::desenharFB() const
 {
     if (flag_fb)
     {
@@ -40,7 +40,7 @@ void bubble::camera::desenharFB() const
 }
 
 
-bubble::camera::~camera()
+namespace BECOMMONS_NScamera::~camera()
 {
     depuracao::emitir(debug, "camera", "descarregando");
     
@@ -48,11 +48,11 @@ bubble::camera::~camera()
     desativarFB();
 }
 
-bubble::camera::camera(const bool orth)
+namespace BECOMMONS_NScamera::camera(const bool orth)
     : flag_orth(orth) {
 }
         
-bool bubble::camera::analizar(const rapidjson::Value& value)
+bool namespace BECOMMONS_NScamera::analizar(const rapidjson::Value& value)
 {
 	viewport_ptr = &instanciaJanela->tamanho;
 	
@@ -79,7 +79,7 @@ bool bubble::camera::analizar(const rapidjson::Value& value)
     m_skybox = new skybox();
 	return true;
 }
-bool bubble::camera::serializar(rapidjson::Value& value, rapidjson::Document::AllocatorType& allocator) const
+bool namespace BECOMMONS_NScamera::serializar(rapidjson::Value& value, rapidjson::Document::AllocatorType& allocator) const
 {
     // fov
     value.AddMember("fov", fov, allocator);
@@ -106,7 +106,7 @@ bool bubble::camera::serializar(rapidjson::Value& value, rapidjson::Document::Al
 
     return true;
 }
-void bubble::camera::ativarFB()
+void namespace BECOMMONS_NScamera::ativarFB()
 {
     flag_fb = true;
 
@@ -117,8 +117,8 @@ void bubble::camera::ativarFB()
     glGenTextures(1, &textura);
     glBindTexture(GL_TEXTURE_2D, textura);
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, 800, 600, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MININ_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MINAG_FILTER, GL_LINEAR);
 
     // Anexando a textura ao framebuffer
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, textura, 0);
@@ -139,7 +139,7 @@ void bubble::camera::ativarFB()
 
 }
 
-void bubble::camera::desativarFB()
+void namespace BECOMMONS_NScamera::desativarFB()
 {
     if (!flag_fb) return;
     flag_fb = false;
@@ -148,7 +148,7 @@ void bubble::camera::desativarFB()
     glDeleteTextures(1, &textura);
 }
 
-glm::mat4 bubble::camera::obtViewMatrix() {
+glm::mat4 namespace BECOMMONS_NScamera::obtViewMatrix() {
     if (!transform)
         transform = projeto_atual->obterFaseAtual()->obterRegistro()->obter<transformacao>(meu_objeto);
 
@@ -182,13 +182,13 @@ glm::mat4 bubble::camera::obtViewMatrix() {
     viewMatrix = glm::lookAt(posicao, alvo, cima);
     return viewMatrix;
 }
-void bubble::camera::viewport(const bubble::vetor2<double>& viewp)
+void namespace BECOMMONS_NScamera::viewport(const bubble::vetor2<double>& viewp)
 {
     viewportFBO = viewp;
 }
 
-glm::mat4 bubble::camera::obtProjectionMatrix() {
-    bubble::vetor2<double> viewp;
+glm::mat4 namespace BECOMMONS_NScamera::obtProjectionMatrix() {
+    namespace BECOMMONS_NSvetor2<double> viewp;
     if (flag_fb && !viewport_ptr)
         viewp = viewportFBO;
     else if(viewport_ptr)
@@ -219,7 +219,7 @@ glm::mat4 bubble::camera::obtProjectionMatrix() {
     return projMatriz;
 }
 
-bubble::raio bubble::camera::pontoParaRaio(bubble::vetor2<double> screenPoint) const 
+raio bubble::camera::pontoParaRaio(bubble::vetor2<double> screenPoint) const 
 {
     glm::vec3 worldSpaceDirection = telaParaMundo(screenPoint, 0.0f);
 
@@ -230,7 +230,7 @@ bubble::raio bubble::camera::pontoParaRaio(bubble::vetor2<double> screenPoint) c
     return ray;
 }
 
-glm::vec3 bubble::camera::telaParaMundo(const bubble::vetor2<double> &screenPoint, float profundidade) const
+glm::vec3 namespace BECOMMONS_NScamera::telaParaMundo(const bubble::vetor2<double> &screenPoint, float profundidade) const
 {
     float ndcX = (2.0f * screenPoint.x) / viewportFBO.x - 1.0f;
     float ndcY = 1.0f - (2.0f * screenPoint.y) / viewportFBO.y;
@@ -243,13 +243,13 @@ glm::vec3 bubble::camera::telaParaMundo(const bubble::vetor2<double> &screenPoin
     return glm::normalize(glm::vec3(worldCoords));
 }
 
-bubble::vetor2<int> bubble::camera::mundoParaTela(const glm::vec3 &mundoPos)
+namespace BECOMMONS_NSvetor2<int> bubble::camera::mundoParaTela(const glm::vec3 &mundoPos)
 {
     glm::vec4 clipSpacePos = projMatriz * viewMatrix * glm::vec4(mundoPos, 1.0f);
 
     // Validação de w para evitar divisões inválidas
     if (clipSpacePos.w <= 0.0001f) {
-        return bubble::vetor2<int>(-1, -1); // ou outro tratamento adequado
+        return namespace BECOMMONS_NSvetor2<int>(-1, -1); // ou outro tratamento adequado
     }
 
     glm::vec3 ndcPos = glm::vec3(clipSpacePos) / clipSpacePos.w;
@@ -257,13 +257,13 @@ bubble::vetor2<int> bubble::camera::mundoParaTela(const glm::vec3 &mundoPos)
     int screenWidth = viewport_ptr->x;
     int screenHeight = viewport_ptr->y;
 
-    bubble::vetor2<int> screenPos;
+    namespace BECOMMONS_NSvetor2<int> screenPos;
     screenPos.x = static_cast<int>(std::round((ndcPos.x * 0.5f + 0.5f) * screenWidth));
     screenPos.y = static_cast<int>(std::round((1.0f - (ndcPos.y * 0.5f + 0.5f)) * screenHeight)); // Inverter Y
     return screenPos;
 }
 
-void bubble::camera::mover(glm::vec3 pos)
+void namespace BECOMMONS_NScamera::mover(glm::vec3 pos)
 {
     if (!transform)
         transform = projeto_atual->obterFaseAtual()->obterRegistro()->obter<transformacao>(meu_objeto);

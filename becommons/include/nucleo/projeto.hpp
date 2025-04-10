@@ -13,15 +13,16 @@
  */
 
 #pragma once
-#include "nucleo/fase.hpp"
 #include <string>
 #include <rapidjson/document.h>
 #include <memory>
-#include "nucleo/sistema.hpp"
-#include "nucleo/sistema_de_fisica.hpp"
-#include "nucleo/sistema_de_renderizacao.hpp"
+#include "namespace.hpp"
+#include "fase.hpp"
+#include "sistema.hpp"
+#include "sistema_de_fisica.hpp"
+#include "sistema_de_renderizacao.hpp"
 
-namespace bubble
+namespace BECOMMONS_NS
 {
     struct projeto
     {
@@ -54,10 +55,10 @@ namespace bubble
             /// @brief obtenção de uma fase dentro da lista da fases carregadas
             /// @param nome diretório da fase
 	        /// @return ponteiro inteligente da fase
-	        std::shared_ptr<bubble::fase> obterFase(const std::string& nome){return nullptr;};
+	        std::shared_ptr<fase> obterFase(const std::string& nome){return nullptr;};
 	        /// @brief obtenção da fase atualmente em execução
 	        /// @return retorna ponteiro da fase atual
-	        std::shared_ptr<bubble::fase> obterFaseAtual();
+	        std::shared_ptr<fase> obterFaseAtual();
 
             /// @brief adiciona sistema
             /// @param nome Nome do sistema
@@ -76,11 +77,11 @@ namespace bubble
             /// @brief sistemas adicionais
             std::unordered_map<std::string, sistema*> sistemas_adicionais;
             /// @brief vetor de fases carregadas
-            std::unordered_map<std::string, std::shared_ptr<bubble::fase>> m_fases;
+            std::unordered_map<std::string, std::shared_ptr<fase>> m_fases;
             /// @brief cria janela glfw e inicia contexto opengl
             void criarJanela(rapidjson::Document& doc);
             /// @brief adiciona sistemas padrão como interface, renderização e física
-            void iniciarSistemas(bubble::fase*);
+            void iniciarSistemas(fase*);
             /// @brief id para fase atual
             std::string fase_atual;
     };

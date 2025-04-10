@@ -11,9 +11,9 @@
 
 #pragma once
 #include <cmath>
-/* Defini��o da estrutura vetor2 */
+#include "namespace.hpp"
 
-namespace bubble
+namespace BECOMMONS_NS
 {
     template<class T>
     struct vetor2
@@ -134,4 +134,6 @@ namespace bubble
     };
 }
 
-typedef bubble::vetor2<float> vet2;
+typedef BECOMMONS_NS::vetor2<float> fvet2;
+typedef BECOMMONS_NS::vetor2<double> dvet2;
+typedef BECOMMONS_NS::vetor2<int> ivet2;

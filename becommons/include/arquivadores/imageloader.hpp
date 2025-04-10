@@ -13,17 +13,18 @@
  */
 
 #pragma once
+#include <glad/glad.h>
 #include <string>
-#include "unordered_map"
+#include <unordered_map>
 #include <FreeImage.h>
 #include <assimp/scene.h>
 #include <vector>
-#include <glad/glad.h>
 #include <memory>
+#include "becommons.hpp"
 
 struct GLFWimage;
 
-namespace bubble
+namespace BECOMMONS_NS
 {
     class  imageLoader
     {
@@ -34,7 +35,7 @@ namespace bubble
         imageLoader(const std::string& filepath);
         ~imageLoader();
 
-        static bubble::imageLoader& obterInstancia();
+        static imageLoader& obterInstancia();
         int obterLargura() const;
         int obterAltura() const;
         int obterCanal() const;
@@ -53,7 +54,7 @@ namespace bubble
     int texturaDoArquivo(const std::string& directory, double* width = nullptr, double* height = nullptr);
     int texturaDoArquivo(const std::string& directory, GLuint tipo_textura);
     int texturaDoArquivo(unsigned char* data, unsigned int width, unsigned int height, int format);
-    inline std::unordered_map<std::string, std::shared_ptr<bubble::imageLoader>> imagens_carregadas;
+    inline std::unordered_map<std::string, std::shared_ptr<imageLoader>> imagens_carregadas;
     class  textureLoader
     {
     public:

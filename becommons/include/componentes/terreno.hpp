@@ -9,12 +9,13 @@
  */
 
 #pragma once
-#include "componente.hpp"
-#include "util/malha.hpp"
 #include <vector>
 #include <string>
+#include "namespace.hpp"
+#include "componente.hpp"
+#include "arquivadores/shader.hpp"
 
-namespace bubble
+namespace BECOMMONS_NS
 {
     struct terreno : public componente
     {
@@ -23,13 +24,13 @@ namespace bubble
         void carregarHeightMap(unsigned char *dados, int largura, int altura);
         explicit terreno(const std::string &path);
         void desenhar(shader& _shader);
-        bubble::shader& shader() 
+        shader& obterShader() 
         {
-            return _Mshader;
+            return m_shader;
         }
-            bubble::malha _Mmalha;
+            malha* m_malha;
         private:
-            bubble::shader _Mshader;
+            shader m_shader;
             std::string diretorio;
             std::vector<std::vector<float>> heightmap;
             int largura{0}, altura{0};

@@ -16,17 +16,17 @@
 #include "sistema.hpp"
 #include "componentes/camera.hpp"
 
-namespace bubble
+namespace BECOMMONS_NS
 {
 	class sistema_renderizacao : public sistema
 	{
         private:
-            void atualizarCamera(bubble::camera*);
+            void atualizarCamera(camera*);
 	    public:
-            bubble::camera* camera_principal{nullptr};
-	        void definirCamera(bubble::camera*);
+            camera* camera_principal{nullptr};
+	        void definirCamera(camera*);
 	    	sistema_renderizacao() = default;
 		    void atualizar() override;
-		    void inicializar(bubble::fase* fase_ptr) override;
+		    void inicializar(fase* fase_ptr) override;
 	};
 }

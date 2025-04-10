@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['mascara_0',['mascara',['../structbubble_1_1componente.html#a8834f64f3b133879dd73ffb478dd1447',1,'bubble::componente']]]
+  ['mascara_0',['mascara',['../structBECOMMONS__NS_1_1componente.html#a63f9004bc698806fecbc2d677f8ee369',1,'BECOMMONS_NS::componente']]]
 ];

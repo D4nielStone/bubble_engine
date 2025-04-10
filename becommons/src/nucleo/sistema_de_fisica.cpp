@@ -1,4 +1,3 @@
-#include "nucleo/sistema_de_fisica.hpp"
 
 /** @copyright Copyright (c) 2025 Daniel Oliveira */
 /**
@@ -11,12 +10,13 @@
  * @licence MIT License
  */
 
+#include "nucleo/sistema_de_fisica.hpp"
 #include "nucleo/fase.hpp"
 #include "os/janela.hpp"
 #include "componentes/transformacao.hpp"
 #include "componentes/fisica.hpp"
 
-bubble::sistema_fisica::sistema_fisica()
+BECOMMONS_NSsistema_fisica::sistema_fisica()
 {
     configColisao = new btDefaultCollisionConfiguration();
     expedidor = new btCollisionDispatcher(configColisao);
@@ -27,7 +27,7 @@ bubble::sistema_fisica::sistema_fisica()
     mundoDinamico->getSolverInfo().m_numIterations = 100;
 
 }
-bubble::sistema_fisica::~sistema_fisica()
+BECOMMONS_NSsistema_fisica::~sistema_fisica()
 {
     pararThread();
 
@@ -40,10 +40,10 @@ bubble::sistema_fisica::~sistema_fisica()
 }
 
 
-void bubble::sistema_fisica::atualizar()
+void BECOMMONS_NSsistema_fisica::atualizar()
 {
-    mundoDinamico->stepSimulation(instanciaJanela->_Mtempo.obterDeltaTime() * velocidade, 1, 1.f / 1000.f);
-    reg->cada<bubble::fisica, bubble::transformacao>([&](const uint32_t entidade)
+    mundoDinamico->stepSimulation(instanciaJanela->m_tempo.obterDeltaTime() * velocidade, 1, 1.f / 1000.f);
+    reg->cada<BECOMMONS_NSfisica, bubble::transformacao>([&](const uint32_t entidade)
         {
             /// adiciona corpos rigidos
             reg->obter<fisica>(entidade)->atualizarTransformacao();
@@ -51,11 +51,11 @@ void bubble::sistema_fisica::atualizar()
     );
 }
 
-void bubble::sistema_fisica::inicializar(bubble::fase* f)
+void BECOMMONS_NSsistema_fisica::inicializar(bubble::fase* f)
 {
     sistema_fisica::sistema::inicializar(f);
     mundoDinamicoPrincipal = mundoDinamico;
-    reg->cada<bubble::fisica, bubble::transformacao>([&](const uint32_t entidade)
+    reg->cada<BECOMMONS_NSfisica, bubble::transformacao>([&](const uint32_t entidade)
         {
             /// adiciona corpos rigidos
             auto comp_fisica = reg->obter<fisica>(entidade);
@@ -67,7 +67,7 @@ void bubble::sistema_fisica::inicializar(bubble::fase* f)
     );
 }
 
-void bubble::sistema_fisica::iniciarThread()
+void BECOMMONS_NSsistema_fisica::iniciarThread()
 {
     rodando = true;
     fisicaThread = std::thread([this]() {
@@ -79,7 +79,7 @@ void bubble::sistema_fisica::iniciarThread()
         });
 }
 
-void bubble::sistema_fisica::pararThread()
+void BECOMMONS_NSsistema_fisica::pararThread()
 {
     rodando = false;
     if (fisicaThread.joinable()) {
@@ -87,7 +87,7 @@ void bubble::sistema_fisica::pararThread()
     }
 }
 
-bool bubble::sistema_fisica::remover(btRigidBody*& corpo)
+bool BECOMMONS_NSsistema_fisica::remover(btRigidBody*& corpo)
 {
     if (!mundoDinamico) {
         return false; // Retorna falso se o mundo não existir
@@ -107,12 +107,12 @@ bool bubble::sistema_fisica::remover(btRigidBody*& corpo)
     return true;
 }
 
-btDiscreteDynamicsWorld* bubble::sistema_fisica::mundo()
+btDiscreteDynamicsWorld* BECOMMONS_NSsistema_fisica::mundo()
 {
     return mundoDinamico;
 }
 
-bubble::resultadoRaio bubble::raioIntersecta(const raio& raio)
+BECOMMONS_NSresultadoRaio bubble::raioIntersecta(const raio& raio)
 {
     // Configura��o do ponto inicial e final do raio no espa�o 3D
     btVector3 origem(raio.origem.x, raio.origem.y, raio.origem.z);

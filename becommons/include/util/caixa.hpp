@@ -10,12 +10,11 @@
  */
 
 #pragma once
-#include "componentes/imagem.hpp"
-#include "util/vetor4.hpp"
-#include "util/vetor2.hpp"
 #include <string>    
+#include <memory>
+#include "becommons.hpp"
 
-namespace bubble
+namespace BECOMMONS_NS
 {
         enum class flags_caixa : uint32_t {
             nenhuma             = 0,
@@ -74,8 +73,8 @@ namespace bubble
         float m_altura = 20.f;
         float m_crescimento_modular = 0.0f; // Fator de crescimento em layouts modulares
         unsigned int m_espessura_borda = 1;
-        bubble::vetor2<int> m_padding = {0, 0};
-        bubble::vetor2<int> m_padding_geral = {0, 0};
+        vetor2<int> m_padding = {0, 0};
+        vetor2<int> m_padding_geral = {0, 0};
         vet4 m_limites  {0, 0, 20, 20};
         cor m_cor_borda {0.1f, 0.1f, 0.1f, 0.f};
         cor m_cor_fundo {0.5f, 0.5f, 0.5f, 0.f};

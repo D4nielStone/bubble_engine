@@ -1,9 +1,0 @@
-<map id="bubble::texto" name="bubble::texto">
-<area shape="rect" id="Node000001" title=" " alt="" coords="211,93,319,119"/>
-<area shape="rect" id="Node000002" href="$structbubble_1_1componente.html" title="base para as funcionalidades da engine" alt="" coords="5,5,160,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="121,34,242,91,239,95,119,39"/>
-<area shape="rect" id="Node000003" href="$structbubble_1_1vetor2.html" title=" " alt="" coords="184,5,347,31"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="268,45,268,93,263,93,263,45"/>
-<area shape="rect" id="Node000004" href="$structbubble_1_1cor.html" title=" " alt="" coords="371,5,466,31"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="387,40,287,95,285,91,385,35"/>
-</map>

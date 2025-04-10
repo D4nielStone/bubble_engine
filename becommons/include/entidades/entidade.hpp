@@ -12,9 +12,9 @@
 
 #pragma once
 #include <memory>
-#include "componentes/componente.hpp"
+#include "becommons.hpp"
 
-namespace bubble
+namespace BECOMMONS_NS
 {
 	/**
 	 * @struct entidade
@@ -29,13 +29,13 @@ namespace bubble
 		}
 	};
 
-}	///< namespace bubble
+}	///< namespace BECOMMONS_NS
 
 // Implementação de std::hash para entidade
 namespace std {
 	template <>
-	struct hash<bubble::entidade> {
-		std::size_t operator()(const bubble::entidade& entidade) const {
+	struct hash<entidade> {
+		std::size_t operator()(const entidade& entidade) const {
 			return std::hash<uint32_t>()(entidade.id);
 		}
 	};

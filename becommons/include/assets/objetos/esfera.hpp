@@ -3,14 +3,14 @@
  * @file esfera.hpp
  */
 
-#include "util/malha.hpp"
+#include "util/malha*.hpp"
 #include "util/material.hpp"
 #include "util/vertice.hpp"
 #include <vector>
 #include <cmath>
 
-inline std::vector<bubble::vertice> create_sphere_vertices(float radius, int sectors, int stacks) {
-    std::vector<bubble::vertice> vertices;
+inline std::vector<vertice> create_sphere_vertices(float radius, int sectors, int stacks) {
+    std::vector<vertice> vertices;
     
     const float PI = 3.14159265358979323846f;
     const float TWO_PI = 2.0f * PI;
@@ -41,7 +41,7 @@ inline std::vector<bubble::vertice> create_sphere_vertices(float radius, int sec
             float u = (float)j / sectors;
             float v = (float)i / stacks;
             
-            vertices.push_back(bubble::vertice(position, normal, vet2(u, v)));
+            vertices.push_back(vertice(position, normal, fvet2(u, v)));
         }
     }
     
@@ -74,9 +74,9 @@ inline std::vector<unsigned int> create_sphere_indices(int sectors, int stacks) 
 }
 
 // Example usage with 36 sectors and 18 stacks (adjust as needed)
-inline std::vector<bubble::vertice> sphere_vertices = create_sphere_vertices(1.0f, 36, 18);
+inline std::vector<vertice> sphere_vertices = create_sphere_vertices(1.0f, 36, 18);
 inline std::vector<unsigned int> sphere_indices = create_sphere_indices(36, 18);
 
-inline bubble::material material_esf;
-inline bubble::malha malha_esfera(sphere_vertices, sphere_indices, material_esf);
+inline material material_esf;
+inline malha* malha*_esfera(sphere_vertices, sphere_indices, material_esf);
 

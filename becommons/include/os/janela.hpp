@@ -13,17 +13,16 @@
  */
 
 #pragma once
-#include "tempo.hpp"
-#include "util/vetor2.hpp"
-#include "nucleo/sistema.hpp"
-#include "nucleo/sistema_de_renderizacao.hpp"
-#include "inputs/inputs.hpp"
 #include <functional>
 #include <memory>
 #include <unordered_map>
+#include <glad/glad.h>
+#include <GLFW/glfw3.h>
+#include "namespace.hpp"
+#include "tempo.hpp"
+#include "util/vetor2.hpp"
 
-struct GLFWwindow;
-namespace bubble
+namespace BECOMMONS_NS
 {
 	/**
 	* @struct janela
@@ -44,13 +43,13 @@ namespace bubble
 	    cursor m_cursor = cursor::seta;
 	    cursor m_cursor_antigo = cursor::seta;
         public:
-		tempo _Mtempo;
-        std::string _Mnome{""};
-		bubble::vetor2<double> tamanho;
+		tempo m_tempo;
+        std::string m_nome{""};
+		vetor2<double> tamanho;
 		GLFWwindow* window;
-		bubble::inputs inputs;
-		janela(const char* nome, bubble::vetor2<double> bounds = bubble::vetor2<double>(600, 400), const char* icon_path = nullptr);
-		janela(const char* nome, const bool f, bubble::vetor2<double> bounds = bubble::vetor2<double>(600, 400), const char* icon_path = nullptr);
+		inputs m_inputs;
+		janela(const char* nome, vetor2<double> bounds = vetor2<double>(600, 400), const char* icon_path = nullptr);
+		janela(const char* nome, const bool f, vetor2<double> bounds = vetor2<double>(600, 400), const char* icon_path = nullptr);
 		~janela();
 		void poll();
         inline void defCursor(const cursor c)
@@ -62,6 +61,8 @@ namespace bubble
 		void viewport() const;
         std::string nome() const;
 		void nome(const char* novo_nome);
+        private:
+            janela() = default;
 	};
 	inline janela* instanciaJanela{ nullptr };
 }

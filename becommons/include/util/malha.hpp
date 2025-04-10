@@ -1,6 +1,6 @@
 /** @copyright Copyright (c) 2025 Daniel Oliveira */
 /**
- * @file malha.hpp
+ * @file malha*.hpp
  *
  * @author Daniel O. dos Santos
  * @date 2025-04-08
@@ -10,28 +10,26 @@
  */
 
 #pragma once
-#include "vertice.hpp"
 #include <vector>
-#include "textura.hpp"
-#include "arquivadores/shader.hpp"
-#include "util/material.hpp"
+#include <glm/glm.hpp>
+#include "namespace.hpp"
+#include "material.hpp"
 
-namespace bubble
+namespace BECOMMONS_NS
 {
     class malha
     {
-    public:
-        bool sobrepor = false;
+        public:
+        malha() = default;
+        bool m_sobrepor = false;
         std::vector<glm::vec3> instancias_pos;
         std::vector<vertice> vertices;
         std::vector<unsigned int> indices;
-        bubble::material material;
-
-        malha() = default;
-        malha(std::vector<vertice>& vertices, std::vector<unsigned int> &indices, bubble::material& material);
+        material m_material;
+        malha(std::vector<vertice>& vertices, std::vector<unsigned int> &indices, material& material);
         ~malha();
         void descarregar();
-        void desenhar(bubble::shader& shader);
+        void desenhar(shader& shader);
         void definirBuffers();
         //  dados de renderizacao
         unsigned int VAO, VBO, EBO;

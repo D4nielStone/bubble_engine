@@ -17,7 +17,7 @@
 #include "util/vetor3.hpp"
 #include <iostream>
 
-void bubble::terreno::carregarHeightMap(unsigned char* dados, int largura, int altura)
+void namespace BECOMMONS_NSterreno::carregarHeightMap(unsigned char* dados, int largura, int altura)
 {
     heightmap = std::vector<std::vector<float>>(altura, std::vector<float>(largura));
     for (int j = 0; j < altura; j++)
@@ -30,7 +30,7 @@ void bubble::terreno::carregarHeightMap(unsigned char* dados, int largura, int a
         }
     }
 
-        std::vector<bubble::vertice> vertices;
+        std::vector<namespace BECOMMONS_NSvertice> vertices;
     std::vector<unsigned int> indices;
 
     // Criar vértices do terreno
@@ -40,7 +40,7 @@ void bubble::terreno::carregarHeightMap(unsigned char* dados, int largura, int a
         {
             vertice v;
             v.posicao = vet3(i/(float)(largura-1), heightmap[j][i], j/(float)(altura-1));
-            v.uvcoords = vet2(i / (float)largura, j / (float)altura);
+            v.uvcoords = vetor2<float>(i / (float)largura, j / (float)altura);
         
             vertices.push_back(v);
         }
@@ -104,23 +104,23 @@ void bubble::terreno::carregarHeightMap(unsigned char* dados, int largura, int a
         v.normal.normalizar();
     }
     // Criar a malha
-    _Mmalha.vertices = vertices;
-    _Mmalha.indices = indices;
-    _Mmalha.definirBuffers(); // Configura VBO, VAO, EBO
+    m_malha.vertices = vertices;
+    m_malha.indices = indices;
+    m_malha.definirBuffers(); // Configura VBO, VAO, EBO
 }
 
 // Construtor do terreno
-bubble::terreno::terreno(const std::string &path) : diretorio(path)
+namespace BECOMMONS_NSterreno::terreno(const std::string &path) : diretorio(path)
 {
     // Carregar imagem como Heightmap
-    bubble::imageLoader imagem(path);
+    imageLoader imagem(path);
     largura = imagem.obterLargura();
     altura = imagem.obterAltura();
     carregarHeightMap(imagem.obterDados(), largura, altura);
 }
 
 // Método para desenhar o terreno
-void bubble::terreno::desenhar(bubble::shader &_shader)
+void namespace BECOMMONS_NSterreno::desenhar(bubble::shader &_shader)
 {
-    _Mmalha.desenhar(_shader);
+    m_malha.desenhar(_shader);
 }

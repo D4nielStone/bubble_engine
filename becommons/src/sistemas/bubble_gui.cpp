@@ -16,7 +16,7 @@
 #include <cmath>
 #include <functional>
 
-using namespace bubble;
+using BECOMMONS_NS;
 
 glm::mat4 proj(1.f);
 
@@ -87,7 +87,7 @@ void bubble_gui::desenhar_caixa(caixa* c)
     }
 }
 
-void bubble::renderizarImagem(elementos::imagem* img)
+void BECOMMONS_NSrenderizarImagem(elementos::imagem* img)
 {
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, img->m_imagem_id);
@@ -107,7 +107,7 @@ void bubble::renderizarImagem(elementos::imagem* img)
     glBindVertexArray(0);
 }
 
-void bubble::renderizarFundo(caixa* it_caixa, bubble::shader* quad_shader)
+void BECOMMONS_NSrenderizarFundo(caixa* it_caixa, bubble::shader* quad_shader)
 {
     quad_shader->use();
     quad_shader->setVec2("quadrado.posicao", it_caixa->m_limites.x, it_caixa->m_limites.y);
@@ -124,7 +124,7 @@ void bubble::renderizarFundo(caixa* it_caixa, bubble::shader* quad_shader)
     glBindVertexArray(0);
 }
 
-void bubble::renderizarTexto(elementos::texto* tex)
+void BECOMMONS_NSrenderizarTexto(elementos::texto* tex)
 {
 
         // activate corresponding render state	
@@ -137,7 +137,7 @@ void bubble::renderizarTexto(elementos::texto* tex)
 
         // iterate through all characters
         std::string::const_iterator c;
-        auto& chs = bubble::gerenciadorFontes::obterInstancia().obter(tex->m_texto_fonte, tex->m_texto_escala);
+        auto& chs = BECOMMONS_NSgerenciadorFontes::obterInstancia().obter(tex->m_texto_fonte, tex->m_texto_escala);
         float y_linha = tex->m_texto_escala;
         float x_linha = tex->m_limites.x; 
         if(((uint32_t)tex->m_texto_flags & (uint32_t)elementos::flags_texto::alinhamento_central)!=0) 
@@ -154,7 +154,7 @@ void bubble::renderizarTexto(elementos::texto* tex)
             
             if (chs.empty())
                 return;
-            bubble::caractere ch = chs.at(ca);
+            BECOMMONS_NScaractere ch = chs.at(ca);
             
             float xpos = x_linha + ch.apoio.x;
             float ypos = tex->m_limites.y - ch.apoio.y + y_linha;

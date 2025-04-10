@@ -14,7 +14,7 @@
 #include <filesystem>
 #include "assets/shaders_na_memoria.hpp"
 
-using namespace bubble;
+using namespace BECOMMONS_NS;
 
 // Mapeia os shaders na memória para facilitar o acesso aos shaders embutidos
 inline const std::unordered_map<std::string, const char*> shader_memoria{
@@ -29,22 +29,22 @@ inline const std::unordered_map<std::string, const char*> shader_memoria{
     {"phong.frag", phong_frag}
 };
 
-void bubble::descarregarShaders()
+void descarregarShaders()
 {
     shaders.clear();
 }
 
-bubble::shaderException::shaderException(const char* msg) : msg_(msg) {}
+namespace BECOMMONS_NSshaderException::shaderException(const char* msg) : msg_(msg) {}
 
-const char* bubble::shaderException::what() const noexcept {
+const char* namespace BECOMMONS_NSshaderException::what() const noexcept {
     return msg_.c_str();
 }
 
-bubble::shader::shader(const char* vertexPath, const char* fragmentPath) {
+namespace BECOMMONS_NSshader::shader(const char* vertexPath, const char* fragmentPath) {
     compilar(vertexPath, fragmentPath);
 }
 
-void bubble::shader::compilar(const char* vertexPath, const char* fragmentPath) {
+void namespace BECOMMONS_NSshader::compilar(const char* vertexPath, const char* fragmentPath) {
     vert = vertexPath; frag = fragmentPath;
     // Verifica se o shader já foi compilado
     if(shaders.find(fragmentPath) != shaders.end())
@@ -131,7 +131,7 @@ void bubble::shader::compilar(const char* vertexPath, const char* fragmentPath) 
     shaders[fragmentPath] = ID;
 }
 
-void bubble::shader::use() 
+void namespace BECOMMONS_NSshader::use() 
 {
     if(shaders.find(frag) != shaders.end())
     {
@@ -144,45 +144,45 @@ void bubble::shader::use()
     }
 }
 
-void bubble::shader::setBool(const std::string& name, const bool& value) const {
+void namespace BECOMMONS_NSshader::setBool(const std::string& name, const bool& value) const {
     glUniform1i(glGetUniformLocation(ID, name.c_str()), value);
 }
 
-void bubble::shader::setFloat(const std::string& name, const float& value) const {
+void namespace BECOMMONS_NSshader::setFloat(const std::string& name, const float& value) const {
     glUniform1f(glGetUniformLocation(ID, name.c_str()), value);
 }
 
-void bubble::shader::setInt(const std::string& name, const int& value) const {
+void namespace BECOMMONS_NSshader::setInt(const std::string& name, const int& value) const {
     glUniform1i(glGetUniformLocation(ID, name.c_str()), value);
 }
 
-void bubble::shader::setMat4(const std::string& name, const float* value) const {
+void namespace BECOMMONS_NSshader::setMat4(const std::string& name, const float* value) const {
     glUniformMatrix4fv(glGetUniformLocation(ID, name.c_str()), 1, GL_FALSE, value);
 }
 
-void bubble::shader::setMat3(const std::string& name, const float* value) const {
+void namespace BECOMMONS_NSshader::setMat3(const std::string& name, const float* value) const {
     glUniformMatrix3fv(glGetUniformLocation(ID, name.c_str()), 1, GL_FALSE, value);
 }
 
-void bubble::shader::setCor(const std::string& name, const bubble::cor& cor) const {
+void namespace BECOMMONS_NSshader::setCor(const std::string& name, const bubble::cor& cor) const {
     glUniform4f(glGetUniformLocation(ID, name.c_str()), cor.r, cor.g, cor.b, cor.a);
 }
 
-void bubble::shader::setVec4(const std::string& name, const vet4& vec4 ) const {
+void namespace BECOMMONS_NSshader::setVec4(const std::string& name, const vet4& vec4 ) const {
     glUniform4f(glGetUniformLocation(ID, name.c_str()), vec4.x, vec4.y, vec4.z, vec4.w);
 }
-void bubble::shader::setVec3(const std::string& name, const float& r, const float& g, const float& b) const {
+void namespace BECOMMONS_NSshader::setVec3(const std::string& name, const float& r, const float& g, const float& b) const {
     glUniform3f(glGetUniformLocation(ID, name.c_str()), r, g, b);
 }
-void bubble::shader::setVec3(const std::string& name, const vet3& vet) const {
+void namespace BECOMMONS_NSshader::setVec3(const std::string& name, const vet3& vet) const {
     glUniform3f(glGetUniformLocation(ID, name.c_str()), vet.x, vet.y, vet.z);
 }
 
-void bubble::shader::setVec2(const std::string& name, const float& r, const float& g) const {
+void namespace BECOMMONS_NSshader::setVec2(const std::string& name, const float& r, const float& g) const {
     glUniform2f(glGetUniformLocation(ID, name.c_str()), r, g);
 }
 
-bool bubble::shader::checkCompileErrors(unsigned int shader, const std::string& type) {
+bool namespace BECOMMONS_NSshader::checkCompileErrors(unsigned int shader, const std::string& type) {
     GLint success;
     GLchar infoLog[1024];
 
@@ -205,7 +205,7 @@ bool bubble::shader::checkCompileErrors(unsigned int shader, const std::string& 
     return true;
 }
 
-bool bubble::shader::checkLinkErrors(unsigned int program) {
+bool namespace BECOMMONS_NSshader::checkLinkErrors(unsigned int program) {
     GLint success;
     GLchar infoLog[1024];
 

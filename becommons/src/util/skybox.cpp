@@ -10,10 +10,9 @@
  * @licence MIT License
  */
 
-#include "glad/glad.h"
-#include "util/skybox.hpp"
+#include "becommons.hpp"
 
-using namespace bubble;
+using BECOMMONS_NS;
 
 void skybox::desenhar(glm::mat4 view, glm::mat4 proj)
         {
@@ -26,7 +25,7 @@ void skybox::desenhar(glm::mat4 view, glm::mat4 proj)
             shader().setMat4("view", glm::value_ptr(nview));
             shader().setMat4("projection", glm::value_ptr(proj));
             
-            glBindTexture(GL_TEXTURE_CUBE_MAP, id_skybox);
+            glBindTexture(GL_TEXTURE_CUBEm_AP, id_skybox);
             glDrawElements(GL_TRIANGLES, malhas.back().indices.size(), GL_UNSIGNED_INT, 0);
             
             glBindVertexArray(0);

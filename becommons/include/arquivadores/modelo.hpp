@@ -13,19 +13,18 @@
  */
 
 #pragma once
-#include "util/malha.hpp"
-#include "depuracao/debug.hpp"
-#include "util/textura.hpp"
-#include "arquivadores/shader.hpp"
 #include <assimp/scene.h>
 #include <filesystem>
+#include "namespace.hpp"
+#include "util/malha.hpp"
+#include "shader.hpp"
 
-namespace bubble
+namespace BECOMMONS_NS
 {
     class modelo
     {
-    public:
-        modelo() = default;
+        public:
+            modelo() = default;
         modelo(const char* diretorio)
         {
                 carregarmodelo(std::filesystem::absolute(diretorio).string().c_str());
@@ -39,18 +38,16 @@ namespace bubble
             return nullptr;
         }
         void definirShader(const char* vertex,const char* frag);
-        bubble::shader& shader();
-        void desenhar(bubble::shader& shader);
+        shader& obterShader();
+        void desenhar(shader& shader);
         std::vector<malha> malhas;
         std::string diretorio;
     protected:
-        // dados de malha
-
-        bubble::shader* _Mshader{nullptr};
+        shader* m_shader{nullptr};
 
         void carregarmodelo(const std::string& path);
         void processarNo(aiNode* node, const aiScene* scene);
-        malha processarMalha(aiMesh* mesh, const aiScene* scene);
+        malha* processarMalha(aiMesh* mesh, const aiScene* scene);
         textura carregarTextura(aiMaterial* mat, aiTextureType type) const;
     };
 }

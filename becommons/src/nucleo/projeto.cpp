@@ -1,4 +1,3 @@
-/** @copyright Copyright (c) 2025 Daniel Oliveira */
 
 /** @copyright Copyright (c) 2025 Daniel Oliveira */
 /**
@@ -30,7 +29,7 @@
 #include <filesystem>
 #include <GLFW/glfw3.h>
 
-using namespace bubble;
+using BECOMMONS_NS;
 
 // Main loop
 void projeto::rodar()
@@ -167,8 +166,8 @@ void projeto::criarJanela(rapidjson::Document& doc)
     const char* nome_janela = doc["janela"].GetObject()["titulo"].GetString();
     std::string icon_path = doc["janela"].GetObject()["icone"].GetString();
 
-    instanciaJanela = new bubble::janela(nome_janela, true,
-     bubble::vetor2<double>(doc["janela"].GetObject()["largura"].GetInt(), doc["janela"].GetObject()["altura"].GetInt()),
+    instanciaJanela = new BECOMMONS_NSjanela(nome_janela, true,
+     BECOMMONS_NSvetor2<double>(doc["janela"].GetObject()["largura"].GetInt(), doc["janela"].GetObject()["altura"].GetInt()),
     (diretorioDoProjeto + "/" + icon_path).c_str());
 
     // Cria fase atual
@@ -183,13 +182,13 @@ void projeto::carregarFase(const std::string &n)
     // Torna atual
     fase_atual = nome;
     // Adiciona ao map de m_fases
-    m_fases[nome] = std::make_shared<bubble::fase>(nome + ".fase");
+    m_fases[nome] = std::make_shared<BECOMMONS_NSfase>(nome + ".fase");
 
     m_fases[nome]->carregar();
     iniciarSistemas(m_fases[nome].get());
 }
 
-void projeto::iniciarSistemas(bubble::fase* f)
+void projeto::iniciarSistemas(BECOMMONS_NSfase* f)
 {
     sistemas["fisica"] = new sistema_fisica();
     sistemas["interface"] = new sistema_interface();

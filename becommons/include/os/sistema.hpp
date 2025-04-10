@@ -14,8 +14,9 @@
 #include <fstream>
 #include <unistd.h>
 #include <limits.h>
+#include "namespace.hpp"
 
-namespace bubble
+namespace BECOMMONS_NS
 {
 inline static std::string obterExecDir() {
     char path[PATH_MAX];

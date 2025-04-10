@@ -20,7 +20,7 @@
 #include <GLFW/glfw3.h>
 #include "os/janela.hpp"
 
-using namespace bubble;
+using namespace BECOMMONS_NS;
 static const std::unordered_map<int, std::string> keyMap = {
         {GLFW_KEY_W, "W"},
 {GLFW_KEY_A, "A"},
@@ -44,8 +44,8 @@ static const std::unordered_map<int, std::string> keyMap = {
 {GLFW_KEY_KP_ENTER, "Ente"},
 {GLFW_KEY_DELETE, "Del"},
 {GLFW_KEY_F5, "F5"},
-{GLFW_MOUSE_BUTTON_MIDDLE, "Scrl"},
-{GLFW_MOUSE_BUTTON_LEFT, "MouseE"}
+{GLFWm_OUSE_BUTTONm_IDDLE, "Scrl"},
+{GLFWm_OUSE_BUTTON_LEFT, "MouseE"}
 };
 
 inputMode inputs::getInputMode() const {
@@ -108,7 +108,7 @@ static std::string glfwkeyTokey(int glfwkey) {
     return it != keyMap.end() ? it->second : "Erro";
 }
 // Callback de teclado GLFW
-void bubble::callbackKey(GLFWwindow* window, int key, int scancode, int action, int mods) 
+void namespace BECOMMONS_NScallbackKey(GLFWwindow* window, int key, int scancode, int action, int mods) 
 {
     auto &input = instanciaJanela->inputs;
     input.mods = mods;
@@ -126,7 +126,7 @@ void bubble::callbackKey(GLFWwindow* window, int key, int scancode, int action, 
 }
 
 // Callback de posi��o do mouse
-void bubble::mousePosCallBack(GLFWwindow* window, double x, double y)
+void mousePosCallBack(GLFWwindow* window, double x, double y)
 {
     auto& input = instanciaJanela->inputs;
 
@@ -135,7 +135,7 @@ void bubble::mousePosCallBack(GLFWwindow* window, double x, double y)
     
 }
 // Callback de clique do mouse
-void bubble::mouseButtonCallBack(GLFWwindow* window, int button, int action, int mods)
+void mouseButtonCallBack(GLFWwindow* window, int button, int action, int mods)
 {
     auto& input = instanciaJanela->inputs;
 
@@ -154,7 +154,7 @@ void bubble::mouseButtonCallBack(GLFWwindow* window, int button, int action, int
     }
 }
 // Callback para caracteres
-void bubble::charCallback(GLFWwindow* window, unsigned int codepoint)
+void namespace BECOMMONS_NScharCallback(GLFWwindow* window, unsigned int codepoint)
 {
     auto& input = instanciaJanela->inputs;
 
@@ -184,7 +184,7 @@ void bubble::charCallback(GLFWwindow* window, unsigned int codepoint)
     }
 
     // Ajusta para letras mai�sculas/min�sculas se a tecla SHIFT estiver pressionada
-    if (input.mods & GLFW_MOD_SHIFT && utf8_char.length() == 1) {
+    if (input.mods & GLFWm_OD_SHIFT && utf8_char.length() == 1) {
         utf8_char[0] = toupper(utf8_char[0]);
     }
 
@@ -192,7 +192,7 @@ void bubble::charCallback(GLFWwindow* window, unsigned int codepoint)
     input.char_press = true;
 }
 
-void bubble::posicionarCursor(double x, double y)
+void namespace BECOMMONS_NSposicionarCursor(double x, double y)
 {
     auto& input = instanciaJanela->inputs;
     
@@ -201,19 +201,19 @@ void bubble::posicionarCursor(double x, double y)
     glfwSetCursorPos(instanciaJanela->window, x, y);
 }
 
-bubble::vetor2<double> bubble::obterMouse()
+namespace BECOMMONS_NSvetor2<double> bubble::obterMouse()
 {
     auto& input = instanciaJanela->inputs;
 
-        return bubble::vetor2<double>( input.mousex, input.mousey );
+        return namespace BECOMMONS_NSvetor2<double>( input.mousex, input.mousey );
 };
 
-bubble::vetor2<int> bubble::tamanhoJanela()
+namespace BECOMMONS_NSvetor2<int> bubble::tamanhoJanela()
 {
-    return bubble::vetor2<int>( instanciaJanela->tamanho.x, instanciaJanela->tamanho.y );
+    return namespace BECOMMONS_NSvetor2<int>( instanciaJanela->tamanho.x, instanciaJanela->tamanho.y );
 };
 
-bool bubble::pressionada(const std::string &letra)
+bool namespace BECOMMONS_NSpressionada(const std::string &letra)
 {
     auto& input = instanciaJanela->inputs;
 

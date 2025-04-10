@@ -16,7 +16,7 @@
 #include <thread>
 #include <atomic>
 
-namespace bubble
+namespace BECOMMONS_NS
 {
 	class sistema_codigo : public sistema
 	{
@@ -27,7 +27,7 @@ namespace bubble
 		sistema_codigo() = default;
 		~sistema_codigo();
 		void atualizar() override;
-		void inicializar(bubble::fase* fase_ptr) override;
+		void inicializar(fase* fase_ptr) override;
 		void iniciarThread();
 		void pararThread();
 	};

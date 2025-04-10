@@ -14,21 +14,21 @@
 #include "depuracao/debug.hpp"
 #include "os/janela.hpp"
 
-using namespace bubble;
+using namespace BECOMMONS_NS;
 
 camera_editor::camera_editor()
 {
     m_skybox = new skybox();
-    mousex_antigo = bubble::obterMouse().x;
-    mousey_antigo = bubble::obterMouse().y;
+    mousex_antigo = obterMouse().x;
+    mousey_antigo = obterMouse().y;
     transform = std::make_shared<transformacao>();
     ceu = cor(0.2, 0.2, 0.2, 1.f);
 };
 
 void camera_editor::atualizarMovimentacao()
 {
-    auto inputs = bubble::instanciaJanela->inputs;
-    float delta = bubble::instanciaJanela->_Mtempo.obterDeltaTime();
+    auto inputs = instanciaJanela->inputs;
+    float delta = instanciaJanela->m_tempo.obterDeltaTime();
 
     // Movement
     if (inputs.isKeyPressed("W")) mover(glm::vec3(0, 0, sens * delta));
@@ -37,8 +37,8 @@ void camera_editor::atualizarMovimentacao()
     if (inputs.isKeyPressed("D")) mover(glm::vec3(sens * delta, 0, 0));
 
     // Mouse rotation
-    float mousex_atual = bubble::obterMouse().x;
-    float mousey_atual = bubble::obterMouse().y;
+    float mousex_atual = obterMouse().x;
+    float mousey_atual = obterMouse().y;
     if (inputs.isKeyPressed("MouseE"))
     {
         float mx = mousex_antigo - mousex_atual;

@@ -1,4 +1,3 @@
-#include <glad/glad.h>
 
 /** @copyright Copyright (c) 2025 Daniel Oliveira */
 /**
@@ -11,6 +10,7 @@
  * @licence MIT License
  */
 
+#include <glad/glad.h>
 #include "nucleo/sistema_de_renderizacao.hpp"
 #include "componentes/renderizador.hpp"
 #include "componentes/transformacao.hpp"
@@ -26,7 +26,7 @@
 
 #define MAX_LPS 5
 
-using namespace bubble;
+using BECOMMONS_NS;
 
 void sistema_renderizacao::atualizar() {
     glEnable(GL_DEPTH_TEST);
@@ -40,10 +40,10 @@ void sistema_renderizacao::atualizar() {
     atualizarCamera(camera_principal);
 } 
 
-void sistema_renderizacao::inicializar(bubble::fase* fase_ptr)
+void sistema_renderizacao::inicializar(BECOMMONS_NSfase* fase_ptr)
 {
-        this->_Mfase = fase_ptr;
-        this->reg = _Mfase->obterRegistro();
+        this->m_fase = fase_ptr;
+        this->reg = m_fase->obterRegistro();
 
         reg->cada<camera>([&](const uint32_t e){
                 camera_principal = reg->obter<camera>(e).get();
@@ -51,12 +51,12 @@ void sistema_renderizacao::inicializar(bubble::fase* fase_ptr)
 
         glCullFace(GL_BACK);
 }
-void sistema_renderizacao::definirCamera(bubble::camera* cam)
+void sistema_renderizacao::definirCamera(BECOMMONS_NScamera* cam)
 {
     camera_principal = cam;
 }
 
-void sistema_renderizacao::atualizarCamera(bubble::camera* cam)
+void sistema_renderizacao::atualizarCamera(BECOMMONS_NScamera* cam)
 {
         if (!cam) {
             return;

@@ -21,30 +21,30 @@
 #include "assets/objetos/esfera.hpp"
 #include "map"
 
-std::map<std::string, bubble::malha> primitivas = 
+std::map<std::string, malha> primitivas = 
 {
     {"cubo", malha_cubo},
     {"esfera", malha_esfera}
 };
 
-namespace bubble
+namespace BECOMMONS_NS
 {
-    void modelo::desenhar(bubble::shader& shader)
+    void modelo::desenhar(namespace BECOMMONS_NSshader& shader)
     {
         for (unsigned int i = 0; i < malhas.size(); i++)
             malhas[i].desenhar(shader);
     }
 
-    bubble::shader& modelo::shader()
+    namespace BECOMMONS_NSshader& modelo::shader()
     {
-        if (!_Mshader) _Mshader = new bubble::shader();
-        return *_Mshader;
+        if (!m_shader) m_shader = new namespace BECOMMONS_NSshader();
+        return *m_shader;
     }
 
     void modelo::definirShader(const char* vertex, const char* frag)
     {
-        if (_Mshader) delete _Mshader;
-        _Mshader = new bubble::shader(vertex, frag);
+        if (m_shader) delete m_shader;
+        m_shader = new namespace BECOMMONS_NSshader(vertex, frag);
     }
 
     void modelo::carregarmodelo(const std::string& path)
@@ -86,17 +86,17 @@ namespace bubble
 
     }
 
-    bubble::malha modelo::processarMalha(aiMesh* mesh, const aiScene* scene)
+    malha modelo::processarMalha(aiMesh* mesh, const aiScene* scene)
     {
-        std::vector<bubble::vertice> vertices;
+        std::vector<namespace BECOMMONS_NSvertice> vertices;
         std::vector<unsigned int> indices;
         std::unordered_map<std::string, textura> texturas;
 
         for (unsigned int i = 0; i < mesh->mNumVertices; i++)
         {
-            bubble::vertice vertex;
+            namespace BECOMMONS_NSvertice vertex;
             // processa coordenadas de vertice
-            bubble::vetor3<float> vector;
+            namespace BECOMMONS_NSvetor3<float> vector;
             vector.x = mesh->mVertices[i].x;
             vector.y = mesh->mVertices[i].y;
             vector.z = mesh->mVertices[i].z;
@@ -114,14 +114,14 @@ namespace bubble
             // uvs
             if (mesh->mTextureCoords[0])
             {
-                vet2 vec;
+                vetor2<float> vec;
 
                 vec.x = mesh->mTextureCoords[0][i].x;
                 vec.y = mesh->mTextureCoords[0][i].y;
                 vertex.uvcoords = vec;
             }
             else
-                vertex.uvcoords = vet2(0.0f, 0.0f);
+                vertex.uvcoords = vetor2<float>(0.0f, 0.0f);
 
             vertices.push_back(vertex);
         }
@@ -140,7 +140,7 @@ namespace bubble
         // 1. diffusa
         texturas["tex_albedo"] = carregarTextura(material, aiTextureType_DIFFUSE);
         // 2. metallico
-        texturas["tex_metallic"] = carregarTextura(material, aiTextureType_METALNESS);
+        texturas["tex_metallic"] = carregarTextura(material, aiTextureTypem_ETALNESS);
         // 3. roughness
         texturas["tex_roughness"] = carregarTextura(material, aiTextureType_DIFFUSE_ROUGHNESS);
         // 4. normal
@@ -152,17 +152,17 @@ namespace bubble
         
         /// extrai cor difusa
         aiColor4D diffuse_color;
-        bubble::cor difusa;
-        if (AI_SUCCESS == material->Get(AI_MATKEY_COLOR_DIFFUSE, diffuse_color))
+        namespace BECOMMONS_NScor difusa;
+        if (AI_SUCCESS == material->Get(AIm_ATKEY_COLOR_DIFFUSE, diffuse_color))
         {
             difusa.r = diffuse_color.r;
             difusa.g = diffuse_color.g;
             difusa.b = diffuse_color.b;
             difusa.a = diffuse_color.a;
         }
-        bubble::material mat(texturas, difusa);
+        material mat(texturas, difusa);
 
-        bubble::malha m_(vertices, indices, mat);
+        malha m_(vertices, indices, mat);
         m_.definirBuffers();
         return m_;
     }

@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['fase_0',['fase',['../structbubble_1_1fase.html',1,'bubble::fase'],['../structfase.html',1,'fase']]],
-  ['fisica_1',['fisica',['../structbubble_1_1fisica.html',1,'bubble']]]
+  ['gerenciador_5fprojetos_0',['gerenciador_projetos',['../classEDITOR__NS_1_1gerenciador__projetos.html',1,'EDITOR_NS']]],
+  ['gerenciadorfontes_1',['gerenciadorFontes',['../classBECOMMONS__NS_1_1gerenciadorFontes.html',1,'BECOMMONS_NS']]]
 ];

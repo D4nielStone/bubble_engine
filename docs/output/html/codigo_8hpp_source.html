@@ -84,44 +84,41 @@ $(document).ready(function() { init_codefold(0); });
 <div class="contents">
 <a href="codigo_8hpp.html">Ir para a documentação desse arquivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span> </div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#pragma once</span></div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#include &quot;<a class="code" href="componente_8hpp.html">componente.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#include &quot;<a class="code" href="transformacao_8hpp.html">transformacao.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="preprocessor">#include &lt;string&gt;</span></div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="preprocessor">#include &quot;<a class="code" href="debug_8hpp.html">depuracao/debug.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="preprocessor">#include &lt;lua.hpp&gt;</span></div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="preprocessor">#include &lt;lua5.3/lua.h&gt;</span></div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>}</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="keyword">namespace </span>bubble</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>{</div>
-<div class="foldopen" id="foldopen00028" data-start="{" data-end="};">
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno"><a class="line" href="structbubble_1_1codigo.html">   28</a></span>    <span class="keyword">struct </span><a class="code hl_struct" href="structbubble_1_1codigo.html">codigo</a> : <a class="code hl_struct" href="structbubble_1_1componente.html">componente</a></div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    {</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>        <span class="keyword">static</span> <span class="keyword">constexpr</span> <a class="code hl_enumeration" href="structbubble_1_1componente.html#a8834f64f3b133879dd73ffb478dd1447">mascara</a> <a class="code hl_enumeration" href="structbubble_1_1componente.html#a8834f64f3b133879dd73ffb478dd1447">mascara</a> = COMPONENTE_CODIGO;</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>        std::string arquivo;</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>        std::string arquivoCompleto;</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>        lua_State* L;</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>        <a class="code hl_struct" href="structbubble_1_1codigo.html">codigo</a>(<span class="keyword">const</span> std::string&amp; arquivo);</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        <a class="code hl_function" href="structbubble_1_1codigo.html#ab438ca6af10f3ab35b067a20cf383a11">~codigo</a>();</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>        <a class="code hl_struct" href="structbubble_1_1codigo.html">codigo</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        <span class="keywordtype">bool</span> analizar(<span class="keyword">const</span> rapidjson::Value&amp;) <span class="keyword">override</span>;</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>        <span class="keywordtype">bool</span> serializar(rapidjson::Value&amp; value, rapidjson::Document::AllocatorType&amp; allocator) <span class="keyword">const override</span>;</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>        <span class="keywordtype">void</span> iniciar() <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>        <span class="keywordtype">void</span> encerrar();</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>        <span class="keywordtype">void</span> atualizar() <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    };</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#include &lt;lua.hpp&gt;</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="preprocessor">#include &quot;<a class="code" href="becommons_8hpp.html">becommons.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="preprocessor">#include &lt;lua5.3/lua.h&gt;</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>}</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="keyword">namespace </span>BECOMMONS_NS</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>{</div>
+<div class="foldopen" id="foldopen00026" data-start="{" data-end="};">
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno"><a class="line" href="structBECOMMONS__NS_1_1codigo.html">   26</a></span>    <span class="keyword">struct </span><a class="code hl_struct" href="structBECOMMONS__NS_1_1codigo.html">codigo</a> : <a class="code hl_struct" href="structBECOMMONS__NS_1_1componente.html">componente</a></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    {</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>        <span class="keyword">static</span> <span class="keyword">constexpr</span> <a class="code hl_enumeration" href="structBECOMMONS__NS_1_1componente.html#a63f9004bc698806fecbc2d677f8ee369">mascara</a> <a class="code hl_enumeration" href="structBECOMMONS__NS_1_1componente.html#a63f9004bc698806fecbc2d677f8ee369">mascara</a> = COMPONENTE_CODIGO;</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>        std::string arquivo;</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>        std::string arquivoCompleto;</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>        lua_State* L;</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno"><a class="line" href="structBECOMMONS__NS_1_1codigo.html#a4ce3cf090535d8703142345f9639a80c">   36</a></span>        <a class="code hl_function" href="structBECOMMONS__NS_1_1codigo.html#a4ce3cf090535d8703142345f9639a80c">codigo</a>(<span class="keyword">const</span> std::string&amp; arquivo);</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno"><a class="line" href="structBECOMMONS__NS_1_1codigo.html#ac06297bb34f1468d03acc3e56d5de68c">   40</a></span>        <a class="code hl_function" href="structBECOMMONS__NS_1_1codigo.html#ac06297bb34f1468d03acc3e56d5de68c">~codigo</a>();</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        <a class="code hl_struct" href="structBECOMMONS__NS_1_1codigo.html">codigo</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        <span class="keywordtype">bool</span> analizar(<span class="keyword">const</span> rapidjson::Value&amp;) <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>        <span class="keywordtype">bool</span> serializar(rapidjson::Value&amp; value, rapidjson::Document::AllocatorType&amp; allocator) <span class="keyword">const override</span>;</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        <span class="keywordtype">void</span> iniciar() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>        <span class="keywordtype">void</span> encerrar();</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>        <span class="keywordtype">void</span> atualizar() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    };</div>
 </div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>}</div>
-<div class="ttc" id="acomponente_8hpp_html"><div class="ttname"><a href="componente_8hpp.html">componente.hpp</a></div><div class="ttdoc">Estrutura base para componetes.</div></div>
-<div class="ttc" id="adebug_8hpp_html"><div class="ttname"><a href="debug_8hpp.html">debug.hpp</a></div></div>
-<div class="ttc" id="astructbubble_1_1codigo_html"><div class="ttname"><a href="structbubble_1_1codigo.html">bubble::codigo</a></div><div class="ttdef"><b>Definição</b> codigo.hpp:29</div></div>
-<div class="ttc" id="astructbubble_1_1codigo_html_ab438ca6af10f3ab35b067a20cf383a11"><div class="ttname"><a href="structbubble_1_1codigo.html#ab438ca6af10f3ab35b067a20cf383a11">bubble::codigo::~codigo</a></div><div class="ttdeci">~codigo()</div><div class="ttdoc">limpa recursos</div><div class="ttdef"><b>Definição</b> codigo.cpp:106</div></div>
-<div class="ttc" id="astructbubble_1_1componente_html"><div class="ttname"><a href="structbubble_1_1componente.html">bubble::componente</a></div><div class="ttdoc">base para as funcionalidades da engine</div><div class="ttdef"><b>Definição</b> componente.hpp:29</div></div>
-<div class="ttc" id="astructbubble_1_1componente_html_a8834f64f3b133879dd73ffb478dd1447"><div class="ttname"><a href="structbubble_1_1componente.html#a8834f64f3b133879dd73ffb478dd1447">bubble::componente::mascara</a></div><div class="ttdeci">mascara</div><div class="ttdoc">facilita a identificacao dos componentes pertencentes a uma entidade</div><div class="ttdef"><b>Definição</b> componente.hpp:35</div></div>
-<div class="ttc" id="atransformacao_8hpp_html"><div class="ttname"><a href="transformacao_8hpp.html">transformacao.hpp</a></div><div class="ttdoc">Calcula a mtriz de modelo para um objeto 3d qualquer.</div></div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>}</div>
+<div class="ttc" id="abecommons_8hpp_html"><div class="ttname"><a href="becommons_8hpp.html">becommons.hpp</a></div></div>
+<div class="ttc" id="astructBECOMMONS__NS_1_1codigo_html"><div class="ttname"><a href="structBECOMMONS__NS_1_1codigo.html">BECOMMONS_NS::codigo</a></div><div class="ttdef"><b>Definição</b> codigo.hpp:27</div></div>
+<div class="ttc" id="astructBECOMMONS__NS_1_1codigo_html_a4ce3cf090535d8703142345f9639a80c"><div class="ttname"><a href="structBECOMMONS__NS_1_1codigo.html#a4ce3cf090535d8703142345f9639a80c">BECOMMONS_NS::codigo::codigo</a></div><div class="ttdeci">codigo(const std::string &amp;arquivo)</div><div class="ttdoc">carrega script lua</div></div>
+<div class="ttc" id="astructBECOMMONS__NS_1_1codigo_html_ac06297bb34f1468d03acc3e56d5de68c"><div class="ttname"><a href="structBECOMMONS__NS_1_1codigo.html#ac06297bb34f1468d03acc3e56d5de68c">BECOMMONS_NS::codigo::~codigo</a></div><div class="ttdeci">~codigo()</div><div class="ttdoc">limpa recursos</div></div>
+<div class="ttc" id="astructBECOMMONS__NS_1_1componente_html"><div class="ttname"><a href="structBECOMMONS__NS_1_1componente.html">BECOMMONS_NS::componente</a></div><div class="ttdoc">base para as funcionalidades da engine</div><div class="ttdef"><b>Definição</b> componente.hpp:30</div></div>
+<div class="ttc" id="astructBECOMMONS__NS_1_1componente_html_a63f9004bc698806fecbc2d677f8ee369"><div class="ttname"><a href="structBECOMMONS__NS_1_1componente.html#a63f9004bc698806fecbc2d677f8ee369">BECOMMONS_NS::componente::mascara</a></div><div class="ttdeci">mascara</div><div class="ttdoc">facilita a identificacao dos componentes pertencentes a uma entidade</div><div class="ttdef"><b>Definição</b> componente.hpp:36</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

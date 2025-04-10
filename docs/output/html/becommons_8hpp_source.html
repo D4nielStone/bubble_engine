@@ -1,0 +1,190 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt-BR">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Bubble Engine: Código-Fonte de becommons/include/becommons.hpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Bubble Engine<span id="projectnumber">&#160;1.0b</span>
+   </div>
+   <div id="projectbrief">Game engine eficiente para projetos pequenos</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Gerado por Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Busca');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function() { init_codefold(0); });
+/* @license-end */
+</script>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Carregando...</div>
+<div class="SRStatus" id="Searching">Procurando...</div>
+<div class="SRStatus" id="NoMatches">Nenhuma entrada encontrado</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_0394786a11e0dfde3dca27fdccf84bfd.html">becommons</a></li><li class="navelem"><a class="el" href="dir_9a744b5567c265deacf566b467d8af59.html">include</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle"><div class="title">becommons.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="becommons_8hpp.html">Ir para a documentação desse arquivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span> </div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#pragma once</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#define BECOMMONS_NS bubble</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &quot;<a class="code" href="api__lua_8hpp.html">api/api_lua.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &quot;<a class="code" href="mat_8hpp.html">api/mat.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#include &quot;<a class="code" href="fonte_8hpp.html">arquivadores/fonte.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#include &quot;<a class="code" href="imageloader_8hpp.html">arquivadores/imageloader.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#include &quot;<a class="code" href="modelo_8hpp.html">arquivadores/modelo.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="preprocessor">#include &quot;<a class="code" href="shader_8hpp.html">arquivadores/shader.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="preprocessor">#include &quot;<a class="code" href="camera_8hpp.html">componentes/camera.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="preprocessor">#include &quot;<a class="code" href="camera__editor_8hpp.html">componentes/camera_editor.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="preprocessor">#include &quot;<a class="code" href="codigo_8hpp.html">componentes/codigo.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="preprocessor">#include &quot;<a class="code" href="componente_8hpp.html">componentes/componente.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="preprocessor">#include &quot;<a class="code" href="fisica_8hpp.html">componentes/fisica.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="preprocessor">#include &quot;<a class="code" href="componentes_2imagem_8hpp.html">componentes/imagem.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="preprocessor">#include &quot;<a class="code" href="luz__direcional_8hpp.html">componentes/luz_direcional.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="preprocessor">#include &quot;<a class="code" href="luz__pontual_8hpp.html">componentes/luz_pontual.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="preprocessor">#include &quot;<a class="code" href="propriedades_8hpp.html">componentes/propriedades.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="preprocessor">#include &quot;<a class="code" href="renderizador_8hpp.html">componentes/renderizador.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="preprocessor">#include &quot;<a class="code" href="terreno_8hpp.html">componentes/terreno.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="preprocessor">#include &quot;<a class="code" href="componentes_2texto_8hpp.html">componentes/texto.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="preprocessor">#include &quot;<a class="code" href="transformacao_8hpp.html">componentes/transformacao.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="preprocessor">#include &quot;<a class="code" href="debug_8hpp.html">depuracao/debug.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="preprocessor">#include &quot;<a class="code" href="assert_8hpp.html">depuracao/assert.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="preprocessor">#include &quot;<a class="code" href="botao_8hpp.html">elementos/botao.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="preprocessor">#include &quot;<a class="code" href="elementos_2imagem_8hpp.html">elementos/imagem.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="preprocessor">#include &quot;<a class="code" href="elementos_2texto_8hpp.html">elementos/texto.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="preprocessor">#include &quot;<a class="code" href="entidade_8hpp.html">entidades/entidade.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="preprocessor">#include &quot;<a class="code" href="inputs_8hpp.html">inputs/inputs.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="preprocessor">#include &quot;<a class="code" href="fase_8hpp.html">nucleo/fase.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="preprocessor">#include &quot;<a class="code" href="projeto_8hpp.html">nucleo/projeto.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="preprocessor">#include &quot;<a class="code" href="registro_8hpp.html">nucleo/registro.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="preprocessor">#include &quot;<a class="code" href="nucleo_2sistema_8hpp.html">nucleo/sistema.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="preprocessor">#include &quot;<a class="code" href="sistema__de__codigo_8hpp.html">nucleo/sistema_de_codigo.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="preprocessor">#include &quot;<a class="code" href="sistema__de__fisica_8hpp.html">nucleo/sistema_de_fisica.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="preprocessor">#include &quot;<a class="code" href="sistema__de__interface_8hpp.html">nucleo/sistema_de_interface.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="preprocessor">#include &quot;<a class="code" href="sistema__de__renderizacao_8hpp.html">nucleo/sistema_de_renderizacao.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="preprocessor">#include &quot;<a class="code" href="janela_8hpp.html">os/janela.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="preprocessor">#include &quot;<a class="code" href="os_2sistema_8hpp.html">os/sistema.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="preprocessor">#include &quot;<a class="code" href="tempo_8hpp.html">os/tempo.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="preprocessor">#include &quot;<a class="code" href="caixa_8hpp.html">util/caixa.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="preprocessor">#include &quot;<a class="code" href="cor_8hpp.html">util/cor.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="preprocessor">#include &quot;<a class="code" href="malha_8hpp.html">util/malha.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="preprocessor">#include &quot;<a class="code" href="material_8hpp.html">util/material.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span><span class="preprocessor">#include &quot;<a class="code" href="raio_8hpp.html">util/raio.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="preprocessor">#include &quot;<a class="code" href="skybox_8hpp.html">util/skybox.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="preprocessor">#include &quot;<a class="code" href="vertice_8hpp.html">util/vertice.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="preprocessor">#include &quot;<a class="code" href="textura_8hpp.html">util/textura.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="preprocessor">#include &quot;<a class="code" href="vetor2_8hpp.html">util/vetor2.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="preprocessor">#include &quot;<a class="code" href="vetor3_8hpp.html">util/vetor3.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="preprocessor">#include &quot;<a class="code" href="vetor4_8hpp.html">util/vetor4.hpp</a>&quot;</span></div>
+<div class="ttc" id="aapi__lua_8hpp_html"><div class="ttname"><a href="api__lua_8hpp.html">api_lua.hpp</a></div><div class="ttdoc">Gerencia a configuração do luabridge para api lua.</div></div>
+<div class="ttc" id="aassert_8hpp_html"><div class="ttname"><a href="assert_8hpp.html">assert.hpp</a></div></div>
+<div class="ttc" id="abotao_8hpp_html"><div class="ttname"><a href="botao_8hpp.html">botao.hpp</a></div></div>
+<div class="ttc" id="acaixa_8hpp_html"><div class="ttname"><a href="caixa_8hpp.html">caixa.hpp</a></div></div>
+<div class="ttc" id="acamera_8hpp_html"><div class="ttname"><a href="camera_8hpp.html">camera.hpp</a></div><div class="ttdoc">Estrutura básica de câmera.</div></div>
+<div class="ttc" id="acamera__editor_8hpp_html"><div class="ttname"><a href="camera__editor_8hpp.html">camera_editor.hpp</a></div></div>
+<div class="ttc" id="acodigo_8hpp_html"><div class="ttname"><a href="codigo_8hpp.html">codigo.hpp</a></div><div class="ttdoc">Componente de código para entidades ECS.</div></div>
+<div class="ttc" id="acomponente_8hpp_html"><div class="ttname"><a href="componente_8hpp.html">componente.hpp</a></div><div class="ttdoc">Estrutura base para componetes.</div></div>
+<div class="ttc" id="acomponentes_2imagem_8hpp_html"><div class="ttname"><a href="componentes_2imagem_8hpp.html">imagem.hpp</a></div></div>
+<div class="ttc" id="acomponentes_2texto_8hpp_html"><div class="ttname"><a href="componentes_2texto_8hpp.html">texto.hpp</a></div></div>
+<div class="ttc" id="acor_8hpp_html"><div class="ttname"><a href="cor_8hpp.html">cor.hpp</a></div></div>
+<div class="ttc" id="adebug_8hpp_html"><div class="ttname"><a href="debug_8hpp.html">debug.hpp</a></div></div>
+<div class="ttc" id="aelementos_2imagem_8hpp_html"><div class="ttname"><a href="elementos_2imagem_8hpp.html">imagem.hpp</a></div><div class="ttdoc">Gerencia a configuração do luabridge para api lua.</div></div>
+<div class="ttc" id="aelementos_2texto_8hpp_html"><div class="ttname"><a href="elementos_2texto_8hpp.html">texto.hpp</a></div></div>
+<div class="ttc" id="aentidade_8hpp_html"><div class="ttname"><a href="entidade_8hpp.html">entidade.hpp</a></div><div class="ttdoc">Inclusoes e defini��es relacionadas � entidade.</div></div>
+<div class="ttc" id="afase_8hpp_html"><div class="ttname"><a href="fase_8hpp.html">fase.hpp</a></div><div class="ttdoc">Gerencia sistemas numa fase.</div></div>
+<div class="ttc" id="afisica_8hpp_html"><div class="ttname"><a href="fisica_8hpp.html">fisica.hpp</a></div><div class="ttdoc">Componente de física para entidades ECS.</div></div>
+<div class="ttc" id="afonte_8hpp_html"><div class="ttname"><a href="fonte_8hpp.html">fonte.hpp</a></div><div class="ttdoc">Define estruturas básicas para renderização de textos.</div></div>
+<div class="ttc" id="aimageloader_8hpp_html"><div class="ttname"><a href="imageloader_8hpp.html">imageloader.hpp</a></div><div class="ttdoc">Gerencia as imagems/texturas carregadas na engine.</div></div>
+<div class="ttc" id="ainputs_8hpp_html"><div class="ttname"><a href="inputs_8hpp.html">inputs.hpp</a></div></div>
+<div class="ttc" id="ajanela_8hpp_html"><div class="ttname"><a href="janela_8hpp.html">janela.hpp</a></div><div class="ttdoc">Inicia e gerencia janela glfw.</div></div>
+<div class="ttc" id="aluz__direcional_8hpp_html"><div class="ttname"><a href="luz__direcional_8hpp.html">luz_direcional.hpp</a></div></div>
+<div class="ttc" id="aluz__pontual_8hpp_html"><div class="ttname"><a href="luz__pontual_8hpp.html">luz_pontual.hpp</a></div></div>
+<div class="ttc" id="amalha_8hpp_html"><div class="ttname"><a href="malha_8hpp.html">malha.hpp</a></div></div>
+<div class="ttc" id="amat_8hpp_html"><div class="ttname"><a href="mat_8hpp.html">mat.hpp</a></div><div class="ttdoc">Gerencia funçoes matemáticas.</div></div>
+<div class="ttc" id="amaterial_8hpp_html"><div class="ttname"><a href="material_8hpp.html">material.hpp</a></div></div>
+<div class="ttc" id="amodelo_8hpp_html"><div class="ttname"><a href="modelo_8hpp.html">modelo.hpp</a></div><div class="ttdoc">Carrega um modelo usando a biblioteca assimp com base em um diretório.</div></div>
+<div class="ttc" id="anucleo_2sistema_8hpp_html"><div class="ttname"><a href="nucleo_2sistema_8hpp.html">sistema.hpp</a></div></div>
+<div class="ttc" id="aos_2sistema_8hpp_html"><div class="ttname"><a href="os_2sistema_8hpp.html">sistema.hpp</a></div><div class="ttdoc">funçoes do sistema</div></div>
+<div class="ttc" id="aprojeto_8hpp_html"><div class="ttname"><a href="projeto_8hpp.html">projeto.hpp</a></div><div class="ttdoc">Gerencia configurações do projeto.</div></div>
+<div class="ttc" id="apropriedades_8hpp_html"><div class="ttname"><a href="propriedades_8hpp.html">propriedades.hpp</a></div></div>
+<div class="ttc" id="araio_8hpp_html"><div class="ttname"><a href="raio_8hpp.html">raio.hpp</a></div></div>
+<div class="ttc" id="aregistro_8hpp_html"><div class="ttname"><a href="registro_8hpp.html">registro.hpp</a></div><div class="ttdoc">Inclusoes e definições relacionadas à registro.</div></div>
+<div class="ttc" id="arenderizador_8hpp_html"><div class="ttname"><a href="renderizador_8hpp.html">renderizador.hpp</a></div></div>
+<div class="ttc" id="ashader_8hpp_html"><div class="ttname"><a href="shader_8hpp.html">shader.hpp</a></div><div class="ttdoc">Gerencia os shaders GLSL.</div></div>
+<div class="ttc" id="asistema__de__codigo_8hpp_html"><div class="ttname"><a href="sistema__de__codigo_8hpp.html">sistema_de_codigo.hpp</a></div></div>
+<div class="ttc" id="asistema__de__fisica_8hpp_html"><div class="ttname"><a href="sistema__de__fisica_8hpp.html">sistema_de_fisica.hpp</a></div><div class="ttdoc">Gerencia a fisica de jogo com o bullet3.</div></div>
+<div class="ttc" id="asistema__de__interface_8hpp_html"><div class="ttname"><a href="sistema__de__interface_8hpp.html">sistema_de_interface.hpp</a></div></div>
+<div class="ttc" id="asistema__de__renderizacao_8hpp_html"><div class="ttname"><a href="sistema__de__renderizacao_8hpp.html">sistema_de_renderizacao.hpp</a></div><div class="ttdoc">Gerencia a renderizacao.</div></div>
+<div class="ttc" id="askybox_8hpp_html"><div class="ttname"><a href="skybox_8hpp.html">skybox.hpp</a></div></div>
+<div class="ttc" id="atempo_8hpp_html"><div class="ttname"><a href="tempo_8hpp.html">tempo.hpp</a></div><div class="ttdoc">Inicia e gerencia o tempo.</div></div>
+<div class="ttc" id="aterreno_8hpp_html"><div class="ttname"><a href="terreno_8hpp.html">terreno.hpp</a></div></div>
+<div class="ttc" id="atextura_8hpp_html"><div class="ttname"><a href="textura_8hpp.html">textura.hpp</a></div></div>
+<div class="ttc" id="atransformacao_8hpp_html"><div class="ttname"><a href="transformacao_8hpp.html">transformacao.hpp</a></div><div class="ttdoc">Calcula a mtriz de modelo para um objeto 3d qualquer.</div></div>
+<div class="ttc" id="avertice_8hpp_html"><div class="ttname"><a href="vertice_8hpp.html">vertice.hpp</a></div></div>
+<div class="ttc" id="avetor2_8hpp_html"><div class="ttname"><a href="vetor2_8hpp.html">vetor2.hpp</a></div></div>
+<div class="ttc" id="avetor3_8hpp_html"><div class="ttname"><a href="vetor3_8hpp.html">vetor3.hpp</a></div></div>
+<div class="ttc" id="avetor4_8hpp_html"><div class="ttname"><a href="vetor4_8hpp.html">vetor4.hpp</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Gerado por&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8
+</small></address>
+</body>
+</html>

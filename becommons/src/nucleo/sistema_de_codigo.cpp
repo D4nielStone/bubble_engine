@@ -1,4 +1,3 @@
-#include "nucleo/sistema_de_codigo.hpp"
 
 /** @copyright Copyright (c) 2025 Daniel Oliveira */
 /**
@@ -11,6 +10,7 @@
  * @licence MIT License
  */
 
+#include "nucleo/sistema_de_codigo.hpp"
 #include "nucleo/fase.hpp"
 #include "componentes/codigo.hpp"
 #include "os/janela.hpp"
@@ -18,7 +18,7 @@
 
 std::mutex mtx;
 
-namespace bubble
+BECOMMONS_NS
 {
     void sistema_codigo::atualizar()
     {
@@ -30,10 +30,10 @@ namespace bubble
         );
     }
 
-    void sistema_codigo::inicializar(bubble::fase* fase_ptr)
+    void sistema_codigo::inicializar(BECOMMONS_NSfase* fase_ptr)
     {
-        this->_Mfase = fase_ptr;
-        this->reg = _Mfase->obterRegistro();
+        this->m_fase = fase_ptr;
+        this->reg = m_fase->obterRegistro();
 
         reg->cada<codigo>([&](const uint32_t entidade)
             {

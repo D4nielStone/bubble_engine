@@ -84,54 +84,48 @@ $(document).ready(function() { init_codefold(0); });
 <div class="contents">
 <a href="componentes_2imagem_8hpp.html">Ir para a documentação desse arquivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span> </div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#pragma once</span></div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &quot;<a class="code" href="componente_8hpp.html">componente.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &quot;<a class="code" href="vetor2_8hpp.html">util/vetor2.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#include &quot;<a class="code" href="imageloader_8hpp.html">arquivadores/imageloader.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#include &quot;<a class="code" href="cor_8hpp.html">util/cor.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#include &lt;string&gt;</span></div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="preprocessor">#include &lt;filesystem&gt;</span></div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="keyword">namespace </span>bubble</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>{</div>
-<div class="foldopen" id="foldopen00022" data-start="{" data-end="};">
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno"><a class="line" href="structbubble_1_1imagem.html">   22</a></span>    <span class="keyword">struct </span><a class="code hl_struct" href="structbubble_1_1imagem.html">imagem</a> : <a class="code hl_struct" href="structbubble_1_1componente.html">componente</a></div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    {</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>        <span class="keyword">constexpr</span> <span class="keyword">static</span> <a class="code hl_enumeration" href="structbubble_1_1componente.html#a8834f64f3b133879dd73ffb478dd1447">componente::mascara</a> <a class="code hl_enumeration" href="structbubble_1_1componente.html#a8834f64f3b133879dd73ffb478dd1447">mascara</a> = componente::COMPONENTE_IMAGEM;</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>        std::string arquivo { <span class="stringliteral">&quot;&quot;</span> };</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>        <a class="code hl_struct" href="structbubble_1_1vetor2.html">bubble::vetor2&lt;double&gt;</a> limite           { 20, 20 };</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>        <a class="code hl_struct" href="structbubble_1_1vetor2.html">bubble::vetor2&lt;double&gt;</a> padding          { 0,0 };</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>        <span class="keywordtype">bool</span> flip                   { <span class="keyword">false</span> };</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>        <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> id;</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>        <a class="code hl_struct" href="structbubble_1_1cor.html">cor</a> difusa                  { 1.f, 1.f, 1.f, 1.f };</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>        <a class="code hl_struct" href="structbubble_1_1imagem.html">imagem</a>(<span class="keyword">const</span> std::string&amp; diretorio) : arquivo(diretorio) </div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>        {</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>            std::string dir = diretorio;</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>            <span class="keywordflow">if</span> (std::filesystem::exists(diretorio))</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>                dir = (diretorio);</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>            <span class="keywordflow">else</span> <span class="keywordflow">if</span> (std::filesystem::exists(std::filesystem::absolute(diretorio)))</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>            {</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>                dir = (std::filesystem::absolute(diretorio).string().c_str());</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>            }</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>            <span class="keywordtype">id</span> = bubble::textureLoader::obterInstancia().carregarTextura(dir, &amp;limite.x, &amp;limite.y);</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        }</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>        <a class="code hl_struct" href="structbubble_1_1imagem.html">imagem</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <span class="keywordtype">id</span>) : id(<span class="keywordtype">id</span>) {}</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        <span class="keywordtype">void</span> definirID(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> id_)</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>        {</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>            <span class="keywordtype">id</span> = id_;</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>        }</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    };</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &lt;filesystem&gt;</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#include &quot;<a class="code" href="becommons_8hpp.html">becommons.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="keyword">namespace </span>BECOMMONS_NS</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>{</div>
+<div class="foldopen" id="foldopen00019" data-start="{" data-end="};">
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="structBECOMMONS__NS_1_1imagem.html">   19</a></span>    <span class="keyword">struct </span><a class="code hl_struct" href="structBECOMMONS__NS_1_1imagem.html">imagem</a> : <a class="code hl_struct" href="structBECOMMONS__NS_1_1componente.html">componente</a></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    {</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>        <span class="keyword">constexpr</span> <span class="keyword">static</span> <a class="code hl_enumeration" href="structBECOMMONS__NS_1_1componente.html#a63f9004bc698806fecbc2d677f8ee369">componente::mascara</a> <a class="code hl_enumeration" href="structBECOMMONS__NS_1_1componente.html#a63f9004bc698806fecbc2d677f8ee369">mascara</a> = componente::COMPONENTE_IMAGEM;</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>        std::string arquivo { <span class="stringliteral">&quot;&quot;</span> };</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>        BECOMMONS_NS <a class="code hl_struct" href="structBECOMMONS__NS_1_1vetor2.html">vetor2&lt;double&gt;</a> limite          { 20, 20 };</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>        BECOMMONS_NS <a class="code hl_struct" href="structBECOMMONS__NS_1_1vetor2.html">vetor2&lt;double&gt;</a> padding         { 0,0 };</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>        <span class="keywordtype">bool</span> flip                   { <span class="keyword">false</span> };</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>        <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> id;</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>        <a class="code hl_struct" href="structBECOMMONS__NS_1_1cor.html">cor</a> difusa                  { 1.f, 1.f, 1.f, 1.f };</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>        <a class="code hl_struct" href="structBECOMMONS__NS_1_1imagem.html">imagem</a>(<span class="keyword">const</span> std::string&amp; diretorio) : arquivo(diretorio) </div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>        {</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>            std::string dir = diretorio;</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>            <span class="keywordflow">if</span> (std::filesystem::exists(diretorio))</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>                dir = (diretorio);</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>            <span class="keywordflow">else</span> <span class="keywordflow">if</span> (std::filesystem::exists(std::filesystem::absolute(diretorio)))</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>            {</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>                dir = (std::filesystem::absolute(diretorio).string().c_str());</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>            }</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>            <span class="keywordtype">id</span> = textureLoader::obterInstancia().carregarTextura(dir, &amp;limite.x, &amp;limite.y);</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>        }</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>        <a class="code hl_struct" href="structBECOMMONS__NS_1_1imagem.html">imagem</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <span class="keywordtype">id</span>) : id(<span class="keywordtype">id</span>) {}</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        <span class="keywordtype">void</span> definirID(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> id_)</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        {</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>            <span class="keywordtype">id</span> = id_;</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        }</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    };</div>
 </div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>} </div>
-<div class="ttc" id="acomponente_8hpp_html"><div class="ttname"><a href="componente_8hpp.html">componente.hpp</a></div><div class="ttdoc">Estrutura base para componetes.</div></div>
-<div class="ttc" id="acor_8hpp_html"><div class="ttname"><a href="cor_8hpp.html">cor.hpp</a></div></div>
-<div class="ttc" id="aimageloader_8hpp_html"><div class="ttname"><a href="imageloader_8hpp.html">imageloader.hpp</a></div><div class="ttdoc">Gerencia as imagems/texturas carregadas na engine.</div></div>
-<div class="ttc" id="astructbubble_1_1componente_html"><div class="ttname"><a href="structbubble_1_1componente.html">bubble::componente</a></div><div class="ttdoc">base para as funcionalidades da engine</div><div class="ttdef"><b>Definição</b> componente.hpp:29</div></div>
-<div class="ttc" id="astructbubble_1_1componente_html_a8834f64f3b133879dd73ffb478dd1447"><div class="ttname"><a href="structbubble_1_1componente.html#a8834f64f3b133879dd73ffb478dd1447">bubble::componente::mascara</a></div><div class="ttdeci">mascara</div><div class="ttdoc">facilita a identificacao dos componentes pertencentes a uma entidade</div><div class="ttdef"><b>Definição</b> componente.hpp:35</div></div>
-<div class="ttc" id="astructbubble_1_1cor_html"><div class="ttname"><a href="structbubble_1_1cor.html">bubble::cor</a></div><div class="ttdef"><b>Definição</b> cor.hpp:18</div></div>
-<div class="ttc" id="astructbubble_1_1imagem_html"><div class="ttname"><a href="structbubble_1_1imagem.html">bubble::imagem</a></div><div class="ttdef"><b>Definição</b> imagem.hpp:23</div></div>
-<div class="ttc" id="astructbubble_1_1vetor2_html"><div class="ttname"><a href="structbubble_1_1vetor2.html">bubble::vetor2</a></div><div class="ttdef"><b>Definição</b> vetor2.hpp:20</div></div>
-<div class="ttc" id="avetor2_8hpp_html"><div class="ttname"><a href="vetor2_8hpp.html">vetor2.hpp</a></div></div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>} </div>
+<div class="ttc" id="abecommons_8hpp_html"><div class="ttname"><a href="becommons_8hpp.html">becommons.hpp</a></div></div>
+<div class="ttc" id="astructBECOMMONS__NS_1_1componente_html"><div class="ttname"><a href="structBECOMMONS__NS_1_1componente.html">BECOMMONS_NS::componente</a></div><div class="ttdoc">base para as funcionalidades da engine</div><div class="ttdef"><b>Definição</b> componente.hpp:30</div></div>
+<div class="ttc" id="astructBECOMMONS__NS_1_1componente_html_a63f9004bc698806fecbc2d677f8ee369"><div class="ttname"><a href="structBECOMMONS__NS_1_1componente.html#a63f9004bc698806fecbc2d677f8ee369">BECOMMONS_NS::componente::mascara</a></div><div class="ttdeci">mascara</div><div class="ttdoc">facilita a identificacao dos componentes pertencentes a uma entidade</div><div class="ttdef"><b>Definição</b> componente.hpp:36</div></div>
+<div class="ttc" id="astructBECOMMONS__NS_1_1cor_html"><div class="ttname"><a href="structBECOMMONS__NS_1_1cor.html">BECOMMONS_NS::cor</a></div><div class="ttdef"><b>Definição</b> cor.hpp:19</div></div>
+<div class="ttc" id="astructBECOMMONS__NS_1_1imagem_html"><div class="ttname"><a href="structBECOMMONS__NS_1_1imagem.html">BECOMMONS_NS::imagem</a></div><div class="ttdef"><b>Definição</b> imagem.hpp:20</div></div>
+<div class="ttc" id="astructBECOMMONS__NS_1_1vetor2_html"><div class="ttname"><a href="structBECOMMONS__NS_1_1vetor2.html">BECOMMONS_NS::vetor2</a></div><div class="ttdef"><b>Definição</b> vetor2.hpp:20</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

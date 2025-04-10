@@ -10,21 +10,18 @@
  */
 
 #pragma once
-#include "componente.hpp"
-#include "util/vetor2.hpp"
-#include "arquivadores/imageloader.hpp"
-#include "util/cor.hpp"
 #include <string>
 #include <filesystem>
+#include "becommons.hpp"
 
-namespace bubble
+namespace BECOMMONS_NS
 {
 	struct imagem : componente
 	{
 		constexpr static componente::mascara mascara = componente::COMPONENTE_IMAGEM;
 		std::string arquivo	{ "" };
-		bubble::vetor2<double> limite			{ 20, 20 };
-		bubble::vetor2<double> padding			{ 0,0 };
+		vetor2<double> limite			{ 20, 20 };
+		vetor2<double> padding			{ 0,0 };
 		bool flip					{ false };
 		unsigned int id;
 		cor difusa					{ 1.f, 1.f, 1.f, 1.f };
@@ -38,7 +35,7 @@ namespace bubble
 
 				dir = (std::filesystem::absolute(diretorio).string().c_str());
 			}
-			id = bubble::textureLoader::obterInstancia().carregarTextura(dir, &limite.x, &limite.y);
+			id = textureLoader::obterInstancia().carregarTextura(dir, &limite.x, &limite.y);
 		}
 		imagem(unsigned int id) : id(id) {}
 		void definirID(unsigned int id_)

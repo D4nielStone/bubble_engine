@@ -10,10 +10,10 @@
  */
 
 #pragma once
-#include "componente.hpp"
 #include <string>
+#include "becommons.hpp"
 
-namespace bubble
+namespace BECOMMONS_NS
 {
 	struct propriedades : componente
 	{

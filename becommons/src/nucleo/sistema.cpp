@@ -1,4 +1,3 @@
-#include "nucleo/sistema.hpp"
 
 /** @copyright Copyright (c) 2025 Daniel Oliveira */
 /**
@@ -11,10 +10,11 @@
  * @licence MIT License
  */
 
+#include "nucleo/sistema.hpp"
 #include "nucleo/fase.hpp"
 
-void bubble::sistema::inicializar(bubble::fase* fase_ptr)
+void BECOMMONS_NSsistema::inicializar(bubble::fase* fase_ptr)
 {
-	this->_Mfase = fase_ptr;
-	this->reg= _Mfase->obterRegistro();
+	this->m_fase = fase_ptr;
+	this->reg= m_fase->obterRegistro();
 }

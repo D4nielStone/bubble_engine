@@ -3,12 +3,12 @@
  * @file cubo.hpp
  */
 
-#include "util/malha.hpp"
+#include "util/malha*.hpp"
 #include "util/material.hpp"
 #include "util/vertice.hpp"
 #include <vector>
 
-inline std::vector<bubble::vertice> vertices = {
+inline std::vector<vertice> vertices = {
     // Positions (8 vertices matching the OBJ file)
     //       Position              Normal               UV
     {{-1.0f, -1.0f,  1.0f}, {-1.0f,  0.0f,  0.0f}, {0.0f, 0.0f}}, // 0 (Left face)
@@ -62,5 +62,5 @@ inline std::vector<unsigned int> indices = {
     20, 21, 22, 20, 22, 23
 };
 
-inline bubble::material material;
-inline bubble::malha malha_cubo(vertices, indices, material);
+inline material material;
+inline malha* malha*_cubo(vertices, indices, material);

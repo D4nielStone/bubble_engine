@@ -14,16 +14,17 @@
 
 
 #pragma once
-#include "nucleo/registro.hpp"
 #include <string>
 #include <memory>
 #include <rapidjson/document.h>
+#include "namespace.hpp"
+#include "registro.hpp"
 
 /**
  * @struct fase
  */
 
-namespace bubble
+namespace BECOMMONS_NS
 {
 	struct fase : public std::enable_shared_from_this<fase>
 	{
@@ -56,6 +57,6 @@ namespace bubble
 		void serializar(const std::string& diretorio);
         std::string diretorio;
 		registro reg;
-		std::string _Mnome {""};
+		std::string m_nome {""};
 	};
 }

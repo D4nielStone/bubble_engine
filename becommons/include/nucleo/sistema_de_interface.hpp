@@ -17,18 +17,18 @@
 #include "componentes/texto.hpp"
 #include "componentes/imagem.hpp"
 
-namespace bubble
+namespace BECOMMONS_NS
 {
 	class sistema_interface : public sistema
 	{
 	public:
         inline static glm::mat4 projection{1.f};
-        inline static bubble::shader* shader_texto{ nullptr };
-        inline static bubble::shader* shader_imagem{ nullptr };
+        inline static shader* shader_texto{ nullptr };
+        inline static shader* shader_imagem{ nullptr };
 		sistema_interface() = default;
 		~sistema_interface() override;
 		void atualizar() override;
-		void inicializar(bubble::fase* fase_ptr) override;
+		void inicializar(fase* fase_ptr) override;
 		static void desenharTexto(shader& s, const texto& t);
 		static void desenharImagem(shader& s, const imagem& img);
 	private:

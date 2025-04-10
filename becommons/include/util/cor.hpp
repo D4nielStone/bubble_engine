@@ -11,8 +11,9 @@
  */
 
 #pragma once
+#include "becommons.hpp"
 /* Defini��o da estrutura cor */
-namespace bubble
+namespace BECOMMONS_NS
 {
     struct cor
     {

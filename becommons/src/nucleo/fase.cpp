@@ -1,5 +1,3 @@
-#include "nucleo/fase.hpp"
-
 /** @copyright Copyright (c) 2025 Daniel Oliveira */
 /**
  * @file fase.cpp
@@ -10,6 +8,8 @@
  *
  * @licence MIT License
  */
+
+#include "nucleo/fase.hpp"
 
 #include "arquivadores/imageloader.hpp"
 #include "util/malha.hpp"
@@ -31,9 +31,9 @@
 #include <rapidjson/prettywriter.h>
 
 using namespace rapidjson;
-using namespace bubble;
+using namespace BECOMMONS_NS;
 
-fase::fase() : _Mnome("")
+fase::fase() : m_nome("")
 {
 }
 
@@ -81,20 +81,20 @@ fase::fase(const std::string& diretorio) : diretorio(diretorio)
 	
 }
 
-void bubble::fase::pausar()
+void fase::pausar()
 {
 			depuracao::emitir(debug, "fase", "Pausando");
 			rodando = false;
 }
 
-void bubble::fase::parar()
+void fase::parar()
 {
 	depuracao::emitir(debug, "fase", "Parando");
 	// TODO: snapshot para retornar o rodando do registro
 	rodando = false;
 }
 
-void bubble::fase::iniciar()
+void fase::iniciar()
 {
 	depuracao::emitir(debug, "fase", "Iniciando");
 	if (rodando != false)
@@ -102,21 +102,21 @@ void bubble::fase::iniciar()
     rodando = true;
 }
 
-bubble::registro* bubble::fase::obterRegistro()
+registro* bubble::fase::obterRegistro()
 {
 	return &reg;
 }
 
-void bubble::fase::nome(const std::string& nome)
+void fase::nome(const std::string& nome)
 {
-	_Mnome = nome;
+	m_nome = nome;
 }
-std::string bubble::fase::nome() const
+std::string fase::nome() const
 {
-	return _Mnome;
+	return m_nome;
 }
 
-void bubble::fase::analizarEntidades(const Document& doc)
+void fase::analizarEntidades(const Document& doc)
 {
 	if (!doc.HasMember("entidades") || !doc["entidades"].IsArray()) {
         depuracao::emitir(alerta, "fase", "Não possui array 'entidades'");
@@ -129,7 +129,7 @@ void bubble::fase::analizarEntidades(const Document& doc)
 		uint32_t id = 0;
 		if(entidade.HasMember("id") && entidade["id"].IsInt())
             id = entidade["id"].GetInt();
-        bubble::entidade ent = reg.criar(id);
+        namespace BECOMMONS_NSentidade ent = reg.criar(id);
 		
 		// Itera os componentes
 		if (!entidade.HasMember("componentes") && entidade["componentes"].IsArray())
@@ -149,39 +149,39 @@ void bubble::fase::analizarEntidades(const Document& doc)
 			
 			// Deserialização de componentes
 			if      (tipo_str == "camera") {
-			    reg.adicionar<bubble::camera>(ent);
-			    auto cam = reg.obter<bubble::camera>(ent.id);
+			    reg.adicionar<namespace BECOMMONS_NScamera>(ent);
+			    auto cam = reg.obter<namespace BECOMMONS_NScamera>(ent.id);
                 if(!cam->analizar(componente)) {
                     depuracao::emitir(erro, "fase", "Problemas analizando camera");
                     return;
                 }
             }
             else if (tipo_str == "renderizador") {
-			    reg.adicionar<bubble::renderizador>(ent);
-			    auto render = reg.obter<bubble::renderizador>(ent.id);
+			    reg.adicionar<renderizador>(ent);
+			    auto render = reg.obter<renderizador>(ent.id);
                 if(!render->analizar(componente)) {
                     depuracao::emitir(erro, "fase", "Problemas analizando renderizador");
                     return;
                 }
             }
             else if (tipo_str == "codigo") {
-			    reg.adicionar<bubble::codigo>(ent);
-			    auto code = reg.obter<bubble::codigo>(ent.id);
+			    reg.adicionar<namespace BECOMMONS_NScodigo>(ent);
+			    auto code = reg.obter<namespace BECOMMONS_NScodigo>(ent.id);
                 if(!code->analizar(componente)) {
                     depuracao::emitir(erro, "fase", "Problemas analizando codigo");
                     return;
                 }
             }
             else if (tipo_str == "transformacao") {
-			    auto transf = reg.obter<bubble::transformacao>(ent.id);
+			    auto transf = reg.obter<namespace BECOMMONS_NStransformacao>(ent.id);
                 if(!transf->analizar(componente)) {
                     depuracao::emitir(erro, "fase", "Problemas analizando transformacao");
                     return;
                 }
             }
             else if (tipo_str == "luz_direcional") {
-			    reg.adicionar<bubble::luz_direcional>(ent);
-			    auto ld = reg.obter<bubble::luz_direcional>(ent.id);
+			    reg.adicionar<namespace BECOMMONS_NSluz_direcional>(ent);
+			    auto ld = reg.obter<namespace BECOMMONS_NSluz_direcional>(ent.id);
                 if(!ld->analizar(componente)) {
                     depuracao::emitir(erro, "fase", "Problemas analizando luz direcional");
                     return;
@@ -191,14 +191,14 @@ void bubble::fase::analizarEntidades(const Document& doc)
 	}
 }
 
-void bubble::fase::serializar(const std::string& diretorio)
+void fase::serializar(const std::string& diretorio)
 {
     Document doc;
     doc.SetObject();
     Document::AllocatorType& allocator = doc.GetAllocator();
 
     // Nome da fase
-    doc.AddMember("nome", Value(_Mnome.c_str(), allocator), allocator);
+    doc.AddMember("nome", Value(m_nome.c_str(), allocator), allocator);
 
     // Array de entidades
     Value entidades_v(kArrayType);
@@ -241,7 +241,7 @@ void bubble::fase::serializar(const std::string& diretorio)
     doc.Accept(writer);
     ofs << buffer.GetString();
 }
-void bubble::fase::analizar(const std::string& diretorio)
+void fase::analizar(const std::string& diretorio)
 {
 	std::ifstream file(diretorio);
 	std::stringstream sb;
@@ -256,8 +256,8 @@ void bubble::fase::analizar(const std::string& diretorio)
 	/*----Analise da cena-----*/
 	if (doc.HasMember("nome") && doc["nome"].IsString())
 	{
-		_Mnome = doc["nome"].GetString();
-		depuracao::emitir(debug, "Fase", "Nome definido como " + _Mnome);
+		m_nome = doc["nome"].GetString();
+		depuracao::emitir(debug, "Fase", "Nome definido como " + m_nome);
 	}
 	/*------------------------*/
 	analizarEntidades(doc);

@@ -10,10 +10,9 @@
  */
 
 #pragma once
-#include "componente.hpp"
-#include "util/vetor3.hpp"
+#include "becommons.hpp"
 
-namespace bubble
+namespace BECOMMONS_NS
 {
     struct luz_pontual : public componente
     {

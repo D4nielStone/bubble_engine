@@ -13,8 +13,7 @@
  */
 
 #pragma once
-#include "componente.hpp"
-#include "util/vetor3.hpp"
+#include "becommons.hpp"
 
 #define GLM_ENABLE_EXPERIMENTAL
 
@@ -23,7 +22,7 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/gtx/quaternion.hpp>
 
-namespace bubble
+namespace BECOMMONS_NS
 {
 	struct transformacao : componente
 	{

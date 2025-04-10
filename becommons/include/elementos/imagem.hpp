@@ -11,22 +11,18 @@
  */
 
 #pragma once
-#include "arquivadores/shader.hpp"
-#include "util/caixa.hpp"
-#include "util/vetor2.hpp"
-#include "util/vetor4.hpp"
-#include "arquivadores/imageloader.hpp"
 #include <string>
 #include <filesystem>
+#include "becommons.hpp"
 
-namespace bubble{
+namespace BECOMMONS_NS{
     namespace elementos{
-	    class imagem : public bubble::caixa
+	    class imagem : public caixa
 	    {
             public:
                 shader* m_imagem_shader                 {nullptr};
                 std::string m_imagem_path	            { "" };
-		        bubble::vetor2<double> m_imagem_tamanho {100.0, 100.0};
+		        vetor2<double> m_imagem_tamanho {100.0, 100.0};
 		        bool m_imagem_flip                      { false };
 		        unsigned int m_imagem_id                { 0 };
 		        ~imagem() override {
@@ -39,7 +35,7 @@ namespace bubble{
 
                     m_imagem_path = (std::filesystem::absolute(diretorio).string().c_str());
 			    }
-			    m_imagem_id = bubble::textureLoader::obterInstancia().
+			    m_imagem_id = textureLoader::obterInstancia().
 			        carregarTextura(m_imagem_path, &m_imagem_tamanho.x, &m_imagem_tamanho.y);
                 m_limites.z = m_imagem_tamanho.x;
 			    m_limites.w = m_imagem_tamanho.y;

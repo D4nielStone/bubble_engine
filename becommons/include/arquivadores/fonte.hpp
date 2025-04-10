@@ -14,14 +14,16 @@
 
 #pragma once
 #include <glad/glad.h>
-#include "util/vetor2.hpp"
 #include <string>
 #include <map>
 #include <ft2build.h>
+#include "namespace.hpp"
+#include "util/vetor2.hpp"
+
 #include FT_FREETYPE_H
 
 typedef std::pair<std::string, unsigned int> FonteID;
-namespace bubble
+namespace BECOMMONS_NS
 {
     // Estrutura base da letra
     struct caractere

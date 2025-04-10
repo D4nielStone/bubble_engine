@@ -1,9 +1,0 @@
-<map id="becommons/include/sistemas/bubble_gui.hpp" name="becommons/include/sistemas/bubble_gui.hpp">
-<area shape="rect" id="Node000001" title=" " alt="" coords="183,5,399,45"/>
-<area shape="rect" id="Node000002" href="$bubble__gui_8cpp.html" title=" " alt="" coords="5,93,193,133"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="238,53,142,96,140,91,236,49"/>
-<area shape="rect" id="Node000003" href="$editor_2src_2main_8cpp.html" title=" " alt="" coords="218,101,365,126"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="294,59,294,100,289,100,289,59"/>
-<area shape="rect" id="Node000004" href="$editor_8cpp.html" title=" " alt="" coords="389,93,535,133"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="342,49,426,91,423,96,340,54"/>
-</map>

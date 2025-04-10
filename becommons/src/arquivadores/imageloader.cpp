@@ -19,7 +19,7 @@
 #include "depuracao/debug.hpp"
 #include <iostream>
 
-using namespace bubble;
+using namespace BECOMMONS_NS;
 
 const std::map<const std::string, std::pair<BYTE*, const unsigned int>> imagems_memoria
 {
@@ -49,22 +49,22 @@ const std::map<const std::string, std::pair<BYTE*, const unsigned int>> imagems_
 };
 void imageLoader::shutdown()
 { FreeImage_DeInitialise(); imagens_carregadas.clear(); }
-bubble::imageLoader::imageLoader()
+imageLoader::imageLoader()
 {
 }
-bubble::imageLoader::imageLoader(const std::string& filepath)
+imageLoader::imageLoader(const std::string& filepath)
     : width(0), height(0), channels(0), data(nullptr), path(filepath.c_str()), carregado(false)
 {
     carregarImagem(filepath);
 }
-bubble::imageLoader::~imageLoader()
+imageLoader::~imageLoader()
 {
     if (data) {
         //delete[] data;
         data = nullptr; // Precau��o para evitar acesso duplo
     }
 }
-void bubble::imageLoader::flipVertical()
+void imageLoader::flipVertical()
 {
     int rowSize = width * channels;
     unsigned char* tempRow = new unsigned char[rowSize];
@@ -77,7 +77,7 @@ void bubble::imageLoader::flipVertical()
     }
     delete[] tempRow;
 }
-void bubble::imageLoader::carregarImagem(const std::string& filepath)
+void imageLoader::carregarImagem(const std::string& filepath)
 {
     auto it = imagens_carregadas.find(filepath);
     if (it != imagens_carregadas.end())
@@ -144,10 +144,10 @@ void bubble::imageLoader::carregarImagem(const std::string& filepath)
     // Indica que a imagem foi carregada com sucesso  
     carregado = true;
     flipVertical();
-    imagens_carregadas[filepath] = std::make_shared<bubble::imageLoader>(*this);
+    imagens_carregadas[filepath] = std::make_shared<imageLoader>(*this);
 
 }
-void bubble::imageLoader::embutida(BYTE* data, const unsigned int tamanho) 
+void imageLoader::embutida(BYTE* data, const unsigned int tamanho) 
 {
     // Cria um stream de mem�ria com o buffer da imagem
     FIMEMORY* memoryStream = FreeImage_OpenMemory(data, tamanho);
@@ -199,7 +199,7 @@ void bubble::imageLoader::embutida(BYTE* data, const unsigned int tamanho)
 
     return;
 }
-GLFWimage bubble::imageLoader::converterParaGlfw()
+GLFWimage imageLoader::converterParaGlfw()
 {
     GLFWimage image = {};
     if (!carregado) {
@@ -211,30 +211,30 @@ GLFWimage bubble::imageLoader::converterParaGlfw()
     image.pixels = data;
     return image;
 }
-int bubble::imageLoader::obterLargura() const
+int imageLoader::obterLargura() const
 {
     return width;
 }
-int bubble::imageLoader::obterAltura() const
+int imageLoader::obterAltura() const
 {
     return height;
 }
-int bubble::imageLoader::obterCanal() const
+int imageLoader::obterCanal() const
 {
     return channels;
 }
-unsigned char* bubble::imageLoader::obterDados() const
+unsigned char* imageLoader::obterDados() const
 {
     return data;
 }
 
-int bubble::texturaDoArquivo(const std::string& directory,GLuint tipo_textura) {
+int namespace BECOMMONS_NStexturaDoArquivo(const std::string& directory,GLuint tipo_textura) {
     // Gera um ID de textura e carrega a imagem
     unsigned int textureID;
     glGenTextures(1, &textureID);
 
     int width, height, nrComponents;
-    bubble::imageLoader img(directory.c_str());
+    imageLoader img(directory.c_str());
     auto data = img.obterDados();
     nrComponents = img.obterCanal();
     width = img.obterLargura();
@@ -254,8 +254,8 @@ int bubble::texturaDoArquivo(const std::string& directory,GLuint tipo_textura) {
         glActiveTexture(GL_TEXTURE0);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MININ_FILTER, GL_NEAREST);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MINAG_FILTER, GL_NEAREST);
 
     }
     else {
@@ -265,13 +265,13 @@ int bubble::texturaDoArquivo(const std::string& directory,GLuint tipo_textura) {
 
     return textureID;
 }
-int bubble::texturaDoArquivo(const std::string& directory, int* width_ptr , int* height_ptr) {
+int namespace BECOMMONS_NStexturaDoArquivo(const std::string& directory, int* width_ptr , int* height_ptr) {
     // Gera um ID de textura e carrega a imagem
     unsigned int textureID;
     glGenTextures(1, &textureID);
 
     int width, height, nrComponents;
-    bubble::imageLoader img(directory.c_str());
+    imageLoader img(directory.c_str());
     auto data = img.obterDados();
     nrComponents = img.obterCanal();
     width = img.obterLargura();
@@ -293,8 +293,8 @@ int bubble::texturaDoArquivo(const std::string& directory, int* width_ptr , int*
         glActiveTexture(GL_TEXTURE0);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MININ_FILTER, GL_NEAREST);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MINAG_FILTER, GL_NEAREST);
 
     }
     else {
@@ -304,13 +304,13 @@ int bubble::texturaDoArquivo(const std::string& directory, int* width_ptr , int*
 
     return textureID;
 }
-int bubble::texturaDoArquivo(const std::string& directory, double* width_ptr , double* height_ptr) {
+int namespace BECOMMONS_NStexturaDoArquivo(const std::string& directory, double* width_ptr , double* height_ptr) {
     // Gera um ID de textura e carrega a imagem
     unsigned int textureID;
     glGenTextures(1, &textureID);
 
     int width, height, nrComponents;
-    bubble::imageLoader img(directory.c_str());
+    imageLoader img(directory.c_str());
     auto data = img.obterDados();
     nrComponents = img.obterCanal();
     width = img.obterLargura();
@@ -332,8 +332,8 @@ int bubble::texturaDoArquivo(const std::string& directory, double* width_ptr , d
         glActiveTexture(GL_TEXTURE0);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MININ_FILTER, GL_NEAREST);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MINAG_FILTER, GL_NEAREST);
 
     }
     else {
@@ -343,7 +343,7 @@ int bubble::texturaDoArquivo(const std::string& directory, double* width_ptr , d
 
     return textureID;
 }
-int bubble::texturaDoArquivo(unsigned char* data, unsigned int width, unsigned int height, int nrComponents) {
+int namespace BECOMMONS_NStexturaDoArquivo(unsigned char* data, unsigned int width, unsigned int height, int nrComponents) {
 
     unsigned int textureID;
     glGenTextures(1, &textureID);
@@ -363,8 +363,8 @@ int bubble::texturaDoArquivo(unsigned char* data, unsigned int width, unsigned i
 
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MININ_FILTER, GL_NEAREST);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MINAG_FILTER, GL_NEAREST);
 
 
     }
@@ -376,13 +376,13 @@ int bubble::texturaDoArquivo(unsigned char* data, unsigned int width, unsigned i
     return textureID;
 }
 
-bubble::textureLoader& bubble::textureLoader::obterInstancia()
+namespace BECOMMONS_NStextureLoader& bubble::textureLoader::obterInstancia()
 {
-    static bubble::textureLoader instance;
+    static namespace BECOMMONS_NStextureLoader instance;
     return instance;
 }
 
-GLuint bubble::textureLoader::carregarTextura(const std::string& caminho, int *width, int *height)
+GLuint namespace BECOMMONS_NStextureLoader::carregarTextura(const std::string& caminho, int *width, int *height)
 {
     // Verificar se a textura j� foi carregada
     if (texturasCarregadas.find(caminho) != texturasCarregadas.end()) {
@@ -395,7 +395,7 @@ GLuint bubble::textureLoader::carregarTextura(const std::string& caminho, int *w
 
     return id;
 }
-GLuint bubble::textureLoader::carregarTextura(const std::string& caminho, double *width, double *height)
+GLuint namespace BECOMMONS_NStextureLoader::carregarTextura(const std::string& caminho, double *width, double *height)
 {
     // Verificar se a textura j� foi carregada
     if (texturasCarregadas.find(caminho) != texturasCarregadas.end()) {
@@ -408,7 +408,7 @@ GLuint bubble::textureLoader::carregarTextura(const std::string& caminho, double
 
     return id;
 }
-GLuint bubble::textureLoader::carregarTextura(const std::string& caminho)
+GLuint namespace BECOMMONS_NStextureLoader::carregarTextura(const std::string& caminho)
 {
     // Verificar se a textura j� foi carregada
     if (texturasCarregadas.find(caminho) != texturasCarregadas.end()) {
@@ -422,22 +422,22 @@ GLuint bubble::textureLoader::carregarTextura(const std::string& caminho)
     return id;
 }
 
-GLuint bubble::textureLoader::carregarSkybox(const char* path_pai, std::vector<std::string> faces) {
+GLuint namespace BECOMMONS_NStextureLoader::carregarSkybox(const char* path_pai, std::vector<std::string> faces) {
     GLuint textureID;
     glGenTextures(1, &textureID);
-    glBindTexture(GL_TEXTURE_CUBE_MAP, textureID);
+    glBindTexture(GL_TEXTURE_CUBEm_AP, textureID);
 
     for (unsigned int i = 0; i < faces.size(); i++) {
         int width, height, nrChannels;
         std::string caminhoCompleto = std::string(path_pai) + "/" + faces[i];
-        bubble::imageLoader img(caminhoCompleto.c_str());
+        imageLoader img(caminhoCompleto.c_str());
         unsigned char* data = img.obterDados();
         width = img.obterLargura();
         height = img.obterAltura();
         nrChannels = img.obterCanal();
 
         if (img.carregado && data) {
-            glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i,
+            glTexImage2D(GL_TEXTURE_CUBEm_AP_POSITIVE_X + i,
                 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
         }
         else {
@@ -445,16 +445,16 @@ GLuint bubble::textureLoader::carregarSkybox(const char* path_pai, std::vector<s
         }
     }
 
-    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_CUBEm_AP, GL_TEXTURE_MININ_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_CUBEm_AP, GL_TEXTURE_MINAG_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_CUBEm_AP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_CUBEm_AP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_CUBEm_AP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
 
     return textureID;
 }
 
-GLuint bubble::textureLoader::carregarAiTexture(const aiTexture* texture)
+GLuint namespace BECOMMONS_NStextureLoader::carregarAiTexture(const aiTexture* texture)
 {
     GLuint ID{};
     if (texture) {
@@ -482,17 +482,17 @@ GLuint bubble::textureLoader::carregarAiTexture(const aiTexture* texture)
     }
     return ID;
 }
-GLuint bubble::textureLoader::carregarSkyboxMemoria(const std::vector<std::string> faces) {
+GLuint namespace BECOMMONS_NStextureLoader::carregarSkyboxMemoria(const std::vector<std::string> faces) {
     GLuint textureID;
     glGenTextures(1, &textureID);
-    glBindTexture(GL_TEXTURE_CUBE_MAP, textureID);
+    glBindTexture(GL_TEXTURE_CUBEm_AP, textureID);
 
     int width, height, nrChannels;
     // Itera sobre cada face do skybox
     for (unsigned int i = 0; i < faces.size(); i++) {
         auto it = imagems_memoria.find(faces[i]);
         if (it != imagems_memoria.end()) {
-            bubble::imageLoader img;
+            imageLoader img;
             // Carrega a imagem diretamente da memória
             img.embutida(it->second.first, it->second.second);
             width = img.obterLargura();
@@ -506,7 +506,7 @@ GLuint bubble::textureLoader::carregarSkyboxMemoria(const std::vector<std::strin
         else if (nrChannels == 4)
             format = GL_RGBA;
             if (img.carregado) {
-                glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i,
+                glTexImage2D(GL_TEXTURE_CUBEm_AP_POSITIVE_X + i,
                     0, format, width, height, 0, format, GL_UNSIGNED_BYTE, img.obterDados());
             } else {
                 std::cerr << "Falha ao carregar a textura da skybox da memória: " << faces[i] << std::endl;
@@ -517,11 +517,11 @@ GLuint bubble::textureLoader::carregarSkyboxMemoria(const std::vector<std::strin
     }
 
     // Define os parâmetros da textura do cubo
-    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_CUBEm_AP, GL_TEXTURE_MININ_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_CUBEm_AP, GL_TEXTURE_MINAG_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_CUBEm_AP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_CUBEm_AP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_CUBEm_AP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
 
     return textureID;
 }

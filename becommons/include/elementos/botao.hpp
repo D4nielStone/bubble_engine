@@ -9,19 +9,20 @@
  */
 
 #pragma once
-#include "imagem.hpp"
-#include "util/caixa.hpp"
-#include "texto.hpp"
-#include "os/janela.hpp"
-#include "inputs/inputs.hpp"
 #include <functional>
+#include "namespace.hpp"
+#include "imagem.hpp"
+#include "texto.hpp"
+#include "util/caixa.hpp"
+#include "inputs/inputs.hpp"
+#include "os/janela.hpp"
 
-namespace bubble{
+namespace BECOMMONS_NS{
     namespace elementos{
         class botao : public caixa
         {
         private:
-            bool gatilho = false;
+            bool m_gatilho = false;
             bool* m_interruptor{nullptr};
             std::function<void()> m_botao_funcao;
         public:
@@ -62,15 +63,15 @@ namespace bubble{
                     m_texto->m_limites.y = m_limites.y+ m_padding_geral.y/2;
                     m_texto->m_flags_caixa = m_flags_caixa;
                 }
-                if(!instanciaJanela->inputs.isKeyPressed("MouseE"))
-                    gatilho = false;
+                if(!instanciaJanela->m_inputs.isKeyPressed("MouseE"))
+                    m_gatilho = false;
                 auto m = obterMouse();
                 if(m.x > m_limites.x && m.x < m_limites.z + m_limites.x &&
                    m.y > m_limites.y && m.y < m_limites.w + m_limites.y)
                 {
                     m_cor_borda.a = 1.f;
                     instanciaJanela->defCursor(janela::cursor::mao);
-                    if(!gatilho && instanciaJanela->inputs.isKeyPressed("MouseE"))
+                    if(!m_gatilho && instanciaJanela->m_inputs.isKeyPressed("MouseE"))
                     {
                         if(m_interruptor) 
                         {
@@ -80,8 +81,8 @@ namespace bubble{
                         m_botao_funcao();
                     }
                 }
-                if(!gatilho && instanciaJanela->inputs.isKeyPressed("MouseE"))
-                    gatilho = true;
+                if(!m_gatilho && instanciaJanela->m_inputs.isKeyPressed("MouseE"))
+                    m_gatilho = true;
             }
         };  
     } // elementos

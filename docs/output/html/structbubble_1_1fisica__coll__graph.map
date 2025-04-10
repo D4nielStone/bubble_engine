@@ -1,8 +1,0 @@
-<map id="bubble::fisica" name="bubble::fisica">
-<area shape="rect" id="Node000001" title=" " alt="" coords="34,168,142,193"/>
-<area shape="rect" id="Node000002" href="$structbubble_1_1componente.html" title="base para as funcionalidades da engine" alt="" coords="5,5,160,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="86,44,90,168,85,168,81,45"/>
-<area shape="rect" id="Node000003" href="$structbubble_1_1transformacao.html" title=" " alt="" coords="105,80,274,105"/>
-<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="113,36,174,78,171,82,110,41"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="167,116,104,169,100,165,163,112"/>
-</map>

@@ -1,4 +1,3 @@
-#include "sistemas/bubble_gui.hpp"
 
 /** @copyright Copyright (c) 2025 Daniel Oliveira */
 /**
@@ -11,14 +10,12 @@
  * @licence MIT License
  */
 
-#include "sistemas/editor.hpp"
-#include "util/runtime.hpp"
-#include "os/janela.hpp"
-#include "nucleo/projeto.hpp"
+#include "editor.hpp"
 
-using namespace bubble;
+namespace EDITOR_NS
+{
 bool gatilho_ = true;
-void sistema_editor::configurarInterface(bubble::projeto& proj)
+void sistema_editor::configurarInterface(projeto& proj)
 {
     bubble_gui* gui = static_cast<bubble_gui*>(proj.obterSistema("bubble_gui"));
     // head
@@ -303,4 +300,5 @@ void sistema_editor::atualizarComponentes()
         gui->defLargura     (                          25);
         gui->defAltura      (                          25);
         gui->defCorFundo    (    cor(0.0f, 0.0f, 0.0f, 0.f));
+}
 }

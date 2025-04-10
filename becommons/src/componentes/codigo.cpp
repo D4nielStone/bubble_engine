@@ -20,7 +20,7 @@
 #include "os/sistema.hpp"
 #include <cmath>
 
-bubble::codigo::codigo(const std::string& arquivo) : L(luaL_newstate()), arquivo(arquivo)
+namespace BECOMMONS_NScodigo::codigo(const std::string& arquivo) : L(luaL_newstate()), arquivo(arquivo)
 
 {
 	luaL_openlibs(L);
@@ -37,7 +37,7 @@ bubble::codigo::codigo(const std::string& arquivo) : L(luaL_newstate()), arquivo
     }
 }
 
-void bubble::codigo::iniciar() const
+void namespace BECOMMONS_NScodigo::iniciar() const
 {
 
 	luabridge::setGlobal(L, new bapi::entidade(meu_objeto), "eu");
@@ -56,11 +56,11 @@ void bubble::codigo::iniciar() const
 	}
 }
 
-bool bubble::codigo::analizar(const rapidjson::Value& value) 
+bool namespace BECOMMONS_NScodigo::analizar(const rapidjson::Value& value) 
 {
     if(!value.HasMember("diretorio")) return false;
     arquivo = value["diretorio"].GetString();
-    arquivoCompleto = bubble::projeto_atual->diretorioDoProjeto + arquivo; 
+    arquivoCompleto = namespace BECOMMONS_NSprojeto_atual->diretorioDoProjeto + arquivo; 
 	L = luaL_newstate();
 	luaL_openlibs(L);
 
@@ -77,13 +77,13 @@ bool bubble::codigo::analizar(const rapidjson::Value& value)
     return true;
 };
 
-bool bubble::codigo::serializar(rapidjson::Value& value, rapidjson::Document::AllocatorType& allocator) const
+bool namespace BECOMMONS_NScodigo::serializar(rapidjson::Value& value, rapidjson::Document::AllocatorType& allocator) const
 {
     value.AddMember("diretorio", rapidjson::Value(arquivo.c_str(), allocator), allocator);
     return true;
 }
 
-void bubble::codigo::atualizar() const
+void namespace BECOMMONS_NScodigo::atualizar() const
 {
 	lua_getglobal(L, "atualizar");
 	if (lua_isfunction(L, -1)) {
@@ -93,7 +93,7 @@ void bubble::codigo::atualizar() const
 	    std::cerr << "Função 'atualizar' não definida no Lua!" << std::endl;
 	}
 }
-void bubble::codigo::encerrar()
+void namespace BECOMMONS_NScodigo::encerrar()
 {
 	if (L) {
 		lua_pushnil(L);
@@ -103,7 +103,7 @@ void bubble::codigo::encerrar()
 		L = nullptr;
 	}
 }
-bubble::codigo::~codigo()
+namespace BECOMMONS_NScodigo::~codigo()
 {
         depuracao::emitir(debug, "codigo", "descarregando");
 

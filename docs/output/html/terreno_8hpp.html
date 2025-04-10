@@ -79,97 +79,27 @@ $(function() {
   <div class="headertitle"><div class="title">Referência do Arquivo terreno.hpp</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;<a class="el" href="componente_8hpp_source.html">componente.hpp</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="malha_8hpp_source.html">util/malha.hpp</a>&quot;</code><br />
-<code>#include &lt;vector&gt;</code><br />
+<div class="textblock"><code>#include &lt;vector&gt;</code><br />
 <code>#include &lt;string&gt;</code><br />
+<code>#include &quot;<a class="el" href="becommons_8hpp_source.html">becommons.hpp</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Gráfico de dependência de inclusões para terreno.hpp:</div>
 <div class="dyncontent">
 <div class="center"><img src="terreno_8hpp__incl.png" border="0" usemap="#abecommons_2include_2componentes_2terreno_8hpp" alt=""/></div>
-<map name="abecommons_2include_2componentes_2terreno_8hpp" id="abecommons_2include_2componentes_2terreno_8hpp">
-<area shape="rect" title=" " alt="" coords="681,5,926,45"/>
-<area shape="rect" href="componente_8hpp.html" title="Estrutura base para componetes." alt="" coords="401,93,531,119"/>
-<area shape="poly" title=" " alt="" coords="723,48,529,93,528,88,722,43"/>
-<area shape="rect" href="malha_8hpp.html" title=" " alt="" coords="935,93,1051,119"/>
-<area shape="poly" title=" " alt="" coords="850,43,953,85,951,90,848,48"/>
-<area shape="rect" title=" " alt="" coords="807,240,869,265"/>
-<area shape="poly" title=" " alt="" coords="809,45,837,226,832,227,804,46"/>
-<area shape="rect" title=" " alt="" coords="913,313,971,339"/>
-<area shape="poly" title=" " alt="" coords="798,46,785,89,775,146,774,177,776,207,784,237,798,264,818,285,844,301,872,311,899,317,898,323,871,316,842,306,815,289,793,267,779,239,771,208,768,177,770,145,780,88,793,45"/>
-<area shape="rect" title=" " alt="" coords="665,167,731,192"/>
-<area shape="poly" title=" " alt="" coords="504,116,653,161,651,166,502,121"/>
-<area shape="rect" title=" " alt="" coords="5,167,97,192"/>
-<area shape="poly" title=" " alt="" coords="401,120,111,169,110,164,400,115"/>
-<area shape="rect" title=" " alt="" coords="122,167,285,192"/>
-<area shape="poly" title=" " alt="" coords="424,121,260,166,258,160,423,116"/>
-<area shape="rect" title=" " alt="" coords="309,167,444,192"/>
-<area shape="poly" title=" " alt="" coords="453,121,404,160,400,156,450,117"/>
-<area shape="rect" title=" " alt="" coords="468,167,640,192"/>
-<area shape="poly" title=" " alt="" coords="482,117,531,156,527,160,478,121"/>
-<area shape="rect" href="vertice_8hpp.html" title=" " alt="" coords="2039,167,2133,192"/>
-<area shape="poly" title=" " alt="" coords="1051,108,2025,171,2024,177,1051,114"/>
-<area shape="poly" title=" " alt="" coords="982,121,862,232,859,228,978,117"/>
-<area shape="rect" href="textura_8hpp.html" title=" " alt="" coords="893,240,991,265"/>
-<area shape="poly" title=" " alt="" coords="990,120,970,168,951,227,946,226,965,166,985,118"/>
-<area shape="rect" href="shader_8hpp.html" title="Gerencia os shaders GLSL." alt="" coords="1339,167,1521,192"/>
-<area shape="poly" title=" " alt="" coords="1051,114,1347,162,1346,167,1050,119"/>
-<area shape="rect" href="material_8hpp.html" title=" " alt="" coords="979,167,1110,192"/>
-<area shape="poly" title=" " alt="" coords="1003,117,1030,154,1026,157,999,121"/>
-<area shape="rect" href="vetor3_8hpp.html" title=" " alt="" coords="2040,240,2132,265"/>
-<area shape="poly" title=" " alt="" coords="2089,192,2089,226,2083,226,2083,192"/>
-<area shape="rect" href="vetor2_8hpp.html" title=" " alt="" coords="2156,240,2248,265"/>
-<area shape="poly" title=" " alt="" coords="2106,190,2173,230,2170,235,2103,194"/>
-<area shape="rect" title=" " alt="" coords="2055,313,2117,339"/>
-<area shape="poly" title=" " alt="" coords="2089,266,2089,300,2083,300,2083,266"/>
-<area shape="poly" title=" " alt="" coords="2185,268,2118,308,2115,304,2182,263"/>
-<area shape="poly" title=" " alt="" coords="945,266,945,300,939,300,939,266"/>
-<area shape="poly" title=" " alt="" coords="1522,184,1747,204,2027,237,2026,243,1746,209,1521,190"/>
-<area shape="poly" title=" " alt="" coords="1339,189,1134,208,1010,223,884,243,883,238,1010,218,1133,202,1338,184"/>
-<area shape="poly" title=" " alt="" coords="1410,195,1271,268,1193,290,1115,306,986,324,985,318,1114,301,1192,285,1269,263,1408,190"/>
-<area shape="rect" title=" " alt="" coords="1597,240,1671,265"/>
-<area shape="poly" title=" " alt="" coords="1464,190,1589,233,1587,238,1462,195"/>
-<area shape="rect" title=" " alt="" coords="1695,240,1770,265"/>
-<area shape="poly" title=" " alt="" coords="1479,189,1682,237,1681,242,1478,195"/>
-<area shape="rect" title=" " alt="" coords="1794,240,1874,265"/>
-<area shape="poly" title=" " alt="" coords="1504,189,1781,237,1780,242,1503,195"/>
-<area shape="rect" title=" " alt="" coords="1333,240,1393,265"/>
-<area shape="poly" title=" " alt="" coords="1421,194,1385,232,1382,228,1417,191"/>
-<area shape="rect" title=" " alt="" coords="1133,240,1257,265"/>
-<area shape="poly" title=" " alt="" coords="1393,195,1247,239,1246,233,1392,189"/>
-<area shape="rect" title=" " alt="" coords="1417,240,1573,265"/>
-<area shape="poly" title=" " alt="" coords="1443,191,1477,228,1474,232,1439,194"/>
-<area shape="rect" href="cor_8hpp.html" title=" " alt="" coords="1015,240,1109,265"/>
-<area shape="poly" title=" " alt="" coords="1371,195,1124,242,1123,237,1370,189"/>
-<area shape="rect" href="vetor4_8hpp.html" title=" " alt="" coords="1898,240,2015,265"/>
-<area shape="poly" title=" " alt="" coords="1522,189,1885,237,1884,242,1521,194"/>
-<area shape="poly" title=" " alt="" coords="1979,263,2054,304,2051,309,1976,268"/>
-<area shape="poly" title=" " alt="" coords="1012,195,883,239,882,234,1011,189"/>
-<area shape="poly" title=" " alt="" coords="1030,194,972,234,969,230,1027,190"/>
-<area shape="poly" title=" " alt="" coords="1070,190,1159,232,1157,236,1068,194"/>
-<area shape="poly" title=" " alt="" coords="1050,192,1059,226,1053,228,1045,193"/>
-</map>
+<!-- MAP 0 -->
 </div>
 </div><div class="textblock"><div class="dynheader">
 Este grafo mostra quais arquivos estão direta ou indiretamente relacionados com esse arquivo:</div>
 <div class="dyncontent">
 <div class="center"><img src="terreno_8hpp__dep__incl.png" border="0" usemap="#abecommons_2include_2componentes_2terreno_8hppdep" alt=""/></div>
-<map name="abecommons_2include_2componentes_2terreno_8hppdep" id="abecommons_2include_2componentes_2terreno_8hppdep">
-<area shape="rect" title=" " alt="" coords="210,5,455,45"/>
-<area shape="rect" href="terreno_8cpp.html" title=" " alt="" coords="5,93,223,133"/>
-<area shape="poly" title=" " alt="" coords="273,53,163,96,161,91,271,48"/>
-<area shape="rect" href="fase_8cpp.html" title=" " alt="" coords="247,93,419,133"/>
-<area shape="poly" title=" " alt="" coords="335,59,335,93,330,93,330,59"/>
-<area shape="rect" href="sistema__de__renderizacao_8cpp.html" title=" " alt="" coords="443,93,662,133"/>
-<area shape="poly" title=" " alt="" coords="394,48,505,91,504,96,392,53"/>
-</map>
+<!-- MAP 1 -->
 </div>
 </div>
 <p><a href="terreno_8hpp_source.html">Ir para o código-fonte desse arquivo.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Componentes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbubble_1_1terreno.html">bubble::terreno</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structBECOMMONS__NS_1_1terreno.html">BECOMMONS_NS::terreno</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Descrição detalhada</h2>

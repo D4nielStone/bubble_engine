@@ -8,22 +8,22 @@
  * @licence MIT License
  */
 
-
 #pragma once
-#include "arquivadores/modelo.hpp"
-#include "componentes/transformacao.hpp"
+#include "namespace.hpp"
 #include "arquivadores/shader.hpp"
 #include "arquivadores/imageloader.hpp"
+#include "arquivadores/modelo.hpp"
+#include <glm/glm.hpp>
 
-namespace bubble
+namespace BECOMMONS_NS
 {
-    struct skybox : modelo
-    
+    class skybox : protected modelo
     {
+        public:
         unsigned int id_skybox = 0;
         skybox() : modelo("cubo")
         {
-            id_skybox = bubble::textureLoader::obterInstancia().carregarSkybox("/home/d4nl/Imagens/skybox/", 
+            id_skybox = textureLoader::obterInstancia().carregarSkybox("/home/d4nl/Imagens/skybox/", 
                     {
                     "DaylightBox_Right.png",
                     "DaylightBox_Left.png",
@@ -31,7 +31,7 @@ namespace bubble
                     "DaylightBox_Bottom.png",
                     "DaylightBox_Front.png",
                     "DaylightBox_Back.png"});
-            _Mshader = new bubble::shader("skybox.vs", "skybox.fs");
+            m_shader = new shader("skybox.vs", "skybox.fs");
             malhas.back().definirBuffers();
         }
         void desenhar(glm::mat4 view, glm::mat4 proj);

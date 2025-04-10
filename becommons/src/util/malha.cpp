@@ -1,4 +1,3 @@
-#include <glad/glad.h>
 
 /** @copyright Copyright (c) 2025 Daniel Oliveira */
 /**
@@ -11,14 +10,15 @@
  * @licence MIT License
  */
 
+#include <glad/glad.h>
 #include "util/malha.hpp"
 #include "util/material.hpp"
 #include "depuracao/debug.hpp"
 
 
-namespace bubble
+BECOMMONS_NS
 {
-    malha::malha(std::vector<vertice>& vertices, std::vector<unsigned int>& indices, bubble::material& material)
+    malha::malha(std::vector<vertice>& vertices, std::vector<unsigned int>& indices, BECOMMONS_NSmaterial& material)
     {
         this->vertices = vertices;
         this->indices = indices;
@@ -37,7 +37,7 @@ namespace bubble
         glDeleteBuffers(1, &VBO);
         glDeleteBuffers(1, &EBO);
     }
-    void malha::desenhar(bubble::shader &shader)
+    void malha::desenhar(BECOMMONS_NSshader &shader)
     {
         if(sobrepor)
             glDepthFunc(GL_ALWAYS);

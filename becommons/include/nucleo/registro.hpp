@@ -12,19 +12,16 @@
  * @see registro.cpp
  */
 
- #pragma once
+#pragma once
 #include <unordered_map>
 #include <map>
 #include <deque>
 #include <memory>
 #include <functional>
+#include "namespace.hpp"
 #include "entidades/entidade.hpp"
-#include "componentes/componente.hpp"
-#include "componentes/fisica.hpp"
-#include "depuracao/debug.hpp"
-#include "depuracao/assert.hpp"
 
-namespace bubble
+namespace BECOMMONS_NS
 {
     /**
 	* @struct registro
@@ -35,9 +32,9 @@ namespace bubble
 	{
 	    ~registro(){entidades.clear(); mascaras.clear();}
 		/// Armazena mascara da entidade associada
-		std::unordered_map<uint32_t, bubble::componente::mascara> mascaras;
+		std::unordered_map<uint32_t, componente::mascara> mascaras;
 		/// Armazena componentes da entidade associada
-		std::map<uint32_t, std::unordered_map<bubble::componente::mascara, std::shared_ptr<bubble::componente>>> entidades;
+		std::map<uint32_t, std::unordered_map<componente::mascara, std::shared_ptr<componente>>> entidades;
 		/* Cria nova entidade */
 		entidade criar(const uint32_t id = 0);
 		/* Retorna todos os componentes da entidade */

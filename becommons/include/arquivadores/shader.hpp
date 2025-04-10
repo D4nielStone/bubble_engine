@@ -21,11 +21,9 @@
 #include <utility>
 #include <unordered_map>
 #include <glm/gtc/type_ptr.hpp>
-#include "util/cor.hpp"
-#include "util/vetor4.hpp"
-#include "util/vetor3.hpp"
+#include "becommons.hpp"
 
-namespace bubble
+namespace BECOMMONS_NS
 {
     class shaderException : public std::exception
     {
@@ -55,7 +53,7 @@ namespace bubble
         void setBool(const std::string& name, const bool& value) const;
         void setInt(const std::string& name, const int& value) const;
         void setFloat(const std::string& name, const float& value) const;
-        void setCor(const std::string& name, const bubble::cor& cor) const;
+        void setCor(const std::string& name, const cor& cor) const;
         void setVec4(const std::string& name, const vet4& vec4) const;
         void setVec3(const std::string& name, const float& r, const float& g, const float& b) const;
         void setVec3(const std::string &name, const vet3 &vet) const;

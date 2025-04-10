@@ -18,13 +18,13 @@
 #include "depuracao/assert.hpp"
 
 // Construtor para forma gen�rica
-bubble::fisica::fisica(btCollisionShape* forma, btScalar massa, btVector3 posicaoInicial, camada camada) 
+fisica::fisica(btCollisionShape* forma, btScalar massa, btVector3 posicaoInicial, camada camada) 
     : forma(forma), malha(false), massa(massa), posicaoInicial(posicaoInicial), camada_colisao(camada)
 {
     ASSERT(forma != nullptr);
     init();
 }
-void bubble::fisica::init()
+void fisica::init()
 {
     btVector3 inertia(0, 0, 0);
     if (massa > 0) {
@@ -40,13 +40,13 @@ void bubble::fisica::init()
     corpoRigido->setCcdSweptSphereRadius(0.05f); // Define um raio de varredura para detectar colis�es
 }
 // Construtor para cria��o de malha
-bubble::fisica::fisica(bool malha, btScalar massa, btVector3 posicaoInicial, camada camada)
+fisica::fisica(bool malha, btScalar massa, btVector3 posicaoInicial, camada camada)
     : malha(malha), massa(0), posicaoInicial(posicaoInicial), camada_colisao(camada)
 {
 }
 
 // Destrutor
-bubble::fisica::~fisica()
+fisica::~fisica()
 {
 
     if(corpoRigido && projeto_atual->obterFaseAtual())projeto_atual->sfisica()->remover(corpoRigido);
@@ -56,7 +56,7 @@ bubble::fisica::~fisica()
 }
 
 // Obter o corpo r�gido
-btRigidBody* bubble::fisica::obterCorpoRigido()
+btRigidBody* fisica::obterCorpoRigido()
 {
 
     if (malha &&!corpoRigido) {
@@ -68,10 +68,10 @@ btRigidBody* bubble::fisica::obterCorpoRigido()
 }
 
 // Criar forma para m�ltiplas malhas
-void bubble::fisica::criarMalha()
+void fisica::criarMalha()
 {
     // Obt�m as malhas do modelo associado ao objeto
-    auto modelo = projeto_atual->obterFaseAtual()->obterRegistro()->obter<bubble::renderizador>(meu_objeto)->modelo;
+    auto modelo = projeto_atual->obterFaseAtual()->obterRegistro()->obter<renderizador>(meu_objeto)->modelo;
     auto& malhas = modelo->malhas;
 
     // Criar o btTriangleIndexVertexArray para todas as malhas
@@ -100,36 +100,36 @@ void bubble::fisica::criarMalha()
 }
 
 // Atualizar transforma��o
-void bubble::fisica::atualizarTransformacao()
+void fisica::atualizarTransformacao()
 {
-    _Mtransformacao = projeto_atual->obterFaseAtual()->obterRegistro()->obter<bubble::transformacao>(meu_objeto).get();
-    forma->setLocalScaling(btVector3(_Mtransformacao->escala.x, _Mtransformacao->escala.y, _Mtransformacao->escala.z));
+    m_transformacao = projeto_atual->obterFaseAtual()->obterRegistro()->obter<namespace BECOMMONS_NStransformacao>(meu_objeto).get();
+    forma->setLocalScaling(btVector3(m_transformacao->escala.x, m_transformacao->escala.y, m_transformacao->escala.z));
 
     if (massa == 0)  return;
     btTransform bt;
     estadoDeMovimento->getWorldTransform(bt);
 
-    _Mtransformacao->posicao = { bt.getOrigin().getX(), bt.getOrigin().getY(), bt.getOrigin().getZ() };
-    _Mtransformacao->rotacao = { bt.getRotation().getX(), bt.getRotation().getY(), bt.getRotation().getZ() };
+    m_transformacao->posicao = { bt.getOrigin().getX(), bt.getOrigin().getY(), bt.getOrigin().getZ() };
+    m_transformacao->rotacao = { bt.getRotation().getX(), bt.getRotation().getY(), bt.getRotation().getZ() };
 }
 
 // Aplicar for�a
-void bubble::fisica::aplicarForca(const glm::vec3& vetor)
+void fisica::aplicarForca(const glm::vec3& vetor)
 {
     corpoRigido->applyCentralForce({ vetor.x, vetor.y, vetor.z });
 }
 
 // Aplicar velocidade
-void bubble::fisica::aplicarVelocidade(const glm::vec3& velocidade)
+void fisica::aplicarVelocidade(const glm::vec3& velocidade)
 {
     corpoRigido->activate();
     corpoRigido->setLinearVelocity(btVector3(velocidade.x, velocidade.y, velocidade.z));
 }
 
 // definir posi��o
-void bubble::fisica::definirPosicao(const glm::vec3& posicao)
+void fisica::definirPosicao(const glm::vec3& posicao)
 {
-    _Mtransformacao->posicao = posicao;
+    m_transformacao->posicao = posicao;
     // Ensure the rigid body exists
     if (estadoDeMovimento)
     {
@@ -148,7 +148,7 @@ void bubble::fisica::definirPosicao(const glm::vec3& posicao)
 }
 
 // definir rota��o
-void bubble::fisica::definirRotacao(const glm::vec3& rotacao)
+void fisica::definirRotacao(const glm::vec3& rotacao)
 {
     btTransform bt;
     estadoDeMovimento->getWorldTransform(bt); // Recupera transforma��o atual
@@ -159,13 +159,13 @@ void bubble::fisica::definirRotacao(const glm::vec3& rotacao)
 }
 
 // Obter velocidade
-glm::vec3 bubble::fisica::obterVelocidade() const
+glm::vec3 fisica::obterVelocidade() const
 {
     return { corpoRigido->getLinearVelocity().getX(),
             corpoRigido->getLinearVelocity().getY(),
             corpoRigido->getLinearVelocity().getZ() };
 }// Obter velocidade
-glm::vec3 bubble::fisica::obterPosicao() const
+glm::vec3 fisica::obterPosicao() const
 {
     btTransform bt;
     corpoRigido->getMotionState()->getWorldTransform(bt);
@@ -176,26 +176,26 @@ glm::vec3 bubble::fisica::obterPosicao() const
     };
 }
 
-void bubble::fisica::definirFatorLinear(const glm::vec3& fator)
+void fisica::definirFatorLinear(const glm::vec3& fator)
 {
         corpoRigido->setLinearFactor(btVector3(fator.x, fator.y, fator.z)); // Reset velocity to avoid unwanted movement
         corpoRigido->activate(); 
 }
 
-void bubble::fisica::definirFatorAngular(const glm::vec3& fator){
+void fisica::definirFatorAngular(const glm::vec3& fator){
         corpoRigido->setAngularFactor(btVector3(fator.x, fator.y, fator.z)); // Reset velocity to avoid unwanted movement
         corpoRigido->activate(); 
 }
 
-void bubble::fisica::definirRestituicao(const float fator){
+void fisica::definirRestituicao(const float fator){
         corpoRigido->setRestitution(fator); // Reset velocity to avoid unwanted movement
         corpoRigido->activate(); 
 }
-void bubble::fisica::definirFriccao(const float fator){
+void fisica::definirFriccao(const float fator){
         corpoRigido->setFriction(fator); // Reset velocity to avoid unwanted movement
         corpoRigido->activate(); 
 }
-void bubble::fisica::definirRaioCcd(const float fator)
+void fisica::definirRaioCcd(const float fator)
 {
     corpoRigido->setContactProcessingThreshold(0.0001f);
     corpoRigido->setCcdMotionThreshold(0.0001f);

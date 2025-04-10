@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['entidades_0',['entidades',['../structbubble_1_1registro.html#a717e2908372e04d7d61eed4ab4fff984',1,'bubble::registro']]]
+  ['entidades_0',['entidades',['../structBECOMMONS__NS_1_1registro.html#a6dc14669a4bb01d981d9a17be6ff81a8',1,'BECOMMONS_NS::registro']]]
 ];

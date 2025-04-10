@@ -1,4 +1,3 @@
-#include <glad/glad.h>
 
 /** @copyright Copyright (c) 2025 Daniel Oliveira */
 /**
@@ -11,6 +10,7 @@
  * @licence MIT License
  */
 
+#include <glad/glad.h>
 #include "nucleo/sistema_de_interface.hpp"
 #include "componentes/renderizador.hpp"
 #include "componentes/transformacao.hpp"
@@ -23,7 +23,7 @@
 #include "os/janela.hpp"
 #include "nucleo/projeto.hpp"
 
-namespace bubble
+BECOMMONS_NS
 {
     sistema_interface::~sistema_interface()
     {
@@ -36,25 +36,25 @@ namespace bubble
     {
         glDisable(GL_DEPTH_TEST);
         glDisable(GL_CULL_FACE);
-        reg->cada<bubble::texto>([&](const uint32_t ent) 
+        reg->cada<BECOMMONS_NStexto>([&](const uint32_t ent) 
             {
-                desenharTexto(*shader_texto, *reg->obter<bubble::texto>(ent));
+                desenharTexto(*shader_texto, *reg->obter<BECOMMONS_NStexto>(ent));
             }
         );
-        reg->cada<bubble::imagem>([&](const uint32_t ent) 
+        reg->cada<BECOMMONS_NSimagem>([&](const uint32_t ent) 
             {
-                desenharImagem(*shader_imagem, *reg->obter<bubble::imagem>(ent));
+                desenharImagem(*shader_imagem, *reg->obter<BECOMMONS_NSimagem>(ent));
             }
         );
     }
 
-    void sistema_interface::inicializar(bubble::fase* fase_ptr)
+    void sistema_interface::inicializar(BECOMMONS_NSfase* fase_ptr)
     {
-        this->_Mfase = fase_ptr;
-        this->reg = _Mfase->obterRegistro();
+        this->m_fase = fase_ptr;
+        this->reg = m_fase->obterRegistro();
 
-        if (!shader_texto) shader_texto = new bubble::shader("texto.vert", "texto.frag");
-        if (!shader_imagem) shader_imagem = new bubble::shader("imagem.vert", "imagem.frag");
+        if (!shader_texto) shader_texto = new BECOMMONS_NSshader("texto.vert", "texto.frag");
+        if (!shader_imagem) shader_imagem = new BECOMMONS_NSshader("imagem.vert", "imagem.frag");
         /*---------------texto---------------*/
         glGenVertexArrays(1, &text_VAO);
         glGenBuffers(1, &text_VBO);
@@ -111,8 +111,8 @@ namespace bubble
 
     }
 
-    float obterLarguraTexto(const bubble::texto& texto) {
-        auto& caracteres = bubble::gerenciadorFontes::obterInstancia().obter(texto.fonte);
+    float obterLarguraTexto(const BECOMMONS_NStexto& texto) {
+        auto& caracteres = BECOMMONS_NSgerenciadorFontes::obterInstancia().obter(texto.fonte);
         if (caracteres.empty()) {
             return 0.0f;
         }
@@ -121,7 +121,7 @@ namespace bubble
         for (char32_t c : texto.frase) {
            auto it = caracteres.find(c);
            if (it != caracteres.end()) {
-               const bubble::caractere& ch = it->second;
+               const BECOMMONS_NScaractere& ch = it->second;
             // Calculate advance in pixels (same logic as in desenharTexto)
                 larguraTotal += (ch.avanco >> 6) * texto.escala;
             }
@@ -129,17 +129,17 @@ namespace bubble
     return larguraTotal;
 }
 
-    void calcularReferencial(bubble::texto &_texto)
+    void calcularReferencial(BECOMMONS_NStexto &_texto)
     {
         glm::vec3 worldPosition = _texto.posicao_referencial; 
         _texto.padding = projeto_atual->srender()->camera_principal->mundoParaTela(worldPosition);
         _texto.padding.x -= obterLarguraTexto(_texto)/2;
     }
 
-    void bubble::sistema_interface::desenharTexto(shader& s, const bubble::texto &_texto)
+    void BECOMMONS_NSsistema_interface::desenharTexto(shader& s, const bubble::texto &_texto)
     {
         projection = glm::ortho(0.0, instanciaJanela->tamanho.x, instanciaJanela->tamanho.y, 0.0);
-        bubble::texto text = _texto;
+        BECOMMONS_NStexto text = _texto;
 
         if(_texto.pf_ativa)
             calcularReferencial(text);
@@ -155,12 +155,12 @@ namespace bubble
 
         // iterate through all characters
         std::string::const_iterator c;
-        auto& chs = bubble::gerenciadorFontes::obterInstancia().obter(text.fonte);
+        auto& chs = BECOMMONS_NSgerenciadorFontes::obterInstancia().obter(text.fonte);
         for(char32_t ca : text.frase)
         {
             if (chs.empty())
                 return;
-            bubble::caractere ch = chs.at(ca);
+            BECOMMONS_NScaractere ch = chs.at(ca);
             
             float xpos = text.padding.x + ch.apoio.x * text.escala;
             float ypos = text.padding.y - (ch.tamanho.y - ch.apoio.y) * text.escala;
@@ -191,7 +191,7 @@ namespace bubble
         glBindVertexArray(0);
         glBindTexture(GL_TEXTURE_2D, 0);
     }
-    void bubble::sistema_interface::desenharImagem(shader& s, const bubble::imagem& img)
+    void BECOMMONS_NSsistema_interface::desenharImagem(shader& s, const bubble::imagem& img)
     {
         projection = glm::ortho(0.0, instanciaJanela->tamanho.x, instanciaJanela->tamanho.y, 0.0);
         glActiveTexture(GL_TEXTURE0);

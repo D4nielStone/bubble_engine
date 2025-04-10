@@ -1,6 +1,4 @@
 /** @copyright Copyright (c) 2025 Daniel Oliveira */
-
-/** @copyright Copyright (c) 2025 Daniel Oliveira */
 /**
  * @file gerenciador_projetos.cpp
  *
@@ -11,10 +9,123 @@
  * @licence MIT License
  */
 
-#include "sistemas/gerenciador_projetos.hpp"
-#include <GLFW/glfw3.h>
+#include "editor.hpp"
 
-using namespace bubble;
+namespace EDITOR_NS
+{
+void gerenciador_projetos::criarProjetoPadrao(const std::string& novo_diretorio, const char* nome)
+{
+        // Cria diretório do projeto
+        std::filesystem::create_directories(novo_diretorio + "/" + nome);
+        
+        std::string diretorioDoProjeto = novo_diretorio + "/" + nome;
+        
+        // Criar um novo JSON de configuração
+        rapidjson::Document newDoc;
+        newDoc.SetObject();
+        rapidjson::Document::AllocatorType& allocator = newDoc.GetAllocator();
+
+        rapidjson::Value _janela(rapidjson::kObjectType);
+        _janela.AddMember("largura", 800, allocator);
+        _janela.AddMember("altura",  460, allocator);
+        _janela.AddMember("titulo",  rapidjson::Value(nome, allocator), allocator);
+        _janela.AddMember("icone",   rapidjson::Value("icon.ico", allocator), allocator);
+
+        newDoc.AddMember("nome", rapidjson::Value(nome, allocator), allocator);
+        newDoc.AddMember("lancamento", rapidjson::Value("/fases/main", allocator), allocator);
+        newDoc.AddMember("janela", _janela, allocator);
+        
+        // Salvar o JSON no arquivo
+        std::ofstream ofs(diretorioDoProjeto + "/config.json");
+        if (ofs.is_open()) {
+            rapidjson::StringBuffer buffer;
+            rapidjson::Writer<rapidjson::StringBuffer> writer(buffer);
+            newDoc.Accept(writer);
+            ofs << buffer.GetString();
+            ofs.close();
+        }
+
+        
+        // Diretório de fases
+        if(std::filesystem::create_directories(diretorioDoProjeto + "/fases"))
+        {
+            std::ofstream fase_file(diretorioDoProjeto + "/fases/main.fase");
+            if(fase_file.is_open())
+            {
+                fase_file << R"({
+    "nome": "FaseMain",
+    "entidades":[
+        {
+            "componentes":[
+                {
+                    "tipo": "luz_direcional",
+                    "direcao": [1, 1, 1],
+                    "cor": [1, 1, 1],
+                    "ambiente": [0.1, 0.1, 0.1],
+                    "intensidade": 1.0
+                }
+            ]
+        },
+        {
+            "componentes":[
+                {
+                    "tipo": "renderizador",
+                    "modelo": "/cubo"
+                },
+                {
+                    "tipo": "transformacao",
+                    "posicao": [0,0,5],
+                    "rotacao": [0,0,0],
+                    "escala": [1, 1, 1]
+                },
+                {
+                    "tipo": "codigo",
+                    "diretorio": "/codigos/rotacao.lua"
+                }
+            ]
+        },
+        {
+            "componentes":[
+                {
+                    "tipo": "transformacao",
+                    "posicao": [0,0,0],
+                    "rotacao": [0,90,0],
+                    "escala": [1, 1, 1]
+                },
+                {
+                    "tipo": "camera"
+                }
+            ]
+        }
+    ]
+})";
+                fase_file.close();
+            }
+    }
+    
+        // Diretorio de codigos
+        if(std::filesystem::create_directories(diretorioDoProjeto + "/codigos"))
+        {
+            std::ofstream codigo_file(diretorioDoProjeto + "/codigos/rotacao.lua");
+            if(codigo_file.is_open())
+            {
+                codigo_file << R"(
+-- Autor Daniel O. Santos copyright 2025
+local vel = 6
+
+function iniciar()
+end
+function atualizar()
+    eu.transformacao.rotacao.y = eu.transformacao.rotacao.y + vel * tempo.obterDeltaTime()
+    eu.transformacao.rotacao.x = eu.transformacao.rotacao.x + vel * tempo.obterDeltaTime()
+end
+
+                )";
+                codigo_file.close();
+            }
+        }
+    atualizarElementos(DIR_PADRAO);
+}
 
 gerenciador_projetos::gerenciador_projetos(const std::string& DIR_PADRAO) : DIR_PADRAO(DIR_PADRAO)
 {
@@ -22,6 +133,7 @@ gerenciador_projetos::gerenciador_projetos(const std::string& DIR_PADRAO) : DIR_
 
 void gerenciador_projetos::atualizarElementos(const std::string& Dir)
 {
+    gui.removerFilhos("barra_lateral");
     // Barra Lateral (    Texto acima    )
     gui.novoEstilo();
         gui.adicionarElemento<elementos::texto>("barra_lateral", "texto1", "Projetos encontrados", 20, elementos::flags_texto::alinhamento_central);
@@ -38,18 +150,18 @@ void gerenciador_projetos::atualizarElementos(const std::string& Dir)
                 glfwDestroyWindow(instanciaJanela->window);
                 delete instanciaJanela;
                 instanciaJanela = nullptr;
-                bubble::descarregarShaders();
+                descarregarShaders();
                 // Cria projeto
-                bubble::projeto editor(caminhoEncontrado);
+                projeto editor(caminhoEncontrado);
                
                 // Sistema do editor
                 editor.adicionar("editor", new sistema_editor());
             
             
                 // Define o nome da janela
-                bubble::instanciaJanela->nome(
+                instanciaJanela->nome(
                         (std::string("editor | Daniel O. dos Santos© Bubble 2025 | ") 
-                         + bubble::instanciaJanela->nome()).c_str());
+                         + instanciaJanela->nome()).c_str());
             
                 // Inicia main loop
                 editor.rodar();
@@ -75,7 +187,7 @@ void gerenciador_projetos::iniciar()
                 return;
             }
         }
-    bubble::instanciaJanela = new bubble::janela("gerenciador de projetos | Daniel O. dos Santos© Bubble 2025", true);
+    instanciaJanela = new janela("gerenciador de projetos | Daniel O. dos Santos© Bubble 2025", true);
    
     // Sistema de gui
     gui.inicializar(nullptr);
@@ -99,7 +211,7 @@ void gerenciador_projetos::iniciar()
         gui.defAltura(1.0);
         gui.defCrescimentoM(1.0);
     gui.novoEstilo();
-        gui.adicionarElemento<elementos::botao>("area_maior", "add", [](){}, new elementos::texto("+", 48));
+        gui.adicionarElemento<elementos::botao>("area_maior", "add", [this](){criarProjetoPadrao(DIR_PADRAO, "Juquinha");std::cout << "AAAAAA";}, new elementos::texto("+", 48));
     while(!glfwWindowShouldClose(instanciaJanela->window))
     {
         instanciaJanela->poll();
@@ -109,3 +221,4 @@ void gerenciador_projetos::iniciar()
         instanciaJanela->swap();
     }
 }
+} // namespace

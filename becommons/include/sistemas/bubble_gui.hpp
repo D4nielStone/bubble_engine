@@ -12,22 +12,18 @@
  * @see bubble_gui.cpp
  */
 
-#include "componentes/imagem.hpp"
-#include "nucleo/sistema.hpp"
 #include <unordered_map>
 #include <memory>
-#include "util/vetor4.hpp"
-#include "elementos/botao.hpp"
-#include "elementos/texto.hpp"
 #include <set>
+#include "becommons.hpp"
 
-namespace bubble
+namespace BECOMMONS_NS
 { 
 	inline static unsigned int ret_VAO= 0, ret_VBO = 0, ret_EBO = 0, text_VBO = 0, text_VAO = 0;
     inline static void renderizarImagem(elementos::imagem*);
-    inline static void renderizarFundo(caixa*, bubble::shader*);
+    inline static void renderizarFundo(caixa*, shader*);
     inline static void renderizarTexto(elementos::texto*);
-    class bubble_gui : public bubble::sistema
+    class bubble_gui : public sistema
     {
         private:
             std::unique_ptr<caixa> raiz;

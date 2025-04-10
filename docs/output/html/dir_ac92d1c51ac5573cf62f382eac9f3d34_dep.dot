@@ -1,0 +1,14 @@
+digraph "becommons/src/arquivadores"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  compound=true
+  subgraph clusterdir_c4122870b4eb0ef02862e41dabd11367 {
+    graph [ bgcolor="#edf0f7", pencolor="grey50", label="src", fontname=Helvetica,fontsize=10 style="filled,dashed", URL="dir_c4122870b4eb0ef02862e41dabd11367.html",tooltip=""]
+  dir_ac92d1c51ac5573cf62f382eac9f3d34 [label="arquivadores", fillcolor="#edf0f7", color="grey25", style="filled,bold", URL="dir_ac92d1c51ac5573cf62f382eac9f3d34.html",tooltip=""];
+  }
+  dir_9a744b5567c265deacf566b467d8af59 [label="include", fillcolor="#edf0f7", color="red", style="filled,dashed", URL="dir_9a744b5567c265deacf566b467d8af59.html",tooltip=""];
+  dir_ac92d1c51ac5573cf62f382eac9f3d34->dir_9a744b5567c265deacf566b467d8af59 [headlabel="7", labeldistance=1.5 headhref="dir_000003_000011.html" href="dir_000003_000011.html" color="steelblue1" fontcolor="steelblue1"];
+}

@@ -12,9 +12,9 @@
  */
 
 #pragma once
-#include "componentes/camera.hpp"
+#include "becommons.hpp"
 
-namespace bubble
+namespace BECOMMONS_NS
 {
     struct camera_editor : camera
     {

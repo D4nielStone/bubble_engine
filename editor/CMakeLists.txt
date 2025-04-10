@@ -17,6 +17,7 @@ find_package(assimp REQUIRED)
 
 add_executable(editor 
     src/sistemas/editor.cpp
+    src/sistemas/gerenciador_projetos.cpp
     src/main.cpp
 )
 

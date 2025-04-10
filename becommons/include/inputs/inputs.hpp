@@ -14,13 +14,12 @@
 #include <iostream>
 #include <unordered_map>
 #include <functional>
-#include "util/vetor2.hpp"
-#include "util/vetor4.hpp"
 #include <glm/glm.hpp>
+#include "becommons.hpp"
 
 struct GLFWwindow;
 
-namespace bubble
+namespace BECOMMONS_NS
 {
     // inputMode: não serve mais:
     enum inputMode {
@@ -58,7 +57,7 @@ namespace bubble
     /// @brief posiciona o cursor do mouse em uma posição na tela.
     /// @param pos 
     void posicionarCursor(double x, double y);
-    bubble::vetor2<double> obterMouse();
-    bubble::vetor2<int> tamanhoJanela();
+    vetor2<double> obterMouse();
+    vetor2<int> tamanhoJanela();
     bool pressionada(const std::string &tecla);
 }

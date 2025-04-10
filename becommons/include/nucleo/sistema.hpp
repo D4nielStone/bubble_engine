@@ -11,15 +11,16 @@
  */
 
 #pragma once
-#include "entidades/entidade.hpp"
-#include "nucleo/registro.hpp"
+#include "namespace.hpp"
+#include "fase.hpp"
+#include "registro.hpp"
 
  /**
   * @class Sistema
   * @brief Classe base para sistemas do loop principal
   */
 
-namespace bubble
+namespace BECOMMONS_NS
 {
     class fase;
     class sistema {
@@ -38,7 +39,7 @@ namespace bubble
         /**
          * @brief Inicializa o sistema
          */
-        virtual void inicializar(bubble::fase* fase_ptr);
+        virtual void inicializar(fase* fase_ptr);
 
         /**
          * @brief Atualiza o sistema dentro do loop principal
@@ -47,7 +48,7 @@ namespace bubble
         virtual void atualizar() = 0;
 
     protected:
-        fase* _Mfase;
+        fase* m_fase;
         registro* reg;
     };
 }

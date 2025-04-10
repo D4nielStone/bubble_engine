@@ -14,19 +14,16 @@
  */
 
 #pragma once
-#include "componente.hpp"
-#include "util/raio.hpp"
-#include "util/vetor2.hpp"
-#include "util/vetor3.hpp"
-#include "util/vetor4.hpp"
-#include "util/cor.hpp"
 #include <glm/ext/matrix_clip_space.hpp>
 #include <glm/ext/matrix_transform.hpp>
-#include "transformacao.hpp"
 #include <memory>
+#include "namespace.hpp"
+#include "componente.hpp"
+#include "transformacao.hpp"
 #include "util/skybox.hpp"
+#include "util/cor.hpp"
 
-namespace bubble
+namespace BECOMMONS_NS
 {
 	/**
 	 * @struct camera
@@ -43,7 +40,7 @@ namespace bubble
 		cor ceu				{0.43F, 0.78F, 0.86F, 1.0F};
 
 		glm::vec3 forward, direita, cima, posicao;
-		std::shared_ptr<bubble::transformacao> transform{ nullptr };
+		std::unique_ptr<transformacao> transform{ nullptr };
 
 		glm::mat4 viewMatrix = glm::mat4(1.f), projMatriz = glm::mat4(1.f);
 
@@ -62,8 +59,8 @@ namespace bubble
 
 		static constexpr mascara mascara = COMPONENTE_CAM;
 
-		bubble::vetor2<double>* viewport_ptr{ nullptr };
-		bubble::vetor2<double> viewportFBO{ 400, 400 };
+		vetor2<double>* viewport_ptr{ nullptr };
+		vetor2<double> viewportFBO{ 400, 400 };
 
 		void desenharFB() const;
         bool analizar(const rapidjson::Value&) override;
@@ -75,15 +72,15 @@ namespace bubble
 		void ativarFB();
 		void desativarFB();
 		glm::mat4 obtViewMatrix();
-		void viewport(const bubble::vetor2<double>& viewp);
+		void viewport(const vetor2<double>& viewp);
 
 		glm::mat4 obtProjectionMatrix();
 
-		raio pontoParaRaio(bubble::vetor2<double> screenPoint) const;
+		raio pontoParaRaio(vetor2<double> screenPoint) const;
 
-		glm::vec3 telaParaMundo(const bubble::vetor2<double>& screenPoint, float profundidade) const;
+		glm::vec3 telaParaMundo(const vetor2<double>& screenPoint, float profundidade) const;
 
-        bubble::vetor2<int> mundoParaTela(const glm::vec3& mundoPos);
+        vetor2<int> mundoParaTela(const glm::vec3& mundoPos);
 		
 		void mover(glm::vec3 pos);
 	};

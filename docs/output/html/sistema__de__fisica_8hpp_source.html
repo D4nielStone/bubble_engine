@@ -111,19 +111,19 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>};</div>
 </div>
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="keyword">namespace </span>bubble</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="keyword">namespace </span>BECOMMONS_NS</div>
 <div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>{</div>
 <div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    <span class="keyword">inline</span> <span class="keyword">static</span> btDiscreteDynamicsWorld* mundoDinamicoPrincipal;</div>
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    </div>
 <div class="foldopen" id="foldopen00046" data-start="{" data-end="};">
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno"><a class="line" href="classbubble_1_1sistema__fisica.html">   46</a></span>    <span class="keyword">class </span><a class="code hl_class" href="classbubble_1_1sistema__fisica.html">sistema_fisica</a> : <span class="keyword">public</span> <a class="code hl_class" href="classbubble_1_1sistema.html">sistema</a> {</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno"><a class="line" href="classBECOMMONS__NS_1_1sistema__fisica.html">   46</a></span>    <span class="keyword">class </span><a class="code hl_class" href="classBECOMMONS__NS_1_1sistema__fisica.html">sistema_fisica</a> : <span class="keyword">public</span> <a class="code hl_class" href="classBECOMMONS__NS_1_1sistema.html">sistema</a> {</div>
 <div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    <span class="keyword">public</span>:</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>         <a class="code hl_class" href="classbubble_1_1sistema__fisica.html">sistema_fisica</a>();</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>        <a class="code hl_class" href="classbubble_1_1sistema__fisica.html">~sistema_fisica</a>();</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>         <a class="code hl_class" href="classBECOMMONS__NS_1_1sistema__fisica.html">sistema_fisica</a>();</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>        <a class="code hl_class" href="classBECOMMONS__NS_1_1sistema__fisica.html">~sistema_fisica</a>();</div>
 <div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classbubble_1_1sistema__fisica.html#a818f6bbf19104646b7c56b730c8a809f">atualizar</a>() <span class="keyword">override</span>;</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classbubble_1_1sistema__fisica.html#a55c6db7b6fcfa318f5c4afcce3174cf6">inicializar</a>(<a class="code hl_struct" href="structbubble_1_1fase.html">bubble::fase</a>* f) <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno"><a class="line" href="classBECOMMONS__NS_1_1sistema__fisica.html#abd0e4a121acf14065f0d2be7263b9f93">   51</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classBECOMMONS__NS_1_1sistema__fisica.html#abd0e4a121acf14065f0d2be7263b9f93">atualizar</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno"><a class="line" href="classBECOMMONS__NS_1_1sistema__fisica.html#a295a0bc0088ccdc41f143e5e6cd43ffc">   52</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classBECOMMONS__NS_1_1sistema__fisica.html#a295a0bc0088ccdc41f143e5e6cd43ffc">inicializar</a>(<a class="code hl_struct" href="structBECOMMONS__NS_1_1fase.html">fase</a>* f) <span class="keyword">override</span>;</div>
 <div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>        <span class="keywordtype">void</span> iniciarThread();</div>
 <div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>        <span class="keywordtype">void</span> pararThread();</div>
 <div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>        <span class="keywordtype">bool</span> remover(btRigidBody*&amp; corpo);</div>
@@ -142,18 +142,16 @@ $(document).ready(function() { init_codefold(0); });
 </div>
 <div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span> </div>
 <div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    <span class="comment">// Fun��o de Raycast</span></div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    <a class="code hl_struct" href="structbubble_1_1resultadoRaio.html">resultadoRaio</a> raioIntersecta(<span class="keyword">const</span> <a class="code hl_struct" href="structbubble_1_1raio.html">raio</a>&amp; <a class="code hl_struct" href="structbubble_1_1raio.html">raio</a>);</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    resultadoRaio raioIntersecta(<span class="keyword">const</span> raio&amp; raio);</div>
 <div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>}</div>
+<div class="ttc" id="aclassBECOMMONS__NS_1_1sistema__fisica_html"><div class="ttname"><a href="classBECOMMONS__NS_1_1sistema__fisica.html">BECOMMONS_NS::sistema_fisica</a></div><div class="ttdef"><b>Definição</b> sistema_de_fisica.hpp:46</div></div>
+<div class="ttc" id="aclassBECOMMONS__NS_1_1sistema__fisica_html_a295a0bc0088ccdc41f143e5e6cd43ffc"><div class="ttname"><a href="classBECOMMONS__NS_1_1sistema__fisica.html#a295a0bc0088ccdc41f143e5e6cd43ffc">BECOMMONS_NS::sistema_fisica::inicializar</a></div><div class="ttdeci">void inicializar(fase *f) override</div><div class="ttdoc">Inicializa o sistema.</div></div>
+<div class="ttc" id="aclassBECOMMONS__NS_1_1sistema__fisica_html_abd0e4a121acf14065f0d2be7263b9f93"><div class="ttname"><a href="classBECOMMONS__NS_1_1sistema__fisica.html#abd0e4a121acf14065f0d2be7263b9f93">BECOMMONS_NS::sistema_fisica::atualizar</a></div><div class="ttdeci">void atualizar() override</div><div class="ttdoc">Atualiza o sistema dentro do loop principal.</div></div>
+<div class="ttc" id="aclassBECOMMONS__NS_1_1sistema_html"><div class="ttname"><a href="classBECOMMONS__NS_1_1sistema.html">BECOMMONS_NS::sistema</a></div><div class="ttdef"><b>Definição</b> sistema.hpp:24</div></div>
 <div class="ttc" id="aclassMyContactCallback_html"><div class="ttname"><a href="classMyContactCallback.html">MyContactCallback</a></div><div class="ttdef"><b>Definição</b> sistema_de_fisica.hpp:24</div></div>
-<div class="ttc" id="aclassbubble_1_1sistema__fisica_html"><div class="ttname"><a href="classbubble_1_1sistema__fisica.html">bubble::sistema_fisica</a></div><div class="ttdef"><b>Definição</b> sistema_de_fisica.hpp:46</div></div>
-<div class="ttc" id="aclassbubble_1_1sistema__fisica_html_a55c6db7b6fcfa318f5c4afcce3174cf6"><div class="ttname"><a href="classbubble_1_1sistema__fisica.html#a55c6db7b6fcfa318f5c4afcce3174cf6">bubble::sistema_fisica::inicializar</a></div><div class="ttdeci">void inicializar(bubble::fase *f) override</div><div class="ttdoc">Inicializa o sistema.</div><div class="ttdef"><b>Definição</b> sistema_de_fisica.cpp:54</div></div>
-<div class="ttc" id="aclassbubble_1_1sistema__fisica_html_a818f6bbf19104646b7c56b730c8a809f"><div class="ttname"><a href="classbubble_1_1sistema__fisica.html#a818f6bbf19104646b7c56b730c8a809f">bubble::sistema_fisica::atualizar</a></div><div class="ttdeci">void atualizar() override</div><div class="ttdoc">Atualiza o sistema dentro do loop principal.</div><div class="ttdef"><b>Definição</b> sistema_de_fisica.cpp:43</div></div>
-<div class="ttc" id="aclassbubble_1_1sistema_html"><div class="ttname"><a href="classbubble_1_1sistema.html">bubble::sistema</a></div><div class="ttdef"><b>Definição</b> sistema.hpp:25</div></div>
 <div class="ttc" id="aos_2sistema_8hpp_html"><div class="ttname"><a href="os_2sistema_8hpp.html">sistema.hpp</a></div><div class="ttdoc">funçoes do sistema</div></div>
 <div class="ttc" id="araio_8hpp_html"><div class="ttname"><a href="raio_8hpp.html">raio.hpp</a></div></div>
-<div class="ttc" id="astructbubble_1_1fase_html"><div class="ttname"><a href="structbubble_1_1fase.html">bubble::fase</a></div><div class="ttdef"><b>Definição</b> fase.hpp:29</div></div>
-<div class="ttc" id="astructbubble_1_1raio_html"><div class="ttname"><a href="structbubble_1_1raio.html">bubble::raio</a></div><div class="ttdef"><b>Definição</b> raio.hpp:19</div></div>
-<div class="ttc" id="astructbubble_1_1resultadoRaio_html"><div class="ttname"><a href="structbubble_1_1resultadoRaio.html">bubble::resultadoRaio</a></div><div class="ttdef"><b>Definição</b> raio.hpp:23</div></div>
+<div class="ttc" id="astructBECOMMONS__NS_1_1fase_html"><div class="ttname"><a href="structBECOMMONS__NS_1_1fase.html">BECOMMONS_NS::fase</a></div><div class="ttdef"><b>Definição</b> fase.hpp:29</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

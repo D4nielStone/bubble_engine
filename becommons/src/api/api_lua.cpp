@@ -17,55 +17,126 @@
 #include "componentes/codigo.hpp"
 #include "os/janela.hpp"
 #include "inputs/inputs.hpp"
+#include "util/malha.hpp"
 
-using namespace bubble;
+using namespace BECOMMONS_NS;
 
 template <class T>
 T lerp(T start, T end, T alpha) {
     return start + alpha * (end - start);
 }
 
-void bapi::entidade::destruir() const
+void api::entidade::definir(lua_State* L)
+		{
+			luabridge::getGlobalNamespace(L). 
+			    beginClass<malha>("malha").
+			    addConstructor<void(*)()>().
+			    addData("material", &malha::m_material).
+			    endClass().
+			    beginClass<modelo>("modelo").
+			    addConstructor<void(*)()>().
+			    addFunction("obtMalha", &modelo::obterMalha).
+			    endClass().
+				beginClass<renderizador>("renderizador").			///< define transformacao
+				addConstructor<void(*)(const char*)>().
+				addData("modelo", &renderizador::m_modelo).
+				endClass().
+				beginClass<transformacao>("transformacao").			///< define transformacao
+				addConstructor<void(*)()>().
+				addData<glm::vec3>("posicao", &transformacao::posicao, true).
+				addData<glm::vec3>("escala", &transformacao::escala, true).
+				addData<glm::vec3>("rotacao", &transformacao::rotacao, true).
+				addFunction("apontarEntidade", &transformacao::apontarEntidade).
+				addFunction("apontarV3", &transformacao::apontarV3).
+				endClass().
+				beginClass<imagem>("imagem").			///< define transformacao
+				addConstructor<void(*)(std::string)>().
+				addConstructor<void(*)(unsigned int)>().
+				addData<vetor2<double>>("padding", &imagem::padding, true).
+				addData<vetor2<double>>("limite", &imagem::limite, true).
+				addData<cor>("difusa", &imagem::difusa, true).
+				addFunction("definirID", &imagem::definirID).
+				endClass().
+				beginClass<texto>("texto").
+				addConstructor<void(*)(const std::string&)>().
+				addConstructor<void(*)(const std::string&,float)>().
+				addData("frase", &texto::frase).
+				addData("fonte", &texto::fonte).
+				addData("cor", &texto::m_cor).
+				addData("refPos", &texto::posicao_referencial).
+				addData("refPosAtiva", &texto::pf_ativa).
+				endClass().
+				beginClass<camera>("camera").			///< define camera
+				addConstructor<void(*)()>().
+				addFunction("pontoParaRaio", &camera::pontoParaRaio).
+				addData("fov", &camera::fov).
+				addData("corte_curto", &camera::corte_curto).
+				addData("framebuffer", &camera::textura).
+				addData("corte_longo", &camera::corte_longo).
+				addData("frente", &camera::forward).
+				addData("ceu", &camera::ceu).
+				addData("escala", &camera::escala).
+				addData("flag_ortho", &camera::flag_orth).
+				addFunction("telaParaMundo", &camera::telaParaMundo).
+				addFunction("ativarFB", &camera::ativarFB).
+				addFunction("mover", &camera::mover).
+				addFunction("desativarFB", &camera::desativarFB).
+				addFunction("viewport", &camera::viewport).
+				endClass().
+				beginClass<api::entidade>("entidade").			///< define entidade
+				addConstructor<void(*)(int)>().
+				addData("transformacao", &api::entidade::m_transformacao, true).
+				addData("camera", &api::entidade::m_camera, true).
+				addData("imagem", &api::entidade::m_imagem, true).
+				addData("texto", &api::entidade::m_texto, true).
+				addData("fisica", &api::entidade::m_fisica, true).
+	 			addData("id", &api::entidade::id, false).
+        addData("luzDir", &api::entidade::m_luzDir, true).
+                addData("renderizador", &api::entidade::m_renderizador).
+				addFunction("destruir", &api::entidade::destruir).
+				endClass();
+		};
+void api::entidade::destruir() const
 {
 	auto componentes = projeto_atual->obterFaseAtual()->obterRegistro()->obterComponentes(id);
-	if (componentes & bubble::componente::COMPONENTE_CAM)
+	if (componentes & componente::COMPONENTE_CAM)
 		projeto_atual->obterFaseAtual()->obterRegistro()->remover<camera>(id);
-	if (componentes & bubble::componente::COMPONENTE_RENDER)
+	if (componentes & componente::COMPONENTE_RENDER)
 		projeto_atual->obterFaseAtual()->obterRegistro()->remover<renderizador>(id);
-	if (componentes & bubble::componente::COMPONENTE_TRANSFORMACAO)
+	if (componentes & componente::COMPONENTE_TRANSFORMACAO)
 		projeto_atual->obterFaseAtual()->obterRegistro()->remover<transformacao>(id);
-	if (componentes & bubble::componente::COMPONENTE_CODIGO)
+	if (componentes & componente::COMPONENTE_CODIGO)
 		projeto_atual->obterFaseAtual()->obterRegistro()->remover<codigo>(id);
-	if (componentes & bubble::componente::COMPONENTE_FISICA)
+	if (componentes & componente::COMPONENTE_FISICA)
 		projeto_atual->obterFaseAtual()->obterRegistro()->remover<fisica>(id);
 	if (
-      componentes & bubble::componente::COMPONENTE_TEXTO)
+      componentes & componente::COMPONENTE_TEXTO)
 		projeto_atual->obterFaseAtual()->obterRegistro()->remover<texto>(id);
 	if (
-      componentes & bubble::componente::COMPONENTE_IMAGEM)
+      componentes & componente::COMPONENTE_IMAGEM)
 		projeto_atual->obterFaseAtual()->obterRegistro()->remover<imagem>(id);
 	if (
-      componentes & bubble::componente::COMPONENTE_LUZ_DIRECIONAL)
+      componentes & componente::COMPONENTE_LUZ_DIRECIONAL)
 		projeto_atual->obterFaseAtual()->obterRegistro()->remover<luz_direcional>(id);
 
 }
 
-bapi::entidade::entidade(const uint32_t& id) : id(id)
+api::entidade::entidade(const uint32_t& id) : id(id)
 {
-	if (projeto_atual->obterFaseAtual()->obterRegistro()->tem<bubble::transformacao>(id))
-		_Mrenderizador = projeto_atual->obterFaseAtual()->obterRegistro()->obter<bubble::renderizador>(id).get();
-	if (projeto_atual->obterFaseAtual()->obterRegistro()->tem<bubble::transformacao>(id))
-		_Mtransformacao = projeto_atual->obterFaseAtual()->obterRegistro()->obter<bubble::transformacao>(id).get();
-	if (projeto_atual->obterFaseAtual()->obterRegistro()->tem<bubble::camera>(id))
-		_Mcamera = projeto_atual->obterFaseAtual()->obterRegistro()->obter<bubble::camera>(id).get();
-	if (projeto_atual->obterFaseAtual()->obterRegistro()->tem<bubble::texto>(id))
-		_Mtexto = projeto_atual->obterFaseAtual()->obterRegistro()->obter<bubble::texto>(id).get();
-	if (projeto_atual->obterFaseAtual()->obterRegistro()->tem<bubble::imagem>(id))
-		_Mimagem = projeto_atual->obterFaseAtual()->obterRegistro()->obter<bubble::imagem>(id).get();
-	if (projeto_atual->obterFaseAtual()->obterRegistro()->tem<bubble::fisica>(id))
-		_Mfisica = projeto_atual->obterFaseAtual()->obterRegistro()->obter<bubble::fisica>(id).get();
-	if (projeto_atual->obterFaseAtual()->obterRegistro()->tem<bubble::luz_direcional>(id))
-		_MluzDir = projeto_atual->obterFaseAtual()->obterRegistro()->obter<bubble::luz_direcional>(id).get(); 
+	if (projeto_atual->obterFaseAtual()->obterRegistro()->tem<transformacao>(id))
+		m_renderizador = projeto_atual->obterFaseAtual()->obterRegistro()->obter<renderizador>(id).get();
+	if (projeto_atual->obterFaseAtual()->obterRegistro()->tem<transformacao>(id))
+		m_transformacao = projeto_atual->obterFaseAtual()->obterRegistro()->obter<transformacao>(id).get();
+	if (projeto_atual->obterFaseAtual()->obterRegistro()->tem<camera>(id))
+		m_camera = projeto_atual->obterFaseAtual()->obterRegistro()->obter<camera>(id).get();
+	if (projeto_atual->obterFaseAtual()->obterRegistro()->tem<texto>(id))
+		m_texto = projeto_atual->obterFaseAtual()->obterRegistro()->obter<texto>(id).get();
+	if (projeto_atual->obterFaseAtual()->obterRegistro()->tem<imagem>(id))
+		m_imagem = projeto_atual->obterFaseAtual()->obterRegistro()->obter<imagem>(id).get();
+	if (projeto_atual->obterFaseAtual()->obterRegistro()->tem<fisica>(id))
+		m_fisica = projeto_atual->obterFaseAtual()->obterRegistro()->obter<fisica>(id).get();
+	if (projeto_atual->obterFaseAtual()->obterRegistro()->tem<luz_direcional>(id))
+		m_luzDir = projeto_atual->obterFaseAtual()->obterRegistro()->obter<luz_direcional>(id).get(); 
 }
 
 int numColisoes(btRigidBody* objA, btRigidBody* objB) {
@@ -86,69 +157,69 @@ void defVelFisica(const float v)
     projeto_atual->sfisica()->velocidade = v;
 }
 
-void bapi::definirFisica(lua_State* L)
+void definirFisica(lua_State* L)
 {
 
     luabridge::getGlobalNamespace(L).
-        beginClass<bubble::fase>("fase").
+        beginClass<fase>("fase").
         addConstructor<void(*)(const char*)>().
-        addFunction("pausar", &bubble::fase::pausar).
-        addFunction("parar", &bubble::fase::parar).
-        addFunction("iniciar", &bubble::fase::iniciar).
+        addFunction("pausar", &fase::pausar).
+        addFunction("parar", &fase::parar).
+        addFunction("iniciar", &fase::iniciar).
         endClass().
-        beginClass<bubble::projeto>("projeto").
+        beginClass<projeto>("projeto").
         addConstructor<void(*)(const std::string&)>().
-        addFunction("carregarFase", &bubble::projeto::carregarFase).
-        addFunction("faseAtual", &bubble::projeto::obterFaseAtual).
+        addFunction("carregarFase", &projeto::carregarFase).
+        addFunction("faseAtual", &projeto::obterFaseAtual).
         endClass().
         beginClass<btCollisionObject>("objetoDeColisao").
         addConstructor<void(*)()>().
         endClass().
         beginClass<btRigidBody>("corpoRigido").
         endClass().
-        beginClass<bubble::raio>("raio").
+        beginClass<raio>("raio").
         addConstructor<void(*)()>().
-        addData("origem", &bubble::raio::origem).
-        addData("direcao", &bubble::raio::direcao).
+        addData("origem", &raio::origem).
+        addData("direcao", &raio::direcao).
         endClass().
-        beginClass<bubble::resultadoRaio>("resultadoRaio").
+        beginClass<resultadoRaio>("resultadoRaio").
         addConstructor<void(*)()>().
-        addData("objetoAtingido", &bubble::resultadoRaio::objetoAtingido, false).
-        addData("atingiu", &bubble::resultadoRaio::atingiu, false).
-        addData("pontoDeColisao", &bubble::resultadoRaio::pontoDeColisao, false).
-        addData("normalAtingida", &bubble::resultadoRaio::normalAtingida, false).
+        addData("objetoAtingido", &resultadoRaio::objetoAtingido, false).
+        addData("atingiu", &resultadoRaio::atingiu, false).
+        addData("pontoDeColisao", &resultadoRaio::pontoDeColisao, false).
+        addData("normalAtingida", &resultadoRaio::normalAtingida, false).
         endClass().
-        beginClass<bubble::fisica>("fisica").
+        beginClass<fisica>("fisica").
         addConstructor<void(*)()>().
-        addData("massa", &bubble::fisica::massa).
-        addFunction("aplicarForca", &bubble::fisica::aplicarForca).
-        addFunction("defVelocidade", &bubble::fisica::aplicarVelocidade).
-        addFunction("obtVelocidade", &bubble::fisica::obterVelocidade).
-        addFunction("defPosicao", &bubble::fisica::definirPosicao).
-        addFunction("obtPosicao", &bubble::fisica::obterPosicao).
-        addFunction("defRotacao", &bubble::fisica::definirRotacao).
-        addFunction("defFatorLinear", &bubble::fisica::definirFatorLinear).
-        addFunction("defFriccao", &bubble::fisica::definirFriccao).
-        addFunction("defRestituicao", &bubble::fisica::definirRestituicao).
-        addFunction("defFatorAngular", &bubble::fisica::definirFatorAngular).
-        addFunction("defRaioCcd", &bubble::fisica::definirRaioCcd).
-        addFunction("corpoRigido", &bubble::fisica::obterCorpoRigido).
+        addData("massa", &fisica::massa).
+        addFunction("aplicarForca", &fisica::aplicarForca).
+        addFunction("defVelocidade", &fisica::aplicarVelocidade).
+        addFunction("obtVelocidade", &fisica::obterVelocidade).
+        addFunction("defPosicao", &fisica::definirPosicao).
+        addFunction("obtPosicao", &fisica::obterPosicao).
+        addFunction("defRotacao", &fisica::definirRotacao).
+        addFunction("defFatorLinear", &fisica::definirFatorLinear).
+        addFunction("defFriccao", &fisica::definirFriccao).
+        addFunction("defRestituicao", &fisica::definirRestituicao).
+        addFunction("defFatorAngular", &fisica::definirFatorAngular).
+        addFunction("defRaioCcd", &fisica::definirRaioCcd).
+        addFunction("corpoRigido", &fisica::obterCorpoRigido).
         endClass().
 
         beginNamespace("fisica").
-        addFunction("raioIntersecta", &bubble::raioIntersecta).
+        addFunction("raioIntersecta", &raioIntersecta).
         addFunction("numColisoes", &numColisoes). 
         addFunction("defVelocidade", &defVelFisica). 
         endNamespace();
 }
 
-void bapi::definirTempo(lua_State *L)
+void definirTempo(lua_State *L)
 {
 	std::function<double()> obterDeltaTimeFunc = []() -> double {
 		if (!projeto_atual->obterFaseAtual()) {
 			return 0.0;
 		}
-		return instanciaJanela->_Mtempo.obterDeltaTime();
+		return instanciaJanela->m_tempo.obterDeltaTime();
 		};
 	luabridge::getGlobalNamespace(L)
 		.beginNamespace("tempo")
@@ -156,14 +227,14 @@ void bapi::definirTempo(lua_State *L)
 		.endNamespace();
 }
 
-void bapi::definirInputs(lua_State *L)
+void definirInputs(lua_State *L)
 {
 	luabridge::getGlobalNamespace(L)
 		.beginNamespace("inputs")
-		.addFunction("pressionada", &bubble::pressionada)
-		.addFunction("mouse", &bubble::obterMouse)
-		.addFunction("tamanhoTela", &bubble::tamanhoJanela)
-		.addFunction("cursor", &bubble::posicionarCursor)
+		.addFunction("pressionada", &pressionada)
+		.addFunction("mouse", &obterMouse)
+		.addFunction("tamanhoTela", &tamanhoJanela)
+		.addFunction("cursor", &posicionarCursor)
 		.endNamespace();
 }
 
@@ -171,15 +242,15 @@ float clamp_float(float v, float min, float max) {
     return std::clamp(v, min, max);
 }
 
-void bapi::definirUtils(lua_State *L)
+void definirUtils(lua_State *L)
 {
 	luabridge::getGlobalNamespace(L)
 		.beginNamespace("util")
 		.addFunction("lerp", &lerp<float>)
-		.addFunction("lerpV3", &bubble::lerpV3)
+		.addFunction("lerpV3", &lerpV3)
 		.addFunction("clamp", &clamp_float)
-		.addFunction("distanciaV3", &bubble::distancia3)
-		.addFunction("distanciaV2", &bubble::distancia2)
+		.addFunction("distanciaV3", &distancia3)
+		.addFunction("distanciaV2", &distancia2)
 		.addFunction("normalizarV3", &glm::normalize<3, float, glm::packed_highp>) 
 		.endNamespace()
 		.beginClass<glm::vec3>("vetor3")
@@ -194,70 +265,70 @@ void bapi::definirUtils(lua_State *L)
 		.addData<float>("y", &vet3::y)
 		.addData<float>("z", &vet3::z)
 		.endClass()
-        .beginClass<bubble::luz_direcional>("luz_direcional")
+        .beginClass<luz_direcional>("luz_direcional")
         .addConstructor<void(*)()>()
-        .addData<vet3>("direcao", &bubble::luz_direcional::direcao)
-        .addData<vet3>("cor", &bubble::luz_direcional::cor)
-        .addData<vet3>("ambiente", &bubble::luz_direcional::ambiente)
-        .addData("intensidade", &bubble::luz_direcional::intensidade)
+        .addData<vet3>("direcao", &luz_direcional::direcao)
+        .addData<vet3>("cor", &luz_direcional::cor)
+        .addData<vet3>("ambiente", &luz_direcional::ambiente)
+        .addData("intensidade", &luz_direcional::intensidade)
         .endClass()
-		.beginClass<bubble::cor>("cor")
+		.beginClass<cor>("cor")
 		.addConstructor<void(*)(float, float, float, float)>()
-		.addData<float>("r", &bubble::cor::r)
-		.addData<float>("g", &bubble::cor::g)
-		.addData<float>("b", &bubble::cor::b)
-		.addData<float>("a", &bubble::cor::a)
+		.addData<float>("r", &cor::r)
+		.addData<float>("g", &cor::g)
+		.addData<float>("b", &cor::b)
+		.addData<float>("a", &cor::a)
 		.endClass()
-		.beginClass<bubble::vetor2<int>>("vetor2i")
+		.beginClass<vetor2<int>>("vetor2i")
 		.addConstructor<void(*)(int, int)>()
 		.addConstructor<void(*)(float, float)>()
-		.addData<int>("x", &bubble::vetor2<int>::x)
-		.addData<int>("y", &bubble::vetor2<int>::y)
+		.addData<int>("x", &vetor2<int>::x)
+		.addData<int>("y", &vetor2<int>::y)
 		.endClass()
-		.beginClass<bubble::vetor2<double>>("vetor2d")
+		.beginClass<vetor2<double>>("vetor2d")
 		.addConstructor<void(*)(double, double)>()
-		.addData<double>("x", &bubble::vetor2<double>::x)
-		.addData<double>("y", &bubble::vetor2<double>::y)
+		.addData<double>("x", &vetor2<double>::x)
+		.addData<double>("y", &vetor2<double>::y)
 		.endClass()
-		.beginClass<bubble::cor>("cor")
+		.beginClass<cor>("cor")
 		.addConstructor<void(*)(float, float, float, float)>()
-		.addData<float>("r", &bubble::cor::r)
-		.addData<float>("g", &bubble::cor::g)
-		.addData<float>("b", &bubble::cor::b)
-		.addData<float>("a", &bubble::cor::a)
+		.addData<float>("r", &cor::r)
+		.addData<float>("g", &cor::g)
+		.addData<float>("b", &cor::b)
+		.addData<float>("a", &cor::a)
 		.endClass()
-		.beginClass<bubble::textura>("textura")
+		.beginClass<textura>("textura")
 		.addConstructor<void(*)(unsigned int, std::string)>()
-		.addData("id", &bubble::textura::id)
-		.addData("caminho", &bubble::textura::path)
+		.addData("id", &textura::id)
+		.addData("caminho", &textura::path)
 		.endClass();
 
     luabridge::getGlobalNamespace(L)
-        .beginClass<bubble::material>("material")
+        .beginClass<material>("material")
 		.addConstructor<void(*)()>()
-		.addData<bubble::cor>("albedo", &bubble::material::albedo)
-		.addData("matalico", &bubble::material::metallic)
-		.addData("roughness", &bubble::material::roughness)
-		.addData("ao", &bubble::material::ao)
+		.addData<cor>("albedo", &bubble::material::albedo)
+		.addData("matalico", &material::metallic)
+		.addData("roughness", &material::roughness)
+		.addData("ao", &material::ao)
 		.addProperty("texAlbedo", 
-            &bubble::material::getTexturaAlbedo, 
-            &bubble::material::setTexturaAlbedo
+            &material::getTexturaAlbedo, 
+            &material::setTexturaAlbedo
         )
         .addProperty("texMetalica", 
-            &bubble::material::getTexturaMetallic, 
-            &bubble::material::setTexturaMetallic
+            &material::getTexturaMetallic, 
+            &material::setTexturaMetallic
         )
         .addProperty("texRoughness", 
-            &bubble::material::getTexturaRoughness, 
-            &bubble::material::setTexturaRoughness
+            &material::getTexturaRoughness, 
+            &material::setTexturaRoughness
         )
         .addProperty("texNormal", 
-            &bubble::material::getTexturaNormal, 
-            &bubble::material::setTexturaNormal
+            &material::getTexturaNormal, 
+            &material::setTexturaNormal
         )
 		.addProperty("texAO", 
-            &bubble::material::getTexturaAO, 
-            &bubble::material::setTexturaAO
+            &material::getTexturaAO, 
+            &material::setTexturaAO
         )
         .endClass();
 }

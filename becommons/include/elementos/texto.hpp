@@ -10,11 +10,9 @@
  */
 
 #pragma once
-#include "util/caixa.hpp"
-#include "arquivadores/fonte.hpp"
-#include "arquivadores/shader.hpp"
+#include "becommons.hpp"
 
-namespace bubble{
+namespace BECOMMONS_NS{
     namespace elementos{
             enum class flags_texto : uint32_t
             {
@@ -71,7 +69,7 @@ namespace bubble{
             }
             float obterLargura(const std::string& frase) {
                 if(m_texto_frase_ptr) m_texto_frase = *m_texto_frase_ptr;
-                auto& caracteres = bubble::gerenciadorFontes::obterInstancia().obter(m_texto_fonte, m_texto_escala);
+                auto& caracteres = gerenciadorFontes::obterInstancia().obter(m_texto_fonte, m_texto_escala);
                 if (caracteres.empty()) {
                     return 0.0f;
                 }
@@ -81,7 +79,7 @@ namespace bubble{
                     if(c == '\n') return larguraTotal;
                     auto it = caracteres.find(c);
                     if (it != caracteres.end()) {
-                        const bubble::caractere& ch = it->second;
+                        const caractere& ch = it->second;
                         larguraTotal += (ch.avanco >> 6);
                     }
                 }

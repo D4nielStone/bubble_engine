@@ -10,11 +10,11 @@
  */
 
 
+#include <filesystem>
 #include "arquivadores/fonte.hpp"
 #include "assets/fontes_na_memoria.hpp"
-#include <filesystem>
 
-namespace bubble
+namespace BECOMMONS_NS
 {
     std::map<std::string, std::pair<const unsigned char*, unsigned int>> fontes_memoria
     {

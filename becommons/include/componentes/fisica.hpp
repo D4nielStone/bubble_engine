@@ -13,11 +13,13 @@
  */
 
 #pragma once
-#include "componente.hpp"
-#include "transformacao.hpp"
 #include <bullet/btBulletDynamicsCommon.h>
+#include <glm/glm.hpp>
+#include "namespace.hpp"
+#include "util/malha.hpp"
+#include "componente.hpp"
 
-namespace bubble
+namespace BECOMMONS_NS
 {
     struct fisica : componente {
         static constexpr mascara mascara { COMPONENTE_FISICA };
@@ -29,7 +31,7 @@ namespace bubble
         camada camada_colisao{camada::COLISAO_PADRAO};
         fisica() = default;
         fisica(btCollisionShape* forma, btScalar massa, btVector3 posicaoInicial, camada camada = COLISAO_PADRAO);
-        fisica(bool malha, btScalar massa, btVector3 posicaoInicial, camada camada = fisica::COLISAO_PADRAO);
+        fisica(bool usar_malha, btScalar massa, btVector3 posicaoInicial, camada camada = fisica::COLISAO_PADRAO);
         virtual ~fisica();
 
         btRigidBody* obterCorpoRigido();
@@ -50,11 +52,11 @@ namespace bubble
         btScalar massa;
 
     private:
-        bool malha{ false };
+        bool usar_malha{ false };
         btCollisionShape* forma;
         btDefaultMotionState* estadoDeMovimento;
         btRigidBody* corpoRigido{ nullptr };
         btVector3 posicaoInicial;
-        transformacao* _Mtransformacao;
+        transformacao* m_transformacao;
     };
 }

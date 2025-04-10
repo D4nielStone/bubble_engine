@@ -14,9 +14,9 @@
 #pragma once
 #include <glm/glm.hpp>
 #include <glm/detail/type_vec3.hpp>
-#include "util/vetor2.hpp"
+#include "becommons.hpp"
 
-namespace bubble
+namespace BECOMMONS_NS
 {
 	inline static float distancia3(const glm::vec3& a, const glm::vec3& b)
 	{
@@ -30,7 +30,7 @@ namespace bubble
 	{
 		return a + t * (b - a);
 	}
-	inline static float distancia2(const bubble::vetor2<double>& a, const bubble::vetor2<double>& b)
+	inline static float distancia2(const vetor2<double>& a, const vetor2<double>& b)
 	{
 		float dx = b.x - a.x;
 		float dy = b.y - a.y;
@@ -42,3 +42,4 @@ inline glm::vec3 operator*(const glm::vec3& lhs, const glm::vec3& rhs)
 {
 	return glm::vec3(lhs.x * rhs.x, lhs.y * rhs.y, lhs.z * rhs.z);
 }
+using namespace BECOMMONS_NS;

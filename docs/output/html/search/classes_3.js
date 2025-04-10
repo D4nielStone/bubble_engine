@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['entidade_0',['entidade',['../structbapi_1_1entidade.html',1,'bapi::entidade'],['../structbubble_1_1entidade.html',1,'bubble::entidade']]]
+  ['fase_0',['fase',['../structBECOMMONS__NS_1_1fase.html',1,'BECOMMONS_NS::fase'],['../structfase.html',1,'fase']]],
+  ['fisica_1',['fisica',['../structBECOMMONS__NS_1_1fisica.html',1,'BECOMMONS_NS']]]
 ];

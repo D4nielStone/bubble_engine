@@ -84,64 +84,56 @@ $(document).ready(function() { init_codefold(0); });
 <div class="contents">
 <a href="janela_8hpp.html">Ir para a documentação desse arquivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span> </div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#pragma once</span></div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#include &quot;<a class="code" href="tempo_8hpp.html">tempo.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#include &quot;<a class="code" href="vetor2_8hpp.html">util/vetor2.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="preprocessor">#include &quot;<a class="code" href="nucleo_2sistema_8hpp.html">nucleo/sistema.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="preprocessor">#include &quot;<a class="code" href="sistema__de__renderizacao_8hpp.html">nucleo/sistema_de_renderizacao.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="preprocessor">#include &quot;<a class="code" href="inputs_8hpp.html">inputs/inputs.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="preprocessor">#include &lt;functional&gt;</span></div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="preprocessor">#include &lt;memory&gt;</span></div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="preprocessor">#include &lt;unordered_map&gt;</span></div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="keyword">struct </span>GLFWwindow;</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="keyword">namespace </span>bubble</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>{</div>
-<div class="foldopen" id="foldopen00033" data-start="{" data-end="};">
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="structbubble_1_1janela.html">   33</a></span>    <span class="keyword">struct </span><a class="code hl_struct" href="structbubble_1_1janela.html">janela</a></div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    {</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>        <span class="keyword">enum class</span> cursor : <span class="keywordtype">int</span></div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>        {</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>        mao = 0x00036004,</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>        i   = 0x00036002,</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>        seta= 0x00036001,</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>        re_h= 0x00036005,</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        re_v= 0x00036006</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        };</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>        <span class="keyword">private</span>:</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        cursor m_cursor = cursor::seta;</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>        cursor m_cursor_antigo = cursor::seta;</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>        <span class="keyword">public</span>:</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>        <a class="code hl_struct" href="structbubble_1_1tempo.html">tempo</a> _Mtempo;</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>        std::string _Mnome{<span class="stringliteral">&quot;&quot;</span>};</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>        <a class="code hl_struct" href="structbubble_1_1vetor2.html">bubble::vetor2&lt;double&gt;</a> tamanho;</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>        GLFWwindow* window;</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>        <a class="code hl_class" href="classbubble_1_1inputs.html">bubble::inputs</a> <a class="code hl_class" href="classbubble_1_1inputs.html">inputs</a>;</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>        <a class="code hl_struct" href="structbubble_1_1janela.html">janela</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* nome, <a class="code hl_struct" href="structbubble_1_1vetor2.html">bubble::vetor2&lt;double&gt;</a> bounds = <a class="code hl_struct" href="structbubble_1_1vetor2.html">bubble::vetor2&lt;double&gt;</a>(600, 400), <span class="keyword">const</span> <span class="keywordtype">char</span>* icon_path = <span class="keyword">nullptr</span>);</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>        <a class="code hl_struct" href="structbubble_1_1janela.html">janela</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* nome, <span class="keyword">const</span> <span class="keywordtype">bool</span> f, <a class="code hl_struct" href="structbubble_1_1vetor2.html">bubble::vetor2&lt;double&gt;</a> bounds = <a class="code hl_struct" href="structbubble_1_1vetor2.html">bubble::vetor2&lt;double&gt;</a>(600, 400), <span class="keyword">const</span> <span class="keywordtype">char</span>* icon_path = <span class="keyword">nullptr</span>);</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>        <a class="code hl_struct" href="structbubble_1_1janela.html">~janela</a>();</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>        <span class="keywordtype">void</span> poll();</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        <span class="keyword">inline</span> <span class="keywordtype">void</span> defCursor(<span class="keyword">const</span> cursor c)</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>        {</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>            <span class="keywordflow">if</span>(c == m_cursor) <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>            m_cursor = c;</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>        }</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>        <span class="keywordtype">void</span> swap();</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>        <span class="keywordtype">void</span> viewport() <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>        std::string nome() <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>        <span class="keywordtype">void</span> nome(<span class="keyword">const</span> <span class="keywordtype">char</span>* novo_nome);</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    };</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#include &lt;functional&gt;</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#include &lt;memory&gt;</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="preprocessor">#include &lt;unordered_map&gt;</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="preprocessor">#include &quot;<a class="code" href="becommons_8hpp.html">becommons.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="keyword">struct </span>GLFWwindow;</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="keyword">namespace </span>BECOMMONS_NS</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>{</div>
+<div class="foldopen" id="foldopen00029" data-start="{" data-end="};">
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno"><a class="line" href="structBECOMMONS__NS_1_1janela.html">   29</a></span>    <span class="keyword">struct </span><a class="code hl_struct" href="structBECOMMONS__NS_1_1janela.html">janela</a></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    {</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>        <span class="keyword">enum class</span> cursor : <span class="keywordtype">int</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>        {</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>        mao = 0x00036004,</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>        i   = 0x00036002,</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>        seta= 0x00036001,</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>        re_h= 0x00036005,</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>        re_v= 0x00036006</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>        };</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>        <span class="keyword">private</span>:</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>        cursor m_cursor = cursor::seta;</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        cursor m_cursor_antigo = cursor::seta;</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>        <a class="code hl_struct" href="structBECOMMONS__NS_1_1tempo.html">tempo</a> _Mtempo;</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        std::string _Mnome{<span class="stringliteral">&quot;&quot;</span>};</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>        BECOMMONS_NS <a class="code hl_struct" href="structBECOMMONS__NS_1_1vetor2.html">vetor2&lt;double&gt;</a> tamanho;</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>        GLFWwindow* window;</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>        <a class="code hl_class" href="classBECOMMONS__NS_1_1inputs.html">inputs</a> <a class="code hl_class" href="classBECOMMONS__NS_1_1inputs.html">inputs</a>;</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>        <a class="code hl_struct" href="structBECOMMONS__NS_1_1janela.html">janela</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* nome, BECOMMONS_NS <a class="code hl_struct" href="structBECOMMONS__NS_1_1vetor2.html">vetor2&lt;double&gt;</a> bounds = BECOMMONS_NS <a class="code hl_struct" href="structBECOMMONS__NS_1_1vetor2.html">vetor2&lt;double&gt;</a>(600, 400), <span class="keyword">const</span> <span class="keywordtype">char</span>* icon_path = <span class="keyword">nullptr</span>);</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>        <a class="code hl_struct" href="structBECOMMONS__NS_1_1janela.html">janela</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* nome, <span class="keyword">const</span> <span class="keywordtype">bool</span> f, BECOMMONS_NS <a class="code hl_struct" href="structBECOMMONS__NS_1_1vetor2.html">vetor2&lt;double&gt;</a> bounds = BECOMMONS_NS <a class="code hl_struct" href="structBECOMMONS__NS_1_1vetor2.html">vetor2&lt;double&gt;</a>(600, 400), <span class="keyword">const</span> <span class="keywordtype">char</span>* icon_path = <span class="keyword">nullptr</span>);</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>        <a class="code hl_struct" href="structBECOMMONS__NS_1_1janela.html">~janela</a>();</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>        <span class="keywordtype">void</span> poll();</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>        <span class="keyword">inline</span> <span class="keywordtype">void</span> defCursor(<span class="keyword">const</span> cursor c)</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>        {</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>            <span class="keywordflow">if</span>(c == m_cursor) <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>            m_cursor = c;</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        }</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>        <span class="keywordtype">void</span> swap();</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>        <span class="keywordtype">void</span> viewport() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>        std::string nome() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>        <span class="keywordtype">void</span> nome(<span class="keyword">const</span> <span class="keywordtype">char</span>* novo_nome);</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    };</div>
 </div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    <span class="keyword">inline</span> <a class="code hl_struct" href="structbubble_1_1janela.html">janela</a>* instanciaJanela{ <span class="keyword">nullptr</span> };</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>}</div>
-<div class="ttc" id="aclassbubble_1_1inputs_html"><div class="ttname"><a href="classbubble_1_1inputs.html">bubble::inputs</a></div><div class="ttdef"><b>Definição</b> inputs.hpp:32</div></div>
-<div class="ttc" id="ainputs_8hpp_html"><div class="ttname"><a href="inputs_8hpp.html">inputs.hpp</a></div></div>
-<div class="ttc" id="anucleo_2sistema_8hpp_html"><div class="ttname"><a href="nucleo_2sistema_8hpp.html">sistema.hpp</a></div></div>
-<div class="ttc" id="asistema__de__renderizacao_8hpp_html"><div class="ttname"><a href="sistema__de__renderizacao_8hpp.html">sistema_de_renderizacao.hpp</a></div><div class="ttdoc">Gerencia a renderizacao.</div></div>
-<div class="ttc" id="astructbubble_1_1janela_html"><div class="ttname"><a href="structbubble_1_1janela.html">bubble::janela</a></div><div class="ttdoc">facilita o uso da janela glfw</div><div class="ttdef"><b>Definição</b> janela.hpp:34</div></div>
-<div class="ttc" id="astructbubble_1_1tempo_html"><div class="ttname"><a href="structbubble_1_1tempo.html">bubble::tempo</a></div><div class="ttdef"><b>Definição</b> tempo.hpp:19</div></div>
-<div class="ttc" id="astructbubble_1_1vetor2_html"><div class="ttname"><a href="structbubble_1_1vetor2.html">bubble::vetor2</a></div><div class="ttdef"><b>Definição</b> vetor2.hpp:20</div></div>
-<div class="ttc" id="atempo_8hpp_html"><div class="ttname"><a href="tempo_8hpp.html">tempo.hpp</a></div><div class="ttdoc">Inicia e gerencia o tempo.</div></div>
-<div class="ttc" id="avetor2_8hpp_html"><div class="ttname"><a href="vetor2_8hpp.html">vetor2.hpp</a></div></div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    <span class="keyword">inline</span> <a class="code hl_struct" href="structBECOMMONS__NS_1_1janela.html">janela</a>* instanciaJanela{ <span class="keyword">nullptr</span> };</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>}</div>
+<div class="ttc" id="abecommons_8hpp_html"><div class="ttname"><a href="becommons_8hpp.html">becommons.hpp</a></div></div>
+<div class="ttc" id="aclassBECOMMONS__NS_1_1inputs_html"><div class="ttname"><a href="classBECOMMONS__NS_1_1inputs.html">BECOMMONS_NS::inputs</a></div><div class="ttdef"><b>Definição</b> inputs.hpp:31</div></div>
+<div class="ttc" id="astructBECOMMONS__NS_1_1janela_html"><div class="ttname"><a href="structBECOMMONS__NS_1_1janela.html">BECOMMONS_NS::janela</a></div><div class="ttdoc">facilita o uso da janela glfw</div><div class="ttdef"><b>Definição</b> janela.hpp:30</div></div>
+<div class="ttc" id="astructBECOMMONS__NS_1_1tempo_html"><div class="ttname"><a href="structBECOMMONS__NS_1_1tempo.html">BECOMMONS_NS::tempo</a></div><div class="ttdef"><b>Definição</b> tempo.hpp:19</div></div>
+<div class="ttc" id="astructBECOMMONS__NS_1_1vetor2_html"><div class="ttname"><a href="structBECOMMONS__NS_1_1vetor2.html">BECOMMONS_NS::vetor2</a></div><div class="ttdef"><b>Definição</b> vetor2.hpp:20</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

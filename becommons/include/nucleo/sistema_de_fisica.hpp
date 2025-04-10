@@ -38,7 +38,7 @@ public:
     }
 };
 
-namespace bubble
+namespace BECOMMONS_NS
 {
 
     inline static btDiscreteDynamicsWorld* mundoDinamicoPrincipal;
@@ -49,7 +49,7 @@ namespace bubble
         ~sistema_fisica();
 
         void atualizar() override;
-        void inicializar(bubble::fase* f) override;
+        void inicializar(fase* f) override;
         void iniciarThread();
         void pararThread();
         bool remover(btRigidBody*& corpo);

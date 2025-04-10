@@ -10,11 +10,11 @@
  *
  */
 
+#pragma once
 #include <thread>
 #include <chrono>
-#pragma once
-
-namespace bubble
+#include "becommons.hpp"
+namespace BECOMMONS_NS
 {
     struct tempo {
         tempo() : tempoCorrido(std::chrono::high_resolution_clock::now()) {}

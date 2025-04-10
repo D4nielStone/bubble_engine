@@ -11,7 +11,7 @@
 #pragma once
 #include <string>
 
-namespace bubble
+namespace BECOMMONS_NS
 {
     struct textura {
         unsigned int id{0};

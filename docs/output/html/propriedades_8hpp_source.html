@@ -84,28 +84,28 @@ $(document).ready(function() { init_codefold(0); });
 <div class="contents">
 <a href="propriedades_8hpp.html">Ir para a documentação desse arquivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span> </div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#pragma once</span></div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &quot;<a class="code" href="componente_8hpp.html">componente.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &quot;<a class="code" href="becommons_8hpp.html">becommons.hpp</a>&quot;</span></div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="keyword">namespace </span>bubble</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="keyword">namespace </span>BECOMMONS_NS</div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>{</div>
 <div class="foldopen" id="foldopen00018" data-start="{" data-end="};">
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="structbubble_1_1propriedades.html">   18</a></span>    <span class="keyword">struct </span><a class="code hl_struct" href="structbubble_1_1propriedades.html">propriedades</a> : <a class="code hl_struct" href="structbubble_1_1componente.html">componente</a></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="structBECOMMONS__NS_1_1propriedades.html">   18</a></span>    <span class="keyword">struct </span><a class="code hl_struct" href="structBECOMMONS__NS_1_1propriedades.html">propriedades</a> : <a class="code hl_struct" href="structBECOMMONS__NS_1_1componente.html">componente</a></div>
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    {</div>
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>        </div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>        std::string nome;</div>
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>        std::string tag;</div>
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>        <span class="keywordtype">bool</span> ativo;</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>        <span class="keyword">static</span> <span class="keyword">constexpr</span> <a class="code hl_enumeration" href="structbubble_1_1componente.html#a8834f64f3b133879dd73ffb478dd1447">mascara</a> <a class="code hl_enumeration" href="structbubble_1_1componente.html#a8834f64f3b133879dd73ffb478dd1447">mascara</a> = COMPONENTE_PROPRIEDADES;</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>        <a class="code hl_struct" href="structbubble_1_1propriedades.html">propriedades</a>(<span class="keyword">const</span> std::string&amp; name = <span class="stringliteral">&quot;&quot;</span>, <span class="keyword">const</span> std::string&amp; tag = <span class="stringliteral">&quot;&quot;</span>, <span class="keywordtype">bool</span> active = <span class="keyword">true</span>)</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>        <span class="keyword">static</span> <span class="keyword">constexpr</span> <a class="code hl_enumeration" href="structBECOMMONS__NS_1_1componente.html#a63f9004bc698806fecbc2d677f8ee369">mascara</a> <a class="code hl_enumeration" href="structBECOMMONS__NS_1_1componente.html#a63f9004bc698806fecbc2d677f8ee369">mascara</a> = COMPONENTE_PROPRIEDADES;</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>        <a class="code hl_struct" href="structBECOMMONS__NS_1_1propriedades.html">propriedades</a>(<span class="keyword">const</span> std::string&amp; name = <span class="stringliteral">&quot;&quot;</span>, <span class="keyword">const</span> std::string&amp; tag = <span class="stringliteral">&quot;&quot;</span>, <span class="keywordtype">bool</span> active = <span class="keyword">true</span>)</div>
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>            : nome(name), tag(tag), ativo(active) {}</div>
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    };</div>
 </div>
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>}</div>
-<div class="ttc" id="acomponente_8hpp_html"><div class="ttname"><a href="componente_8hpp.html">componente.hpp</a></div><div class="ttdoc">Estrutura base para componetes.</div></div>
-<div class="ttc" id="astructbubble_1_1componente_html"><div class="ttname"><a href="structbubble_1_1componente.html">bubble::componente</a></div><div class="ttdoc">base para as funcionalidades da engine</div><div class="ttdef"><b>Definição</b> componente.hpp:29</div></div>
-<div class="ttc" id="astructbubble_1_1componente_html_a8834f64f3b133879dd73ffb478dd1447"><div class="ttname"><a href="structbubble_1_1componente.html#a8834f64f3b133879dd73ffb478dd1447">bubble::componente::mascara</a></div><div class="ttdeci">mascara</div><div class="ttdoc">facilita a identificacao dos componentes pertencentes a uma entidade</div><div class="ttdef"><b>Definição</b> componente.hpp:35</div></div>
-<div class="ttc" id="astructbubble_1_1propriedades_html"><div class="ttname"><a href="structbubble_1_1propriedades.html">bubble::propriedades</a></div><div class="ttdef"><b>Definição</b> propriedades.hpp:19</div></div>
+<div class="ttc" id="abecommons_8hpp_html"><div class="ttname"><a href="becommons_8hpp.html">becommons.hpp</a></div></div>
+<div class="ttc" id="astructBECOMMONS__NS_1_1componente_html"><div class="ttname"><a href="structBECOMMONS__NS_1_1componente.html">BECOMMONS_NS::componente</a></div><div class="ttdoc">base para as funcionalidades da engine</div><div class="ttdef"><b>Definição</b> componente.hpp:30</div></div>
+<div class="ttc" id="astructBECOMMONS__NS_1_1componente_html_a63f9004bc698806fecbc2d677f8ee369"><div class="ttname"><a href="structBECOMMONS__NS_1_1componente.html#a63f9004bc698806fecbc2d677f8ee369">BECOMMONS_NS::componente::mascara</a></div><div class="ttdeci">mascara</div><div class="ttdoc">facilita a identificacao dos componentes pertencentes a uma entidade</div><div class="ttdef"><b>Definição</b> componente.hpp:36</div></div>
+<div class="ttc" id="astructBECOMMONS__NS_1_1propriedades_html"><div class="ttname"><a href="structBECOMMONS__NS_1_1propriedades.html">BECOMMONS_NS::propriedades</a></div><div class="ttdef"><b>Definição</b> propriedades.hpp:19</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

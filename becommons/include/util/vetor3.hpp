@@ -11,9 +11,10 @@
 
 #pragma once
 #include <cmath>
+#include "becommons.hpp"
 /* Definição da estrutura vetor3 */
 
-namespace bubble
+namespace BECOMMONS_NS
 {
     template<class T>
     struct vetor3
@@ -143,4 +144,4 @@ namespace bubble
     };
 }
 
-typedef bubble::vetor3<float> vet3;
+typedef BECOMMONS_NS::vetor3<float> vet3;

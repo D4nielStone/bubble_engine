@@ -1,0 +1,60 @@
+/** @copyright Copyright (c) 2025 Daniel Oliveira */
+/**
+ * @file becommons.hpp
+ *
+ * @author Daniel O. dos Santos
+ * @date 2025-04-08
+ * @version 1.0
+ *
+ * @licence MIT License
+ */
+#pragma once
+#include "namespace.hpp"
+#include "util/vetor2.hpp"
+#include "util/vetor3.hpp"
+#include "util/vetor4.hpp"
+#include "util/cor.hpp"
+#include "util/textura.hpp"
+#include "util/vertice.hpp"
+#include "arquivadores/shader.hpp"
+#include "arquivadores/fonte.hpp"
+#include "arquivadores/imageloader.hpp"
+#include "arquivadores/modelo.hpp"
+#include "util/material.hpp"
+#include "util/caixa.hpp"
+#include "util/malha.hpp"
+#include "util/raio.hpp"
+#include "util/skybox.hpp"
+#include "api/api_lua.hpp"
+#include "api/mat.hpp"
+#include "componentes/camera.hpp"
+#include "componentes/camera_editor.hpp"
+#include "componentes/codigo.hpp"
+#include "componentes/componente.hpp"
+#include "componentes/fisica.hpp"
+#include "componentes/imagem.hpp"
+#include "componentes/luz_direcional.hpp"
+#include "componentes/luz_pontual.hpp"
+#include "componentes/propriedades.hpp"
+#include "componentes/renderizador.hpp"
+#include "componentes/terreno.hpp"
+#include "componentes/texto.hpp"
+#include "componentes/transformacao.hpp"
+#include "depuracao/debug.hpp"
+#include "depuracao/assert.hpp"
+#include "elementos/botao.hpp"
+#include "elementos/imagem.hpp"
+#include "elementos/texto.hpp"
+#include "entidades/entidade.hpp"
+#include "inputs/inputs.hpp"
+#include "nucleo/fase.hpp"
+#include "nucleo/projeto.hpp"
+#include "nucleo/registro.hpp"
+#include "nucleo/sistema.hpp"
+#include "nucleo/sistema_de_codigo.hpp"
+#include "nucleo/sistema_de_fisica.hpp"
+#include "nucleo/sistema_de_interface.hpp"
+#include "nucleo/sistema_de_renderizacao.hpp"
+#include "os/janela.hpp"
+#include "os/sistema.hpp"
+#include "os/tempo.hpp"
