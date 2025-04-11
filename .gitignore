@@ -13,6 +13,7 @@ jogos/releases
 */lib
 */lib64
 */out
+*/output
 */install
 
 # Ignorar arquivos específicos do sistema operacional
