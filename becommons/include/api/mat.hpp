@@ -1,15 +1,5 @@
-/** @copyright Copyright (c) 2025 Daniel Oliveira */
-/**
- * @file mat.hpp
- * @brief Gerencia funçoes matemáticas
- *
- * @author Daniel O. dos Santos
- * @date 2025-04-08
- * @version 1.0
- *
- * @licence MIT License
- */
-
+/// @file mat.hpp
+/// @brief Funções de matemática referentes à api lua
 
 #pragma once
 #include <glm/glm.hpp>
@@ -36,7 +26,7 @@ namespace BECOMMONS_NS {
 
 		return std::sqrt(dx * dx + dy * dy );
 	}
-}
+} // namespace becommons
 inline glm::vec3 operator*(const glm::vec3& lhs, const glm::vec3& rhs)
 {
 	return glm::vec3(lhs.x * rhs.x, lhs.y * rhs.y, lhs.z * rhs.z);

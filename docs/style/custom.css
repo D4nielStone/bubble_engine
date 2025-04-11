@@ -1,0 +1,5 @@
+/* Aplica Consolas como fonte global (opcional) */
+body {
+    font-family: Consolas, "Courier New", monospace;
+}
+

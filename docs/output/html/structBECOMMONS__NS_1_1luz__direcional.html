@@ -9,10 +9,15 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="custom.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -20,10 +25,11 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="banner.png"/></td>
   <td id="projectalign">
    <div id="projectname">Bubble Engine<span id="projectnumber">&#160;1.0b</span>
    </div>
-   <div id="projectbrief">Game engine eficiente para projetos pequenos</div>
+   <div id="projectbrief">Projeto independente de game engine eficiente para projetos pequenos</div>
   </td>
  </tr>
  </tbody>
@@ -47,6 +53,23 @@ $(function() {
 /* @license-end */
 </script>
 <div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('structBECOMMONS__NS_1_1luz__direcional.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -68,11 +91,6 @@ $(function() {
 </div>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><b>BECOMMONS_NS</b></li><li class="navelem"><a class="el" href="structBECOMMONS__NS_1_1luz__direcional.html">luz_direcional</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Membros Públicos</a> &#124;
@@ -82,40 +100,52 @@ $(function() {
   <div class="headertitle"><div class="title">Referência da Estrutura BECOMMONS_NS::luz_direcional</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="dynheader">
-Diagrama de hierarquia da classe BECOMMONS_NS::luz_direcional:</div>
-<div class="dyncontent">
+<div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Diagrama de hierarquia da classe BECOMMONS_NS::luz_direcional:</div>
+<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-0-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="structBECOMMONS__NS_1_1luz__direcional__inherit__graph.png" border="0" usemap="#aBECOMMONS__NS_1_1luz__direcional_inherit__map" alt="Inheritance graph"/></div>
-<!-- MAP 0 -->
-<center><span class="legend">[<a href="graph_legend.html">legenda</a>]</span></center></div>
-<div class="dynheader">
-Diagrama de colaboração para BECOMMONS_NS::luz_direcional:</div>
-<div class="dyncontent">
+<map name="aBECOMMONS__NS_1_1luz__direcional_inherit__map" id="aBECOMMONS__NS_1_1luz__direcional_inherit__map">
+<area shape="rect" title=" " alt="" coords="5,79,239,104"/>
+<area shape="rect" href="structBECOMMONS__NS_1_1componente.html" title="base para as funcionalidades da engine" alt="" coords="10,5,234,31"/>
+<area shape="poly" title=" " alt="" coords="125,44,125,79,119,79,119,44"/>
+</map>
+<center><span class="legend">[<a target="top" href="graph_legend.html">legenda</a>]</span></center></div>
+<div id="dynsection-1" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-1-trigger" src="closed.png" alt="+"/> Diagrama de colaboração para BECOMMONS_NS::luz_direcional:</div>
+<div id="dynsection-1-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-1-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="structBECOMMONS__NS_1_1luz__direcional__coll__graph.png" border="0" usemap="#aBECOMMONS__NS_1_1luz__direcional_coll__map" alt="Collaboration graph"/></div>
-<!-- MAP 1 -->
-<center><span class="legend">[<a href="graph_legend.html">legenda</a>]</span></center></div>
+<map name="aBECOMMONS__NS_1_1luz__direcional_coll__map" id="aBECOMMONS__NS_1_1luz__direcional_coll__map">
+<area shape="rect" title=" " alt="" coords="5,79,239,104"/>
+<area shape="rect" href="structBECOMMONS__NS_1_1componente.html" title="base para as funcionalidades da engine" alt="" coords="10,5,234,31"/>
+<area shape="poly" title=" " alt="" coords="125,44,125,79,119,79,119,44"/>
+</map>
+<center><span class="legend">[<a target="top" href="graph_legend.html">legenda</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Membros Públicos</h2></td></tr>
-<tr class="memitem:a546861ed5eb54721701bc9fc551bda5e" id="r_a546861ed5eb54721701bc9fc551bda5e"><td class="memItemLeft" align="right" valign="top"><a id="a546861ed5eb54721701bc9fc551bda5e" name="a546861ed5eb54721701bc9fc551bda5e"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>luz_direcional</b> (vet3 direcao, vet3 ambiente, vet3 <a class="el" href="structBECOMMONS__NS_1_1cor.html">cor</a>, float intensidade)</td></tr>
-<tr class="separator:a546861ed5eb54721701bc9fc551bda5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a29dbcb9ba22b1f310de9b2cd02aa56ae" id="r_a29dbcb9ba22b1f310de9b2cd02aa56ae"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structBECOMMONS__NS_1_1luz__direcional.html#a29dbcb9ba22b1f310de9b2cd02aa56ae">serializar</a> (rapidjson::Value &amp;value, rapidjson::Document::AllocatorType &amp;allocator) const override</td></tr>
-<tr class="separator:a29dbcb9ba22b1f310de9b2cd02aa56ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afb1fb4f0d0e4ac72cb77e50c6ae4afb4" id="r_afb1fb4f0d0e4ac72cb77e50c6ae4afb4"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structBECOMMONS__NS_1_1luz__direcional.html#afb1fb4f0d0e4ac72cb77e50c6ae4afb4">analizar</a> (const rapidjson::Value &amp;value) override</td></tr>
-<tr class="separator:afb1fb4f0d0e4ac72cb77e50c6ae4afb4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad76f55f26123bfbcc2b4589e7209e193" id="r_ad76f55f26123bfbcc2b4589e7209e193"><td class="memItemLeft" align="right" valign="top"><a id="ad76f55f26123bfbcc2b4589e7209e193" name="ad76f55f26123bfbcc2b4589e7209e193"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>luz_direcional</b> (fvet3 direcao, fvet3 ambiente, fvet3 <a class="el" href="structBECOMMONS__NS_1_1cor.html">cor</a>, float intensidade)</td></tr>
+<tr class="separator:ad76f55f26123bfbcc2b4589e7209e193"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a82b8e0656a22e68c6fddbf1961e2d423" id="r_a82b8e0656a22e68c6fddbf1961e2d423"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structBECOMMONS__NS_1_1luz__direcional.html#a82b8e0656a22e68c6fddbf1961e2d423">serializar</a> (rapidjson::Value &amp;value, rapidjson::Document::AllocatorType &amp;allocator) const override</td></tr>
+<tr class="separator:a82b8e0656a22e68c6fddbf1961e2d423"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a81c8327a4fd4594b97d0030c4b98e912" id="r_a81c8327a4fd4594b97d0030c4b98e912"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structBECOMMONS__NS_1_1luz__direcional.html#a81c8327a4fd4594b97d0030c4b98e912">analizar</a> (const rapidjson::Value &amp;value) override</td></tr>
+<tr class="separator:a81c8327a4fd4594b97d0030c4b98e912"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Atributos Públicos</h2></td></tr>
-<tr class="memitem:a1b7368b382d456b25cd7d18602f68eb2" id="r_a1b7368b382d456b25cd7d18602f68eb2"><td class="memItemLeft" align="right" valign="top"><a id="a1b7368b382d456b25cd7d18602f68eb2" name="a1b7368b382d456b25cd7d18602f68eb2"></a>
-vet3&#160;</td><td class="memItemRight" valign="bottom"><b>direcao</b></td></tr>
-<tr class="separator:a1b7368b382d456b25cd7d18602f68eb2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae2e281276d4ac04458469ae55502ee25" id="r_ae2e281276d4ac04458469ae55502ee25"><td class="memItemLeft" align="right" valign="top"><a id="ae2e281276d4ac04458469ae55502ee25" name="ae2e281276d4ac04458469ae55502ee25"></a>
-vet3&#160;</td><td class="memItemRight" valign="bottom"><b>ambiente</b></td></tr>
-<tr class="separator:ae2e281276d4ac04458469ae55502ee25"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a74170de78447b1c870d62865902e7c70" id="r_a74170de78447b1c870d62865902e7c70"><td class="memItemLeft" align="right" valign="top"><a id="a74170de78447b1c870d62865902e7c70" name="a74170de78447b1c870d62865902e7c70"></a>
-vet3&#160;</td><td class="memItemRight" valign="bottom"><b>cor</b></td></tr>
-<tr class="separator:a74170de78447b1c870d62865902e7c70"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a35193e807891bbeee96a7e2e00ee287a" id="r_a35193e807891bbeee96a7e2e00ee287a"><td class="memItemLeft" align="right" valign="top"><a id="a35193e807891bbeee96a7e2e00ee287a" name="a35193e807891bbeee96a7e2e00ee287a"></a>
+fvet3&#160;</td><td class="memItemRight" valign="bottom"><b>direcao</b></td></tr>
+<tr class="separator:a35193e807891bbeee96a7e2e00ee287a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9b1b6bb0710724a62b0c309756f93130" id="r_a9b1b6bb0710724a62b0c309756f93130"><td class="memItemLeft" align="right" valign="top"><a id="a9b1b6bb0710724a62b0c309756f93130" name="a9b1b6bb0710724a62b0c309756f93130"></a>
+fvet3&#160;</td><td class="memItemRight" valign="bottom"><b>ambiente</b></td></tr>
+<tr class="separator:a9b1b6bb0710724a62b0c309756f93130"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a22de89f20c79160868b48433b52323b0" id="r_a22de89f20c79160868b48433b52323b0"><td class="memItemLeft" align="right" valign="top"><a id="a22de89f20c79160868b48433b52323b0" name="a22de89f20c79160868b48433b52323b0"></a>
+fvet3&#160;</td><td class="memItemRight" valign="bottom"><b>cor</b></td></tr>
+<tr class="separator:a22de89f20c79160868b48433b52323b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:addd198a4b36a83d3b0aec0182e0d834b" id="r_addd198a4b36a83d3b0aec0182e0d834b"><td class="memItemLeft" align="right" valign="top"><a id="addd198a4b36a83d3b0aec0182e0d834b" name="addd198a4b36a83d3b0aec0182e0d834b"></a>
 float&#160;</td><td class="memItemRight" valign="bottom"><b>intensidade</b> = 1.f</td></tr>
 <tr class="separator:addd198a4b36a83d3b0aec0182e0d834b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -156,8 +186,8 @@ Outros membros herdados</h2></td></tr>
 <tr class="separator:a63f9004bc698806fecbc2d677f8ee369 inherit pub_types_structBECOMMONS__NS_1_1componente"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Documentação das funções</h2>
-<a id="afb1fb4f0d0e4ac72cb77e50c6ae4afb4" name="afb1fb4f0d0e4ac72cb77e50c6ae4afb4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afb1fb4f0d0e4ac72cb77e50c6ae4afb4">&#9670;&#160;</a></span>analizar()</h2>
+<a id="a81c8327a4fd4594b97d0030c4b98e912" name="a81c8327a4fd4594b97d0030c4b98e912"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a81c8327a4fd4594b97d0030c4b98e912">&#9670;&#160;</a></span>analizar()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -166,7 +196,7 @@ Outros membros herdados</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool BECOMMONS_NS::luz_direcional::analizar </td>
+          <td class="memname">bool luz_direcional::analizar </td>
           <td>(</td>
           <td class="paramtype">const rapidjson::Value &amp;&#160;</td>
           <td class="paramname"><em>value</em></td><td>)</td>
@@ -175,7 +205,7 @@ Outros membros herdados</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -184,8 +214,8 @@ Outros membros herdados</h2></td></tr>
 
 </div>
 </div>
-<a id="a29dbcb9ba22b1f310de9b2cd02aa56ae" name="a29dbcb9ba22b1f310de9b2cd02aa56ae"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a29dbcb9ba22b1f310de9b2cd02aa56ae">&#9670;&#160;</a></span>serializar()</h2>
+<a id="a82b8e0656a22e68c6fddbf1961e2d423" name="a82b8e0656a22e68c6fddbf1961e2d423"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a82b8e0656a22e68c6fddbf1961e2d423">&#9670;&#160;</a></span>serializar()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -194,7 +224,7 @@ Outros membros herdados</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool BECOMMONS_NS::luz_direcional::serializar </td>
+          <td class="memname">bool luz_direcional::serializar </td>
           <td>(</td>
           <td class="paramtype">rapidjson::Value &amp;&#160;</td>
           <td class="paramname"><em>value</em>, </td>
@@ -213,7 +243,7 @@ Outros membros herdados</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -222,13 +252,18 @@ Outros membros herdados</h2></td></tr>
 
 </div>
 </div>
-<hr/>A documentação para essa estrutura foi gerada a partir do seguinte arquivo:<ul>
+<hr/>A documentação para essa estrutura foi gerada a partir dos seguintes arquivos:<ul>
 <li>becommons/include/componentes/<a class="el" href="luz__direcional_8hpp_source.html">luz_direcional.hpp</a></li>
+<li>becommons/src/componentes/<b>luz_direcional.cpp</b></li>
 </ul>
 </div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Gerado por&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>BECOMMONS_NS</b></li><li class="navelem"><a class="el" href="structBECOMMONS__NS_1_1luz__direcional.html">luz_direcional</a></li>
+    <li class="footer">Gerado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+  </ul>
+</div>
 </body>
 </html>

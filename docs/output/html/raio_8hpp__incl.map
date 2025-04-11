@@ -1,0 +1,9 @@
+<map id="becommons/include/util/raio.hpp" name="becommons/include/util/raio.hpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="169,5,348,45"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,93,109,119"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="211,48,101,91,99,86,209,43"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="133,93,384,119"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="261,46,261,79,256,79,256,46"/>
+<area shape="rect" id="Node000004" href="$namespace_8hpp.html" title=" " alt="" coords="408,93,533,119"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="310,43,427,86,426,91,309,48"/>
+</map>

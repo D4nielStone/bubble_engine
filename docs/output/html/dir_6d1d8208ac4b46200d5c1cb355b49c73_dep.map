@@ -1,0 +1,16 @@
+<map id="becommons/include/nucleo" name="becommons/include/nucleo">
+<area shape="rect" id="node1" href="dir_0058f9f8930e3f234e27134542bf0d59.html" title="arquivadores" alt="" coords="27,125,133,151"/>
+<area shape="rect" id="node2" href="dir_01945739458c10315f029035be55b339.html" title="util" alt="" coords="157,125,200,151"/>
+<area shape="rect" id="node3" href="dir_111f21dc146a617cd827120506a93450.html" title="componentes" alt="" coords="225,125,335,151"/>
+<area shape="rect" id="node4" href="dir_ad84174b1d22f877aaa01cba77f76f93.html" title="entidades" alt="" coords="359,125,446,151"/>
+<area shape="rect" id="node5" href="dir_6d1d8208ac4b46200d5c1cb355b49c73.html" title="nucleo" alt="" coords="197,52,262,77"/>
+<area shape="poly" id="edge1" href="dir_000016_000002.html" alt="" coords="206,80,118,122,116,117,204,75"/>
+<area shape="rect" id="edge1-headlabel" href="dir_000016_000002.html" title="1" alt="" coords="120,118,129,132"/>
+<area shape="poly" id="edge2" href="dir_000016_000029.html" alt="" coords="223,79,197,116,193,113,219,76"/>
+<area shape="rect" id="edge2-headlabel" href="dir_000016_000029.html" title="1" alt="" coords="200,108,209,123"/>
+<area shape="poly" id="edge3" href="dir_000016_000005.html" alt="" coords="240,76,266,113,262,116,236,79"/>
+<area shape="rect" id="edge3-headlabel" href="dir_000016_000005.html" title="3" alt="" coords="263,98,273,113"/>
+<area shape="poly" id="edge4" href="dir_000016_000011.html" alt="" coords="258,75,363,118,361,122,256,80"/>
+<area shape="rect" id="edge4-headlabel" href="dir_000016_000011.html" title="1" alt="" coords="356,103,365,118"/>
+<area shape="rect" id="clust1" href="dir_9a744b5567c265deacf566b467d8af59.html" title="include" alt="" coords="16,16,457,161"/>
+</map>

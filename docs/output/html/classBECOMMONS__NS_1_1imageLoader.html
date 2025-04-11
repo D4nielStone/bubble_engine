@@ -9,10 +9,15 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="custom.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -20,10 +25,11 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="banner.png"/></td>
   <td id="projectalign">
    <div id="projectname">Bubble Engine<span id="projectnumber">&#160;1.0b</span>
    </div>
-   <div id="projectbrief">Game engine eficiente para projetos pequenos</div>
+   <div id="projectbrief">Projeto independente de game engine eficiente para projetos pequenos</div>
   </td>
  </tr>
  </tbody>
@@ -47,6 +53,23 @@ $(function() {
 /* @license-end */
 </script>
 <div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('classBECOMMONS__NS_1_1imageLoader.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -68,11 +91,6 @@ $(function() {
 </div>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><b>BECOMMONS_NS</b></li><li class="navelem"><a class="el" href="classBECOMMONS__NS_1_1imageLoader.html">imageLoader</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Membros Públicos</a> &#124;
@@ -86,33 +104,33 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Membros Públicos</h2></td></tr>
-<tr class="memitem:aa1ee62560a4780d7a34b503911cd9bee" id="r_aa1ee62560a4780d7a34b503911cd9bee"><td class="memItemLeft" align="right" valign="top"><a id="aa1ee62560a4780d7a34b503911cd9bee" name="aa1ee62560a4780d7a34b503911cd9bee"></a>
+<tr class="memitem:a091d1eaf9bdc4b08c255c6ce6ec6549d" id="r_a091d1eaf9bdc4b08c255c6ce6ec6549d"><td class="memItemLeft" align="right" valign="top"><a id="a091d1eaf9bdc4b08c255c6ce6ec6549d" name="a091d1eaf9bdc4b08c255c6ce6ec6549d"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>imageLoader</b> (const std::string &amp;filepath)</td></tr>
-<tr class="separator:aa1ee62560a4780d7a34b503911cd9bee"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a42555b465b721c62352a764d515bb709" id="r_a42555b465b721c62352a764d515bb709"><td class="memItemLeft" align="right" valign="top"><a id="a42555b465b721c62352a764d515bb709" name="a42555b465b721c62352a764d515bb709"></a>
+<tr class="separator:a091d1eaf9bdc4b08c255c6ce6ec6549d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a34408bcac348e7b151459b3989ac389e" id="r_a34408bcac348e7b151459b3989ac389e"><td class="memItemLeft" align="right" valign="top"><a id="a34408bcac348e7b151459b3989ac389e" name="a34408bcac348e7b151459b3989ac389e"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>obterLargura</b> () const</td></tr>
-<tr class="separator:a42555b465b721c62352a764d515bb709"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aac5ce5158b01e98c2b82bf0e94917c17" id="r_aac5ce5158b01e98c2b82bf0e94917c17"><td class="memItemLeft" align="right" valign="top"><a id="aac5ce5158b01e98c2b82bf0e94917c17" name="aac5ce5158b01e98c2b82bf0e94917c17"></a>
+<tr class="separator:a34408bcac348e7b151459b3989ac389e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abb60dd20b3073a5872de03a9ff7a3d4e" id="r_abb60dd20b3073a5872de03a9ff7a3d4e"><td class="memItemLeft" align="right" valign="top"><a id="abb60dd20b3073a5872de03a9ff7a3d4e" name="abb60dd20b3073a5872de03a9ff7a3d4e"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>obterAltura</b> () const</td></tr>
-<tr class="separator:aac5ce5158b01e98c2b82bf0e94917c17"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af38e65ef4b517c43c308dbbf686adfb2" id="r_af38e65ef4b517c43c308dbbf686adfb2"><td class="memItemLeft" align="right" valign="top"><a id="af38e65ef4b517c43c308dbbf686adfb2" name="af38e65ef4b517c43c308dbbf686adfb2"></a>
+<tr class="separator:abb60dd20b3073a5872de03a9ff7a3d4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab6496b85acb01b00e7ffa317f6ab9e7d" id="r_ab6496b85acb01b00e7ffa317f6ab9e7d"><td class="memItemLeft" align="right" valign="top"><a id="ab6496b85acb01b00e7ffa317f6ab9e7d" name="ab6496b85acb01b00e7ffa317f6ab9e7d"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>obterCanal</b> () const</td></tr>
-<tr class="separator:af38e65ef4b517c43c308dbbf686adfb2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9fe55b1674ae429a096b4859d39a5ee0" id="r_a9fe55b1674ae429a096b4859d39a5ee0"><td class="memItemLeft" align="right" valign="top"><a id="a9fe55b1674ae429a096b4859d39a5ee0" name="a9fe55b1674ae429a096b4859d39a5ee0"></a>
+<tr class="separator:ab6496b85acb01b00e7ffa317f6ab9e7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a60e78e783cb1d5f35c77b411d2d58b6f" id="r_a60e78e783cb1d5f35c77b411d2d58b6f"><td class="memItemLeft" align="right" valign="top"><a id="a60e78e783cb1d5f35c77b411d2d58b6f" name="a60e78e783cb1d5f35c77b411d2d58b6f"></a>
 unsigned char *&#160;</td><td class="memItemRight" valign="bottom"><b>obterDados</b> () const</td></tr>
-<tr class="separator:a9fe55b1674ae429a096b4859d39a5ee0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a953d2d1d25b7a0073a8e8dd1d9e37ae5" id="r_a953d2d1d25b7a0073a8e8dd1d9e37ae5"><td class="memItemLeft" align="right" valign="top"><a id="a953d2d1d25b7a0073a8e8dd1d9e37ae5" name="a953d2d1d25b7a0073a8e8dd1d9e37ae5"></a>
+<tr class="separator:a60e78e783cb1d5f35c77b411d2d58b6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0a5634575ed2f12827fa119249bdcb34" id="r_a0a5634575ed2f12827fa119249bdcb34"><td class="memItemLeft" align="right" valign="top"><a id="a0a5634575ed2f12827fa119249bdcb34" name="a0a5634575ed2f12827fa119249bdcb34"></a>
 GLFWimage&#160;</td><td class="memItemRight" valign="bottom"><b>converterParaGlfw</b> ()</td></tr>
-<tr class="separator:a953d2d1d25b7a0073a8e8dd1d9e37ae5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4de0b84f545f561ca82e7688d4e098f4" id="r_a4de0b84f545f561ca82e7688d4e098f4"><td class="memItemLeft" align="right" valign="top"><a id="a4de0b84f545f561ca82e7688d4e098f4" name="a4de0b84f545f561ca82e7688d4e098f4"></a>
+<tr class="separator:a0a5634575ed2f12827fa119249bdcb34"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5222e6548e0dba8fb0eec431f8133b23" id="r_a5222e6548e0dba8fb0eec431f8133b23"><td class="memItemLeft" align="right" valign="top"><a id="a5222e6548e0dba8fb0eec431f8133b23" name="a5222e6548e0dba8fb0eec431f8133b23"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>flipVertical</b> ()</td></tr>
-<tr class="separator:a4de0b84f545f561ca82e7688d4e098f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0013f3c259feaaa069a1dfe9537be3ab" id="r_a0013f3c259feaaa069a1dfe9537be3ab"><td class="memItemLeft" align="right" valign="top"><a id="a0013f3c259feaaa069a1dfe9537be3ab" name="a0013f3c259feaaa069a1dfe9537be3ab"></a>
+<tr class="separator:a5222e6548e0dba8fb0eec431f8133b23"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aca93ff2507e2062c06be0e63039673c5" id="r_aca93ff2507e2062c06be0e63039673c5"><td class="memItemLeft" align="right" valign="top"><a id="aca93ff2507e2062c06be0e63039673c5" name="aca93ff2507e2062c06be0e63039673c5"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>carregarImagem</b> (const std::string &amp;filepath)</td></tr>
-<tr class="separator:a0013f3c259feaaa069a1dfe9537be3ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4225ff51f2d83c190ba27bed83f02a6a" id="r_a4225ff51f2d83c190ba27bed83f02a6a"><td class="memItemLeft" align="right" valign="top"><a id="a4225ff51f2d83c190ba27bed83f02a6a" name="a4225ff51f2d83c190ba27bed83f02a6a"></a>
+<tr class="separator:aca93ff2507e2062c06be0e63039673c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4a80ac411adbc440f820bfe262d00572" id="r_a4a80ac411adbc440f820bfe262d00572"><td class="memItemLeft" align="right" valign="top"><a id="a4a80ac411adbc440f820bfe262d00572" name="a4a80ac411adbc440f820bfe262d00572"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>embutida</b> (BYTE *data, const unsigned int tamanho)</td></tr>
-<tr class="separator:a4225ff51f2d83c190ba27bed83f02a6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="separator:a4a80ac411adbc440f820bfe262d00572"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Membros públicos estáticos</h2></td></tr>
@@ -155,9 +173,13 @@ unsigned char *&#160;</td><td class="memItemRight" valign="bottom"><b>data</b></
 <li>becommons/src/arquivadores/<a class="el" href="imageloader_8cpp.html">imageloader.cpp</a></li>
 </ul>
 </div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Gerado por&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>BECOMMONS_NS</b></li><li class="navelem"><a class="el" href="classBECOMMONS__NS_1_1imageLoader.html">imageLoader</a></li>
+    <li class="footer">Gerado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+  </ul>
+</div>
 </body>
 </html>

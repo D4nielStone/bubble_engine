@@ -9,10 +9,15 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="custom.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -20,10 +25,11 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="banner.png"/></td>
   <td id="projectalign">
    <div id="projectname">Bubble Engine<span id="projectnumber">&#160;1.0b</span>
    </div>
-   <div id="projectbrief">Game engine eficiente para projetos pequenos</div>
+   <div id="projectbrief">Projeto independente de game engine eficiente para projetos pequenos</div>
   </td>
  </tr>
  </tbody>
@@ -47,6 +53,23 @@ $(function() {
 /* @license-end */
 </script>
 <div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('classBECOMMONS__NS_1_1sistema__renderizacao.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -68,11 +91,6 @@ $(function() {
 </div>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><b>BECOMMONS_NS</b></li><li class="navelem"><a class="el" href="classBECOMMONS__NS_1_1sistema__renderizacao.html">sistema_renderizacao</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Membros Públicos</a> &#124;
@@ -82,18 +100,52 @@ $(function() {
   <div class="headertitle"><div class="title">Referência da Classe BECOMMONS_NS::sistema_renderizacao</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="dynheader">
-Diagrama de hierarquia da classe BECOMMONS_NS::sistema_renderizacao:</div>
-<div class="dyncontent">
+<div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Diagrama de hierarquia da classe BECOMMONS_NS::sistema_renderizacao:</div>
+<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-0-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classBECOMMONS__NS_1_1sistema__renderizacao__inherit__graph.png" border="0" usemap="#aBECOMMONS__NS_1_1sistema__renderizacao_inherit__map" alt="Inheritance graph"/></div>
-<!-- MAP 0 -->
-<center><span class="legend">[<a href="graph_legend.html">legenda</a>]</span></center></div>
-<div class="dynheader">
-Diagrama de colaboração para BECOMMONS_NS::sistema_renderizacao:</div>
-<div class="dyncontent">
+<map name="aBECOMMONS__NS_1_1sistema__renderizacao_inherit__map" id="aBECOMMONS__NS_1_1sistema__renderizacao_inherit__map">
+<area shape="rect" title=" " alt="" coords="5,79,200,119"/>
+<area shape="rect" href="classBECOMMONS__NS_1_1sistema.html" title=" " alt="" coords="5,5,200,31"/>
+<area shape="poly" title=" " alt="" coords="105,44,105,79,100,79,100,44"/>
+</map>
+<center><span class="legend">[<a target="top" href="graph_legend.html">legenda</a>]</span></center></div>
+<div id="dynsection-1" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-1-trigger" src="closed.png" alt="+"/> Diagrama de colaboração para BECOMMONS_NS::sistema_renderizacao:</div>
+<div id="dynsection-1-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-1-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classBECOMMONS__NS_1_1sistema__renderizacao__coll__graph.png" border="0" usemap="#aBECOMMONS__NS_1_1sistema__renderizacao_coll__map" alt="Collaboration graph"/></div>
-<!-- MAP 1 -->
-<center><span class="legend">[<a href="graph_legend.html">legenda</a>]</span></center></div>
+<map name="aBECOMMONS__NS_1_1sistema__renderizacao_coll__map" id="aBECOMMONS__NS_1_1sistema__renderizacao_coll__map">
+<area shape="rect" title=" " alt="" coords="1324,140,1519,180"/>
+<area shape="rect" href="classBECOMMONS__NS_1_1sistema.html" title=" " alt="" coords="964,91,1159,117"/>
+<area shape="poly" title=" " alt="" coords="1158,116,1324,142,1323,147,1157,121"/>
+<area shape="rect" href="structBECOMMONS__NS_1_1fase.html" title=" " alt="" coords="641,39,811,65"/>
+<area shape="poly" title=" " alt="" coords="823,64,979,89,978,94,822,69"/>
+<area shape="rect" title=" " alt="" coords="347,5,496,45"/>
+<area shape="poly" title=" " alt="" coords="510,30,640,42,640,47,510,36"/>
+<area shape="rect" href="structBECOMMONS__NS_1_1registro.html" title="gerencia as entidades" alt="" coords="325,81,518,106"/>
+<area shape="poly" title=" " alt="" coords="531,92,964,100,964,105,531,98"/>
+<area shape="poly" title=" " alt="" coords="528,76,640,61,641,66,529,81"/>
+<area shape="rect" href="structBECOMMONS__NS_1_1camera.html" title="componente que facilita a manipuacao da matriz de visualizacao e projeco" alt="" coords="965,203,1157,229"/>
+<area shape="poly" title=" " alt="" coords="1157,199,1323,173,1324,178,1158,204"/>
+<area shape="rect" href="structBECOMMONS__NS_1_1componente.html" title="base para as funcionalidades da engine" alt="" coords="309,173,533,198"/>
+<area shape="poly" title=" " alt="" coords="547,179,733,180,837,185,940,193,992,201,991,206,940,199,837,190,733,185,547,184"/>
+<area shape="rect" href="classBECOMMONS__NS_1_1transformacao.html" title=" " alt="" coords="607,203,845,229"/>
+<area shape="poly" title=" " alt="" coords="547,195,607,201,606,207,547,201"/>
+<area shape="rect" href="classBECOMMONS__NS_1_1skybox.html" title=" " alt="" coords="631,253,821,278"/>
+<area shape="poly" title=" " alt="" coords="834,249,940,233,985,226,986,231,940,239,835,254"/>
+<area shape="rect" href="classBECOMMONS__NS_1_1modelo.html" title=" " alt="" coords="325,253,517,278"/>
+<area shape="poly" title=" " alt="" coords="531,263,631,263,631,268,531,268"/>
+<area shape="rect" href="classBECOMMONS__NS_1_1shader.html" title=" " alt="" coords="5,253,192,278"/>
+<area shape="poly" title=" " alt="" coords="206,263,325,263,325,268,206,268"/>
+<area shape="rect" href="structBECOMMONS__NS_1_1cor.html" title=" " alt="" coords="645,302,807,327"/>
+<area shape="poly" title=" " alt="" coords="806,297,845,288,892,278,939,264,1032,226,1034,231,941,269,894,283,846,293,807,302"/>
+<area shape="poly" title=" " alt="" coords="859,213,965,213,965,219,859,219"/>
+</map>
+<center><span class="legend">[<a target="top" href="graph_legend.html">legenda</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Membros Públicos</h2></td></tr>
@@ -130,9 +182,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>atualizarCamera</b> (
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
 Outros membros herdados</h2></td></tr>
 <tr class="inherit_header pro_attribs_classBECOMMONS__NS_1_1sistema"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classBECOMMONS__NS_1_1sistema')"><img src="closed.png" alt="-"/>&#160;Atributos Protegidos herdados de <a class="el" href="classBECOMMONS__NS_1_1sistema.html">BECOMMONS_NS::sistema</a></td></tr>
-<tr class="memitem:a015b87ce23c486b9bcf48d2be841839c inherit pro_attribs_classBECOMMONS__NS_1_1sistema" id="r_a015b87ce23c486b9bcf48d2be841839c"><td class="memItemLeft" align="right" valign="top">
-<a class="el" href="structBECOMMONS__NS_1_1fase.html">fase</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>_Mfase</b></td></tr>
-<tr class="separator:a015b87ce23c486b9bcf48d2be841839c inherit pro_attribs_classBECOMMONS__NS_1_1sistema"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af173d78c8a8583d27bc322ec176e0047 inherit pro_attribs_classBECOMMONS__NS_1_1sistema" id="r_af173d78c8a8583d27bc322ec176e0047"><td class="memItemLeft" align="right" valign="top">
+<a class="el" href="structBECOMMONS__NS_1_1fase.html">fase</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>m_fase</b></td></tr>
+<tr class="separator:af173d78c8a8583d27bc322ec176e0047 inherit pro_attribs_classBECOMMONS__NS_1_1sistema"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8e478741504bae646a34da80ee35ac6e inherit pro_attribs_classBECOMMONS__NS_1_1sistema" id="r_a8e478741504bae646a34da80ee35ac6e"><td class="memItemLeft" align="right" valign="top">
 <a class="el" href="structBECOMMONS__NS_1_1registro.html">registro</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>reg</b></td></tr>
 <tr class="separator:a8e478741504bae646a34da80ee35ac6e inherit pro_attribs_classBECOMMONS__NS_1_1sistema"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -199,7 +251,7 @@ Outros membros herdados</h2></td></tr>
 
 <p>Inicializa o sistema. </p>
 
-<p>Reimplementa <a class="el" href="classBECOMMONS__NS_1_1sistema.html#ad3055b86fdcd6508539786e3b49ac1b0">BECOMMONS_NS::sistema</a>.</p>
+<p>Reimplementa <a class="el" href="classBECOMMONS__NS_1_1sistema.html#a07203461ea0705a701d3feeb19cd6b4a">BECOMMONS_NS::sistema</a>.</p>
 
 </div>
 </div>
@@ -208,9 +260,13 @@ Outros membros herdados</h2></td></tr>
 <li>becommons/src/nucleo/<a class="el" href="sistema__de__renderizacao_8cpp.html">sistema_de_renderizacao.cpp</a></li>
 </ul>
 </div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Gerado por&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>BECOMMONS_NS</b></li><li class="navelem"><a class="el" href="classBECOMMONS__NS_1_1sistema__renderizacao.html">sistema_renderizacao</a></li>
+    <li class="footer">Gerado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+  </ul>
+</div>
 </body>
 </html>

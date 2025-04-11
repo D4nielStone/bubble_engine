@@ -9,10 +9,15 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="custom.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -20,10 +25,11 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="banner.png"/></td>
   <td id="projectalign">
    <div id="projectname">Bubble Engine<span id="projectnumber">&#160;1.0b</span>
    </div>
-   <div id="projectbrief">Game engine eficiente para projetos pequenos</div>
+   <div id="projectbrief">Projeto independente de game engine eficiente para projetos pequenos</div>
   </td>
  </tr>
  </tbody>
@@ -47,6 +53,23 @@ $(function() {
 /* @license-end */
 </script>
 <div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('structBECOMMONS__NS_1_1camera__editor.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -68,11 +91,6 @@ $(function() {
 </div>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><b>BECOMMONS_NS</b></li><li class="navelem"><a class="el" href="structBECOMMONS__NS_1_1camera__editor.html">camera_editor</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Membros Públicos</a> &#124;
@@ -81,18 +99,45 @@ $(function() {
   <div class="headertitle"><div class="title">Referência da Estrutura BECOMMONS_NS::camera_editor</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="dynheader">
-Diagrama de hierarquia da classe BECOMMONS_NS::camera_editor:</div>
-<div class="dyncontent">
+<div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Diagrama de hierarquia da classe BECOMMONS_NS::camera_editor:</div>
+<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-0-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="structBECOMMONS__NS_1_1camera__editor__inherit__graph.png" border="0" usemap="#aBECOMMONS__NS_1_1camera__editor_inherit__map" alt="Inheritance graph"/></div>
-<!-- MAP 0 -->
-<center><span class="legend">[<a href="graph_legend.html">legenda</a>]</span></center></div>
-<div class="dynheader">
-Diagrama de colaboração para BECOMMONS_NS::camera_editor:</div>
-<div class="dyncontent">
+<map name="aBECOMMONS__NS_1_1camera__editor_inherit__map" id="aBECOMMONS__NS_1_1camera__editor_inherit__map">
+<area shape="rect" title=" " alt="" coords="21,152,213,192"/>
+<area shape="rect" href="structBECOMMONS__NS_1_1camera.html" title="componente que facilita a manipuacao da matriz de visualizacao e projeco" alt="" coords="21,79,213,104"/>
+<area shape="poly" title=" " alt="" coords="120,118,120,152,115,152,115,118"/>
+<area shape="rect" href="structBECOMMONS__NS_1_1componente.html" title="base para as funcionalidades da engine" alt="" coords="5,5,229,31"/>
+<area shape="poly" title=" " alt="" coords="120,44,120,79,115,79,115,44"/>
+</map>
+<center><span class="legend">[<a target="top" href="graph_legend.html">legenda</a>]</span></center></div>
+<div id="dynsection-1" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-1-trigger" src="closed.png" alt="+"/> Diagrama de colaboração para BECOMMONS_NS::camera_editor:</div>
+<div id="dynsection-1-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-1-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="structBECOMMONS__NS_1_1camera__editor__coll__graph.png" border="0" usemap="#aBECOMMONS__NS_1_1camera__editor_coll__map" alt="Collaboration graph"/></div>
-<!-- MAP 1 -->
-<center><span class="legend">[<a href="graph_legend.html">legenda</a>]</span></center></div>
+<map name="aBECOMMONS__NS_1_1camera__editor_coll__map" id="aBECOMMONS__NS_1_1camera__editor_coll__map">
+<area shape="rect" title=" " alt="" coords="1181,55,1373,95"/>
+<area shape="rect" href="structBECOMMONS__NS_1_1camera.html" title="componente que facilita a manipuacao da matriz de visualizacao e projeco" alt="" coords="940,63,1132,88"/>
+<area shape="poly" title=" " alt="" coords="1145,73,1181,73,1181,78,1145,78"/>
+<area shape="rect" href="structBECOMMONS__NS_1_1componente.html" title="base para as funcionalidades da engine" alt="" coords="309,5,533,31"/>
+<area shape="poly" title=" " alt="" coords="547,10,630,10,723,13,821,23,917,39,994,60,993,65,915,45,820,28,723,19,630,15,547,15"/>
+<area shape="rect" href="classBECOMMONS__NS_1_1transformacao.html" title=" " alt="" coords="583,39,821,64"/>
+<area shape="poly" title=" " alt="" coords="542,30,595,36,594,41,542,35"/>
+<area shape="rect" href="classBECOMMONS__NS_1_1skybox.html" title=" " alt="" coords="607,88,797,113"/>
+<area shape="poly" title=" " alt="" coords="811,92,916,85,939,83,940,88,916,90,811,97"/>
+<area shape="rect" href="classBECOMMONS__NS_1_1modelo.html" title=" " alt="" coords="325,88,517,113"/>
+<area shape="poly" title=" " alt="" coords="531,98,607,98,607,103,531,103"/>
+<area shape="rect" href="classBECOMMONS__NS_1_1shader.html" title=" " alt="" coords="5,88,192,113"/>
+<area shape="poly" title=" " alt="" coords="206,98,325,98,325,103,206,103"/>
+<area shape="rect" href="structBECOMMONS__NS_1_1cor.html" title=" " alt="" coords="621,137,783,163"/>
+<area shape="poly" title=" " alt="" coords="797,134,915,110,998,85,999,91,917,115,798,139"/>
+<area shape="poly" title=" " alt="" coords="835,58,940,66,940,71,835,64"/>
+</map>
+<center><span class="legend">[<a target="top" href="graph_legend.html">legenda</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Membros Públicos</h2></td></tr>
@@ -100,43 +145,43 @@ Membros Públicos</h2></td></tr>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>atualizarMovimentacao</b> ()</td></tr>
 <tr class="separator:a62bb520093fd0c800a047604b9c348ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_structBECOMMONS__NS_1_1camera"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_structBECOMMONS__NS_1_1camera')"><img src="closed.png" alt="-"/>&#160;Membros Públicos herdados de <a class="el" href="structBECOMMONS__NS_1_1camera.html">BECOMMONS_NS::camera</a></td></tr>
-<tr class="memitem:a349c84221c6d0379874b165787f58d2e inherit pub_methods_structBECOMMONS__NS_1_1camera" id="r_a349c84221c6d0379874b165787f58d2e"><td class="memItemLeft" align="right" valign="top">
+<tr class="memitem:a0e566cc080c1518a8d73dd99f8f8f535 inherit pub_methods_structBECOMMONS__NS_1_1camera" id="r_a0e566cc080c1518a8d73dd99f8f8f535"><td class="memItemLeft" align="right" valign="top">
 void&#160;</td><td class="memItemRight" valign="bottom"><b>desenharFB</b> () const</td></tr>
-<tr class="separator:a349c84221c6d0379874b165787f58d2e inherit pub_methods_structBECOMMONS__NS_1_1camera"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1c511cb497cd78677a2907f9174385bd inherit pub_methods_structBECOMMONS__NS_1_1camera" id="r_a1c511cb497cd78677a2907f9174385bd"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structBECOMMONS__NS_1_1camera.html#a1c511cb497cd78677a2907f9174385bd">analizar</a> (const rapidjson::Value &amp;) override</td></tr>
-<tr class="separator:a1c511cb497cd78677a2907f9174385bd inherit pub_methods_structBECOMMONS__NS_1_1camera"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab5b8ea788bb698886175a24a016f53f4 inherit pub_methods_structBECOMMONS__NS_1_1camera" id="r_ab5b8ea788bb698886175a24a016f53f4"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structBECOMMONS__NS_1_1camera.html#ab5b8ea788bb698886175a24a016f53f4">serializar</a> (rapidjson::Value &amp;value, rapidjson::Document::AllocatorType &amp;allocator) const override</td></tr>
-<tr class="separator:ab5b8ea788bb698886175a24a016f53f4 inherit pub_methods_structBECOMMONS__NS_1_1camera"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a45871689053d613d3af4bb079eea3d57 inherit pub_methods_structBECOMMONS__NS_1_1camera" id="r_a45871689053d613d3af4bb079eea3d57"><td class="memItemLeft" align="right" valign="top">
+<tr class="separator:a0e566cc080c1518a8d73dd99f8f8f535 inherit pub_methods_structBECOMMONS__NS_1_1camera"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a18c03003902f6fcc185697b6347e8c12 inherit pub_methods_structBECOMMONS__NS_1_1camera" id="r_a18c03003902f6fcc185697b6347e8c12"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structBECOMMONS__NS_1_1camera.html#a18c03003902f6fcc185697b6347e8c12">analizar</a> (const rapidjson::Value &amp;) override</td></tr>
+<tr class="separator:a18c03003902f6fcc185697b6347e8c12 inherit pub_methods_structBECOMMONS__NS_1_1camera"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae11eb1c55d3c09337a983fe8cb02954f inherit pub_methods_structBECOMMONS__NS_1_1camera" id="r_ae11eb1c55d3c09337a983fe8cb02954f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structBECOMMONS__NS_1_1camera.html#ae11eb1c55d3c09337a983fe8cb02954f">serializar</a> (rapidjson::Value &amp;value, rapidjson::Document::AllocatorType &amp;allocator) const override</td></tr>
+<tr class="separator:ae11eb1c55d3c09337a983fe8cb02954f inherit pub_methods_structBECOMMONS__NS_1_1camera"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9eeae08e1e6921cddd2888ca5020e850 inherit pub_methods_structBECOMMONS__NS_1_1camera" id="r_a9eeae08e1e6921cddd2888ca5020e850"><td class="memItemLeft" align="right" valign="top">
 &#160;</td><td class="memItemRight" valign="bottom"><b>camera</b> (const bool ortho=false)</td></tr>
-<tr class="separator:a45871689053d613d3af4bb079eea3d57 inherit pub_methods_structBECOMMONS__NS_1_1camera"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a227f04f29ea71b3832cd9e250f754b8d inherit pub_methods_structBECOMMONS__NS_1_1camera" id="r_a227f04f29ea71b3832cd9e250f754b8d"><td class="memItemLeft" align="right" valign="top">
+<tr class="separator:a9eeae08e1e6921cddd2888ca5020e850 inherit pub_methods_structBECOMMONS__NS_1_1camera"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af1dbf03805f9246c0f1a46e7373ecd09 inherit pub_methods_structBECOMMONS__NS_1_1camera" id="r_af1dbf03805f9246c0f1a46e7373ecd09"><td class="memItemLeft" align="right" valign="top">
 void&#160;</td><td class="memItemRight" valign="bottom"><b>ativarFB</b> ()</td></tr>
-<tr class="separator:a227f04f29ea71b3832cd9e250f754b8d inherit pub_methods_structBECOMMONS__NS_1_1camera"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1c96714a0b6d14e0030509a1893a4667 inherit pub_methods_structBECOMMONS__NS_1_1camera" id="r_a1c96714a0b6d14e0030509a1893a4667"><td class="memItemLeft" align="right" valign="top">
+<tr class="separator:af1dbf03805f9246c0f1a46e7373ecd09 inherit pub_methods_structBECOMMONS__NS_1_1camera"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adb94c8bb1ac397866227031931eac887 inherit pub_methods_structBECOMMONS__NS_1_1camera" id="r_adb94c8bb1ac397866227031931eac887"><td class="memItemLeft" align="right" valign="top">
 void&#160;</td><td class="memItemRight" valign="bottom"><b>desativarFB</b> ()</td></tr>
-<tr class="separator:a1c96714a0b6d14e0030509a1893a4667 inherit pub_methods_structBECOMMONS__NS_1_1camera"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a428ddd234e5d73118a192899cfa5f942 inherit pub_methods_structBECOMMONS__NS_1_1camera" id="r_a428ddd234e5d73118a192899cfa5f942"><td class="memItemLeft" align="right" valign="top">
+<tr class="separator:adb94c8bb1ac397866227031931eac887 inherit pub_methods_structBECOMMONS__NS_1_1camera"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4408727e1c5dddb6cdc0118892e389d0 inherit pub_methods_structBECOMMONS__NS_1_1camera" id="r_a4408727e1c5dddb6cdc0118892e389d0"><td class="memItemLeft" align="right" valign="top">
 glm::mat4&#160;</td><td class="memItemRight" valign="bottom"><b>obtViewMatrix</b> ()</td></tr>
-<tr class="separator:a428ddd234e5d73118a192899cfa5f942 inherit pub_methods_structBECOMMONS__NS_1_1camera"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8eb26d172c2b67a3763827aa027c0d05 inherit pub_methods_structBECOMMONS__NS_1_1camera" id="r_a8eb26d172c2b67a3763827aa027c0d05"><td class="memItemLeft" align="right" valign="top">
-void&#160;</td><td class="memItemRight" valign="bottom"><b>viewport</b> (const BECOMMONS_NS <a class="el" href="structBECOMMONS__NS_1_1vetor2.html">vetor2</a>&lt; double &gt; &amp;viewp)</td></tr>
-<tr class="separator:a8eb26d172c2b67a3763827aa027c0d05 inherit pub_methods_structBECOMMONS__NS_1_1camera"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a15a15c3e31ab977fa2915f451f75edce inherit pub_methods_structBECOMMONS__NS_1_1camera" id="r_a15a15c3e31ab977fa2915f451f75edce"><td class="memItemLeft" align="right" valign="top">
+<tr class="separator:a4408727e1c5dddb6cdc0118892e389d0 inherit pub_methods_structBECOMMONS__NS_1_1camera"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4bbbeacc46ab8920d34f359da5757dc1 inherit pub_methods_structBECOMMONS__NS_1_1camera" id="r_a4bbbeacc46ab8920d34f359da5757dc1"><td class="memItemLeft" align="right" valign="top">
+void&#160;</td><td class="memItemRight" valign="bottom"><b>viewport</b> (const <a class="el" href="structBECOMMONS__NS_1_1vetor2.html">vetor2</a>&lt; double &gt; &amp;viewp)</td></tr>
+<tr class="separator:a4bbbeacc46ab8920d34f359da5757dc1 inherit pub_methods_structBECOMMONS__NS_1_1camera"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa0637efdaa30b7610a91aba5c03d476d inherit pub_methods_structBECOMMONS__NS_1_1camera" id="r_aa0637efdaa30b7610a91aba5c03d476d"><td class="memItemLeft" align="right" valign="top">
 glm::mat4&#160;</td><td class="memItemRight" valign="bottom"><b>obtProjectionMatrix</b> ()</td></tr>
-<tr class="separator:a15a15c3e31ab977fa2915f451f75edce inherit pub_methods_structBECOMMONS__NS_1_1camera"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aafd35388eac0d936425269b58fe7ceac inherit pub_methods_structBECOMMONS__NS_1_1camera" id="r_aafd35388eac0d936425269b58fe7ceac"><td class="memItemLeft" align="right" valign="top">
-<a class="el" href="structBECOMMONS__NS_1_1raio.html">raio</a>&#160;</td><td class="memItemRight" valign="bottom"><b>pontoParaRaio</b> (BECOMMONS_NS <a class="el" href="structBECOMMONS__NS_1_1vetor2.html">vetor2</a>&lt; double &gt; screenPoint) const</td></tr>
-<tr class="separator:aafd35388eac0d936425269b58fe7ceac inherit pub_methods_structBECOMMONS__NS_1_1camera"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9b904c7b6a3317a30b7befd414f1245a inherit pub_methods_structBECOMMONS__NS_1_1camera" id="r_a9b904c7b6a3317a30b7befd414f1245a"><td class="memItemLeft" align="right" valign="top">
-glm::vec3&#160;</td><td class="memItemRight" valign="bottom"><b>telaParaMundo</b> (const BECOMMONS_NS <a class="el" href="structBECOMMONS__NS_1_1vetor2.html">vetor2</a>&lt; double &gt; &amp;screenPoint, float profundidade) const</td></tr>
-<tr class="separator:a9b904c7b6a3317a30b7befd414f1245a inherit pub_methods_structBECOMMONS__NS_1_1camera"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae45d28728e5b0189c208ead30719621d inherit pub_methods_structBECOMMONS__NS_1_1camera" id="r_ae45d28728e5b0189c208ead30719621d"><td class="memItemLeft" align="right" valign="top">
-BECOMMONS_NS <a class="el" href="structBECOMMONS__NS_1_1vetor2.html">vetor2</a>&lt; int &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>mundoParaTela</b> (const glm::vec3 &amp;mundoPos)</td></tr>
-<tr class="separator:ae45d28728e5b0189c208ead30719621d inherit pub_methods_structBECOMMONS__NS_1_1camera"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3afeecf736d34de300e045f7fe49940c inherit pub_methods_structBECOMMONS__NS_1_1camera" id="r_a3afeecf736d34de300e045f7fe49940c"><td class="memItemLeft" align="right" valign="top">
+<tr class="separator:aa0637efdaa30b7610a91aba5c03d476d inherit pub_methods_structBECOMMONS__NS_1_1camera"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2c8c1a72766368649436f7b501ebd229 inherit pub_methods_structBECOMMONS__NS_1_1camera" id="r_a2c8c1a72766368649436f7b501ebd229"><td class="memItemLeft" align="right" valign="top">
+<a class="el" href="structBECOMMONS__NS_1_1raio.html">raio</a>&#160;</td><td class="memItemRight" valign="bottom"><b>pontoParaRaio</b> (<a class="el" href="structBECOMMONS__NS_1_1vetor2.html">vetor2</a>&lt; double &gt; screenPoint) const</td></tr>
+<tr class="separator:a2c8c1a72766368649436f7b501ebd229 inherit pub_methods_structBECOMMONS__NS_1_1camera"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a134b3233918f041af0224ee1640183b2 inherit pub_methods_structBECOMMONS__NS_1_1camera" id="r_a134b3233918f041af0224ee1640183b2"><td class="memItemLeft" align="right" valign="top">
+glm::vec3&#160;</td><td class="memItemRight" valign="bottom"><b>telaParaMundo</b> (const <a class="el" href="structBECOMMONS__NS_1_1vetor2.html">vetor2</a>&lt; double &gt; &amp;screenPoint, float profundidade) const</td></tr>
+<tr class="separator:a134b3233918f041af0224ee1640183b2 inherit pub_methods_structBECOMMONS__NS_1_1camera"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afed0f974974ee72dbb7a47c5dafd3a0d inherit pub_methods_structBECOMMONS__NS_1_1camera" id="r_afed0f974974ee72dbb7a47c5dafd3a0d"><td class="memItemLeft" align="right" valign="top">
+<a class="el" href="structBECOMMONS__NS_1_1vetor2.html">vetor2</a>&lt; int &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>mundoParaTela</b> (const glm::vec3 &amp;mundoPos)</td></tr>
+<tr class="separator:afed0f974974ee72dbb7a47c5dafd3a0d inherit pub_methods_structBECOMMONS__NS_1_1camera"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8d490f16af875e902fda66e5d6d1d637 inherit pub_methods_structBECOMMONS__NS_1_1camera" id="r_a8d490f16af875e902fda66e5d6d1d637"><td class="memItemLeft" align="right" valign="top">
 void&#160;</td><td class="memItemRight" valign="bottom"><b>mover</b> (glm::vec3 pos)</td></tr>
-<tr class="separator:a3afeecf736d34de300e045f7fe49940c inherit pub_methods_structBECOMMONS__NS_1_1camera"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="separator:a8d490f16af875e902fda66e5d6d1d637 inherit pub_methods_structBECOMMONS__NS_1_1camera"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Atributos Públicos</h2></td></tr>
@@ -151,7 +196,7 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>mousey_antigo</b></t
 <tr class="separator:a84c3c7ff95da74ae2c90ca96393237e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_attribs_structBECOMMONS__NS_1_1camera"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_structBECOMMONS__NS_1_1camera')"><img src="closed.png" alt="-"/>&#160;Atributos Públicos herdados de <a class="el" href="structBECOMMONS__NS_1_1camera.html">BECOMMONS_NS::camera</a></td></tr>
 <tr class="memitem:a8cf6cb782b12dc93819acc414db7a15d inherit pub_attribs_structBECOMMONS__NS_1_1camera" id="r_a8cf6cb782b12dc93819acc414db7a15d"><td class="memItemLeft" align="right" valign="top">
-<a class="el" href="structBECOMMONS__NS_1_1skybox.html">skybox</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>m_skybox</b> {nullptr}</td></tr>
+<a class="el" href="classBECOMMONS__NS_1_1skybox.html">skybox</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>m_skybox</b> {nullptr}</td></tr>
 <tr class="separator:a8cf6cb782b12dc93819acc414db7a15d inherit pub_attribs_structBECOMMONS__NS_1_1camera"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac8141755339ab468074188b98d02b8cc inherit pub_attribs_structBECOMMONS__NS_1_1camera" id="r_ac8141755339ab468074188b98d02b8cc"><td class="memItemLeft" align="right" valign="top">
 <a class="el" href="structBECOMMONS__NS_1_1cor.html">cor</a>&#160;</td><td class="memItemRight" valign="bottom"><b>ceu</b> {0.43F, 0.78F, 0.86F, 1.0F}</td></tr>
@@ -168,9 +213,9 @@ glm::vec3&#160;</td><td class="memItemRight" valign="bottom"><b>cima</b></td></t
 <tr class="memitem:a2526a61156ce6fa5c027b14b21d6359c inherit pub_attribs_structBECOMMONS__NS_1_1camera" id="r_a2526a61156ce6fa5c027b14b21d6359c"><td class="memItemLeft" align="right" valign="top">
 glm::vec3&#160;</td><td class="memItemRight" valign="bottom"><b>posicao</b></td></tr>
 <tr class="separator:a2526a61156ce6fa5c027b14b21d6359c inherit pub_attribs_structBECOMMONS__NS_1_1camera"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a483885ecb78159269b3b7fb554081c8d inherit pub_attribs_structBECOMMONS__NS_1_1camera" id="r_a483885ecb78159269b3b7fb554081c8d"><td class="memItemLeft" align="right" valign="top">
-std::shared_ptr&lt; <a class="el" href="structBECOMMONS__NS_1_1transformacao.html">transformacao</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>transform</b> { nullptr }</td></tr>
-<tr class="separator:a483885ecb78159269b3b7fb554081c8d inherit pub_attribs_structBECOMMONS__NS_1_1camera"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a18a5974f2372fc8104157c13d183d556 inherit pub_attribs_structBECOMMONS__NS_1_1camera" id="r_a18a5974f2372fc8104157c13d183d556"><td class="memItemLeft" align="right" valign="top">
+<a class="el" href="classBECOMMONS__NS_1_1transformacao.html">transformacao</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>transform</b> { nullptr }</td></tr>
+<tr class="separator:a18a5974f2372fc8104157c13d183d556 inherit pub_attribs_structBECOMMONS__NS_1_1camera"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9b513e1c566fcb0292926e91857f1f56 inherit pub_attribs_structBECOMMONS__NS_1_1camera" id="r_a9b513e1c566fcb0292926e91857f1f56"><td class="memItemLeft" align="right" valign="top">
 glm::mat4&#160;</td><td class="memItemRight" valign="bottom"><b>viewMatrix</b> = glm::mat4(1.f)</td></tr>
 <tr class="separator:a9b513e1c566fcb0292926e91857f1f56 inherit pub_attribs_structBECOMMONS__NS_1_1camera"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -219,12 +264,12 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>flag_orth</b> { false
 <tr class="memitem:ab63734660e95f3f68d287d01fc60518c inherit pub_attribs_structBECOMMONS__NS_1_1camera" id="r_ab63734660e95f3f68d287d01fc60518c"><td class="memItemLeft" align="right" valign="top">
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>flag_fb</b> { false }</td></tr>
 <tr class="separator:ab63734660e95f3f68d287d01fc60518c inherit pub_attribs_structBECOMMONS__NS_1_1camera"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a049cdcc6b9b3d8f388967e5115910731 inherit pub_attribs_structBECOMMONS__NS_1_1camera" id="r_a049cdcc6b9b3d8f388967e5115910731"><td class="memItemLeft" align="right" valign="top">
-BECOMMONS_NS <a class="el" href="structBECOMMONS__NS_1_1vetor2.html">vetor2</a>&lt; double &gt; *&#160;</td><td class="memItemRight" valign="bottom"><b>viewport_ptr</b> { nullptr }</td></tr>
-<tr class="separator:a049cdcc6b9b3d8f388967e5115910731 inherit pub_attribs_structBECOMMONS__NS_1_1camera"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae7e592c8bf8a12973241d35903f18a95 inherit pub_attribs_structBECOMMONS__NS_1_1camera" id="r_ae7e592c8bf8a12973241d35903f18a95"><td class="memItemLeft" align="right" valign="top">
-BECOMMONS_NS <a class="el" href="structBECOMMONS__NS_1_1vetor2.html">vetor2</a>&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>viewportFBO</b> { 400, 400 }</td></tr>
-<tr class="separator:ae7e592c8bf8a12973241d35903f18a95 inherit pub_attribs_structBECOMMONS__NS_1_1camera"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a59f2f46abd264ae501487d99c8adcc62 inherit pub_attribs_structBECOMMONS__NS_1_1camera" id="r_a59f2f46abd264ae501487d99c8adcc62"><td class="memItemLeft" align="right" valign="top">
+<a class="el" href="structBECOMMONS__NS_1_1vetor2.html">vetor2</a>&lt; double &gt; *&#160;</td><td class="memItemRight" valign="bottom"><b>viewport_ptr</b> { nullptr }</td></tr>
+<tr class="separator:a59f2f46abd264ae501487d99c8adcc62 inherit pub_attribs_structBECOMMONS__NS_1_1camera"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af05d1a682cff3c4492623ea18e79ba3d inherit pub_attribs_structBECOMMONS__NS_1_1camera" id="r_af05d1a682cff3c4492623ea18e79ba3d"><td class="memItemLeft" align="right" valign="top">
+<a class="el" href="structBECOMMONS__NS_1_1vetor2.html">vetor2</a>&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>viewportFBO</b> { 400, 400 }</td></tr>
+<tr class="separator:af05d1a682cff3c4492623ea18e79ba3d inherit pub_attribs_structBECOMMONS__NS_1_1camera"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_attribs_structBECOMMONS__NS_1_1componente"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_structBECOMMONS__NS_1_1componente')"><img src="closed.png" alt="-"/>&#160;Atributos Públicos herdados de <a class="el" href="structBECOMMONS__NS_1_1componente.html">BECOMMONS_NS::componente</a></td></tr>
 <tr class="memitem:a198888339edd6c4a74869037e26badc3 inherit pub_attribs_structBECOMMONS__NS_1_1componente" id="r_a198888339edd6c4a74869037e26badc3"><td class="memItemLeft" align="right" valign="top">
 uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>meu_objeto</b> { 0 }</td></tr>
@@ -264,9 +309,13 @@ static constexpr <a class="el" href="structBECOMMONS__NS_1_1componente.html#a63f
 <li>becommons/src/componentes/<a class="el" href="camera__editor_8cpp.html">camera_editor.cpp</a></li>
 </ul>
 </div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Gerado por&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>BECOMMONS_NS</b></li><li class="navelem"><a class="el" href="structBECOMMONS__NS_1_1camera__editor.html">camera_editor</a></li>
+    <li class="footer">Gerado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+  </ul>
+</div>
 </body>
 </html>

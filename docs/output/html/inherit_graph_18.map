@@ -1,0 +1,15 @@
+<map id="Gráfico de Hierarquia de Classes" name="Gráfico de Hierarquia de Classes">
+<area shape="rect" id="Node000000" href="$classBECOMMONS__NS_1_1sistema.html" title=" " alt="" coords="5,159,200,184"/>
+<area shape="rect" id="Node000001" href="$classBECOMMONS__NS_1_1bubble__gui.html" title=" " alt="" coords="248,5,463,31"/>
+<area shape="poly" id="edge17_Node000000_Node000001" title=" " alt="" coords="122,146,174,93,209,65,247,41,279,28,281,33,249,46,212,69,178,97,125,150"/>
+<area shape="rect" id="Node000002" href="$classBECOMMONS__NS_1_1sistema__codigo.html" title=" " alt="" coords="258,55,453,95"/>
+<area shape="poly" id="edge18_Node000000_Node000002" title=" " alt="" coords="141,150,247,105,282,93,284,98,249,110,143,155"/>
+<area shape="rect" id="Node000003" href="$classBECOMMONS__NS_1_1sistema__fisica.html" title=" " alt="" coords="258,119,453,159"/>
+<area shape="poly" id="edge19_Node000000_Node000003" title=" " alt="" coords="213,155,257,149,258,154,214,160"/>
+<area shape="rect" id="Node000004" href="$classBECOMMONS__NS_1_1sistema__interface.html" title=" " alt="" coords="258,183,453,223"/>
+<area shape="poly" id="edge20_Node000000_Node000004" title=" " alt="" coords="214,183,258,188,257,194,213,188"/>
+<area shape="rect" id="Node000005" href="$classBECOMMONS__NS_1_1sistema__renderizacao.html" title=" " alt="" coords="258,247,453,287"/>
+<area shape="poly" id="edge21_Node000000_Node000005" title=" " alt="" coords="143,188,249,233,284,245,282,250,247,238,141,192"/>
+<area shape="rect" id="Node000006" href="$structEDITOR__NS_1_1sistema__editor.html" title=" " alt="" coords="277,311,433,351"/>
+<area shape="poly" id="edge22_Node000000_Node000006" title=" " alt="" coords="126,193,179,245,213,273,249,297,278,310,276,315,247,302,209,277,175,249,122,196"/>
+</map>

@@ -9,10 +9,15 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="custom.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -20,10 +25,11 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="banner.png"/></td>
   <td id="projectalign">
    <div id="projectname">Bubble Engine<span id="projectnumber">&#160;1.0b</span>
    </div>
-   <div id="projectbrief">Game engine eficiente para projetos pequenos</div>
+   <div id="projectbrief">Projeto independente de game engine eficiente para projetos pequenos</div>
   </td>
  </tr>
  </tbody>
@@ -47,6 +53,23 @@ $(function() {
 /* @license-end */
 </script>
 <div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('structBECOMMONS__NS_1_1fase.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -68,11 +91,6 @@ $(function() {
 </div>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><b>BECOMMONS_NS</b></li><li class="navelem"><a class="el" href="structBECOMMONS__NS_1_1fase.html">fase</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
   <div class="headertitle"><div class="title">BECOMMONS_NS::fase Lista dos Membros</div></div>
 </div><!--header-->
@@ -80,31 +98,34 @@ $(function() {
 
 <p>Esta é a lista de todos os membros de <a class="el" href="structBECOMMONS__NS_1_1fase.html">BECOMMONS_NS::fase</a>, incluindo os membros herdados.</p>
 <table class="directory">
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>_Mnome</b> (definido(a) em <a class="el" href="structBECOMMONS__NS_1_1fase.html">BECOMMONS_NS::fase</a>)</td><td class="entry"><a class="el" href="structBECOMMONS__NS_1_1fase.html">BECOMMONS_NS::fase</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
-  <tr bgcolor="#f0f0f0" class="odd"><td class="entry"><b>analizar</b>(const std::string &amp;diretorio) (definido(a) em <a class="el" href="structBECOMMONS__NS_1_1fase.html">BECOMMONS_NS::fase</a>)</td><td class="entry"><a class="el" href="structBECOMMONS__NS_1_1fase.html">BECOMMONS_NS::fase</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>analizarEntidades</b>(const rapidjson::Document &amp;) (definido(a) em <a class="el" href="structBECOMMONS__NS_1_1fase.html">BECOMMONS_NS::fase</a>)</td><td class="entry"><a class="el" href="structBECOMMONS__NS_1_1fase.html">BECOMMONS_NS::fase</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
-  <tr bgcolor="#f0f0f0" class="odd"><td class="entry"><b>carregada</b> (definido(a) em <a class="el" href="structBECOMMONS__NS_1_1fase.html">BECOMMONS_NS::fase</a>)</td><td class="entry"><a class="el" href="structBECOMMONS__NS_1_1fase.html">BECOMMONS_NS::fase</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>carregar</b>() (definido(a) em <a class="el" href="structBECOMMONS__NS_1_1fase.html">BECOMMONS_NS::fase</a>)</td><td class="entry"><a class="el" href="structBECOMMONS__NS_1_1fase.html">BECOMMONS_NS::fase</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="odd"><td class="entry"><b>descarregar</b>() (definido(a) em <a class="el" href="structBECOMMONS__NS_1_1fase.html">BECOMMONS_NS::fase</a>)</td><td class="entry"><a class="el" href="structBECOMMONS__NS_1_1fase.html">BECOMMONS_NS::fase</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>diretorio</b> (definido(a) em <a class="el" href="structBECOMMONS__NS_1_1fase.html">BECOMMONS_NS::fase</a>)</td><td class="entry"><a class="el" href="structBECOMMONS__NS_1_1fase.html">BECOMMONS_NS::fase</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="structBECOMMONS__NS_1_1fase.html#a3134bfed75712b5d6cb79107fb04be6a">fase</a>(const char *diretorio)</td><td class="entry"><a class="el" href="structBECOMMONS__NS_1_1fase.html">BECOMMONS_NS::fase</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>fase</b>(const std::string &amp;diretorio) (definido(a) em <a class="el" href="structBECOMMONS__NS_1_1fase.html">BECOMMONS_NS::fase</a>)</td><td class="entry"><a class="el" href="structBECOMMONS__NS_1_1fase.html">BECOMMONS_NS::fase</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="odd"><td class="entry"><b>fase</b>() (definido(a) em <a class="el" href="structBECOMMONS__NS_1_1fase.html">BECOMMONS_NS::fase</a>)</td><td class="entry"><a class="el" href="structBECOMMONS__NS_1_1fase.html">BECOMMONS_NS::fase</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>iniciar</b>() (definido(a) em <a class="el" href="structBECOMMONS__NS_1_1fase.html">BECOMMONS_NS::fase</a>)</td><td class="entry"><a class="el" href="structBECOMMONS__NS_1_1fase.html">BECOMMONS_NS::fase</a></td><td class="entry"></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="structBECOMMONS__NS_1_1fase.html#adccda1ae1c998902e35104f863c0ee8a">nome</a>() const</td><td class="entry"><a class="el" href="structBECOMMONS__NS_1_1fase.html">BECOMMONS_NS::fase</a></td><td class="entry"></td></tr>
+  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>analizar</b>(const std::string &amp;diretorio) (definido(a) em <a class="el" href="structBECOMMONS__NS_1_1fase.html">BECOMMONS_NS::fase</a>)</td><td class="entry"><a class="el" href="structBECOMMONS__NS_1_1fase.html">BECOMMONS_NS::fase</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
+  <tr bgcolor="#f0f0f0" class="odd"><td class="entry"><b>analizarEntidades</b>(const rapidjson::Document &amp;) (definido(a) em <a class="el" href="structBECOMMONS__NS_1_1fase.html">BECOMMONS_NS::fase</a>)</td><td class="entry"><a class="el" href="structBECOMMONS__NS_1_1fase.html">BECOMMONS_NS::fase</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
+  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>carregada</b> (definido(a) em <a class="el" href="structBECOMMONS__NS_1_1fase.html">BECOMMONS_NS::fase</a>)</td><td class="entry"><a class="el" href="structBECOMMONS__NS_1_1fase.html">BECOMMONS_NS::fase</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
+  <tr bgcolor="#f0f0f0" class="odd"><td class="entry"><b>carregar</b>() (definido(a) em <a class="el" href="structBECOMMONS__NS_1_1fase.html">BECOMMONS_NS::fase</a>)</td><td class="entry"><a class="el" href="structBECOMMONS__NS_1_1fase.html">BECOMMONS_NS::fase</a></td><td class="entry"></td></tr>
+  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>descarregar</b>() (definido(a) em <a class="el" href="structBECOMMONS__NS_1_1fase.html">BECOMMONS_NS::fase</a>)</td><td class="entry"><a class="el" href="structBECOMMONS__NS_1_1fase.html">BECOMMONS_NS::fase</a></td><td class="entry"></td></tr>
+  <tr bgcolor="#f0f0f0" class="odd"><td class="entry"><b>diretorio</b> (definido(a) em <a class="el" href="structBECOMMONS__NS_1_1fase.html">BECOMMONS_NS::fase</a>)</td><td class="entry"><a class="el" href="structBECOMMONS__NS_1_1fase.html">BECOMMONS_NS::fase</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="structBECOMMONS__NS_1_1fase.html#a3134bfed75712b5d6cb79107fb04be6a">fase</a>(const char *diretorio)</td><td class="entry"><a class="el" href="structBECOMMONS__NS_1_1fase.html">BECOMMONS_NS::fase</a></td><td class="entry"></td></tr>
+  <tr bgcolor="#f0f0f0" class="odd"><td class="entry"><b>fase</b>(const std::string &amp;diretorio) (definido(a) em <a class="el" href="structBECOMMONS__NS_1_1fase.html">BECOMMONS_NS::fase</a>)</td><td class="entry"><a class="el" href="structBECOMMONS__NS_1_1fase.html">BECOMMONS_NS::fase</a></td><td class="entry"></td></tr>
+  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>fase</b>() (definido(a) em <a class="el" href="structBECOMMONS__NS_1_1fase.html">BECOMMONS_NS::fase</a>)</td><td class="entry"><a class="el" href="structBECOMMONS__NS_1_1fase.html">BECOMMONS_NS::fase</a></td><td class="entry"></td></tr>
+  <tr bgcolor="#f0f0f0" class="odd"><td class="entry"><b>iniciar</b>() (definido(a) em <a class="el" href="structBECOMMONS__NS_1_1fase.html">BECOMMONS_NS::fase</a>)</td><td class="entry"><a class="el" href="structBECOMMONS__NS_1_1fase.html">BECOMMONS_NS::fase</a></td><td class="entry"></td></tr>
+  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>m_nome</b> (definido(a) em <a class="el" href="structBECOMMONS__NS_1_1fase.html">BECOMMONS_NS::fase</a>)</td><td class="entry"><a class="el" href="structBECOMMONS__NS_1_1fase.html">BECOMMONS_NS::fase</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="structBECOMMONS__NS_1_1fase.html#a4e9fac024c64eb9836d08bb9b76bd6cb">nome</a>() const</td><td class="entry"><a class="el" href="structBECOMMONS__NS_1_1fase.html">BECOMMONS_NS::fase</a></td><td class="entry"></td></tr>
   <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>nome</b>(const std::string &amp;) (definido(a) em <a class="el" href="structBECOMMONS__NS_1_1fase.html">BECOMMONS_NS::fase</a>)</td><td class="entry"><a class="el" href="structBECOMMONS__NS_1_1fase.html">BECOMMONS_NS::fase</a></td><td class="entry"></td></tr>
   <tr bgcolor="#f0f0f0" class="odd"><td class="entry"><b>obterRegistro</b>() (definido(a) em <a class="el" href="structBECOMMONS__NS_1_1fase.html">BECOMMONS_NS::fase</a>)</td><td class="entry"><a class="el" href="structBECOMMONS__NS_1_1fase.html">BECOMMONS_NS::fase</a></td><td class="entry"></td></tr>
   <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>parar</b>() (definido(a) em <a class="el" href="structBECOMMONS__NS_1_1fase.html">BECOMMONS_NS::fase</a>)</td><td class="entry"><a class="el" href="structBECOMMONS__NS_1_1fase.html">BECOMMONS_NS::fase</a></td><td class="entry"></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="structBECOMMONS__NS_1_1fase.html#acfb33a626d245db54cf38b947bda3b12">pausar</a>()</td><td class="entry"><a class="el" href="structBECOMMONS__NS_1_1fase.html">BECOMMONS_NS::fase</a></td><td class="entry"></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="structBECOMMONS__NS_1_1fase.html#a4fa8c13068a7937233d88472f5fbd82e">pausar</a>()</td><td class="entry"><a class="el" href="structBECOMMONS__NS_1_1fase.html">BECOMMONS_NS::fase</a></td><td class="entry"></td></tr>
   <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>reg</b> (definido(a) em <a class="el" href="structBECOMMONS__NS_1_1fase.html">BECOMMONS_NS::fase</a>)</td><td class="entry"><a class="el" href="structBECOMMONS__NS_1_1fase.html">BECOMMONS_NS::fase</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
   <tr bgcolor="#f0f0f0" class="odd"><td class="entry"><b>rodando</b> (definido(a) em <a class="el" href="structBECOMMONS__NS_1_1fase.html">BECOMMONS_NS::fase</a>)</td><td class="entry"><a class="el" href="structBECOMMONS__NS_1_1fase.html">BECOMMONS_NS::fase</a></td><td class="entry"></td></tr>
   <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>salvar</b>() (definido(a) em <a class="el" href="structBECOMMONS__NS_1_1fase.html">BECOMMONS_NS::fase</a>)</td><td class="entry"><a class="el" href="structBECOMMONS__NS_1_1fase.html">BECOMMONS_NS::fase</a></td><td class="entry"></td></tr>
   <tr bgcolor="#f0f0f0" class="odd"><td class="entry"><b>serializar</b>(const std::string &amp;diretorio) (definido(a) em <a class="el" href="structBECOMMONS__NS_1_1fase.html">BECOMMONS_NS::fase</a>)</td><td class="entry"><a class="el" href="structBECOMMONS__NS_1_1fase.html">BECOMMONS_NS::fase</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
   <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>~fase</b>() (definido(a) em <a class="el" href="structBECOMMONS__NS_1_1fase.html">BECOMMONS_NS::fase</a>)</td><td class="entry"><a class="el" href="structBECOMMONS__NS_1_1fase.html">BECOMMONS_NS::fase</a></td><td class="entry"></td></tr>
 </table></div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Gerado por&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Gerado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+  </ul>
+</div>
 </body>
 </html>

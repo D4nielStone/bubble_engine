@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['projeto_5fatual_0',['projeto_atual',['../projeto_8hpp.html#a7293cf46d98634b050aef6ae73eea4a2',1,'BECOMMONS_NS']]]
+  ['m_5ffases_0',['m_fases',['../structBECOMMONS__NS_1_1projeto.html#a64c66febf33d42cbbbf64838dcddbf57',1,'BECOMMONS_NS::projeto']]],
+  ['mascaras_1',['mascaras',['../structBECOMMONS__NS_1_1registro.html#ababc759798ebf7256db4f9c11e82354a',1,'BECOMMONS_NS::registro']]]
 ];

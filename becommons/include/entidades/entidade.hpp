@@ -15,6 +15,7 @@
 #include "namespace.hpp"
 #include "componentes/componente.hpp"
 
+// Namespace bubble
 namespace BECOMMONS_NS {
 	/**
 	 * @struct entidade
@@ -29,7 +30,7 @@ namespace BECOMMONS_NS {
 		}
 	};
 
-}	///< namespace BECOMMONS_NS
+}
 
 // Implementação de std::hash para entidade
 namespace std {

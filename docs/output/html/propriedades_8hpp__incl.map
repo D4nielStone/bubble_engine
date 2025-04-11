@@ -1,0 +1,20 @@
+<map id="becommons/include/componentes/propriedades.hpp" name="becommons/include/componentes/propriedades.hpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,251,45"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="32,93,91,119"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="114,47,82,84,78,81,110,44"/>
+<area shape="rect" id="Node000003" href="$namespace_8hpp.html" title=" " alt="" coords="5,167,131,192"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="127,46,118,81,105,120,85,157,81,154,100,118,113,79,122,45"/>
+<area shape="rect" id="Node000004" href="$componente_8hpp.html" title="Estrutura base para componetes." alt="" coords="227,93,357,119"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="168,43,257,85,255,90,166,48"/>
+<area shape="poly" id="edge9_Node000004_Node000003" title=" " alt="" coords="257,121,118,165,116,160,255,116"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="155,167,221,192"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="277,121,218,161,215,156,274,116"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="246,167,338,192"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="295,119,295,153,289,153,289,119"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="363,167,525,192"/>
+<area shape="poly" id="edge6_Node000004_Node000007" title=" " alt="" coords="318,116,408,158,406,163,315,121"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="550,167,685,192"/>
+<area shape="poly" id="edge7_Node000004_Node000008" title=" " alt="" coords="345,116,552,161,551,166,344,121"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="709,167,881,192"/>
+<area shape="poly" id="edge8_Node000004_Node000009" title=" " alt="" coords="358,114,701,162,700,167,357,119"/>
+</map>

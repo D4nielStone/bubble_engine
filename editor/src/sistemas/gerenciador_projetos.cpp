@@ -59,10 +59,11 @@ void gerenciador_projetos::criarProjetoPadrao(const std::string& novo_diretorio,
     "nome": "FaseMain",
     "entidades":[
         {
+            "id": 1,
             "componentes":[
                 {
                     "tipo": "luz_direcional",
-                    "direcao": [1, 1, 1],
+                    "direcao": [-0.25, -0.75, 1],
                     "cor": [1, 1, 1],
                     "ambiente": [0.1, 0.1, 0.1],
                     "intensidade": 1.0
@@ -70,6 +71,7 @@ void gerenciador_projetos::criarProjetoPadrao(const std::string& novo_diretorio,
             ]
         },
         {
+            "id": 2,
             "componentes":[
                 {
                     "tipo": "renderizador",
@@ -77,7 +79,22 @@ void gerenciador_projetos::criarProjetoPadrao(const std::string& novo_diretorio,
                 },
                 {
                     "tipo": "transformacao",
-                    "posicao": [0,0,5],
+                    "posicao": [0,-2, 15],
+                    "rotacao": [0,0,0],
+                    "escala": [10, 0.25, 10]
+                }
+            ]
+        },
+        {
+            "id": 3,
+            "componentes":[
+                {
+                    "tipo": "renderizador",
+                    "modelo": "/cubo"
+                },
+                {
+                    "tipo": "transformacao",
+                    "posicao": [0,0,15],
                     "rotacao": [0,0,0],
                     "escala": [1, 1, 1]
                 },
@@ -88,6 +105,7 @@ void gerenciador_projetos::criarProjetoPadrao(const std::string& novo_diretorio,
             ]
         },
         {
+            "id": 4,
             "componentes":[
                 {
                     "tipo": "transformacao",

@@ -9,10 +9,15 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="custom.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -20,10 +25,11 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="banner.png"/></td>
   <td id="projectalign">
    <div id="projectname">Bubble Engine<span id="projectnumber">&#160;1.0b</span>
    </div>
-   <div id="projectbrief">Game engine eficiente para projetos pequenos</div>
+   <div id="projectbrief">Projeto independente de game engine eficiente para projetos pequenos</div>
   </td>
  </tr>
  </tbody>
@@ -47,6 +53,23 @@ $(function() {
 /* @license-end */
 </script>
 <div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('classBECOMMONS__NS_1_1malha.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -68,11 +91,6 @@ $(function() {
 </div>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><b>BECOMMONS_NS</b></li><li class="navelem"><a class="el" href="classBECOMMONS__NS_1_1malha.html">malha</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Membros Públicos</a> &#124;
@@ -81,12 +99,20 @@ $(function() {
   <div class="headertitle"><div class="title">Referência da Classe BECOMMONS_NS::malha</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="dynheader">
-Diagrama de colaboração para BECOMMONS_NS::malha:</div>
-<div class="dyncontent">
+<div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Diagrama de colaboração para BECOMMONS_NS::malha:</div>
+<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-0-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classBECOMMONS__NS_1_1malha__coll__graph.png" border="0" usemap="#aBECOMMONS__NS_1_1malha_coll__map" alt="Collaboration graph"/></div>
-<!-- MAP 0 -->
-<center><span class="legend">[<a href="graph_legend.html">legenda</a>]</span></center></div>
+<map name="aBECOMMONS__NS_1_1malha_coll__map" id="aBECOMMONS__NS_1_1malha_coll__map">
+<area shape="rect" title=" " alt="" coords="13,181,197,207"/>
+<area shape="rect" href="structBECOMMONS__NS_1_1material.html" title=" " alt="" coords="5,93,204,119"/>
+<area shape="poly" title=" " alt="" coords="107,133,107,181,102,181,102,133"/>
+<area shape="rect" href="structBECOMMONS__NS_1_1cor.html" title=" " alt="" coords="23,5,186,31"/>
+<area shape="poly" title=" " alt="" coords="107,45,107,93,102,93,102,45"/>
+</map>
+<center><span class="legend">[<a target="top" href="graph_legend.html">legenda</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Membros Públicos</h2></td></tr>
@@ -105,9 +131,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>definirBuffers</b> ()
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Atributos Públicos</h2></td></tr>
-<tr class="memitem:a80484948f8772ea6c194bd828f9b9ff1" id="r_a80484948f8772ea6c194bd828f9b9ff1"><td class="memItemLeft" align="right" valign="top"><a id="a80484948f8772ea6c194bd828f9b9ff1" name="a80484948f8772ea6c194bd828f9b9ff1"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>sobrepor</b> = false</td></tr>
-<tr class="separator:a80484948f8772ea6c194bd828f9b9ff1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a34e7dfcb54edac78bd92a3edb9750381" id="r_a34e7dfcb54edac78bd92a3edb9750381"><td class="memItemLeft" align="right" valign="top"><a id="a34e7dfcb54edac78bd92a3edb9750381" name="a34e7dfcb54edac78bd92a3edb9750381"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>m_sobrepor</b> = false</td></tr>
+<tr class="separator:a34e7dfcb54edac78bd92a3edb9750381"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0163644d0b2e2008ec8e2e750465cf8f" id="r_a0163644d0b2e2008ec8e2e750465cf8f"><td class="memItemLeft" align="right" valign="top"><a id="a0163644d0b2e2008ec8e2e750465cf8f" name="a0163644d0b2e2008ec8e2e750465cf8f"></a>
 std::vector&lt; glm::vec3 &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>instancias_pos</b></td></tr>
 <tr class="separator:a0163644d0b2e2008ec8e2e750465cf8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -117,9 +143,9 @@ std::vector&lt; <a class="el" href="structBECOMMONS__NS_1_1vertice.html">vertice
 <tr class="memitem:aeb285f0e182f3befd8f1a217f7e9f814" id="r_aeb285f0e182f3befd8f1a217f7e9f814"><td class="memItemLeft" align="right" valign="top"><a id="aeb285f0e182f3befd8f1a217f7e9f814" name="aeb285f0e182f3befd8f1a217f7e9f814"></a>
 std::vector&lt; unsigned int &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>indices</b></td></tr>
 <tr class="separator:aeb285f0e182f3befd8f1a217f7e9f814"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a56679b35f5cded78071702d1c800d4d1" id="r_a56679b35f5cded78071702d1c800d4d1"><td class="memItemLeft" align="right" valign="top"><a id="a56679b35f5cded78071702d1c800d4d1" name="a56679b35f5cded78071702d1c800d4d1"></a>
-<a class="el" href="structBECOMMONS__NS_1_1material.html">material</a>&#160;</td><td class="memItemRight" valign="bottom"><b>material</b></td></tr>
-<tr class="separator:a56679b35f5cded78071702d1c800d4d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a86647d968c2c28ee994301e7954e2202" id="r_a86647d968c2c28ee994301e7954e2202"><td class="memItemLeft" align="right" valign="top"><a id="a86647d968c2c28ee994301e7954e2202" name="a86647d968c2c28ee994301e7954e2202"></a>
+<a class="el" href="structBECOMMONS__NS_1_1material.html">material</a>&#160;</td><td class="memItemRight" valign="bottom"><b>m_material</b></td></tr>
+<tr class="separator:a86647d968c2c28ee994301e7954e2202"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afb15b7ecba0e909455bf5739fca30e41" id="r_afb15b7ecba0e909455bf5739fca30e41"><td class="memItemLeft" align="right" valign="top"><a id="afb15b7ecba0e909455bf5739fca30e41" name="afb15b7ecba0e909455bf5739fca30e41"></a>
 unsigned int&#160;</td><td class="memItemRight" valign="bottom"><b>VAO</b></td></tr>
 <tr class="separator:afb15b7ecba0e909455bf5739fca30e41"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -135,9 +161,13 @@ unsigned int&#160;</td><td class="memItemRight" valign="bottom"><b>EBO</b></td><
 <li>becommons/src/util/<a class="el" href="malha_8cpp.html">malha.cpp</a></li>
 </ul>
 </div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Gerado por&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>BECOMMONS_NS</b></li><li class="navelem"><a class="el" href="classBECOMMONS__NS_1_1malha.html">malha</a></li>
+    <li class="footer">Gerado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+  </ul>
+</div>
 </body>
 </html>
