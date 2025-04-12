@@ -25,6 +25,8 @@
 #include "elementos/botao.hpp"
 #include "elementos/imagem.hpp"
 #include "elementos/texto.hpp"
+#include <functional>
+#include <queue>
 
 namespace BECOMMONS_NS { 
 	inline static unsigned int ret_VAO= 0, ret_VBO = 0, ret_EBO = 0, text_VBO = 0, text_VAO = 0;
@@ -34,6 +36,7 @@ namespace BECOMMONS_NS {
     class bubble_gui : public sistema
     {
         private:
+            std::queue<std::function<void()>> funcoes;
             std::unique_ptr<caixa> raiz;
             std::unordered_map<std::string, caixa*> caixas;
             std::set<std::string> estilo_atual;

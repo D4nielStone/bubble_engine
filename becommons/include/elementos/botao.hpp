@@ -9,42 +9,38 @@
  */
 
 #pragma once
-#include <functional>
 #include "namespace.hpp"
 #include "imagem.hpp"
 #include "texto.hpp"
-#include "util/caixa.hpp"
-#include "inputs/inputs.hpp"
-#include "os/janela.hpp"
+#include "area_de_toque.hpp"
+#include <memory>
 
 namespace BECOMMONS_NS{
     namespace elementos{
-        class botao : public caixa
+        struct botao : area_toque
         {
-        private:
-            bool m_gatilho = false;
-            bool* m_interruptor{nullptr};
-            std::function<void()> m_botao_funcao;
-        public:
-            imagem* m_imagem{ nullptr };
-            texto* m_texto{ nullptr };
-            botao(std::function<void()> f, texto* txt) : m_botao_funcao(f), m_texto(txt)
-            {
+            /// Ponteiros para aparência
+            std::unique_ptr<imagem> m_imagem    { nullptr };
+            std::unique_ptr<texto>  m_texto     { nullptr };
+            /// @name Construtores com ponteiro para aparência
+            /// @{
+            botao(const std::function<void()> &fctn, std::unique_ptr<texto> txt)    : area_toque(fctn), m_texto(std::move(txt)) {
             }
-            botao(std::function<void()> f, const std::string& txt) : m_botao_funcao(f), m_texto(new texto(txt))
-            {
+            botao(const std::function<void()> &fctn, std::unique_ptr<imagem> img)   : area_toque(fctn), m_imagem(std::move(img)) {
             }
-            botao(std::function<void()> f, imagem* img) : m_botao_funcao(f), m_imagem(img)
-            {
+            botao(bool* ptr, std::unique_ptr<imagem> img)                           : area_toque(ptr), m_imagem(std::move(img)) {
             }
-            botao(bool* ptr, imagem* img) : m_interruptor(ptr), m_imagem(img)
-            {
+            /// @}
+            /// @name Construtores de texto simplificado
+            /// @{
+            botao(const std::function<void()> &fctn, const std::string& txt) : area_toque(fctn), m_texto(std::make_unique<texto>(txt)) {
             }
-            botao(bool* ptr, const std::string& txt) : m_interruptor(ptr), m_texto(new texto(txt))
-            {
+            botao(bool* ptr, const std::string& txt) : area_toque(ptr), m_texto(std::make_unique<texto>(txt)) {
             }
-            ~botao(){}
-            void atualizarFuncao()
+            /// @}
+            ~botao() {
+            }
+            bool pressionado() override
             {
                 m_cor_borda.a = 0.f;
                 if(m_imagem)
@@ -63,26 +59,8 @@ namespace BECOMMONS_NS{
                     m_texto->m_limites.y = m_limites.y+ m_padding_geral.y/2;
                     m_texto->m_flags_caixa = m_flags_caixa;
                 }
-                if(!instanciaJanela->m_inputs.isKeyPressed("MouseE"))
-                    m_gatilho = false;
-                auto m = obterMouse();
-                if(m.x > m_limites.x && m.x < m_limites.z + m_limites.x &&
-                   m.y > m_limites.y && m.y < m_limites.w + m_limites.y)
-                {
-                    m_cor_borda.a = 1.f;
-                    instanciaJanela->defCursor(janela::cursor::mao);
-                    if(!m_gatilho && instanciaJanela->m_inputs.isKeyPressed("MouseE"))
-                    {
-                        if(m_interruptor) 
-                        {
-                            if(*m_interruptor) *m_interruptor = false;
-                            else               *m_interruptor = true;
-                        }else
-                        m_botao_funcao();
-                    }
-                }
-                if(!m_gatilho && instanciaJanela->m_inputs.isKeyPressed("MouseE"))
-                    m_gatilho = true;
+                if(m_pressionado) m_cor_borda.a = 1.f;
+                return area_toque::pressionado();
             }
         };  
     } // elementos

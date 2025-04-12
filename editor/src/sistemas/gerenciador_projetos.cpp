@@ -1,13 +1,9 @@
-/** @copyright Copyright (c) 2025 Daniel Oliveira */
-/**
- * @file gerenciador_projetos.cpp
- *
- * @author Daniel O. dos Santos
- * @date 2025-04-08
- * @version 1.0
- *
- * @licence MIT License
- */
+/// @copyright Copyright (c) 2025 Daniel Oliveira */
+///
+/// @file gerenciador_projetos.cpp
+///
+/// @author Daniel O. dos Santos
+///
 
 #include "becommons/becommons.hpp"
 #include "editor_namespace.hpp"
@@ -188,7 +184,7 @@ void gerenciador_projetos::atualizarElementos(const std::string& Dir)
                 editor.rodar();
         
                 }
-                , new elementos::imagem("folder.png"));
+                , std::make_unique<elementos::imagem>("folder.png"));
                 gui.defLargura(40);
                 gui.defAltura(40);
                 gui.novoEstilo();    
@@ -232,7 +228,7 @@ void gerenciador_projetos::iniciar()
         gui.defAltura(1.0);
         gui.defCrescimentoM(1.0);
     gui.novoEstilo();
-        gui.adicionarElemento<elementos::botao>("area_maior", "add", [this](){criarProjetoPadrao(DIR_PADRAO, "Juquinha");std::cout << "AAAAAA";}, new elementos::texto("+", 48));
+        gui.adicionarElemento<elementos::botao>("area_maior", "add", [this](){criarProjetoPadrao(DIR_PADRAO, "Juquinha");}, std::make_unique<elementos::texto>("+", 48));
     while(!glfwWindowShouldClose(instanciaJanela->window))
     {
         instanciaJanela->poll();

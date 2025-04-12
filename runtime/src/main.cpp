@@ -21,7 +21,7 @@
 #include <sys/wait.h>
 int main(int argv, char* argc[])
 {
-	std::string DIR_PADRAO = std::string(std::getenv("HOME")) + "/bubble/jogos";
+	std::string DIR_PADRAO = std::string(std::getenv("HOME")) + "/bubble engine/jogos";
 
 	if(argv > 1)
 	{
@@ -32,7 +32,7 @@ int main(int argv, char* argc[])
 	{
 		depuracao::emitir(info, "Iniciando projeto em:" + DIR_PADRAO);
 		
-		bubble::projeto runtime(DIR_PADRAO);
+		becommons::projeto runtime(DIR_PADRAO);
 	    runtime.obterFaseAtual()->iniciar();
 	    runtime.rodar();
 	}

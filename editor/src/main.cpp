@@ -14,7 +14,7 @@ using namespace EDITOR_NS;
 
 int main(int argc, char* argv[]) {
     // Definir diretório do projeto
-    std::string DIR_PADRAO = std::string(std::getenv("HOME")) + "/bubble/jogos";
+    std::string DIR_PADRAO = std::string(std::getenv("HOME")) + "/bubble engine/jogos";
     if(!std::filesystem::exists(DIR_PADRAO))
         if(!std::filesystem::create_directories(DIR_PADRAO)) return -1;
     if (argc > 1) {

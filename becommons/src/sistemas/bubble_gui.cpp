@@ -63,12 +63,13 @@ void bubble_gui::desenhar_caixa(caixa* c)
     }else
     if(auto btn = dynamic_cast<elementos::botao*>(c)){
         // Renderizar botao
-        btn->atualizarFuncao();
+        if(btn->pressionado())
+            funcoes.push(btn->m_funcao);
         
         if(btn->m_imagem)
-            renderizarImagem(btn->m_imagem);
+            renderizarImagem(btn->m_imagem.get());
         if(btn->m_texto)
-            renderizarTexto(btn->m_texto);
+            renderizarTexto(btn->m_texto.get());
     }else
     
     if(auto img = dynamic_cast<elementos::imagem*>(c)){
@@ -288,6 +289,13 @@ instanciaJanela->tamanho.y
         static_cast<float>(instanciaJanela->tamanho.x),
         static_cast<float>(instanciaJanela->tamanho.y)};
 
+
+    while(!funcoes.empty())
+    {
+        auto f = funcoes.front();
+        f();
+        funcoes.pop();
+    }
 
     // Ajusta largura de último-primeiro
     atualizarHDTF(raiz.get(), atualizarLJ);

@@ -9,5 +9,5 @@
  * @licence MIT License
  */
 #ifndef BECOMMONS_NS
-#define BECOMMONS_NS bubble
+#define BECOMMONS_NS becommons
 #endif

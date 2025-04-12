@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+cd ..
 
 mkdir $(dirname "$0")/becommons/out 
 cd $(dirname "$0")/becommons/out && cmake .. && cmake --build .

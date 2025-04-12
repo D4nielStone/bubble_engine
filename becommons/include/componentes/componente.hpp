@@ -11,6 +11,7 @@
  */
 
 #pragma once
+#include <unordered_map>
 #include <cstdint>
 #include <type_traits>
 #include <rapidjson/document.h>
@@ -27,10 +28,10 @@ namespace BECOMMONS_NS {
 	*/
 	struct componente
 	{
-		/**
-		* @enum mascara
-		* @brief facilita a identificacao dos componentes pertencentes a uma entidade
-		*/
+		///
+		/// @enum mascara
+		/// @brief facilita a identificacao dos componentes pertencentes a uma entidade
+		///
 		enum mascara : uint32_t
 		{
 			COMPONENTE_NONE = 0,
@@ -47,6 +48,18 @@ namespace BECOMMONS_NS {
 			COMPONENTE_LUZ_HOLOFOTE = 1 << 10,
 			COMPONENTE_TERRENO = 1 << 11
 		};
+		///  Mapeamento de nomes e mascara
+        inline static std::unordered_map<mascara, std::string> mapa_nomes_componentes = {
+            {mascara::COMPONENTE_LUZ_DIRECIONAL            ,"Iluminacao"},
+            {mascara::COMPONENTE_LUZ_PONTUAL               ,"Iluminacao"},
+            {mascara::COMPONENTE_RENDER                    ,"Renderizador"},
+            {mascara::COMPONENTE_TRANSFORMACAO             ,"Transformacao"},
+            {mascara::COMPONENTE_CODIGO                    ,"Codigo"},
+            {mascara::COMPONENTE_CAM                       ,"Camera"},
+            {mascara::COMPONENTE_TERRENO                   ,"Terreno"}
+        };
+        /// Id da entidade ECS atual
+        /// Todo componente deve ter um e ele é utilizado para encontrar o "eu" (entidade do componente de código) para a api lua.
 		uint32_t meu_objeto{ 0 };
 		componente() = default;
 		virtual ~componente() = default;

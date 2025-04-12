@@ -11,6 +11,7 @@ HASH_FILE="$EDITOR_DIR/include/assets/runtime.hash"
 # Compilar o runtime primeiro
 ./$BASE_DIR/build_runtime.sh
 
+cd ..
 # Verificar se o runtime foi modificado antes de rodar xxd
 if [[ -f "$RUNTIME_DIR/runtime" ]]; then
     NEW_HASH=$(sha256sum "$RUNTIME_DIR/runtime" | awk '{print $1}')

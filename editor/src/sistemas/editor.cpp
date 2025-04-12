@@ -14,12 +14,11 @@
 #include "sistemas/editor.hpp"
 #include "util/runtime.hpp"
 
-using namespace BECOMMONS_NS;
+using namespace becommons;
 using namespace EDITOR_NS;
 bool gatilho_ = true;
-void sistema_editor::configurarInterface(BECOMMONS_NS::projeto& proj)
+void sistema_editor::configurarInterface(becommons::projeto& proj)
 {
-    bubble_gui* gui = static_cast<BECOMMONS_NS::bubble_gui*>(proj.obterSistema("bubble_gui"));
     // head
     if(!gui) {
         depuracao::emitir(erro, "interface", "sistema de gui inválido");
@@ -54,29 +53,25 @@ void sistema_editor::configurarInterface(BECOMMONS_NS::projeto& proj)
         gui->defCorFundo    (    cor(0.05f, 0.05f, 0.05f, 1.f));
         gui->defCrescimentoM(                            0.2f);
     gui->novoEstilo();
-        gui->adicionarElemento<elementos::texto>("raiz_c", "console", depuracao::obterMensagens(), 0.65f);
+        gui->adicionarElemento<elementos::texto>("raiz_c", "console", depuracao::obterMensagens(), 10.f);
         gui->defAltura(1.0);
         // items menu
     gui->novoEstilo();
-        gui->adicionarElemento<elementos::botao>("menu", "rc", [gui](){
+        gui->adicionarElemento<elementos::botao>("menu", "rc", [this](){
                 if(gui->obterElemento("raiz_c")->m_crescimento_modular == 0)
                 {
-                    
-                gui->obterElemento("raiz_c")->m_crescimento_modular = 0.2;
                 gui->obterElemento("raiz_c")->m_ativo = true;
                 }
                 else
                 {
-                gui->obterElemento("raiz_c")->m_crescimento_modular = 0;
                 gui->obterElemento("raiz_c")->m_ativo = false;
                 }}, "Mostrar Console");
         gui->obterElemento("raiz_c")->m_ativo = false;
-        gui->obterElemento("raiz_c")->m_crescimento_modular = 0;
         gui->adicionarElemento<elementos::botao>("menu", "arquivo", [](){}, "Arquivo");
         gui->adicionarElemento<elementos::botao>("menu", "editar", [](){}, "Editar");
         gui->adicionarElemento<elementos::botao>("menu", "visualizar", [](){}, "Exibir");
         gui->adicionarElemento<elementos::botao>("menu", "ajuda", [](){}, "Ajuda");
-        gui->adicionarElemento<elementos::botao>("menu", "add_primitivas", [](){}, new elementos::imagem("cubo_branco"));
+        gui->adicionarElemento<elementos::botao>("menu", "add_primitivas", [](){}, std::make_unique<elementos::imagem>("cubo_branco"));
         gui->defCorBorda    (cor(1.f, 1.f, 1.f, 1.f));
         gui->defCorFundo    (cor(0.15f, 0.15f, 0.15f, 1.f));
         gui->defPaddingG    (5, 5);
@@ -110,7 +105,7 @@ void sistema_editor::configurarInterface(BECOMMONS_NS::projeto& proj)
         gui->adicionarElemento<elementos::botao>("imagem_editor", "btn_play", [](){
                     projeto_atual->salvarFases();
                     sistema_editor::executarRuntime();
-                }, new elementos::imagem("Play.png"));
+                }, std::make_unique<elementos::imagem>("Play.png"));
         gui->defPadding      (15, 15);
         gui->defLargura      (        30);
         gui->defAltura       (        30);
@@ -137,6 +132,14 @@ void sistema_editor::configurarInterface(BECOMMONS_NS::projeto& proj)
         gui->defAltura       (                           35);
         gui->defPaddingG     (                           5, 5);
         gui->defOrientacao   ( caixa::orientacao::horizontal);
+    gui->novoEstilo();
+        gui->adicionarElemento<caixa>("componentes", "inspetor");
+        gui->defCorFundo     (    cor(0.08f, 0.08f, 0.08f, 0.f));
+        gui->defFlags        (flags_caixa::largura_percentual | flags_caixa::modular | flags_caixa::alinhamento_central);
+        gui->defLargura       (                           1.0);
+        gui->defCrescimentoM (1.0);
+        gui->defPaddingG     (                           5, 5);
+        gui->defOrientacao   ( caixa::orientacao::horizontal);
 }
 
 sistema_editor::sistema_editor()
@@ -152,6 +155,7 @@ void sistema_editor::inicializar(fase* f)
     
     // Adiciona sistema de gui ao projeto
     projeto_atual->adicionar("bubble_gui", new bubble_gui());
+    gui = static_cast<becommons::bubble_gui*>(projeto_atual->obterSistema("bubble_gui"));
     /*  Config da interface   */
     configurarInterface(*projeto_atual);
     atualizarEntidades();
@@ -207,7 +211,7 @@ projeto_atual->obterFaseAtual()->obterRegistro()->remover(entidade_atual);
 void sistema_editor::executarRuntime()
 {
     // Inicia o runtime
-    iniciarRuntime(); 
+    iniciarRuntime({projeto_atual->diretorioDoProjeto}); 
 
     // Se já houver uma thread rodando, não cria outra
     if (rodando.load()) return;
@@ -235,7 +239,6 @@ void sistema_editor::monitorarRuntime()
 }
 void sistema_editor::atualizarEntidades()
 {
-    bubble_gui* gui = static_cast<bubble_gui*>(projeto_atual->obterSistema("bubble_gui"));
     // head
     if(!gui) {
         depuracao::emitir(erro, "interface", "sistema de gui inválido");
@@ -259,7 +262,7 @@ void sistema_editor::atualizarEntidades()
                 entidade_atual = id;
                 texto_entidade = "id:" + std::to_string(entidade_atual);
             },
-            new elementos::imagem(icone));
+            std::make_unique<elementos::imagem>(icone));
                 entidade_atual = id;
                 texto_entidade = "id:" + std::to_string(entidade_atual);
     }
@@ -272,10 +275,10 @@ void sistema_editor::atualizarEntidades()
         texto_entidade = "Nenhuma entidade selecionada";
     }
     atualizarComponentes();
+    atualizarComponente(componente::COMPONENTE_TRANSFORMACAO);
 }
 void sistema_editor::atualizarComponentes()
 {
-    bubble_gui* gui = static_cast<bubble_gui*>(projeto_atual->obterSistema("bubble_gui"));
     if (!gui) return;
 
     // Remove os botões antigos para evitar duplicatas
@@ -286,20 +289,42 @@ void sistema_editor::atualizarComponentes()
     for (auto& [mascara, componente] : projeto_atual->obterFaseAtual()->obterRegistro()->entidades[entidade_atual]) 
     {
         i++;
-        std::string icone = "cube.png";
-            if(mascara == componente::COMPONENTE_LUZ_DIRECIONAL) icone =  "Iluminacao.png";
-            if(mascara == componente::COMPONENTE_LUZ_PONTUAL) icone =  "Iluminacao.png";
-            if(mascara == componente::COMPONENTE_RENDER) icone =           "Renderizador.png";
-            if(mascara == componente::COMPONENTE_TRANSFORMACAO) icone =    "Transformacao.png";
-            if(mascara == componente::COMPONENTE_CODIGO) icone =           "Codigo.png";
-            if(mascara == componente::COMPONENTE_CAM) icone =              "Camera.png";
-            if(mascara == componente::COMPONENTE_TERRENO) icone =              "Terreno.png";
-        gui->adicionarElemento<elementos::botao>("area_comps",
-            icone.erase(icone.size() - 3),
-            [](){},
-            new elementos::imagem(icone));
+        std::string nome = "cube";
+        
+        if(becommons::componente::mapa_nomes_componentes.find(mascara) != becommons::componente::mapa_nomes_componentes.end())
+            nome = becommons::componente::mapa_nomes_componentes[mascara];
+        gui->adicionarElemento<elementos::botao>(
+            "area_comps",
+            nome,
+            [mascara, this](){
+                atualizarComponente(mascara);
+            },
+            std::make_unique<elementos::imagem>(nome + ".png")
+        );
     }
-        gui->defLargura     (                          25);
-        gui->defAltura      (                          25);
-        gui->defCorFundo    (    cor(0.0f, 0.0f, 0.0f, 0.f));
+    gui->defLargura     (                          25);
+    gui->defAltura      (                          25);
+    gui->defCorFundo    (    cor(0.0f, 0.0f, 0.0f, 0.f));
+}
+
+void sistema_editor::atualizarComponente(const becommons::componente::mascara& mascara)
+{
+    if (!gui) return;
+
+    // Remove os botões antigos para evitar duplicatas
+    gui->removerFilhos("inspetor");
+    if(entidade_atual == 0) return;
+    std::string nome = "nenhum";
+    if(becommons::componente::mapa_nomes_componentes.find(mascara) != becommons::componente::mapa_nomes_componentes.end())
+        nome = becommons::componente::mapa_nomes_componentes[mascara];
+    gui->novoEstilo();
+        gui->adicionarElemento<elementos::texto>("inspetor", "texto_comp", nome);
+    gui->novoEstilo();
+    /*
+    switch (mascara) {
+        case componente::COMPONENTE_CAMERA:
+            gui->adicionarElemento<
+        default:
+            break;
+    }*/
 }

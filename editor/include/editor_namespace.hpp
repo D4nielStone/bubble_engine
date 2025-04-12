@@ -9,6 +9,6 @@
  * @licence MIT License
  */
 #ifndef EDITOR_NS
-#define EDITOR_NS EBubble
+#define EDITOR_NS edbecommons
 #endif
 
