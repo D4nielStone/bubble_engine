@@ -1,0 +1,180 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt-BR">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Bubble Engine: Referência do Arquivo editor/include/util/runtime.hpp</title>
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../jquery.js"></script>
+<script type="text/javascript" src="../../dynsections.js"></script>
+<link href="../../navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../resize.js"></script>
+<script type="text/javascript" src="../../navtreedata.js"></script>
+<script type="text/javascript" src="../../navtree.js"></script>
+<link href="../../search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../search/searchdata.js"></script>
+<script type="text/javascript" src="../../search/search.js"></script>
+<link href="../../doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="../../banner.png"/></td>
+  <td id="projectalign">
+   <div id="projectname">Bubble Engine<span id="projectnumber">&#160;1.0b</span>
+   </div>
+   <div id="projectbrief">Projeto independente de game engine eficiente para projetos pequenos</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Gerado por Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "../../search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="../../menudata.js"></script>
+<script type="text/javascript" src="../../menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('../../',true,false,'search.php','Busca');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('d0/df9/runtime_8hpp.html','../../'); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Carregando...</div>
+<div class="SRStatus" id="Searching">Procurando...</div>
+<div class="SRStatus" id="NoMatches">Nenhuma entrada encontrado</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#func-members">Funções</a>  </div>
+  <div class="headertitle"><div class="title">Referência do Arquivo runtime.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><code>#include &lt;iostream&gt;</code><br />
+<code>#include &lt;vector&gt;</code><br />
+<code>#include &lt;fstream&gt;</code><br />
+<code>#include &lt;filesystem&gt;</code><br />
+<code>#include &lt;unistd.h&gt;</code><br />
+<code>#include &lt;sys/types.h&gt;</code><br />
+<code>#include &lt;sys/stat.h&gt;</code><br />
+<code>#include &lt;cstring&gt;</code><br />
+<code>#include &lt;cstdlib&gt;</code><br />
+<code>#include &quot;assets/runtime_embutido.hpp&quot;</code><br />
+</div><div class="textblock"><div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-0-trigger" src="../../closed.png" alt="+"/> Gráfico de dependência de inclusões para runtime.hpp:</div>
+<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-0-content" class="dyncontent" style="display:none;">
+<div class="center"><img src="../../d7/dd8/runtime_8hpp__incl.png" border="0" usemap="#aeditor_2include_2util_2runtime_8hpp" alt=""/></div>
+<map name="aeditor_2include_2util_2runtime_8hpp" id="aeditor_2include_2util_2runtime_8hpp">
+<area shape="rect" title=" " alt="" coords="433,5,569,45"/>
+<area shape="rect" title=" " alt="" coords="5,93,85,119"/>
+<area shape="poly" title=" " alt="" coords="434,39,99,96,98,91,433,34"/>
+<area shape="rect" title=" " alt="" coords="110,93,173,119"/>
+<area shape="poly" title=" " alt="" coords="434,43,187,96,185,90,432,37"/>
+<area shape="rect" title=" " alt="" coords="197,93,270,119"/>
+<area shape="poly" title=" " alt="" coords="438,48,284,93,282,88,436,43"/>
+<area shape="rect" title=" " alt="" coords="295,93,385,119"/>
+<area shape="poly" title=" " alt="" coords="464,48,377,90,375,85,462,43"/>
+<area shape="rect" title=" " alt="" coords="409,93,484,119"/>
+<area shape="poly" title=" " alt="" coords="490,47,465,84,460,80,486,44"/>
+<area shape="rect" title=" " alt="" coords="508,93,604,119"/>
+<area shape="poly" title=" " alt="" coords="517,44,542,80,538,84,512,47"/>
+<area shape="rect" title=" " alt="" coords="628,93,713,119"/>
+<area shape="poly" title=" " alt="" coords="543,43,634,85,632,90,541,48"/>
+<area shape="rect" title=" " alt="" coords="737,93,804,119"/>
+<area shape="poly" title=" " alt="" coords="567,43,725,89,723,94,565,48"/>
+<area shape="rect" title=" " alt="" coords="829,93,894,119"/>
+<area shape="poly" title=" " alt="" coords="570,38,816,91,815,96,569,43"/>
+<area shape="rect" title=" " alt="" coords="919,93,1135,119"/>
+<area shape="poly" title=" " alt="" coords="570,34,937,89,936,94,569,39"/>
+</map>
+</div>
+</div><div class="textblock"><div id="dynsection-1" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-1-trigger" src="../../closed.png" alt="+"/> Este grafo mostra quais arquivos estão direta ou indiretamente relacionados com esse arquivo:</div>
+<div id="dynsection-1-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-1-content" class="dyncontent" style="display:none;">
+<div class="center"><img src="../../d8/d14/runtime_8hpp__dep__incl.png" border="0" usemap="#aeditor_2include_2util_2runtime_8hppdep" alt=""/></div>
+<map name="aeditor_2include_2util_2runtime_8hppdep" id="aeditor_2include_2util_2runtime_8hppdep">
+<area shape="rect" title=" " alt="" coords="107,5,243,45"/>
+<area shape="rect" href="../../d1/d1f/editor_8cpp.html" title=" " alt="" coords="5,93,152,133"/>
+<area shape="poly" title=" " alt="" coords="145,57,102,95,98,91,141,53"/>
+<area shape="rect" href="../../d3/ded/gerenciador__projetos_8cpp.html" title=" " alt="" coords="177,93,367,133"/>
+<area shape="poly" title=" " alt="" coords="208,52,252,91,249,95,205,56"/>
+</map>
+</div>
+</div>
+<p><a href="../../d0/df9/runtime_8hpp_source.html">Ir para o código-fonte desse arquivo.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Funções</h2></td></tr>
+<tr class="memitem:af437d25913be5b55ede162b9271f62e8" id="r_af437d25913be5b55ede162b9271f62e8"><td class="memItemLeft" align="right" valign="top"><a id="af437d25913be5b55ede162b9271f62e8" name="af437d25913be5b55ede162b9271f62e8"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>runtimeRodando</b> ()</td></tr>
+<tr class="separator:af437d25913be5b55ede162b9271f62e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a85984d0c2bdc8601a52e32ca553e1896" id="r_a85984d0c2bdc8601a52e32ca553e1896"><td class="memItemLeft" align="right" valign="top"><a id="a85984d0c2bdc8601a52e32ca553e1896" name="a85984d0c2bdc8601a52e32ca553e1896"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>iniciarRuntime</b> (const std::vector&lt; std::string &gt; &amp;argumentos={})</td></tr>
+<tr class="separator:a85984d0c2bdc8601a52e32ca553e1896"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Descrição detalhada</h2>
+<div class="textblock"><dl class="section copyright"><dt>Copyright</dt><dd>MIT LicenseCopyright (c) 2025 Daniel Oliveira</dd></dl>
+<p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</p>
+<p>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</p>
+<p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. </p>
+</div></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="../../dir_bac5aa69239d34ac960582aca466258e.html">editor</a></li><li class="navelem"><a class="el" href="../../dir_07800c8bc9e485b30bf8571db4a636e5.html">include</a></li><li class="navelem"><a class="el" href="../../dir_6d46a6efcc2e8ef1b44b7b5ad270ed2e.html">util</a></li><li class="navelem"><a class="el" href="../../d0/df9/runtime_8hpp.html">runtime.hpp</a></li>
+    <li class="footer">Gerado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+  </ul>
+</div>
+</body>
+</html>

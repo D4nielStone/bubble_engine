@@ -1,0 +1,28 @@
+<map id="becommons/include/util/material.hpp" name="becommons/include/util/material.hpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="765,5,944,45"/>
+<area shape="rect" id="Node000002" href="$db/d94/malha_8hpp_source.html" title=" " alt="" coords="411,93,589,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="764,51,578,96,577,91,763,46"/>
+<area shape="rect" id="Node000004" href="$dd/d4a/modelo_8cpp.html" title=" " alt="" coords="770,269,985,309"/>
+<area shape="poly" id="edge13_Node000001_Node000004" title=" " alt="" coords="880,55,916,111,933,145,945,181,949,202,945,222,928,250,906,271,902,267,924,246,940,220,944,202,940,182,928,147,911,114,876,58"/>
+<area shape="rect" id="Node000012" href="$d1/d2a/malha_8cpp.html" title=" " alt="" coords="779,181,930,221"/>
+<area shape="poly" id="edge14_Node000001_Node000012" title=" " alt="" coords="857,59,857,181,852,181,852,59"/>
+<area shape="rect" id="Node000003" href="$db/df7/modelo_8hpp.html" title="Carrega um modelo usando a biblioteca assimp com base em um diretório." alt="" coords="512,181,755,221"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="542,139,605,179,602,183,540,143"/>
+<area shape="rect" id="Node000005" href="$d6/def/fisica_8hpp.html" title="Componente de física para entidades ECS." alt="" coords="243,181,488,221"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="460,143,397,183,394,179,457,139"/>
+<area shape="rect" id="Node000007" href="$d3/df3/api__lua_8cpp.html" title=" " alt="" coords="89,357,263,397"/>
+<area shape="poly" id="edge10_Node000002_Node000007" title=" " alt="" coords="397,117,295,121,187,132,137,141,94,152,59,166,35,183,15,213,8,243,14,274,32,308,44,323,59,336,95,355,92,360,56,340,40,327,27,311,9,276,3,243,10,211,31,179,56,161,92,147,136,135,187,127,295,116,397,112"/>
+<area shape="rect" id="Node000011" href="$d8/d41/fase_8cpp.html" title=" " alt="" coords="46,181,218,221"/>
+<area shape="poly" id="edge11_Node000002_Node000011" title=" " alt="" coords="407,139,213,184,212,179,405,134"/>
+<area shape="poly" id="edge12_Node000002_Node000012" title=" " alt="" coords="592,134,779,179,778,184,590,139"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="701,223,825,267,823,272,699,228"/>
+<area shape="rect" id="Node000006" href="$db/d85/api__lua_8hpp.html" title=" " alt="" coords="479,269,657,309"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="423,224,525,267,523,272,421,229"/>
+<area shape="rect" id="Node000009" href="$dc/dea/fisica_8cpp.html" title=" " alt="" coords="42,269,259,309"/>
+<area shape="poly" id="edge8_Node000005_Node000009" title=" " alt="" coords="307,229,199,272,197,267,305,224"/>
+<area shape="rect" id="Node000010" href="$da/d81/sistema__de__fisica_8cpp.html" title=" " alt="" coords="283,269,455,309"/>
+<area shape="poly" id="edge9_Node000005_Node000010" title=" " alt="" coords="369,235,371,269,366,269,364,235"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="469,315,262,360,261,355,468,310"/>
+<area shape="rect" id="Node000008" href="$d4/d6e/codigo_8cpp.html" title=" " alt="" coords="459,357,677,397"/>
+<area shape="poly" id="edge7_Node000006_Node000008" title=" " alt="" coords="571,323,571,357,565,357,565,323"/>
+</map>

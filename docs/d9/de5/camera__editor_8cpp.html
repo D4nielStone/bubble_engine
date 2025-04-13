@@ -1,0 +1,221 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt-BR">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Bubble Engine: Referência do Arquivo becommons/src/componentes/camera_editor.cpp</title>
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../jquery.js"></script>
+<script type="text/javascript" src="../../dynsections.js"></script>
+<link href="../../navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../resize.js"></script>
+<script type="text/javascript" src="../../navtreedata.js"></script>
+<script type="text/javascript" src="../../navtree.js"></script>
+<link href="../../search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../search/searchdata.js"></script>
+<script type="text/javascript" src="../../search/search.js"></script>
+<link href="../../doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="../../banner.png"/></td>
+  <td id="projectalign">
+   <div id="projectname">Bubble Engine<span id="projectnumber">&#160;1.0b</span>
+   </div>
+   <div id="projectbrief">Projeto independente de game engine eficiente para projetos pequenos</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Gerado por Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "../../search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="../../menudata.js"></script>
+<script type="text/javascript" src="../../menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('../../',true,false,'search.php','Busca');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('d9/de5/camera__editor_8cpp.html','../../'); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Carregando...</div>
+<div class="SRStatus" id="Searching">Procurando...</div>
+<div class="SRStatus" id="NoMatches">Nenhuma entrada encontrado</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">Referência do Arquivo camera_editor.cpp</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><code>#include &quot;<a class="el" href="../../d4/d94/camera__editor_8hpp_source.html">componentes/camera_editor.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="../../da/d7b/debug_8hpp_source.html">depuracao/debug.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="../../d3/df1/janela_8hpp_source.html">os/janela.hpp</a>&quot;</code><br />
+</div><div class="textblock"><div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-0-trigger" src="../../closed.png" alt="+"/> Gráfico de dependência de inclusões para camera_editor.cpp:</div>
+<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-0-content" class="dyncontent" style="display:none;">
+<div class="center"><img src="../../d2/d60/camera__editor_8cpp__incl.png" border="0" usemap="#abecommons_2src_2componentes_2camera__editor_8cpp" alt=""/></div>
+<map name="abecommons_2src_2componentes_2camera__editor_8cpp" id="abecommons_2src_2componentes_2camera__editor_8cpp">
+<area shape="rect" title=" " alt="" coords="1961,5,2179,45"/>
+<area shape="rect" href="../../d4/d94/camera__editor_8hpp.html" title=" " alt="" coords="1391,93,1554,133"/>
+<area shape="poly" title=" " alt="" coords="1962,45,1568,101,1567,96,1961,40"/>
+<area shape="rect" href="../../da/d7b/debug_8hpp.html" title=" " alt="" coords="2509,101,2671,126"/>
+<area shape="poly" title=" " alt="" coords="2179,42,2508,96,2507,101,2179,47"/>
+<area shape="rect" href="../../d3/df1/janela_8hpp.html" title="Inicia e gerencia janela glfw." alt="" coords="2015,181,2125,207"/>
+<area shape="poly" title=" " alt="" coords="2073,46,2073,168,2067,168,2067,46"/>
+<area shape="rect" href="../../db/d19/namespace_8hpp.html" title=" " alt="" coords="1423,416,1549,441"/>
+<area shape="poly" title=" " alt="" coords="1476,134,1488,402,1482,402,1471,134"/>
+<area shape="rect" href="../../d0/d8a/camera_8hpp.html" title="Estrutura básica de câmera." alt="" coords="1069,181,1167,207"/>
+<area shape="poly" title=" " alt="" coords="1392,135,1182,181,1180,176,1391,130"/>
+<area shape="poly" title=" " alt="" coords="1160,204,1216,224,1277,252,1464,405,1460,409,1274,257,1214,229,1158,209"/>
+<area shape="rect" title=" " alt="" coords="433,255,582,295"/>
+<area shape="poly" title=" " alt="" coords="1069,202,867,221,596,257,596,252,866,216,1068,197"/>
+<area shape="rect" title=" " alt="" coords="606,262,825,287"/>
+<area shape="poly" title=" " alt="" coords="1069,208,788,262,787,257,1068,202"/>
+<area shape="rect" title=" " alt="" coords="1510,262,1587,287"/>
+<area shape="poly" title=" " alt="" coords="1168,202,1446,252,1497,261,1496,266,1446,257,1167,207"/>
+<area shape="rect" href="../../db/de2/componente_8hpp.html" title="Estrutura base para componetes." alt="" coords="329,343,459,368"/>
+<area shape="poly" title=" " alt="" coords="1068,199,910,204,706,214,522,231,457,243,422,257,410,272,402,291,396,330,391,329,397,289,405,269,419,253,456,238,521,226,706,209,910,198,1068,194"/>
+<area shape="rect" href="../../d4/dcc/transformacao_8hpp.html" title="Calcula a mtriz de modelo para um objeto 3d qualquer." alt="" coords="1119,262,1264,287"/>
+<area shape="poly" title=" " alt="" coords="1131,205,1173,250,1169,253,1127,209"/>
+<area shape="rect" href="../../dd/dbf/skybox_8hpp_source.html" title=" " alt="" coords="849,262,971,287"/>
+<area shape="poly" title=" " alt="" coords="1089,209,954,260,952,255,1087,204"/>
+<area shape="rect" href="../../d3/d49/cor_8hpp.html" title=" " alt="" coords="1340,262,1435,287"/>
+<area shape="poly" title=" " alt="" coords="1158,204,1336,256,1334,261,1156,209"/>
+<area shape="rect" href="../../da/d11/raio_8hpp_source.html" title=" " alt="" coords="995,262,1095,287"/>
+<area shape="poly" title=" " alt="" coords="1109,209,1067,253,1063,250,1105,205"/>
+<area shape="poly" title=" " alt="" coords="460,364,472,365,742,389,1008,405,1409,422,1409,428,1007,411,741,394,471,371,459,369"/>
+<area shape="rect" title=" " alt="" coords="2315,416,2439,441"/>
+<area shape="poly" title=" " alt="" coords="460,364,472,365,1292,393,2301,423,2301,428,1292,399,471,371,459,369"/>
+<area shape="rect" title=" " alt="" coords="361,416,427,441"/>
+<area shape="poly" title=" " alt="" coords="397,368,397,402,391,402,391,368"/>
+<area shape="rect" title=" " alt="" coords="452,416,544,441"/>
+<area shape="poly" title=" " alt="" coords="412,366,471,406,468,410,409,370"/>
+<area shape="rect" title=" " alt="" coords="569,416,731,441"/>
+<area shape="poly" title=" " alt="" coords="436,365,596,410,595,415,434,371"/>
+<area shape="rect" title=" " alt="" coords="5,416,140,441"/>
+<area shape="poly" title=" " alt="" coords="343,371,138,416,137,410,342,365"/>
+<area shape="rect" title=" " alt="" coords="164,416,336,441"/>
+<area shape="poly" title=" " alt="" coords="372,370,287,412,285,407,370,366"/>
+<area shape="poly" title=" " alt="" coords="1211,285,1274,322,1354,366,1447,408,1445,413,1351,370,1271,327,1209,290"/>
+<area shape="poly" title=" " alt="" coords="1146,290,1106,297,931,318,792,325,652,331,473,345,473,340,652,325,792,320,930,312,1106,292,1145,285"/>
+<area shape="rect" href="../../d5/d2b/vetor3_8hpp.html" title=" " alt="" coords="1561,343,1678,368"/>
+<area shape="poly" title=" " alt="" coords="1254,285,1548,338,1547,343,1253,290"/>
+<area shape="rect" title=" " alt="" coords="483,343,673,368"/>
+<area shape="poly" title=" " alt="" coords="1144,290,1106,297,687,345,686,340,1106,292,1143,285"/>
+<area shape="rect" title=" " alt="" coords="697,343,904,368"/>
+<area shape="poly" title=" " alt="" coords="1141,290,1107,297,875,343,874,337,1105,292,1140,285"/>
+<area shape="rect" title=" " alt="" coords="928,343,1084,368"/>
+<area shape="poly" title=" " alt="" coords="1165,290,1046,340,1044,335,1163,285"/>
+<area shape="rect" title=" " alt="" coords="1108,343,1283,368"/>
+<area shape="poly" title=" " alt="" coords="1195,287,1197,329,1191,329,1189,288"/>
+<area shape="poly" title=" " alt="" coords="1599,370,1521,412,1519,407,1597,366"/>
+<area shape="rect" title=" " alt="" coords="1855,416,1917,441"/>
+<area shape="poly" title=" " alt="" coords="1663,365,1842,413,1841,418,1661,371"/>
+<area shape="poly" title=" " alt="" coords="1397,286,1473,403,1469,406,1393,289"/>
+<area shape="rect" title=" " alt="" coords="2665,181,2728,207"/>
+<area shape="poly" title=" " alt="" coords="2607,124,2671,171,2668,175,2604,128"/>
+<area shape="rect" title=" " alt="" coords="2752,181,2812,207"/>
+<area shape="poly" title=" " alt="" coords="2619,124,2743,174,2741,179,2617,128"/>
+<area shape="rect" title=" " alt="" coords="2433,181,2491,207"/>
+<area shape="poly" title=" " alt="" coords="2573,128,2494,176,2491,172,2570,124"/>
+<area shape="rect" title=" " alt="" coords="2601,343,2681,368"/>
+<area shape="poly" title=" " alt="" coords="2595,126,2638,328,2633,329,2590,127"/>
+<area shape="rect" title=" " alt="" coords="2515,181,2590,207"/>
+<area shape="poly" title=" " alt="" coords="2587,127,2566,170,2562,168,2582,125"/>
+<area shape="poly" title=" " alt="" coords="2015,200,1920,211,1798,234,1733,253,1669,277,1607,308,1550,345,1522,374,1500,406,1496,403,1517,371,1547,341,1604,303,1666,272,1731,248,1797,229,1919,205,2015,195"/>
+<area shape="poly" title=" " alt="" coords="2015,202,1833,220,1720,236,1607,257,1594,261,1592,255,1605,252,1719,230,1832,214,2015,196"/>
+<area shape="poly" title=" " alt="" coords="2125,194,2187,199,2261,209,2341,226,2418,252,2458,269,2490,284,2517,306,2540,342,2545,357,2543,371,2536,383,2524,393,2491,409,2453,419,2452,414,2490,404,2521,389,2532,379,2538,369,2540,357,2536,344,2513,309,2488,288,2456,273,2416,257,2339,231,2260,215,2186,205,2125,200"/>
+<area shape="rect" title=" " alt="" coords="1932,343,2019,368"/>
+<area shape="poly" title=" " alt="" coords="2065,208,1992,332,1987,329,2061,205"/>
+<area shape="rect" title=" " alt="" coords="2267,262,2361,287"/>
+<area shape="poly" title=" " alt="" coords="2106,204,2266,255,2264,260,2105,209"/>
+<area shape="rect" title=" " alt="" coords="2415,343,2525,368"/>
+<area shape="poly" title=" " alt="" coords="2125,194,2180,198,2244,208,2311,225,2375,252,2400,269,2423,289,2457,329,2452,333,2419,293,2397,273,2373,257,2310,230,2243,213,2179,203,2125,199"/>
+<area shape="rect" href="../../df/d10/tempo_8hpp.html" title="Inicia e gerencia o tempo." alt="" coords="1783,262,1875,287"/>
+<area shape="poly" title=" " alt="" coords="2036,209,1878,260,1876,255,2034,204"/>
+<area shape="rect" href="../../dd/dcf/vetor2_8hpp.html" title=" " alt="" coords="2094,343,2211,368"/>
+<area shape="poly" title=" " alt="" coords="2074,207,2081,247,2099,293,2113,314,2130,331,2126,335,2109,317,2094,296,2076,248,2069,208"/>
+<area shape="rect" href="../../d1/da6/inputs_8hpp.html" title=" " alt="" coords="2108,262,2243,287"/>
+<area shape="poly" title=" " alt="" coords="2087,205,2150,252,2147,256,2084,209"/>
+<area shape="poly" title=" " alt="" coords="1816,290,1763,329,1691,370,1622,397,1556,415,1554,410,1621,392,1689,366,1760,324,1813,285"/>
+<area shape="rect" title=" " alt="" coords="1753,343,1817,368"/>
+<area shape="poly" title=" " alt="" coords="1824,289,1800,332,1796,329,1820,286"/>
+<area shape="rect" title=" " alt="" coords="1841,343,1907,368"/>
+<area shape="poly" title=" " alt="" coords="1838,286,1863,329,1858,332,1833,289"/>
+<area shape="poly" title=" " alt="" coords="2094,368,2076,371,1792,402,1563,423,1562,418,1792,397,2075,365,2093,363"/>
+<area shape="poly" title=" " alt="" coords="2111,371,1931,418,1930,413,2109,365"/>
+<area shape="poly" title=" " alt="" coords="2161,290,2095,335,2032,370,1993,381,1941,391,1814,407,1563,426,1562,421,1813,401,1940,386,1992,376,2030,366,2092,330,2158,285"/>
+<area shape="poly" title=" " alt="" coords="2219,285,2296,310,2330,325,2353,341,2370,371,2378,402,2372,403,2365,373,2349,344,2328,330,2294,315,2217,290"/>
+<area shape="poly" title=" " alt="" coords="2222,285,2256,292,2438,323,2587,344,2587,350,2437,328,2255,297,2221,290"/>
+<area shape="poly" title=" " alt="" coords="2147,290,2018,340,2016,335,2145,285"/>
+<area shape="poly" title=" " alt="" coords="2219,285,2415,337,2413,342,2217,290"/>
+<area shape="poly" title=" " alt="" coords="2175,288,2162,330,2157,329,2169,287"/>
+<area shape="rect" title=" " alt="" coords="2235,343,2339,368"/>
+<area shape="poly" title=" " alt="" coords="2193,285,2261,333,2258,337,2190,290"/>
+</map>
+</div>
+</div><a name="details" id="details"></a><h2 class="groupheader">Descrição detalhada</h2>
+<div class="textblock"><dl class="section copyright"><dt>Copyright</dt><dd>MIT LicenseCopyright (c) 2025 Daniel Oliveira</dd></dl>
+<p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</p>
+<p>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</p>
+<p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. </p>
+</div></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="../../dir_0394786a11e0dfde3dca27fdccf84bfd.html">becommons</a></li><li class="navelem"><a class="el" href="../../dir_c4122870b4eb0ef02862e41dabd11367.html">src</a></li><li class="navelem"><a class="el" href="../../dir_8ec866bb956e524c374443dbfe033dff.html">componentes</a></li><li class="navelem"><a class="el" href="../../d9/de5/camera__editor_8cpp.html">camera_editor.cpp</a></li>
+    <li class="footer">Gerado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+  </ul>
+</div>
+</body>
+</html>

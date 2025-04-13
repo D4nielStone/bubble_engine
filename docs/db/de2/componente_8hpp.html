@@ -1,0 +1,276 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt-BR">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Bubble Engine: Referência do Arquivo becommons/include/componentes/componente.hpp</title>
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../jquery.js"></script>
+<script type="text/javascript" src="../../dynsections.js"></script>
+<link href="../../navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../resize.js"></script>
+<script type="text/javascript" src="../../navtreedata.js"></script>
+<script type="text/javascript" src="../../navtree.js"></script>
+<link href="../../search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../search/searchdata.js"></script>
+<script type="text/javascript" src="../../search/search.js"></script>
+<link href="../../doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="../../banner.png"/></td>
+  <td id="projectalign">
+   <div id="projectname">Bubble Engine<span id="projectnumber">&#160;1.0b</span>
+   </div>
+   <div id="projectbrief">Projeto independente de game engine eficiente para projetos pequenos</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Gerado por Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "../../search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="../../menudata.js"></script>
+<script type="text/javascript" src="../../menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('../../',true,false,'search.php','Busca');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('db/de2/componente_8hpp.html','../../'); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Carregando...</div>
+<div class="SRStatus" id="Searching">Procurando...</div>
+<div class="SRStatus" id="NoMatches">Nenhuma entrada encontrado</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">Componentes</a> &#124;
+<a href="#func-members">Funções</a>  </div>
+  <div class="headertitle"><div class="title">Referência do Arquivo componente.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Estrutura base para componetes.  
+<a href="#details">Mais...</a></p>
+<div class="textblock"><code>#include &lt;unordered_map&gt;</code><br />
+<code>#include &lt;cstdint&gt;</code><br />
+<code>#include &lt;type_traits&gt;</code><br />
+<code>#include &lt;rapidjson/document.h&gt;</code><br />
+<code>#include &lt;rapidjson/writer.h&gt;</code><br />
+<code>#include &lt;rapidjson/stringbuffer.h&gt;</code><br />
+<code>#include &quot;<a class="el" href="../../db/d19/namespace_8hpp_source.html">namespace.hpp</a>&quot;</code><br />
+</div><div class="textblock"><div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-0-trigger" src="../../closed.png" alt="+"/> Gráfico de dependência de inclusões para componente.hpp:</div>
+<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-0-content" class="dyncontent" style="display:none;">
+<div class="center"><img src="../../de/d68/componente_8hpp__incl.png" border="0" usemap="#abecommons_2include_2componentes_2componente_8hpp" alt=""/></div>
+<map name="abecommons_2include_2componentes_2componente_8hpp" id="abecommons_2include_2componentes_2componente_8hpp">
+<area shape="rect" title="Estrutura base para componetes." alt="" coords="321,5,566,45"/>
+<area shape="rect" title=" " alt="" coords="5,93,129,119"/>
+<area shape="poly" title=" " alt="" coords="354,48,136,93,135,88,353,43"/>
+<area shape="rect" title=" " alt="" coords="154,93,221,119"/>
+<area shape="poly" title=" " alt="" coords="383,48,235,93,233,88,381,43"/>
+<area shape="rect" title=" " alt="" coords="245,93,337,119"/>
+<area shape="poly" title=" " alt="" coords="408,48,328,89,325,84,406,43"/>
+<area shape="rect" title=" " alt="" coords="362,93,525,119"/>
+<area shape="poly" title=" " alt="" coords="446,46,446,79,441,79,441,46"/>
+<area shape="rect" title=" " alt="" coords="549,93,684,119"/>
+<area shape="poly" title=" " alt="" coords="486,43,580,85,578,90,484,48"/>
+<area shape="rect" title=" " alt="" coords="708,93,880,119"/>
+<area shape="poly" title=" " alt="" coords="528,43,730,88,729,93,527,48"/>
+<area shape="rect" href="../../db/d19/namespace_8hpp.html" title=" " alt="" coords="905,93,1030,119"/>
+<area shape="poly" title=" " alt="" coords="567,42,892,91,891,96,566,47"/>
+</map>
+</div>
+</div><div class="textblock"><div id="dynsection-1" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-1-trigger" src="../../closed.png" alt="+"/> Este grafo mostra quais arquivos estão direta ou indiretamente relacionados com esse arquivo:</div>
+<div id="dynsection-1-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-1-content" class="dyncontent" style="display:none;">
+<div class="center"><img src="../../d0/dac/componente_8hpp__dep__incl.png" border="0" usemap="#abecommons_2include_2componentes_2componente_8hppdep" alt=""/></div>
+<map name="abecommons_2include_2componentes_2componente_8hppdep" id="abecommons_2include_2componentes_2componente_8hppdep">
+<area shape="rect" title="Estrutura base para componetes." alt="" coords="981,5,1227,45"/>
+<area shape="rect" href="../../d0/d8a/camera_8hpp.html" title="Estrutura básica de câmera." alt="" coords="1492,181,1737,221"/>
+<area shape="poly" title=" " alt="" coords="1173,47,1560,179,1559,184,1171,52"/>
+<area shape="rect" href="../../da/d82/codigo_8hpp.html" title="Componente de código para entidades ECS." alt="" coords="523,357,768,397"/>
+<area shape="poly" title=" " alt="" coords="968,34,833,53,759,69,685,93,612,124,544,163,483,212,457,240,433,271,426,286,425,300,431,312,442,323,478,341,523,355,522,360,476,346,439,327,427,315,420,301,420,285,428,268,453,236,480,208,541,158,610,119,683,88,758,64,832,47,967,29"/>
+<area shape="rect" href="../../d6/def/fisica_8hpp.html" title="Componente de física para entidades ECS." alt="" coords="2384,181,2629,221"/>
+<area shape="poly" title=" " alt="" coords="1241,26,1411,31,1602,43,1779,62,1851,75,1905,91,1921,100,1931,111,1941,122,1956,131,2013,152,2064,164,2109,171,2152,172,2243,172,2297,173,2359,179,2384,182,2384,187,2358,184,2296,178,2243,177,2152,178,2108,176,2063,170,2012,157,1954,136,1938,126,1927,115,1918,105,1903,96,1849,80,1778,67,1602,48,1410,37,1241,31"/>
+<area shape="rect" href="../../db/dfb/componentes_2imagem_8hpp.html" title=" " alt="" coords="443,269,688,309"/>
+<area shape="poly" title=" " alt="" coords="1054,54,605,272,603,267,1052,49"/>
+<area shape="rect" href="../../da/dd5/luz__direcional_8hpp.html" title=" " alt="" coords="712,269,957,309"/>
+<area shape="poly" title=" " alt="" coords="1077,57,856,271,852,267,1073,53"/>
+<area shape="rect" href="../../d9/d8b/luz__pontual_8hpp.html" title=" " alt="" coords="5,269,251,309"/>
+<area shape="poly" title=" " alt="" coords="968,33,816,40,649,52,496,70,434,82,388,96,349,113,312,134,244,183,187,232,148,271,144,267,184,228,240,179,309,130,347,108,386,91,433,77,495,65,649,47,816,35,967,28"/>
+<area shape="rect" href="../../db/d62/propriedades_8hpp.html" title=" " alt="" coords="1967,93,2212,133"/>
+<area shape="poly" title=" " alt="" coords="1241,33,1564,56,1948,91,1967,93,1966,98,1948,96,1563,61,1240,38"/>
+<area shape="rect" href="../../dd/d03/componentes_2texto_8hpp.html" title=" " alt="" coords="981,269,1227,309"/>
+<area shape="poly" title=" " alt="" coords="1107,59,1107,269,1101,269,1101,59"/>
+<area shape="rect" href="../../d4/dcc/transformacao_8hpp.html" title="Calcula a mtriz de modelo para um objeto 3d qualquer." alt="" coords="1647,93,1892,133"/>
+<area shape="poly" title=" " alt="" coords="1241,42,1646,94,1646,99,1240,47"/>
+<area shape="rect" href="../../db/d85/api__lua_8hpp.html" title=" " alt="" coords="1017,357,1194,397"/>
+<area shape="poly" title=" " alt="" coords="1547,228,1161,360,1160,355,1546,223"/>
+<area shape="rect" href="../../d4/d94/camera__editor_8hpp.html" title=" " alt="" coords="1756,269,2001,309"/>
+<area shape="poly" title=" " alt="" coords="1686,223,1822,267,1820,272,1685,228"/>
+<area shape="rect" href="../../da/d6f/sistema__de__renderizacao_8hpp.html" title="Gerencia a renderizacao." alt="" coords="1505,269,1725,309"/>
+<area shape="poly" title=" " alt="" coords="1617,235,1617,269,1612,269,1612,235"/>
+<area shape="rect" href="../../d1/d6b/camera_8cpp.html" title=" " alt="" coords="1895,445,2113,485"/>
+<area shape="poly" title=" " alt="" coords="1751,203,1838,209,1925,221,1999,239,2026,252,2046,268,2065,299,2068,329,2061,361,2049,398,2038,424,2023,447,2018,444,2033,422,2044,396,2056,360,2063,329,2060,300,2042,271,2024,257,1997,244,1924,226,1838,214,1751,208"/>
+<area shape="rect" href="../../d8/d41/fase_8cpp.html" title=" " alt="" coords="323,445,495,485"/>
+<area shape="poly" title=" " alt="" coords="1478,205,1202,207,875,216,721,224,588,236,488,252,454,261,432,272,416,288,404,309,398,332,396,357,399,406,407,445,401,446,393,407,390,357,393,331,400,307,411,285,429,267,452,256,487,246,588,231,721,219,875,210,1202,201,1478,199"/>
+<area shape="rect" href="../../df/d9d/sistema__de__interface_8cpp.html" title=" " alt="" coords="1678,445,1871,485"/>
+<area shape="poly" title=" " alt="" coords="1751,205,1830,212,1908,224,1973,242,1998,254,2015,268,2037,300,2045,332,2039,365,2019,399,1999,411,1962,423,1863,448,1862,443,1960,418,1997,406,2015,395,2034,363,2040,332,2032,302,2011,271,1995,258,1971,247,1907,229,1830,217,1751,210"/>
+<area shape="rect" href="../../d1/de4/sistema__de__renderizacao_8cpp.html" title=" " alt="" coords="1219,357,1437,397"/>
+<area shape="poly" title=" " alt="" coords="1568,230,1495,272,1357,360,1354,355,1492,267,1565,226"/>
+<area shape="rect" href="../../d3/df3/api__lua_8cpp.html" title=" " alt="" coords="828,445,1001,485"/>
+<area shape="poly" title=" " alt="" coords="1052,405,958,448,955,443,1050,401"/>
+<area shape="rect" href="../../d4/d6e/codigo_8cpp.html" title=" " alt="" coords="1026,445,1243,485"/>
+<area shape="poly" title=" " alt="" coords="1119,410,1131,444,1126,446,1114,411"/>
+<area shape="rect" href="../../d9/de5/camera__editor_8cpp.html" title=" " alt="" coords="1787,357,2005,397"/>
+<area shape="poly" title=" " alt="" coords="1888,322,1895,357,1890,358,1883,323"/>
+<area shape="rect" href="../../d8/d28/projeto_8hpp.html" title="Gerencia configurações do projeto." alt="" coords="1512,357,1712,397"/>
+<area shape="poly" title=" " alt="" coords="1616,323,1615,357,1610,357,1611,323"/>
+<area shape="rect" href="../../d7/dd2/projeto_8cpp.html" title=" " alt="" coords="1297,445,1469,485"/>
+<area shape="poly" title=" " alt="" coords="1567,318,1502,359,1447,405,1403,447,1399,443,1443,401,1498,355,1565,314"/>
+<area shape="poly" title=" " alt="" coords="1539,316,1392,360,1390,355,1538,311"/>
+<area shape="poly" title=" " alt="" coords="1498,394,1450,400,1232,421,1015,448,1002,450,1001,445,1014,443,1231,416,1449,395,1498,389"/>
+<area shape="poly" title=" " alt="" coords="1499,402,1240,448,1239,443,1498,396"/>
+<area shape="poly" title=" " alt="" coords="1712,398,1919,443,1918,448,1711,403"/>
+<area shape="rect" href="../../dc/dea/fisica_8cpp.html" title=" " alt="" coords="2378,445,2595,485"/>
+<area shape="poly" title=" " alt="" coords="1726,389,1776,395,1942,409,2072,417,2201,426,2367,443,2378,444,2377,449,2366,448,2201,431,2071,422,1942,414,1776,400,1725,395"/>
+<area shape="rect" href="../../d3/d92/transformacao_8cpp.html" title=" " alt="" coords="2137,445,2354,485"/>
+<area shape="poly" title=" " alt="" coords="1726,390,2126,443,2137,444,2136,450,2125,448,1726,395"/>
+<area shape="poly" title=" " alt="" coords="1498,395,1450,400,1195,416,997,422,798,429,544,448,496,454,495,448,544,443,798,424,996,417,1195,411,1449,395,1498,390"/>
+<area shape="poly" title=" " alt="" coords="1550,405,1434,448,1432,443,1548,400"/>
+<area shape="poly" title=" " alt="" coords="1661,401,1740,443,1738,448,1658,406"/>
+<area shape="rect" href="../../d7/d0b/runtime_2src_2main_8cpp.html" title=" " alt="" coords="1493,453,1653,478"/>
+<area shape="poly" title=" " alt="" coords="1600,411,1581,453,1576,451,1595,409"/>
+<area shape="poly" title=" " alt="" coords="718,399,857,443,855,448,717,404"/>
+<area shape="poly" title=" " alt="" coords="766,397,1028,443,1027,448,765,402"/>
+<area shape="poly" title=" " alt="" coords="582,405,462,448,460,443,580,400"/>
+<area shape="rect" href="../../d6/df2/sistema__de__codigo_8cpp.html" title=" " alt="" coords="556,445,735,485"/>
+<area shape="poly" title=" " alt="" coords="648,411,648,445,643,445,643,411"/>
+<area shape="poly" title=" " alt="" coords="2371,210,1905,232,1666,249,1569,260,1494,272,1461,281,1437,290,1379,312,1192,360,1191,355,1378,307,1435,285,1460,275,1493,267,1568,255,1666,244,1904,226,2370,204"/>
+<area shape="poly" title=" " alt="" coords="2516,235,2521,269,2521,320,2515,369,2496,446,2490,445,2509,368,2516,319,2516,270,2511,235"/>
+<area shape="rect" href="../../da/d81/sistema__de__fisica_8cpp.html" title=" " alt="" coords="2334,269,2506,309"/>
+<area shape="poly" title=" " alt="" coords="2480,233,2441,271,2437,267,2476,229"/>
+<area shape="poly" title=" " alt="" coords="702,308,1004,355,1017,357,1016,362,1004,360,702,313"/>
+<area shape="poly" title=" " alt="" coords="472,317,442,335,418,359,409,380,405,403,408,445,402,445,400,402,404,378,414,356,439,330,469,312"/>
+<area shape="rect" href="../../dd/d18/sistema__de__interface_8hpp.html" title=" " alt="" coords="792,357,992,397"/>
+<area shape="poly" title=" " alt="" coords="651,310,821,355,820,360,649,315"/>
+<area shape="poly" title=" " alt="" coords="1006,396,1297,446,1296,452,1005,401"/>
+<area shape="poly" title=" " alt="" coords="1005,395,1006,395,1191,412,1335,418,1480,425,1666,443,1678,444,1677,450,1665,448,1480,430,1335,424,1190,417,1005,400,1005,400"/>
+<area shape="poly" title=" " alt="" coords="908,311,1047,355,1045,360,906,316"/>
+<area shape="poly" title=" " alt="" coords="705,314,551,341,468,360,449,378,434,401,416,446,412,444,429,399,445,375,465,355,550,335,704,309"/>
+<area shape="poly" title=" " alt="" coords="957,309,1220,355,1220,360,956,314"/>
+<area shape="poly" title=" " alt="" coords="161,317,209,356,265,395,314,421,362,443,360,448,312,426,263,400,206,360,158,321"/>
+<area shape="poly" title=" " alt="" coords="264,296,1207,355,1219,356,1218,361,1206,360,264,302"/>
+<area shape="poly" title=" " alt="" coords="1107,323,1108,357,1102,357,1102,323"/>
+<area shape="poly" title=" " alt="" coords="968,312,858,318,727,324,603,336,551,346,512,360,476,394,428,447,424,443,472,390,509,355,550,341,602,330,727,319,858,313,967,307"/>
+<area shape="poly" title=" " alt="" coords="1241,296,1532,319,1657,335,1700,345,1725,355,1745,375,1759,399,1774,444,1769,446,1754,401,1741,378,1723,360,1698,350,1656,341,1531,324,1240,301"/>
+<area shape="poly" title=" " alt="" coords="1046,317,939,360,937,355,1044,312"/>
+<area shape="poly" title=" " alt="" coords="1725,142,1650,184,1647,179,1722,138"/>
+<area shape="poly" title=" " alt="" coords="1633,131,1531,151,1478,165,1428,184,1372,213,1332,243,1293,275,1240,312,1148,360,1145,355,1237,307,1290,271,1329,239,1369,208,1426,179,1477,160,1530,146,1632,126"/>
+<area shape="poly" title=" " alt="" coords="1892,134,1946,153,1997,179,2025,198,2045,216,2061,238,2074,268,2087,304,2092,334,2089,363,2077,399,2059,426,2035,447,2032,443,2055,423,2072,396,2084,362,2087,334,2082,305,2070,270,2056,241,2041,220,2022,202,1995,184,1944,158,1891,139"/>
+<area shape="poly" title=" " alt="" coords="1893,133,2002,155,2082,179,2144,209,2204,243,2315,318,2407,390,2468,443,2464,447,2403,394,2312,323,2201,248,2141,213,2080,184,2001,161,1892,138"/>
+<area shape="poly" title=" " alt="" coords="1890,133,1978,154,2014,166,2040,179,2078,209,2113,243,2171,319,2214,391,2240,444,2235,446,2209,393,2166,322,2109,247,2075,213,2037,184,2012,171,1976,160,1889,139"/>
+<area shape="poly" title=" " alt="" coords="1633,125,1323,146,946,178,768,199,613,221,497,245,457,258,432,271,416,289,405,310,399,333,396,358,399,406,407,444,401,445,394,407,391,357,394,332,400,308,412,286,429,267,455,253,495,240,612,216,767,193,946,173,1322,141,1633,120"/>
+<area shape="poly" title=" " alt="" coords="1855,135,1906,156,1959,184,2008,221,2029,243,2046,268,2064,303,2072,335,2068,366,2049,399,2026,411,1983,424,1872,449,1871,444,1982,419,2024,406,2045,395,2063,364,2067,335,2059,305,2042,271,2025,247,2004,225,1956,188,1904,160,1853,140"/>
+<area shape="poly" title=" " alt="" coords="1634,129,1555,149,1517,164,1481,184,1432,224,1391,273,1360,321,1339,358,1335,356,1356,318,1387,270,1429,220,1479,179,1515,159,1554,144,1632,124"/>
+<area shape="poly" title=" " alt="" coords="1906,130,1911,131,2366,179,2384,181,2383,186,2365,184,1910,136,1905,135"/>
+<area shape="poly" title=" " alt="" coords="1906,130,1911,131,1973,136,2027,136,2119,133,2163,135,2209,141,2259,155,2316,179,2346,198,2372,222,2410,267,2406,271,2368,225,2342,202,2313,184,2257,160,2208,146,2163,140,2119,139,2027,142,1973,141,1910,136,1905,135"/>
+</map>
+</div>
+</div>
+<p><a href="../../db/de2/componente_8hpp_source.html">Ir para o código-fonte desse arquivo.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Componentes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d85/structBECOMMONS__NS_1_1componente.html">BECOMMONS_NS::componente</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">base para as funcionalidades da engine  <a href="../../d9/d85/structBECOMMONS__NS_1_1componente.html#details">Mais...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Funções</h2></td></tr>
+<tr class="memitem:a0300830cf36f3eac711e91e245178b73" id="r_a0300830cf36f3eac711e91e245178b73"><td class="memItemLeft" align="right" valign="top"><a id="a0300830cf36f3eac711e91e245178b73" name="a0300830cf36f3eac711e91e245178b73"></a>
+<a class="el" href="../../d9/d85/structBECOMMONS__NS_1_1componente.html#a63f9004bc698806fecbc2d677f8ee369">componente::mascara</a>&#160;</td><td class="memItemRight" valign="bottom"><b>BECOMMONS_NS::operator|</b> (<a class="el" href="../../d9/d85/structBECOMMONS__NS_1_1componente.html#a63f9004bc698806fecbc2d677f8ee369">componente::mascara</a> lhs, <a class="el" href="../../d9/d85/structBECOMMONS__NS_1_1componente.html#a63f9004bc698806fecbc2d677f8ee369">componente::mascara</a> rhs)</td></tr>
+<tr class="separator:a0300830cf36f3eac711e91e245178b73"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4063703a89e2dfbb0ca567035f873ccb" id="r_a4063703a89e2dfbb0ca567035f873ccb"><td class="memItemLeft" align="right" valign="top"><a id="a4063703a89e2dfbb0ca567035f873ccb" name="a4063703a89e2dfbb0ca567035f873ccb"></a>
+<a class="el" href="../../d9/d85/structBECOMMONS__NS_1_1componente.html#a63f9004bc698806fecbc2d677f8ee369">componente::mascara</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>BECOMMONS_NS::operator|=</b> (<a class="el" href="../../d9/d85/structBECOMMONS__NS_1_1componente.html#a63f9004bc698806fecbc2d677f8ee369">componente::mascara</a> &amp;lhs, <a class="el" href="../../d9/d85/structBECOMMONS__NS_1_1componente.html#a63f9004bc698806fecbc2d677f8ee369">componente::mascara</a> rhs)</td></tr>
+<tr class="separator:a4063703a89e2dfbb0ca567035f873ccb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9caef3fe88bc7c5c920ff21c8e5504cf" id="r_a9caef3fe88bc7c5c920ff21c8e5504cf"><td class="memItemLeft" align="right" valign="top"><a id="a9caef3fe88bc7c5c920ff21c8e5504cf" name="a9caef3fe88bc7c5c920ff21c8e5504cf"></a>
+<a class="el" href="../../d9/d85/structBECOMMONS__NS_1_1componente.html#a63f9004bc698806fecbc2d677f8ee369">componente::mascara</a>&#160;</td><td class="memItemRight" valign="bottom"><b>BECOMMONS_NS::operator&amp;</b> (<a class="el" href="../../d9/d85/structBECOMMONS__NS_1_1componente.html#a63f9004bc698806fecbc2d677f8ee369">componente::mascara</a> lhs, <a class="el" href="../../d9/d85/structBECOMMONS__NS_1_1componente.html#a63f9004bc698806fecbc2d677f8ee369">componente::mascara</a> rhs)</td></tr>
+<tr class="separator:a9caef3fe88bc7c5c920ff21c8e5504cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a35736e091730f5c03772310ab3936930" id="r_a35736e091730f5c03772310ab3936930"><td class="memItemLeft" align="right" valign="top"><a id="a35736e091730f5c03772310ab3936930" name="a35736e091730f5c03772310ab3936930"></a>
+<a class="el" href="../../d9/d85/structBECOMMONS__NS_1_1componente.html#a63f9004bc698806fecbc2d677f8ee369">componente::mascara</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>BECOMMONS_NS::operator&amp;=</b> (<a class="el" href="../../d9/d85/structBECOMMONS__NS_1_1componente.html#a63f9004bc698806fecbc2d677f8ee369">componente::mascara</a> &amp;lhs, <a class="el" href="../../d9/d85/structBECOMMONS__NS_1_1componente.html#a63f9004bc698806fecbc2d677f8ee369">componente::mascara</a> rhs)</td></tr>
+<tr class="separator:a35736e091730f5c03772310ab3936930"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab71f2dd274e71d5f6cdb82fb3fee715e" id="r_ab71f2dd274e71d5f6cdb82fb3fee715e"><td class="memItemLeft" align="right" valign="top"><a id="ab71f2dd274e71d5f6cdb82fb3fee715e" name="ab71f2dd274e71d5f6cdb82fb3fee715e"></a>
+<a class="el" href="../../d9/d85/structBECOMMONS__NS_1_1componente.html#a63f9004bc698806fecbc2d677f8ee369">componente::mascara</a>&#160;</td><td class="memItemRight" valign="bottom"><b>BECOMMONS_NS::operator~</b> (<a class="el" href="../../d9/d85/structBECOMMONS__NS_1_1componente.html#a63f9004bc698806fecbc2d677f8ee369">componente::mascara</a> mask)</td></tr>
+<tr class="separator:ab71f2dd274e71d5f6cdb82fb3fee715e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Descrição detalhada</h2>
+<div class="textblock"><p>Estrutura base para componetes. </p>
+<dl class="section copyright"><dt>Copyright</dt><dd>MIT LicenseCopyright (c) 2025 Daniel Oliveira</dd></dl>
+<p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</p>
+<p>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</p>
+<p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. </p>
+</div></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="../../dir_0394786a11e0dfde3dca27fdccf84bfd.html">becommons</a></li><li class="navelem"><a class="el" href="../../dir_9a744b5567c265deacf566b467d8af59.html">include</a></li><li class="navelem"><a class="el" href="../../dir_111f21dc146a617cd827120506a93450.html">componentes</a></li><li class="navelem"><a class="el" href="../../db/de2/componente_8hpp.html">componente.hpp</a></li>
+    <li class="footer">Gerado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+  </ul>
+</div>
+</body>
+</html>
