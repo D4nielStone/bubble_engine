@@ -1,7 +1,0 @@
-<map id="BECOMMONS_NS::camera" name="BECOMMONS_NS::camera">
-<area shape="rect" id="Node000001" title="componente que facilita a manipuacao da matriz de visualizacao e projeco" alt="" coords="21,79,213,104"/>
-<area shape="rect" id="Node000003" href="$dc/dd0/structBECOMMONS__NS_1_1camera__editor.html" title=" " alt="" coords="21,152,213,192"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="120,118,120,152,115,152,115,118"/>
-<area shape="rect" id="Node000002" href="$d9/d85/structBECOMMONS__NS_1_1componente.html" title="base para as funcionalidades da engine" alt="" coords="5,5,229,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="120,44,120,79,115,79,115,44"/>
-</map>
