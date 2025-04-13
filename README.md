@@ -1,7 +1,7 @@
 # Bubble Engine
 <p align="center">
   <a href="https://d4nielstone.github.io/bubble_engine">
-    <img src="becommons/include/assets/imagems/banner.png" width="400" alt="Bubble Engine logo">
+    <img src="banner.png" width="400" alt="Bubble Engine logo">
   </a>
 </p>
 
