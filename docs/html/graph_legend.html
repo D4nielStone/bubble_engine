@@ -1,0 +1,166 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt-BR">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Bubble Engine: Legenda do Grafo</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="banner.png"/></td>
+  <td id="projectalign">
+   <div id="projectname">Bubble Engine<span id="projectnumber">&#160;1.0b</span>
+   </div>
+   <div id="projectbrief">Projeto independente de game engine eficiente para projetos pequenos</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Gerado por Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Busca');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('graph_legend.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Carregando...</div>
+<div class="SRStatus" id="Searching">Procurando...</div>
+<div class="SRStatus" id="NoMatches">Nenhuma entrada encontrado</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">Legenda do Grafo</div></div>
+</div><!--header-->
+<div class="contents">
+<p>Esta página explica como interpretar os grafos gerados pelo doxygen.</p>
+<p>Considere o seguinte exemplo: </p><div class="fragment"><div class="line"><span class="comment">/*! Classe oculta por causa da truncagem */</span></div>
+<div class="line"><span class="keyword">class </span>Invisible { };</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">/*! Classe Truncated, relação de herança está oculta */</span></div>
+<div class="line"><span class="keyword">class </span>Truncated : <span class="keyword">public</span> Invisible { };</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">/* Classe não documentada com os comentários do Doxygen */</span></div>
+<div class="line"><span class="keyword">class </span>Undocumented { };</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">/*! Classe possui que possui uma relação de herança pública */</span></div>
+<div class="line"><span class="keyword">class </span>PublicBase : <span class="keyword">public</span> Truncated { };</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">/*! Um template de classe */</span></div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt; <span class="keyword">class </span>Templ { };</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">/*! Classe possui que possui uma relação de herança protegida  */</span></div>
+<div class="line"><span class="keyword">class </span>ProtectedBase { };</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">/*! Classe possui que possui uma relação de herança privada  */</span></div>
+<div class="line"><span class="keyword">class </span>PrivateBase { };</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">/*! Classe utilizada pela classe Inherited */</span></div>
+<div class="line"><span class="keyword">class </span>Used { };</div>
+<div class="line"><span class="comment"></span> </div>
+<div class="line"><span class="comment">/*! Super classe que herda outras classes */</span></div>
+<div class="line"><span class="keyword">class </span>Inherited : <span class="keyword">public</span> PublicBase,</div>
+<div class="line">                  <span class="keyword">protected</span> ProtectedBase,</div>
+<div class="line">                  <span class="keyword">private</span> PrivateBase,</div>
+<div class="line">                  <span class="keyword">public</span> Undocumented,</div>
+<div class="line">                  <span class="keyword">public</span> Templ&lt;int&gt;</div>
+<div class="line">{</div>
+<div class="line">  <span class="keyword">private</span>:</div>
+<div class="line">    Used *m_usedClass;</div>
+<div class="line">};</div>
+</div><!-- fragment --><p> Isto irá gerar o seguinte gráfo:</p>
+<center><img src="graph_legend.png" alt="" class="inline"/></center> <p>As caixas no grafo acima possuem os seguintes significados: </p>
+<ul>
+<li>
+Uma caixa cinza denota a estrutura ou a classe que geroueste grafo. </li>
+<li>
+Uma caixa com a borda preta denota uma estrutura ou classe documentada. </li>
+<li>
+Uma caixa com a borda cinza denota uma estrutura ou classe não documentada. </li>
+<li>
+Uma caixa com a borda vermelha denota uma estrutura ou classe naqual nem todas as relações são mostradas. Um grafo é truncado quando esse não cabe no espaço especificado. </li>
+</ul>
+<p>As setas possuem os seguintes significados: </p>
+<ul>
+<li>
+Uma seta azul escura denota a relação de herança pública entre duas classes. </li>
+<li>
+Uma seta verde escura denota a relação de herança protegida entre duas classes. </li>
+<li>
+Uma seta vermelha escura denota a relação de herança privada entre duas classes. </li>
+<li>
+Uma seta pontilhada púrpura denota a relação de uso e/ou agragação por outra classe/estrutura. A etiqueta da seta denota o nome do(s) campo(s) que representa(m) este apontamento. </li>
+<li>
+Uma seta pontilhada amarela denota a relação de instanciação de uma <em>template</em>. A etiqueta da seta denota os parâmetros de instanciação desta <em>template</em>. </li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Gerado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+  </ul>
+</div>
+</body>
+</html>

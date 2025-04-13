@@ -1,0 +1,31 @@
+digraph "becommons/include/nucleo/sistema_de_renderizacao.hpp"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  Node1 [id="Node000001",label="becommons/include/nucleo\l/sistema_de_renderizacao.hpp",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Gerencia a renderizacao."];
+  Node1 -> Node2 [id="edge1_Node000001_Node000002",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node2 [id="Node000002",label="becommons/include/nucleo\l/projeto.hpp",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$d8/d28/projeto_8hpp.html",tooltip="Gerencia configurações do projeto."];
+  Node2 -> Node3 [id="edge2_Node000002_Node000003",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node3 [id="Node000003",label="becommons/src/api/api\l_lua.cpp",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$d3/df3/api__lua_8cpp.html",tooltip=" "];
+  Node2 -> Node4 [id="edge3_Node000002_Node000004",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node4 [id="Node000004",label="becommons/src/componentes\l/camera.cpp",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$d1/d6b/camera_8cpp.html",tooltip=" "];
+  Node2 -> Node5 [id="edge4_Node000002_Node000005",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node5 [id="Node000005",label="becommons/src/componentes\l/codigo.cpp",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$d4/d6e/codigo_8cpp.html",tooltip=" "];
+  Node2 -> Node6 [id="edge5_Node000002_Node000006",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node6 [id="Node000006",label="becommons/src/componentes\l/fisica.cpp",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$dc/dea/fisica_8cpp.html",tooltip=" "];
+  Node2 -> Node7 [id="edge6_Node000002_Node000007",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node7 [id="Node000007",label="becommons/src/componentes\l/transformacao.cpp",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$d3/d92/transformacao_8cpp.html",tooltip=" "];
+  Node2 -> Node8 [id="edge7_Node000002_Node000008",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node8 [id="Node000008",label="becommons/src/nucleo\l/fase.cpp",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$d8/d41/fase_8cpp.html",tooltip=" "];
+  Node2 -> Node9 [id="edge8_Node000002_Node000009",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node9 [id="Node000009",label="becommons/src/nucleo\l/projeto.cpp",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$d7/dd2/projeto_8cpp.html",tooltip=" "];
+  Node2 -> Node10 [id="edge9_Node000002_Node000010",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node10 [id="Node000010",label="becommons/src/nucleo\l/sistema_de_interface.cpp",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$df/d9d/sistema__de__interface_8cpp.html",tooltip=" "];
+  Node2 -> Node11 [id="edge10_Node000002_Node000011",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node11 [id="Node000011",label="runtime/src/main.cpp",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$d7/d0b/runtime_2src_2main_8cpp.html",tooltip=" "];
+  Node1 -> Node9 [id="edge11_Node000001_Node000009",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node1 -> Node12 [id="edge12_Node000001_Node000012",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node12 [id="Node000012",label="becommons/src/nucleo\l/sistema_de_renderizacao.cpp",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$d1/de4/sistema__de__renderizacao_8cpp.html",tooltip=" "];
+}
