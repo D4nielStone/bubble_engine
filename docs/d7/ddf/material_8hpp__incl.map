@@ -1,0 +1,14 @@
+<map id="becommons/include/util/material.hpp" name="becommons/include/util/material.hpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="165,5,343,45"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,93,129,119"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="210,48,108,90,106,85,208,43"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="153,93,216,119"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="239,47,206,84,202,81,235,44"/>
+<area shape="rect" id="Node000004" href="$db/d19/namespace_8hpp.html" title=" " alt="" coords="289,167,414,192"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="259,45,267,80,283,117,301,139,322,156,319,161,297,142,278,120,262,82,254,46"/>
+<area shape="rect" id="Node000005" href="$d2/d3a/textura_8hpp_source.html" title=" " alt="" coords="292,93,389,119"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="277,44,319,82,316,86,273,48"/>
+<area shape="rect" id="Node000006" href="$d3/d49/cor_8hpp.html" title=" " alt="" coords="414,93,483,119"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="302,43,408,86,406,91,300,48"/>
+<area shape="poly" id="edge6_Node000006_Node000004" title=" " alt="" coords="435,121,380,160,377,156,431,117"/>
+</map>
