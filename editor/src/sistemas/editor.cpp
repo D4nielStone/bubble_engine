@@ -1,11 +1,28 @@
+/** @copyright 
+MIT LicenseCopyright (c) 2025 Daniel Oliveira
 
-/** @copyright Copyright (c) 2025 Daniel Oliveira */
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE. 
+*/
 /**
  * @file editor.cpp
  *
  * @author Daniel O. dos Santos
- * @date 2025-04-08
- * @version 1.0
  *
  * @licence MIT License
  */
@@ -25,14 +42,14 @@ void sistema_editor::configurarInterface(becommons::projeto& proj)
         return;
     }
 
-    gui->adicionarFlags("raiz", flags_caixa::modular);
+    gui->adicionarFlags("raiz", flag_estilo::modular);
     gui->obterElemento("raiz")->m_orientacao_modular = caixa::orientacao::vertical;
 
     gui->obterElemento("raiz")->m_cor_fundo = cor(0.15f, 0.15f, 0.15f, 1.f);
     // menu
     gui->novoEstilo();
         gui->adicionarElemento<caixa>("raiz", "menu");
-        gui->defFlags       (flags_caixa::modular | flags_caixa::alinhamento_central);
+        gui->defFlags       (flag_estilo::modular | flag_estilo::alinhamento_central);
         gui->defAltura      (                            30);
         gui->defLargura     (                           1.0);
         gui->defOrientacao  (   caixa::orientacao::horizontal);
@@ -40,14 +57,14 @@ void sistema_editor::configurarInterface(becommons::projeto& proj)
         gui->defCorFundo    (    cor(0.15f, 0.15f, 0.15f, 1.f));
     gui->novoEstilo();
         gui->adicionarElemento<caixa>("raiz", "raiz_b");
-        gui->defFlags       (flags_caixa::modular);
+        gui->defFlags       (flag_estilo::modular);
         gui->defLargura     (                           1.0);
         gui->defOrientacao  (   caixa::orientacao::horizontal);
         gui->defCorFundo    (    cor(0.f, 0.f, 1.f, 0.f));
         gui->defCrescimentoM(                            1.0f);
     gui->novoEstilo();
         gui->adicionarElemento<caixa>("raiz", "raiz_c");
-        gui->defFlags       (flags_caixa::modular);
+        gui->defFlags       (flag_estilo::modular);
         gui->defLargura     (                           1.0);
         gui->defOrientacao  (   caixa::orientacao::horizontal);
         gui->defCorFundo    (    cor(0.05f, 0.05f, 0.05f, 1.f));
@@ -57,16 +74,9 @@ void sistema_editor::configurarInterface(becommons::projeto& proj)
         gui->defAltura(1.0);
         // items menu
     gui->novoEstilo();
-        gui->adicionarElemento<elementos::botao>("menu", "rc", [this](){
-                if(gui->obterElemento("raiz_c")->m_crescimento_modular == 0)
-                {
-                gui->obterElemento("raiz_c")->m_ativo = true;
-                }
-                else
-                {
-                gui->obterElemento("raiz_c")->m_ativo = false;
-                }}, "Mostrar Console");
+        gui->adicionarElemento<elementos::botao>("menu", "rc", &gui->obterElemento("raiz_c")->m_ativo, "Mostrar Console");
         gui->obterElemento("raiz_c")->m_ativo = false;
+        gui->obterElemento("raiz_c")->m_crescimento_modular = 1.f;
         gui->adicionarElemento<elementos::botao>("menu", "arquivo", [](){}, "Arquivo");
         gui->adicionarElemento<elementos::botao>("menu", "editar", [](){}, "Editar");
         gui->adicionarElemento<elementos::botao>("menu", "visualizar", [](){}, "Exibir");
@@ -81,7 +91,7 @@ void sistema_editor::configurarInterface(becommons::projeto& proj)
     gui->novoEstilo();
         gui->adicionarElemento<caixa>("raiz_b", "entidades");
         
-        gui->defFlags       (flags_caixa::modular);
+        gui->defFlags       (flag_estilo::modular);
         gui->defLargura     (                          35);
         gui->defAltura      (                           1.0);
         gui->defOrientacao  (   caixa::orientacao::vertical);
@@ -92,7 +102,7 @@ void sistema_editor::configurarInterface(becommons::projeto& proj)
     gui->novoEstilo();
         gui->adicionarElemento<elementos::imagem>("raiz_b", "imagem_editor", cam.textura, true);
         
-        gui->defFlags       (flags_caixa::altura_percentual | flags_caixa::modular);
+        gui->defFlags       (flag_estilo::altura_percentual | flag_estilo::modular);
         gui->defAltura      (                           1.0);
         gui->defOrientacao  ( caixa::orientacao::horizontal);
         gui->defCorFundo    (    cor(0.0f, 0.0f, 0.0f, 0.f));
@@ -112,22 +122,22 @@ void sistema_editor::configurarInterface(becommons::projeto& proj)
         gui->defCorFundo     (cor(0.0f, 0.0f, 0.0f, 0.0f));
     gui->novoEstilo();
         gui->adicionarElemento<caixa>("raiz_b", "componentes");
-        gui->defFlags        (flags_caixa::altura_percentual | flags_caixa::modular);
+        gui->defFlags        (flag_estilo::altura_percentual | flag_estilo::modular);
         gui->defAltura       (                           1.0);
         gui->defCrescimentoM (0.5);
         gui->defOrientacao   ( caixa::orientacao::vertical);
         gui->defCorFundo     (    cor(0.1f, 0.1f, 0.1f, 1.f));
     // texto
     gui->novoEstilo();
-        gui->adicionarElemento<elementos::texto>("componentes", "texto2", &texto_entidade, 0.7f, elementos::flags_texto::alinhamento_central);
+        gui->adicionarElemento<elementos::texto>("componentes", "texto2", &texto_entidade, 14.f, elementos::flags_texto::alinhamento_central);
         gui->defCorFundo     (cor(0.07f, 0.07f, 0.07f, 1.f));
-        gui->defFlags        (flags_caixa::largura_percentual );
+        gui->defFlags        (flag_estilo::largura_percentual );
         gui->defLargura      (1.0);
         gui->defAltura       (17);
     gui->novoEstilo();
         gui->adicionarElemento<caixa>("componentes", "area_comps");
         gui->defCorFundo     (    cor(0.08f, 0.08f, 0.08f, 1.f));
-        gui->defFlags        (flags_caixa::largura_percentual | flags_caixa::modular);
+        gui->defFlags        (flag_estilo::largura_percentual | flag_estilo::modular);
         gui->defLargura       (                           1.0);
         gui->defAltura       (                           35);
         gui->defPaddingG     (                           5, 5);
@@ -135,7 +145,7 @@ void sistema_editor::configurarInterface(becommons::projeto& proj)
     gui->novoEstilo();
         gui->adicionarElemento<caixa>("componentes", "inspetor");
         gui->defCorFundo     (    cor(0.08f, 0.08f, 0.08f, 0.f));
-        gui->defFlags        (flags_caixa::largura_percentual | flags_caixa::modular | flags_caixa::alinhamento_central);
+        gui->defFlags        (flag_estilo::largura_percentual | flag_estilo::modular | flag_estilo::alinhamento_central);
         gui->defLargura       (                           1.0);
         gui->defCrescimentoM (1.0);
         gui->defPaddingG     (                           5, 5);

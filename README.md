@@ -12,7 +12,7 @@ Para instalar as dependências necessárias, execute os seguintes comandos:
 sudo apt install liblua5.3-0 libglm-dev libglfw3 libassimp-dev libfreeimage-dev rapidjson-dev libbullet-dev libfreetype6-dev
 ```
 
-### Instalando LuaBridge
+#### Instalando LuaBridge
 
 O LuaBridge é uma biblioteca read-only, portanto, não precisa ser compilada. Basta colocá-la no diretório padrão de bibliotecas do sistema:
 
@@ -35,10 +35,7 @@ Este projeto está licenciado sob a [MIT License](https://choosealicense.com/lic
 ![image](https://github.com/user-attachments/assets/65968911-e9cd-44c7-868b-81286b40889d)
 
 ## Vídeos do youtube
-# https://youtu.be/g4ts_jrP9cg](https://youtu.be/qS8rZQ_BfRA)
+### https://youtu.be/g4ts_jrP9cg](https://youtu.be/qS8rZQ_BfRA)
 ![thumb](https://github.com/user-attachments/assets/fc9f3c5e-1919-4099-8339-774a22db1503)
-# https://www.youtube.com/watch?v=JXo_AMSbO0Q&ab_channel=D4NL
+### https://www.youtube.com/watch?v=JXo_AMSbO0Q&ab_channel=D4NL
 ![a](https://github.com/user-attachments/assets/ddf1fab5-8873-43de-83e6-da597637dba0)
-
-
-&#x20;

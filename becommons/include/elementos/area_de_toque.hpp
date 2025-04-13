@@ -1,4 +1,24 @@
-/** @copyright Copyright (c) 2025 Daniel Oliveira */
+/** @copyright 
+MIT LicenseCopyright (c) 2025 Daniel Oliveira
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE. 
+*/
 /**
  * @file botao.hpp
  * @author Daniel O. dos Santos
@@ -18,7 +38,7 @@ namespace BECOMMONS_NS {
         struct area_toque : caixa
         {
             /// Flags de ativação
-            bool m_gatilho = false, m_pressionado;
+            bool m_gatilho = false, m_pressionado, m_mouse_cima { false };
             std::function<void()> m_funcao;
             bool* m_interruptor{nullptr};
             /// Construtor padrão
@@ -26,18 +46,21 @@ namespace BECOMMONS_NS {
             area_toque(bool* ptr = nullptr) : m_interruptor(ptr) {};
             /// Atualiza função de ativação
             /// @returns Se está presionado ou não
+            bool mouseEmCima() {
+                /// vetor2 do mouse
+                auto m = obterMouse();
+                m_mouse_cima = (m.x > m_limites.x && m.x < m_limites.z + m_limites.x &&
+                   m.y > m_limites.y && m.y < m_limites.w + m_limites.y);
+                return m_mouse_cima;
+            }
             virtual bool pressionado() {
                 /// Reset do flag m_pressionado
                 m_pressionado = false;
                 /// Se não está pressionado, reseta gatilho
                 if(!instanciaJanela->m_inputs.isKeyPressed("MouseE"))
                     m_gatilho = false;
-                /// vetor2 do mouse
-                auto m = obterMouse();
                 /// Caso dentro do campo
-                if(m.x > m_limites.x && m.x < m_limites.z + m_limites.x &&
-                   m.y > m_limites.y && m.y < m_limites.w + m_limites.y)
-                {
+                if(mouseEmCima()) {
                     /// Define cursor para mão
                     instanciaJanela->defCursor(janela::cursor::mao);
                     /// Caso o gatilho esteja desativado e o mouse esquerdo tocado

@@ -1,12 +1,26 @@
-/** @copyright Copyright (c) 2025 Daniel Oliveira */
+/** @copyright 
+MIT LicenseCopyright (c) 2025 Daniel Oliveira
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE. 
+*/
 /**
  * @file bubble_gui.cpp
- *
- * @author Daniel O. dos Santos
- * @date 2025-04-08
- * @version 1.0
- *
- * @licence MIT License
  */
 
 #include "namespace.hpp"
@@ -28,7 +42,7 @@ inline void atualizarLJ(caixa* it_caixa)
     for(auto& filho : it_caixa->m_filhos)
     {
         if(!filho->m_ativo) continue;
-        if(!is_horizontal && it_caixa->tem_flag(flags_caixa::largura_justa))
+        if(!is_horizontal && it_caixa->tem_flag(flag_estilo::largura_justa))
         {
         // Calcular largura justa
         mais_largo = std::max(mais_largo, filho->m_largura + filho->m_padding.x*2 + it_caixa->m_padding_geral.x*2);
@@ -265,9 +279,9 @@ void bubble_gui::definirBuffers()
         glBindVertexArray(0);
 }
 
-void bubble_gui::adicionarFlags(const std::string& id, flags_caixa f) {
+void bubble_gui::adicionarFlags(const std::string& id, flag_estilo f) {
     if (auto caixa = obterElemento(id)) {
-        caixa->m_flags_caixa |= f;
+        caixa->m_flag_estilo |= f;
     }
 }
 void bubble_gui::atualizar()
@@ -313,7 +327,7 @@ void bubble_gui::atualizarFilhos(caixa* it_caixa)
     }
     
     // Se a caixa for modular, atualizar limites dos filhos
-    if(it_caixa->tem_flag(flags_caixa::modular)){
+    if(it_caixa->tem_flag(flag_estilo::modular)){
         // Define qual é a dimensão principal e a secundária
         // Se horizontal: principal = largura (z), secundária = altura (w)
         // Se vertical: principal = altura (w), secundária = largura (z)
@@ -337,27 +351,27 @@ void bubble_gui::atualizarFilhos(caixa* it_caixa)
                     
             if(is_horizontal) {
                 // Dimensão principal (largura)
-                if(filho->tem_flag(flags_caixa::largura_percentual))
+                if(filho->tem_flag(flag_estilo::largura_percentual))
                     espaco_fixo_principal += espaco_disponivel_principal * filho->m_largura;
                 else
                     espaco_fixo_principal += filho->m_largura;
                 crescimento_total_principal += filho->m_crescimento_modular;
                 
                 // Dimensão secundária (altura)
-                if(filho->tem_flag(flags_caixa::altura_percentual))
+                if(filho->tem_flag(flag_estilo::altura_percentual))
                     espaco_fixo_secundario += espaco_disponivel_secundario * filho->m_altura;
                 else
                     espaco_fixo_secundario += filho->m_altura;
             } else {
                 // Dimensão principal (altura)
-                if(filho->tem_flag(flags_caixa::altura_percentual))
+                if(filho->tem_flag(flag_estilo::altura_percentual))
                     espaco_fixo_principal += espaco_disponivel_principal * filho->m_altura;
                 else
                     espaco_fixo_principal += filho->m_altura;
                 crescimento_total_principal += filho->m_crescimento_modular;
                 
                 // Dimensão secundária (largura)
-                if(filho->tem_flag(flags_caixa::largura_percentual))
+                if(filho->tem_flag(flag_estilo::largura_percentual))
                     espaco_fixo_secundario += espaco_disponivel_secundario * filho->m_largura;
                 else
                     espaco_fixo_secundario += filho->m_largura;
@@ -376,14 +390,14 @@ void bubble_gui::atualizarFilhos(caixa* it_caixa)
             float cursor_secundario = it_caixa->m_limites.y;
             
             // Se a flag de alinhamento central estiver ativa, recalcula o cursor principal
-            if(it_caixa->tem_flag(flags_caixa::alinhamento_central))
+            if(it_caixa->tem_flag(flag_estilo::alinhamento_central))
             {
                 float total_tamanho_principal = 0.0f;
                 // Calcula o tamanho total que os filhos ocuparão na dimensão principal, incluindo paddings
                 for(auto& filho : it_caixa->m_filhos)
                 {
                     if(!filho->m_ativo) continue;
-                    float tamanho_principal = (filho->tem_flag(flags_caixa::largura_percentual) ? 
+                    float tamanho_principal = (filho->tem_flag(flag_estilo::largura_percentual) ? 
                         espaco_disponivel_principal * filho->m_largura : filho->m_largura)
                         + filho->m_crescimento_modular * unidade_crescimento;
                     // Considera o padding horizontal antes e depois do filho
@@ -401,14 +415,14 @@ void bubble_gui::atualizarFilhos(caixa* it_caixa)
                 float tamanho_secundario = 0.0f;
                 
                 // Para a largura (dimensão principal)
-                if (filho->tem_flag(flags_caixa::largura_percentual))
+                if (filho->tem_flag(flag_estilo::largura_percentual))
                     tamanho_principal = espaco_disponivel_principal * filho->m_largura;
                 else
                     tamanho_principal = filho->m_largura;
                 tamanho_principal += filho->m_crescimento_modular * unidade_crescimento;
                 
                 // Para a altura (dimensão secundária)
-                if (filho->tem_flag(flags_caixa::altura_percentual))
+                if (filho->tem_flag(flag_estilo::altura_percentual))
                     tamanho_secundario = espaco_disponivel_secundario * filho->m_altura;
                 else
                     tamanho_secundario = filho->m_altura;
@@ -428,7 +442,7 @@ void bubble_gui::atualizarFilhos(caixa* it_caixa)
             float cursor_vertical = it_caixa->m_limites.y;
             
             // Se a flag de alinhamento central estiver ativa, recalcula o cursor vertical
-            if(it_caixa->tem_flag(flags_caixa::alinhamento_central))
+            if(it_caixa->tem_flag(flag_estilo::alinhamento_central))
             {
                 float total_tamanho_vertical = 0.0f;
                 size_t j = 0;
@@ -436,13 +450,13 @@ void bubble_gui::atualizarFilhos(caixa* it_caixa)
                     auto& filho = it_caixa->m_filhos[j];
                     if(!filho->m_ativo) { j++; continue; }
                     // Se é mesma linha
-                    if(filho->tem_flag(flags_caixa::mesma_linha)){
+                    if(filho->tem_flag(flag_estilo::mesma_linha)){
                         float altura_max_grupo = 0.0f;
                         while(j < it_caixa->m_filhos.size() && it_caixa->m_filhos[j]->m_ativo &&
-                              it_caixa->m_filhos[j]->tem_flag(flags_caixa::mesma_linha))
+                              it_caixa->m_filhos[j]->tem_flag(flag_estilo::mesma_linha))
                         {
                             auto& f = it_caixa->m_filhos[j];
-                            float altura_fixa = (f->tem_flag(flags_caixa::altura_percentual)) ?
+                            float altura_fixa = (f->tem_flag(flag_estilo::altura_percentual)) ?
                                 (it_caixa->m_limites.w * f->m_altura) : f->m_altura;
                             float altura_total = altura_fixa + f->m_crescimento_modular * unidade_crescimento;
                             // Considera o padding vertical antes e depois
@@ -451,7 +465,7 @@ void bubble_gui::atualizarFilhos(caixa* it_caixa)
                         }
                         total_tamanho_vertical += altura_max_grupo + it_caixa->m_padding_geral.y;
                     } else {
-                        float tamanho_principal = (filho->tem_flag(flags_caixa::altura_percentual)) ?
+                        float tamanho_principal = (filho->tem_flag(flag_estilo::altura_percentual)) ?
                             it_caixa->m_limites.w * filho->m_altura : filho->m_altura;
                         tamanho_principal += filho->m_crescimento_modular * unidade_crescimento;
                         total_tamanho_vertical += filho->m_padding.y + it_caixa->m_padding_geral.y + tamanho_principal + filho->m_padding.y;
@@ -469,18 +483,18 @@ void bubble_gui::atualizarFilhos(caixa* it_caixa)
                 if(!filho->m_ativo) { i++; continue; }
                 
                 // Se o filho possuir a flag "mesma_linha", processa grupo horizontal
-                if(filho->tem_flag(flags_caixa::mesma_linha)){
+                if(filho->tem_flag(flag_estilo::mesma_linha)){
                     // Cursor horizontal para o grupo: inicia no limite esquerdo do pai + padding geral
                     float cursor_horizontal = it_caixa->m_limites.x + it_caixa->m_padding_geral.x;
                     float altura_max_grupo = 0.0f;
                     // Processa todos os filhos consecutivos com a flag "mesma_linha"
                     while(i < it_caixa->m_filhos.size() && it_caixa->m_filhos[i]->m_ativo &&
-                          it_caixa->m_filhos[i]->tem_flag(flags_caixa::mesma_linha))
+                          it_caixa->m_filhos[i]->tem_flag(flag_estilo::mesma_linha))
                     {
                         auto& f = it_caixa->m_filhos[i];
                         
                         // Cálculo da largura (dimensão principal para o grupo horizontal)
-                        float largura_fixa = (f->tem_flag(flags_caixa::largura_percentual)) ?
+                        float largura_fixa = (f->tem_flag(flag_estilo::largura_percentual)) ?
                             (it_caixa->m_limites.z * f->m_largura) : f->m_largura;
                         float largura_total = largura_fixa + f->m_crescimento_modular * unidade_crescimento;
                         
@@ -491,7 +505,7 @@ void bubble_gui::atualizarFilhos(caixa* it_caixa)
                         
                         // Posicionamento vertical do grupo (todos na mesma linha)
                         f->m_limites.y = cursor_vertical + f->m_padding.y + it_caixa->m_padding_geral.y;
-                        float altura_fixa = (f->tem_flag(flags_caixa::altura_percentual)) ?
+                        float altura_fixa = (f->tem_flag(flag_estilo::altura_percentual)) ?
                             (it_caixa->m_limites.w * f->m_altura) : f->m_altura;
                         float altura_total = altura_fixa + f->m_crescimento_modular * unidade_crescimento;
                             f->m_limites.w = altura_total;
@@ -506,7 +520,7 @@ void bubble_gui::atualizarFilhos(caixa* it_caixa)
                 } else {
                     // Processa individualmente o filho sem flag "mesma_linha"
                     cursor_vertical += filho->m_padding.y + it_caixa->m_padding_geral.y;
-                    float tamanho_principal = (filho->tem_flag(flags_caixa::altura_percentual)) ?
+                    float tamanho_principal = (filho->tem_flag(flag_estilo::altura_percentual)) ?
                         it_caixa->m_limites.w * filho->m_altura : filho->m_altura;
                     tamanho_principal += filho->m_crescimento_modular * unidade_crescimento;
                     filho->m_limites.y = cursor_vertical;
@@ -515,7 +529,7 @@ void bubble_gui::atualizarFilhos(caixa* it_caixa)
                     
                     // Posicionamento horizontal padrão para filhos isolados
                     filho->m_limites.x = it_caixa->m_limites.x + it_caixa->m_padding_geral.x + filho->m_padding.x;
-                    float tamanho_secundario = (filho->tem_flag(flags_caixa::largura_percentual)) ?
+                    float tamanho_secundario = (filho->tem_flag(flag_estilo::largura_percentual)) ?
                         it_caixa->m_limites.z * filho->m_largura - it_caixa->m_padding_geral.x * 2 : filho->m_largura;
                         filho->m_limites.z = tamanho_secundario;
                     i++;

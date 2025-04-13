@@ -1,14 +1,48 @@
-/** @copyright Copyright (c) 2025 Daniel Oliveira */
+/** @copyright 
+MIT LicenseCopyright (c) 2025 Daniel Oliveira
 
-/** @copyright Copyright (c) 2025 Daniel Oliveira */
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE. 
+*/
+
+/** @copyright 
+MIT LicenseCopyright (c) 2025 Daniel Oliveira
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE. 
+*/
 /**
  * @file main.cpp
- *
- * @author Daniel O. dos Santos
- * @date 2025-04-08
- * @version 1.0
- *
- * @licence MIT License
  */
 
 
@@ -483,7 +517,7 @@ void testarBubbleGUI()
     // Teste 3: Layout horizontal com dimensões fixas
     testes.adicionar("atualizarFilhos_horizontal_fixo", []() {
         bubble::caixa parent;
-        parent.m_flags_caixa = bubble::flags_caixa::modular;
+        parent.m_flag_estilo = bubble::flag_estilo::modular;
         parent.m_orientacao_modular = bubble::caixa::orientacao::horizontal;
         parent.m_limites = {0, 0, 100, 50};
         parent.m_padding_geral = {5, 0};
@@ -508,12 +542,12 @@ void testarBubbleGUI()
     // Teste 4: Layout horizontal com porcentagem
     testes.adicionar("atualizarFilhos_horizontal_percentual", []() {
         bubble::caixa parent;
-        parent.m_flags_caixa = bubble::flags_caixa::modular;
+        parent.m_flag_estilo = bubble::flag_estilo::modular;
         parent.m_orientacao_modular = bubble::caixa::orientacao::horizontal;
         parent.m_limites.z = 200;
 
         auto* child = parent.adicionarFilho<bubble::caixa>("child");
-        child->m_flags_caixa |= bubble::flags_caixa::largura_percentual;
+        child->m_flag_estilo |= bubble::flag_estilo::largura_percentual;
         child->m_largura = 0.5f;
 
         bubble::bubble_gui gui;
@@ -525,7 +559,7 @@ void testarBubbleGUI()
     // Teste 5: Crescimento modular horizontal
     testes.adicionar("atualizarFilhos_horizontal_crescimento", []() {
         bubble::caixa parent;
-        parent.m_flags_caixa = bubble::flags_caixa::modular;
+        parent.m_flag_estilo = bubble::flag_estilo::modular;
         parent.m_orientacao_modular = bubble::caixa::orientacao::horizontal;
         parent.m_limites.z = 100;
 
@@ -547,13 +581,13 @@ void testarBubbleGUI()
     // Teste 6: Layout vertical com dimensões fixas e percentual
     testes.adicionar("atualizarFilhos_vertical_misto", []() {
         bubble::caixa parent;
-        parent.m_flags_caixa = bubble::flags_caixa::modular;
+        parent.m_flag_estilo = bubble::flag_estilo::modular;
         parent.m_orientacao_modular = bubble::caixa::orientacao::vertical;
         parent.m_limites = {0, 0, 80, 150};
         parent.m_padding_geral = {10, 5};
 
         auto* child = parent.adicionarFilho<bubble::caixa>("child");
-        child->m_flags_caixa |= bubble::flags_caixa::largura_percentual;
+        child->m_flag_estilo |= bubble::flag_estilo::largura_percentual;
         child->m_largura = 0.5f;
         child->m_altura = 60;
 
@@ -568,10 +602,10 @@ void testarBubbleGUI()
     // Teste 7: Atualização recursiva de filhos
     testes.adicionar("atualizarFilhos_recursivo", []() {
         bubble::caixa parent;
-        parent.m_flags_caixa = bubble::flags_caixa::modular;
+        parent.m_flag_estilo = bubble::flag_estilo::modular;
 
         auto* child = parent.adicionarFilho<bubble::caixa>("child");
-        child->m_flags_caixa = bubble::flags_caixa::modular;
+        child->m_flag_estilo = bubble::flag_estilo::modular;
         child->m_orientacao_modular = bubble::caixa::orientacao::vertical;
 
         auto* grandchild = child->adicionarFilho<bubble::caixa>("grandchild");
@@ -586,7 +620,7 @@ void testarBubbleGUI()
     // Teste 8: Espaço insuficiente para crescimento
     testes.adicionar("atualizarFilhos_espaco_insuficiente", []() {
         bubble::caixa parent;
-        parent.m_flags_caixa = bubble::flags_caixa::modular;
+        parent.m_flag_estilo = bubble::flag_estilo::modular;
         parent.m_orientacao_modular = bubble::caixa::orientacao::horizontal;
         parent.m_limites.z = 50;
 
@@ -610,7 +644,7 @@ void testarBubbleGUI()
         bubble::bubble_gui gui;
         
         bubble::caixa parent;
-        parent.m_flags_caixa = bubble::flags_caixa::modular;
+        parent.m_flag_estilo = bubble::flag_estilo::modular;
         parent.m_padding_geral = {5, 5};
         auto* child1 = parent.adicionarFilho<bubble::caixa>("child1");
         auto* child2 = parent.adicionarFilho<bubble::caixa>("child2");

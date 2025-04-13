@@ -1,12 +1,26 @@
-/** @copyright Copyright (c) 2025 Daniel Oliveira */
+/** @copyright 
+MIT LicenseCopyright (c) 2025 Daniel Oliveira
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE. 
+*/
 /**
  * @file api_lua.cpp
- *
- * @author Daniel O. dos Santos
- * @date 2025-04-08
- * @version 1.0
- *
- * @licence MIT License
  */
 
 #include "api/api_lua.hpp"
@@ -38,11 +52,11 @@ void api::entidade::definir(lua_State* L)
 			    addConstructor<void(*)()>().
 			    addFunction("obtMalha", &modelo::obterMalha).
 			    endClass().
-				beginClass<renderizador>("renderizador").			///< define transformacao
+				beginClass<renderizador>("renderizador").	
 				addConstructor<void(*)(const char*)>().
 				addData("modelo", &renderizador::m_modelo).
 				endClass().
-				beginClass<transformacao>("transformacao").			///< define transformacao
+				beginClass<transformacao>("transformacao").
 				addConstructor<void(*)()>().
 				addData<glm::vec3>("posicao", &transformacao::posicao, true).
 				addData<glm::vec3>("escala", &transformacao::escala, true).
@@ -50,7 +64,7 @@ void api::entidade::definir(lua_State* L)
 				addFunction("apontarEntidade", &transformacao::apontarEntidade).
 				addFunction("apontarV3", &transformacao::apontarV3).
 				endClass().
-				beginClass<imagem>("imagem").			///< define transformacao
+				beginClass<imagem>("imagem").			
 				addConstructor<void(*)(std::string)>().
 				addConstructor<void(*)(unsigned int)>().
 				addData<vetor2<double>>("padding", &imagem::padding, true).
@@ -67,7 +81,7 @@ void api::entidade::definir(lua_State* L)
 				addData("refPos", &texto::posicao_referencial).
 				addData("refPosAtiva", &texto::pf_ativa).
 				endClass().
-				beginClass<camera>("camera").			///< define camera
+				beginClass<camera>("camera").			
 				addConstructor<void(*)()>().
 				addFunction("pontoParaRaio", &camera::pontoParaRaio).
 				addData("fov", &camera::fov).
@@ -84,7 +98,7 @@ void api::entidade::definir(lua_State* L)
 				addFunction("desativarFB", &camera::desativarFB).
 				addFunction("viewport", &camera::viewport).
 				endClass().
-				beginClass<api::entidade>("entidade").			///< define entidade
+				beginClass<api::entidade>("entidade").			
 				addConstructor<void(*)(int)>().
 				addData("transformacao", &api::entidade::m_transformacao, true).
 				addData("camera", &api::entidade::m_camera, true).

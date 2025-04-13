@@ -1,0 +1,218 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt-BR">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Bubble Engine: Referência do Arquivo becommons/include/componentes/fisica.hpp</title>
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../jquery.js"></script>
+<script type="text/javascript" src="../../dynsections.js"></script>
+<link href="../../navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../resize.js"></script>
+<script type="text/javascript" src="../../navtreedata.js"></script>
+<script type="text/javascript" src="../../navtree.js"></script>
+<link href="../../search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../search/searchdata.js"></script>
+<script type="text/javascript" src="../../search/search.js"></script>
+<link href="../../doxygen.css" rel="stylesheet" type="text/css" />
+<link href="../../doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="../../banner.png"/></td>
+  <td id="projectalign">
+   <div id="projectname">Bubble Engine<span id="projectnumber">&#160;1.0b</span>
+   </div>
+   <div id="projectbrief">Projeto independente de game engine eficiente para projetos pequenos</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Gerado por Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "../../search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="../../menudata.js"></script>
+<script type="text/javascript" src="../../menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('../../',true,false,'search.php','Busca');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('d6/def/fisica_8hpp.html','../../'); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Carregando...</div>
+<div class="SRStatus" id="Searching">Procurando...</div>
+<div class="SRStatus" id="NoMatches">Nenhuma entrada encontrado</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">Componentes</a>  </div>
+  <div class="headertitle"><div class="title">Referência do Arquivo fisica.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Componente de física para entidades ECS.  
+<a href="#details">Mais...</a></p>
+<div class="textblock"><code>#include &lt;bullet/btBulletDynamicsCommon.h&gt;</code><br />
+<code>#include &lt;glm/glm.hpp&gt;</code><br />
+<code>#include &quot;<a class="el" href="../../db/d19/namespace_8hpp_source.html">namespace.hpp</a>&quot;</code><br />
+<code>#include &quot;util/malha.hpp&quot;</code><br />
+<code>#include &quot;<a class="el" href="../../db/de2/componente_8hpp_source.html">componente.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="../../d4/dcc/transformacao_8hpp_source.html">transformacao.hpp</a>&quot;</code><br />
+</div><div class="textblock"><div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-0-trigger" src="../../closed.png" alt="+"/> Gráfico de dependência de inclusões para fisica.hpp:</div>
+<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-0-content" class="dyncontent" style="display:none;">
+<div class="center"><img src="../../dd/deb/fisica_8hpp__incl.png" border="0" usemap="#abecommons_2include_2componentes_2fisica_8hpp" alt=""/></div>
+<map name="abecommons_2include_2componentes_2fisica_8hpp" id="abecommons_2include_2componentes_2fisica_8hpp">
+<area shape="rect" title="Componente de física para entidades ECS." alt="" coords="408,5,653,45"/>
+<area shape="rect" title=" " alt="" coords="5,93,256,119"/>
+<area shape="poly" title=" " alt="" coords="435,48,203,93,202,88,434,43"/>
+<area shape="rect" title=" " alt="" coords="84,167,188,192"/>
+<area shape="poly" title=" " alt="" coords="462,48,393,69,320,96,269,121,176,163,174,159,267,116,318,91,391,64,461,43"/>
+<area shape="rect" href="../../db/d19/namespace_8hpp.html" title=" " alt="" coords="567,313,692,339"/>
+<area shape="poly" title=" " alt="" coords="540,45,607,239,625,299,620,301,601,241,535,46"/>
+<area shape="rect" href="../../db/d94/malha_8hpp_source.html" title=" " alt="" coords="331,93,447,119"/>
+<area shape="poly" title=" " alt="" coords="498,48,424,89,421,84,496,43"/>
+<area shape="rect" href="../../db/de2/componente_8hpp.html" title="Estrutura base para componetes." alt="" coords="1047,167,1177,192"/>
+<area shape="poly" title=" " alt="" coords="603,43,1056,161,1054,166,602,48"/>
+<area shape="rect" href="../../d4/dcc/transformacao_8hpp.html" title="Calcula a mtriz de modelo para um objeto 3d qualquer." alt="" coords="1742,93,1887,119"/>
+<area shape="poly" title=" " alt="" coords="654,31,1729,97,1728,102,654,37"/>
+<area shape="poly" title=" " alt="" coords="349,121,191,165,190,160,348,116"/>
+<area shape="poly" title=" " alt="" coords="367,121,321,147,273,183,255,203,244,223,243,244,253,264,272,278,301,290,379,308,469,317,553,321,553,327,469,323,379,313,299,295,269,283,249,267,237,245,239,222,251,200,269,179,318,143,364,116"/>
+<area shape="rect" title=" " alt="" coords="263,240,326,265"/>
+<area shape="poly" title=" " alt="" coords="384,121,312,230,308,227,379,118"/>
+<area shape="rect" href="../../d4/d75/material_8hpp.html" title=" " alt="" coords="407,167,513,192"/>
+<area shape="poly" title=" " alt="" coords="403,117,441,155,437,159,399,121"/>
+<area shape="poly" title=" " alt="" coords="467,191,484,226,513,263,547,288,583,306,581,311,544,293,509,267,479,229,462,194"/>
+<area shape="poly" title=" " alt="" coords="434,194,335,237,333,232,432,190"/>
+<area shape="rect" title=" " alt="" coords="667,240,791,265"/>
+<area shape="poly" title=" " alt="" coords="504,189,673,234,672,239,503,195"/>
+<area shape="rect" href="../../d2/d3a/textura_8hpp_source.html" title=" " alt="" coords="350,240,447,265"/>
+<area shape="poly" title=" " alt="" coords="452,194,420,231,416,228,448,191"/>
+<area shape="rect" href="../../d3/d49/cor_8hpp.html" title=" " alt="" coords="523,240,592,265"/>
+<area shape="poly" title=" " alt="" coords="477,190,532,229,529,234,474,194"/>
+<area shape="poly" title=" " alt="" coords="571,264,610,302,606,306,567,268"/>
+<area shape="poly" title=" " alt="" coords="1047,194,955,214,856,242,830,255,804,268,681,312,679,307,802,263,827,250,854,238,954,208,1046,189"/>
+<area shape="poly" title=" " alt="" coords="1051,195,805,240,804,235,1050,189"/>
+<area shape="rect" title=" " alt="" coords="1223,240,1289,265"/>
+<area shape="poly" title=" " alt="" coords="1136,190,1221,231,1219,236,1134,194"/>
+<area shape="rect" title=" " alt="" coords="1314,240,1406,265"/>
+<area shape="poly" title=" " alt="" coords="1153,189,1307,234,1306,239,1151,195"/>
+<area shape="rect" title=" " alt="" coords="1431,240,1593,265"/>
+<area shape="poly" title=" " alt="" coords="1177,189,1434,235,1433,240,1176,195"/>
+<area shape="rect" title=" " alt="" coords="867,240,1002,265"/>
+<area shape="poly" title=" " alt="" coords="1084,194,977,237,975,232,1083,190"/>
+<area shape="rect" title=" " alt="" coords="1026,240,1198,265"/>
+<area shape="poly" title=" " alt="" coords="1115,192,1115,226,1109,226,1109,192"/>
+<area shape="poly" title=" " alt="" coords="1755,121,1705,139,1680,152,1658,169,1647,181,1641,193,1635,219,1628,244,1620,256,1607,268,1586,277,1555,284,1464,298,1345,308,1209,315,928,324,706,327,706,322,928,319,1209,310,1345,302,1464,292,1554,279,1584,271,1604,263,1616,253,1623,242,1630,218,1636,191,1643,178,1654,165,1677,148,1702,134,1754,116"/>
+<area shape="poly" title=" " alt="" coords="1742,117,1192,173,1191,167,1741,112"/>
+<area shape="rect" href="../../d5/d2b/vetor3_8hpp.html" title=" " alt="" coords="1668,167,1785,192"/>
+<area shape="poly" title=" " alt="" coords="1802,121,1753,160,1750,156,1799,117"/>
+<area shape="rect" title=" " alt="" coords="1809,167,1999,192"/>
+<area shape="poly" title=" " alt="" coords="1831,117,1880,156,1877,160,1827,121"/>
+<area shape="rect" title=" " alt="" coords="2023,167,2230,192"/>
+<area shape="poly" title=" " alt="" coords="1865,116,2064,161,2062,166,1864,121"/>
+<area shape="rect" title=" " alt="" coords="2254,167,2410,192"/>
+<area shape="poly" title=" " alt="" coords="1888,115,2240,163,2240,168,1887,120"/>
+<area shape="rect" title=" " alt="" coords="2434,167,2609,192"/>
+<area shape="poly" title=" " alt="" coords="1888,111,2420,164,2420,169,1887,117"/>
+<area shape="poly" title=" " alt="" coords="1723,194,1695,232,1675,252,1650,268,1594,282,1498,294,1229,311,935,321,706,326,705,321,935,316,1229,305,1497,288,1593,277,1648,263,1671,248,1691,228,1718,190"/>
+<area shape="rect" title=" " alt="" coords="1719,240,1782,265"/>
+<area shape="poly" title=" " alt="" coords="1733,191,1745,226,1740,228,1728,193"/>
+</map>
+</div>
+</div><div class="textblock"><div id="dynsection-1" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-1-trigger" src="../../closed.png" alt="+"/> Este grafo mostra quais arquivos estão direta ou indiretamente relacionados com esse arquivo:</div>
+<div id="dynsection-1-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-1-content" class="dyncontent" style="display:none;">
+<div class="center"><img src="../../d9/d4a/fisica_8hpp__dep__incl.png" border="0" usemap="#abecommons_2include_2componentes_2fisica_8hppdep" alt=""/></div>
+<map name="abecommons_2include_2componentes_2fisica_8hppdep" id="abecommons_2include_2componentes_2fisica_8hppdep">
+<area shape="rect" title="Componente de física para entidades ECS." alt="" coords="300,5,545,45"/>
+<area shape="rect" href="../../db/d85/api__lua_8hpp.html" title=" " alt="" coords="113,93,290,133"/>
+<area shape="poly" title=" " alt="" coords="362,53,251,96,249,91,361,48"/>
+<area shape="rect" href="../../dc/dea/fisica_8cpp.html" title=" " alt="" coords="314,93,531,133"/>
+<area shape="poly" title=" " alt="" coords="425,59,425,93,420,93,420,59"/>
+<area shape="rect" href="../../da/d81/sistema__de__fisica_8cpp.html" title=" " alt="" coords="555,93,727,133"/>
+<area shape="poly" title=" " alt="" coords="484,48,594,91,592,96,483,53"/>
+<area shape="rect" href="../../d3/df3/api__lua_8cpp.html" title=" " alt="" coords="5,181,179,221"/>
+<area shape="poly" title=" " alt="" coords="168,144,118,183,115,179,165,140"/>
+<area shape="rect" href="../../d4/d6e/codigo_8cpp.html" title=" " alt="" coords="203,181,421,221"/>
+<area shape="poly" title=" " alt="" coords="238,140,289,179,286,183,235,144"/>
+</map>
+</div>
+</div>
+<p><a href="../../d6/def/fisica_8hpp_source.html">Ir para o código-fonte desse arquivo.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Componentes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d0b/structBECOMMONS__NS_1_1fisica.html">BECOMMONS_NS::fisica</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Descrição detalhada</h2>
+<div class="textblock"><p>Componente de física para entidades ECS. </p>
+<dl class="section copyright"><dt>Copyright</dt><dd>MIT LicenseCopyright (c) 2025 Daniel Oliveira</dd></dl>
+<p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</p>
+<p>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</p>
+<p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>
+<dl class="section see"><dt>Veja também</dt><dd><a class="el" href="../../dc/dea/fisica_8cpp.html">fisica.cpp</a> </dd></dl>
+</div></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="../../dir_0394786a11e0dfde3dca27fdccf84bfd.html">becommons</a></li><li class="navelem"><a class="el" href="../../dir_9a744b5567c265deacf566b467d8af59.html">include</a></li><li class="navelem"><a class="el" href="../../dir_111f21dc146a617cd827120506a93450.html">componentes</a></li><li class="navelem"><a class="el" href="../../d6/def/fisica_8hpp.html">fisica.hpp</a></li>
+    <li class="footer">Gerado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+  </ul>
+</div>
+</body>
+</html>

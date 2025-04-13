@@ -209,12 +209,12 @@ void gerenciador_projetos::iniciar()
     // Sistema de gui
     gui.inicializar(nullptr);
     gui.obterElemento("raiz")->m_cor_fundo = {0.18f, 0.18f, 0.18f, 1.f};
-    gui.adicionarFlags("raiz", flags_caixa::modular);
+    gui.adicionarFlags("raiz", flag_estilo::modular);
     
     // configura interface
     gui.novoEstilo();
     gui.adicionarElemento<caixa>("raiz", "barra_lateral");
-        gui.defFlags(flags_caixa::modular | flags_caixa::largura_justa);
+        gui.defFlags(flag_estilo::modular | flag_estilo::largura_justa);
         gui.defOrientacao(caixa::orientacao::vertical);
         gui.defCorFundo({0.1, 0.1, 0.1, 1});
         gui.defPaddingG(5, 5);
@@ -224,7 +224,7 @@ void gerenciador_projetos::iniciar()
     // Area Maior
     gui.novoEstilo();
         gui.adicionarElemento<caixa>("raiz", "area_maior");
-        gui.defFlags(flags_caixa::modular | flags_caixa::alinhamento_central);
+        gui.defFlags(flag_estilo::modular | flag_estilo::alinhamento_central);
         gui.defAltura(1.0);
         gui.defCrescimentoM(1.0);
     gui.novoEstilo();

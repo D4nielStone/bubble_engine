@@ -1,12 +1,28 @@
-/** @copyright Copyright (c) 2025 Daniel Oliveira */
+/** @copyright 
+MIT LicenseCopyright (c) 2025 Daniel Oliveira
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE. 
+*/
 /**
  * @file caixa.hpp
  *
  * @author Daniel O. dos Santos
- * @date 2025-04-08
- * @version 1.0
- *
- * @licence MIT License
  */
 
 #pragma once
@@ -15,7 +31,9 @@
 #include "namespace.hpp"
 
 namespace BECOMMONS_NS {
-        enum class flags_caixa : uint32_t {
+        /// @enum flag_estilo
+        /// Flags que definem o estilo da caixa. Também controlam o alinhamento e estilo dos filhos.
+        enum class flag_estilo : uint32_t {
             nenhuma             = 0,
             largura_percentual  = 1 << 0,   // 1
             altura_percentual   = 1 << 1,   // 2
@@ -27,16 +45,16 @@ namespace BECOMMONS_NS {
             mesma_linha         = 1 << 7,
             largura_justa       = 1 << 8,
             altura_justa        = 1 << 9
-        };
-        inline flags_caixa operator|(flags_caixa a, flags_caixa b) {
-            return static_cast<flags_caixa>(static_cast<uint32_t>(a) | static_cast<uint32_t>(b));
+        }; 
+        inline flag_estilo operator|(flag_estilo a, flag_estilo b) {
+            return static_cast<flag_estilo>(static_cast<uint32_t>(a) | static_cast<uint32_t>(b));
         }
 
-        inline flags_caixa operator&(flags_caixa a, flags_caixa b) {
-            return static_cast<flags_caixa>(static_cast<uint32_t>(a) & static_cast<uint32_t>(b));
+        inline flag_estilo operator&(flag_estilo a, flag_estilo b) {
+            return static_cast<flag_estilo>(static_cast<uint32_t>(a) & static_cast<uint32_t>(b));
         }
 
-        inline flags_caixa& operator|=(flags_caixa& a, flags_caixa b) {
+        inline flag_estilo& operator|=(flag_estilo& a, flag_estilo b) {
             a = a | b;
             return a;
         }
@@ -58,12 +76,12 @@ namespace BECOMMONS_NS {
         };
              
         // Verifica se uma flag está ativa
-        inline bool tem_flag(flags_caixa flag) {
-            return (static_cast<uint32_t>(m_flags_caixa) & static_cast<uint32_t>(flag)) != 0;
+        inline bool tem_flag(flag_estilo flag) {
+            return (static_cast<uint32_t>(m_flag_estilo) & static_cast<uint32_t>(flag)) != 0;
         }
 
         std::string m_id;
-        flags_caixa m_flags_caixa = flags_caixa::nenhuma;
+        flag_estilo m_flag_estilo = flag_estilo::nenhuma;
         caixa::orientacao m_orientacao_modular = caixa::orientacao::horizontal;
         
         // Estilo

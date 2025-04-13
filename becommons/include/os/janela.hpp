@@ -1,13 +1,27 @@
-/** @copyright Copyright (c) 2025 Daniel Oliveira */
+/** @copyright 
+MIT LicenseCopyright (c) 2025 Daniel Oliveira
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE. 
+*/
 /**
  * @file janela.hpp
  * @brief Inicia e gerencia janela glfw
- *
- * @author Daniel O. dos Santos
- * @date 2025-04-08
- * @version 1.0
- *
- * @licence MIT License
  *
  * @see janela.cpp
  */
@@ -45,11 +59,11 @@ namespace BECOMMONS_NS {
         public:
 		tempo m_tempo;
         std::string m_nome{""};
-		vetor2<double> tamanho;
+		dvet2 tamanho;
 		GLFWwindow* window;
 		inputs m_inputs;
-		janela(const char* nome, vetor2<double> bounds = vetor2<double>(600, 400), const char* icon_path = nullptr);
-		janela(const char* nome, const bool f, vetor2<double> bounds = vetor2<double>(600, 400), const char* icon_path = nullptr);
+		janela(const char* nome, dvet2 bounds = dvet2(600, 400), const char* icon_path = nullptr);
+		janela(const char* nome, const bool f, dvet2 bounds = dvet2(600, 400), const char* icon_path = nullptr);
 		~janela();
 		void poll();
         inline void defCursor(const cursor c)

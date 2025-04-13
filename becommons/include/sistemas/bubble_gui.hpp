@@ -1,13 +1,27 @@
-/** @copyright Copyright (c) 2025 Daniel Oliveira */
+/** @copyright 
+MIT LicenseCopyright (c) 2025 Daniel Oliveira
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE. 
+*/
 /**
  * @file bubble_gui.hpp
  * @struct Manuseia a interface do editor
- *
- * @author Daniel O. dos Santos
- * @date 2025-04-08
- * @version 1.0
- *
- * @licence MIT License
  *
  * @see bubble_gui.cpp
  */
@@ -48,7 +62,7 @@ namespace BECOMMONS_NS {
 
             void atualizarFilhos(caixa*);
             void definirBuffers();
-            void adicionarFlags(const std::string& id, flags_caixa); 
+            void adicionarFlags(const std::string& id, flag_estilo); 
             void inicializar(fase*) override;
             void atualizar() override;
 
@@ -92,21 +106,21 @@ namespace BECOMMONS_NS {
             void novoEstilo(){
                 estilo_atual.clear();
             };
-            void defFlags(const flags_caixa v){
+            void defFlags(const flag_estilo v){
                 for(auto& id : estilo_atual){
-                    obterElemento(id)->m_flags_caixa = v;
+                    obterElemento(id)->m_flag_estilo = v;
                 }
             }
             void defLargura(const double v){
                 for(auto& id : estilo_atual){
                     obterElemento(id)->m_largura = v;
-                    obterElemento(id)->m_flags_caixa |= flags_caixa::largura_percentual;
+                    obterElemento(id)->m_flag_estilo |= flag_estilo::largura_percentual;
                 }
             }
             void defAltura(const double v){
                 for(auto& id : estilo_atual){
                     obterElemento(id)->m_altura = v;
-                    obterElemento(id)->m_flags_caixa |= flags_caixa::altura_percentual;
+                    obterElemento(id)->m_flag_estilo |= flag_estilo::altura_percentual;
                 }
             }
             void defLargura(const int v){

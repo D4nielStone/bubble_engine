@@ -1,12 +1,6 @@
 /**
  * @file gerenciador_projetos.hpp
  *
- * @author Daniel O. dos Santos
- * @date 2025-04-08
- * @version 1.0
- *
- * @licence MIT License
- *
  * @see gerenciador_projetos.cpp
  */
 #include <string>

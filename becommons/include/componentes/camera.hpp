@@ -1,14 +1,28 @@
-/** @copyright Copyright (c) 2025 Daniel Oliveira */
+/** @copyright 
+MIT LicenseCopyright (c) 2025 Daniel Oliveira
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE. 
+*/
 /**
  * @file camera.hpp
  * @brief Estrutura básica de câmera.
  * @brief Viewport, Matrizes etc.
- *
- * @author Daniel O. dos Santos
- * @date 2025-04-08
- * @version 1.0
- *
- * @licence MIT License
  *
  * @see camera.cpp
  */
@@ -59,8 +73,8 @@ namespace BECOMMONS_NS {
 
 		static constexpr mascara mascara = COMPONENTE_CAM;
 
-		vetor2<double>* viewport_ptr{ nullptr };
-		vetor2<double> viewportFBO{ 400, 400 };
+		dvet2* viewport_ptr{ nullptr };
+		dvet2 viewportFBO{ 400, 400 };
 
 		void desenharFB() const;
         bool analizar(const rapidjson::Value&) override;
@@ -72,13 +86,13 @@ namespace BECOMMONS_NS {
 		void ativarFB();
 		void desativarFB();
 		glm::mat4 obtViewMatrix();
-		void viewport(const vetor2<double>& viewp);
+		void viewport(const dvet2& viewp);
 
 		glm::mat4 obtProjectionMatrix();
 
-		raio pontoParaRaio(vetor2<double> screenPoint) const;
+		raio pontoParaRaio(dvet2 screenPoint) const;
 
-		glm::vec3 telaParaMundo(const vetor2<double>& screenPoint, float profundidade) const;
+		glm::vec3 telaParaMundo(const dvet2& screenPoint, float profundidade) const;
 
         vetor2<int> mundoParaTela(const glm::vec3& mundoPos);
 		
