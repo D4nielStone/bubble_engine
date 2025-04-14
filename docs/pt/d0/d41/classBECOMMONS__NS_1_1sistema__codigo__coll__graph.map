@@ -1,0 +1,12 @@
+<map id="BECOMMONS_NS::sistema_codigo" name="BECOMMONS_NS::sistema_codigo">
+<area shape="rect" id="Node000001" title=" " alt="" coords="112,271,307,311"/>
+<area shape="rect" id="Node000002" href="$d2/d25/classBECOMMONS__NS_1_1sistema.html" title=" " alt="" coords="112,196,307,221"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="212,235,212,271,207,271,207,235"/>
+<area shape="rect" id="Node000003" href="$da/dd1/structBECOMMONS__NS_1_1fase.html" title=" " alt="" coords="57,108,228,133"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="162,143,202,194,198,197,158,146"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="5,5,155,45"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="103,55,137,106,133,109,98,58"/>
+<area shape="rect" id="Node000005" href="$d5/d67/structBECOMMONS__NS_1_1registro.html" title="gerencia as entidades" alt="" coords="179,13,373,38"/>
+<area shape="poly" id="edge5_Node000002_Node000005" title=" " alt="" coords="276,52,264,109,254,142,241,173,223,197,219,194,236,171,249,140,259,108,270,51"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="250,48,161,110,158,106,247,43"/>
+</map>
