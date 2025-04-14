@@ -8,6 +8,8 @@ var hierarchy =
       [ "BECOMMONS_NS::elementos::texto", "d4/de8/classBECOMMONS__NS_1_1elementos_1_1texto.html", null ]
     ] ],
     [ "BECOMMONS_NS::caractere", "d7/ded/structBECOMMONS__NS_1_1caractere.html", null ],
+    [ "carectere", "d8/dbd/structcarectere.html", null ],
+    [ "Carregador", "d1/dcd/classCarregador.html", null ],
     [ "BECOMMONS_NS::componente", "d9/d85/structBECOMMONS__NS_1_1componente.html", [
       [ "BECOMMONS_NS::camera", "db/dc5/structBECOMMONS__NS_1_1camera.html", [
         [ "BECOMMONS_NS::camera_editor", "dc/dd0/structBECOMMONS__NS_1_1camera__editor.html", null ]
@@ -43,7 +45,6 @@ var hierarchy =
     [ "BECOMMONS_NS::inputs", "d5/d20/classBECOMMONS__NS_1_1inputs.html", null ],
     [ "BECOMMONS_NS::janela", "d9/d75/structBECOMMONS__NS_1_1janela.html", null ],
     [ "BECOMMONS_NS::malha", "da/d21/classBECOMMONS__NS_1_1malha.html", null ],
-    [ "Manuseia", "d9/d94/structManuseia.html", null ],
     [ "BECOMMONS_NS::material", "dc/dbc/structBECOMMONS__NS_1_1material.html", null ],
     [ "BECOMMONS_NS::modelo", "d0/d96/classBECOMMONS__NS_1_1modelo.html", [
       [ "BECOMMONS_NS::skybox", "d4/d46/classBECOMMONS__NS_1_1skybox.html", null ]

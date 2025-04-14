@@ -7,6 +7,9 @@
 #include "becommons/becommons.hpp"
 #include "editor_namespace.hpp"
 
+using namespace becommons;
+
+/// namespace beeditor
 namespace EDITOR_NS
 {
     class gerenciador_projetos
@@ -18,7 +21,7 @@ namespace EDITOR_NS
             void criarProjetoPadrao(const std::string& novo_diretorio, const char* nome);
         private:
             std::string DIR_PADRAO;
-            bubble_gui gui;
+            becommons::bubble_gui gui;
             gerenciador_projetos() = default;
     };
 }

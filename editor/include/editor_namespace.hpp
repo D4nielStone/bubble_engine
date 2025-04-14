@@ -24,6 +24,6 @@ SOFTWARE.
  * @file editor_namespace.hpp
  */
 #ifndef EDITOR_NS
-#define EDITOR_NS edbecommons
+#define EDITOR_NS beeditor
 #endif
 

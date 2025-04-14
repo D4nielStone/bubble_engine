@@ -22,12 +22,11 @@ SOFTWARE.
 */
 /**
  * @file imageloader.hpp
- *
- * @see imageloader.cpp
  */
 
 #pragma once
 #include <glad/glad.h>
+#include <GLFW/glfw3.h>
 #include <string>
 #include <unordered_map>
 #include <FreeImage.h>
@@ -36,48 +35,65 @@ SOFTWARE.
 #include <memory>
 #include "namespace.hpp"
 
-struct GLFWimage;
-
+/// namespace becommons
 namespace BECOMMONS_NS {
-    // @class imageLoader
-    // Gerencia as imagems/texturas carregadas na engine
+    /// @class imageLoader
+    /// Gerencia as imagems/texturas carregadas na engine
     class  imageLoader {
     public:
-        // Inicializa/Desliga Biblioteca FreeImage
-        // @{
+        /// Inicializa/Desliga Biblioteca FreeImage
+        /// @{
+        /// Inicializa a biblioteca
         static void init() { FreeImage_Initialise(); }
+        /// Deslica a biblioteca
         static void shutdown(); 
-        // @}
-        // @name Construtores/Destrutores
-        // @{
+        /// @}
+        /// @name Construtores/Destrutores
+        /// @{
         imageLoader();
+        /// Carrega uma imagem pelo diretório
+        /// @param filepath Diretório do arquivo
         imageLoader(const std::string& filepath);
+        /// Destrutor padrao
         ~imageLoader();
-        // @}
-        // Obtenção da instância global
+        /// @}
+        /// Obtenção da instância global
         static imageLoader& obterInstancia();
-        // @name Obtenções de dados de imagem
-        // @{
-        int obterLargura() const;
-        int obterAltura() const;
-        int obterCanal() const;
-        unsigned char* obterDados() const;
-        GLFWimage converterParaGlfw();
-        bool carregado;
-        // @}
+        /// @name Obtenções de dados de imagem
+        /// @{
+        int obterLargura() const;                   ///< @returns largura da imagem carregada
+        int obterAltura() const;                    ///< @returns altura da imagem carregada
+        int obterCanal() const;                     ///< @returns canal (Ex: RGB/RGBA) da imagem carregada
+        unsigned char* obterDados() const;          ///< @returns Dados binários da imagem carregada
+        GLFWimage converterParaGlfw();              ///< @returns Versão do glfw da imagem carregada
+        bool carregado;                             ///< Flag de imagem carregada
+        /// @}
+        /// Efetua o flip vertical bit por bit em data
         void flipVertical();
+        /// Carrega imagem pelo diretório
+        /// @param filepath Diretório
         void carregarImagem(const std::string& filepath);
+        /// Carrega imagem embutida num array
+        /// Ex: const unsigned int data[xxx] {...}
         void embutida(BYTE* data, const unsigned int tamanho);
     private:
-        const char* path;
-        int width, height, channels;
-        unsigned char* data;
+        const char* path;   ///< Diretório da imagem
+        int width,          ///< Largura
+            height,         ///< Altura
+            channels;       ///< Canal
+        unsigned char* data;///< Dados Binários
     };
+    /// @name Carrega Textura do arquivo
+    /// @note Não apenas carrega a imagem como o imageLoader,
+    /// mas também cria a textura opengl e armazena num map.
+    /// @{
     int texturaDoArquivo(const std::string& directory, int* width, int* height);
     int texturaDoArquivo(const std::string& directory, double* width = nullptr, double* height = nullptr);
     int texturaDoArquivo(const std::string& directory, GLuint tipo_textura);
     int texturaDoArquivo(unsigned char* data, unsigned int width, unsigned int height, int format);
     inline std::unordered_map<std::string, std::shared_ptr<imageLoader>> imagens_carregadas;
+    /// @}
+    /// @class Carregador de textura
     class  textureLoader
     {
     public:
@@ -99,11 +115,12 @@ namespace BECOMMONS_NS {
         std::unordered_map<std::string, GLuint> texturasCarregadas;
 
     private:
-        // Construtor privado para Singleton
+        /// Construtor privado para Singleton
         textureLoader() {}
 
-        // Desabilitar cópia e atribuição
+        /// Desabilitar cópia e atribuição
         textureLoader(const textureLoader&) = delete;
         void operator=(const textureLoader&) = delete;
     };
 }
+/// @see imageloader.cpp

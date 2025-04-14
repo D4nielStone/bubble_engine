@@ -15,5 +15,6 @@ var structBECOMMONS__NS_1_1componente =
       [ "COMPONENTE_LUZ_HOLOFOTE", "d9/d85/structBECOMMONS__NS_1_1componente.html#a63f9004bc698806fecbc2d677f8ee369a8778500aa6c66b2ae79e163986f17647", null ],
       [ "COMPONENTE_TERRENO", "d9/d85/structBECOMMONS__NS_1_1componente.html#a63f9004bc698806fecbc2d677f8ee369a7f4cd379b45872cc5da1dcd90b376b97", null ]
     ] ],
+    [ "mapa_nomes_componentes", "d9/d85/structBECOMMONS__NS_1_1componente.html#a8736103a6174940b233e4f9d5438524a", null ],
     [ "meu_objeto", "d9/d85/structBECOMMONS__NS_1_1componente.html#a198888339edd6c4a74869037e26badc3", null ]
 ];

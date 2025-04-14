@@ -22,52 +22,66 @@ SOFTWARE.
 */
 /**
  * @file fonte.hpp
- * @brief Define estruturas básicas para renderização de textos
- *
- * @see fonte.cpp
+ * Define estruturas básicas para renderização de textos
  */
 
 #pragma once
 #include <glad/glad.h>
 #include <string>
 #include <map>
+#include <unordered_map>
 #include <ft2build.h>
 #include "namespace.hpp"
 #include "util/vetor2.hpp"
 
 #include FT_FREETYPE_H
 
+/// Define std::pair<std::string, unsigned int> como FonteID.
+/// Diretório e id da fonte respectivamente.
 typedef std::pair<std::string, unsigned int> FonteID;
+/// namespace becommons
 namespace BECOMMONS_NS {
-    // Estrutura base da letra
+    /// @struct carectere
+    /// Estrutura base da letra.
     struct caractere
     {
-        unsigned int id;        // ID da textura
-        vetor2<unsigned int> tamanho;    // tamanho do glifo
-        vetor2<FT_Int>   apoio;    // offset
-        long int avanco;    // Offset para o avanco do proximo glifo
+        /// ID da textura
+        unsigned int id;
+        /// Tamanho do glifo
+        vetor2<unsigned int> tamanho;
+        /// Deslocamento/Offset vertical
+        vetor2<FT_Int>   apoio;
+        /// Deslocamento horizontal
+        long int avanco;
     };
 
-
+    /// @class gerenciadorFontes
+    /// Gerencia as fontes caregadas.
     class gerenciadorFontes
     {
     public:
+        /// Obtenção da instância global
         static gerenciadorFontes& obterInstancia();
 
-        // Inicializa o FreeType
+        /// Inicializa o FreeType
         gerenciadorFontes();
 
-        // Destrutor
+        /// Destrutor
         ~gerenciadorFontes();
 
-        // Carrega uma fonte com a resolução especificada
+        /// Carrega uma fonte com a resolução especificada
         void carregar(const std::string& nome_da_fonte, const unsigned int resolucao);
+        
+        /// Re-inicia o map de fontes carregadas
         static void limparFontes();
 
-        // Obtém um ponteiro para os caracteres de uma fonte já carregada
+        /// Obtém um ponteiro para os caracteres de uma fonte já carregada
         const std::map<char32_t, caractere>& obter(const std::string& nome_da_fonte, const unsigned int resolucao = 20) const;
-        std::map<FonteID, std::map<char32_t, caractere>> fontes; // Mapa para armazenar as fontes carregadas
+        
+        /// Mapa de fontes carregadas
+        std::map<FonteID, std::map<char32_t, caractere>> fontes;
     private:
-        FT_Library ft; // biblioteca FreeType
+        FT_Library ft; ///< biblioteca FreeType
     };
 }
+/// @see fonte.cpp

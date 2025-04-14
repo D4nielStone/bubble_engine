@@ -22,9 +22,6 @@ SOFTWARE.
 */
 /**
  * @file bubble_gui.hpp
- * @struct Manuseia a interface do editor
- *
- * @see bubble_gui.cpp
  */
 
 #include <glad/glad.h>
@@ -43,131 +40,201 @@ SOFTWARE.
 #include <functional>
 #include <queue>
 
+/// namespace becommons
 namespace BECOMMONS_NS { 
-	inline static unsigned int ret_VAO= 0, ret_VBO = 0, ret_EBO = 0, text_VBO = 0, text_VAO = 0;
-    static void renderizarImagem(elementos::imagem*);
-    static void renderizarFundo(caixa*, shader*);
-    static void renderizarTexto(elementos::texto*);
+	inline static unsigned int ret_VAO= 0,  ///< Vertex Array Object do retângulo
+	       ret_VBO = 0,                     ///< Vertex Buffer Object do retângulo
+	       ret_EBO = 0,                     ///< Element Buffer Object do texto
+	       text_VBO = 0,                    ///< Vertex Buffer Object do texto
+	       text_VAO = 0;                    ///< Vertex Array Object do texto
+    /**
+     * @brief Renderiza uma imagem do elemento.
+     * @param img Ponteiro para o objeto imagem a ser renderizado.
+     */
+    static void renderizarImagem(elementos::imagem* img);
+
+    /**
+     * @brief Renderiza o fundo de uma caixa utilizando um shader específico.
+     * @param c Ponteiro para a caixa a ser renderizada.
+     * @param s Shader utilizado para o fundo.
+     */
+    static void renderizarFundo(caixa* c, shader* s);
+
+    /**
+     * @brief Renderiza um elemento de texto.
+     * @param txt Ponteiro para o objeto texto.
+     */
+    static void renderizarTexto(elementos::texto* txt);
+    /// @class bubble_gui 
+    /// @brief Gerencia e organiza as caixas flexíveis da interface
     class bubble_gui : public sistema
     {
         private:
-            std::queue<std::function<void()>> funcoes;
-            std::unique_ptr<caixa> raiz;
-            std::unordered_map<std::string, caixa*> caixas;
-            std::set<std::string> estilo_atual;
-            shader* quad_shader{nullptr};
+            std::queue<std::function<void()>> funcoes;      ///< Fila de funções para serem executadas no fim do loop
+            std::unique_ptr<caixa> raiz;                    ///< Elemento raiz ( tem as dimensões da janela )
+            std::unordered_map<std::string, caixa*> caixas; ///< Vetor de elementos
+            std::set<std::string> estilo_atual;             ///< Todos os elementos presentes no estilo atual
+            shader* quad_shader{nullptr};                   ///< Shader do quadrado usado no fundo do elemento
+            /// Desenha a caixa
+            /// Desenha e decide que tipo de elemento ela é
+            /// @param c Ponteiro da caixa
             void desenhar_caixa(caixa* c);
         public:
-            bubble_gui();
-            ~bubble_gui();
+        /**
+         * @brief Construtor padrão da interface.
+         */
+        bubble_gui();
 
-            void atualizarFilhos(caixa*);
-            void definirBuffers();
-            void adicionarFlags(const std::string& id, flag_estilo); 
-            void inicializar(fase*) override;
-            void atualizar() override;
+        /**
+         * @brief Destrutor da interface.
+         */
+        ~bubble_gui();
 
-            template <typename T, typename ...Args>
-            void adicionarElemento(const std::string& pai_id, const std::string& nova_id, Args&&... args) {
+        /**
+         * @brief Atualiza as posições e tamanhos dos filhos de uma caixa.
+         * @param c Caixa a ser atualizada.
+         */
+        void atualizarFilhos(caixa* c);
+
+        /**
+         * @brief Define os buffers de OpenGL necessários para a renderização.
+         */
+        void definirBuffers();
+
+        /**
+         * @brief Adiciona uma flag de estilo a uma caixa específica.
+         * @param id ID da caixa.
+         * @param f Flag de estilo a ser aplicada.
+         */
+        void adicionarFlags(const std::string& id, flag_estilo f);
+
+        /**
+         * @brief Inicializa o sistema gráfico dentro de uma fase.
+         * @param f Ponteiro para a fase.
+         */
+        void inicializar(fase* f) override;
+
+        /**
+         * @brief Atualiza o sistema gráfico a cada quadro.
+         */
+        void atualizar() override;
+
+        /**
+         * @brief Adiciona um novo elemento à interface, como botão, texto ou imagem.
+         * @tparam T Tipo do elemento a ser adicionado (deve herdar de `caixa`).
+         * @tparam Args Argumentos para o construtor do elemento.
+         * @param pai_id ID do elemento pai.
+         * @param nova_id ID do novo elemento.
+         * @param args Argumentos para construção do novo elemento.
+         */
+        template <typename T, typename ...Args>
+        void adicionarElemento(const std::string& pai_id, const std::string& nova_id, Args&&... args) {
                 estilo_atual.insert(nova_id);
                 if (auto pai = obterElemento(pai_id)) {
                     auto nova_caixa = pai->adicionarFilho<T>(nova_id, std::forward<Args>(args)...);
                     caixas[nova_id] = nova_caixa;
                 }
             }
-            void removerElemento(const std::string& id)
-            {
-                if(caixas.find(id) == caixas.end()) return;
-                for(auto& filho : caixas[id]->m_filhos)
-                {
-                    caixas.erase(filho->m_id);
-                }
-                caixas[id]->m_filhos.clear();
-                caixas.erase(id);
-            }
-            void removerFilhos(const std::string& id)
-            {
-                if(caixas.find(id) == caixas.end()) return;
-                for(auto& filho : caixas[id]->m_filhos)
-                {
-                    caixas.erase(filho->m_id);
-                }
-                caixas[id]->m_filhos.clear();
-            }
 
-            caixa* obterElemento(const std::string& id) {
-            auto it = caixas.find(id);
-            if (it != caixas.end()) {
-                return it->second;
-            }
-            return nullptr;
-            }
+        /**
+         * @brief Remove um elemento da interface, junto com todos os seus filhos.
+         * @param id ID do elemento a ser removido.
+         */
+        void removerElemento(const std::string& id);
 
-            // Funções de estilo
-            void novoEstilo(){
-                estilo_atual.clear();
-            };
-            void defFlags(const flag_estilo v){
-                for(auto& id : estilo_atual){
-                    obterElemento(id)->m_flag_estilo = v;
-                }
-            }
-            void defLargura(const double v){
-                for(auto& id : estilo_atual){
-                    obterElemento(id)->m_largura = v;
-                    obterElemento(id)->m_flag_estilo |= flag_estilo::largura_percentual;
-                }
-            }
-            void defAltura(const double v){
-                for(auto& id : estilo_atual){
-                    obterElemento(id)->m_altura = v;
-                    obterElemento(id)->m_flag_estilo |= flag_estilo::altura_percentual;
-                }
-            }
-            void defLargura(const int v){
-                for(auto& id : estilo_atual){
-                    obterElemento(id)->m_largura = v;
-                }
-            }
-            void defAltura(const int v){
-                for(auto& id : estilo_atual){
-                    obterElemento(id)->m_altura = v;
-                }
-            }
-            void defOrientacao(const caixa::orientacao v){
-                for(auto& id : estilo_atual){
-                    obterElemento(id)->m_orientacao_modular = v;
-                }
-            }
-            void defPaddingG(const int v1, const int v2){
-                for(auto& id : estilo_atual){
-                    obterElemento(id)->m_padding_geral = {v1, v2};
-                }
-            }
-            void defPadding(const int v1, const int v2){
-                for(auto& id : estilo_atual){
-                    obterElemento(id)->m_padding = {v1, v2};
-                }
-            }
-            void defCorBorda(const cor v){
-                for(auto& id : estilo_atual){
-                    obterElemento(id)->m_cor_borda = v;
-                }
-            }
-            void defCorFundo(const cor v){
-                for(auto& id : estilo_atual){
-                    obterElemento(id)->m_cor_fundo = v;
-                }
-            }
-            void defCrescimentoM(const float v){
-                for(auto& id : estilo_atual){
-                    obterElemento(id)->m_crescimento_modular = v;
-                }
-            }
-            void defTamanhoBorda(const int v){
-                for(auto& id : estilo_atual){
-                    obterElemento(id)->m_espessura_borda = v;
-                }
-            }
+        /**
+         * @brief Remove apenas os filhos de uma determinada caixa.
+         * @param id ID da caixa cujos filhos serão removidos.
+         */
+        void removerFilhos(const std::string& id);
+
+        /**
+         * @brief Recupera uma caixa da interface pelo seu ID.
+         * @param id ID do elemento.
+         * @return Ponteiro para a caixa, ou nullptr se não for encontrada.
+         */
+        caixa* obterElemento(const std::string& id);
+
+        // === Funções de Estilo ===
+
+        /**
+         * @brief Limpa o estilo atual.
+         */
+        void novoEstilo();
+
+        /**
+         * @brief Define uma flag de estilo para todos os elementos do estilo atual.
+         * @param v Flag a ser aplicada.
+         */
+        void defFlags(const flag_estilo v);
+
+        /**
+         * @brief Define largura percentual para todos os elementos do estilo atual.
+         * @param v Valor percentual (0.0 a 1.0).
+         */
+        void defLargura(const double v);
+
+        /**
+         * @brief Define altura percentual para todos os elementos do estilo atual.
+         * @param v Valor percentual (0.0 a 1.0).
+         */
+        void defAltura(const double v);
+
+        /**
+         * @brief Define largura absoluta (em pixels) para os elementos.
+         * @param v Valor inteiro em pixels.
+         */
+        void defLargura(const int v);
+
+        /**
+         * @brief Define altura absoluta (em pixels) para os elementos.
+         * @param v Valor inteiro em pixels.
+         */
+        void defAltura(const int v);
+
+        /**
+         * @brief Define a orientação modular das caixas.
+         * @param v Orientação (horizontal ou vertical).
+         */
+        void defOrientacao(const caixa::orientacao v);
+
+        /**
+         * @brief Define o padding geral (externo) das caixas.
+         * @param v1 Padding horizontal.
+         * @param v2 Padding vertical.
+         */
+        void defPaddingG(const int v1, const int v2);
+
+        /**
+         * @brief Define o padding interno das caixas.
+         * @param v1 Padding horizontal.
+         * @param v2 Padding vertical.
+         */
+        void defPadding(const int v1, const int v2);
+
+        /**
+         * @brief Define a cor da borda das caixas.
+         * @param v Cor da borda.
+         */
+        void defCorBorda(const cor v);
+
+        /**
+         * @brief Define a cor do fundo das caixas.
+         * @param v Cor do fundo.
+         */
+        void defCorFundo(const cor v);
+
+        /**
+         * @brief Define o crescimento modular (escala proporcional) das caixas.
+         * @param v Fator de crescimento.
+         */
+        void defCrescimentoM(const float v);
+
+        /**
+         * @brief Define a espessura da borda.
+         * @param v Valor em pixels.
+         */
+        void defTamanhoBorda(const int v);
     };
 }
+/// @see bubble_gui.cpp

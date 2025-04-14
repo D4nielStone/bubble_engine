@@ -1,7 +1,7 @@
 var annotated_dup =
 [
-    [ "BECOMMONS_NS", null, [
-      [ "api", null, [
+    [ "BECOMMONS_NS", "d3/d16/namespaceBECOMMONS__NS.html", [
+      [ "api", "d4/dc5/namespaceBECOMMONS__NS_1_1api.html", [
         [ "entidade", "d8/db4/structBECOMMONS__NS_1_1api_1_1entidade.html", "d8/db4/structBECOMMONS__NS_1_1api_1_1entidade" ]
       ] ],
       [ "elementos", null, [
@@ -14,15 +14,15 @@ var annotated_dup =
       [ "caixa", "dc/d61/classBECOMMONS__NS_1_1caixa.html", null ],
       [ "camera", "db/dc5/structBECOMMONS__NS_1_1camera.html", null ],
       [ "camera_editor", "dc/dd0/structBECOMMONS__NS_1_1camera__editor.html", null ],
-      [ "caractere", "d7/ded/structBECOMMONS__NS_1_1caractere.html", null ],
+      [ "caractere", "d7/ded/structBECOMMONS__NS_1_1caractere.html", "d7/ded/structBECOMMONS__NS_1_1caractere" ],
       [ "codigo", "d8/d1f/structBECOMMONS__NS_1_1codigo.html", "d8/d1f/structBECOMMONS__NS_1_1codigo" ],
       [ "componente", "d9/d85/structBECOMMONS__NS_1_1componente.html", "d9/d85/structBECOMMONS__NS_1_1componente" ],
       [ "cor", "df/df9/structBECOMMONS__NS_1_1cor.html", null ],
       [ "entidade", "d8/d57/structBECOMMONS__NS_1_1entidade.html", null ],
       [ "fase", "da/dd1/structBECOMMONS__NS_1_1fase.html", "da/dd1/structBECOMMONS__NS_1_1fase" ],
       [ "fisica", "d1/d0b/structBECOMMONS__NS_1_1fisica.html", null ],
-      [ "gerenciadorFontes", "df/dbd/classBECOMMONS__NS_1_1gerenciadorFontes.html", null ],
-      [ "imageLoader", "dd/d13/classBECOMMONS__NS_1_1imageLoader.html", null ],
+      [ "gerenciadorFontes", "df/dbd/classBECOMMONS__NS_1_1gerenciadorFontes.html", "df/dbd/classBECOMMONS__NS_1_1gerenciadorFontes" ],
+      [ "imageLoader", "dd/d13/classBECOMMONS__NS_1_1imageLoader.html", "dd/d13/classBECOMMONS__NS_1_1imageLoader" ],
       [ "imagem", "dc/d0e/structBECOMMONS__NS_1_1imagem.html", null ],
       [ "inputs", "d5/d20/classBECOMMONS__NS_1_1inputs.html", null ],
       [ "janela", "d9/d75/structBECOMMONS__NS_1_1janela.html", null ],
@@ -49,7 +49,7 @@ var annotated_dup =
       [ "terreno", "df/d13/structBECOMMONS__NS_1_1terreno.html", null ],
       [ "texto", "d7/d3b/structBECOMMONS__NS_1_1texto.html", null ],
       [ "textura", "d5/df8/structBECOMMONS__NS_1_1textura.html", null ],
-      [ "textureLoader", "d1/db7/classBECOMMONS__NS_1_1textureLoader.html", null ],
+      [ "textureLoader", "d1/db7/classBECOMMONS__NS_1_1textureLoader.html", "d1/db7/classBECOMMONS__NS_1_1textureLoader" ],
       [ "transformacao", "de/dbc/classBECOMMONS__NS_1_1transformacao.html", null ],
       [ "vertice", "de/db6/structBECOMMONS__NS_1_1vertice.html", null ],
       [ "vetor2", "dd/d94/structBECOMMONS__NS_1_1vetor2.html", null ],
@@ -63,7 +63,8 @@ var annotated_dup =
     [ "std", null, [
       [ "hash< BECOMMONS_NS::entidade >", "d0/d74/structstd_1_1hash_3_01BECOMMONS__NS_1_1entidade_01_4.html", null ]
     ] ],
+    [ "carectere", "d8/dbd/structcarectere.html", null ],
+    [ "Carregador", "d1/dcd/classCarregador.html", null ],
     [ "fase", "da/dfd/structfase.html", null ],
-    [ "Manuseia", "d9/d94/structManuseia.html", null ],
     [ "MyContactCallback", "da/da9/classMyContactCallback.html", null ]
 ];

@@ -31,6 +31,15 @@ var NAVTREE =
     [ "Contribuição", "index.html#autotoc_md5", null ],
     [ "Licença", "index.html#autotoc_md6", null ],
     [ "Vídeos do youtube", "index.html#autotoc_md7", null ],
+    [ "Namespaces", "namespaces.html", [
+      [ "Lista de Namespaces", "namespaces.html", "namespaces_dup" ],
+      [ "Membros do namespace", "namespacemembers.html", [
+        [ "Todos", "namespacemembers.html", null ],
+        [ "Funções", "namespacemembers_func.html", null ],
+        [ "Variáveis", "namespacemembers_vars.html", null ],
+        [ "Enumerações", "namespacemembers_enum.html", null ]
+      ] ]
+    ] ],
     [ "Classes", "annotated.html", [
       [ "Lista de Classes", "annotated.html", "annotated_dup" ],
       [ "Índice dos Componentes", "classes.html", null ],
@@ -43,7 +52,11 @@ var NAVTREE =
       ] ]
     ] ],
     [ "Arquivos", "files.html", [
-      [ "Lista de Arquivos", "files.html", "files_dup" ]
+      [ "Lista de Arquivos", "files.html", "files_dup" ],
+      [ "Membros dos Arquivos", "globals.html", [
+        [ "Todos", "globals.html", null ],
+        [ "Definições de Tipos", "globals_type.html", null ]
+      ] ]
     ] ]
   ] ]
 ];
@@ -51,7 +64,8 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "annotated.html",
-"de/d62/structBECOMMONS__NS_1_1propriedades.html"
+"d8/d1f/structBECOMMONS__NS_1_1codigo.html",
+"de/d04/bubble__gui_8hpp.html#ae549ab1a9c891856fcc861cddd9e5ab5"
 ];
 
 var SYNCONMSG = 'clique para desativar a sincronização do painel';

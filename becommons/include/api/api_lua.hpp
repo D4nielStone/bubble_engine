@@ -68,9 +68,12 @@
 #include "componentes/transformacao.hpp"
 #include "componentes/renderizador.hpp"
 
+/// namespace becommons
 namespace BECOMMONS_NS {
+    /// namespace api
     namespace api {
-    /// Estrutura para api lua
+    /// @struct entidade
+    /// @brief Estrutura para api lua
     /// @note É diferente da entidade do sistema ECS, aqui serve como uma ponte para a api lua
 	struct entidade
 	{
@@ -93,12 +96,13 @@ namespace BECOMMONS_NS {
 		void destruir() const;
 		entidade(const uint32_t& id);
 	};
-    /// @name Definições pŕoprias
-    /// @{
-	  	void definirFisica(lua_State* L);
-	  	void definirTempo(lua_State* L);
-	  	void definirUtils(lua_State* L);
-	  	void definirInputs(lua_State* L);
-	/// @}
-   } /// namespace api
-} /// namespace becommons
+        /// Define a física do componente de código
+	  	void definirFisica(lua_State* L);   ///< @param L Lua state
+        /// Define o tempo do componente de código
+	  	void definirTempo(lua_State* L);    ///< @param L Lua state
+        /// Define os utilitários do componente de código
+	  	void definirUtils(lua_State* L);    ///< @param L Lua state
+        /// Define os inputs componente de código
+	  	void definirInputs(lua_State* L);   ///< @param L Lua state
+   } 
+}

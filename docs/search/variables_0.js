@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['entidades_0',['entidades',['../d5/d67/structBECOMMONS__NS_1_1registro.html#a6dc14669a4bb01d981d9a17be6ff81a8',1,'BECOMMONS_NS::registro']]]
+  ['apoio_0',['apoio',['../d7/ded/structBECOMMONS__NS_1_1caractere.html#a777d703d29d1541d887fb0f782fb232a',1,'BECOMMONS_NS::caractere']]],
+  ['avanco_1',['avanco',['../d7/ded/structBECOMMONS__NS_1_1caractere.html#a0236189769dd47472a703683b0f388b7',1,'BECOMMONS_NS::caractere']]]
 ];

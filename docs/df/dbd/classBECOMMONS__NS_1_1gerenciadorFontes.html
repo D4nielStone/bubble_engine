@@ -101,38 +101,56 @@ $(document).ready(function(){initNavTree('df/dbd/classBECOMMONS__NS_1_1gerenciad
   <div class="headertitle"><div class="title">Referência da Classe BECOMMONS_NS::gerenciadorFontes</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p><code>#include &lt;<a class="el" href="../../d9/d0f/fonte_8hpp_source.html">fonte.hpp</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Membros Públicos</h2></td></tr>
+<tr class="memitem:a106ae9c34cbe5b554a944ffc0b4959de" id="r_a106ae9c34cbe5b554a944ffc0b4959de"><td class="memItemLeft" align="right" valign="top"><a id="a106ae9c34cbe5b554a944ffc0b4959de" name="a106ae9c34cbe5b554a944ffc0b4959de"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>gerenciadorFontes</b> ()</td></tr>
+<tr class="memdesc:a106ae9c34cbe5b554a944ffc0b4959de"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inicializa o FreeType. <br /></td></tr>
+<tr class="separator:a106ae9c34cbe5b554a944ffc0b4959de"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a534c07c64c9c1d78f15d99e0fc5e8ec6" id="r_a534c07c64c9c1d78f15d99e0fc5e8ec6"><td class="memItemLeft" align="right" valign="top"><a id="a534c07c64c9c1d78f15d99e0fc5e8ec6" name="a534c07c64c9c1d78f15d99e0fc5e8ec6"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>~gerenciadorFontes</b> ()</td></tr>
+<tr class="memdesc:a534c07c64c9c1d78f15d99e0fc5e8ec6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destrutor. <br /></td></tr>
+<tr class="separator:a534c07c64c9c1d78f15d99e0fc5e8ec6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1a73ae57b3c37604d3bfb568f5678eb0" id="r_a1a73ae57b3c37604d3bfb568f5678eb0"><td class="memItemLeft" align="right" valign="top"><a id="a1a73ae57b3c37604d3bfb568f5678eb0" name="a1a73ae57b3c37604d3bfb568f5678eb0"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>carregar</b> (const std::string &amp;nome_da_fonte, const unsigned int resolucao)</td></tr>
+<tr class="memdesc:a1a73ae57b3c37604d3bfb568f5678eb0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Carrega uma fonte com a resolução especificada. <br /></td></tr>
 <tr class="separator:a1a73ae57b3c37604d3bfb568f5678eb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7bcc0c54cf36b29dde491fff5a082ea5" id="r_a7bcc0c54cf36b29dde491fff5a082ea5"><td class="memItemLeft" align="right" valign="top"><a id="a7bcc0c54cf36b29dde491fff5a082ea5" name="a7bcc0c54cf36b29dde491fff5a082ea5"></a>
 const std::map&lt; char32_t, <a class="el" href="../../d7/ded/structBECOMMONS__NS_1_1caractere.html">caractere</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>obter</b> (const std::string &amp;nome_da_fonte, const unsigned int resolucao=20) const</td></tr>
+<tr class="memdesc:a7bcc0c54cf36b29dde491fff5a082ea5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtém um ponteiro para os caracteres de uma fonte já carregada. <br /></td></tr>
 <tr class="separator:a7bcc0c54cf36b29dde491fff5a082ea5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Membros públicos estáticos</h2></td></tr>
 <tr class="memitem:ab90747fa9102590cfdccf3cb0c66d62c" id="r_ab90747fa9102590cfdccf3cb0c66d62c"><td class="memItemLeft" align="right" valign="top"><a id="ab90747fa9102590cfdccf3cb0c66d62c" name="ab90747fa9102590cfdccf3cb0c66d62c"></a>
 static <a class="el" href="../../df/dbd/classBECOMMONS__NS_1_1gerenciadorFontes.html">gerenciadorFontes</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>obterInstancia</b> ()</td></tr>
+<tr class="memdesc:ab90747fa9102590cfdccf3cb0c66d62c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtenção da instância global. <br /></td></tr>
 <tr class="separator:ab90747fa9102590cfdccf3cb0c66d62c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a451c48a62150f8d53063fd7dbd265304" id="r_a451c48a62150f8d53063fd7dbd265304"><td class="memItemLeft" align="right" valign="top"><a id="a451c48a62150f8d53063fd7dbd265304" name="a451c48a62150f8d53063fd7dbd265304"></a>
 static void&#160;</td><td class="memItemRight" valign="bottom"><b>limparFontes</b> ()</td></tr>
+<tr class="memdesc:a451c48a62150f8d53063fd7dbd265304"><td class="mdescLeft">&#160;</td><td class="mdescRight">Re-inicia o map de fontes carregadas. <br /></td></tr>
 <tr class="separator:a451c48a62150f8d53063fd7dbd265304"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Atributos Públicos</h2></td></tr>
 <tr class="memitem:a2a016e9af5ec70a06c14366a34650dc9" id="r_a2a016e9af5ec70a06c14366a34650dc9"><td class="memItemLeft" align="right" valign="top"><a id="a2a016e9af5ec70a06c14366a34650dc9" name="a2a016e9af5ec70a06c14366a34650dc9"></a>
-std::map&lt; FonteID, std::map&lt; char32_t, <a class="el" href="../../d7/ded/structBECOMMONS__NS_1_1caractere.html">caractere</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>fontes</b></td></tr>
+std::map&lt; <a class="el" href="../../d9/d0f/fonte_8hpp.html#ae5c0d37c453abcc0fe309bcf6b989740">FonteID</a>, std::map&lt; char32_t, <a class="el" href="../../d7/ded/structBECOMMONS__NS_1_1caractere.html">caractere</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>fontes</b></td></tr>
+<tr class="memdesc:a2a016e9af5ec70a06c14366a34650dc9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mapa de fontes carregadas. <br /></td></tr>
 <tr class="separator:a2a016e9af5ec70a06c14366a34650dc9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
 Atributos Privados</h2></td></tr>
 <tr class="memitem:a9cc17dbeda0a0ec44c16b6f7b3298331" id="r_a9cc17dbeda0a0ec44c16b6f7b3298331"><td class="memItemLeft" align="right" valign="top"><a id="a9cc17dbeda0a0ec44c16b6f7b3298331" name="a9cc17dbeda0a0ec44c16b6f7b3298331"></a>
 FT_Library&#160;</td><td class="memItemRight" valign="bottom"><b>ft</b></td></tr>
+<tr class="memdesc:a9cc17dbeda0a0ec44c16b6f7b3298331"><td class="mdescLeft">&#160;</td><td class="mdescRight">biblioteca FreeType <br /></td></tr>
 <tr class="separator:a9cc17dbeda0a0ec44c16b6f7b3298331"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<hr/>A documentação para essa classe foi gerada a partir dos seguintes arquivos:<ul>
+<a name="details" id="details"></a><h2 class="groupheader">Descrição detalhada</h2>
+<div class="textblock"><p>Gerencia as fontes caregadas. </p>
+</div><hr/>A documentação para essa classe foi gerada a partir dos seguintes arquivos:<ul>
 <li>becommons/include/arquivadores/<a class="el" href="../../d9/d0f/fonte_8hpp_source.html">fonte.hpp</a></li>
 <li>becommons/src/arquivadores/<a class="el" href="../../d4/d5f/fonte_8cpp.html">fonte.cpp</a></li>
 </ul>
@@ -141,7 +159,7 @@ FT_Library&#160;</td><td class="memItemRight" valign="bottom"><b>ft</b></td></tr
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><b>BECOMMONS_NS</b></li><li class="navelem"><a class="el" href="../../df/dbd/classBECOMMONS__NS_1_1gerenciadorFontes.html">gerenciadorFontes</a></li>
+    <li class="navelem"><a class="el" href="../../d3/d16/namespaceBECOMMONS__NS.html">BECOMMONS_NS</a></li><li class="navelem"><a class="el" href="../../df/dbd/classBECOMMONS__NS_1_1gerenciadorFontes.html">gerenciadorFontes</a></li>
     <li class="footer">Gerado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>

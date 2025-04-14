@@ -1,4 +1,7 @@
 var mat_8hpp =
 [
-    [ "Copyright", "dc/dc2/mat_8hpp.html#af8d8b372ab8a4f206b00aa3513079b8c", null ]
+    [ "distancia2", "dc/dc2/mat_8hpp.html#a50e0753157c3a4aad38c7b8791bfffc3", null ],
+    [ "distancia3", "dc/dc2/mat_8hpp.html#a9cc2c027e22bf0fb2a05468ca0a84672", null ],
+    [ "lerp3", "dc/dc2/mat_8hpp.html#a801858ea39bd3471ab9979e54ce8bf09", null ],
+    [ "operator*", "dc/dc2/mat_8hpp.html#ab0abbb148889cb6185af0560f3f9e0ab", null ]
 ];

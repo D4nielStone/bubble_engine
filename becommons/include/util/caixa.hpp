@@ -22,8 +22,6 @@ SOFTWARE.
 */
 /**
  * @file caixa.hpp
- *
- * @author Daniel O. dos Santos
  */
 
 #pragma once
@@ -63,7 +61,6 @@ namespace BECOMMONS_NS {
     /**
      * @class caixa
      * @brief funciona como uma div em css
-     *
      */
     class caixa
     {
