@@ -25,10 +25,11 @@ var searchData=
   ['codigo_2ehpp_22',['codigo.hpp',['../da/d82/codigo_8hpp.html',1,'']]],
   ['componente_23',['componente',['../d9/d85/structBECOMMONS__NS_1_1componente.html',1,'BECOMMONS_NS']]],
   ['componente_2ehpp_24',['componente.hpp',['../db/de2/componente_8hpp.html',1,'']]],
-  ['contribution_25',['Contribution',['../index.html#autotoc_md6',1,'']]],
-  ['converterparaglfw_26',['converterParaGlfw',['../dd/d13/classBECOMMONS__NS_1_1imageLoader.html#a0a5634575ed2f12827fa119249bdcb34',1,'BECOMMONS_NS::imageLoader']]],
-  ['cor_27',['cor',['../df/df9/structBECOMMONS__NS_1_1cor.html',1,'BECOMMONS_NS']]],
-  ['cor_2ehpp_28',['cor.hpp',['../d3/d49/cor_8hpp.html',1,'']]],
-  ['criarjanela_29',['criarJanela',['../dd/d2d/structBECOMMONS__NS_1_1projeto.html#a6c0e3d01485ea2c255362230f950c1df',1,'BECOMMONS_NS::projeto']]],
-  ['criarprojetovazio_30',['criarProjetoVazio',['../dd/d2d/structBECOMMONS__NS_1_1projeto.html#a3d90a05281ba01ad898c1431ae336eb3',1,'BECOMMONS_NS::projeto']]]
+  ['componentes_25',['Componentes',['../dd/d27/group__api__componentes.html',1,'']]],
+  ['contribution_26',['Contribution',['../index.html#autotoc_md6',1,'']]],
+  ['converterparaglfw_27',['converterParaGlfw',['../dd/d13/classBECOMMONS__NS_1_1imageLoader.html#a0a5634575ed2f12827fa119249bdcb34',1,'BECOMMONS_NS::imageLoader']]],
+  ['cor_28',['cor',['../df/df9/structBECOMMONS__NS_1_1cor.html',1,'BECOMMONS_NS']]],
+  ['cor_2ehpp_29',['cor.hpp',['../d3/d49/cor_8hpp.html',1,'']]],
+  ['criarjanela_30',['criarJanela',['../dd/d2d/structBECOMMONS__NS_1_1projeto.html#a6c0e3d01485ea2c255362230f950c1df',1,'BECOMMONS_NS::projeto']]],
+  ['criarprojetovazio_31',['criarProjetoVazio',['../dd/d2d/structBECOMMONS__NS_1_1projeto.html#a3d90a05281ba01ad898c1431ae336eb3',1,'BECOMMONS_NS::projeto']]]
 ];

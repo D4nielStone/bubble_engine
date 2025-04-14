@@ -1,5 +1,4 @@
 var topics =
 [
-    [ "Lua", "d3/d67/group__lua__api.html", null ],
-    [ "Objetos", "dc/d8d/group__lua__obj.html", null ]
+    [ "Lua", "d9/d3e/group__api__root.html", "d9/d3e/group__api__root" ]
 ];
