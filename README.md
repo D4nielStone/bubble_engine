@@ -1,3 +1,7 @@
+![License](https://img.shields.io/github/license/d4nielstone/bubble_engine)
+![Version](https://img.shields.io/github/v/tag/d4nielstone/bubble_engine)
+![Stars](https://img.shields.io/github/stars/d4nielstone/bubble_engine?style=social)
+
 # Bubble Engine
 <p align="center">
   <a href="https://d4nielstone.github.io/bubble_engine">
