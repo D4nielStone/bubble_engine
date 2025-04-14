@@ -1,9 +1,14 @@
+[![License](https://img.shields.io/github/license/d4nielstone/bubble_engine)](https://github.com/D4nielStone/bubble_engine/blob/master/LICENSE)
+[![Version](https://img.shields.io/github/v/tag/d4nielstone/bubble_engine)](https://github.com/D4nielStone/bubble_engine/tags)
+[![Stars](https://img.shields.io/github/stars/d4nielstone/bubble_engine?style=social)](https://github.com/D4nielStone/bubble_engine/stargazers)
+
 # Bubble Engine
 <p align="center">
   <a href="https://d4nielstone.github.io/bubble_engine">
-    <img src="becommons/include/assets/imagems/banner.png" width="400" alt="Bubble Engine logo">
+    <img src="https://github.com/user-attachments/assets/c5a24614-03ec-405e-8eae-55ab74326a66" width="400" alt="Bubble Engine logo">
   </a>
 </p>
+
 
 ## Desenvolvimento 3D
 
