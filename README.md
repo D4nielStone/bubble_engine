@@ -42,7 +42,11 @@ Este projeto é desenvolvido utilizando o Visual Studio Code no Linux Mint. Pull
 Este projeto está licenciado sob a [MIT License](https://choosealicense.com/licenses/mit/).
 
 ## Vídeos do youtube
-### https://youtu.be/g4ts_jrP9cg](https://youtu.be/qS8rZQ_BfRA)
-![thumb](https://github.com/user-attachments/assets/fc9f3c5e-1919-4099-8339-774a22db1503)
-### https://www.youtube.com/watch?v=JXo_AMSbO0Q&ab_channel=D4NL
-![a](https://github.com/user-attachments/assets/ddf1fab5-8873-43de-83e6-da597637dba0)
+<p align="center">
+  <a href="https://youtu.be/g4ts_jrP9cg](https://youtu.be/qS8rZQ_BfRA)">
+    <img src="https://github.com/user-attachments/assets/fc9f3c5e-1919-4099-8339-774a22db1503" width="500" alt="Video 1">
+  </a>
+  <a href="https://www.youtube.com/watch?v=JXo_AMSbO0Q&ab_channel=D4NL">
+    <img src="https://github.com/user-attachments/assets/ddf1fab5-8873-43de-83e6-da597637dba0" width="500" alt="Video 2">
+  </a>
+</p>
