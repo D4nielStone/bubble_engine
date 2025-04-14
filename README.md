@@ -43,7 +43,7 @@ Este projeto está licenciado sob a [MIT License](https://choosealicense.com/lic
 
 ## Vídeos do youtube
 <p align="center">
-  <a href="https://youtu.be/g4ts_jrP9cg](https://youtu.be/qS8rZQ_BfRA)">
+  <a href="https://youtu.be/qS8rZQ_BfRA">
     <img src="https://github.com/user-attachments/assets/fc9f3c5e-1919-4099-8339-774a22db1503" width="500" alt="Video 1">
   </a>
   <a href="https://www.youtube.com/watch?v=JXo_AMSbO0Q&ab_channel=D4NL">
