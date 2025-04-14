@@ -1,5 +1,6 @@
 /** @copyright 
-MIT LicenseCopyright (c) 2025 Daniel Oliveira
+MIT License
+Copyright (c) 2025 Daniel Oliveira
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -21,7 +22,6 @@ SOFTWARE.
 */
 /**
  * @file imageloader.hpp
- * @brief Gerencia as imagems/texturas carregadas na engine
  *
  * @see imageloader.cpp
  */
@@ -39,22 +39,32 @@ SOFTWARE.
 struct GLFWimage;
 
 namespace BECOMMONS_NS {
-    class  imageLoader
-    {
+    // @class imageLoader
+    // Gerencia as imagems/texturas carregadas na engine
+    class  imageLoader {
     public:
+        // Inicializa/Desliga Biblioteca FreeImage
+        // @{
         static void init() { FreeImage_Initialise(); }
         static void shutdown(); 
+        // @}
+        // @name Construtores/Destrutores
+        // @{
         imageLoader();
         imageLoader(const std::string& filepath);
         ~imageLoader();
-
+        // @}
+        // Obtenção da instância global
         static imageLoader& obterInstancia();
+        // @name Obtenções de dados de imagem
+        // @{
         int obterLargura() const;
         int obterAltura() const;
         int obterCanal() const;
         unsigned char* obterDados() const;
         GLFWimage converterParaGlfw();
         bool carregado;
+        // @}
         void flipVertical();
         void carregarImagem(const std::string& filepath);
         void embutida(BYTE* data, const unsigned int tamanho);
@@ -92,7 +102,7 @@ namespace BECOMMONS_NS {
         // Construtor privado para Singleton
         textureLoader() {}
 
-        // Desabilitar c�pia e atribui��o
+        // Desabilitar cópia e atribuição
         textureLoader(const textureLoader&) = delete;
         void operator=(const textureLoader&) = delete;
     };

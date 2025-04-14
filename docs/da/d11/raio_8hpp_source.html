@@ -100,13 +100,39 @@ $(document).ready(function(){initNavTree('da/d11/raio_8hpp_source.html','../../'
   <div class="headertitle"><div class="title">raio.hpp</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span> </div>
+<a href="../../da/d11/raio_8hpp.html">Ir para a documentação desse arquivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span> </div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="preprocessor">#pragma once</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="preprocessor">#include &lt;glm/glm.hpp&gt;</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="preprocessor">#include &lt;bullet/btBulletDynamicsCommon.h&gt;</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="preprocessor">#include &quot;<a class="code" href="../../db/d19/namespace_8hpp.html">namespace.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="keyword">namespace </span>BECOMMONS_NS {</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    <span class="comment">// Estrutura para armazenar os resultados do Raycast</span></div>
+<div class="foldopen" id="foldopen00034" data-start="{" data-end="};">
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno"><a class="line" href="../../de/d65/structBECOMMONS__NS_1_1raio.html">   34</a></span>    <span class="keyword">struct </span><a class="code hl_struct" href="../../de/d65/structBECOMMONS__NS_1_1raio.html">raio</a></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    {</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>        glm::vec3 origem;</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>        glm::vec3 direcao;</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    };</div>
+</div>
+<div class="foldopen" id="foldopen00039" data-start="{" data-end="};">
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno"><a class="line" href="../../d8/ddf/structBECOMMONS__NS_1_1resultadoRaio.html">   39</a></span>    <span class="keyword">struct </span><a class="code hl_struct" href="../../d8/ddf/structBECOMMONS__NS_1_1resultadoRaio.html">resultadoRaio</a> {</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>        <span class="keywordtype">bool</span> atingiu;                      <span class="comment">// Se o raio atingiu algo</span></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        glm::vec3 pontoDeColisao;            <span class="comment">// Ponto de colis�o</span></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        glm::vec3 normalAtingida;           <span class="comment">// Normal da superf�cie atingida</span></div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>        <span class="keyword">const</span> btCollisionObject* objetoAtingido; <span class="comment">// Objeto atingido</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    };</div>
+</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>}</div>
+<div class="ttc" id="anamespace_8hpp_html"><div class="ttname"><a href="../../db/d19/namespace_8hpp.html">namespace.hpp</a></div></div>
+<div class="ttc" id="astructBECOMMONS__NS_1_1raio_html"><div class="ttname"><a href="../../de/d65/structBECOMMONS__NS_1_1raio.html">BECOMMONS_NS::raio</a></div><div class="ttdef"><b>Definição</b> raio.hpp:35</div></div>
+<div class="ttc" id="astructBECOMMONS__NS_1_1resultadoRaio_html"><div class="ttname"><a href="../../d8/ddf/structBECOMMONS__NS_1_1resultadoRaio.html">BECOMMONS_NS::resultadoRaio</a></div><div class="ttdef"><b>Definição</b> raio.hpp:39</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="../../dir_0394786a11e0dfde3dca27fdccf84bfd.html">becommons</a></li><li class="navelem"><a class="el" href="../../dir_9a744b5567c265deacf566b467d8af59.html">include</a></li><li class="navelem"><a class="el" href="../../dir_01945739458c10315f029035be55b339.html">util</a></li><li class="navelem"><b>raio.hpp</b></li>
+    <li class="navelem"><a class="el" href="../../dir_0394786a11e0dfde3dca27fdccf84bfd.html">becommons</a></li><li class="navelem"><a class="el" href="../../dir_9a744b5567c265deacf566b467d8af59.html">include</a></li><li class="navelem"><a class="el" href="../../dir_01945739458c10315f029035be55b339.html">util</a></li><li class="navelem"><a class="el" href="../../da/d11/raio_8hpp.html">raio.hpp</a></li>
     <li class="footer">Gerado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>

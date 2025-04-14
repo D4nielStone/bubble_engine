@@ -1,5 +1,6 @@
 /** @copyright 
-MIT LicenseCopyright (c) 2025 Daniel Oliveira
+MIT License
+Copyright (c) 2025 Daniel Oliveira
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -20,7 +21,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE. 
 */
 /**
- * @file botao.hpp/
+ * @file botao.hpp
+ */
 
 #pragma once
 #include "namespace.hpp"
@@ -31,25 +33,25 @@ SOFTWARE.
 
 namespace BECOMMONS_NS{
     namespace elementos{
-        struct botao : area_toque
+        struct botao : area_de_toque
         {
             /// Ponteiros para aparência
             std::unique_ptr<imagem> m_imagem    { nullptr };
             std::unique_ptr<texto>  m_texto     { nullptr };
             /// @name Construtores com ponteiro para aparência
             /// @{
-            botao(const std::function<void()> &fctn, std::unique_ptr<texto> txt)    : area_toque(fctn), m_texto(std::move(txt)) {
+            botao(const std::function<void()> &fctn, std::unique_ptr<texto> txt)    : area_de_toque(fctn), m_texto(std::move(txt)) {
             }
-            botao(const std::function<void()> &fctn, std::unique_ptr<imagem> img)   : area_toque(fctn), m_imagem(std::move(img)) {
+            botao(const std::function<void()> &fctn, std::unique_ptr<imagem> img)   : area_de_toque(fctn), m_imagem(std::move(img)) {
             }
-            botao(bool* ptr, std::unique_ptr<imagem> img)                           : area_toque(ptr), m_imagem(std::move(img)) {
+            botao(bool* ptr, std::unique_ptr<imagem> img)                           : area_de_toque(ptr), m_imagem(std::move(img)) {
             }
             /// @}
             /// @name Construtores de texto simplificado
             /// @{
-            botao(const std::function<void()> &fctn, const std::string& txt) : area_toque(fctn), m_texto(std::make_unique<texto>(txt)) {
+            botao(const std::function<void()> &fctn, const std::string& txt) : area_de_toque(fctn), m_texto(std::make_unique<texto>(txt)) {
             }
-            botao(bool* ptr, const std::string& txt) : area_toque(ptr), m_texto(std::make_unique<texto>(txt)) {
+            botao(bool* ptr, const std::string& txt) : area_de_toque(ptr), m_texto(std::make_unique<texto>(txt)) {
             }
             /// @}
             ~botao() {
@@ -73,7 +75,7 @@ namespace BECOMMONS_NS{
                     m_texto->m_limites.y = m_limites.y+ m_padding_geral.y/2;
                     m_texto->m_flag_estilo = m_flag_estilo;
                 }
-                m_pressionado = area_toque::pressionado();
+                m_pressionado = area_de_toque::pressionado();
                 if(m_mouse_cima) m_cor_borda.a = 1.f;
                 return m_pressionado;
             }

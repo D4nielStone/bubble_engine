@@ -100,13 +100,51 @@ $(document).ready(function(){initNavTree('d4/def/terreno_8hpp_source.html','../.
   <div class="headertitle"><div class="title">terreno.hpp</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span> </div>
+<a href="../../d4/def/terreno_8hpp.html">Ir para a documentação desse arquivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span> </div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="preprocessor">#pragma once</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="preprocessor">#include &quot;<a class="code" href="../../db/d19/namespace_8hpp.html">namespace.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="preprocessor">#include &quot;<a class="code" href="../../db/de2/componente_8hpp.html">componente.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="preprocessor">#include &quot;util/malha.hpp&quot;</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="preprocessor">#include &quot;<a class="code" href="../../d9/d52/shader_8hpp.html">arquivadores/shader.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="keyword">namespace </span>BECOMMONS_NS {</div>
+<div class="foldopen" id="foldopen00036" data-start="{" data-end="};">
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno"><a class="line" href="../../df/d13/structBECOMMONS__NS_1_1terreno.html">   36</a></span>    <span class="keyword">struct </span><a class="code hl_struct" href="../../df/d13/structBECOMMONS__NS_1_1terreno.html">terreno</a> : <span class="keyword">public</span> <a class="code hl_struct" href="../../d9/d85/structBECOMMONS__NS_1_1componente.html">componente</a></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    {</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>        <span class="keyword">static</span> <span class="keyword">constexpr</span> <a class="code hl_enumeration" href="../../d9/d85/structBECOMMONS__NS_1_1componente.html#a63f9004bc698806fecbc2d677f8ee369">mascara</a> <a class="code hl_enumeration" href="../../d9/d85/structBECOMMONS__NS_1_1componente.html#a63f9004bc698806fecbc2d677f8ee369">mascara</a> = {COMPONENTE_TERRENO};</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>        <a class="code hl_struct" href="../../df/d13/structBECOMMONS__NS_1_1terreno.html">terreno</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>        <span class="keywordtype">void</span> carregarHeightMap(<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *dados, <span class="keywordtype">int</span> largura, <span class="keywordtype">int</span> altura);</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        <span class="keyword">explicit</span> <a class="code hl_struct" href="../../df/d13/structBECOMMONS__NS_1_1terreno.html">terreno</a>(<span class="keyword">const</span> std::string &amp;path);</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        <span class="keywordtype">void</span> desenhar(<a class="code hl_class" href="../../d1/dfc/classBECOMMONS__NS_1_1shader.html">shader</a>&amp; _shader);</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>        <a class="code hl_class" href="../../d1/dfc/classBECOMMONS__NS_1_1shader.html">shader</a>&amp; obterShader() </div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        {</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>            <span class="keywordflow">return</span> m_shader;</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>        }</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>        <a class="code hl_class" href="../../da/d21/classBECOMMONS__NS_1_1malha.html">malha</a> m_malha;</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>        <span class="keyword">private</span>:</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>            <a class="code hl_class" href="../../d1/dfc/classBECOMMONS__NS_1_1shader.html">shader</a> m_shader;</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>            std::string diretorio;</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>            std::vector&lt;std::vector&lt;float&gt;&gt; heightmap;</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>            <span class="keywordtype">int</span> largura{0}, altura{0};</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    };</div>
+</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>}</div>
+<div class="ttc" id="aclassBECOMMONS__NS_1_1malha_html"><div class="ttname"><a href="../../da/d21/classBECOMMONS__NS_1_1malha.html">BECOMMONS_NS::malha</a></div><div class="ttdef"><b>Definição</b> malha.hpp:37</div></div>
+<div class="ttc" id="aclassBECOMMONS__NS_1_1shader_html"><div class="ttname"><a href="../../d1/dfc/classBECOMMONS__NS_1_1shader.html">BECOMMONS_NS::shader</a></div><div class="ttdef"><b>Definição</b> shader.hpp:58</div></div>
+<div class="ttc" id="acomponente_8hpp_html"><div class="ttname"><a href="../../db/de2/componente_8hpp.html">componente.hpp</a></div><div class="ttdoc">Estrutura base para componetes.</div></div>
+<div class="ttc" id="anamespace_8hpp_html"><div class="ttname"><a href="../../db/d19/namespace_8hpp.html">namespace.hpp</a></div></div>
+<div class="ttc" id="ashader_8hpp_html"><div class="ttname"><a href="../../d9/d52/shader_8hpp.html">shader.hpp</a></div><div class="ttdoc">Gerencia os shaders GLSL.</div></div>
+<div class="ttc" id="astructBECOMMONS__NS_1_1componente_html"><div class="ttname"><a href="../../d9/d85/structBECOMMONS__NS_1_1componente.html">BECOMMONS_NS::componente</a></div><div class="ttdoc">base para as funcionalidades da engine</div><div class="ttdef"><b>Definição</b> componente.hpp:45</div></div>
+<div class="ttc" id="astructBECOMMONS__NS_1_1componente_html_a63f9004bc698806fecbc2d677f8ee369"><div class="ttname"><a href="../../d9/d85/structBECOMMONS__NS_1_1componente.html#a63f9004bc698806fecbc2d677f8ee369">BECOMMONS_NS::componente::mascara</a></div><div class="ttdeci">mascara</div><div class="ttdoc">facilita a identificacao dos componentes pertencentes a uma entidade</div><div class="ttdef"><b>Definição</b> componente.hpp:51</div></div>
+<div class="ttc" id="astructBECOMMONS__NS_1_1terreno_html"><div class="ttname"><a href="../../df/d13/structBECOMMONS__NS_1_1terreno.html">BECOMMONS_NS::terreno</a></div><div class="ttdef"><b>Definição</b> terreno.hpp:37</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="../../dir_0394786a11e0dfde3dca27fdccf84bfd.html">becommons</a></li><li class="navelem"><a class="el" href="../../dir_9a744b5567c265deacf566b467d8af59.html">include</a></li><li class="navelem"><a class="el" href="../../dir_111f21dc146a617cd827120506a93450.html">componentes</a></li><li class="navelem"><b>terreno.hpp</b></li>
+    <li class="navelem"><a class="el" href="../../dir_0394786a11e0dfde3dca27fdccf84bfd.html">becommons</a></li><li class="navelem"><a class="el" href="../../dir_9a744b5567c265deacf566b467d8af59.html">include</a></li><li class="navelem"><a class="el" href="../../dir_111f21dc146a617cd827120506a93450.html">componentes</a></li><li class="navelem"><a class="el" href="../../d4/def/terreno_8hpp.html">terreno.hpp</a></li>
     <li class="footer">Gerado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>

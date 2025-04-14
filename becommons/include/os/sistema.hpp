@@ -1,5 +1,6 @@
 /** @copyright 
-MIT LicenseCopyright (c) 2025 Daniel Oliveira
+MIT License
+Copyright (c) 2025 Daniel Oliveira
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -21,7 +22,8 @@ SOFTWARE.
 */
 /**
  * @file sistema.hpp
- * @brief funçoes do sistema/
+ * @brief funçoes do sistema
+ */
 
 #pragma once
 #include <iostream>

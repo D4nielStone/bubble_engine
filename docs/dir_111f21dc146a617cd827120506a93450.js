@@ -9,8 +9,8 @@ var dir_111f21dc146a617cd827120506a93450 =
     [ "luz_direcional.hpp", "da/dd5/luz__direcional_8hpp.html", "da/dd5/luz__direcional_8hpp" ],
     [ "luz_pontual.hpp", "d9/d8b/luz__pontual_8hpp.html", "d9/d8b/luz__pontual_8hpp" ],
     [ "propriedades.hpp", "db/d62/propriedades_8hpp.html", "db/d62/propriedades_8hpp" ],
-    [ "renderizador.hpp", "d7/d43/renderizador_8hpp_source.html", null ],
-    [ "terreno.hpp", "d4/def/terreno_8hpp_source.html", null ],
+    [ "renderizador.hpp", "d7/d43/renderizador_8hpp.html", "d7/d43/renderizador_8hpp" ],
+    [ "terreno.hpp", "d4/def/terreno_8hpp.html", "d4/def/terreno_8hpp" ],
     [ "texto.hpp", "dd/d03/componentes_2texto_8hpp.html", "dd/d03/componentes_2texto_8hpp" ],
     [ "transformacao.hpp", "d4/dcc/transformacao_8hpp.html", "d4/dcc/transformacao_8hpp" ]
 ];

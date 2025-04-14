@@ -1,5 +1,6 @@
 /** @copyright 
-MIT LicenseCopyright (c) 2025 Daniel Oliveira
+MIT License
+Copyright (c) 2025 Daniel Oliveira
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -148,5 +149,5 @@ namespace BECOMMONS_NS {
 }
 
 typedef BECOMMONS_NS::vetor2<float> fvet2;
-typedef dvet2 dvet2;
+typedef BECOMMONS_NS::vetor2<double> dvet2;
 typedef BECOMMONS_NS::vetor2<int> ivet2;

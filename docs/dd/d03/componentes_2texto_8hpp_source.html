@@ -101,35 +101,35 @@ $(document).ready(function(){initNavTree('dd/d03/componentes_2texto_8hpp_source.
 </div><!--header-->
 <div class="contents">
 <a href="../../dd/d03/componentes_2texto_8hpp.html">Ir para a documentação desse arquivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span> </div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="preprocessor">#pragma once</span></div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="preprocessor">#include &lt;glm/glm.hpp&gt;</span></div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="preprocessor">#include &lt;string&gt;</span></div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="preprocessor">#include &quot;<a class="code" href="../../db/d19/namespace_8hpp.html">namespace.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="preprocessor">#include &quot;<a class="code" href="../../d3/d49/cor_8hpp.html">util/cor.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="preprocessor">#include &quot;<a class="code" href="../../db/de2/componente_8hpp.html">componente.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="keyword">namespace </span>BECOMMONS_NS {</div>
-<div class="foldopen" id="foldopen00035" data-start="{" data-end="};">
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno"><a class="line" href="../../d7/d3b/structBECOMMONS__NS_1_1texto.html">   35</a></span>    <span class="keyword">struct </span><a class="code hl_struct" href="../../d7/d3b/structBECOMMONS__NS_1_1texto.html">texto</a> : <a class="code hl_struct" href="../../d9/d85/structBECOMMONS__NS_1_1componente.html">componente</a></div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    {</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>        <span class="keyword">constexpr</span> <span class="keyword">static</span> <a class="code hl_enumeration" href="../../d9/d85/structBECOMMONS__NS_1_1componente.html#a63f9004bc698806fecbc2d677f8ee369">componente::mascara</a> <a class="code hl_enumeration" href="../../d9/d85/structBECOMMONS__NS_1_1componente.html#a63f9004bc698806fecbc2d677f8ee369">mascara</a> = componente::COMPONENTE_TEXTO;</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>        std::string frase, fonte = <span class="stringliteral">&quot;noto_sans.regular.ttf&quot;</span>;</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>        <span class="keyword">const</span> <span class="keywordtype">float</span> escala;</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>        <a class="code hl_struct" href="../../dd/d94/structBECOMMONS__NS_1_1vetor2.html">vetor2&lt;int&gt;</a> padding{0,0};</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        <a class="code hl_struct" href="../../df/df9/structBECOMMONS__NS_1_1cor.html">cor</a> m_cor;</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        glm::vec3 posicao_referencial; <span class="keywordtype">bool</span> pf_ativa = <span class="keyword">false</span>;<span class="comment">// posicao de 3d para 2d</span></div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>        <a class="code hl_struct" href="../../d7/d3b/structBECOMMONS__NS_1_1texto.html">texto</a>(<span class="keyword">const</span> std::string&amp; <a class="code hl_struct" href="../../d7/d3b/structBECOMMONS__NS_1_1texto.html">texto</a>, <span class="keywordtype">float</span> escala = 1.f) : frase(<a class="code hl_struct" href="../../d7/d3b/structBECOMMONS__NS_1_1texto.html">texto</a>), escala(escala), m_cor({ 1.f, 1.f, 1.f, 1.f }), padding({0, 0}) {}</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    };</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="preprocessor">#pragma once</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="preprocessor">#include &lt;glm/glm.hpp&gt;</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="preprocessor">#include &quot;<a class="code" href="../../db/d19/namespace_8hpp.html">namespace.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="preprocessor">#include &quot;<a class="code" href="../../d3/d49/cor_8hpp.html">util/cor.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="preprocessor">#include &quot;<a class="code" href="../../db/de2/componente_8hpp.html">componente.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="keyword">namespace </span>BECOMMONS_NS {</div>
+<div class="foldopen" id="foldopen00036" data-start="{" data-end="};">
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno"><a class="line" href="../../d7/d3b/structBECOMMONS__NS_1_1texto.html">   36</a></span>    <span class="keyword">struct </span><a class="code hl_struct" href="../../d7/d3b/structBECOMMONS__NS_1_1texto.html">texto</a> : <a class="code hl_struct" href="../../d9/d85/structBECOMMONS__NS_1_1componente.html">componente</a></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    {</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>        <span class="keyword">constexpr</span> <span class="keyword">static</span> <a class="code hl_enumeration" href="../../d9/d85/structBECOMMONS__NS_1_1componente.html#a63f9004bc698806fecbc2d677f8ee369">componente::mascara</a> <a class="code hl_enumeration" href="../../d9/d85/structBECOMMONS__NS_1_1componente.html#a63f9004bc698806fecbc2d677f8ee369">mascara</a> = componente::COMPONENTE_TEXTO;</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>        std::string frase, fonte = <span class="stringliteral">&quot;noto_sans.regular.ttf&quot;</span>;</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>        <span class="keyword">const</span> <span class="keywordtype">float</span> escala;</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        <a class="code hl_struct" href="../../dd/d94/structBECOMMONS__NS_1_1vetor2.html">vetor2&lt;int&gt;</a> padding{0,0};</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        <a class="code hl_struct" href="../../df/df9/structBECOMMONS__NS_1_1cor.html">cor</a> m_cor;</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>        glm::vec3 posicao_referencial; <span class="keywordtype">bool</span> pf_ativa = <span class="keyword">false</span>;<span class="comment">// posicao de 3d para 2d</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        <a class="code hl_struct" href="../../d7/d3b/structBECOMMONS__NS_1_1texto.html">texto</a>(<span class="keyword">const</span> std::string&amp; <a class="code hl_struct" href="../../d7/d3b/structBECOMMONS__NS_1_1texto.html">texto</a>, <span class="keywordtype">float</span> escala = 1.f) : frase(<a class="code hl_struct" href="../../d7/d3b/structBECOMMONS__NS_1_1texto.html">texto</a>), escala(escala), m_cor({ 1.f, 1.f, 1.f, 1.f }), padding({0, 0}) {}</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    };</div>
 </div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>} </div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>} </div>
 <div class="ttc" id="acomponente_8hpp_html"><div class="ttname"><a href="../../db/de2/componente_8hpp.html">componente.hpp</a></div><div class="ttdoc">Estrutura base para componetes.</div></div>
 <div class="ttc" id="acor_8hpp_html"><div class="ttname"><a href="../../d3/d49/cor_8hpp.html">cor.hpp</a></div></div>
 <div class="ttc" id="anamespace_8hpp_html"><div class="ttname"><a href="../../db/d19/namespace_8hpp.html">namespace.hpp</a></div></div>
-<div class="ttc" id="astructBECOMMONS__NS_1_1componente_html"><div class="ttname"><a href="../../d9/d85/structBECOMMONS__NS_1_1componente.html">BECOMMONS_NS::componente</a></div><div class="ttdoc">base para as funcionalidades da engine</div><div class="ttdef"><b>Definição</b> componente.hpp:44</div></div>
-<div class="ttc" id="astructBECOMMONS__NS_1_1componente_html_a63f9004bc698806fecbc2d677f8ee369"><div class="ttname"><a href="../../d9/d85/structBECOMMONS__NS_1_1componente.html#a63f9004bc698806fecbc2d677f8ee369">BECOMMONS_NS::componente::mascara</a></div><div class="ttdeci">mascara</div><div class="ttdoc">facilita a identificacao dos componentes pertencentes a uma entidade</div><div class="ttdef"><b>Definição</b> componente.hpp:50</div></div>
+<div class="ttc" id="astructBECOMMONS__NS_1_1componente_html"><div class="ttname"><a href="../../d9/d85/structBECOMMONS__NS_1_1componente.html">BECOMMONS_NS::componente</a></div><div class="ttdoc">base para as funcionalidades da engine</div><div class="ttdef"><b>Definição</b> componente.hpp:45</div></div>
+<div class="ttc" id="astructBECOMMONS__NS_1_1componente_html_a63f9004bc698806fecbc2d677f8ee369"><div class="ttname"><a href="../../d9/d85/structBECOMMONS__NS_1_1componente.html#a63f9004bc698806fecbc2d677f8ee369">BECOMMONS_NS::componente::mascara</a></div><div class="ttdeci">mascara</div><div class="ttdoc">facilita a identificacao dos componentes pertencentes a uma entidade</div><div class="ttdef"><b>Definição</b> componente.hpp:51</div></div>
 <div class="ttc" id="astructBECOMMONS__NS_1_1cor_html"><div class="ttname"><a href="../../df/df9/structBECOMMONS__NS_1_1cor.html">BECOMMONS_NS::cor</a></div><div class="ttdef"><b>Definição</b> cor.hpp:32</div></div>
-<div class="ttc" id="astructBECOMMONS__NS_1_1texto_html"><div class="ttname"><a href="../../d7/d3b/structBECOMMONS__NS_1_1texto.html">BECOMMONS_NS::texto</a></div><div class="ttdef"><b>Definição</b> texto.hpp:36</div></div>
-<div class="ttc" id="astructBECOMMONS__NS_1_1vetor2_html"><div class="ttname"><a href="../../dd/d94/structBECOMMONS__NS_1_1vetor2.html">BECOMMONS_NS::vetor2</a></div><div class="ttdef"><b>Definição</b> vetor2.hpp:33</div></div>
+<div class="ttc" id="astructBECOMMONS__NS_1_1texto_html"><div class="ttname"><a href="../../d7/d3b/structBECOMMONS__NS_1_1texto.html">BECOMMONS_NS::texto</a></div><div class="ttdef"><b>Definição</b> texto.hpp:37</div></div>
+<div class="ttc" id="astructBECOMMONS__NS_1_1vetor2_html"><div class="ttname"><a href="../../dd/d94/structBECOMMONS__NS_1_1vetor2.html">BECOMMONS_NS::vetor2</a></div><div class="ttdef"><b>Definição</b> vetor2.hpp:34</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

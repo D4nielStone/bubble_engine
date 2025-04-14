@@ -54,7 +54,7 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "annotated.html",
-"df/d57/classBECOMMONS__NS_1_1sistema__fisica.html"
+"de/d62/structBECOMMONS__NS_1_1propriedades.html"
 ];
 
 var SYNCONMSG = 'clique para desativar a sincronização do painel';

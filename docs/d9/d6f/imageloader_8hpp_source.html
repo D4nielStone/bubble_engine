@@ -114,70 +114,80 @@ $(document).ready(function(){initNavTree('d9/d6f/imageloader_8hpp_source.html','
 <div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="keyword">struct </span>GLFWimage;</div>
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="keyword">namespace </span>BECOMMONS_NS {</div>
-<div class="foldopen" id="foldopen00042" data-start="{" data-end="};">
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno"><a class="line" href="../../dd/d13/classBECOMMONS__NS_1_1imageLoader.html">   42</a></span>    <span class="keyword">class  </span><a class="code hl_class" href="../../dd/d13/classBECOMMONS__NS_1_1imageLoader.html">imageLoader</a></div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    {</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    <span class="keyword">public</span>:</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>        <span class="keyword">static</span> <span class="keywordtype">void</span> init() { FreeImage_Initialise(); }</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>        <span class="keyword">static</span> <span class="keywordtype">void</span> shutdown(); </div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>        <a class="code hl_class" href="../../dd/d13/classBECOMMONS__NS_1_1imageLoader.html">imageLoader</a>();</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>        <a class="code hl_class" href="../../dd/d13/classBECOMMONS__NS_1_1imageLoader.html">imageLoader</a>(<span class="keyword">const</span> std::string&amp; filepath);</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>        <a class="code hl_class" href="../../dd/d13/classBECOMMONS__NS_1_1imageLoader.html">~imageLoader</a>();</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>        <span class="keyword">static</span> <a class="code hl_class" href="../../dd/d13/classBECOMMONS__NS_1_1imageLoader.html">imageLoader</a>&amp; obterInstancia();</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>        <span class="keywordtype">int</span> obterLargura() <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>        <span class="keywordtype">int</span> obterAltura() <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>        <span class="keywordtype">int</span> obterCanal() <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>        <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>* obterDados() <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        GLFWimage converterParaGlfw();</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>        <span class="keywordtype">bool</span> carregado;</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>        <span class="keywordtype">void</span> flipVertical();</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>        <span class="keywordtype">void</span> carregarImagem(<span class="keyword">const</span> std::string&amp; filepath);</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>        <span class="keywordtype">void</span> embutida(BYTE* data, <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> tamanho);</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    <span class="keyword">private</span>:</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>        <span class="keyword">const</span> <span class="keywordtype">char</span>* path;</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>        <span class="keywordtype">int</span> width, height, channels;</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>        <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>* data;</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    };</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    <span class="comment">// @class imageLoader</span></div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    <span class="comment">// Gerencia as imagems/texturas carregadas na engine</span></div>
+<div class="foldopen" id="foldopen00044" data-start="{" data-end="};">
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno"><a class="line" href="../../dd/d13/classBECOMMONS__NS_1_1imageLoader.html">   44</a></span>    <span class="keyword">class  </span><a class="code hl_class" href="../../dd/d13/classBECOMMONS__NS_1_1imageLoader.html">imageLoader</a> {</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>        <span class="comment">// Inicializa/Desliga Biblioteca FreeImage</span></div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>        <span class="comment">// @{</span></div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>        <span class="keyword">static</span> <span class="keywordtype">void</span> init() { FreeImage_Initialise(); }</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>        <span class="keyword">static</span> <span class="keywordtype">void</span> shutdown(); </div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>        <span class="comment">// @}</span></div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>        <span class="comment">// @name Construtores/Destrutores</span></div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>        <span class="comment">// @{</span></div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>        <a class="code hl_class" href="../../dd/d13/classBECOMMONS__NS_1_1imageLoader.html">imageLoader</a>();</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>        <a class="code hl_class" href="../../dd/d13/classBECOMMONS__NS_1_1imageLoader.html">imageLoader</a>(<span class="keyword">const</span> std::string&amp; filepath);</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>        <a class="code hl_class" href="../../dd/d13/classBECOMMONS__NS_1_1imageLoader.html">~imageLoader</a>();</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        <span class="comment">// @}</span></div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>        <span class="comment">// Obtenção da instância global</span></div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>        <span class="keyword">static</span> <a class="code hl_class" href="../../dd/d13/classBECOMMONS__NS_1_1imageLoader.html">imageLoader</a>&amp; obterInstancia();</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>        <span class="comment">// @name Obtenções de dados de imagem</span></div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>        <span class="comment">// @{</span></div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>        <span class="keywordtype">int</span> obterLargura() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>        <span class="keywordtype">int</span> obterAltura() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>        <span class="keywordtype">int</span> obterCanal() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>        <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>* obterDados() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>        GLFWimage converterParaGlfw();</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>        <span class="keywordtype">bool</span> carregado;</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>        <span class="comment">// @}</span></div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>        <span class="keywordtype">void</span> flipVertical();</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>        <span class="keywordtype">void</span> carregarImagem(<span class="keyword">const</span> std::string&amp; filepath);</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>        <span class="keywordtype">void</span> embutida(BYTE* data, <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> tamanho);</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    <span class="keyword">private</span>:</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>        <span class="keyword">const</span> <span class="keywordtype">char</span>* path;</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>        <span class="keywordtype">int</span> width, height, channels;</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>        <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>* data;</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    };</div>
 </div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    <span class="keywordtype">int</span> texturaDoArquivo(<span class="keyword">const</span> std::string&amp; directory, <span class="keywordtype">int</span>* width, <span class="keywordtype">int</span>* height);</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    <span class="keywordtype">int</span> texturaDoArquivo(<span class="keyword">const</span> std::string&amp; directory, <span class="keywordtype">double</span>* width = <span class="keyword">nullptr</span>, <span class="keywordtype">double</span>* height = <span class="keyword">nullptr</span>);</div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    <span class="keywordtype">int</span> texturaDoArquivo(<span class="keyword">const</span> std::string&amp; directory, GLuint tipo_textura);</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    <span class="keywordtype">int</span> texturaDoArquivo(<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>* data, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> width, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> height, <span class="keywordtype">int</span> format);</div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    <span class="keyword">inline</span> std::unordered_map&lt;std::string, std::shared_ptr&lt;imageLoader&gt;&gt; imagens_carregadas;</div>
-<div class="foldopen" id="foldopen00071" data-start="{" data-end="};">
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno"><a class="line" href="../../d1/db7/classBECOMMONS__NS_1_1textureLoader.html">   71</a></span>    <span class="keyword">class  </span><a class="code hl_class" href="../../d1/db7/classBECOMMONS__NS_1_1textureLoader.html">textureLoader</a></div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    {</div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    <span class="keyword">public</span>:</div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>        <span class="keyword">static</span> <a class="code hl_class" href="../../d1/db7/classBECOMMONS__NS_1_1textureLoader.html">textureLoader</a>&amp; obterInstancia();</div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>        GLuint carregarTextura(<span class="keyword">const</span> std::string&amp; caminho, <span class="keywordtype">int</span>* width, <span class="keywordtype">int</span>* height);</div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>        GLuint carregarTextura(<span class="keyword">const</span> std::string&amp; caminho, <span class="keywordtype">double</span>* width, <span class="keywordtype">double</span>* height);</div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>        GLuint carregarTextura(<span class="keyword">const</span> std::string&amp; caminho);</div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>        GLuint carregarSkybox(<span class="keyword">const</span> <span class="keywordtype">char</span>*, std::vector&lt;std::string&gt; faces);</div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>        GLuint carregarSkyboxMemoria(<span class="keyword">const</span> std::vector&lt;std::string&gt; faces = </div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>                {</div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span><span class="stringliteral">&quot;skybox_right.png&quot;</span>,</div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span><span class="stringliteral">&quot;skybox_left.png&quot;</span>, </div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span><span class="stringliteral">&quot;skybox_top.png&quot;</span>,</div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span><span class="stringliteral">&quot;skybox_bottom.png&quot;</span>,</div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span><span class="stringliteral">&quot;skybox_front.png&quot;</span>,                </div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span><span class="stringliteral">&quot;skybox_back.png&quot;</span>, </div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>                }); </div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>        GLuint carregarAiTexture(<span class="keyword">const</span> aiTexture* texture);</div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>        std::unordered_map&lt;std::string, GLuint&gt; texturasCarregadas;</div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span> </div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>    <span class="keyword">private</span>:</div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>        <span class="comment">// Construtor privado para Singleton</span></div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>        <a class="code hl_class" href="../../d1/db7/classBECOMMONS__NS_1_1textureLoader.html">textureLoader</a>() {}</div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span> </div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>        <span class="comment">// Desabilitar c�pia e atribui��o</span></div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>        <a class="code hl_class" href="../../d1/db7/classBECOMMONS__NS_1_1textureLoader.html">textureLoader</a>(<span class="keyword">const</span> <a class="code hl_class" href="../../d1/db7/classBECOMMONS__NS_1_1textureLoader.html">textureLoader</a>&amp;) = <span class="keyword">delete</span>;</div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>        <span class="keywordtype">void</span> operator=(<span class="keyword">const</span> <a class="code hl_class" href="../../d1/db7/classBECOMMONS__NS_1_1textureLoader.html">textureLoader</a>&amp;) = <span class="keyword">delete</span>;</div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    };</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    <span class="keywordtype">int</span> texturaDoArquivo(<span class="keyword">const</span> std::string&amp; directory, <span class="keywordtype">int</span>* width, <span class="keywordtype">int</span>* height);</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>    <span class="keywordtype">int</span> texturaDoArquivo(<span class="keyword">const</span> std::string&amp; directory, <span class="keywordtype">double</span>* width = <span class="keyword">nullptr</span>, <span class="keywordtype">double</span>* height = <span class="keyword">nullptr</span>);</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    <span class="keywordtype">int</span> texturaDoArquivo(<span class="keyword">const</span> std::string&amp; directory, GLuint tipo_textura);</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>    <span class="keywordtype">int</span> texturaDoArquivo(<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>* data, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> width, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> height, <span class="keywordtype">int</span> format);</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    <span class="keyword">inline</span> std::unordered_map&lt;std::string, std::shared_ptr&lt;imageLoader&gt;&gt; imagens_carregadas;</div>
+<div class="foldopen" id="foldopen00081" data-start="{" data-end="};">
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno"><a class="line" href="../../d1/db7/classBECOMMONS__NS_1_1textureLoader.html">   81</a></span>    <span class="keyword">class  </span><a class="code hl_class" href="../../d1/db7/classBECOMMONS__NS_1_1textureLoader.html">textureLoader</a></div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    {</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>        <span class="keyword">static</span> <a class="code hl_class" href="../../d1/db7/classBECOMMONS__NS_1_1textureLoader.html">textureLoader</a>&amp; obterInstancia();</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>        GLuint carregarTextura(<span class="keyword">const</span> std::string&amp; caminho, <span class="keywordtype">int</span>* width, <span class="keywordtype">int</span>* height);</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>        GLuint carregarTextura(<span class="keyword">const</span> std::string&amp; caminho, <span class="keywordtype">double</span>* width, <span class="keywordtype">double</span>* height);</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>        GLuint carregarTextura(<span class="keyword">const</span> std::string&amp; caminho);</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>        GLuint carregarSkybox(<span class="keyword">const</span> <span class="keywordtype">char</span>*, std::vector&lt;std::string&gt; faces);</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>        GLuint carregarSkyboxMemoria(<span class="keyword">const</span> std::vector&lt;std::string&gt; faces = </div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>                {</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span><span class="stringliteral">&quot;skybox_right.png&quot;</span>,</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span><span class="stringliteral">&quot;skybox_left.png&quot;</span>, </div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span><span class="stringliteral">&quot;skybox_top.png&quot;</span>,</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span><span class="stringliteral">&quot;skybox_bottom.png&quot;</span>,</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span><span class="stringliteral">&quot;skybox_front.png&quot;</span>,                </div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span><span class="stringliteral">&quot;skybox_back.png&quot;</span>, </div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>                }); </div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>        GLuint carregarAiTexture(<span class="keyword">const</span> aiTexture* texture);</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>        std::unordered_map&lt;std::string, GLuint&gt; texturasCarregadas;</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span> </div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>    <span class="keyword">private</span>:</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>        <span class="comment">// Construtor privado para Singleton</span></div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>        <a class="code hl_class" href="../../d1/db7/classBECOMMONS__NS_1_1textureLoader.html">textureLoader</a>() {}</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span> </div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>        <span class="comment">// Desabilitar cópia e atribuição</span></div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>        <a class="code hl_class" href="../../d1/db7/classBECOMMONS__NS_1_1textureLoader.html">textureLoader</a>(<span class="keyword">const</span> <a class="code hl_class" href="../../d1/db7/classBECOMMONS__NS_1_1textureLoader.html">textureLoader</a>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>        <span class="keywordtype">void</span> operator=(<span class="keyword">const</span> <a class="code hl_class" href="../../d1/db7/classBECOMMONS__NS_1_1textureLoader.html">textureLoader</a>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>    };</div>
 </div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>}</div>
-<div class="ttc" id="aclassBECOMMONS__NS_1_1imageLoader_html"><div class="ttname"><a href="../../dd/d13/classBECOMMONS__NS_1_1imageLoader.html">BECOMMONS_NS::imageLoader</a></div><div class="ttdef"><b>Definição</b> imageloader.hpp:43</div></div>
-<div class="ttc" id="aclassBECOMMONS__NS_1_1textureLoader_html"><div class="ttname"><a href="../../d1/db7/classBECOMMONS__NS_1_1textureLoader.html">BECOMMONS_NS::textureLoader</a></div><div class="ttdef"><b>Definição</b> imageloader.hpp:72</div></div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>}</div>
+<div class="ttc" id="aclassBECOMMONS__NS_1_1imageLoader_html"><div class="ttname"><a href="../../dd/d13/classBECOMMONS__NS_1_1imageLoader.html">BECOMMONS_NS::imageLoader</a></div><div class="ttdef"><b>Definição</b> imageloader.hpp:44</div></div>
+<div class="ttc" id="aclassBECOMMONS__NS_1_1textureLoader_html"><div class="ttname"><a href="../../d1/db7/classBECOMMONS__NS_1_1textureLoader.html">BECOMMONS_NS::textureLoader</a></div><div class="ttdef"><b>Definição</b> imageloader.hpp:82</div></div>
 <div class="ttc" id="anamespace_8hpp_html"><div class="ttname"><a href="../../db/d19/namespace_8hpp.html">namespace.hpp</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->

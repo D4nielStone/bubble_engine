@@ -6,7 +6,7 @@
  * @date 2025-04-08
  * @version 1.0
  *
- * @licence MIT License
+ * 
  */
 #pragma once
 #include "editor_namespace.hpp"

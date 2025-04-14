@@ -1,5 +1,6 @@
 /** @copyright 
-MIT LicenseCopyright (c) 2025 Daniel Oliveira
+MIT License
+Copyright (c) 2025 Daniel Oliveira
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -18,34 +19,34 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE. 
+
 */
+
 /**
  * @file sistema.hpp
- *
  */
-
 #pragma once
 #include "namespace.hpp"
 #include "fase.hpp"
 #include "registro.hpp"
 
- /**
-  * @class Sistema
-  * @brief Classe base para sistemas do loop principal
-  */
-
 namespace BECOMMONS_NS {
     class fase;
+
+    /**
+     * @class sistema
+     * Classe base para sistemas do loop principal
+     */
     class sistema {
     public:
         /**
-         * @brief Construtor virtual da classe Sistema
+         * Construtor virtual da classe Sistema
          * @param nome Nome do sistema
          */
         sistema() = default;
 
         /**
-         * @brief Destrutor virtual para garantir a destrui��o adequada das subclasses
+         * @brief Destrutor virtual para garantir a destruição adequada das subclasses
          */
         virtual ~sistema() = default;
 
@@ -56,7 +57,7 @@ namespace BECOMMONS_NS {
 
         /**
          * @brief Atualiza o sistema dentro do loop principal
-         * @param deltaTime Tempo desde a �ltima atualiza��o (em segundos)
+         * @param deltaTime Tempo desde a última atualização (em segundos)
          */
         virtual void atualizar() = 0;
 

@@ -1,5 +1,6 @@
 /** @copyright 
-MIT LicenseCopyright (c) 2025 Daniel Oliveira
+MIT License
+Copyright (c) 2025 Daniel Oliveira
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -21,30 +22,31 @@ SOFTWARE.
 */
 /**
  * @file entidade.hpp
- * @brief Inclusoes e defini��es relacionadas � entidade/
-
+ * @brief Inclusoes e definições relacionadas à entidade/
+ */
 
 #pragma once
 #include <memory>
 #include "namespace.hpp"
 #include "componentes/componente.hpp"
 
-// Namespace bubble
 namespace BECOMMONS_NS {
 	/**
 	 * @struct entidade
 	 * @brief todo elemento do faserio
 	 */
 	struct entidade {
+	    // Id da entidade no sistema ECS
 		uint32_t id;
-		componente::mascara mascara = componente::COMPONENTE_NONE;
-
+		// Flags de componentes
+        componente::mascara mascara = componente::COMPONENTE_NONE;
+    
+        // Operador de igualdade
 		bool operator==(const entidade& other) const {
 			return id == other.id;
 		}
 	};
-
-}
+}   // Namespace becommons
 
 // Implementação de std::hash para entidade
 namespace std {

@@ -1,5 +1,6 @@
 /** @copyright 
-MIT LicenseCopyright (c) 2025 Daniel Oliveira
+MIT License
+Copyright (c) 2025 Daniel Oliveira
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -63,13 +64,13 @@ namespace BECOMMONS_NS {
 		{
 			if (alvo)
 			{
-				matrizmodelo = glm::translate(glm::mat4(1.f), posicao); // Aplica a transla��o
+				matrizmodelo = glm::translate(glm::mat4(1.f), posicao); // Aplica a translação
 				matrizmodelo *= glm::inverse(glm::lookAt(glm::vec3(0.f), *alvo - posicao, cima));
 				matrizmodelo = glm::scale(matrizmodelo, escala);       // Aplica a escala
 			}
 			else
 			{
-				matrizmodelo = glm::translate(glm::mat4(1.f), posicao); // Aplica a transla��o
+				matrizmodelo = glm::translate(glm::mat4(1.f), posicao); // Aplica a translação
 				matrizmodelo = glm::rotate(matrizmodelo, glm::radians(rotacao.x), glm::vec3(1.f, 0.f, 0.f));
 				matrizmodelo = glm::rotate(matrizmodelo, glm::radians(rotacao.y), glm::vec3(0.f, 1.f, 0.f));
 				matrizmodelo = glm::rotate(matrizmodelo, glm::radians(rotacao.z), glm::vec3(0.f, 0.f, 1.f));
