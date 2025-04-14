@@ -25,12 +25,8 @@
 var NAVTREE =
 [
   [ "Bubble Engine", "index.html", [
-    [ "3D Development", "index.html#autotoc_md2", null ],
-    [ "Example project", "index.html#autotoc_md3", null ],
-    [ "Installation", "index.html#autotoc_md4", null ],
-    [ "Contribution", "index.html#autotoc_md5", null ],
-    [ "License", "index.html#autotoc_md6", null ],
-    [ "YouTube videos", "index.html#autotoc_md7", null ],
+    [ "Introduction", "index.html", "index" ],
+    [ "Topics", "topics.html", "topics" ],
     [ "Namespaces", "namespaces.html", [
       [ "Namespace List", "namespaces.html", "namespaces_dup" ],
       [ "Namespace Members", "namespacemembers.html", [
@@ -64,8 +60,8 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "annotated.html",
-"d7/ded/structBECOMMONS__NS_1_1caractere.html#aeb9b952854cb283b9ca4211f0c2af0b4",
-"de/d04/bubble__gui_8hpp.html#aa92479c7d75198d3129127f8e4231592"
+"d7/ded/structBECOMMONS__NS_1_1caractere.html#a777d703d29d1541d887fb0f782fb232a",
+"de/d04/bubble__gui_8hpp.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
