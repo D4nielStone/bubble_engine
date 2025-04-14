@@ -56,7 +56,7 @@ var annotated_dup =
       [ "vetor3", "da/de2/structBECOMMONS__NS_1_1vetor3.html", null ],
       [ "vetor4", "d2/dbf/structBECOMMONS__NS_1_1vetor4.html", null ]
     ] ],
-    [ "EDITOR_NS", null, [
+    [ "EDITOR_NS", "d0/d1b/namespaceEDITOR__NS.html", [
       [ "gerenciador_projetos", "d6/d0d/classEDITOR__NS_1_1gerenciador__projetos.html", null ],
       [ "sistema_editor", "df/d79/structEDITOR__NS_1_1sistema__editor.html", null ]
     ] ],

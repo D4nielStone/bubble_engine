@@ -105,25 +105,28 @@ $(document).ready(function(){initNavTree('de/daf/gerenciador__projetos_8hpp_sour
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;becommons/becommons.hpp&quot;</span></div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &quot;<a class="code" href="../../d7/d88/editor__namespace_8hpp.html">editor_namespace.hpp</a>&quot;</span></div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="keyword">namespace </span>EDITOR_NS</div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>{</div>
-<div class="foldopen" id="foldopen00012" data-start="{" data-end="};">
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno"><a class="line" href="../../d6/d0d/classEDITOR__NS_1_1gerenciador__projetos.html">   12</a></span>    <span class="keyword">class </span><a class="code hl_class" href="../../d6/d0d/classEDITOR__NS_1_1gerenciador__projetos.html">gerenciador_projetos</a></div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    {</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>        <span class="keyword">public</span>:</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>            <a class="code hl_class" href="../../d6/d0d/classEDITOR__NS_1_1gerenciador__projetos.html">gerenciador_projetos</a>(<span class="keyword">const</span> std::string&amp; DIR_PADRAO);</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>            <span class="keywordtype">void</span> atualizarElementos(<span class="keyword">const</span> std::string&amp; Dir);</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>            <span class="keywordtype">void</span> iniciar();</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>            <span class="keywordtype">void</span> criarProjetoPadrao(<span class="keyword">const</span> std::string&amp; novo_diretorio, <span class="keyword">const</span> <span class="keywordtype">char</span>* nome);</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>        <span class="keyword">private</span>:</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>            std::string DIR_PADRAO;</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>            becommons::bubble_gui gui;</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>            <a class="code hl_class" href="../../d6/d0d/classEDITOR__NS_1_1gerenciador__projetos.html">gerenciador_projetos</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    };</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="keyword">using namespace </span>becommons;</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="keyword">namespace </span><a class="code hl_namespace" href="../../d0/d1b/namespaceEDITOR__NS.html">EDITOR_NS</a></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>{</div>
+<div class="foldopen" id="foldopen00015" data-start="{" data-end="};">
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno"><a class="line" href="../../d6/d0d/classEDITOR__NS_1_1gerenciador__projetos.html">   15</a></span>    <span class="keyword">class </span><a class="code hl_class" href="../../d6/d0d/classEDITOR__NS_1_1gerenciador__projetos.html">gerenciador_projetos</a></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    {</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>        <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>            <a class="code hl_class" href="../../d6/d0d/classEDITOR__NS_1_1gerenciador__projetos.html">gerenciador_projetos</a>(<span class="keyword">const</span> std::string&amp; DIR_PADRAO);</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>            <span class="keywordtype">void</span> atualizarElementos(<span class="keyword">const</span> std::string&amp; Dir);</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>            <span class="keywordtype">void</span> iniciar();</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>            <span class="keywordtype">void</span> criarProjetoPadrao(<span class="keyword">const</span> std::string&amp; novo_diretorio, <span class="keyword">const</span> <span class="keywordtype">char</span>* nome);</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>        <span class="keyword">private</span>:</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>            std::string DIR_PADRAO;</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>            becommons::bubble_gui gui;</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>            <a class="code hl_class" href="../../d6/d0d/classEDITOR__NS_1_1gerenciador__projetos.html">gerenciador_projetos</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    };</div>
 </div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>}</div>
-<div class="ttc" id="aclassEDITOR__NS_1_1gerenciador__projetos_html"><div class="ttname"><a href="../../d6/d0d/classEDITOR__NS_1_1gerenciador__projetos.html">EDITOR_NS::gerenciador_projetos</a></div><div class="ttdef"><b>Definição</b> gerenciador_projetos.hpp:13</div></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>}</div>
+<div class="ttc" id="aclassEDITOR__NS_1_1gerenciador__projetos_html"><div class="ttname"><a href="../../d6/d0d/classEDITOR__NS_1_1gerenciador__projetos.html">EDITOR_NS::gerenciador_projetos</a></div><div class="ttdef"><b>Definição</b> gerenciador_projetos.hpp:16</div></div>
 <div class="ttc" id="aeditor__namespace_8hpp_html"><div class="ttname"><a href="../../d7/d88/editor__namespace_8hpp.html">editor_namespace.hpp</a></div></div>
+<div class="ttc" id="anamespaceEDITOR__NS_html"><div class="ttname"><a href="../../d0/d1b/namespaceEDITOR__NS.html">EDITOR_NS</a></div><div class="ttdoc">namespace beeditor</div><div class="ttdef"><b>Definição</b> editor.hpp:60</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

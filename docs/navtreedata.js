@@ -64,8 +64,8 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "annotated.html",
-"d8/d1f/structBECOMMONS__NS_1_1codigo.html",
-"de/d04/bubble__gui_8hpp.html#ae549ab1a9c891856fcc861cddd9e5ab5"
+"d7/ded/structBECOMMONS__NS_1_1caractere.html#aeb9b952854cb283b9ca4211f0c2af0b4",
+"de/d04/bubble__gui_8hpp.html#aa92479c7d75198d3129127f8e4231592"
 ];
 
 var SYNCONMSG = 'clique para desativar a sincronização do painel';
