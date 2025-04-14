@@ -1,6 +1,6 @@
-![License](https://img.shields.io/github/license/d4nielstone/bubble_engine)
-![Version](https://img.shields.io/github/v/tag/d4nielstone/bubble_engine)
-![Stars](https://img.shields.io/github/stars/d4nielstone/bubble_engine?style=social)
+[![License](https://img.shields.io/github/license/d4nielstone/bubble_engine)](https://github.com/D4nielStone/bubble_engine/blob/master/LICENSE)
+[![Version](https://img.shields.io/github/v/tag/d4nielstone/bubble_engine)](https://github.com/D4nielStone/bubble_engine/tags)
+[![Stars](https://img.shields.io/github/stars/d4nielstone/bubble_engine?style=social)](https://github.com/D4nielStone/bubble_engine/stargazers)
 
 # Bubble Engine
 <p align="center">
