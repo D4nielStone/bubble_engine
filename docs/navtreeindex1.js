@@ -70,7 +70,5 @@ var NAVTREEINDEX1 =
 "index.html#autotoc_md5":[3],
 "index.html#autotoc_md6":[4],
 "index.html#autotoc_md7":[5],
-"index.html#autotoc_md8":[5,0],
-"index.html#autotoc_md9":[5,1],
 "pages.html":[]
 };

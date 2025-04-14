@@ -30,10 +30,7 @@ var NAVTREE =
     [ "Instalação", "index.html#autotoc_md4", null ],
     [ "Contribuição", "index.html#autotoc_md5", null ],
     [ "Licença", "index.html#autotoc_md6", null ],
-    [ "Vídeos do youtube", "index.html#autotoc_md7", [
-      [ "https://youtu.be/g4ts_jrP9cg](https://youtu.be/qS8rZQ_BfRA)", "index.html#autotoc_md8", null ],
-      [ "https://www.youtube.com/watch?v=JXo_AMSbO0Q&ab_channel=D4NL", "index.html#autotoc_md9", null ]
-    ] ],
+    [ "Vídeos do youtube", "index.html#autotoc_md7", null ],
     [ "Classes", "annotated.html", [
       [ "Lista de Classes", "annotated.html", "annotated_dup" ],
       [ "Índice dos Componentes", "classes.html", null ],

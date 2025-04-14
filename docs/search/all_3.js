@@ -16,12 +16,11 @@ var searchData=
   ['codigo_13',['codigo',['../d8/d1f/structBECOMMONS__NS_1_1codigo.html#a596afcff71415089c5b7b705a7cc0529',1,'BECOMMONS_NS::codigo::codigo()'],['../d8/d1f/structBECOMMONS__NS_1_1codigo.html',1,'BECOMMONS_NS::codigo']]],
   ['codigo_2ecpp_14',['codigo.cpp',['../d4/d6e/codigo_8cpp.html',1,'']]],
   ['codigo_2ehpp_15',['codigo.hpp',['../da/d82/codigo_8hpp.html',1,'']]],
-  ['com_20watch_20v_20jxo_5famsbo0q_20ab_5fchannel_20d4nl_16',['https://www.youtube.com/watch?v=JXo_AMSbO0Q&amp;ab_channel=D4NL',['../index.html#autotoc_md9',1,'']]],
-  ['componente_17',['componente',['../d9/d85/structBECOMMONS__NS_1_1componente.html',1,'BECOMMONS_NS']]],
-  ['componente_2ehpp_18',['componente.hpp',['../db/de2/componente_8hpp.html',1,'']]],
-  ['contribuição_19',['Contribuição',['../index.html#autotoc_md5',1,'']]],
-  ['cor_20',['cor',['../df/df9/structBECOMMONS__NS_1_1cor.html',1,'BECOMMONS_NS']]],
-  ['cor_2ehpp_21',['cor.hpp',['../d3/d49/cor_8hpp.html',1,'']]],
-  ['criarjanela_22',['criarJanela',['../dd/d2d/structBECOMMONS__NS_1_1projeto.html#a6c0e3d01485ea2c255362230f950c1df',1,'BECOMMONS_NS::projeto']]],
-  ['criarprojetovazio_23',['criarProjetoVazio',['../dd/d2d/structBECOMMONS__NS_1_1projeto.html#a3d90a05281ba01ad898c1431ae336eb3',1,'BECOMMONS_NS::projeto']]]
+  ['componente_16',['componente',['../d9/d85/structBECOMMONS__NS_1_1componente.html',1,'BECOMMONS_NS']]],
+  ['componente_2ehpp_17',['componente.hpp',['../db/de2/componente_8hpp.html',1,'']]],
+  ['contribuição_18',['Contribuição',['../index.html#autotoc_md5',1,'']]],
+  ['cor_19',['cor',['../df/df9/structBECOMMONS__NS_1_1cor.html',1,'BECOMMONS_NS']]],
+  ['cor_2ehpp_20',['cor.hpp',['../d3/d49/cor_8hpp.html',1,'']]],
+  ['criarjanela_21',['criarJanela',['../dd/d2d/structBECOMMONS__NS_1_1projeto.html#a6c0e3d01485ea2c255362230f950c1df',1,'BECOMMONS_NS::projeto']]],
+  ['criarprojetovazio_22',['criarProjetoVazio',['../dd/d2d/structBECOMMONS__NS_1_1projeto.html#a3d90a05281ba01ad898c1431ae336eb3',1,'BECOMMONS_NS::projeto']]]
 ];
