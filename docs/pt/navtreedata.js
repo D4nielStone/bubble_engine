@@ -26,7 +26,6 @@ var NAVTREE =
 [
   [ "Bubble Engine", "index.html", [
     [ "Introdução", "index.html", "index" ],
-    [ "Documentação da API Lua", "d1/d58/md_docs_2api__lua_2lua__mainpage.html", null ],
     [ "Tópicos", "topics.html", "topics" ],
     [ "Namespaces", "namespaces.html", [
       [ "Lista de Namespaces", "namespaces.html", "namespaces_dup" ],
@@ -62,7 +61,7 @@ var NAVTREEINDEX =
 [
 "annotated.html",
 "d7/ded/structBECOMMONS__NS_1_1caractere.html#a54725622b7dd64eecf8ec2f5a67eb4a1",
-"dd/dcf/vetor2_8hpp_source.html"
+"dd/de8/sistema_8cpp.html"
 ];
 
 var SYNCONMSG = 'clique para desativar a sincronização do painel';

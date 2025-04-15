@@ -1,11 +1,11 @@
 var searchData=
 [
-  ['da_20api_20lua_0',['da api lua',['../db/dd3/group__docs.html',1,'Documentação da API lua'],['../d1/d58/md_docs_2api__lua_2lua__mainpage.html',1,'Documentação da API Lua']]],
+  ['da_20api_20lua_0',['Documentação da API lua',['../db/dd3/group__docs.html',1,'']]],
   ['data_1',['data',['../dd/d13/classBECOMMONS__NS_1_1imageLoader.html#a8fb3432faeff19a6305dd6585f61540f',1,'BECOMMONS_NS::imageLoader']]],
   ['de_20projeto_2',['Exeplo de projeto',['../index.html#autotoc_md4',1,'']]],
   ['de_20uso_20no_20script_20lua_3a_3',['Exemplo de uso no script lua:',['../dd/dc2/becommons_2include_2api_2api__lua_8hpp.html#autotoc_md0',1,'']]],
   ['debug_2ehpp_4',['debug.hpp',['../da/d7b/debug_8hpp.html',1,'']]],
-  ['defaltura_5',['defaltura',['../d0/dcb/classBECOMMONS__NS_1_1bubble__gui.html#a730fb88167d6898ae39bbc86d254ffd0',1,'BECOMMONS_NS::bubble_gui::defAltura(const double v)'],['../d0/dcb/classBECOMMONS__NS_1_1bubble__gui.html#a71220101fc7328ac5a271ad84ee0af84',1,'BECOMMONS_NS::bubble_gui::defAltura(const int v)']]],
+  ['defaltura_5',['defaltura',['../d0/dcb/classBECOMMONS__NS_1_1bubble__gui.html#a71220101fc7328ac5a271ad84ee0af84',1,'BECOMMONS_NS::bubble_gui::defAltura(const int v)'],['../d0/dcb/classBECOMMONS__NS_1_1bubble__gui.html#a730fb88167d6898ae39bbc86d254ffd0',1,'BECOMMONS_NS::bubble_gui::defAltura(const double v)']]],
   ['defcorborda_6',['defCorBorda',['../d0/dcb/classBECOMMONS__NS_1_1bubble__gui.html#a87336aa13ff9bcebdac0243e4d0653c1',1,'BECOMMONS_NS::bubble_gui']]],
   ['defcorfundo_7',['defCorFundo',['../d0/dcb/classBECOMMONS__NS_1_1bubble__gui.html#ac242fd514e10a29c45d0e7912669b96f',1,'BECOMMONS_NS::bubble_gui']]],
   ['defcrescimentom_8',['defCrescimentoM',['../d0/dcb/classBECOMMONS__NS_1_1bubble__gui.html#ae894014a49767f96f0c7c47faa1e492e',1,'BECOMMONS_NS::bubble_gui']]],
@@ -16,7 +16,7 @@ var searchData=
   ['definirinputs_13',['definirInputs',['../d4/dc5/namespaceBECOMMONS__NS_1_1api.html#a7aca54c522722fbc8803b57165f663fa',1,'BECOMMONS_NS::api']]],
   ['definirtempo_14',['definirTempo',['../d4/dc5/namespaceBECOMMONS__NS_1_1api.html#a5747b4043d84efb73980879711e14c7a',1,'BECOMMONS_NS::api']]],
   ['definirutils_15',['definirUtils',['../d4/dc5/namespaceBECOMMONS__NS_1_1api.html#a9386f3af3b55a82511b3ba7bd667e086',1,'BECOMMONS_NS::api']]],
-  ['deflargura_16',['deflargura',['../d0/dcb/classBECOMMONS__NS_1_1bubble__gui.html#a9bd833713454c24adad4b90b18833abc',1,'BECOMMONS_NS::bubble_gui::defLargura(const double v)'],['../d0/dcb/classBECOMMONS__NS_1_1bubble__gui.html#aed1bb46470cbc5b03fd212c0c2144662',1,'BECOMMONS_NS::bubble_gui::defLargura(const int v)']]],
+  ['deflargura_16',['deflargura',['../d0/dcb/classBECOMMONS__NS_1_1bubble__gui.html#aed1bb46470cbc5b03fd212c0c2144662',1,'BECOMMONS_NS::bubble_gui::defLargura(const int v)'],['../d0/dcb/classBECOMMONS__NS_1_1bubble__gui.html#a9bd833713454c24adad4b90b18833abc',1,'BECOMMONS_NS::bubble_gui::defLargura(const double v)']]],
   ['deforientacao_17',['defOrientacao',['../d0/dcb/classBECOMMONS__NS_1_1bubble__gui.html#aff26074c14cca782c9b234076e7fe9db',1,'BECOMMONS_NS::bubble_gui']]],
   ['defpadding_18',['defPadding',['../d0/dcb/classBECOMMONS__NS_1_1bubble__gui.html#aca7f44c80c65f8153421bb95fb83695e',1,'BECOMMONS_NS::bubble_gui']]],
   ['defpaddingg_19',['defPaddingG',['../d0/dcb/classBECOMMONS__NS_1_1bubble__gui.html#a39d47ccb6eaba3391c2e91a138755beb',1,'BECOMMONS_NS::bubble_gui']]],
@@ -27,5 +27,5 @@ var searchData=
   ['distancia3_24',['distancia3',['../d3/d16/namespaceBECOMMONS__NS.html#a9cc2c027e22bf0fb2a05468ca0a84672',1,'BECOMMONS_NS']]],
   ['do_20projeto_25',['Fonte do projeto',['../index.html#autotoc_md2',1,'']]],
   ['do_20youtube_26',['Vídeos do youtube',['../index.html#autotoc_md8',1,'']]],
-  ['documentação_20da_20api_20lua_27',['documentação da api lua',['../d1/d58/md_docs_2api__lua_2lua__mainpage.html',1,'Documentação da API Lua'],['../db/dd3/group__docs.html',1,'Documentação da API lua']]]
+  ['documentação_20da_20api_20lua_27',['Documentação da API lua',['../db/dd3/group__docs.html',1,'']]]
 ];

@@ -4,7 +4,7 @@ var searchData=
   ['adicionarelemento_1',['adicionarElemento',['../d0/dcb/classBECOMMONS__NS_1_1bubble__gui.html#a315bd9c9ce35a834826aa060efd4c5e8',1,'BECOMMONS_NS::bubble_gui']]],
   ['adicionarflags_2',['adicionarFlags',['../d0/dcb/classBECOMMONS__NS_1_1bubble__gui.html#adfebcc934505ff1c154ab27e16eaa37c',1,'BECOMMONS_NS::bubble_gui']]],
   ['analizarmalha_3',['analizarMalha',['../d3/d16/namespaceBECOMMONS__NS.html#aaa5c21b9ccc38fce9303e6630cbf14a2',1,'BECOMMONS_NS']]],
-  ['api_20lua_4',['api lua',['../d1/d58/md_docs_2api__lua_2lua__mainpage.html',1,'Documentação da API Lua'],['../db/dd3/group__docs.html',1,'Documentação da API lua']]],
+  ['api_20lua_4',['Documentação da API lua',['../db/dd3/group__docs.html',1,'']]],
   ['api_5flua_2ecpp_5',['api_lua.cpp',['../d3/df3/api__lua_8cpp.html',1,'']]],
   ['api_5flua_2ehpp_6',['api_lua.hpp',['../dd/dc2/becommons_2include_2api_2api__lua_8hpp.html',1,'']]],
   ['apoio_7',['apoio',['../d7/ded/structBECOMMONS__NS_1_1caractere.html#a777d703d29d1541d887fb0f782fb232a',1,'BECOMMONS_NS::caractere']]],
