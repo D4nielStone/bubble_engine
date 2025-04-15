@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['objeto_20entidade_0',['Objeto/entidade',['../d9/d1c/group__api__entidade.html#autotoc_md10',1,'']]],
-  ['objetos_1',['Objetos',['../d7/d2e/group__api__objs.html',1,'']]],
+  ['objeto_20entidade_0',['Objeto/entidade',['../d8/d1f/api_entidade.html#autotoc_md10',1,'']]],
+  ['objetos_1',['Objetos',['../dd/d31/api_objs.html',1,'api_root']]],
   ['obter_2',['obter',['../df/dbd/classBECOMMONS__NS_1_1gerenciadorFontes.html#a7bcc0c54cf36b29dde491fff5a082ea5',1,'BECOMMONS_NS::gerenciadorFontes']]],
   ['obteraltura_3',['obterAltura',['../dd/d13/classBECOMMONS__NS_1_1imageLoader.html#abb60dd20b3073a5872de03a9ff7a3d4e',1,'BECOMMONS_NS::imageLoader']]],
   ['obtercanal_4',['obterCanal',['../dd/d13/classBECOMMONS__NS_1_1imageLoader.html#ab6496b85acb01b00e7ffa317f6ab9e7d',1,'BECOMMONS_NS::imageLoader']]],

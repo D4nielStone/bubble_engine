@@ -26,7 +26,16 @@ var NAVTREE =
 [
   [ "Bubble Engine", "index.html", [
     [ "Introduction", "index.html", "index" ],
-    [ "Topics", "topics.html", "topics" ],
+    [ "Lua", "d7/d5a/api_root.html", [
+      [ "Objetos", "dd/d31/api_objs.html", [
+        [ "Entidade", "d8/d1f/api_entidade.html", [
+          [ "Entidade", "d8/d1f/api_entidade.html#autotoc_md9", [
+            [ "Objeto/entidade", "d8/d1f/api_entidade.html#autotoc_md10", null ]
+          ] ]
+        ] ]
+      ] ],
+      [ "Componentes", "db/d11/api_componentes.html", null ]
+    ] ],
     [ "Namespaces", "namespaces.html", [
       [ "Namespace List", "namespaces.html", "namespaces_dup" ],
       [ "Namespace Members", "namespacemembers.html", [
@@ -61,7 +70,7 @@ var NAVTREEINDEX =
 [
 "annotated.html",
 "d7/ded/structBECOMMONS__NS_1_1caractere.html#a777d703d29d1541d887fb0f782fb232a",
-"dd/dcf/vetor2_8hpp_source.html"
+"dd/dcf/lua__entidades_8hpp_source.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

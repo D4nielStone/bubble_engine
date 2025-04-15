@@ -25,7 +25,7 @@ var searchData=
   ['codigo_2ehpp_22',['codigo.hpp',['../da/d82/codigo_8hpp.html',1,'']]],
   ['componente_23',['componente',['../d9/d85/structBECOMMONS__NS_1_1componente.html',1,'BECOMMONS_NS']]],
   ['componente_2ehpp_24',['componente.hpp',['../db/de2/componente_8hpp.html',1,'']]],
-  ['componentes_25',['Componentes',['../dd/d27/group__api__componentes.html',1,'']]],
+  ['componentes_25',['Componentes',['../db/d11/api_componentes.html',1,'api_root']]],
   ['contribution_26',['Contribution',['../index.html#autotoc_md6',1,'']]],
   ['converterparaglfw_27',['converterParaGlfw',['../dd/d13/classBECOMMONS__NS_1_1imageLoader.html#a0a5634575ed2f12827fa119249bdcb34',1,'BECOMMONS_NS::imageLoader']]],
   ['cor_28',['cor',['../df/df9/structBECOMMONS__NS_1_1cor.html',1,'BECOMMONS_NS']]],

@@ -1,0 +1,179 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt-BR">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Bubble Engine: Código-Fonte de becommons/include/api/api_lua.hpp</title>
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../jquery.js"></script>
+<script type="text/javascript" src="../../dynsections.js"></script>
+<link href="../../navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../resize.js"></script>
+<script type="text/javascript" src="../../navtreedata.js"></script>
+<script type="text/javascript" src="../../navtree.js"></script>
+<link href="../../search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../search/searchdata.js"></script>
+<script type="text/javascript" src="../../search/search.js"></script>
+<link href="../../doxygen.css" rel="stylesheet" type="text/css" />
+<link href="../../doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="../../banner.png"/></td>
+  <td id="projectalign">
+   <div id="projectname">Bubble Engine<span id="projectnumber">&#160;1.0b</span>
+   </div>
+   <div id="projectbrief">Projeto independente de game engine eficiente para projetos pequenos</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Gerado por Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "../../search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="../../menudata.js"></script>
+<script type="text/javascript" src="../../menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('../../',true,false,'search.php','Busca');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function() { init_codefold(1); });
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('dd/dc2/becommons_2include_2api_2api__lua_8hpp_source.html','../../'); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Carregando...</div>
+<div class="SRStatus" id="Searching">Procurando...</div>
+<div class="SRStatus" id="NoMatches">Nenhuma entrada encontrado</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">api_lua.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="../../dd/dc2/becommons_2include_2api_2api__lua_8hpp.html">Ir para a documentação desse arquivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span> </div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span> </div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="preprocessor">#pragma once</span></div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="preprocessor">#include &lt;cstdint&gt;</span></div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="preprocessor">#include &lt;bullet/btBulletDynamicsCommon.h&gt;</span></div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="preprocessor">#include &lt;lua.hpp&gt;</span></div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="preprocessor">#include &lt;LuaBridge/LuaBridge.h&gt;</span></div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span> </div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="preprocessor">#include &quot;<a class="code" href="../../db/d19/namespace_8hpp.html">namespace.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><span class="preprocessor">#include &quot;<a class="code" href="../../da/dd5/luz__direcional_8hpp.html">componentes/luz_direcional.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="preprocessor">#include &quot;<a class="code" href="../../db/dfb/componentes_2imagem_8hpp.html">componentes/imagem.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="preprocessor">#include &quot;<a class="code" href="../../dd/d03/componentes_2texto_8hpp.html">componentes/texto.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><span class="preprocessor">#include &quot;<a class="code" href="../../d0/d8a/camera_8hpp.html">componentes/camera.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="preprocessor">#include &quot;<a class="code" href="../../d6/def/fisica_8hpp.html">componentes/fisica.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span><span class="preprocessor">#include &quot;<a class="code" href="../../d4/dcc/transformacao_8hpp.html">componentes/transformacao.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span><span class="preprocessor">#include &quot;<a class="code" href="../../d7/d43/renderizador_8hpp.html">componentes/renderizador.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span> </div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span><span class="keyword">namespace </span><a class="code hl_namespace" href="../../d3/d16/namespaceBECOMMONS__NS.html">BECOMMONS_NS</a> {</div>
+<div class="foldopen" id="foldopen00074" data-start="{" data-end="}">
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno"><a class="line" href="../../d4/dc5/namespaceBECOMMONS__NS_1_1api.html">   74</a></span>    <span class="keyword">namespace </span>api {</div>
+<div class="foldopen" id="foldopen00078" data-start="{" data-end="};">
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno"><a class="line" href="../../d8/db4/structBECOMMONS__NS_1_1api_1_1entidade.html">   78</a></span>    <span class="keyword">struct </span><a class="code hl_struct" href="../../d8/db4/structBECOMMONS__NS_1_1api_1_1entidade.html">entidade</a></div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>    {</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>        <a class="code hl_class" href="../../de/dbc/classBECOMMONS__NS_1_1transformacao.html">transformacao</a>* m_transformacao{ <span class="keyword">nullptr</span> };</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>        <a class="code hl_struct" href="../../d1/d0b/structBECOMMONS__NS_1_1fisica.html">fisica</a>* m_fisica{ <span class="keyword">nullptr</span> };</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>        <a class="code hl_struct" href="../../db/dc5/structBECOMMONS__NS_1_1camera.html">camera</a>* m_camera{ <span class="keyword">nullptr</span> };</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>        <a class="code hl_struct" href="../../d7/d3b/structBECOMMONS__NS_1_1texto.html">texto</a>* m_texto{ <span class="keyword">nullptr</span> };</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>        <a class="code hl_struct" href="../../dc/d0e/structBECOMMONS__NS_1_1imagem.html">imagem</a>* m_imagem{ <span class="keyword">nullptr</span> };</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>        <a class="code hl_struct" href="../../df/dd0/structBECOMMONS__NS_1_1luz__direcional.html">luz_direcional</a>* m_luzDir{<span class="keyword">nullptr</span>};</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>        <a class="code hl_struct" href="../../db/d8a/structBECOMMONS__NS_1_1renderizador.html">renderizador</a>* m_renderizador{<span class="keyword">nullptr</span>};</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno"><a class="line" href="../../d8/db4/structBECOMMONS__NS_1_1api_1_1entidade.html#a5b7ba8f769d43a292d89a78fa3d58246">   92</a></span>        uint32_t <a class="code hl_variable" href="../../d8/db4/structBECOMMONS__NS_1_1api_1_1entidade.html#a5b7ba8f769d43a292d89a78fa3d58246">id</a>;</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>        <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code hl_function" href="../../d8/db4/structBECOMMONS__NS_1_1api_1_1entidade.html#afd9a15ad606be0610fb92c73245d4b69">definir</a>(lua_State* L);</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>        <span class="keywordtype">void</span> destruir() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>        <a class="code hl_struct" href="../../d8/db4/structBECOMMONS__NS_1_1api_1_1entidade.html">entidade</a>(<span class="keyword">const</span> uint32_t&amp; <span class="keywordtype">id</span>);</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    };</div>
+</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="../../d4/dc5/namespaceBECOMMONS__NS_1_1api.html#aa3cc03feb232a53da9bda6968c3a5540">definirFisica</a>(lua_State* L);   </div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="../../d4/dc5/namespaceBECOMMONS__NS_1_1api.html#a5747b4043d84efb73980879711e14c7a">definirTempo</a>(lua_State* L);    </div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="../../d4/dc5/namespaceBECOMMONS__NS_1_1api.html#a9386f3af3b55a82511b3ba7bd667e086">definirUtils</a>(lua_State* L);    </div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="../../d4/dc5/namespaceBECOMMONS__NS_1_1api.html#a7aca54c522722fbc8803b57165f663fa">definirInputs</a>(lua_State* L);   </div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>   } </div>
+</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>}</div>
+<div class="ttc" id="acamera_8hpp_html"><div class="ttname"><a href="../../d0/d8a/camera_8hpp.html">camera.hpp</a></div><div class="ttdoc">Estrutura básica de câmera.</div></div>
+<div class="ttc" id="aclassBECOMMONS__NS_1_1transformacao_html"><div class="ttname"><a href="../../de/dbc/classBECOMMONS__NS_1_1transformacao.html">BECOMMONS_NS::transformacao</a></div><div class="ttdef"><b>Definição</b> transformacao.hpp:44</div></div>
+<div class="ttc" id="acomponentes_2imagem_8hpp_html"><div class="ttname"><a href="../../db/dfb/componentes_2imagem_8hpp.html">imagem.hpp</a></div></div>
+<div class="ttc" id="acomponentes_2texto_8hpp_html"><div class="ttname"><a href="../../dd/d03/componentes_2texto_8hpp.html">texto.hpp</a></div></div>
+<div class="ttc" id="afisica_8hpp_html"><div class="ttname"><a href="../../d6/def/fisica_8hpp.html">fisica.hpp</a></div><div class="ttdoc">Componente de física para entidades ECS.</div></div>
+<div class="ttc" id="aluz__direcional_8hpp_html"><div class="ttname"><a href="../../da/dd5/luz__direcional_8hpp.html">luz_direcional.hpp</a></div></div>
+<div class="ttc" id="anamespaceBECOMMONS__NS_1_1api_html_a5747b4043d84efb73980879711e14c7a"><div class="ttname"><a href="../../d4/dc5/namespaceBECOMMONS__NS_1_1api.html#a5747b4043d84efb73980879711e14c7a">BECOMMONS_NS::api::definirTempo</a></div><div class="ttdeci">void definirTempo(lua_State *L)</div><div class="ttdoc">Define o tempo do componente de código.</div><div class="ttdef"><b>Definição</b> api_lua.cpp:232</div></div>
+<div class="ttc" id="anamespaceBECOMMONS__NS_1_1api_html_a7aca54c522722fbc8803b57165f663fa"><div class="ttname"><a href="../../d4/dc5/namespaceBECOMMONS__NS_1_1api.html#a7aca54c522722fbc8803b57165f663fa">BECOMMONS_NS::api::definirInputs</a></div><div class="ttdeci">void definirInputs(lua_State *L)</div><div class="ttdoc">Define os inputs componente de código.</div><div class="ttdef"><b>Definição</b> api_lua.cpp:246</div></div>
+<div class="ttc" id="anamespaceBECOMMONS__NS_1_1api_html_a9386f3af3b55a82511b3ba7bd667e086"><div class="ttname"><a href="../../d4/dc5/namespaceBECOMMONS__NS_1_1api.html#a9386f3af3b55a82511b3ba7bd667e086">BECOMMONS_NS::api::definirUtils</a></div><div class="ttdeci">void definirUtils(lua_State *L)</div><div class="ttdoc">Define os utilitários do componente de código.</div><div class="ttdef"><b>Definição</b> api_lua.cpp:261</div></div>
+<div class="ttc" id="anamespaceBECOMMONS__NS_1_1api_html_aa3cc03feb232a53da9bda6968c3a5540"><div class="ttname"><a href="../../d4/dc5/namespaceBECOMMONS__NS_1_1api.html#aa3cc03feb232a53da9bda6968c3a5540">BECOMMONS_NS::api::definirFisica</a></div><div class="ttdeci">void definirFisica(lua_State *L)</div><div class="ttdoc">Define a física do componente de código.</div><div class="ttdef"><b>Definição</b> api_lua.cpp:176</div></div>
+<div class="ttc" id="anamespaceBECOMMONS__NS_html"><div class="ttname"><a href="../../d3/d16/namespaceBECOMMONS__NS.html">BECOMMONS_NS</a></div><div class="ttdoc">namespace becommons</div><div class="ttdef"><b>Definição</b> fonte.cpp:33</div></div>
+<div class="ttc" id="anamespace_8hpp_html"><div class="ttname"><a href="../../db/d19/namespace_8hpp.html">namespace.hpp</a></div></div>
+<div class="ttc" id="arenderizador_8hpp_html"><div class="ttname"><a href="../../d7/d43/renderizador_8hpp.html">renderizador.hpp</a></div></div>
+<div class="ttc" id="astructBECOMMONS__NS_1_1api_1_1entidade_html"><div class="ttname"><a href="../../d8/db4/structBECOMMONS__NS_1_1api_1_1entidade.html">BECOMMONS_NS::api::entidade</a></div><div class="ttdoc">Estrutura para api lua.</div><div class="ttdef"><b>Definição</b> api_lua.hpp:79</div></div>
+<div class="ttc" id="astructBECOMMONS__NS_1_1api_1_1entidade_html_a5b7ba8f769d43a292d89a78fa3d58246"><div class="ttname"><a href="../../d8/db4/structBECOMMONS__NS_1_1api_1_1entidade.html#a5b7ba8f769d43a292d89a78fa3d58246">BECOMMONS_NS::api::entidade::id</a></div><div class="ttdeci">uint32_t id</div><div class="ttdef"><b>Definição</b> api_lua.hpp:92</div></div>
+<div class="ttc" id="astructBECOMMONS__NS_1_1api_1_1entidade_html_afd9a15ad606be0610fb92c73245d4b69"><div class="ttname"><a href="../../d8/db4/structBECOMMONS__NS_1_1api_1_1entidade.html#afd9a15ad606be0610fb92c73245d4b69">BECOMMONS_NS::api::entidade::definir</a></div><div class="ttdeci">static void definir(lua_State *L)</div><div class="ttdef"><b>Definição</b> api_lua.cpp:45</div></div>
+<div class="ttc" id="astructBECOMMONS__NS_1_1camera_html"><div class="ttname"><a href="../../db/dc5/structBECOMMONS__NS_1_1camera.html">BECOMMONS_NS::camera</a></div><div class="ttdoc">componente que facilita a manipuacao da matriz de visualizacao e projeco</div><div class="ttdef"><b>Definição</b> camera.hpp:48</div></div>
+<div class="ttc" id="astructBECOMMONS__NS_1_1fisica_html"><div class="ttname"><a href="../../d1/d0b/structBECOMMONS__NS_1_1fisica.html">BECOMMONS_NS::fisica</a></div><div class="ttdef"><b>Definição</b> fisica.hpp:39</div></div>
+<div class="ttc" id="astructBECOMMONS__NS_1_1imagem_html"><div class="ttname"><a href="../../dc/d0e/structBECOMMONS__NS_1_1imagem.html">BECOMMONS_NS::imagem</a></div><div class="ttdef"><b>Definição</b> imagem.hpp:37</div></div>
+<div class="ttc" id="astructBECOMMONS__NS_1_1luz__direcional_html"><div class="ttname"><a href="../../df/dd0/structBECOMMONS__NS_1_1luz__direcional.html">BECOMMONS_NS::luz_direcional</a></div><div class="ttdef"><b>Definição</b> luz_direcional.hpp:35</div></div>
+<div class="ttc" id="astructBECOMMONS__NS_1_1renderizador_html"><div class="ttname"><a href="../../db/d8a/structBECOMMONS__NS_1_1renderizador.html">BECOMMONS_NS::renderizador</a></div><div class="ttdef"><b>Definição</b> renderizador.hpp:75</div></div>
+<div class="ttc" id="astructBECOMMONS__NS_1_1texto_html"><div class="ttname"><a href="../../d7/d3b/structBECOMMONS__NS_1_1texto.html">BECOMMONS_NS::texto</a></div><div class="ttdef"><b>Definição</b> texto.hpp:37</div></div>
+<div class="ttc" id="atransformacao_8hpp_html"><div class="ttname"><a href="../../d4/dcc/transformacao_8hpp.html">transformacao.hpp</a></div><div class="ttdoc">Calcula a mtriz de modelo para um objeto 3d qualquer.</div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="../../dir_0394786a11e0dfde3dca27fdccf84bfd.html">becommons</a></li><li class="navelem"><a class="el" href="../../dir_9a744b5567c265deacf566b467d8af59.html">include</a></li><li class="navelem"><a class="el" href="../../dir_e07a69a71bd80e8a87e2f4fd89c68eef.html">api</a></li><li class="navelem"><a class="el" href="../../dd/dc2/becommons_2include_2api_2api__lua_8hpp.html">api_lua.hpp</a></li>
+    <li class="footer">Gerado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+  </ul>
+</div>
+</body>
+</html>
