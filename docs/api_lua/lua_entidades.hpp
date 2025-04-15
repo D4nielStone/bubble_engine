@@ -1,5 +1,5 @@
 /** 
- * \defgroup api_root Lua
+ * \page api_root Lua
  */
 
 /** 
