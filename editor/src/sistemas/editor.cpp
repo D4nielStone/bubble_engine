@@ -37,9 +37,9 @@ using namespace becommons;
 using namespace EDITOR_NS;
 bool gatilho_ = true;
 
-inline void abrirLink(const char* url) {
-    std::string comando = "xdg-open ";
-    comando += url;
+inline void abrirLink(const std::string& url) {
+    depuracao::emitir(info, "Abrindo ajuda...");
+    std::string comando = "xdg-open \\" + url;
     system(comando.c_str());
 }
 
@@ -90,7 +90,7 @@ void sistema_editor::configurarInterface(becommons::projeto& proj)
         gui->adicionarElemento<elementos::botao>("menu", "editar", [](){}, "Editar");
         gui->adicionarElemento<elementos::botao>("menu", "visualizar", [](){}, "Exibir");
         gui->adicionarElemento<elementos::botao>("menu", "ajuda", [](){
-                abrirLink("https://d4nielstone.github.io/bubble_engine/pt/d3/d95/group__LuaAPI.html");
+                abrirLink("https://d4nielstone.github.io/bubble_engine/pt/md_docs_2ajuda_2ajuda.html");
                 }, "Ajuda");
         gui->adicionarElemento<elementos::botao>("menu", "add_primitivas", [](){}, std::make_unique<elementos::imagem>("cubo_branco"));
         gui->defCorBorda    (cor(1.f, 1.f, 1.f, 1.f));

@@ -173,9 +173,9 @@ void defVelFisica(const float v)
     projeto_atual->sfisica()->velocidade = v;
 }
 
+
 void BECOMMONS_NS::api::definirFisica(lua_State* L)
 {
-
     luabridge::getGlobalNamespace(L).
         beginClass<fase>("fase").
         addConstructor<void(*)(const char*)>().

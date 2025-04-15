@@ -5,20 +5,11 @@
     <meta http-equiv="refresh" content="5; url=default.html">
     <title>Redirecionando...</title>
     <script>
-      // Detecta o idioma do navegador
-      const userLang = navigator.language || navigator.userLanguage;
-
-      // Redireciona com base no idioma
-      if (userLang.startsWith("pt")) {
-        window.location.href = "pt/index.html"; // Redireciona para a versão em português
-      } else {
-        window.location.href = "en/index.html"; // Redireciona para a versão em inglês
-      }
+        window.location.href = "pt/index.html";
     </script>
   </head>
   <body>
     <p>Redirecionando para a documentação no idioma do seu navegador...</p>
     <p><a href="pt/index.html">Clique aqui se não for redirecionado automaticamente para o Português.</a></p>
-    <p><a href="en/index.html">Clique aqui se não for redirecionado automaticamente para o Inglês.</a></p>
   </body>
 </html>

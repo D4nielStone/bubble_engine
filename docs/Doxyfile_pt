@@ -44,6 +44,7 @@ DOXYFILE_ENCODING      = UTF-8
 
 PROJECT_NAME           = "Bubble Engine"
 
+PROJECT_ICON = docs/favicon.ico
 # The PROJECT_NUMBER tag can be used to enter a project or revision number. This
 # could be handy for archiving the generated documentation or if some version
 # control system is used.
@@ -78,7 +79,7 @@ OUTPUT_DIRECTORY = docs/pt/
 # control the number of sub-directories.
 # The default value is: NO.
 
-CREATE_SUBDIRS         = YES
+CREATE_SUBDIRS         = NO
 
 # Controls the number of sub-directories that will be created when
 # CREATE_SUBDIRS tag is set to YES. Level 0 represents 16 directories, and every
@@ -171,7 +172,7 @@ INLINE_INHERITED_MEMB  = NO
 # shortest path that makes the file name unique will be used
 # The default value is: YES.
 
-FULL_PATH_NAMES        = YES
+FULL_PATH_NAMES        =  NO
 
 # The STRIP_FROM_PATH tag can be used to strip a user-defined part of the path.
 # Stripping is only done if one of the specified strings matches the left-hand
@@ -341,7 +342,7 @@ OPTIMIZE_OUTPUT_SLICE  = NO
 #
 # Note see also the list of default file extension mappings.
 GENERATE_HTML = YES
-USE_MDFILE_AS_MAINPAGE = docs/README_pt.md 
+USE_MDFILE_AS_MAINPAGE = docs/Mainpage.md 
 # If the MARKDOWN_SUPPORT tag is enabled then doxygen pre-processes all comments
 # according to the Markdown format, which allows for more readable
 # documentation. See https://daringfireball.net/projects/markdown/ for details.
@@ -941,7 +942,7 @@ WARN_LOGFILE           =
 # spaces. See also FILE_PATTERNS and EXTENSION_MAPPING
 # Note: If this tag is empty the current directory is searched.
 
-INPUT = becommons/src becommons/include editor/src editor/include runtime/src docs/README_pt.md docs/style/custom.css becommons/include/assets/imagems/banner.png docs/api_lua
+INPUT = becommons/src becommons/include editor/src editor/include runtime/src docs becommons/include/assets/imagems/banner.png
 
 # This tag can be used to specify the character encoding of the source files
 # that doxygen parses. Internally doxygen uses the UTF-8 encoding. Doxygen uses
@@ -1353,7 +1354,6 @@ HTML_FILE_EXTENSION    = .html
 # of the possible markers and block names see the documentation.
 # This tag requires that the tag GENERATE_HTML is set to YES.
 
-HTML_HEADER            = 
 
 # The HTML_FOOTER tag can be used to specify a user-defined HTML footer for each
 # generated HTML page. If the tag is left blank doxygen will generate a standard

@@ -1,5 +1,5 @@
 var group__LuaAPI =
 [
-    [ "Documentação da API lua", "db/dd3/group__docs.html", null ],
-    [ "FAQs", "d3/d21/group__FAQs.html", null ]
+    [ "Classes", "d4/de4/group__grupo__classes.html", "d4/de4/group__grupo__classes" ],
+    [ "FAQs", "d5/dd3/group__grupo__faqs.html", null ]
 ];

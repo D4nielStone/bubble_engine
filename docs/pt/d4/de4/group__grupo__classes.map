@@ -1,0 +1,7 @@
+<map id="Classes" name="Classes">
+<area shape="rect" id="Node000002" href="$d3/d95/group__LuaAPI.html" title=" " alt="" coords="5,55,76,80"/>
+<area shape="rect" id="Node000001" title="Agrupa todas as funcionalidades relacionadas a classes da API Lua." alt="" coords="124,55,196,80"/>
+<area shape="rect" id="Node000005" href="$db/dc4/group__grupo__componentes.html" title="Gerenciamento de componentes via Lua." alt="" coords="244,5,356,31"/>
+<area shape="rect" id="Node000004" href="$d2/d37/group__grupo__fisica.html" title="Interação com o sistema de física." alt="" coords="270,55,330,80"/>
+<area shape="rect" id="Node000003" href="$d8/dce/group__grupo__objetos.html" title="Métodos e propriedades de objetos de jogo acessíveis via Lua." alt="" coords="264,104,336,129"/>
+</map>

@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['faqs_0',['FAQs',['../d3/d21/group__FAQs.html',1,'']]]
+  ['física_0',['Física',['../group__grupo__fisica.html',1,'']]],
+  ['faqs_1',['FAQs',['../group__grupo__faqs.html',1,'']]]
 ];

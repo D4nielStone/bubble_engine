@@ -1,0 +1,176 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt-BR">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Bubble Engine: Código-Fonte de fonte.hpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="banner.png"/></td>
+  <td id="projectalign">
+   <div id="projectname">Bubble Engine<span id="projectnumber">&#160;1.0b</span>
+   </div>
+   <div id="projectbrief">Projeto independente de game engine eficiente para projetos pequenos</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Gerado por Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Busca');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function() { init_codefold(0); });
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('fonte_8hpp_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Carregando...</div>
+<div class="SRStatus" id="Searching">Procurando...</div>
+<div class="SRStatus" id="NoMatches">Nenhuma entrada encontrado</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">fonte.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="fonte_8hpp.html">Ir para a documentação desse arquivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span> </div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="preprocessor">#pragma once</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="preprocessor">#include &lt;glad/glad.h&gt;</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="preprocessor">#include &lt;map&gt;</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="preprocessor">#include &lt;unordered_map&gt;</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="preprocessor">#include &lt;ft2build.h&gt;</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="preprocessor">#include &quot;<a class="code" href="namespace_8hpp.html">namespace.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="preprocessor">#include &quot;<a class="code" href="vetor2_8hpp.html">util/vetor2.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="preprocessor">#include FT_FREETYPE_H</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno"><a class="line" href="fonte_8hpp.html#ae5c0d37c453abcc0fe309bcf6b989740">   41</a></span><span class="keyword">typedef</span> std::pair&lt;std::string, unsigned int&gt; <a class="code hl_typedef" href="fonte_8hpp.html#ae5c0d37c453abcc0fe309bcf6b989740">FonteID</a>;</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceBECOMMONS__NS.html">BECOMMONS_NS</a> {</div>
+<div class="foldopen" id="foldopen00046" data-start="{" data-end="};">
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno"><a class="line" href="structBECOMMONS__NS_1_1caractere.html">   46</a></span>    <span class="keyword">struct </span><a class="code hl_struct" href="structBECOMMONS__NS_1_1caractere.html">caractere</a></div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    {</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno"><a class="line" href="structBECOMMONS__NS_1_1caractere.html#a54725622b7dd64eecf8ec2f5a67eb4a1">   49</a></span>        <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code hl_variable" href="structBECOMMONS__NS_1_1caractere.html#a54725622b7dd64eecf8ec2f5a67eb4a1">id</a>;</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno"><a class="line" href="structBECOMMONS__NS_1_1caractere.html#aeb9b952854cb283b9ca4211f0c2af0b4">   51</a></span>        <a class="code hl_struct" href="structBECOMMONS__NS_1_1vetor2.html">vetor2&lt;unsigned int&gt;</a> <a class="code hl_variable" href="structBECOMMONS__NS_1_1caractere.html#aeb9b952854cb283b9ca4211f0c2af0b4">tamanho</a>;</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno"><a class="line" href="structBECOMMONS__NS_1_1caractere.html#a777d703d29d1541d887fb0f782fb232a">   53</a></span>        <a class="code hl_struct" href="structBECOMMONS__NS_1_1vetor2.html">vetor2&lt;FT_Int&gt;</a>   <a class="code hl_variable" href="structBECOMMONS__NS_1_1caractere.html#a777d703d29d1541d887fb0f782fb232a">apoio</a>;</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno"><a class="line" href="structBECOMMONS__NS_1_1caractere.html#a0236189769dd47472a703683b0f388b7">   55</a></span>        <span class="keywordtype">long</span> <span class="keywordtype">int</span> <a class="code hl_variable" href="structBECOMMONS__NS_1_1caractere.html#a0236189769dd47472a703683b0f388b7">avanco</a>;</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    };</div>
+</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
+<div class="foldopen" id="foldopen00060" data-start="{" data-end="};">
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno"><a class="line" href="classBECOMMONS__NS_1_1gerenciadorFontes.html">   60</a></span>    <span class="keyword">class </span><a class="code hl_class" href="classBECOMMONS__NS_1_1gerenciadorFontes.html">gerenciadorFontes</a></div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    {</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>        <span class="keyword">static</span> <a class="code hl_class" href="classBECOMMONS__NS_1_1gerenciadorFontes.html">gerenciadorFontes</a>&amp; <a class="code hl_function" href="classBECOMMONS__NS_1_1gerenciadorFontes.html#ab90747fa9102590cfdccf3cb0c66d62c">obterInstancia</a>();</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span> </div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>        <a class="code hl_class" href="classBECOMMONS__NS_1_1gerenciadorFontes.html">gerenciadorFontes</a>();</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span> </div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>        <a class="code hl_class" href="classBECOMMONS__NS_1_1gerenciadorFontes.html">~gerenciadorFontes</a>();</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span> </div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classBECOMMONS__NS_1_1gerenciadorFontes.html#a1a73ae57b3c37604d3bfb568f5678eb0">carregar</a>(<span class="keyword">const</span> std::string&amp; nome_da_fonte, <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> resolucao);</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>        </div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>        <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classBECOMMONS__NS_1_1gerenciadorFontes.html#a451c48a62150f8d53063fd7dbd265304">limparFontes</a>();</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span> </div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>        <span class="keyword">const</span> std::map&lt;char32_t, caractere&gt;&amp; <a class="code hl_function" href="classBECOMMONS__NS_1_1gerenciadorFontes.html#a7bcc0c54cf36b29dde491fff5a082ea5">obter</a>(<span class="keyword">const</span> std::string&amp; nome_da_fonte, <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> resolucao = 20) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>        </div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno"><a class="line" href="classBECOMMONS__NS_1_1gerenciadorFontes.html#a2a016e9af5ec70a06c14366a34650dc9">   82</a></span>        std::map&lt;FonteID, std::map&lt;char32_t, caractere&gt;&gt; <a class="code hl_variable" href="classBECOMMONS__NS_1_1gerenciadorFontes.html#a2a016e9af5ec70a06c14366a34650dc9">fontes</a>;</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    <span class="keyword">private</span>:</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno"><a class="line" href="classBECOMMONS__NS_1_1gerenciadorFontes.html#a9cc17dbeda0a0ec44c16b6f7b3298331">   84</a></span>        FT_Library <a class="code hl_variable" href="classBECOMMONS__NS_1_1gerenciadorFontes.html#a9cc17dbeda0a0ec44c16b6f7b3298331">ft</a>; </div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    };</div>
+</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>}</div>
+<div class="ttc" id="aclassBECOMMONS__NS_1_1gerenciadorFontes_html"><div class="ttname"><a href="classBECOMMONS__NS_1_1gerenciadorFontes.html">BECOMMONS_NS::gerenciadorFontes</a></div><div class="ttdef"><b>Definição</b> fonte.hpp:61</div></div>
+<div class="ttc" id="aclassBECOMMONS__NS_1_1gerenciadorFontes_html_a1a73ae57b3c37604d3bfb568f5678eb0"><div class="ttname"><a href="classBECOMMONS__NS_1_1gerenciadorFontes.html#a1a73ae57b3c37604d3bfb568f5678eb0">BECOMMONS_NS::gerenciadorFontes::carregar</a></div><div class="ttdeci">void carregar(const std::string &amp;nome_da_fonte, const unsigned int resolucao)</div><div class="ttdoc">Carrega uma fonte com a resolução especificada.</div><div class="ttdef"><b>Definição</b> fonte.cpp:70</div></div>
+<div class="ttc" id="aclassBECOMMONS__NS_1_1gerenciadorFontes_html_a2a016e9af5ec70a06c14366a34650dc9"><div class="ttname"><a href="classBECOMMONS__NS_1_1gerenciadorFontes.html#a2a016e9af5ec70a06c14366a34650dc9">BECOMMONS_NS::gerenciadorFontes::fontes</a></div><div class="ttdeci">std::map&lt; FonteID, std::map&lt; char32_t, caractere &gt; &gt; fontes</div><div class="ttdoc">Mapa de fontes carregadas.</div><div class="ttdef"><b>Definição</b> fonte.hpp:82</div></div>
+<div class="ttc" id="aclassBECOMMONS__NS_1_1gerenciadorFontes_html_a451c48a62150f8d53063fd7dbd265304"><div class="ttname"><a href="classBECOMMONS__NS_1_1gerenciadorFontes.html#a451c48a62150f8d53063fd7dbd265304">BECOMMONS_NS::gerenciadorFontes::limparFontes</a></div><div class="ttdeci">static void limparFontes()</div><div class="ttdoc">Re-inicia o map de fontes carregadas.</div><div class="ttdef"><b>Definição</b> fonte.cpp:65</div></div>
+<div class="ttc" id="aclassBECOMMONS__NS_1_1gerenciadorFontes_html_a7bcc0c54cf36b29dde491fff5a082ea5"><div class="ttname"><a href="classBECOMMONS__NS_1_1gerenciadorFontes.html#a7bcc0c54cf36b29dde491fff5a082ea5">BECOMMONS_NS::gerenciadorFontes::obter</a></div><div class="ttdeci">const std::map&lt; char32_t, caractere &gt; &amp; obter(const std::string &amp;nome_da_fonte, const unsigned int resolucao=20) const</div><div class="ttdoc">Obtém um ponteiro para os caracteres de uma fonte já carregada.</div><div class="ttdef"><b>Definição</b> fonte.cpp:140</div></div>
+<div class="ttc" id="aclassBECOMMONS__NS_1_1gerenciadorFontes_html_a9cc17dbeda0a0ec44c16b6f7b3298331"><div class="ttname"><a href="classBECOMMONS__NS_1_1gerenciadorFontes.html#a9cc17dbeda0a0ec44c16b6f7b3298331">BECOMMONS_NS::gerenciadorFontes::ft</a></div><div class="ttdeci">FT_Library ft</div><div class="ttdoc">biblioteca FreeType</div><div class="ttdef"><b>Definição</b> fonte.hpp:84</div></div>
+<div class="ttc" id="aclassBECOMMONS__NS_1_1gerenciadorFontes_html_ab90747fa9102590cfdccf3cb0c66d62c"><div class="ttname"><a href="classBECOMMONS__NS_1_1gerenciadorFontes.html#ab90747fa9102590cfdccf3cb0c66d62c">BECOMMONS_NS::gerenciadorFontes::obterInstancia</a></div><div class="ttdeci">static gerenciadorFontes &amp; obterInstancia()</div><div class="ttdoc">Obtenção da instância global.</div><div class="ttdef"><b>Definição</b> fonte.cpp:53</div></div>
+<div class="ttc" id="afonte_8hpp_html_ae5c0d37c453abcc0fe309bcf6b989740"><div class="ttname"><a href="fonte_8hpp.html#ae5c0d37c453abcc0fe309bcf6b989740">FonteID</a></div><div class="ttdeci">std::pair&lt; std::string, unsigned int &gt; FonteID</div><div class="ttdef"><b>Definição</b> fonte.hpp:41</div></div>
+<div class="ttc" id="anamespaceBECOMMONS__NS_html"><div class="ttname"><a href="namespaceBECOMMONS__NS.html">BECOMMONS_NS</a></div><div class="ttdoc">namespace becommons</div><div class="ttdef"><b>Definição</b> fonte.cpp:33</div></div>
+<div class="ttc" id="anamespace_8hpp_html"><div class="ttname"><a href="namespace_8hpp.html">namespace.hpp</a></div></div>
+<div class="ttc" id="astructBECOMMONS__NS_1_1caractere_html"><div class="ttname"><a href="structBECOMMONS__NS_1_1caractere.html">BECOMMONS_NS::caractere</a></div><div class="ttdef"><b>Definição</b> fonte.hpp:47</div></div>
+<div class="ttc" id="astructBECOMMONS__NS_1_1caractere_html_a0236189769dd47472a703683b0f388b7"><div class="ttname"><a href="structBECOMMONS__NS_1_1caractere.html#a0236189769dd47472a703683b0f388b7">BECOMMONS_NS::caractere::avanco</a></div><div class="ttdeci">long int avanco</div><div class="ttdoc">Deslocamento horizontal.</div><div class="ttdef"><b>Definição</b> fonte.hpp:55</div></div>
+<div class="ttc" id="astructBECOMMONS__NS_1_1caractere_html_a54725622b7dd64eecf8ec2f5a67eb4a1"><div class="ttname"><a href="structBECOMMONS__NS_1_1caractere.html#a54725622b7dd64eecf8ec2f5a67eb4a1">BECOMMONS_NS::caractere::id</a></div><div class="ttdeci">unsigned int id</div><div class="ttdoc">ID da textura.</div><div class="ttdef"><b>Definição</b> fonte.hpp:49</div></div>
+<div class="ttc" id="astructBECOMMONS__NS_1_1caractere_html_a777d703d29d1541d887fb0f782fb232a"><div class="ttname"><a href="structBECOMMONS__NS_1_1caractere.html#a777d703d29d1541d887fb0f782fb232a">BECOMMONS_NS::caractere::apoio</a></div><div class="ttdeci">vetor2&lt; FT_Int &gt; apoio</div><div class="ttdoc">Deslocamento/Offset vertical.</div><div class="ttdef"><b>Definição</b> fonte.hpp:53</div></div>
+<div class="ttc" id="astructBECOMMONS__NS_1_1caractere_html_aeb9b952854cb283b9ca4211f0c2af0b4"><div class="ttname"><a href="structBECOMMONS__NS_1_1caractere.html#aeb9b952854cb283b9ca4211f0c2af0b4">BECOMMONS_NS::caractere::tamanho</a></div><div class="ttdeci">vetor2&lt; unsigned int &gt; tamanho</div><div class="ttdoc">Tamanho do glifo.</div><div class="ttdef"><b>Definição</b> fonte.hpp:51</div></div>
+<div class="ttc" id="astructBECOMMONS__NS_1_1vetor2_html"><div class="ttname"><a href="structBECOMMONS__NS_1_1vetor2.html">BECOMMONS_NS::vetor2</a></div><div class="ttdef"><b>Definição</b> vetor2.hpp:34</div></div>
+<div class="ttc" id="avetor2_8hpp_html"><div class="ttname"><a href="vetor2_8hpp.html">vetor2.hpp</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_0394786a11e0dfde3dca27fdccf84bfd.html">becommons</a></li><li class="navelem"><a class="el" href="dir_9a744b5567c265deacf566b467d8af59.html">include</a></li><li class="navelem"><a class="el" href="dir_0058f9f8930e3f234e27134542bf0d59.html">arquivadores</a></li><li class="navelem"><a class="el" href="fonte_8hpp.html">fonte.hpp</a></li>
+    <li class="footer">Gerado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
+  </ul>
+</div>
+</body>
+</html>

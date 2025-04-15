@@ -26,6 +26,9 @@ var NAVTREE =
 [
   [ "Bubble Engine", "index.html", [
     [ "Introdução", "index.html", "index" ],
+    [ "Ajuda", "md_docs_2ajuda_2ajuda.html", [
+      [ "Principais tópicos:", "md_docs_2ajuda_2ajuda.html#autotoc_md2", null ]
+    ] ],
     [ "Tópicos", "topics.html", "topics" ],
     [ "Namespaces", "namespaces.html", [
       [ "Lista de Namespaces", "namespaces.html", "namespaces_dup" ],
@@ -60,8 +63,8 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "annotated.html",
-"d7/ded/structBECOMMONS__NS_1_1caractere.html#a54725622b7dd64eecf8ec2f5a67eb4a1",
-"dd/de8/sistema_8cpp.html"
+"dir_1ca6362e2195f9481ffaf5cf52890df5.html",
+"structBECOMMONS__NS_1_1componente.html#a63f9004bc698806fecbc2d677f8ee369aefba3946983d2abd0bccb2bc337e37ad"
 ];
 
 var SYNCONMSG = 'clique para desativar a sincronização do painel';

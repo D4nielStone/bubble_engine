@@ -1,0 +1,33 @@
+<map id="registro.hpp" name="registro.hpp">
+<area shape="rect" id="Node000001" title="Inclusoes e definições relacionadas à registro." alt="" coords="351,5,451,31"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,225,129,251"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="351,30,283,49,248,63,214,81,173,112,137,149,84,216,80,212,133,146,170,108,211,76,245,58,282,44,350,25"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="225,79,275,104"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="378,33,288,75,286,70,375,28"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="300,79,363,104"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="391,33,354,71,350,67,387,29"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="373,152,450,177"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="404,31,412,138,407,138,399,31"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="439,79,525,104"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="415,29,460,68,457,72,412,33"/>
+<area shape="rect" id="Node000007" href="$namespace_8hpp.html" title=" " alt="" coords="905,225,1030,251"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="451,19,511,24,583,34,662,51,738,76,801,108,859,145,946,214,943,218,856,150,798,112,736,81,660,56,582,40,510,30,451,24"/>
+<area shape="rect" id="Node000008" href="$entidade_8hpp.html" title="Inclusoes e definições relacionadas à entidade/." alt="" coords="549,79,724,104"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="439,28,586,72,585,77,438,33"/>
+<area shape="poly" id="edge8_Node000008_Node000005" title=" " alt="" coords="601,107,462,150,460,145,600,101"/>
+<area shape="poly" id="edge9_Node000008_Node000007" title=" " alt="" coords="664,102,930,217,927,222,662,107"/>
+<area shape="rect" id="Node000009" href="$componente_8hpp.html" title="Estrutura base para componetes." alt="" coords="495,152,717,177"/>
+<area shape="poly" id="edge10_Node000008_Node000009" title=" " alt="" coords="634,105,619,141,614,139,629,103"/>
+<area shape="poly" id="edge11_Node000009_Node000002" title=" " alt="" coords="512,180,144,228,143,223,512,175"/>
+<area shape="poly" id="edge17_Node000009_Node000007" title=" " alt="" coords="665,175,896,220,895,225,664,180"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="154,225,221,251"/>
+<area shape="poly" id="edge12_Node000009_Node000010" title=" " alt="" coords="522,180,391,200,235,228,234,223,390,194,521,175"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="245,225,337,251"/>
+<area shape="poly" id="edge13_Node000009_Node000011" title=" " alt="" coords="556,180,351,226,350,221,555,175"/>
+<area shape="rect" id="Node000012" title=" " alt="" coords="362,225,525,251"/>
+<area shape="poly" id="edge14_Node000009_Node000012" title=" " alt="" coords="581,180,484,222,481,217,579,175"/>
+<area shape="rect" id="Node000013" title=" " alt="" coords="549,225,684,251"/>
+<area shape="poly" id="edge15_Node000009_Node000013" title=" " alt="" coords="610,177,616,211,610,212,605,178"/>
+<area shape="rect" id="Node000014" title=" " alt="" coords="708,225,880,251"/>
+<area shape="poly" id="edge16_Node000009_Node000014" title=" " alt="" coords="637,175,751,218,750,223,635,180"/>
+</map>

@@ -1,4 +1,4 @@
 var topics =
 [
-    [ "Lua", "d3/d95/group__LuaAPI.html", "d3/d95/group__LuaAPI" ]
+    [ "API Lua", "group__LuaAPI.html", "group__LuaAPI" ]
 ];

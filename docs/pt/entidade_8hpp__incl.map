@@ -1,0 +1,22 @@
+<map id="entidade.hpp" name="entidade.hpp">
+<area shape="rect" id="Node000001" title="Inclusoes e definições relacionadas à entidade/." alt="" coords="75,5,181,31"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="13,79,91,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="118,33,76,71,73,67,114,29"/>
+<area shape="rect" id="Node000003" href="$namespace_8hpp.html" title=" " alt="" coords="5,152,131,177"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="128,32,119,65,105,105,85,142,81,139,100,103,114,64,123,30"/>
+<area shape="rect" id="Node000004" href="$componente_8hpp.html" title="Estrutura base para componetes." alt="" coords="278,79,501,104"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="171,28,334,72,333,78,169,33"/>
+<area shape="poly" id="edge10_Node000004_Node000003" title=" " alt="" coords="338,107,134,152,133,146,337,101"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="155,152,279,177"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="363,106,259,149,257,144,361,102"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="304,152,371,177"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="383,106,356,142,352,139,379,103"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="395,152,487,177"/>
+<area shape="poly" id="edge6_Node000004_Node000007" title=" " alt="" coords="400,103,427,139,423,142,396,106"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="512,152,675,177"/>
+<area shape="poly" id="edge7_Node000004_Node000008" title=" " alt="" coords="423,102,548,145,547,150,421,107"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="699,152,834,177"/>
+<area shape="poly" id="edge8_Node000004_Node000009" title=" " alt="" coords="450,101,693,147,692,152,449,107"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="858,152,1030,177"/>
+<area shape="poly" id="edge9_Node000004_Node000010" title=" " alt="" coords="479,101,845,148,844,153,478,107"/>
+</map>
