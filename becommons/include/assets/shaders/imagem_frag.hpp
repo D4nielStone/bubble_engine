@@ -1,4 +1,3 @@
-
 /** @copyright 
 MIT License
 Copyright (c) 2025 Daniel Oliveira
@@ -23,9 +22,6 @@ SOFTWARE.
 */
 /**
  * @file imagem_frag.hpp
- * @author Daniel O. dos Santos
- * @date 2025-04-08
- * @version 1.0
  */
 inline const char* imagem_frag = R"(
 

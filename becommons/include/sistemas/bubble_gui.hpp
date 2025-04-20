@@ -73,7 +73,7 @@ namespace BECOMMONS_NS {
             std::queue<std::function<void()>> funcoes;      ///< Fila de funções para serem executadas no fim do loop
             std::unique_ptr<caixa> raiz;                    ///< Elemento raiz ( tem as dimensões da janela )
             std::unordered_map<std::string, caixa*> caixas; ///< Vetor de elementos
-            std::set<std::string> estilo_atual;             ///< Todos os elementos presentes no estilo atual
+            std::set<caixa*> estilo_atual;             ///< Todos os elementos presentes no estilo atual
             shader* quad_shader{nullptr};                   ///< Shader do quadrado usado no fundo do elemento
             /// Desenha a caixa
             /// Desenha e decide que tipo de elemento ela é
@@ -129,10 +129,16 @@ namespace BECOMMONS_NS {
          */
         template <typename T, typename ...Args>
         void adicionarElemento(const std::string& pai_id, const std::string& nova_id, Args&&... args) {
-                estilo_atual.insert(nova_id);
                 if (auto pai = obterElemento(pai_id)) {
                     auto nova_caixa = pai->adicionarFilho<T>(nova_id, std::forward<Args>(args)...);
-                    caixas[nova_id] = nova_caixa;
+                    estilo_atual.insert(nova_caixa);
+                }
+            }
+        void adicionarElemento(const std::string& pai_id, const std::string& nova_id, std::unique_ptr<elementos::imagem> ptr) {
+                if (auto pai = obterElemento(pai_id)) {
+                    ptr->m_id = nova_id;
+                    estilo_atual.insert(ptr.get());
+                    pai->m_filhos.push_back(std::move(ptr));
                 }
             }
 
@@ -160,7 +166,7 @@ namespace BECOMMONS_NS {
         /**
          * @brief Limpa o estilo atual.
          */
-        void novoEstilo();
+        void fimEstilo();
 
         /**
          * @brief Define uma flag de estilo para todos os elementos do estilo atual.
@@ -185,6 +191,12 @@ namespace BECOMMONS_NS {
          * @param v Valor inteiro em pixels.
          */
         void defLargura(const int v);
+
+        /**
+         * @brief Define largura lingando-a à altura
+         * @param b Booleano (true linka )
+         */
+        void defLarguraAltura(const bool b);
 
         /**
          * @brief Define altura absoluta (em pixels) para os elementos.

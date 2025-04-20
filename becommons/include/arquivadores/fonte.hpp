@@ -33,12 +33,9 @@ SOFTWARE.
 #include <ft2build.h>
 #include "namespace.hpp"
 #include "util/vetor2.hpp"
-
 #include FT_FREETYPE_H
+#include <functional>
 
-/// Define std::pair<std::string, unsigned int> como FonteID.
-/// Diretório e id da fonte respectivamente.
-typedef std::pair<std::string, unsigned int> FonteID;
 /// namespace becommons
 namespace BECOMMONS_NS {
     /// @struct carectere
@@ -54,6 +51,26 @@ namespace BECOMMONS_NS {
         /// Deslocamento horizontal
         long int avanco;
     };
+}
+/// Define std::pair<std::string, unsigned int> como t_FonteID.
+/// Diretório e id da fonte respectivamente.
+typedef std::pair<std::string, unsigned int> t_FonteID;
+/// Define std::unordered_map<char32_t, caractere> como t_Caracteres.
+typedef std::unordered_map<char32_t, BECOMMONS_NS::caractere> t_Caracteres;
+/// Define std::map<t_FonteID, t_Caracteres> como Fontes 
+typedef std::unordered_map<t_FonteID, t_Caracteres> t_Fontes;
+/// Hash para t_FonteID
+namespace std {
+    template <>
+    struct hash<t_FonteID> {
+        std::size_t operator()(const t_FonteID& id) const noexcept {
+            std::size_t h1 = std::hash<std::string>{}(id.first);
+            std::size_t h2 = std::hash<unsigned int>{}(id.second);
+            return h1 ^ (h2 << 1); // Combinação simples
+        }
+    };
+}
+namespace BECOMMONS_NS {
 
     /// @class gerenciadorFontes
     /// Gerencia as fontes caregadas.
@@ -76,10 +93,10 @@ namespace BECOMMONS_NS {
         static void limparFontes();
 
         /// Obtém um ponteiro para os caracteres de uma fonte já carregada
-        const std::map<char32_t, caractere>& obter(const std::string& nome_da_fonte, const unsigned int resolucao = 20) const;
+        const t_Caracteres& obter(const std::string& nome_da_fonte, const unsigned int resolucao = 20) const;
         
         /// Mapa de fontes carregadas
-        std::map<FonteID, std::map<char32_t, caractere>> fontes;
+        t_Fontes fontes;
     private:
         FT_Library ft; ///< biblioteca FreeType
     };

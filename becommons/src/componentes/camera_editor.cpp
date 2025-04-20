@@ -34,6 +34,10 @@ using namespace BECOMMONS_NS;
 camera_editor::camera_editor()
 {
     m_skybox = new skybox();
+    ativarFB(); // Ativa framebuffer
+    framebuffer_ptr = std::make_unique<elementos::imagem>(textura, true);
+    viewport_ptr = &framebuffer_ptr->m_imagem_tamanho;
+    imagem_ptr = framebuffer_ptr.get();
     mousex_antigo = obterMouse().x;
     mousey_antigo = obterMouse().y;
     transform = new transformacao();
@@ -45,15 +49,16 @@ void camera_editor::atualizarMovimentacao()
     auto inputs = instanciaJanela->m_inputs;
     float delta = instanciaJanela->m_tempo.obterDeltaTime();
 
+    // Mouse rotation
+    float mousex_atual = obterMouse().x;
+    float mousey_atual = obterMouse().y;
+    if(imagem_ptr->arrastando()) {
     // Movement
     if (inputs.isKeyPressed("W")) mover(glm::vec3(0, 0, sens * delta));
     if (inputs.isKeyPressed("A")) mover(glm::vec3(-sens * delta, 0, 0));
     if (inputs.isKeyPressed("S")) mover(glm::vec3(0, 0, -sens * delta));
     if (inputs.isKeyPressed("D")) mover(glm::vec3(sens * delta, 0, 0));
 
-    // Mouse rotation
-    float mousex_atual = obterMouse().x;
-    float mousey_atual = obterMouse().y;
     if (inputs.isKeyPressed("MouseE"))
     {
         float mx = mousex_antigo - mousex_atual;
@@ -62,8 +67,8 @@ void camera_editor::atualizarMovimentacao()
         transform->rotacao.x += my * 0.1f; 
         transform->rotacao.x = glm::clamp(transform->rotacao.x, -89.f, 89.f);
     }
+    }
     mousex_antigo = mousex_atual;
     mousey_antigo = mousey_atual;
-
     transform->calcular();
 }

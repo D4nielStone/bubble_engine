@@ -22,22 +22,27 @@ SOFTWARE.
 */
 /**
  * @file imagem.hpp
- * @brief Gerencia a configuração do luabridge para api lua.
  */
 
 #pragma once
+#include <glad/glad.h>
 #include <string>
 #include <filesystem>
+#include "area_de_toque.hpp"
+#include "util/vetor2.hpp"
+#include "util/vetor4.hpp"
+#include "arquivadores/shader.hpp"
+#include "arquivadores/imageloader.hpp"
 #include "namespace.hpp"
 
 namespace BECOMMONS_NS{
     namespace elementos{
-	    class imagem : public caixa
+	    class imagem : public area_de_toque
 	    {
             public:
                 shader* m_imagem_shader                 {nullptr};
                 std::string m_imagem_path	            { "" };
-		        dvet2 m_imagem_tamanho {100.0, 100.0};
+		        dvet2 m_imagem_tamanho                  {100.0, 100.0};
 		        bool m_imagem_flip                      { false };
 		        unsigned int m_imagem_id                { 0 };
 		        ~imagem() override {
@@ -55,7 +60,7 @@ namespace BECOMMONS_NS{
                 m_limites.z = m_imagem_tamanho.x;
 			    m_limites.w = m_imagem_tamanho.y;
 		    }
-		    imagem(unsigned int id, const bool f = false) : m_imagem_id(id), m_imagem_flip(f), m_imagem_shader(new shader("imagem.vert", "imagem.frag")) {}
+		    imagem(unsigned int id, const bool f = false) : m_imagem_id(id), m_imagem_flip(f), m_imagem_shader(new shader("imagem.vert", "framebuffer.frag")) {}
 	    };
-    } // elementos
-} // bubble
+    } ///< elementos
+} ///< becommons

@@ -152,6 +152,7 @@ void main() {
         result = albedo.rgb;
     }
 
-    FragColor = vec4(result, 1.0);
+    float gamma = 2.2;
+    FragColor = vec4(pow(result.rgb, vec3(1.0 / gamma)), albedo.a);
 }
 )";

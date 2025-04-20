@@ -29,6 +29,7 @@ SOFTWARE.
  */
 
 #include <cstdlib>
+#include "util/versao.hpp"
 #include "becommons/becommons.hpp"
 #include "sistemas/editor.hpp"
 #include "util/runtime.hpp"
@@ -56,52 +57,66 @@ void sistema_editor::configurarInterface(becommons::projeto& proj)
 
     gui->obterElemento("raiz")->m_cor_fundo = cor(0.15f, 0.15f, 0.15f, 1.f);
     // menu
-    gui->novoEstilo();
-        gui->adicionarElemento<caixa>("raiz", "menu");
-        gui->defFlags       (flag_estilo::modular | flag_estilo::alinhamento_central);
-        gui->defAltura      (                            30);
+        gui->adicionarElemento<caixa>("raiz", "top");
+        gui->defFlags       (flag_estilo::altura_justa | flag_estilo::modular);
         gui->defLargura     (                           1.0);
         gui->defOrientacao  (   caixa::orientacao::horizontal);
-        gui->defPaddingG    (                      5, 5);
+        gui->defCorFundo    (    cor(0.15f, 0.15f, 0.15f, 0.f));
+    gui->fimEstilo();
+        gui->adicionarElemento<caixa>("top", "menu1");
+        gui->defFlags       (flag_estilo::modular | flag_estilo::alinhamento_central);
+        gui->defCrescimentoM(                           1.0);
+        gui->defAltura      (                           1.0);
+        gui->defOrientacao  (   caixa::orientacao::horizontal);
         gui->defCorFundo    (    cor(0.15f, 0.15f, 0.15f, 1.f));
-    gui->novoEstilo();
+    gui->fimEstilo();
+        gui->adicionarElemento<caixa>("top", "menu2");
+        gui->defFlags       (flag_estilo::altura_justa | flag_estilo::modular | flag_estilo::alinhamento_fim);
+        gui->defCrescimentoM(                           0.3);
+        gui->defOrientacao  (   caixa::orientacao::horizontal);
+        gui->defPaddingG    (                      5, 0);
+        gui->defCorFundo    (    cor(0.11f, 0.11f, 0.11f, 1.f));
+    gui->fimEstilo();
         gui->adicionarElemento<caixa>("raiz", "raiz_b");
         gui->defFlags       (flag_estilo::modular);
         gui->defLargura     (                           1.0);
         gui->defOrientacao  (   caixa::orientacao::horizontal);
         gui->defCorFundo    (    cor(0.f, 0.f, 1.f, 0.f));
         gui->defCrescimentoM(                            1.0f);
-    gui->novoEstilo();
+    gui->fimEstilo();
         gui->adicionarElemento<caixa>("raiz", "raiz_c");
         gui->defFlags       (flag_estilo::modular);
         gui->defLargura     (                           1.0);
         gui->defOrientacao  (   caixa::orientacao::horizontal);
         gui->defCorFundo    (    cor(0.05f, 0.05f, 0.05f, 1.f));
         gui->defCrescimentoM(                            0.2f);
-    gui->novoEstilo();
+    gui->fimEstilo();
+        gui->obterElemento("raiz_c")->m_ativo = false;
         gui->adicionarElemento<elementos::texto>("raiz_c", "console", depuracao::obterMensagens(), 10.f);
         gui->defAltura(1.0);
         // items menu
-    gui->novoEstilo();
-        gui->adicionarElemento<elementos::botao>("menu", "rc", &gui->obterElemento("raiz_c")->m_ativo, "Mostrar Console");
-        gui->obterElemento("raiz_c")->m_ativo = false;
-        gui->obterElemento("raiz_c")->m_crescimento_modular = 1.f;
-        gui->adicionarElemento<elementos::botao>("menu", "arquivo", [](){}, "Arquivo");
-        gui->adicionarElemento<elementos::botao>("menu", "editar", [](){}, "Editar");
-        gui->adicionarElemento<elementos::botao>("menu", "visualizar", [](){}, "Exibir");
-        gui->adicionarElemento<elementos::botao>("menu", "ajuda", [](){
+    gui->fimEstilo();
+        gui->adicionarElemento<elementos::botao>("menu1", "rc", &gui->obterElemento("raiz_c")->m_ativo, "Mostrar Console");
+        gui->adicionarElemento<elementos::botao>("menu1", "arquivo", [](){}, "Arquivo");
+        gui->adicionarElemento<elementos::botao>("menu1", "editar", [](){}, "Editar");
+        gui->adicionarElemento<elementos::botao>("menu1", "visualizar", [](){}, "Exibir");
+        gui->adicionarElemento<elementos::botao>("menu1", "ajuda", [](){
                 abrirLink("https://d4nielstone.github.io/bubble_engine/pt/md_docs_2ajuda_2ajuda.html");
                 }, "Ajuda");
-        gui->adicionarElemento<elementos::botao>("menu", "add_primitivas", [](){}, std::make_unique<elementos::imagem>("cubo_branco"));
-        gui->defCorBorda    (cor(1.f, 1.f, 1.f, 1.f));
-        gui->defCorFundo    (cor(0.15f, 0.15f, 0.15f, 1.f));
-        gui->defPaddingG    (5, 5);
-        gui->defAltura(22);
-        gui->defLargura(22);
+        gui->adicionarElemento<elementos::botao>("menu1", "add_primitivas", [](){}, std::make_unique<elementos::imagem>("cubo_branco"));
+        gui->defFlags(flag_estilo::altura_percentual);
+        gui->defCorFundo    (cor(0.11f, 0.11f, 0.11f, 1.f));
+        gui->defCorBorda    (cor(0.27f, 0.27f, 0.27f, 0.f));
+        gui->defAltura(18);
+        gui->defLargura(18);
+        gui->defPaddingG(5, 0);
+    gui->fimEstilo();
+        gui->adicionarElemento<elementos::texto>("menu2", "version", std::string("v") + std::string(BUBBLE_VERSAO_COMPLETA_STR));
+        gui->defPadding    (2, 1.5);
+        gui->defAltura(16);
     // entidades
-    gui->novoEstilo();
+    gui->fimEstilo();
         gui->adicionarElemento<caixa>("raiz_b", "entidades");
-        
         gui->defFlags       (flag_estilo::modular);
         gui->defLargura     (                          35);
         gui->defAltura      (                           1.0);
@@ -110,9 +125,8 @@ void sistema_editor::configurarInterface(becommons::projeto& proj)
         gui->defCorFundo    (    cor(0.1f, 0.1f, 0.1f, 1.f));
 
     // editor
-    gui->novoEstilo();
-        gui->adicionarElemento<elementos::imagem>("raiz_b", "imagem_editor", cam.textura, true);
-        
+    gui->fimEstilo();
+        gui->adicionarElemento("raiz_b", "imagem_editor", std::move(cam.framebuffer_ptr));
         gui->defFlags       (flag_estilo::altura_percentual | flag_estilo::modular);
         gui->defAltura      (                           1.0);
         gui->defOrientacao  ( caixa::orientacao::horizontal);
@@ -120,9 +134,8 @@ void sistema_editor::configurarInterface(becommons::projeto& proj)
         gui->defCorBorda    (    cor(0.07f, 0.07f, 0.07f, 1.f));
         gui->defCrescimentoM(                           1.f);
         gui->defTamanhoBorda(                           4);
+    gui->fimEstilo();
     // define ponteiro viewport
-        cam.viewport_ptr = &static_cast<elementos::imagem*>(gui->obterElemento("imagem_editor"))->m_imagem_tamanho;
-    gui->novoEstilo();
         gui->adicionarElemento<elementos::botao>("imagem_editor", "btn_play", [](){
                     projeto_atual->salvarFases();
                     sistema_editor::executarRuntime();
@@ -131,7 +144,7 @@ void sistema_editor::configurarInterface(becommons::projeto& proj)
         gui->defLargura      (        30);
         gui->defAltura       (        30);
         gui->defCorFundo     (cor(0.0f, 0.0f, 0.0f, 0.0f));
-    gui->novoEstilo();
+    gui->fimEstilo();
         gui->adicionarElemento<caixa>("raiz_b", "componentes");
         gui->defFlags        (flag_estilo::altura_percentual | flag_estilo::modular);
         gui->defAltura       (                           1.0);
@@ -139,13 +152,13 @@ void sistema_editor::configurarInterface(becommons::projeto& proj)
         gui->defOrientacao   ( caixa::orientacao::vertical);
         gui->defCorFundo     (    cor(0.1f, 0.1f, 0.1f, 1.f));
     // texto
-    gui->novoEstilo();
+    gui->fimEstilo();
         gui->adicionarElemento<elementos::texto>("componentes", "texto2", &texto_entidade, 14.f, elementos::flags_texto::alinhamento_central);
         gui->defCorFundo     (cor(0.07f, 0.07f, 0.07f, 1.f));
         gui->defFlags        (flag_estilo::largura_percentual );
         gui->defLargura      (1.0);
         gui->defAltura       (17);
-    gui->novoEstilo();
+    gui->fimEstilo();
         gui->adicionarElemento<caixa>("componentes", "area_comps");
         gui->defCorFundo     (    cor(0.08f, 0.08f, 0.08f, 1.f));
         gui->defFlags        (flag_estilo::largura_percentual | flag_estilo::modular);
@@ -153,7 +166,7 @@ void sistema_editor::configurarInterface(becommons::projeto& proj)
         gui->defAltura       (                           35);
         gui->defPaddingG     (                           5, 5);
         gui->defOrientacao   ( caixa::orientacao::horizontal);
-    gui->novoEstilo();
+    gui->fimEstilo();
         gui->adicionarElemento<caixa>("componentes", "inspetor");
         gui->defCorFundo     (    cor(0.08f, 0.08f, 0.08f, 0.f));
         gui->defFlags        (flag_estilo::largura_percentual | flag_estilo::modular | flag_estilo::alinhamento_central);
@@ -161,6 +174,7 @@ void sistema_editor::configurarInterface(becommons::projeto& proj)
         gui->defCrescimentoM (1.0);
         gui->defPaddingG     (                           5, 5);
         gui->defOrientacao   ( caixa::orientacao::horizontal);
+    gui->fimEstilo();
 }
 
 sistema_editor::sistema_editor()
@@ -171,7 +185,6 @@ void sistema_editor::inicializar(fase* f)
 {
     sistema::inicializar(f);
 
-    cam.ativarFB(); // Ativa framebuffer
     projeto_atual->srender()->definirCamera(&cam);
     
     // Adiciona sistema de gui ao projeto
@@ -271,7 +284,6 @@ void sistema_editor::atualizarEntidades()
     
     if(!projeto_atual->obterFaseAtual()->obterRegistro()->entidades.empty())
     {
-    gui->novoEstilo();
     // Adiciona os botões para cada entidade existente
     for (auto& [id, comp] : projeto_atual->obterFaseAtual()->obterRegistro()->entidades)
     {
@@ -295,6 +307,7 @@ void sistema_editor::atualizarEntidades()
         entidade_atual = 0;
         texto_entidade = "Nenhuma entidade selecionada";
     }
+    gui->fimEstilo();
     atualizarComponentes();
     atualizarComponente(componente::COMPONENTE_TRANSFORMACAO);
 }
@@ -305,7 +318,6 @@ void sistema_editor::atualizarComponentes()
     // Remove os botões antigos para evitar duplicatas
     gui->removerFilhos("area_comps");
     if(entidade_atual == 0) return;
-    gui->novoEstilo();
     size_t i = 0;
     for (auto& [mascara, componente] : projeto_atual->obterFaseAtual()->obterRegistro()->entidades[entidade_atual]) 
     {
@@ -326,6 +338,7 @@ void sistema_editor::atualizarComponentes()
     gui->defLargura     (                          25);
     gui->defAltura      (                          25);
     gui->defCorFundo    (    cor(0.0f, 0.0f, 0.0f, 0.f));
+    gui->fimEstilo();
 }
 
 void sistema_editor::atualizarComponente(const becommons::componente::mascara& mascara)
@@ -338,9 +351,9 @@ void sistema_editor::atualizarComponente(const becommons::componente::mascara& m
     std::string nome = "nenhum";
     if(becommons::componente::mapa_nomes_componentes.find(mascara) != becommons::componente::mapa_nomes_componentes.end())
         nome = becommons::componente::mapa_nomes_componentes[mascara];
-    gui->novoEstilo();
+    gui->fimEstilo();
         gui->adicionarElemento<elementos::texto>("inspetor", "texto_comp", nome);
-    gui->novoEstilo();
+    gui->fimEstilo();
     /*
     switch (mascara) {
         case componente::COMPONENTE_CAMERA:

@@ -27,6 +27,11 @@ SOFTWARE.
 #pragma once
 #include <string>    
 #include <memory>
+#include <vector>
+#include "vetor2.hpp"
+#include "vetor3.hpp"
+#include "cor.hpp"
+#include "vetor4.hpp"
 #include "namespace.hpp"
 
 namespace BECOMMONS_NS {
@@ -39,11 +44,9 @@ namespace BECOMMONS_NS {
             modular             = 1 << 2,   // 4
             alinhamento_central = 1 << 3,
             alinhamento_fim     = 1 << 4,
-            largura_auto        = 1 << 5,
-            altura_auto         = 1 << 6,
-            mesma_linha         = 1 << 7,
-            largura_justa       = 1 << 8,
-            altura_justa        = 1 << 9
+            mesma_linha         = 1 << 5,
+            largura_justa       = 1 << 6,
+            altura_justa        = 1 << 7
         }; 
         inline flag_estilo operator|(flag_estilo a, flag_estilo b) {
             return static_cast<flag_estilo>(static_cast<uint32_t>(a) | static_cast<uint32_t>(b));
@@ -84,6 +87,8 @@ namespace BECOMMONS_NS {
         
         // Estilo
         bool m_ativo {true};
+        bool m_ligar_la {false};
+        bool m_ligar_al {false};
         float m_largura = 20.f;
         float m_altura = 20.f;
         float m_crescimento_modular = 0.0f; // Fator de crescimento em layouts modulares
@@ -115,5 +120,6 @@ namespace BECOMMONS_NS {
             }
             return nullptr;
         }
+        virtual void configurar() {};
     };
 }

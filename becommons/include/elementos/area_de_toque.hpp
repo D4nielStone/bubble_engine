@@ -42,7 +42,7 @@ namespace BECOMMONS_NS {
         struct area_de_toque : caixa
         {
             /// Flags de ativação
-            bool m_gatilho = false, m_pressionado, m_mouse_cima { false };
+            bool m_gatilho = false, m_pressionado, m_mouse_cima { false }, m_arrastando;
             std::function<void()> m_funcao;
             bool* m_interruptor{nullptr};
             /// Construtor padrão
@@ -69,6 +69,7 @@ namespace BECOMMONS_NS {
                     instanciaJanela->defCursor(janela::cursor::mao);
                     /// Caso o gatilho esteja desativado e o mouse esquerdo tocado
                     if(!m_gatilho && instanciaJanela->m_inputs.isKeyPressed("MouseE")) {
+                        m_arrastando = true;
                         /// Se m_interruptor é diferente de nullptr
                         if(m_interruptor) {
                             /// Lógica de inversão
@@ -81,6 +82,15 @@ namespace BECOMMONS_NS {
                 if(!m_gatilho && instanciaJanela->m_inputs.isKeyPressed("MouseE"))
                     m_gatilho = true;
                 return m_pressionado;
+            }
+            bool arrastando() {
+                if(!instanciaJanela->m_inputs.isKeyPressed("MouseE"))
+                    m_arrastando = false;
+                /// Caso dentro do campo
+                if(!m_arrastando && mouseEmCima() && instanciaJanela->m_inputs.isKeyPressed("MouseE")) {
+                    m_arrastando = true;
+                }
+                return m_arrastando;
             }
         };
     }

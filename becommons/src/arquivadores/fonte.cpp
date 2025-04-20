@@ -31,7 +31,7 @@ SOFTWARE.
 
 namespace BECOMMONS_NS
 {
-    std::map<std::string, std::pair<const unsigned char*, unsigned int>> fontes_memoria
+    std::unordered_map<std::string, std::pair<const unsigned char*, unsigned int>> fontes_memoria
     {
         {"consolas.ttf", std::pair(Consolas_ttf, Consolas_ttf_len)},
         {"consolai.ttf", std::pair(consolai_ttf, consolai_ttf_len)},
@@ -92,7 +92,7 @@ namespace BECOMMONS_NS
 
         FT_Set_Pixel_Sizes(face, 0, resolucao);
 
-        std::map<char32_t, caractere> caracteres;
+        t_Caracteres caracteres;
 
         glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
         for (unsigned int c = 0; c < 128; c++)
@@ -132,12 +132,12 @@ namespace BECOMMONS_NS
             caracteres.emplace(c, character);
         }
 
-        fontes.emplace(FonteID(nome_da_fonte, resolucao), caracteres);
+        fontes.emplace(t_FonteID(nome_da_fonte, resolucao), caracteres);
 
         FT_Done_Face(face);
     }
 
-    const std::map<char32_t, caractere>& gerenciadorFontes::obter(const std::string& nome_da_fonte, const unsigned int resolucao) const
+    const t_Caracteres& gerenciadorFontes::obter(const std::string& nome_da_fonte, const unsigned int resolucao) const
     {
         auto it = fontes.find({nome_da_fonte, resolucao});
         if (it != fontes.end())

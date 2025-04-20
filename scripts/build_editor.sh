@@ -35,8 +35,8 @@ fi
 
 # Compilar o editor
 cd "$EDITOR_DIR" || exit 1
-mkdir -p build
-cd build || exit 1
+mkdir -p out
+cd out || exit 1
 cmake .. && cmake --build .
 
 # Executar o editor

@@ -35,6 +35,7 @@ SOFTWARE.
 #include "namespace.hpp"
 #include "componente.hpp"
 #include "transformacao.hpp"
+#include "elementos/imagem.hpp"
 #include "util/skybox.hpp"
 #include "util/cor.hpp"
 #include "util/raio.hpp"
@@ -52,6 +53,8 @@ namespace BECOMMONS_NS {
 		 */
 
         skybox* m_skybox{nullptr};
+        std::unique_ptr<elementos::imagem> framebuffer_ptr{nullptr};
+        elementos::imagem* imagem_ptr{nullptr};
 		cor ceu				{0.43F, 0.78F, 0.86F, 1.0F};
 
 		glm::vec3 forward, direita, cima, posicao;

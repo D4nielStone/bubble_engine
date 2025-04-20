@@ -264,7 +264,7 @@ int BECOMMONS_NS::texturaDoArquivo(const std::string& directory,GLuint tipo_text
             format = GL_RGBA;
 
         glBindTexture(GL_TEXTURE_2D, textureID);
-        glTexImage2D(tipo_textura, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, data);
+        glTexImage2D(tipo_textura, 0, GL_SRGB_ALPHA, width, height, 0, format, GL_UNSIGNED_BYTE, data);
         glGenerateMipmap(GL_TEXTURE_2D);
         glActiveTexture(GL_TEXTURE0);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
@@ -303,7 +303,7 @@ int BECOMMONS_NS::texturaDoArquivo(const std::string& directory, int* width_ptr 
             format = GL_RGBA;
 
         glBindTexture(GL_TEXTURE_2D, textureID);
-        glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, data);
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_SRGB_ALPHA, width, height, 0, format, GL_UNSIGNED_BYTE, data);
         glGenerateMipmap(GL_TEXTURE_2D);
         glActiveTexture(GL_TEXTURE0);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
@@ -342,7 +342,7 @@ int BECOMMONS_NS::texturaDoArquivo(const std::string& directory, double* width_p
             format = GL_RGBA;
 
         glBindTexture(GL_TEXTURE_2D, textureID);
-        glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, data);
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_SRGB_ALPHA, width, height, 0, format, GL_UNSIGNED_BYTE, data);
         glGenerateMipmap(GL_TEXTURE_2D);
         glActiveTexture(GL_TEXTURE0);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
@@ -373,7 +373,7 @@ int BECOMMONS_NS::texturaDoArquivo(unsigned char* data, unsigned int width, unsi
             format = GL_RGBA;
 
         glBindTexture(GL_TEXTURE_2D, textureID);
-        glTexImage2D(GL_TEXTURE_2D, 0, format, 500, 500, 0, format, GL_UNSIGNED_BYTE, data);
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_SRGB_ALPHA, 500, 500, 0, format, GL_UNSIGNED_BYTE, data);
         glGenerateMipmap(GL_TEXTURE_2D);
 
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
@@ -522,7 +522,7 @@ GLuint textureLoader::carregarSkyboxMemoria(const std::vector<std::string> faces
             format = GL_RGBA;
             if (img.carregado) {
                 glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i,
-                    0, format, width, height, 0, format, GL_UNSIGNED_BYTE, img.obterDados());
+                    0, GL_SRGB_ALPHA, width, height, 0, format, GL_UNSIGNED_BYTE, img.obterDados());
             } else {
                 std::cerr << "Falha ao carregar a textura da skybox da memória: " << faces[i] << std::endl;
             }

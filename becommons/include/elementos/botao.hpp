@@ -35,49 +35,70 @@ namespace BECOMMONS_NS{
     namespace elementos{
         struct botao : area_de_toque
         {
-            /// Ponteiros para aparência
-            std::unique_ptr<imagem> m_imagem    { nullptr };
-            std::unique_ptr<texto>  m_texto     { nullptr };
             /// @name Construtores com ponteiro para aparência
             /// @{
-            botao(const std::function<void()> &fctn, std::unique_ptr<texto> txt)    : area_de_toque(fctn), m_texto(std::move(txt)) {
+            botao(const std::function<void()> &fctn, std::unique_ptr<texto> m_texto)    : area_de_toque(fctn) {
+                cfgTexto(m_texto.get());
+                m_filhos.push_back(std::move(m_texto));
             }
-            botao(const std::function<void()> &fctn, std::unique_ptr<imagem> img)   : area_de_toque(fctn), m_imagem(std::move(img)) {
+            botao(const std::function<void()> &fctn, std::unique_ptr<imagem> m_imagem)   : area_de_toque(fctn) {
+                cfgImagem(m_imagem.get());
+                m_filhos.push_back(std::move(m_imagem));
             }
-            botao(bool* ptr, std::unique_ptr<imagem> img)                           : area_de_toque(ptr), m_imagem(std::move(img)) {
+            botao(bool* ptr, std::unique_ptr<imagem> m_imagem)                           : area_de_toque(ptr) {
+                cfgImagem(m_imagem.get());
+                m_filhos.push_back(std::move(m_imagem));
+            }
+            botao(bool* ptr, std::unique_ptr<texto> m_texto)                           : area_de_toque(ptr) {
+                cfgTexto(m_texto.get());
+                m_filhos.push_back(std::move(m_texto));
             }
             /// @}
             /// @name Construtores de texto simplificado
             /// @{
-            botao(const std::function<void()> &fctn, const std::string& txt) : area_de_toque(fctn), m_texto(std::make_unique<texto>(txt)) {
+            botao(const std::function<void()> &fctn, const std::string& txt) : area_de_toque(fctn) {
+                auto m_texto = std::make_unique<texto>(txt);
+                cfgTexto(m_texto.get());
+                m_filhos.push_back(std::move(m_texto));
             }
-            botao(bool* ptr, const std::string& txt) : area_de_toque(ptr), m_texto(std::make_unique<texto>(txt)) {
+            botao(bool* ptr, const std::string& txt) : area_de_toque(ptr) {
+                auto m_texto = std::make_unique<texto>(txt);
+                cfgTexto(m_texto.get());
+                m_filhos.push_back(std::move(m_texto));
             }
             /// @}
             ~botao() {
             }
-            bool pressionado() override
-            {
-                m_cor_borda.a = 0.f;
-                if(m_imagem)
-                {
-                    m_imagem->m_limites.z = m_largura;
-                    m_imagem->m_limites.w = m_altura;
-                    m_imagem->m_limites.x = m_limites.x;
-                    m_imagem->m_limites.y = m_limites.y;
-                }
-                if(m_texto)
-                {
-                    m_altura = m_texto->m_texto_escala + m_padding_geral.y;
-                    m_largura = m_texto->obterLargura(m_texto->m_texto_frase) + m_padding_geral.x;
-                    
-                    m_texto->m_limites.x = m_limites.x + m_padding_geral.x/2;
-                    m_texto->m_limites.y = m_limites.y+ m_padding_geral.y/2;
-                    m_texto->m_flag_estilo = m_flag_estilo;
-                }
+            inline void cfgImagem(imagem* m_imagem) {
+                m_flag_estilo = flag_estilo::modular;
+
+                m_imagem->m_altura = m_altura;
+                m_imagem->m_largura = m_largura;
+                m_imagem->m_flag_estilo = m_flag_estilo;
+                m_largura += m_padding_geral.x * 2;
+            }
+            inline void cfgTexto(texto* m_texto) {
+                m_flag_estilo = flag_estilo::modular;
+                
+                m_largura = m_texto->obterLargura(m_texto->m_texto_frase) + m_padding_geral.x * 2;
+                
+                m_texto->m_flag_estilo = m_flag_estilo;
+            }
+            bool pressionado() override {
                 m_pressionado = area_de_toque::pressionado();
-                if(m_mouse_cima) m_cor_borda.a = 1.f;
+                m_cor_borda.a = m_mouse_cima ? 1.f : 0.f;
                 return m_pressionado;
+            }
+            void configurar() override {
+                for(auto& f : m_filhos) {
+                    if(auto img = dynamic_cast<imagem*>(f.get())) {
+
+                        cfgImagem(img);
+                    } else
+                    if(auto txt = dynamic_cast<texto*>(f.get())) {
+                        cfgTexto(txt);
+                    }
+                }
             }
         };  
     } // elementos

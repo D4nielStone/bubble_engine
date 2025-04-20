@@ -38,17 +38,33 @@ glm::mat4 proj(1.f);
 inline void atualizarLJ(caixa* it_caixa)
 {
     const bool is_horizontal = it_caixa->m_orientacao_modular == caixa::orientacao::horizontal;
-    float mais_largo = 0.f; float mais_alto = 0.f;
+    float mais_largo = 0.f;
     if(!it_caixa->m_ativo) return;
     for(auto& filho : it_caixa->m_filhos)
     {
-        if(!filho->m_ativo) continue;
+        if(!filho->m_ativo || filho->tem_flag(flag_estilo::largura_percentual)) continue;
         if(!is_horizontal && it_caixa->tem_flag(flag_estilo::largura_justa))
         {
         // Calcular largura justa
         mais_largo = std::max(mais_largo, filho->m_largura + filho->m_padding.x*2 + it_caixa->m_padding_geral.x*2);
         // Definir dimensão da caixa pai
         it_caixa->m_largura = mais_largo;
+        }
+    }
+}
+inline void atualizarAJ(caixa* it_caixa)
+{
+    const bool is_horizontal = it_caixa->m_orientacao_modular == caixa::orientacao::horizontal;
+    float mais_alto = 0.f;
+    if(!it_caixa->m_ativo) return;
+    for(auto& filho : it_caixa->m_filhos)
+    {
+        if(!filho->m_ativo || filho->tem_flag(flag_estilo::altura_percentual)) continue;
+        if(is_horizontal && it_caixa->tem_flag(flag_estilo::altura_justa)){
+        // Calcular largura justa
+        mais_alto = std::max(mais_alto, filho->m_altura + filho->m_padding.y*2 + it_caixa->m_padding_geral.y*2);
+        // Definir dimensão da caixa pai
+        it_caixa->m_altura = mais_alto;
         }
     }
 }
@@ -67,26 +83,19 @@ inline void atualizarHDTF(caixa* it_caixa, std::function<void(caixa*)> func) {
 void bubble_gui::desenhar_caixa(caixa* c)
 {
     if(!c->m_ativo) return;
-    if(c->m_cor_fundo.a != 0)
-    {
+    if(c->m_cor_fundo.a != 0) {
         renderizarFundo(c, quad_shader);
     }
     
     if(auto txt = dynamic_cast<elementos::texto*>(c)){
         // Renderizar texto 
         renderizarTexto(txt);
-    }else
+    } else
     if(auto btn = dynamic_cast<elementos::botao*>(c)){
         // Renderizar botao
         if(btn->pressionado())
             funcoes.push(btn->m_funcao);
-        
-        if(btn->m_imagem)
-            renderizarImagem(btn->m_imagem.get());
-        if(btn->m_texto)
-            renderizarTexto(btn->m_texto.get());
-    }else
-    
+    } else
     if(auto img = dynamic_cast<elementos::imagem*>(c)){
         // Renderizar imagem
         img->m_imagem_tamanho.x = img->m_limites.z; // o m_imagem_tamanho serve para de ponteiro para viewport da camera
@@ -96,8 +105,7 @@ void bubble_gui::desenhar_caixa(caixa* c)
 
     for(auto& filho : c->m_filhos)
     {
-        if(filho->m_ativo 
-                && filho->m_limites.x < c->m_limites.x + c->m_limites.z
+        if(     filho->m_limites.x < c->m_limites.x + c->m_limites.z
                 && filho->m_limites.y < c->m_limites.y + c->m_limites.w)
         desenhar_caixa(filho.get());
     }
@@ -113,6 +121,7 @@ void BECOMMONS_NS::renderizarImagem(elementos::imagem* img)
     img->m_imagem_shader->setVec2("resolucao_textura", img->m_limites.z, img->m_limites.w);
     img->m_imagem_shader->setCor("cor_borda", img->m_cor_borda);
     img->m_imagem_shader->setInt("textura", 0);
+    img->m_imagem_shader->setFloat("time", instanciaJanela->m_tempo.obterDeltaTime());
     img->m_imagem_shader->setInt("tamanho_bordas", img->m_espessura_borda);
     img->m_imagem_shader->setBool("mostrar_bordas", img->m_cor_borda.a != 0);
     img->m_imagem_shader->setBool("flip", img->m_imagem_flip);
@@ -312,8 +321,10 @@ instanciaJanela->tamanho.y
         funcoes.pop();
     }
 
-    // Ajusta largura de último-primeiro
+    // ajusta largura de último-primeiro
     atualizarHDTF(raiz.get(), atualizarLJ);
+    // ajusta altura de último-primeiro
+    atualizarHDTF(raiz.get(), atualizarAJ);
     
     atualizarFilhos(raiz.get());
     desenhar_caixa(raiz.get());
@@ -386,8 +397,8 @@ void bubble_gui::atualizarFilhos(caixa* it_caixa)
         
         // Segunda passagem: aplicar dimensões e posicionamento para ambas as direções
         if(is_horizontal) {
-
-            float cursor_principal = it_caixa->m_limites.x;
+            
+            float cursor_principal = it_caixa->tem_flag(flag_estilo::alinhamento_fim) ? it_caixa->m_limites.x + it_caixa->m_limites.z : it_caixa->m_limites.x;
             float cursor_secundario = it_caixa->m_limites.y;
             
             // Se a flag de alinhamento central estiver ativa, recalcula o cursor principal
@@ -409,6 +420,9 @@ void bubble_gui::atualizarFilhos(caixa* it_caixa)
                 cursor_principal = inicio + (espaco_disponivel_principal - total_tamanho_principal) / 2;
             }
             
+            // Passagem
+            if(!it_caixa->m_filhos.empty() && it_caixa->tem_flag(flag_estilo::alinhamento_fim))
+                cursor_principal -= it_caixa->m_filhos[0]->m_largura;
             for(auto& filho : it_caixa->m_filhos)
             {
                 if(!filho->m_ativo) continue;
@@ -429,10 +443,17 @@ void bubble_gui::atualizarFilhos(caixa* it_caixa)
                     tamanho_secundario = filho->m_altura;
                 
                 // Posicionamento horizontal (eixo principal)
-                cursor_principal += filho->m_padding.x + it_caixa->m_padding_geral.x;
+                if(it_caixa->tem_flag(flag_estilo::alinhamento_fim))
+                    cursor_principal -= filho->m_padding.x + it_caixa->m_padding_geral.x;
+                else
+                    cursor_principal += filho->m_padding.x + it_caixa->m_padding_geral.x;
+                
                 filho->m_limites.x = cursor_principal;
-                    filho->m_limites.z = tamanho_principal;
-                cursor_principal += tamanho_principal + filho->m_padding.x;
+                filho->m_limites.z = tamanho_principal;
+                if(it_caixa->tem_flag(flag_estilo::alinhamento_fim))
+                    cursor_principal -= tamanho_principal + filho->m_padding.x;
+                else
+                    cursor_principal += tamanho_principal + filho->m_padding.x;
                 
                 // Posicionamento vertical (eixo secundário)
                 filho->m_limites.y = cursor_secundario + filho->m_padding.y + it_caixa->m_padding_geral.y;
@@ -498,12 +519,7 @@ void bubble_gui::atualizarFilhos(caixa* it_caixa)
                         float largura_fixa = (f->tem_flag(flag_estilo::largura_percentual)) ?
                             (it_caixa->m_limites.z * f->m_largura) : f->m_largura;
                         float largura_total = largura_fixa + f->m_crescimento_modular * unidade_crescimento;
-                        
-                        // Posicionamento horizontal do filho
-                        f->m_limites.x = cursor_horizontal + f->m_padding.x;
-                            f->m_limites.z = largura_total;
-                        cursor_horizontal += f->m_limites.z + f->m_padding.x;
-                        
+                         
                         // Posicionamento vertical do grupo (todos na mesma linha)
                         f->m_limites.y = cursor_vertical + f->m_padding.y + it_caixa->m_padding_geral.y;
                         float altura_fixa = (f->tem_flag(flag_estilo::altura_percentual)) ?
@@ -511,6 +527,10 @@ void bubble_gui::atualizarFilhos(caixa* it_caixa)
                         float altura_total = altura_fixa + f->m_crescimento_modular * unidade_crescimento;
                             f->m_limites.w = altura_total;
                         
+                        // Posicionamento horizontal do filho
+                        f->m_limites.x = cursor_horizontal + f->m_padding.x;
+                        f->m_limites.z = f->m_ligar_la ? f->m_limites.w : largura_total;
+                        cursor_horizontal += f->m_limites.z + f->m_padding.x;
                         // Atualiza a altura máxima do grupo (considerando padding)
                         altura_max_grupo = std::max(altura_max_grupo, f->m_limites.w + f->m_padding.y);
                         
@@ -545,95 +565,104 @@ void bubble_gui::atualizarFilhos(caixa* it_caixa)
     }
 }
 void bubble_gui::removerElemento(const std::string& id) {
-                if(caixas.find(id) == caixas.end()) return;
-                for(auto& filho : caixas[id]->m_filhos)
-                {
-                    caixas.erase(filho->m_id);
-                }
-                caixas[id]->m_filhos.clear();
-                caixas.erase(id);
-            }
-            void bubble_gui::removerFilhos(const std::string& id)
-            {
-                if(caixas.find(id) == caixas.end()) return;
-                for(auto& filho : caixas[id]->m_filhos)
-                {
-                    caixas.erase(filho->m_id);
-                }
-                caixas[id]->m_filhos.clear();
-            }
+    if(caixas.find(id) == caixas.end()) return;
+    for(auto& filho : caixas[id]->m_filhos)
+    {
+        caixas.erase(filho->m_id);
+    }
+    caixas[id]->m_filhos.clear();
+    caixas.erase(id);
+}
+void bubble_gui::removerFilhos(const std::string& id)
+{
+    if(caixas.find(id) == caixas.end()) return;
+    for(auto& filho : caixas[id]->m_filhos)
+    {
+        caixas.erase(filho->m_id);
+    }
+    caixas[id]->m_filhos.clear();
+}
 
-            caixa* bubble_gui::obterElemento(const std::string& id) {
-            auto it = caixas.find(id);
-            if (it != caixas.end()) {
-                return it->second;
-            }
-            return nullptr;
-            }
+caixa* bubble_gui::obterElemento(const std::string& id) {
+auto it = caixas.find(id);
+if (it != caixas.end()) {
+    return it->second;
+}
+return nullptr;
+}
 
-            // Funções de estilo
-            void bubble_gui::novoEstilo(){
-                estilo_atual.clear();
-            };
-            void bubble_gui::defFlags(const flag_estilo v){
-                for(auto& id : estilo_atual){
-                    obterElemento(id)->m_flag_estilo = v;
-                }
-            }
-            void bubble_gui::defLargura(const double v){
-                for(auto& id : estilo_atual){
-                    obterElemento(id)->m_largura = v;
-                    obterElemento(id)->m_flag_estilo |= flag_estilo::largura_percentual;
-                }
-            }
-            void bubble_gui::defAltura(const double v){
-                for(auto& id : estilo_atual){
-                    obterElemento(id)->m_altura = v;
-                    obterElemento(id)->m_flag_estilo |= flag_estilo::altura_percentual;
-                }
-            }
-            void bubble_gui::defLargura(const int v){
-                for(auto& id : estilo_atual){
-                    obterElemento(id)->m_largura = v;
-                }
-            }
-            void bubble_gui::defAltura(const int v){
-                for(auto& id : estilo_atual){
-                    obterElemento(id)->m_altura = v;
-                }
-            }
-            void bubble_gui::defOrientacao(const caixa::orientacao v){
-                for(auto& id : estilo_atual){
-                    obterElemento(id)->m_orientacao_modular = v;
-                }
-            }
-            void bubble_gui::defPaddingG(const int v1, const int v2){
-                for(auto& id : estilo_atual){
-                    obterElemento(id)->m_padding_geral = {v1, v2};
-                }
-            }
-            void bubble_gui::defPadding(const int v1, const int v2){
-                for(auto& id : estilo_atual){
-                    obterElemento(id)->m_padding = {v1, v2};
-                }
-            }
-            void bubble_gui::defCorBorda(const cor v){
-                for(auto& id : estilo_atual){
-                    obterElemento(id)->m_cor_borda = v;
-                }
-            }
-            void bubble_gui::defCorFundo(const cor v){
-                for(auto& id : estilo_atual){
-                    obterElemento(id)->m_cor_fundo = v;
-                }
-            }
-            void bubble_gui::defCrescimentoM(const float v){
-                for(auto& id : estilo_atual){
-                    obterElemento(id)->m_crescimento_modular = v;
-                }
-            }
-            void bubble_gui::defTamanhoBorda(const int v){
-                for(auto& id : estilo_atual){
-                    obterElemento(id)->m_espessura_borda = v;
-                }
-            }
+// Funções de estilo
+void bubble_gui::fimEstilo(){
+    for(auto& caixa : estilo_atual) {
+        caixa->configurar();
+        caixas[caixa->m_id] = caixa;
+    }
+    estilo_atual.clear();
+};
+void bubble_gui::defFlags(const flag_estilo v){
+    for(auto& caixa : estilo_atual){
+        caixa->m_flag_estilo = v;
+    }
+}
+void bubble_gui::defLargura(const double v){
+    for(auto& caixa : estilo_atual){
+        caixa->m_largura = v;
+        caixa->m_flag_estilo |= flag_estilo::largura_percentual;
+    }
+}
+void bubble_gui::defLarguraAltura(const bool b){
+    for(auto& caixa : estilo_atual){
+        caixa->m_ligar_la = b;
+    }
+}
+void bubble_gui::defAltura(const double v){
+    for(auto& caixa : estilo_atual){
+        caixa->m_altura = v;
+        caixa->m_flag_estilo |= flag_estilo::altura_percentual;
+    }
+}
+void bubble_gui::defLargura(const int v){
+    for(auto& caixa : estilo_atual){
+        caixa->m_largura = v;
+    }
+}
+void bubble_gui::defAltura(const int v){
+    for(auto& caixa : estilo_atual){
+        caixa->m_altura = v;
+    }
+}
+void bubble_gui::defOrientacao(const caixa::orientacao v){
+    for(auto& caixa : estilo_atual){
+        caixa->m_orientacao_modular = v;
+    }
+}
+void bubble_gui::defPaddingG(const int v1, const int v2){
+    for(auto& caixa : estilo_atual){
+        caixa->m_padding_geral = {v1, v2};
+    }
+}
+void bubble_gui::defPadding(const int v1, const int v2){
+    for(auto& caixa : estilo_atual){
+        caixa->m_padding = {v1, v2};
+    }
+}
+void bubble_gui::defCorBorda(const cor v){
+    for(auto& caixa : estilo_atual){
+        caixa->m_cor_borda = v;
+    }
+}
+void bubble_gui::defCorFundo(const cor v){
+    for(auto& caixa : estilo_atual){
+        caixa->m_cor_fundo = v;
+    }
+}
+void bubble_gui::defCrescimentoM(const float v){
+    for(auto& caixa : estilo_atual){
+        caixa->m_crescimento_modular = v;
+    }
+}
+void bubble_gui::defTamanhoBorda(const int v){
+    for(auto& caixa : estilo_atual){
+        caixa->m_espessura_borda = v;
+    }
+}

@@ -152,15 +152,15 @@ void gerenciador_projetos::atualizarElementos(const std::string& Dir)
 {
     gui.removerFilhos("barra_lateral");
     // Barra Lateral (    Texto acima    )
-    gui.novoEstilo();
+    gui.fimEstilo();
         gui.adicionarElemento<elementos::texto>("barra_lateral", "texto1", "Projetos encontrados", 20, elementos::flags_texto::alinhamento_central);
         gui.defLargura(1.0);
     // Iteração pastas
-    gui.novoEstilo();
+    gui.fimEstilo();
         for (const auto& entry : std::filesystem::recursive_directory_iterator(Dir)) {
             if (entry.is_regular_file() && entry.path().filename() == "config.json") {
                 auto caminhoEncontrado = entry.path().parent_path().string();
-                gui.novoEstilo();    
+                gui.fimEstilo();    
                 gui.adicionarElemento<elementos::botao>("barra_lateral", "abrirProjeto", 
                 [caminhoEncontrado](){
         
@@ -187,8 +187,9 @@ void gerenciador_projetos::atualizarElementos(const std::string& Dir)
                 , std::make_unique<elementos::imagem>("folder.png"));
                 gui.defLargura(40);
                 gui.defAltura(40);
-                gui.novoEstilo();    
+                gui.fimEstilo();    
                 gui.adicionarElemento<elementos::texto>("barra_lateral", caminhoEncontrado, caminhoEncontrado);
+                gui.fimEstilo();    
             }
         }
 }
@@ -212,23 +213,24 @@ void gerenciador_projetos::iniciar()
     gui.adicionarFlags("raiz", flag_estilo::modular);
     
     // configura interface
-    gui.novoEstilo();
     gui.adicionarElemento<caixa>("raiz", "barra_lateral");
         gui.defFlags(flag_estilo::modular | flag_estilo::largura_justa);
         gui.defOrientacao(caixa::orientacao::vertical);
         gui.defCorFundo({0.1, 0.1, 0.1, 1});
         gui.defPaddingG(5, 5);
         gui.defAltura(1.0);
+    gui.fimEstilo();
     
     atualizarElementos(DIR_PADRAO);
     // Area Maior
-    gui.novoEstilo();
         gui.adicionarElemento<caixa>("raiz", "area_maior");
         gui.defFlags(flag_estilo::modular | flag_estilo::alinhamento_central);
         gui.defAltura(1.0);
         gui.defCrescimentoM(1.0);
-    gui.novoEstilo();
-        gui.adicionarElemento<elementos::botao>("area_maior", "add", [this](){criarProjetoPadrao(DIR_PADRAO, "Juquinha");}, std::make_unique<elementos::texto>("+", 48));
+    gui.fimEstilo();
+        gui.adicionarElemento<elementos::botao>("area_maior", "add", [this](){criarProjetoPadrao(DIR_PADRAO, "Juquinha");}, std::make_unique<elementos::texto>("+", 128));
+        gui.defAltura(128);
+    gui.fimEstilo();
     while(!glfwWindowShouldClose(instanciaJanela->window))
     {
         instanciaJanela->poll();
