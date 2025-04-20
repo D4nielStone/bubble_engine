@@ -72,6 +72,9 @@ janela::janela(const char* nome, BECOMMONS_NS::vetor2<double> bounds, const char
         abort();
     }
     
+    const GLubyte* versao = glGetString(GL_VERSION);    
+    debug::emitir(info, "Versão opengl: " + std::string(versao) + ".");
+
     if(icon_path)
     {
     imageLoader _icone(icon_path);
