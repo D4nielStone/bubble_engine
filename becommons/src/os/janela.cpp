@@ -72,8 +72,6 @@ janela::janela(const char* nome, BECOMMONS_NS::vetor2<double> bounds, const char
         abort();
     }
     
-    const GLubyte* versao = glGetString(GL_VERSION);    
-    debug::emitir(info, "Versão opengl: " + std::string(versao) + ".");
 
     if(icon_path)
     {
@@ -118,12 +116,15 @@ if(f)
 
     glfwMakeContextCurrent(window);
 
+
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
     {
         depuracao::emitir(erro, "Glad");
         abort();
     }
     
+    const GLubyte* versao = glGetString(GL_VERSION);    
+    depuracao::emitir(info, "Versão opengl: " + std::string(reinterpret_cast<const char*>(versao)) + ".");
     if(icon_path)
     {
     imageLoader _icone(icon_path);
