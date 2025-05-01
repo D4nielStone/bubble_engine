@@ -22,6 +22,10 @@ jobs:
         cmake ninja-build build-essential \
         liblua5.3-0 libglm-dev libglfw3 libassimp-dev libfreeimage-dev rapidjson-dev libbullet-dev libfreetype6-dev
 
+    - name: Download LuaBridge
+      run: |
+        git clone https://github.com/vinniefalco/LuaBridge.git /tmp/LuaBridge
+        sudo cp -r /tmp/LuaBridge/Include/LuaBridge /usr/local/include/
 
     - name: Run tests
       run: ./scripts/run_tests.sh
