@@ -43,7 +43,10 @@ jobs:
           Lua glm glfw3 assimp freeimage rapidjson bullet3 freetype LuaBridge
 
     - name: Build and Run tests ( Linux )
+      if: runner.os == 'Linux'
       run: ./scripts/run_tests.sh
 
     - name: Build and Run tests ( Windows )
+      if: runner.os == 'Windows'
+      shell: powershell
       run: bash scripts/run_tests.sh
