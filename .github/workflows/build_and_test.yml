@@ -28,6 +28,6 @@ jobs:
 
     - name: Check Lua installation
       run: |
-        lua -v || echo "Lua not found"i
+        lua -v || echo "Lua not found"
         ls /usr/include/lua5.4/ || echo "Headers not found"
         ls /usr/lib/x86_64-linux-gnu/liblua5.4.* || echo "Libraries not found"
