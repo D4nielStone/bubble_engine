@@ -26,7 +26,13 @@ build_project() {
     cd "$OUT_DIR"
 
     if [ "$IS_WINDOWS" = true ]; then
-        cmake .. -DCMAKE_TOOLCHAIN_FILE="$VCPKG_TOOLCHAIN_FILE" -DCMAKE_BUILD_TYPE=Debug
+        # Set GCC as the compiler explicitly
+        cmake .. \
+            -G "MinGW Makefiles" \
+            -DCMAKE_TOOLCHAIN_FILE="$VCPKG_TOOLCHAIN_FILE" \
+            -DCMAKE_BUILD_TYPE=Debug \
+            -DCMAKE_C_COMPILER=gcc \
+            -DCMAKE_CXX_COMPILER=g++    
     else
         cmake .. -DCMAKE_BUILD_TYPE=Debug
     fi
