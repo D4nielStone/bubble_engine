@@ -25,7 +25,7 @@ jobs:
     - name: Download LuaBridge
       run: |
         git clone https://github.com/vinniefalco/LuaBridge.git /tmp/LuaBridge
-        sudo cp -r /tmp/LuaBridge/Include/LuaBridge /usr/local/include/
+        sudo cp -r /tmp/LuaBridge/Source/LuaBridge /usr/local/include
 
     - name: Run tests
       run: ./scripts/run_tests.sh
