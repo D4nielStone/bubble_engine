@@ -25,7 +25,7 @@ SOFTWARE.
  */
 
 #pragma once
-#include <glad/glad.h>
+#include "glad.h"
 #include <string>
 #include <filesystem>
 #include "area_de_toque.hpp"

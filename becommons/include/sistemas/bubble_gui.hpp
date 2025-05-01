@@ -24,7 +24,7 @@ SOFTWARE.
  * @file bubble_gui.hpp
  */
 
-#include <glad/glad.h>
+#include "glad.h"
 #include <unordered_map>
 #include <memory>
 #include <set>

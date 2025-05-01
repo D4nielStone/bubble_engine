@@ -10,7 +10,7 @@
  */
 #pragma once
 #include "editor_namespace.hpp"
-#include <glad/glad.h>
+#include "glad.h"
 #include <GLFW/glfw3.h>
 #include <filesystem>
 #include "becommons/becommons.hpp"

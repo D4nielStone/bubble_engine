@@ -26,7 +26,7 @@ SOFTWARE.
  */
 
 #include "namespace.hpp"
-#include <glad/glad.h>
+#include "glad.h"
 #include "nucleo/sistema_de_interface.hpp"
 #include "componentes/renderizador.hpp"
 #include "componentes/transformacao.hpp"

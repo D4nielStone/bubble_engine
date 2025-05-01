@@ -5,8 +5,8 @@ set(CMAKE_CXX_STANDARD 20)
 
 include_directories(
     ${CMAKE_SOURCE_DIR}
-    ${CMAKE_SOURCE_DIR}/include
-    ${CMAKE_SOURCE_DIR}/../libs/
+    ./include
+    ../libs/glad
     /usr/include/lua5.3
     /usr/include/glm
     /usr/include/GLFW
@@ -32,7 +32,7 @@ target_include_directories(becommons PUBLIC ${CMAKE_SOURCE_DIR}/src)
 # Adicionar os arquivos de código fonte da biblioteca
 target_sources(becommons PRIVATE
     src/api/api_lua.cpp
-    ${CMAKE_SOURCE_DIR}/../libs/glad/glad.c
+    ../libs/glad/glad.c
     src/arquivadores/fonte.cpp
     src/nucleo/registro.cpp
     src/arquivadores/imageloader.cpp

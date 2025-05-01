@@ -26,7 +26,7 @@ SOFTWARE.
  */
 
 #include "namespace.hpp"
-#include <glad/glad.h>
+#include "glad.h"
 #include "util/malha.hpp"
 #include "util/material.hpp"
 #include "depuracao/debug.hpp"

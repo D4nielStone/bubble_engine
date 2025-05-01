@@ -31,7 +31,7 @@ SOFTWARE.
 #include <functional>
 #include <memory>
 #include <unordered_map>
-#include <glad/glad.h>
+#include "glad.h"
 #include <GLFW/glfw3.h>
 #include "namespace.hpp"
 #include "tempo.hpp"

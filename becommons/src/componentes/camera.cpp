@@ -24,7 +24,7 @@ SOFTWARE.
  * @file camera.cpp
  */
 
-#include <glad/glad.h>
+#include "glad.h"
 
 #include "depuracao/debug.hpp"
 #include "componentes/camera.hpp"

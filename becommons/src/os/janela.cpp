@@ -26,7 +26,7 @@ SOFTWARE.
  */
 #include <stdexcept>
 #include "namespace.hpp"
-#include <glad/glad.h>
+#include "glad.h"
 #include "GLFW/glfw3.h"
 #include "os/janela.hpp"
 #include "depuracao/debug.hpp"

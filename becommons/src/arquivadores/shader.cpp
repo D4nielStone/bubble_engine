@@ -24,7 +24,7 @@ SOFTWARE.
  * @file shader.cpp
  */
 
-#include <glad/glad.h>
+#include "glad.h"
 #include "arquivadores/shader.hpp"
 #include <filesystem>
 #include "assets/shaders_na_memoria.hpp"

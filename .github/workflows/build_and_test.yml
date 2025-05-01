@@ -29,9 +29,3 @@ jobs:
 
     - name: Run tests
       run: ./scripts/run_tests.sh
-
-    - name: Check Lua installation
-      run: |
-        lua -v || echo "Lua not found"
-        ls /usr/include/lua5.3/ || echo "Headers not found"
-        ls /usr/lib/x86_64-linux-gnu/liblua5.3.* || echo "Libraries not found"

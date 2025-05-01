@@ -25,7 +25,7 @@ SOFTWARE.
  */
 
 #pragma once
-#include <glad/glad.h>
+#include "glad.h"
 #include <GLFW/glfw3.h>
 #include <string>
 #include <unordered_map>

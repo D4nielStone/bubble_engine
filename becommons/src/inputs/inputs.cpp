@@ -24,7 +24,7 @@ SOFTWARE.
  * @file inputs.cpp
  */
 
-#include <glad/glad.h>
+#include "glad.h"
 #include "inputs/inputs.hpp"
 #include <iostream>
 #include <unordered_map>

@@ -26,7 +26,7 @@ SOFTWARE.
  */
 
 #pragma once
-#include <glad/glad.h>
+#include "glad.h"
 #include <string>
 #include <map>
 #include <unordered_map>
