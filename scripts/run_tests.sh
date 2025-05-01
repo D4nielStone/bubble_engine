@@ -7,4 +7,4 @@ ROOT_DIR="$(cd "$BASE_DIR/.." && pwd)"
 
 mkdir $ROOT_DIR/testes/out 
 cd $ROOT_DIR/testes/out && cmake .. && cmake --build .
-./testes
+cd $ROOT_DIR/testes/out && ./testes
