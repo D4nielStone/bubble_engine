@@ -29,18 +29,15 @@ jobs:
           liblua5.3-0 liblua5.3-dev libglm-dev libglfw3-dev \
           libassimp-dev libfreeimage-dev rapidjson-dev \
           libbullet-dev libfreetype6-dev
-
         git clone https://github.com/vinniefalco/LuaBridge.git /tmp/LuaBridge
         sudo cp -r /tmp/LuaBridge/Source/LuaBridge /usr/local/include
-
     - name: Install dependencies (Windows)
       if: runner.os == 'Windows'
       shell: powershell
       run: |
         git clone https://github.com/microsoft/vcpkg.git
         .\vcpkg\bootstrap-vcpkg.bat
-        .\vcpkg\vcpkg install lua glm glfw3 assimp freeimage rapidjson bullet3 freetype LuaBridge
-
+      .\vcpkg\vcpkg install lua[core]:x64-windows glm glfw3 assimp freeimage rapidjson bullet3 freetype LuaBridge
     - name: Build and Run tests ( Linux )
       if: runner.os == 'Linux'
       run: ./scripts/run_tests.sh

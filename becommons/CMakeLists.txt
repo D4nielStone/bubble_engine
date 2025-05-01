@@ -98,4 +98,4 @@ install(DIRECTORY include/ DESTINATION include)
 
 # Debug
 add_definitions(-D_DEBUG)
-set(CMAKE_CXX_FLAGS_DEBUG "-g -O0 -Wall -Wextra")
+set(CMAKE_CXX_FLAGS_DEBUG "-g -O0")

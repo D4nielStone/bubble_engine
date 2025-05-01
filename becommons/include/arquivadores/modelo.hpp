@@ -44,7 +44,7 @@ namespace BECOMMONS_NS {
                 carregarmodelo(std::filesystem::absolute(diretorio).string().c_str());
         }
 
-        malha* obterMalha(const int i)
+        malha* obterMalha(size_t i)
         {
             if(i < malhas.size()) {
                 return &malhas[i];

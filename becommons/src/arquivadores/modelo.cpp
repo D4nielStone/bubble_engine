@@ -47,7 +47,7 @@ namespace BECOMMONS_NS
 {
     void modelo::desenhar(shader& shader)
     {
-        for (unsigned int i = 0; i < malhas.size(); i++)
+        for (size_t i = 0; i < malhas.size(); i++)
             malhas[i].desenhar(shader);
     }
 
