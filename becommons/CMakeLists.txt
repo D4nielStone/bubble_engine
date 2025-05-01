@@ -3,33 +3,50 @@ project(becommons)
 
 set(CMAKE_CXX_STANDARD 20)
 
-include_directories(
-    ${CMAKE_SOURCE_DIR}
-    ./include
-    ../libs/glad
-    /usr/include/lua5.3
-    /usr/include/glm
-    /usr/include/GLFW
-    /usr/include/assimp
-    /usr/include/FreeImage
-    /usr/include/rapidjson
-    /usr/include/bullet
-    /usr/include/freetype2
-)
+# Detectar plataforma
+if(WIN32)
+    message(STATUS "Configuring for Windows")
 
+    # Assumir que o vcpkg foi integrado via CMAKE_TOOLCHAIN_FILE
+    # Inclui apenas diretórios locais e relativos
+    include_directories(
+        ${CMAKE_SOURCE_DIR}
+        ./include
+        ../libs/glad
+    )
+
+else()
+    message(STATUS "Configuring for Linux")
+
+    include_directories(
+        ${CMAKE_SOURCE_DIR}
+        ./include
+        ../libs/glad
+        /usr/include/lua5.3
+        /usr/include/glm
+        /usr/include/GLFW
+        /usr/include/assimp
+        /usr/include/FreeImage
+        /usr/include/rapidjson
+        /usr/include/bullet
+        /usr/include/freetype2
+    )
+endif()
+
+# Encontrar pacotes
 find_package(Lua REQUIRED)
 find_package(glfw3 REQUIRED)
 find_package(glm REQUIRED)
 find_package(assimp REQUIRED)
 find_package(RapidJSON REQUIRED)
-find_package(Bullet REQUIRED )
+find_package(Bullet REQUIRED)
 find_package(Freetype REQUIRED)
 
 add_library(becommons STATIC)
 
 target_include_directories(becommons PUBLIC ${CMAKE_SOURCE_DIR}/src)
 
-# Adicionar os arquivos de código fonte da biblioteca
+# Fontes do projeto
 target_sources(becommons PRIVATE
     src/api/api_lua.cpp
     ../libs/glad/glad.c
@@ -59,12 +76,12 @@ target_sources(becommons PRIVATE
     src/os/janela.cpp
 )
 
-# Linkar as bibliotecas necessárias
+# Linkagem
 target_link_libraries(becommons
     PRIVATE
     lua5.3
     glfw
-    glad 
+    glad
     assimp
     FreeImage
     rapidjson
@@ -75,13 +92,10 @@ target_link_libraries(becommons
     Bullet3Common
 )
 
-# Instalar a biblioteca (se necessário)
+# Instalação
 install(TARGETS becommons DESTINATION lib)
 install(DIRECTORY include/ DESTINATION include)
 
-
-# Adicionar definições para o modo de Debug
+# Debug
 add_definitions(-D_DEBUG)
-
-# Definir flags de compilação no modo Debug
 set(CMAKE_CXX_FLAGS_DEBUG "-g -O0 -Wall -Wextra")

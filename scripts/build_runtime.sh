@@ -1,13 +1,40 @@
 #!/usr/bin/env bash
 
-mkdir $(dirname "$0")/../becommons/out 
-cd $(dirname "$0")/../becommons/out && cmake .. && cmake --build .
+set -e
 
-cd ..
-cd ..
+# Caminho raiz do projeto
+ROOT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 
-mkdir runtime/out 
-cd runtime/out && cmake .. && cmake --build .
+# Caminho para o vcpkg no Windows
+VCPKG_TOOLCHAIN_FILE="$ROOT_DIR/vcpkg/scripts/buildsystems/vcpkg.cmake"
 
-cd ..
-cd ..
+# Detectar Windows (Git Bash) ou Linux
+IS_WINDOWS=false
+case "$(uname -s)" in
+    MINGW*|MSYS*|CYGWIN*)
+        IS_WINDOWS=true
+        ;;
+esac
+
+# Função para configurar e compilar um diretório
+build_project() {
+    NAME=$1
+    OUT_DIR="$ROOT_DIR/$NAME/out"
+    echo "Building $NAME..."
+
+    mkdir -p "$OUT_DIR"
+    cd "$OUT_DIR"
+
+    if [ "$IS_WINDOWS" = true ]; then
+        cmake .. -DCMAKE_TOOLCHAIN_FILE="$VCPKG_TOOLCHAIN_FILE" -DCMAKE_BUILD_TYPE=Debug
+    else
+        cmake .. -DCMAKE_BUILD_TYPE=Debug
+    fi
+
+    cmake --build .
+
+    cd "$ROOT_DIR"
+}
+
+build_project becommons
+build_project runtime
