@@ -106,7 +106,9 @@ target_link_libraries(becommons
     freetype
     BulletCollision
     BulletDynamics
-    Bullet3Common
+    Bullet3Common    
+    Bullet::BulletCollision
+    Bullet::LinearMath
 )
 
 endif()
