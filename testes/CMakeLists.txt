@@ -7,8 +7,8 @@ add_library(becommons STATIC IMPORTED)
 set_target_properties(becommons PROPERTIES IMPORTED_LOCATION ${CMAKE_SOURCE_DIR}/../becommons/out/libbecommons.a)
 
 include_directories(
-    ${CMAKE_SOURCE_DIR}/include
-    ${CMAKE_SOURCE_DIR}/../
+    ./include
+    ./../
 )
 
 find_package(Lua REQUIRED)
@@ -25,7 +25,7 @@ add_executable(testes
     src/main.cpp
 )
 
-add_library(glad STATIC /usr/include/glad/glad.c)
+add_library(glad STATIC ../libs/glad/glad.c)
 target_link_libraries(testes PRIVATE glad)
 
 target_include_directories(testes PRIVATE 
@@ -33,7 +33,7 @@ target_include_directories(testes PRIVATE
     /usr/include/lua5.3
     /usr/include/glm
     /usr/include/GLFW
-    /usr/include/glad
+    ../libs/glad
     /usr/include/assimp
     /usr/include
     /usr/include/rapidjson
