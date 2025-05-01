@@ -77,6 +77,23 @@ target_sources(becommons PRIVATE
 )
 
 # Linkagem
+if(WIN32)
+
+target_link_libraries(becommons
+    PRIVATE
+    lua
+    glfw
+    glad
+    assimp
+    FreeImage
+    rapidjson
+    Bullet
+    freetype
+    BulletCollision
+    BulletDynamics
+    Bullet3Common
+    )
+else()
 target_link_libraries(becommons
     PRIVATE
     lua5.3
@@ -92,6 +109,7 @@ target_link_libraries(becommons
     Bullet3Common
 )
 
+endif()
 # Instalação
 install(TARGETS becommons DESTINATION lib)
 install(DIRECTORY include/ DESTINATION include)
