@@ -95,7 +95,7 @@ namespace BECOMMONS_NS {
         unsigned int m_espessura_borda = 1;
         vetor2<int> m_padding = {0, 0};
         vetor2<int> m_padding_geral = {0, 0};
-        vet4 m_limites  {0, 0, 20, 20};
+        fvet4 m_limites  {0, 0, 20, 20};
         cor m_cor_borda {0.1f, 0.1f, 0.1f, 0.f};
         cor m_cor_fundo {0.5f, 0.5f, 0.5f, 0.f};
         

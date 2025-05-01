@@ -6,7 +6,7 @@ var annotated_dup =
       ] ],
       [ "elementos", null, [
         [ "area_de_toque", "structBECOMMONS__NS_1_1elementos_1_1area__de__toque.html", "structBECOMMONS__NS_1_1elementos_1_1area__de__toque" ],
-        [ "botao", "structBECOMMONS__NS_1_1elementos_1_1botao.html", "structBECOMMONS__NS_1_1elementos_1_1botao" ],
+        [ "botao", "structBECOMMONS__NS_1_1elementos_1_1botao.html", null ],
         [ "imagem", "classBECOMMONS__NS_1_1elementos_1_1imagem.html", null ],
         [ "texto", "classBECOMMONS__NS_1_1elementos_1_1texto.html", null ]
       ] ],
@@ -56,15 +56,21 @@ var annotated_dup =
       [ "vetor3", "structBECOMMONS__NS_1_1vetor3.html", null ],
       [ "vetor4", "structBECOMMONS__NS_1_1vetor4.html", null ]
     ] ],
+    [ "betest", null, [
+      [ "registro_testes", "classbetest_1_1registro__testes.html", "classbetest_1_1registro__testes" ]
+    ] ],
     [ "EDITOR_NS", "namespaceEDITOR__NS.html", [
       [ "gerenciador_projetos", "classEDITOR__NS_1_1gerenciador__projetos.html", null ],
       [ "sistema_editor", "structEDITOR__NS_1_1sistema__editor.html", null ]
     ] ],
-    [ "std", null, [
-      [ "hash< BECOMMONS_NS::entidade >", "structstd_1_1hash_3_01BECOMMONS__NS_1_1entidade_01_4.html", null ]
+    [ "std", "namespacestd.html", [
+      [ "hash< BECOMMONS_NS::entidade >", "structstd_1_1hash_3_01BECOMMONS__NS_1_1entidade_01_4.html", null ],
+      [ "hash< t_FonteID >", "structstd_1_1hash_3_01t__FonteID_01_4.html", null ]
     ] ],
     [ "carectere", "structcarectere.html", null ],
     [ "Carregador", "classCarregador.html", null ],
+    [ "CompA", "structCompA.html", null ],
+    [ "CompB", "structCompB.html", null ],
     [ "fase", "structfase.html", null ],
     [ "MyContactCallback", "classMyContactCallback.html", null ]
 ];

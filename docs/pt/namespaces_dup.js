@@ -5,5 +5,6 @@ var namespaces_dup =
     [ "glm", "namespaceglm.html", [
       [ "lerp3", "namespaceglm.html#a801858ea39bd3471ab9979e54ce8bf09", null ],
       [ "operator*", "namespaceglm.html#ab0abbb148889cb6185af0560f3f9e0ab", null ]
-    ] ]
+    ] ],
+    [ "std", "namespacestd.html", "namespacestd" ]
 ];

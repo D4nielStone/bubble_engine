@@ -49,6 +49,6 @@ namespace betest
             /// @param func 
             void adicionar(const std::string& nome, funcao_teste func);
             void classe(const std::string& names_space, const std::string& prefixo);
-            void rodarTestes();
+            int rodarTestes();
     };
 }

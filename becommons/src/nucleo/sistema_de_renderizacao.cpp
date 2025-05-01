@@ -134,7 +134,7 @@ void sistema_renderizacao::atualizarCamera(camera* cam)
 
             s.setVec3("viewPos", cam->posicao.x, cam->posicao.y, cam->posicao.z);
             s.setMat4("projection", glm::value_ptr(cam->obtProjectionMatrix()));
-            s.setVec2("resolution", instanciaJanela->tamanho.x, instanciaJanela->tamanho.y);
+            s.setVec2("resolution", janela::obterInstancia().tamanho.x, janela::obterInstancia().tamanho.y);
             s.setMat4("modelo", transform->obter());
             terr->desenhar(s);
         });
@@ -167,7 +167,7 @@ void sistema_renderizacao::atualizarCamera(camera* cam)
 
             s.setVec3("viewPos", cam->posicao.x, cam->posicao.y, cam->posicao.z);
             s.setMat4("projection", glm::value_ptr(cam->obtProjectionMatrix()));
-            s.setVec2("resolution", instanciaJanela->tamanho.x, instanciaJanela->tamanho.y);
+            s.setVec2("resolution", janela::obterInstancia().tamanho.x, janela::obterInstancia().tamanho.y);
             s.setMat4("modelo", transform->obter());
             render->m_modelo->desenhar(s);
         });
@@ -176,6 +176,6 @@ void sistema_renderizacao::atualizarCamera(camera* cam)
             glBindFramebuffer(GL_FRAMEBUFFER, 0);
             glClearColor(1, 1, 1, 1);
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-            glViewport(0, 0, instanciaJanela->tamanho.x, instanciaJanela->tamanho.y);
+            glViewport(0, 0, janela::obterInstancia().tamanho.x, janela::obterInstancia().tamanho.y);
         }
     }

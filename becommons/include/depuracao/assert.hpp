@@ -29,6 +29,36 @@ SOFTWARE.
 #include <cmath>
 #include <string>
 
+#define ASSERT_NO_THROW(statement)                                          \
+    do {                                                                    \
+        try {                                                               \
+            statement;                                                      \
+        } catch (...) {                                                     \
+        throw std::runtime_error( \
+            "ASSERT_NO_THROW failed: exeption thrown, linha " + std::to_string(__LINE__) \
+            );\
+        }                                                                   \
+    } while (0)
+
+#define ASSERT_THROW(statement, expected_exception)                         \
+    do {                                                                    \
+        bool threw = false;                                                 \
+        try {                                                               \
+            statement;                                                      \
+        } catch (const expected_exception&) {                               \
+            threw = true;                                                   \
+        } catch (...) {                                                     \
+        throw std::runtime_error( \
+            "ASSERT_NO_THROW failed: threw wrong exeption type, linha " + std::to_string(__LINE__) \
+            );\
+        }                                                                   \
+        if (!threw) {                                                       \
+        throw std::runtime_error( \
+            "ASSERT_NO_THROW failed: no exeption thrown, linha " + std::to_string(__LINE__) \
+            );\
+        }                                                                   \
+    } while (0)
+
 #define ASSERT(condition) do { \
     if (!(condition)) { \
         throw std::runtime_error( \

@@ -46,8 +46,8 @@ camera_editor::camera_editor()
 
 void camera_editor::atualizarMovimentacao()
 {
-    auto inputs = instanciaJanela->m_inputs;
-    float delta = instanciaJanela->m_tempo.obterDeltaTime();
+    auto inputs = janela::obterInstancia().m_inputs;
+    float delta = janela::obterInstancia().m_tempo.obterDeltaTime();
 
     // Mouse rotation
     float mousex_atual = obterMouse().x;

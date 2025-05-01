@@ -227,12 +227,10 @@ Enumerações</h2></td></tr>
 , <br />
 &#160;&#160;<b>alinhamento_central</b> = 1 &lt;&lt; 3
 , <b>alinhamento_fim</b> = 1 &lt;&lt; 4
-, <b>largura_auto</b> = 1 &lt;&lt; 5
-, <b>altura_auto</b> = 1 &lt;&lt; 6
+, <b>mesma_linha</b> = 1 &lt;&lt; 5
+, <b>largura_justa</b> = 1 &lt;&lt; 6
 , <br />
-&#160;&#160;<b>mesma_linha</b> = 1 &lt;&lt; 7
-, <b>largura_justa</b> = 1 &lt;&lt; 8
-, <b>altura_justa</b> = 1 &lt;&lt; 9
+&#160;&#160;<b>altura_justa</b> = 1 &lt;&lt; 7
 <br />
  }</td></tr>
 <tr class="separator:a796da1b97588d8865c0e6ff1b369f378"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -321,8 +319,8 @@ static std::string&#160;</td><td class="memItemRight" valign="bottom"><b>obterEx
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variáveis</h2></td></tr>
-<tr class="memitem:afe4de13f43cdfdd0d2ec7ea3cde91e00" id="r_afe4de13f43cdfdd0d2ec7ea3cde91e00"><td class="memItemLeft" align="right" valign="top">std::map&lt; std::string, std::pair&lt; const unsigned char *, unsigned int &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceBECOMMONS__NS.html#afe4de13f43cdfdd0d2ec7ea3cde91e00">fontes_memoria</a></td></tr>
-<tr class="separator:afe4de13f43cdfdd0d2ec7ea3cde91e00"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6aef8ac969c4dde924b6dfcb300b7e06" id="r_a6aef8ac969c4dde924b6dfcb300b7e06"><td class="memItemLeft" align="right" valign="top">std::unordered_map&lt; std::string, std::pair&lt; const unsigned char *, unsigned int &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceBECOMMONS__NS.html#a6aef8ac969c4dde924b6dfcb300b7e06">fontes_memoria</a></td></tr>
+<tr class="separator:a6aef8ac969c4dde924b6dfcb300b7e06"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afb1e1d999e30b417531a35f71ee15d40" id="r_afb1e1d999e30b417531a35f71ee15d40"><td class="memItemLeft" align="right" valign="top"><a id="afb1e1d999e30b417531a35f71ee15d40" name="afb1e1d999e30b417531a35f71ee15d40"></a>
 std::unordered_map&lt; std::string, unsigned int &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>shaders</b></td></tr>
 <tr class="separator:afb1e1d999e30b417531a35f71ee15d40"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -333,9 +331,9 @@ std::unordered_map&lt; std::string, unsigned int &gt;&#160;</td><td class="memIt
 <tr class="memitem:a3b5f2f9e820473956afd5e46d7e13ade" id="r_a3b5f2f9e820473956afd5e46d7e13ade"><td class="memItemLeft" align="right" valign="top"><a id="a3b5f2f9e820473956afd5e46d7e13ade" name="a3b5f2f9e820473956afd5e46d7e13ade"></a>
 static btDiscreteDynamicsWorld *&#160;</td><td class="memItemRight" valign="bottom"><b>mundoDinamicoPrincipal</b></td></tr>
 <tr class="separator:a3b5f2f9e820473956afd5e46d7e13ade"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a50ef4550601bf0fdba03b0b04de68d32" id="r_a50ef4550601bf0fdba03b0b04de68d32"><td class="memItemLeft" align="right" valign="top"><a id="a50ef4550601bf0fdba03b0b04de68d32" name="a50ef4550601bf0fdba03b0b04de68d32"></a>
-<a class="el" href="structBECOMMONS__NS_1_1janela.html">janela</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>instanciaJanela</b> { nullptr }</td></tr>
-<tr class="separator:a50ef4550601bf0fdba03b0b04de68d32"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aef5a3a73967bec984046dd812e30aed1" id="r_aef5a3a73967bec984046dd812e30aed1"><td class="memItemLeft" align="right" valign="top"><a id="aef5a3a73967bec984046dd812e30aed1" name="aef5a3a73967bec984046dd812e30aed1"></a>
+static <a class="el" href="structBECOMMONS__NS_1_1janela.html">janela</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>instanciaAtual</b> { nullptr }</td></tr>
+<tr class="separator:aef5a3a73967bec984046dd812e30aed1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae549ab1a9c891856fcc861cddd9e5ab5" id="r_ae549ab1a9c891856fcc861cddd9e5ab5"><td class="memItemLeft" align="right" valign="top"><a id="ae549ab1a9c891856fcc861cddd9e5ab5" name="ae549ab1a9c891856fcc861cddd9e5ab5"></a>
 static unsigned int&#160;</td><td class="memItemRight" valign="bottom"><b>ret_VAO</b> = 0</td></tr>
 <tr class="memdesc:ae549ab1a9c891856fcc861cddd9e5ab5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vertex Array Object do retângulo. <br /></td></tr>
@@ -681,14 +679,14 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>texturaDoArquivo</b> (
 </div>
 </div>
 <h2 class="groupheader">Variáveis</h2>
-<a id="afe4de13f43cdfdd0d2ec7ea3cde91e00" name="afe4de13f43cdfdd0d2ec7ea3cde91e00"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afe4de13f43cdfdd0d2ec7ea3cde91e00">&#9670;&#160;</a></span>fontes_memoria</h2>
+<a id="a6aef8ac969c4dde924b6dfcb300b7e06" name="a6aef8ac969c4dde924b6dfcb300b7e06"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6aef8ac969c4dde924b6dfcb300b7e06">&#9670;&#160;</a></span>fontes_memoria</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::map&lt;std::string, std::pair&lt;const unsigned char*, unsigned int&gt; &gt; BECOMMONS_NS::fontes_memoria</td>
+          <td class="memname">std::unordered_map&lt;std::string, std::pair&lt;const unsigned char*, unsigned int&gt; &gt; BECOMMONS_NS::fontes_memoria</td>
         </tr>
       </table>
 </div><div class="memdoc">

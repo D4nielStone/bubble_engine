@@ -121,7 +121,7 @@ void BECOMMONS_NS::renderizarImagem(elementos::imagem* img)
     img->m_imagem_shader->setVec2("resolucao_textura", img->m_limites.z, img->m_limites.w);
     img->m_imagem_shader->setCor("cor_borda", img->m_cor_borda);
     img->m_imagem_shader->setInt("textura", 0);
-    img->m_imagem_shader->setFloat("time", instanciaJanela->m_tempo.obterDeltaTime());
+    img->m_imagem_shader->setFloat("time", janela::obterInstancia().m_tempo.obterDeltaTime());
     img->m_imagem_shader->setInt("tamanho_bordas", img->m_espessura_borda);
     img->m_imagem_shader->setBool("mostrar_bordas", img->m_cor_borda.a != 0);
     img->m_imagem_shader->setBool("flip", img->m_imagem_flip);
@@ -173,7 +173,7 @@ void BECOMMONS_NS::renderizarTexto(elementos::texto* tex)
         
         std::string texto_final = tex->m_texto_frase;
 
-        for(char32_t ca : texto_final)
+        for(auto ca : texto_final)
         {
             if(ca == '\n') {y_linha += tex->m_texto_escala; x_linha = tex->m_limites.x; continue;}
             
@@ -299,19 +299,19 @@ void bubble_gui::atualizar()
     glCullFace(GL_FRONT);
     glDisable(GL_DEPTH_TEST);
     glViewport(0, 0,
-instanciaJanela->tamanho.x,
-instanciaJanela->tamanho.y
+janela::obterInstancia().tamanho.x,
+janela::obterInstancia().tamanho.y
             );
     glClear(GL_COLOR_BUFFER_BIT);
     glClearColor(0, 0, 0, 1);
 
-    instanciaJanela->defCursor(janela::cursor::seta);
+    janela::obterInstancia().defCursor(janela::cursor::seta);
 
-    proj = glm::ortho(0.0, instanciaJanela->tamanho.x, instanciaJanela->tamanho.y, 0.0);
+    proj = glm::ortho(0.0, janela::obterInstancia().tamanho.x, janela::obterInstancia().tamanho.y, 0.0);
     
     raiz->m_limites = {0.f, 0.f,
-        static_cast<float>(instanciaJanela->tamanho.x),
-        static_cast<float>(instanciaJanela->tamanho.y)};
+        static_cast<float>(janela::obterInstancia().tamanho.x),
+        static_cast<float>(janela::obterInstancia().tamanho.y)};
 
 
     while(!funcoes.empty())
@@ -334,8 +334,11 @@ instanciaJanela->tamanho.y
 
 void bubble_gui::atualizarFilhos(caixa* it_caixa)
 {
-    if (!it_caixa || !it_caixa->m_ativo) {
-        return; // Evita acesso inválido caso a caixa não exista
+    if (!it_caixa) {
+        throw std::runtime_error("Caixa nula sendo atualizada.");
+    }
+    if (!it_caixa->m_ativo) {
+        return; // Não atualiza caso a caixa esteja desativada 
     }
     
     // Se a caixa for modular, atualizar limites dos filhos
@@ -584,85 +587,96 @@ void bubble_gui::removerFilhos(const std::string& id)
 }
 
 caixa* bubble_gui::obterElemento(const std::string& id) {
-auto it = caixas.find(id);
-if (it != caixas.end()) {
-    return it->second;
+    // Caso não tenha terminado o estilo atual
+    if(m_novo_estilo) {
+        throw std::runtime_error("estilo atual não finalizado!");
+    }
+    auto it = caixas.find(id);
+    if (it != caixas.end()) {
+        return it->second;
+    }
+    // Isso também pode acontecer ao adicionar um filho de forma direta pelo ponteiro da caixa.
+    // Use a função "adicionarElemento" invés disso.
+    throw std::runtime_error("elemento não encontrado!");
 }
-return nullptr;
+bool bubble_gui::elementoExiste(const std::string id) const {
+    auto it = caixas.find(id);
+    return it != caixas.end();
 }
 
 // Funções de estilo
 void bubble_gui::fimEstilo(){
-    for(auto& caixa : estilo_atual) {
+    for(auto& [id, caixa] : estilo_atual) {
         caixa->configurar();
-        caixas[caixa->m_id] = caixa;
+        caixas[id] = caixa;
     }
+    m_novo_estilo = false;
     estilo_atual.clear();
 };
 void bubble_gui::defFlags(const flag_estilo v){
-    for(auto& caixa : estilo_atual){
+    for(auto& [id, caixa] : estilo_atual){
         caixa->m_flag_estilo = v;
     }
 }
 void bubble_gui::defLargura(const double v){
-    for(auto& caixa : estilo_atual){
+    for(auto& [id, caixa] : estilo_atual){
         caixa->m_largura = v;
         caixa->m_flag_estilo |= flag_estilo::largura_percentual;
     }
 }
 void bubble_gui::defLarguraAltura(const bool b){
-    for(auto& caixa : estilo_atual){
+    for(auto& [id, caixa] : estilo_atual){
         caixa->m_ligar_la = b;
     }
 }
 void bubble_gui::defAltura(const double v){
-    for(auto& caixa : estilo_atual){
+    for(auto& [id, caixa] : estilo_atual){
         caixa->m_altura = v;
         caixa->m_flag_estilo |= flag_estilo::altura_percentual;
     }
 }
 void bubble_gui::defLargura(const int v){
-    for(auto& caixa : estilo_atual){
+    for(auto& [id, caixa] : estilo_atual){
         caixa->m_largura = v;
     }
 }
 void bubble_gui::defAltura(const int v){
-    for(auto& caixa : estilo_atual){
+    for(auto& [id, caixa] : estilo_atual){
         caixa->m_altura = v;
     }
 }
 void bubble_gui::defOrientacao(const caixa::orientacao v){
-    for(auto& caixa : estilo_atual){
+    for(auto& [id, caixa] : estilo_atual){
         caixa->m_orientacao_modular = v;
     }
 }
 void bubble_gui::defPaddingG(const int v1, const int v2){
-    for(auto& caixa : estilo_atual){
+    for(auto& [id, caixa] : estilo_atual){
         caixa->m_padding_geral = {v1, v2};
     }
 }
 void bubble_gui::defPadding(const int v1, const int v2){
-    for(auto& caixa : estilo_atual){
+    for(auto& [id, caixa] : estilo_atual){
         caixa->m_padding = {v1, v2};
     }
 }
 void bubble_gui::defCorBorda(const cor v){
-    for(auto& caixa : estilo_atual){
+    for(auto& [id, caixa] : estilo_atual){
         caixa->m_cor_borda = v;
     }
 }
 void bubble_gui::defCorFundo(const cor v){
-    for(auto& caixa : estilo_atual){
+    for(auto& [id, caixa] : estilo_atual){
         caixa->m_cor_fundo = v;
     }
 }
 void bubble_gui::defCrescimentoM(const float v){
-    for(auto& caixa : estilo_atual){
+    for(auto& [id, caixa] : estilo_atual){
         caixa->m_crescimento_modular = v;
     }
 }
 void bubble_gui::defTamanhoBorda(const int v){
-    for(auto& caixa : estilo_atual){
+    for(auto& [id, caixa] : estilo_atual){
         caixa->m_espessura_borda = v;
     }
 }

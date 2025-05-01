@@ -1,7 +1,9 @@
 <map id="BECOMMONS_NS::elementos::area_de_toque" name="BECOMMONS_NS::elementos::area_de_toque">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,79,217,119"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="123,79,335,119"/>
 <area shape="rect" id="Node000003" href="$structBECOMMONS__NS_1_1elementos_1_1botao.html" title=" " alt="" coords="5,167,217,207"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="114,133,114,166,109,166,109,133"/>
-<area shape="rect" id="Node000002" href="$classBECOMMONS__NS_1_1caixa.html" title="funciona como uma div em css" alt="" coords="22,5,201,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="114,44,114,79,109,79,109,44"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="193,129,139,169,136,164,190,125"/>
+<area shape="rect" id="Node000004" href="$classBECOMMONS__NS_1_1elementos_1_1imagem.html" title=" " alt="" coords="241,167,453,207"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="268,125,323,164,320,169,265,129"/>
+<area shape="rect" id="Node000002" href="$classBECOMMONS__NS_1_1caixa.html" title="funciona como uma div em css" alt="" coords="139,5,318,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="231,44,231,79,226,79,226,44"/>
 </map>

@@ -164,9 +164,8 @@ void gerenciador_projetos::atualizarElementos(const std::string& Dir)
                 gui.adicionarElemento<elementos::botao>("barra_lateral", "abrirProjeto", 
                 [caminhoEncontrado](){
         
-                glfwDestroyWindow(instanciaJanela->window);
-                delete instanciaJanela;
-                instanciaJanela = nullptr;
+                glfwDestroyWindow(janela::obterInstancia().window);
+                
                 descarregarShaders();
                 // Cria projeto
                 projeto editor(caminhoEncontrado);
@@ -176,9 +175,9 @@ void gerenciador_projetos::atualizarElementos(const std::string& Dir)
             
             
                 // Define o nome da janela
-                instanciaJanela->nome(
+                janela::obterInstancia().nome(
                         (std::string("editor | Daniel O. dos Santos© Bubble 2025 | ") 
-                         + instanciaJanela->nome()).c_str());
+                         + janela::obterInstancia().nome()).c_str());
             
                 // Inicia main loop
                 editor.rodar();
@@ -205,7 +204,7 @@ void gerenciador_projetos::iniciar()
                 return;
             }
         }
-    instanciaJanela = new janela("gerenciador de projetos | Daniel O. dos Santos© Bubble 2025", true);
+    janela::gerarInstancia("gerenciador de projetos | Daniel O. dos Santos© Bubble 2025", true);
    
     // Sistema de gui
     gui.inicializar(nullptr);
@@ -231,12 +230,12 @@ void gerenciador_projetos::iniciar()
         gui.adicionarElemento<elementos::botao>("area_maior", "add", [this](){criarProjetoPadrao(DIR_PADRAO, "Juquinha");}, std::make_unique<elementos::texto>("+", 128));
         gui.defAltura(128);
     gui.fimEstilo();
-    while(!glfwWindowShouldClose(instanciaJanela->window))
+    while(!glfwWindowShouldClose(janela::obterInstancia().window))
     {
-        instanciaJanela->poll();
+        janela::obterInstancia().poll();
         
         gui.atualizar();
 
-        instanciaJanela->swap();
+        janela::obterInstancia().swap();
     }
 }

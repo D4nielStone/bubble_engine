@@ -185,7 +185,7 @@ void shader::setCor(const std::string& name, const BECOMMONS_NS::cor& cor) const
     glUniform4f(glGetUniformLocation(ID, name.c_str()), cor.r, cor.g, cor.b, cor.a);
 }
 
-void shader::setVec4(const std::string& name, const vet4& vec4 ) const {
+void shader::setVec4(const std::string& name, const fvet4& vec4 ) const {
     glUniform4f(glGetUniformLocation(ID, name.c_str()), vec4.x, vec4.y, vec4.z, vec4.w);
 }
 void shader::setVec3(const std::string& name, const float& r, const float& g, const float& b) const {

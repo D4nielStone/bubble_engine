@@ -124,7 +124,7 @@ static std::string glfwkeyTokey(int glfwkey) {
 // Callback de teclado GLFW
 void BECOMMONS_NS::callbackKey(GLFWwindow* window, int key, int scancode, int action, int mods) 
 {
-    auto &input = instanciaJanela->m_inputs;
+    auto &input = janela::obterInstancia().m_inputs;
     input.mods = mods;
     input.teclado_action = action;
 
@@ -142,7 +142,7 @@ void BECOMMONS_NS::callbackKey(GLFWwindow* window, int key, int scancode, int ac
 // Callback de posi��o do mouse
 void BECOMMONS_NS::mousePosCallBack(GLFWwindow* window, double x, double y)
 {
-    auto& input = instanciaJanela->m_inputs;
+    auto& input = janela::obterInstancia().m_inputs;
 
         input.mousex = x;
         input.mousey = y;
@@ -151,7 +151,7 @@ void BECOMMONS_NS::mousePosCallBack(GLFWwindow* window, double x, double y)
 // Callback de clique do mouse
 void BECOMMONS_NS::mouseButtonCallBack(GLFWwindow* window, int button, int action, int mods)
 {
-    auto& input = instanciaJanela->m_inputs;
+    auto& input = janela::obterInstancia().m_inputs;
 
     // Processar o clique do mouse
     input.mouseEnter = action;
@@ -170,7 +170,7 @@ void BECOMMONS_NS::mouseButtonCallBack(GLFWwindow* window, int button, int actio
 // Callback para caracteres
 void BECOMMONS_NS::charCallback(GLFWwindow* window, unsigned int codepoint)
 {
-    auto& input = instanciaJanela->m_inputs;
+    auto& input = janela::obterInstancia().m_inputs;
 
     // Converte o c�digo Unicode para um caractere UTF-8
     std::string utf8_char;
@@ -208,28 +208,28 @@ void BECOMMONS_NS::charCallback(GLFWwindow* window, unsigned int codepoint)
 
 void BECOMMONS_NS::posicionarCursor(double x, double y)
 {
-    auto& input = instanciaJanela->m_inputs;
+    auto& input = janela::obterInstancia().m_inputs;
     
     input.mousex = x;
     input.mousey = y;
-    glfwSetCursorPos(instanciaJanela->window, x, y);
+    glfwSetCursorPos(janela::obterInstancia().window, x, y);
 }
 
 vetor2<double> BECOMMONS_NS::obterMouse()
 {
-    auto& input = instanciaJanela->m_inputs;
+    auto& input = janela::obterInstancia().m_inputs;
 
         return vetor2<double>( input.mousex, input.mousey );
 };
 
 vetor2<int> BECOMMONS_NS::tamanhoJanela()
 {
-    return vetor2<int>( instanciaJanela->tamanho.x, instanciaJanela->tamanho.y );
+    return vetor2<int>( janela::obterInstancia().tamanho.x, janela::obterInstancia().tamanho.y );
 };
 
 bool BECOMMONS_NS::pressionada(const std::string &letra)
 {
-    auto& input = instanciaJanela->m_inputs;
+    auto& input = janela::obterInstancia().m_inputs;
 
     return input.isKeyPressed(letra);
 }

@@ -46,7 +46,7 @@ void betest::registro_testes::classe(const std::string &name_space, const std::s
     prefixo_atual = "[" + name_space + "][" + prefixo + "]"; 
 }
 
-void betest::registro_testes::rodarTestes()
+int betest::registro_testes::rodarTestes()
 {
     depuracao::emitir(info, "Iniciando testes unitários. Total de " + std::to_string(testes.size()) + " teste(s).");
     size_t total = testes.size();
@@ -71,6 +71,9 @@ void betest::registro_testes::rodarTestes()
             n_falhas ++;
         }
     }
-    if(n_falhas > 0)
-    std::cout << "\033[31m[FALHAS]\033[0m Total de " << n_falhas << " falhas detectadas.\n";
+    if(n_falhas > 0) {
+        std::cout << "\033[31m[FALHAS]\033[0m Total de " << n_falhas << " falhas detectadas.\n";
+        return -1;
+    }
+    return 0;
 }

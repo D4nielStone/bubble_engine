@@ -70,10 +70,11 @@ namespace BECOMMONS_NS {
     class bubble_gui : public sistema
     {
         private:
+            bool m_novo_estilo { false };
             std::queue<std::function<void()>> funcoes;      ///< Fila de funções para serem executadas no fim do loop
             std::unique_ptr<caixa> raiz;                    ///< Elemento raiz ( tem as dimensões da janela )
             std::unordered_map<std::string, caixa*> caixas; ///< Vetor de elementos
-            std::set<caixa*> estilo_atual;             ///< Todos os elementos presentes no estilo atual
+            std::unordered_map<std::string, caixa*> estilo_atual;             ///< Todos os elementos presentes no estilo atual
             shader* quad_shader{nullptr};                   ///< Shader do quadrado usado no fundo do elemento
             /// Desenha a caixa
             /// Desenha e decide que tipo de elemento ela é
@@ -129,17 +130,36 @@ namespace BECOMMONS_NS {
          */
         template <typename T, typename ...Args>
         void adicionarElemento(const std::string& pai_id, const std::string& nova_id, Args&&... args) {
-                if (auto pai = obterElemento(pai_id)) {
+                if (elementoExiste(pai_id)) {
+                    m_novo_estilo = false;
+                    auto pai = obterElemento(pai_id);
                     auto nova_caixa = pai->adicionarFilho<T>(nova_id, std::forward<Args>(args)...);
-                    estilo_atual.insert(nova_caixa);
+                    estilo_atual[nova_id] = nova_caixa;
+                } else if(estilo_atual.find(pai_id) != estilo_atual.end()) {
+                    auto pai = estilo_atual[pai_id];
+                    auto nova_caixa = pai->adicionarFilho<T>(nova_id, std::forward<Args>(args)...);
+                    estilo_atual[nova_id] = nova_caixa;
+                } else {
+                    throw std::runtime_error("parente da caixa não existe!");
                 }
+                m_novo_estilo = true;
             }
         void adicionarElemento(const std::string& pai_id, const std::string& nova_id, std::unique_ptr<elementos::imagem> ptr) {
-                if (auto pai = obterElemento(pai_id)) {
+                if (elementoExiste(pai_id)) {
+                    m_novo_estilo = false;
+                    auto pai = obterElemento(pai_id);
                     ptr->m_id = nova_id;
-                    estilo_atual.insert(ptr.get());
+                    estilo_atual[nova_id] = ptr.get();
                     pai->m_filhos.push_back(std::move(ptr));
+                } else if(estilo_atual.find(pai_id) != estilo_atual.end()) {
+                    auto pai = estilo_atual[pai_id];
+                    ptr->m_id = nova_id;
+                    estilo_atual[nova_id] = ptr.get();
+                    pai->m_filhos.push_back(std::move(ptr));
+                } else {
+                    throw std::runtime_error("parente da caixa não existe!");
                 }
+                m_novo_estilo = true;
             }
 
         /**
@@ -160,6 +180,8 @@ namespace BECOMMONS_NS {
          * @return Ponteiro para a caixa, ou nullptr se não for encontrada.
          */
         caixa* obterElemento(const std::string& id);
+
+        bool elementoExiste(const std::string id) const;
 
         // === Funções de Estilo ===
 

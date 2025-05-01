@@ -1,7 +1,10 @@
 #!/usr/bin/env bash
 
-./$(dirname "$0")/build_runtime.sh
+BASE_DIR="$(cd "$(dirname "$0")" && pwd)"
+ROOT_DIR="$(cd "$BASE_DIR/.." && pwd)"
 
-mkdir $(dirname "$0")/testes/out 
-cd $(dirname "$0")/testes/out && cmake .. && cmake --build .
+"$BASE_DIR/build_runtime.sh"
+
+mkdir $ROOT_DIR/testes/out 
+cd $ROOT_DIR/testes/out && cmake .. && cmake --build .
 ./testes

@@ -60,7 +60,7 @@ sistema_fisica::~sistema_fisica()
 
 void sistema_fisica::atualizar()
 {
-    mundoDinamico->stepSimulation(instanciaJanela->m_tempo.obterDeltaTime() * velocidade, 1, 1.f / 1000.f);
+    mundoDinamico->stepSimulation(janela::obterInstancia().m_tempo.obterDeltaTime() * velocidade, 1, 1.f / 1000.f);
     reg->cada<fisica, BECOMMONS_NS::transformacao>([&](const uint32_t entidade)
         {
             /// adiciona corpos rigidos

@@ -72,7 +72,7 @@ namespace BECOMMONS_NS {
         void setInt(const std::string& name, const int& value) const;
         void setFloat(const std::string& name, const float& value) const;
         void setCor(const std::string& name, const cor& m_cor) const;
-        void setVec4(const std::string& name, const vet4& vec4) const;
+        void setVec4(const std::string& name, const fvet4& vec4) const;
         void setVec3(const std::string& name, const float& r, const float& g, const float& b) const;
         void setVec3(const std::string &name, const fvet3 &vet) const;
         void setVec2(const std::string &name, const float &r, const float &g) const;

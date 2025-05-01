@@ -106,6 +106,7 @@ $(document).ready(function(){initNavTree('fonte_8hpp.html',''); initResizable();
 <code>#include &lt;ft2build.h&gt;</code><br />
 <code>#include &quot;<a class="el" href="namespace_8hpp_source.html">namespace.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="vetor2_8hpp_source.html">util/vetor2.hpp</a>&quot;</code><br />
+<code>#include &lt;functional&gt;</code><br />
 </div><div class="textblock"><div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Gráfico de dependência de inclusões para fonte.hpp:</div>
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
@@ -113,21 +114,23 @@ $(document).ready(function(){initNavTree('fonte_8hpp.html',''); initResizable();
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="fonte_8hpp__incl.png" border="0" usemap="#afonte_8hpp" alt=""/></div>
 <map name="afonte_8hpp" id="afonte_8hpp">
-<area shape="rect" title=" " alt="" coords="303,5,387,31"/>
+<area shape="rect" title=" " alt="" coords="367,5,451,31"/>
 <area shape="rect" title=" " alt="" coords="5,79,100,104"/>
-<area shape="poly" title=" " alt="" coords="303,32,113,78,112,73,302,27"/>
+<area shape="poly" title=" " alt="" coords="367,30,114,80,113,75,366,25"/>
 <area shape="rect" title=" " alt="" coords="125,79,183,104"/>
-<area shape="poly" title=" " alt="" coords="315,33,198,77,196,72,313,28"/>
+<area shape="poly" title=" " alt="" coords="368,33,198,81,196,76,367,28"/>
 <area shape="rect" title=" " alt="" coords="207,79,258,104"/>
-<area shape="poly" title=" " alt="" coords="328,33,264,73,261,69,325,28"/>
+<area shape="poly" title=" " alt="" coords="381,33,272,77,270,72,379,28"/>
 <area shape="rect" title=" " alt="" coords="283,79,407,104"/>
-<area shape="poly" title=" " alt="" coords="347,31,347,65,342,65,342,31"/>
+<area shape="poly" title=" " alt="" coords="400,33,366,70,362,67,396,29"/>
 <area shape="rect" title=" " alt="" coords="431,79,514,104"/>
-<area shape="poly" title=" " alt="" coords="367,28,441,69,438,74,364,33"/>
+<area shape="poly" title=" " alt="" coords="421,29,455,67,451,70,417,33"/>
 <area shape="rect" href="namespace_8hpp.html" title=" " alt="" coords="489,152,614,177"/>
-<area shape="poly" title=" " alt="" coords="387,20,421,25,459,36,496,52,528,77,538,91,545,107,553,138,547,139,540,108,534,93,524,81,493,57,457,41,420,30,386,25"/>
+<area shape="poly" title=" " alt="" coords="450,28,491,47,511,60,528,77,544,107,552,137,546,139,539,109,524,80,508,65,488,52,448,33"/>
 <area shape="rect" href="vetor2_8hpp.html" title=" " alt="" coords="589,79,706,104"/>
-<area shape="poly" title=" " alt="" coords="387,27,586,73,585,78,386,32"/>
+<area shape="poly" title=" " alt="" coords="448,28,596,72,595,77,446,33"/>
+<area shape="rect" title=" " alt="" coords="731,79,817,104"/>
+<area shape="poly" title=" " alt="" coords="451,25,718,76,717,81,450,30"/>
 <area shape="poly" title=" " alt="" coords="633,106,580,146,577,141,630,102"/>
 <area shape="rect" title=" " alt="" coords="639,152,701,177"/>
 <area shape="poly" title=" " alt="" coords="654,104,665,138,660,140,649,105"/>
@@ -160,6 +163,8 @@ $(document).ready(function(){initNavTree('fonte_8hpp.html',''); initResizable();
 Componentes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structBECOMMONS__NS_1_1caractere.html">BECOMMONS_NS::caractere</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structstd_1_1hash_3_01t__FonteID_01_4.html">std::hash&lt; t_FonteID &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBECOMMONS__NS_1_1gerenciadorFontes.html">BECOMMONS_NS::gerenciadorFontes</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -168,11 +173,22 @@ Namespaces</h2></td></tr>
 <tr class="memitem:namespaceBECOMMONS__NS" id="r_namespaceBECOMMONS__NS"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceBECOMMONS__NS.html">BECOMMONS_NS</a></td></tr>
 <tr class="memdesc:namespaceBECOMMONS__NS"><td class="mdescLeft">&#160;</td><td class="mdescRight">namespace becommons <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:namespacestd" id="r_namespacestd"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacestd.html">std</a></td></tr>
+<tr class="memdesc:namespacestd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Hash para t_FonteID. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
 Definições de Tipos</h2></td></tr>
-<tr class="memitem:ae5c0d37c453abcc0fe309bcf6b989740" id="r_ae5c0d37c453abcc0fe309bcf6b989740"><td class="memItemLeft" align="right" valign="top">typedef std::pair&lt; std::string, unsigned int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="fonte_8hpp.html#ae5c0d37c453abcc0fe309bcf6b989740">FonteID</a></td></tr>
-<tr class="separator:ae5c0d37c453abcc0fe309bcf6b989740"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae5f3440f66ae3e835e5503a1991156c6" id="r_ae5f3440f66ae3e835e5503a1991156c6"><td class="memItemLeft" align="right" valign="top">typedef std::pair&lt; std::string, unsigned int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="fonte_8hpp.html#ae5f3440f66ae3e835e5503a1991156c6">t_FonteID</a></td></tr>
+<tr class="separator:ae5f3440f66ae3e835e5503a1991156c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab88889ba8d8cf22832f4358ac0fafdcd" id="r_ab88889ba8d8cf22832f4358ac0fafdcd"><td class="memItemLeft" align="right" valign="top"><a id="ab88889ba8d8cf22832f4358ac0fafdcd" name="ab88889ba8d8cf22832f4358ac0fafdcd"></a>
+typedef std::unordered_map&lt; char32_t, <a class="el" href="structBECOMMONS__NS_1_1caractere.html">BECOMMONS_NS::caractere</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>t_Caracteres</b></td></tr>
+<tr class="memdesc:ab88889ba8d8cf22832f4358ac0fafdcd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Define std::unordered_map&lt;char32_t, caractere&gt; como t_Caracteres. <br /></td></tr>
+<tr class="separator:ab88889ba8d8cf22832f4358ac0fafdcd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab50d54a0a26081cdc3ff54ce28c8752d" id="r_ab50d54a0a26081cdc3ff54ce28c8752d"><td class="memItemLeft" align="right" valign="top"><a id="ab50d54a0a26081cdc3ff54ce28c8752d" name="ab50d54a0a26081cdc3ff54ce28c8752d"></a>
+typedef std::unordered_map&lt; <a class="el" href="fonte_8hpp.html#ae5f3440f66ae3e835e5503a1991156c6">t_FonteID</a>, <a class="el" href="fonte_8hpp.html#ab88889ba8d8cf22832f4358ac0fafdcd">t_Caracteres</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>t_Fontes</b></td></tr>
+<tr class="memdesc:ab50d54a0a26081cdc3ff54ce28c8752d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Define std::map&lt;t_FonteID, t_Caracteres&gt; como Fontes. <br /></td></tr>
+<tr class="separator:ab50d54a0a26081cdc3ff54ce28c8752d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Descrição detalhada</h2>
 <div class="textblock"><dl class="section copyright"><dt>Copyright</dt><dd>MIT License Copyright (c) 2025 Daniel Oliveira</dd></dl>
@@ -181,18 +197,18 @@ Definições de Tipos</h2></td></tr>
 <p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>
 <p>Define estruturas básicas para renderização de textos </p>
 </div><h2 class="groupheader">Definições dos tipos</h2>
-<a id="ae5c0d37c453abcc0fe309bcf6b989740" name="ae5c0d37c453abcc0fe309bcf6b989740"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae5c0d37c453abcc0fe309bcf6b989740">&#9670;&#160;</a></span>FonteID</h2>
+<a id="ae5f3440f66ae3e835e5503a1991156c6" name="ae5f3440f66ae3e835e5503a1991156c6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae5f3440f66ae3e835e5503a1991156c6">&#9670;&#160;</a></span>t_FonteID</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef std::pair&lt;std::string, unsigned int&gt; <a class="el" href="fonte_8hpp.html#ae5c0d37c453abcc0fe309bcf6b989740">FonteID</a></td>
+          <td class="memname">typedef std::pair&lt;std::string, unsigned int&gt; <a class="el" href="fonte_8hpp.html#ae5f3440f66ae3e835e5503a1991156c6">t_FonteID</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Define std::pair&lt;std::string, unsigned int&gt; como FonteID. Diretório e id da fonte respectivamente. </p>
+<p>Define std::pair&lt;std::string, unsigned int&gt; como t_FonteID. Diretório e id da fonte respectivamente. </p>
 
 </div>
 </div>

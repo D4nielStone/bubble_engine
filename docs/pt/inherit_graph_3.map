@@ -1,3 +1,11 @@
 <map id="Gráfico de Hierarquia de Classes" name="Gráfico de Hierarquia de Classes">
-<area shape="rect" id="Node000000" href="$structBECOMMONS__NS_1_1caractere.html" title=" " alt="" coords="5,5,209,31"/>
+<area shape="rect" id="Node000000" href="$classBECOMMONS__NS_1_1caixa.html" title="funciona como uma div em css" alt="" coords="5,77,184,102"/>
+<area shape="rect" id="Node000001" href="$structBECOMMONS__NS_1_1elementos_1_1area__de__toque.html" title=" " alt="" coords="232,37,444,77"/>
+<area shape="poly" id="edge4_Node000000_Node000001" title=" " alt="" coords="197,73,231,69,232,74,198,78"/>
+<area shape="rect" id="Node000004" href="$classBECOMMONS__NS_1_1elementos_1_1texto.html" title=" " alt="" coords="232,101,444,141"/>
+<area shape="poly" id="edge7_Node000000_Node000004" title=" " alt="" coords="198,100,232,105,231,110,197,106"/>
+<area shape="rect" id="Node000002" href="$structBECOMMONS__NS_1_1elementos_1_1botao.html" title=" " alt="" coords="492,5,704,45"/>
+<area shape="poly" id="edge5_Node000001_Node000002" title=" " alt="" coords="457,40,491,36,492,41,458,45"/>
+<area shape="rect" id="Node000003" href="$classBECOMMONS__NS_1_1elementos_1_1imagem.html" title=" " alt="" coords="492,69,704,109"/>
+<area shape="poly" id="edge6_Node000001_Node000003" title=" " alt="" coords="458,69,492,74,491,79,457,75"/>
 </map>

@@ -30,5 +30,6 @@ var searchData=
   ['skybox_27',['skybox',['../classBECOMMONS__NS_1_1skybox.html',1,'BECOMMONS_NS']]],
   ['skybox_2ecpp_28',['skybox.cpp',['../skybox_8cpp.html',1,'']]],
   ['skybox_2ehpp_29',['skybox.hpp',['../skybox_8hpp.html',1,'']]],
-  ['sumário_30',['Sumário',['../group__LuaAPI.html#autotoc_md4',1,'']]]
+  ['std_30',['std',['../namespacestd.html',1,'']]],
+  ['sumário_31',['Sumário',['../group__LuaAPI.html#autotoc_md4',1,'']]]
 ];

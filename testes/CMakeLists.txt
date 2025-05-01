@@ -8,6 +8,7 @@ set_target_properties(becommons PROPERTIES IMPORTED_LOCATION ${CMAKE_SOURCE_DIR}
 
 include_directories(
     ${CMAKE_SOURCE_DIR}/include
+    ${CMAKE_SOURCE_DIR}/../
 )
 
 find_package(Lua REQUIRED)

@@ -133,6 +133,10 @@ $(document).ready(function(){initNavTree('assert_8hpp.html',''); initResizable()
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
 Definições e Macros</h2></td></tr>
+<tr class="memitem:a895c34d9b192cdc2ba46d2680623485d" id="r_a895c34d9b192cdc2ba46d2680623485d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="assert_8hpp.html#a895c34d9b192cdc2ba46d2680623485d">ASSERT_NO_THROW</a>(statement)</td></tr>
+<tr class="separator:a895c34d9b192cdc2ba46d2680623485d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aedb1eddae6c2a2430b0e7b7e03b4f052" id="r_aedb1eddae6c2a2430b0e7b7e03b4f052"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="assert_8hpp.html#aedb1eddae6c2a2430b0e7b7e03b4f052">ASSERT_THROW</a>(statement,  expected_exception)</td></tr>
+<tr class="separator:aedb1eddae6c2a2430b0e7b7e03b4f052"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac22830a985e1daed0c9eadba8c6f606e" id="r_ac22830a985e1daed0c9eadba8c6f606e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="assert_8hpp.html#ac22830a985e1daed0c9eadba8c6f606e">ASSERT</a>(condition)</td></tr>
 <tr class="separator:ac22830a985e1daed0c9eadba8c6f606e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aacfac3921a9b81ef7ee71e745b236e48" id="r_aacfac3921a9b81ef7ee71e745b236e48"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="assert_8hpp.html#aacfac3921a9b81ef7ee71e745b236e48">ASSERT_EQUAL</a>(actual,  expected)</td></tr>
@@ -242,6 +246,78 @@ Definições e Macros</h2></td></tr>
 <b>Valor:</b><div class="fragment"><div class="line"><span class="keywordflow">if</span> ((actual) != (expected)) { \</div>
 <div class="line">    <span class="keywordflow">throw</span> std::runtime_error(<span class="stringliteral">&quot;ASSERT_EQUAL falhou: &quot;</span> #actual <span class="stringliteral">&quot; != &quot;</span> #expected); \</div>
 <div class="line">}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a895c34d9b192cdc2ba46d2680623485d" name="a895c34d9b192cdc2ba46d2680623485d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a895c34d9b192cdc2ba46d2680623485d">&#9670;&#160;</a></span>ASSERT_NO_THROW</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ASSERT_NO_THROW</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">statement</td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Valor:</b><div class="fragment"><div class="line">    <span class="keywordflow">do</span> {                                                                    \</div>
+<div class="line">        <span class="keywordflow">try</span> {                                                               \</div>
+<div class="line">            statement;                                                      \</div>
+<div class="line">        } <span class="keywordflow">catch</span> (...) {                                                     \</div>
+<div class="line">        <span class="keywordflow">throw</span> std::runtime_error( \</div>
+<div class="line">            <span class="stringliteral">&quot;ASSERT_NO_THROW failed: exeption thrown, linha &quot;</span> + std::to_string(__LINE__) \</div>
+<div class="line">            );\</div>
+<div class="line">        }                                                                   \</div>
+<div class="line">    } <span class="keywordflow">while</span> (0)</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="aedb1eddae6c2a2430b0e7b7e03b4f052" name="aedb1eddae6c2a2430b0e7b7e03b4f052"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aedb1eddae6c2a2430b0e7b7e03b4f052">&#9670;&#160;</a></span>ASSERT_THROW</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ASSERT_THROW</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">statement, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">expected_exception&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Valor:</b><div class="fragment"><div class="line">    <span class="keywordflow">do</span> {                                                                    \</div>
+<div class="line">        <span class="keywordtype">bool</span> threw = <span class="keyword">false</span>;                                                 \</div>
+<div class="line">        <span class="keywordflow">try</span> {                                                               \</div>
+<div class="line">            statement;                                                      \</div>
+<div class="line">        } <span class="keywordflow">catch</span> (<span class="keyword">const</span> expected_exception&amp;) {                               \</div>
+<div class="line">            threw = <span class="keyword">true</span>;                                                   \</div>
+<div class="line">        } <span class="keywordflow">catch</span> (...) {                                                     \</div>
+<div class="line">        <span class="keywordflow">throw</span> std::runtime_error( \</div>
+<div class="line">            <span class="stringliteral">&quot;ASSERT_NO_THROW failed: threw wrong exeption type, linha &quot;</span> + std::to_string(__LINE__) \</div>
+<div class="line">            );\</div>
+<div class="line">        }                                                                   \</div>
+<div class="line">        if (!threw) {                                                       \</div>
+<div class="line">        <span class="keywordflow">throw</span> std::runtime_error( \</div>
+<div class="line">            <span class="stringliteral">&quot;ASSERT_NO_THROW failed: no exeption thrown, linha &quot;</span> + std::to_string(__LINE__) \</div>
+<div class="line">            );\</div>
+<div class="line">        }                                                                   \</div>
+<div class="line">    } <span class="keywordflow">while</span> (0)</div>
 </div><!-- fragment -->
 </div>
 </div>

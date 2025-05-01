@@ -51,13 +51,9 @@ using namespace BECOMMONS_NS;
 // Main loop
 void projeto::rodar()
 {
-        if(!instanciaJanela) {
-            depuracao::emitir(erro, "Janela não definida!");
-            return;
-        }
-    while(!glfwWindowShouldClose(instanciaJanela->window))
+    while(!glfwWindowShouldClose(janela::obterInstancia().window))
 	{
-		instanciaJanela->poll();
+		janela::obterInstancia().poll();
         if(obterFaseAtual() && obterFaseAtual()->rodando)
         {
             if(sistemas.find("fisica") != sistemas.end())
@@ -77,7 +73,7 @@ void projeto::rodar()
             s.second->atualizar();
         }
 
-		instanciaJanela->swap();
+		janela::obterInstancia().swap();
 	}
 }
 
@@ -183,7 +179,8 @@ void projeto::criarJanela(rapidjson::Document& doc)
     const char* nome_janela = doc["janela"].GetObject()["titulo"].GetString();
     std::string icon_path = doc["janela"].GetObject()["icone"].GetString();
 
-    instanciaJanela = new janela(nome_janela, true,
+    // Cria uma instância global de janela.
+    janela::gerarInstancia(nome_janela, true,
      vetor2<double>(doc["janela"].GetObject()["largura"].GetInt(), doc["janela"].GetObject()["altura"].GetInt()),
     (diretorioDoProjeto + "/" + icon_path).c_str());
 

@@ -71,7 +71,7 @@ camera::camera(const bool orth)
         
 bool camera::analizar(const rapidjson::Value& value)
 {
-	viewport_ptr = &instanciaJanela->tamanho;
+	viewport_ptr = &janela::obterInstancia().tamanho;
 	
     if(value.HasMember("fov"))
         fov = value["fov"].GetFloat();

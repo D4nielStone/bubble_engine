@@ -7,6 +7,8 @@ var searchData=
   ['carectere_4',['carectere',['../structcarectere.html',1,'']]],
   ['carregador_5',['Carregador',['../classCarregador.html',1,'']]],
   ['codigo_6',['codigo',['../structBECOMMONS__NS_1_1codigo.html',1,'BECOMMONS_NS']]],
-  ['componente_7',['componente',['../structBECOMMONS__NS_1_1componente.html',1,'BECOMMONS_NS']]],
-  ['cor_8',['cor',['../structBECOMMONS__NS_1_1cor.html',1,'BECOMMONS_NS']]]
+  ['compa_7',['CompA',['../structCompA.html',1,'']]],
+  ['compb_8',['CompB',['../structCompB.html',1,'']]],
+  ['componente_9',['componente',['../structBECOMMONS__NS_1_1componente.html',1,'BECOMMONS_NS']]],
+  ['cor_10',['cor',['../structBECOMMONS__NS_1_1cor.html',1,'BECOMMONS_NS']]]
 ];

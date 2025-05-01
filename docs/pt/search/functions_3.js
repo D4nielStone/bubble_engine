@@ -12,11 +12,12 @@ var searchData=
   ['definirtempo_9',['definirTempo',['../namespaceBECOMMONS__NS_1_1api.html#a5747b4043d84efb73980879711e14c7a',1,'BECOMMONS_NS::api']]],
   ['definirutils_10',['definirUtils',['../namespaceBECOMMONS__NS_1_1api.html#a9386f3af3b55a82511b3ba7bd667e086',1,'BECOMMONS_NS::api']]],
   ['deflargura_11',['deflargura',['../classBECOMMONS__NS_1_1bubble__gui.html#a9bd833713454c24adad4b90b18833abc',1,'BECOMMONS_NS::bubble_gui::defLargura(const double v)'],['../classBECOMMONS__NS_1_1bubble__gui.html#aed1bb46470cbc5b03fd212c0c2144662',1,'BECOMMONS_NS::bubble_gui::defLargura(const int v)']]],
-  ['deforientacao_12',['defOrientacao',['../classBECOMMONS__NS_1_1bubble__gui.html#aff26074c14cca782c9b234076e7fe9db',1,'BECOMMONS_NS::bubble_gui']]],
-  ['defpadding_13',['defPadding',['../classBECOMMONS__NS_1_1bubble__gui.html#aca7f44c80c65f8153421bb95fb83695e',1,'BECOMMONS_NS::bubble_gui']]],
-  ['defpaddingg_14',['defPaddingG',['../classBECOMMONS__NS_1_1bubble__gui.html#a39d47ccb6eaba3391c2e91a138755beb',1,'BECOMMONS_NS::bubble_gui']]],
-  ['deftamanhoborda_15',['defTamanhoBorda',['../classBECOMMONS__NS_1_1bubble__gui.html#a2ffaedd3726866e9ae106a5bafc59e3f',1,'BECOMMONS_NS::bubble_gui']]],
-  ['desenhar_5fcaixa_16',['desenhar_caixa',['../classBECOMMONS__NS_1_1bubble__gui.html#af931d0a352666d6515bbc084e284e57d',1,'BECOMMONS_NS::bubble_gui']]],
-  ['distancia2_17',['distancia2',['../namespaceBECOMMONS__NS.html#a50e0753157c3a4aad38c7b8791bfffc3',1,'BECOMMONS_NS']]],
-  ['distancia3_18',['distancia3',['../namespaceBECOMMONS__NS.html#a9cc2c027e22bf0fb2a05468ca0a84672',1,'BECOMMONS_NS']]]
+  ['deflarguraaltura_12',['defLarguraAltura',['../classBECOMMONS__NS_1_1bubble__gui.html#a748c2aae671c46011c59e8793430bbac',1,'BECOMMONS_NS::bubble_gui']]],
+  ['deforientacao_13',['defOrientacao',['../classBECOMMONS__NS_1_1bubble__gui.html#aff26074c14cca782c9b234076e7fe9db',1,'BECOMMONS_NS::bubble_gui']]],
+  ['defpadding_14',['defPadding',['../classBECOMMONS__NS_1_1bubble__gui.html#aca7f44c80c65f8153421bb95fb83695e',1,'BECOMMONS_NS::bubble_gui']]],
+  ['defpaddingg_15',['defPaddingG',['../classBECOMMONS__NS_1_1bubble__gui.html#a39d47ccb6eaba3391c2e91a138755beb',1,'BECOMMONS_NS::bubble_gui']]],
+  ['deftamanhoborda_16',['defTamanhoBorda',['../classBECOMMONS__NS_1_1bubble__gui.html#a2ffaedd3726866e9ae106a5bafc59e3f',1,'BECOMMONS_NS::bubble_gui']]],
+  ['desenhar_5fcaixa_17',['desenhar_caixa',['../classBECOMMONS__NS_1_1bubble__gui.html#af931d0a352666d6515bbc084e284e57d',1,'BECOMMONS_NS::bubble_gui']]],
+  ['distancia2_18',['distancia2',['../namespaceBECOMMONS__NS.html#a50e0753157c3a4aad38c7b8791bfffc3',1,'BECOMMONS_NS']]],
+  ['distancia3_19',['distancia3',['../namespaceBECOMMONS__NS.html#a9cc2c027e22bf0fb2a05468ca0a84672',1,'BECOMMONS_NS']]]
 ];

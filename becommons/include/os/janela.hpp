@@ -48,35 +48,39 @@ namespace BECOMMONS_NS {
 	{
         enum class cursor : int
         {
-        mao = 0x00036004,
-        i   = 0x00036002,
-        seta= 0x00036001,
-        re_h= 0x00036005,
-        re_v= 0x00036006
+            mao = 0x00036004,
+            i   = 0x00036002,
+            seta= 0x00036001,
+            re_h= 0x00036005,
+            re_v= 0x00036006
         };
         private:
-	    cursor m_cursor = cursor::seta;
-	    cursor m_cursor_antigo = cursor::seta;
+    	    cursor m_cursor = cursor::seta;
+	        cursor m_cursor_antigo = cursor::seta;
+	        static void modoLegado();
         public:
-		tempo m_tempo;
-        std::string m_nome{""};
-		dvet2 tamanho;
-		GLFWwindow* window;
-		inputs m_inputs;
-		janela(const char* nome, dvet2 bounds = dvet2(600, 400), const char* icon_path = nullptr);
-		janela(const char* nome, const bool f, dvet2 bounds = dvet2(600, 400), const char* icon_path = nullptr);
-		~janela();
-		void poll();
-        inline void defCursor(const cursor c)
-        {
-            if(c == m_cursor) return;
-            m_cursor = c;
-        }
-		void swap();
-		void viewport() const;
-        std::string nome() const;
-		void nome(const char* novo_nome);
+            static janela& obterInstancia();
+            static void gerarInstancia(const char* nome, dvet2 bounds = dvet2(600, 400), const char* icon_path = nullptr);
+    		static void gerarInstancia(const char* nome, const bool f, dvet2 bounds = dvet2(600, 400), const char* icon_path = nullptr);
+
+    		tempo m_tempo;
+            std::string m_nome{""};
+    		dvet2 tamanho;
+    		GLFWwindow* window;
+    		inputs m_inputs;
+    		janela(const char* nome, dvet2 bounds = dvet2(600, 400), const char* icon_path = nullptr);
+    		janela(const char* nome, const bool f, dvet2 bounds = dvet2(600, 400), const char* icon_path = nullptr);
+    		~janela();
+    		void poll();
+            inline void defCursor(const cursor c) {
+                if(c == m_cursor) return;
+                m_cursor = c;
+            }
+    		void swap();
+	    	void viewport() const;
+            std::string nome() const;
+    		void nome(const char* novo_nome);
             janela() = default;
 	};
-	inline janela* instanciaJanela{ nullptr };
+    inline static janela* instanciaAtual { nullptr };
 }

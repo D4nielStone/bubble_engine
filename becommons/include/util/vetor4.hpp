@@ -162,4 +162,6 @@ namespace BECOMMONS_NS {
         }
     };
 }
-typedef BECOMMONS_NS::vetor4<float> vet4;
+typedef BECOMMONS_NS::vetor4<float> fvet4;
+typedef BECOMMONS_NS::vetor4<double> dvet4;
+typedef BECOMMONS_NS::vetor4<int> ivet4;

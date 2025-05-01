@@ -2,14 +2,18 @@ var hierarchy =
 [
     [ "BECOMMONS_NS::caixa", "classBECOMMONS__NS_1_1caixa.html", [
       [ "BECOMMONS_NS::elementos::area_de_toque", "structBECOMMONS__NS_1_1elementos_1_1area__de__toque.html", [
-        [ "BECOMMONS_NS::elementos::botao", "structBECOMMONS__NS_1_1elementos_1_1botao.html", null ]
+        [ "BECOMMONS_NS::elementos::botao", "structBECOMMONS__NS_1_1elementos_1_1botao.html", null ],
+        [ "BECOMMONS_NS::elementos::imagem", "classBECOMMONS__NS_1_1elementos_1_1imagem.html", null ]
       ] ],
-      [ "BECOMMONS_NS::elementos::imagem", "classBECOMMONS__NS_1_1elementos_1_1imagem.html", null ],
       [ "BECOMMONS_NS::elementos::texto", "classBECOMMONS__NS_1_1elementos_1_1texto.html", null ]
     ] ],
     [ "BECOMMONS_NS::caractere", "structBECOMMONS__NS_1_1caractere.html", null ],
     [ "carectere", "structcarectere.html", null ],
     [ "Carregador", "classCarregador.html", null ],
+    [ "becommons::componente", null, [
+      [ "CompA", "structCompA.html", null ],
+      [ "CompB", "structCompB.html", null ]
+    ] ],
     [ "BECOMMONS_NS::componente", "structBECOMMONS__NS_1_1componente.html", [
       [ "BECOMMONS_NS::camera", "structBECOMMONS__NS_1_1camera.html", [
         [ "BECOMMONS_NS::camera_editor", "structBECOMMONS__NS_1_1camera__editor.html", null ]
@@ -41,6 +45,7 @@ var hierarchy =
     [ "EDITOR_NS::gerenciador_projetos", "classEDITOR__NS_1_1gerenciador__projetos.html", null ],
     [ "BECOMMONS_NS::gerenciadorFontes", "classBECOMMONS__NS_1_1gerenciadorFontes.html", null ],
     [ "std::hash< BECOMMONS_NS::entidade >", "structstd_1_1hash_3_01BECOMMONS__NS_1_1entidade_01_4.html", null ],
+    [ "std::hash< t_FonteID >", "structstd_1_1hash_3_01t__FonteID_01_4.html", null ],
     [ "BECOMMONS_NS::imageLoader", "classBECOMMONS__NS_1_1imageLoader.html", null ],
     [ "BECOMMONS_NS::inputs", "classBECOMMONS__NS_1_1inputs.html", null ],
     [ "BECOMMONS_NS::janela", "structBECOMMONS__NS_1_1janela.html", null ],
@@ -52,6 +57,7 @@ var hierarchy =
     [ "BECOMMONS_NS::projeto", "structBECOMMONS__NS_1_1projeto.html", null ],
     [ "BECOMMONS_NS::raio", "structBECOMMONS__NS_1_1raio.html", null ],
     [ "BECOMMONS_NS::registro", "structBECOMMONS__NS_1_1registro.html", null ],
+    [ "betest::registro_testes", "classbetest_1_1registro__testes.html", null ],
     [ "BECOMMONS_NS::resultadoRaio", "structBECOMMONS__NS_1_1resultadoRaio.html", null ],
     [ "BECOMMONS_NS::shader", "classBECOMMONS__NS_1_1shader.html", null ],
     [ "becommons::sistema", null, [

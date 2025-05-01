@@ -200,12 +200,12 @@ void sistema_editor::inicializar(fase* f)
 void sistema_editor::atualizar()
 {
     // inputs
-    if(instanciaJanela->m_inputs.isKeyPressed("F5"))
+    if(janela::obterInstancia().m_inputs.isKeyPressed("F5"))
     {
         projeto_atual->salvarFases();
         executarRuntime();
     }
-    if(instanciaJanela->m_inputs.isKeyPressed("Ctrl") && instanciaJanela->m_inputs.isKeyPressed("S"))
+    if(janela::obterInstancia().m_inputs.isKeyPressed("Ctrl") && janela::obterInstancia().m_inputs.isKeyPressed("S"))
     {
         projeto_atual->salvarFases();
     }
@@ -223,18 +223,18 @@ void sistema_editor::atualizar()
         entidade_anterior = entidade_atual;
     }
     // camera
-    if(instanciaJanela->m_inputs.isKeyPressed("Shif"))
+    if(janela::obterInstancia().m_inputs.isKeyPressed("Shif"))
     {
-        if(gatilho_ && instanciaJanela->m_inputs.isKeyPressed("A"))
+        if(gatilho_ && janela::obterInstancia().m_inputs.isKeyPressed("A"))
         {
         projeto_atual->obterFaseAtual()->obterRegistro()->criar();
         gatilho_ = false;
-        }else if(gatilho_ && instanciaJanela->m_inputs.isKeyPressed("X"))
+        }else if(gatilho_ && janela::obterInstancia().m_inputs.isKeyPressed("X"))
         {
 projeto_atual->obterFaseAtual()->obterRegistro()->remover(entidade_atual);
         gatilho_ = false;
         }
-        else if(!instanciaJanela->m_inputs.isKeyPressed("X") && !instanciaJanela->m_inputs.isKeyPressed("A"))
+        else if(!janela::obterInstancia().m_inputs.isKeyPressed("X") && !janela::obterInstancia().m_inputs.isKeyPressed("A"))
         {
         gatilho_ = true;
         }

@@ -153,7 +153,7 @@ namespace BECOMMONS_NS {
 
     void sistema_interface::desenharTexto(shader& s, const BECOMMONS_NS::texto &_texto)
     {
-        projection = glm::ortho(0.0, instanciaJanela->tamanho.x, instanciaJanela->tamanho.y, 0.0);
+        projection = glm::ortho(0.0, janela::obterInstancia().tamanho.x, janela::obterInstancia().tamanho.y, 0.0);
         texto text = _texto;
 
         if(_texto.pf_ativa)
@@ -208,7 +208,7 @@ namespace BECOMMONS_NS {
     }
     void sistema_interface::desenharImagem(shader& s, const BECOMMONS_NS::imagem& img)
     {
-        projection = glm::ortho(0.0, instanciaJanela->tamanho.x, instanciaJanela->tamanho.y, 0.0);
+        projection = glm::ortho(0.0, janela::obterInstancia().tamanho.x, janela::obterInstancia().tamanho.y, 0.0);
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, img.id);
         s.use();

@@ -61,14 +61,14 @@ namespace BECOMMONS_NS {
                 /// Reset do flag m_pressionado
                 m_pressionado = false;
                 /// Se não está pressionado, reseta gatilho
-                if(!instanciaJanela->m_inputs.isKeyPressed("MouseE"))
+                if(!janela::obterInstancia().m_inputs.isKeyPressed("MouseE"))
                     m_gatilho = false;
                 /// Caso dentro do campo
                 if(mouseEmCima()) {
                     /// Define cursor para mão
-                    instanciaJanela->defCursor(janela::cursor::mao);
+                    janela::obterInstancia().defCursor(janela::cursor::mao);
                     /// Caso o gatilho esteja desativado e o mouse esquerdo tocado
-                    if(!m_gatilho && instanciaJanela->m_inputs.isKeyPressed("MouseE")) {
+                    if(!m_gatilho && janela::obterInstancia().m_inputs.isKeyPressed("MouseE")) {
                         m_arrastando = true;
                         /// Se m_interruptor é diferente de nullptr
                         if(m_interruptor) {
@@ -79,15 +79,15 @@ namespace BECOMMONS_NS {
                             m_pressionado = true;
                     }
                 }
-                if(!m_gatilho && instanciaJanela->m_inputs.isKeyPressed("MouseE"))
+                if(!m_gatilho && janela::obterInstancia().m_inputs.isKeyPressed("MouseE"))
                     m_gatilho = true;
                 return m_pressionado;
             }
             bool arrastando() {
-                if(!instanciaJanela->m_inputs.isKeyPressed("MouseE"))
+                if(!janela::obterInstancia().m_inputs.isKeyPressed("MouseE"))
                     m_arrastando = false;
                 /// Caso dentro do campo
-                if(!m_arrastando && mouseEmCima() && instanciaJanela->m_inputs.isKeyPressed("MouseE")) {
+                if(!m_arrastando && mouseEmCima() && janela::obterInstancia().m_inputs.isKeyPressed("MouseE")) {
                     m_arrastando = true;
                 }
                 return m_arrastando;

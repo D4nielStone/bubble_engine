@@ -1,27 +1,35 @@
 <map id="BECOMMONS_NS::sistema_renderizacao" name="BECOMMONS_NS::sistema_renderizacao">
-<area shape="rect" id="Node000001" title=" " alt="" coords="1324,140,1519,180"/>
-<area shape="rect" id="Node000002" href="$classBECOMMONS__NS_1_1sistema.html" title=" " alt="" coords="964,91,1159,117"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="1158,116,1324,142,1323,147,1157,121"/>
-<area shape="rect" id="Node000003" href="$structBECOMMONS__NS_1_1fase.html" title=" " alt="" coords="641,39,811,65"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="823,64,979,89,978,94,822,69"/>
-<area shape="rect" id="Node000004" title=" " alt="" coords="347,5,496,45"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="510,30,640,42,640,47,510,36"/>
-<area shape="rect" id="Node000005" href="$structBECOMMONS__NS_1_1registro.html" title="gerencia as entidades" alt="" coords="325,81,518,106"/>
-<area shape="poly" id="edge5_Node000002_Node000005" title=" " alt="" coords="531,92,964,100,964,105,531,98"/>
-<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="528,76,640,61,641,66,529,81"/>
-<area shape="rect" id="Node000006" href="$structBECOMMONS__NS_1_1camera.html" title="componente que facilita a manipuacao da matriz de visualizacao e projeco" alt="" coords="965,203,1157,229"/>
-<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="1157,199,1323,173,1324,178,1158,204"/>
-<area shape="rect" id="Node000007" href="$structBECOMMONS__NS_1_1componente.html" title="base para as funcionalidades da engine" alt="" coords="309,173,533,198"/>
-<area shape="poly" id="edge7_Node000006_Node000007" title=" " alt="" coords="547,179,733,180,837,185,940,193,992,201,991,206,940,199,837,190,733,185,547,184"/>
-<area shape="rect" id="Node000012" href="$classBECOMMONS__NS_1_1transformacao.html" title=" " alt="" coords="607,203,845,229"/>
-<area shape="poly" id="edge13_Node000012_Node000007" title=" " alt="" coords="547,195,607,201,606,207,547,201"/>
-<area shape="rect" id="Node000008" href="$classBECOMMONS__NS_1_1skybox.html" title=" " alt="" coords="631,253,821,278"/>
-<area shape="poly" id="edge8_Node000006_Node000008" title=" " alt="" coords="834,249,940,233,985,226,986,231,940,239,835,254"/>
-<area shape="rect" id="Node000009" href="$classBECOMMONS__NS_1_1modelo.html" title=" " alt="" coords="325,253,517,278"/>
-<area shape="poly" id="edge9_Node000008_Node000009" title=" " alt="" coords="531,263,631,263,631,268,531,268"/>
-<area shape="rect" id="Node000010" href="$classBECOMMONS__NS_1_1shader.html" title=" " alt="" coords="5,253,192,278"/>
-<area shape="poly" id="edge10_Node000009_Node000010" title=" " alt="" coords="206,263,325,263,325,268,206,268"/>
-<area shape="rect" id="Node000011" href="$structBECOMMONS__NS_1_1cor.html" title=" " alt="" coords="645,302,807,327"/>
-<area shape="poly" id="edge11_Node000006_Node000011" title=" " alt="" coords="806,297,845,288,892,278,939,264,1032,226,1034,231,941,269,894,283,846,293,807,302"/>
-<area shape="poly" id="edge12_Node000006_Node000012" title=" " alt="" coords="859,213,965,213,965,219,859,219"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="1637,176,1832,216"/>
+<area shape="rect" id="Node000002" href="$classBECOMMONS__NS_1_1sistema.html" title=" " alt="" coords="1277,91,1472,117"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="1439,117,1656,173,1655,179,1438,123"/>
+<area shape="rect" id="Node000003" href="$structBECOMMONS__NS_1_1fase.html" title=" " alt="" coords="941,39,1111,65"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="1125,64,1254,83,1292,89,1292,94,1253,88,1124,69"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="647,5,796,45"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="810,30,940,42,940,47,810,36"/>
+<area shape="rect" id="Node000005" href="$structBECOMMONS__NS_1_1registro.html" title="gerencia as entidades" alt="" coords="625,81,818,106"/>
+<area shape="poly" id="edge5_Node000002_Node000005" title=" " alt="" coords="832,92,1277,100,1277,105,832,98"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="828,76,940,61,941,66,829,81"/>
+<area shape="rect" id="Node000006" href="$structBECOMMONS__NS_1_1camera.html" title="componente que facilita a manipuacao da matriz de visualizacao e projeco" alt="" coords="1279,245,1471,270"/>
+<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="1463,240,1637,210,1637,215,1464,245"/>
+<area shape="rect" id="Node000007" href="$structBECOMMONS__NS_1_1componente.html" title="base para as funcionalidades da engine" alt="" coords="609,391,833,417"/>
+<area shape="poly" id="edge7_Node000006_Node000007" title=" " alt="" coords="847,403,991,394,1069,385,1145,369,1200,350,1252,323,1351,268,1354,272,1255,328,1202,355,1146,375,1070,390,992,400,847,408"/>
+<area shape="rect" id="Node000015" href="$classBECOMMONS__NS_1_1transformacao.html" title=" " alt="" coords="907,334,1145,359"/>
+<area shape="poly" id="edge18_Node000015_Node000007" title=" " alt="" coords="802,386,957,357,958,362,803,391"/>
+<area shape="rect" id="Node000008" href="$classBECOMMONS__NS_1_1skybox.html" title=" " alt="" coords="931,214,1121,239"/>
+<area shape="poly" id="edge8_Node000006_Node000008" title=" " alt="" coords="1135,233,1279,246,1278,252,1134,239"/>
+<area shape="rect" id="Node000009" href="$classBECOMMONS__NS_1_1modelo.html" title=" " alt="" coords="625,214,817,239"/>
+<area shape="poly" id="edge9_Node000008_Node000009" title=" " alt="" coords="831,224,931,224,931,229,831,229"/>
+<area shape="rect" id="Node000010" href="$classBECOMMONS__NS_1_1shader.html" title=" " alt="" coords="305,242,492,267"/>
+<area shape="poly" id="edge10_Node000009_Node000010" title=" " alt="" coords="505,243,625,232,625,238,506,248"/>
+<area shape="rect" id="Node000011" href="$classBECOMMONS__NS_1_1elementos_1_1imagem.html" title=" " alt="" coords="920,264,1132,304"/>
+<area shape="poly" id="edge15_Node000011_Node000010" title=" " alt="" coords="506,258,609,264,920,277,920,283,609,269,506,264"/>
+<area shape="poly" id="edge11_Node000006_Node000011" title=" " alt="" coords="1146,280,1253,273,1300,267,1301,273,1254,279,1146,285"/>
+<area shape="rect" id="Node000012" href="$structBECOMMONS__NS_1_1elementos_1_1area__de__toque.html" title=" " alt="" coords="615,327,827,367"/>
+<area shape="poly" id="edge12_Node000011_Node000012" title=" " alt="" coords="832,321,928,301,929,307,833,327"/>
+<area shape="rect" id="Node000013" href="$classBECOMMONS__NS_1_1caixa.html" title="funciona como uma div em css" alt="" coords="309,303,488,329"/>
+<area shape="poly" id="edge13_Node000012_Node000013" title=" " alt="" coords="502,323,615,334,615,339,502,328"/>
+<area shape="rect" id="Node000014" href="$structBECOMMONS__NS_1_1cor.html" title=" " alt="" coords="5,229,168,254"/>
+<area shape="poly" id="edge16_Node000006_Node000014" title=" " alt="" coords="130,221,183,203,249,184,323,169,397,163,1027,163,1074,165,1121,172,1211,193,1289,219,1346,242,1344,247,1287,224,1210,198,1120,177,1073,170,1027,168,397,168,323,174,250,189,185,208,132,226"/>
+<area shape="poly" id="edge14_Node000013_Node000014" title=" " alt="" coords="155,255,345,301,344,306,153,260"/>
+<area shape="poly" id="edge17_Node000006_Node000015" title=" " alt="" coords="1119,329,1253,299,1342,268,1344,273,1254,304,1120,334"/>
 </map>

@@ -235,7 +235,7 @@ void BECOMMONS_NS::api::definirTempo(lua_State *L)
 		if (!projeto_atual->obterFaseAtual()) {
 			return 0.0;
 		}
-		return instanciaJanela->m_tempo.obterDeltaTime();
+		return janela::obterInstancia().m_tempo.obterDeltaTime();
 		};
 	luabridge::getGlobalNamespace(L)
 		.beginNamespace("tempo")

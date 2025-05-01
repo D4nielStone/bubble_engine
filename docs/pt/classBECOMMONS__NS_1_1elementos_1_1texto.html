@@ -151,6 +151,9 @@ template&lt;typename T , typename ... Args&gt; </td></tr>
 <tr class="memitem:a55401afcaee6dde20363d6ea8d16070b inherit pub_methods_classBECOMMONS__NS_1_1caixa" id="r_a55401afcaee6dde20363d6ea8d16070b"><td class="memItemLeft" align="right" valign="top">
 <a class="el" href="classBECOMMONS__NS_1_1caixa.html">caixa</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>obterFilho</b> (const std::string &amp;id)</td></tr>
 <tr class="separator:a55401afcaee6dde20363d6ea8d16070b inherit pub_methods_classBECOMMONS__NS_1_1caixa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada58cf0ada8e48cf6739d5d68eca9347 inherit pub_methods_classBECOMMONS__NS_1_1caixa" id="r_ada58cf0ada8e48cf6739d5d68eca9347"><td class="memItemLeft" align="right" valign="top">
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>configurar</b> ()</td></tr>
+<tr class="separator:ada58cf0ada8e48cf6739d5d68eca9347 inherit pub_methods_classBECOMMONS__NS_1_1caixa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Atributos Públicos</h2></td></tr>
@@ -188,6 +191,12 @@ caixa::orientacao&#160;</td><td class="memItemRight" valign="bottom"><b>m_orient
 <tr class="memitem:a2d04e4a370f14155e914aa23913eb20a inherit pub_attribs_classBECOMMONS__NS_1_1caixa" id="r_a2d04e4a370f14155e914aa23913eb20a"><td class="memItemLeft" align="right" valign="top">
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>m_ativo</b> {true}</td></tr>
 <tr class="separator:a2d04e4a370f14155e914aa23913eb20a inherit pub_attribs_classBECOMMONS__NS_1_1caixa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad1aad144f39da150dc2aca657d0a0b68 inherit pub_attribs_classBECOMMONS__NS_1_1caixa" id="r_ad1aad144f39da150dc2aca657d0a0b68"><td class="memItemLeft" align="right" valign="top">
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>m_ligar_la</b> {false}</td></tr>
+<tr class="separator:ad1aad144f39da150dc2aca657d0a0b68 inherit pub_attribs_classBECOMMONS__NS_1_1caixa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1be1b36deaaa763a1cdac3740438b2ba inherit pub_attribs_classBECOMMONS__NS_1_1caixa" id="r_a1be1b36deaaa763a1cdac3740438b2ba"><td class="memItemLeft" align="right" valign="top">
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>m_ligar_al</b> {false}</td></tr>
+<tr class="separator:a1be1b36deaaa763a1cdac3740438b2ba inherit pub_attribs_classBECOMMONS__NS_1_1caixa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a520795ba13546472666925d81a82c4ad inherit pub_attribs_classBECOMMONS__NS_1_1caixa" id="r_a520795ba13546472666925d81a82c4ad"><td class="memItemLeft" align="right" valign="top">
 float&#160;</td><td class="memItemRight" valign="bottom"><b>m_largura</b> = 20.f</td></tr>
 <tr class="separator:a520795ba13546472666925d81a82c4ad inherit pub_attribs_classBECOMMONS__NS_1_1caixa"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -206,9 +215,9 @@ unsigned int&#160;</td><td class="memItemRight" valign="bottom"><b>m_espessura_b
 <tr class="memitem:aee6bc5dc49071313e76b9f25b47db257 inherit pub_attribs_classBECOMMONS__NS_1_1caixa" id="r_aee6bc5dc49071313e76b9f25b47db257"><td class="memItemLeft" align="right" valign="top">
 <a class="el" href="structBECOMMONS__NS_1_1vetor2.html">vetor2</a>&lt; int &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>m_padding_geral</b> = {0, 0}</td></tr>
 <tr class="separator:aee6bc5dc49071313e76b9f25b47db257 inherit pub_attribs_classBECOMMONS__NS_1_1caixa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9859d5e0a01c73efc27ee86a7afd4256 inherit pub_attribs_classBECOMMONS__NS_1_1caixa" id="r_a9859d5e0a01c73efc27ee86a7afd4256"><td class="memItemLeft" align="right" valign="top">
-vet4&#160;</td><td class="memItemRight" valign="bottom"><b>m_limites</b> {0, 0, 20, 20}</td></tr>
-<tr class="separator:a9859d5e0a01c73efc27ee86a7afd4256 inherit pub_attribs_classBECOMMONS__NS_1_1caixa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a32b0b0441b32b1e0d0f52515ab57459f inherit pub_attribs_classBECOMMONS__NS_1_1caixa" id="r_a32b0b0441b32b1e0d0f52515ab57459f"><td class="memItemLeft" align="right" valign="top">
+fvet4&#160;</td><td class="memItemRight" valign="bottom"><b>m_limites</b> {0, 0, 20, 20}</td></tr>
+<tr class="separator:a32b0b0441b32b1e0d0f52515ab57459f inherit pub_attribs_classBECOMMONS__NS_1_1caixa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a30b3c8d15a79a407b80c548c4a485510 inherit pub_attribs_classBECOMMONS__NS_1_1caixa" id="r_a30b3c8d15a79a407b80c548c4a485510"><td class="memItemLeft" align="right" valign="top">
 <a class="el" href="structBECOMMONS__NS_1_1cor.html">cor</a>&#160;</td><td class="memItemRight" valign="bottom"><b>m_cor_borda</b> {0.1f, 0.1f, 0.1f, 0.f}</td></tr>
 <tr class="separator:a30b3c8d15a79a407b80c548c4a485510 inherit pub_attribs_classBECOMMONS__NS_1_1caixa"><td class="memSeparator" colspan="2">&#160;</td></tr>

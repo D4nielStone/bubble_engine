@@ -24,7 +24,7 @@ SOFTWARE.
 /**
  * @file janela.cpp
  */
-
+#include <stdexcept>
 #include "namespace.hpp"
 #include <glad/glad.h>
 #include "GLFW/glfw3.h"
@@ -40,6 +40,20 @@ using namespace BECOMMONS_NS;
 // Callback de erro
 void errorCallback(int error, const char* description) {
     std::cerr << "GLFW Error (" << error << "): " << description << std::endl;
+}
+
+janela& janela::obterInstancia() {
+    if (!instanciaAtual)
+       throw std::runtime_error("Instância da janela não foi gerada!");
+    return *instanciaAtual;
+}
+void janela::gerarInstancia(const char* nome, dvet2 bounds , const char* icon_path ) {
+    if(instanciaAtual) delete instanciaAtual;
+    instanciaAtual = new janela(nome, bounds, icon_path);
+}
+void janela::gerarInstancia(const char* nome, const bool f, dvet2 bounds , const char* icon_path ) {
+    if(instanciaAtual) delete instanciaAtual;
+    instanciaAtual = new janela(nome, f, bounds, icon_path);
 }
 
 janela::~janela()
@@ -123,19 +137,29 @@ if(f)
         abort();
     }
     
+    // obtém verção
     const GLubyte* versao = glGetString(GL_VERSION);    
-    depuracao::emitir(info, "Versão opengl: " + std::string(reinterpret_cast<const char*>(versao)) + ".");
-    if(icon_path)
-    {
-    imageLoader _icone(icon_path);
-    auto glfw_icone = _icone.converterParaGlfw();
-    glfwSetWindowIcon(window, 1, &glfw_icone);
+    if(!versao) depuracao::emitir(erro, "Versão opengl não identificade.");
+    else {
+        depuracao::emitir(info, "Versão opengl: " + std::string(reinterpret_cast<const char*>(versao)) + ".");
+        int major = versao[0];
+        // usar opengl legacy opengl < 3.0.
+        // máquinas antigas
+        if(major < 3) {
+            depuracao::emitir(alerta, "Opengl legacy detectado. Ativando modo de compatibilidade.");
+            modoLegado();
+        }
+    }
+
+    if(icon_path) {
+        imageLoader _icone(icon_path);
+        auto glfw_icone = _icone.converterParaGlfw();
+        glfwSetWindowIcon(window, 1, &glfw_icone);
     }
     // ativa blend
     glEnable(GL_BLEND); 
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     
-
     glfwSetCursorPosCallback(window,mousePosCallBack);
     glfwSetMouseButtonCallback(window, mouseButtonCallBack);
     glfwSetKeyCallback(window,callbackKey);
@@ -182,4 +206,8 @@ void janela::nome(const char* novo_nome)
 std::string janela::nome() const
 {
     return m_nome;
+}
+
+void janela::modoLegado() {
+// TODO modo legado / legacy mode
 }

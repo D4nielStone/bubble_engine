@@ -38,14 +38,14 @@ namespace BECOMMONS_NS {
         unsigned int id_skybox = 0;
         skybox() : modelo("cubo")
         {
-            id_skybox = textureLoader::obterInstancia().carregarSkybox("/home/d4nl/Imagens/skybox/", 
+            id_skybox = textureLoader::obterInstancia().carregarSkyboxMemoria( 
                     {
-                    "DaylightBox_Right.png",
-                    "DaylightBox_Left.png",
-                    "DaylightBox_Top.png",
-                    "DaylightBox_Bottom.png",
-                    "DaylightBox_Front.png",
-                    "DaylightBox_Back.png"});
+                    "skybox_right.png",
+                    "skybox_left.png",
+                    "skybox_top.png",
+                    "skybox_bottom.png",
+                    "skybox_front.png",
+                    "skybox_back.png"});
             m_shader = new shader("skybox.vs", "skybox.fs");
             malhas.back().definirBuffers();
         }
