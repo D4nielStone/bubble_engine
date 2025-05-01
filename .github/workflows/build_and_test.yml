@@ -37,7 +37,7 @@ jobs:
       run: |
         git clone https://github.com/microsoft/vcpkg.git
         .\vcpkg\bootstrap-vcpkg.bat
-      .\vcpkg\vcpkg install lua[core]:x64-windows glm glfw3 assimp freeimage rapidjson bullet3 freetype LuaBridge
+      .\vcpkg\vcpkg install lua53 glm glfw3 assimp freeimage rapidjson bullet3 freetype LuaBridge
     - name: Build and Run tests ( Linux )
       if: runner.os == 'Linux'
       run: ./scripts/run_tests.sh
