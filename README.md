@@ -26,18 +26,11 @@ Distribuíta pela liscensa **[MIT License](https://choosealicense.com/licenses/m
 Para instalar as dependências necessárias, execute os seguintes comandos:
 
 ```bash
-sudo apt install liblua5.3-0 libglm-dev libglfw3 libassimp-dev libfreeimage-dev rapidjson-dev libbullet-dev libfreetype6-dev
+        sudo apt-get update
+        sudo apt-get install -y cmake build-essential liblua5.3-0 liblua5.3-dev libglm-dev libglfw3-dev libassimp-dev libfreeimage-dev rapidjson-dev libbullet-dev libfreetype6-dev
+        git clone https://github.com/vinniefalco/LuaBridge.git /tmp/LuaBridge
+        sudo cp -r /tmp/LuaBridge/Source/LuaBridge /usr/local/include
 ```
-
-***Instalando LuaBridge***
-
-O LuaBridge é uma biblioteca read-only, portanto, não precisa ser compilada. Basta colocá-la no diretório padrão de bibliotecas do sistema:
-
-```plaintext
-/usr/include/LuaBridge/
-│── LuaBridge.h
-```
-
 ## Contribuição
 
 Este projeto é desenvolvido utilizando o Visual Studio Code no Linux Mint. Pull requests são bem-vindos! Para alterações significativas, abra uma discussão primeiro para alinharmos as mudanças desejadas.
