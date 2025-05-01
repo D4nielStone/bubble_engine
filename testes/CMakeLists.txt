@@ -28,6 +28,22 @@ add_executable(testes
 add_library(glad STATIC ../libs/glad/glad.c)
 target_link_libraries(testes PRIVATE glad)
 
+# Detectar plataforma
+if(WIN32)
+    message(STATUS "Configuring for Windows")
+
+    # Assumir que o vcpkg foi integrado via CMAKE_TOOLCHAIN_FILE
+    # Inclui apenas diretórios locais e relativos
+    include_directories(
+        ${CMAKE_SOURCE_DIR}
+        ../becommons/include
+        ./include
+        ../libs/glad
+    )
+
+else()
+    message(STATUS "Configuring for Linux")
+
 target_include_directories(testes PRIVATE 
     ../becommons/include
     /usr/include/lua5.3
@@ -40,7 +56,25 @@ target_include_directories(testes PRIVATE
     /usr/include/bullet
     /usr/include/freetype2
 )
+endif()
 
+# Linkagem
+if(WIN32)
+target_link_libraries(testes PRIVATE
+    becommons
+    lua
+    glfw
+    glad
+    assimp
+    FreeImage
+    rapidjson
+    Bullet
+    freetype
+    BulletCollision
+    BulletDynamics
+    Bullet3Common
+)
+else()
 target_link_libraries(testes PRIVATE 
  becommons 
  BulletDynamics
@@ -53,6 +87,7 @@ target_link_libraries(testes PRIVATE
  freeimage
  freetype
 )
+endif()
 
 
 find_library(BULLET_DYNAMICS_LIBRARY BulletDynamics)

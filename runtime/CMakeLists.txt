@@ -30,6 +30,7 @@ if(WIN32)
     # Inclui apenas diretórios locais e relativos
     include_directories(
         ${CMAKE_SOURCE_DIR}
+        ../becommons/include
         ./include
         ../libs/glad
     )
@@ -39,6 +40,7 @@ else()
 
     include_directories(
         ${CMAKE_SOURCE_DIR}
+        ../becommons/include
         ./include
         ../libs/glad
         /usr/include/lua5.3
@@ -54,9 +56,8 @@ endif()
 
 # Linkagem
 if(WIN32)
-
-target_link_libraries(becommons
-    PRIVATE
+target_link_libraries(runtime PRIVATE
+    becommons
     lua
     glfw
     glad
@@ -68,23 +69,20 @@ target_link_libraries(becommons
     BulletCollision
     BulletDynamics
     Bullet3Common
-    )
-else()
-target_link_libraries(becommons
-    PRIVATE
-    lua5.3
-    glfw
-    glad
-    assimp
-    FreeImage
-    rapidjson
-    Bullet
-    freetype
-    BulletCollision
-    BulletDynamics
-    Bullet3Common
 )
-
+else()
+target_link_libraries(runtime PRIVATE 
+ becommons 
+ BulletDynamics
+ LinearMath 
+ BulletCollision
+ Bullet3Common
+ glfw 
+ assimp
+ lua5.3
+ freeimage
+ freetype
+)
 endif()
 
 
