@@ -46,3 +46,4 @@ jobs:
       if: runner.os == 'Windows'
       shell: powershell
       run: bash scripts/run_tests.sh
+
