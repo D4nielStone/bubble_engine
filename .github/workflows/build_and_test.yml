@@ -42,5 +42,8 @@ jobs:
         .\vcpkg\vcpkg install \
           Lua glm glfw3 assimp freeimage rapidjson bullet3 freetype LuaBridge
 
-    - name: Build and Run tests ( Both systems )
+    - name: Build and Run tests ( Linux )
       run: ./scripts/run_tests.sh
+
+    - name: Build and Run tests ( Windows )
+      run: bash scripts/run_tests.sh
