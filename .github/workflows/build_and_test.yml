@@ -30,9 +30,6 @@ jobs:
           libassimp-dev libfreeimage-dev rapidjson-dev \
           libbullet-dev libfreetype6-dev
 
-    - name: Download LuaBridge (Linux)
-      if: runner.os == 'Linux'
-      run: |
         git clone https://github.com/vinniefalco/LuaBridge.git /tmp/LuaBridge
         sudo cp -r /tmp/LuaBridge/Source/LuaBridge /usr/local/include
 
@@ -43,13 +40,7 @@ jobs:
         git clone https://github.com/microsoft/vcpkg.git
         .\vcpkg\bootstrap-vcpkg.bat
         .\vcpkg\vcpkg install \
-          lua glm glfw3 assimp freeimage rapidjson bullet3 freetype
+          lua glm glfw3 assimp freeimage rapidjson bullet3 freetype LuaBridge lua
 
-    - name: Configure CMake (Windows)
-      if: runner.os == 'Windows'
-      run: |
-        cmake -B build -S . -G "MinGW Makefiles" -DCMAKE_TOOLCHAIN_FILE=./vcpkg/scripts/buildsystems/vcpkg.cmake
-        cmake --build build
-
-    - name: Run tests
+    - name: Build and Run tests ( Both systems )
       run: ./scripts/run_tests.sh
