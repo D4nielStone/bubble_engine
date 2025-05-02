@@ -44,3 +44,5 @@ build_project() {
 
 build_project becommons
 build_project runtime
+build_project editor
+build_project testes
