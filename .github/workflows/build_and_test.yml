@@ -27,7 +27,7 @@ jobs:
           libbullet-dev libfreetype6-dev
         git clone https://github.com/vinniefalco/LuaBridge.git /tmp/LuaBridge
         sudo cp -r /tmp/LuaBridge/Source/LuaBridge /usr/local/include
-    - name: Build and Run tests ( Linux )
-      run: ./scripts/run_tests.sh
-    - name: Build Editor ( Linux )
-      run: ./scripts/build_editor.sh
+    - name: Build All Projects ( Linux )
+      run: ./build_all.sh
+    - name: Run Tests
+      run: ./testes/out/testes
