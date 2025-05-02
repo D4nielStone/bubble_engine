@@ -29,5 +29,5 @@ jobs:
         sudo cp -r /tmp/LuaBridge/Source/LuaBridge /usr/local/include
     - name: Build and Run tests ( Linux )
       run: ./scripts/run_tests.sh
-    - name: Build and Run Editor ( Linux )
+    - name: Build Editor ( Linux )
       run: ./scripts/build_editor.sh
