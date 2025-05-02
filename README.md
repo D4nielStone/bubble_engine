@@ -57,7 +57,7 @@ sudo cp -r /tmp/LuaBridge/Source/LuaBridge /usr/local/include
 ```bash
 git clone https://github.com/D4nielStone/bubble_engine.git
 cd bubble_engine
-./scripts/build_editor.sh
+./build_all.sh
 ```
 
 ---
