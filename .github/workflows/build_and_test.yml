@@ -1,4 +1,4 @@
-name: Build and Test (Linux)
+name: 🐧 Build and Test
 
 on:
   push:
@@ -28,6 +28,6 @@ jobs:
         git clone https://github.com/vinniefalco/LuaBridge.git /tmp/LuaBridge
         sudo cp -r /tmp/LuaBridge/Source/LuaBridge /usr/local/include
     - name: Build All Projects ( Linux )
-      run: ./build_all.sh
+      run: chmod +x build_all.sh && ./build_all.sh
     - name: Run Tests
-      run: ./testes/out/testes
+      run: chmod +x /testes/out/testes && ./testes/out/testes
