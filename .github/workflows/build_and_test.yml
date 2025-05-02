@@ -30,4 +30,4 @@ jobs:
     - name: Build All Projects ( Linux )
       run: chmod +x build_all.sh && ./build_all.sh
     - name: Run Tests
-      run: chmod +x /testes/out/testes && ./testes/out/testes
+      run: chmod +x testes/out/testes && ./testes/out/testes
