@@ -330,12 +330,13 @@ void testarFase()
     
     // Teste de construtor com diretório
     testes.adicionar("parse_nome", [](){
-        
-        const char* diretorio = "../assets/teste_fase.fase";
-
+        //- Preparação:
+        const std::string diretorio = becommons::obterExecDir() + "/../assets/teste_fase.fase";
         becommons::fase fase(diretorio);
         fase.carregar();
     
+        //- Verificação:
+        // nome da fase deve ser igual ao do pasing.
         ASSERT_EQUAL(fase.nome(), "fase_teste");
     });
 }
