@@ -1,75 +1,115 @@
+
 # **Bubble Engine**
 [![License](https://img.shields.io/github/license/d4nielstone/bubble_engine)](https://github.com/D4nielStone/bubble_engine/blob/master/LICENSE)
 [![Version](https://img.shields.io/github/v/tag/d4nielstone/bubble_engine)](https://github.com/D4nielStone/bubble_engine/tags)
 [![Stars](https://img.shields.io/github/stars/d4nielstone/bubble_engine?style=social)](https://github.com/D4nielStone/bubble_engine/stargazers)
+
 <p align="center">
   <a href="https://d4nielstone.github.io/bubble_engine">
     <img src="https://github.com/user-attachments/assets/c5a24614-03ec-405e-8eae-55ab74326a66" width="400" alt="Bubble Engine logo">
   </a>
 </p>
 
+---
 
-## **Desenvolvimento 3D**
+## **About the Project**
 
-**[Bubble Engine](https://d4nielstone.github.io/bubble_engine) é um projeto individual criado com o objetivo de aprendizado e, no futuro, desenvolvimento de um jogo baseado nesse engine.** Dei preferência em nomear classes, variáveis, métodos e tudo mais em pt-br, minha língua natal. 
-Distribuíta pela liscensa **[MIT License](https://choosealicense.com/licenses/mit/)**
+[Bubble Engine](https://d4nielstone.github.io/bubble_engine) is a 3D engine developed for personal learning and future game development. The codebase is fully written in **Portuguese**, the author’s native language, including all classes, variables, and method names.
 
-## **Exeplo de projeto**
-***Jogo de golfe** feito como teste para a física da engine. Nele alguns recursos foram melhorados no processso de criação do projeto.*
+This project is licensed under the [MIT License](https://choosealicense.com/licenses/mit/).
 
-![Golf](https://github.com/user-attachments/assets/65968911-e9cd-44c7-868b-81286b40889d)
+---
 
-## **Contribuição**
-### **Sobre**
-Este projeto é desenvolvido utilizando o Neo Vim no Linux Mint. Pull requests são bem-vindos! Para alterações significativas, abra uma discussão primeiro para alinharmos as mudanças desejadas.
+## **Project Example**
 
-# **Instalação**
-## **Linux (Debian e distribuições derivadas, como Ubuntu):**
+A **golf game** was created as a physics test. Several engine features were improved throughout its development.
 
-*Para instalar as dependências necessárias, execute os seguintes comandos:*
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/65968911-e9cd-44c7-868b-81286b40889d" width="600" alt="Golf Game">
+</p>
 
+---
+
+## **Contributing**
+
+This project is developed mainly on **Linux Mint** using **NeoVim**.
+
+- Pull Requests are **welcome**!
+- For major changes, please open a **discussion/issue** first.
+- Constructive feedback is appreciated.
+
+---
+
+## **Installation**
+
+### **Linux (Debian/Ubuntu-based distros)**
+
+**1. Install dependencies:**
 ```bash
 sudo apt-get update
 sudo apt-get install -y cmake build-essential liblua5.3-0 liblua5.3-dev libglm-dev libglfw3-dev libassimp-dev libfreeimage-dev rapidjson-dev libbullet-dev libfreetype6-dev
+
 git clone https://github.com/vinniefalco/LuaBridge.git /tmp/LuaBridge
 sudo cp -r /tmp/LuaBridge/Source/LuaBridge /usr/local/include
 ```
-Depois deve clonar o repositório, instalar as dependências necessárias e executar o comando de build.
+
+**2. Clone and build the project:**
 ```bash
 git clone https://github.com/D4nielStone/bubble_engine.git
 cd bubble_engine
 ./scripts/build_editor.sh
 ```
-## **Windows 10 x64:**
-Primeiro instale o [git para windows](https://git-scm.com/downloads/win), ou siga esses [passos detalhados](https://www.geeksforgeeks.org/install-git-on-windows/).
 
-Depois instale o [cmake para windows](https://cmake.org/download/).
+---
 
-E por último, o [mingw](https://e2pc.unicentro.br/tutoriais/mingw.html) para compilar o projeto com gcc.
+### **Windows 7 x64**
 
-*Para instalar as dependências necessárias, execute os seguintes comandos:*
+> **Note:** Windows 7 support is limited due to some newer libraries. Make sure you have the Visual C++ Redistributable 2015+ and compatible build tools.
 
-```powershell
-git clone https://github.com/microsoft/vcpkg.git C:\vcpkg
-Start-Process C:\vcpkg\bootstrap-vcpkg.bat
-C:\vcpkg\vcpkg.exe install lua glm glfw3 assimp freeimage rapidjson bullet3 freetype LuaBridge
+**1. Install:**
+
+- [Git for Windows](https://git-scm.com/downloads/win)
+- [CMake for Windows](https://cmake.org/download/)
+- [MinGW-w64](https://sourceforge.net/projects/mingw-w64/) (recommended for compatibility)
+- [Python (optional)](https://www.python.org/downloads/windows/) for auxiliary scripts
+
+**2. Set up dependencies using `vcpkg`:**
+```cmd
+git clone https://github.com/microsoft/vcpkg.git C:/vcpkg
+cd C:/vcpkg
+bootstrap-vcpkg.bat
+vcpkg install lua glm glfw3 assimp freeimage rapidjson bullet3 freetype
 ```
-Depois deve clonar o repositório, instalar as dependências necessárias e executar o comando de build.
-```powershell
+
+**3. Clone and compile the project:**
+```cmd
 git clone https://github.com/D4nielStone/bubble_engine.git
-cd bubble_engine
-bash scripts\build_editor.sh
+
+cd bubble_engine/becommons
+mkdir out
+cd out
+cmake .. -DCMAKE_TOOLCHAIN_FILE=C:/vcpkg/scripts/buildsystems/vcpkg.cmake
+cmake --build . --config Release
+
+cd ..
+cd bubble_engine/runtime
+mkdir out
+cd out
+cmake .. -DCMAKE_TOOLCHAIN_FILE=C:/vcpkg/scripts/buildsystems/vcpkg.cmake
+cmake --build . --config Release
+
+cd ..
+cd bubble_engine/editor
+mkdir out
+cd out
+cmake .. -DCMAKE_TOOLCHAIN_FILE=C:/vcpkg/scripts/buildsystems/vcpkg.cmake
+cmake --build . --config Release
 ```
 
-## Licença
-Este projeto está licenciado sob a [MIT License](https://choosealicense.com/licenses/mit/).
+> Ensure `vcpkg` and `mingw` paths are added to your system's PATH environment variable.
 
-## Vídeos do youtube
-<p align="center">
-  <a href="https://youtu.be/qS8rZQ_BfRA">
-    <img src="https://github.com/user-attachments/assets/fc9f3c5e-1919-4099-8339-774a22db1503" width="500" alt="Video 1">
-  </a>
-  <a href="https://www.youtube.com/watch?v=JXo_AMSbO0Q&ab_channel=D4NL">
-    <img src="https://github.com/user-attachments/assets/ddf1fab5-8873-43de-83e6-da597637dba0" width="500" alt="Video 2">
-  </a>
-</p>
+---
+
+### **Youtube**
+Subscribe on the [bubble's youtube channel](https://www.youtube.com/playlist?list=LL)!
+---
