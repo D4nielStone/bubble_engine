@@ -59,6 +59,11 @@ git clone https://github.com/D4nielStone/bubble_engine.git
 cd bubble_engine
 ./build_all.sh
 ```
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/20005c5a-ae22-45d6-833a-2c085421b009" width="600" alt="Mint Exemple">
+</p>
+
+> **Image:** Running on Linux mint
 
 ---
 
