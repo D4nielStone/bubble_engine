@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['youtube_0',['Vídeos do youtube',['../index.html#autotoc_md12',1,'']]]
+  ['x64_20strong_0',['&lt;strong&gt;Windows 7 x64&lt;/strong&gt;',['../index.html#autotoc_md15',1,'']]]
 ];

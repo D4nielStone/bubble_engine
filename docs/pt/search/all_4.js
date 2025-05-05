@@ -1,8 +1,8 @@
 var searchData=
 [
   ['data_0',['data',['../classBECOMMONS__NS_1_1imageLoader.html#a8fb3432faeff19a6305dd6585f61540f',1,'BECOMMONS_NS::imageLoader']]],
-  ['de_20projeto_1',['Exeplo de projeto',['../index.html#autotoc_md8',1,'']]],
-  ['de_20uso_20no_20script_20lua_3a_2',['Exemplo de uso no script lua:',['../becommons_2include_2api_2api__lua_8hpp.html#autotoc_md0',1,'']]],
+  ['de_20uso_20no_20script_20lua_3a_1',['Exemplo de uso no script lua:',['../becommons_2include_2api_2api__lua_8hpp.html#autotoc_md0',1,'']]],
+  ['debian_20ubuntu_20based_20distros_20strong_2',['&lt;strong&gt;Linux (Debian/Ubuntu-based distros)&lt;/strong&gt;',['../index.html#autotoc_md13',1,'']]],
   ['debug_2ehpp_3',['debug.hpp',['../debug_8hpp.html',1,'']]],
   ['defaltura_4',['defaltura',['../classBECOMMONS__NS_1_1bubble__gui.html#a730fb88167d6898ae39bbc86d254ffd0',1,'BECOMMONS_NS::bubble_gui::defAltura(const double v)'],['../classBECOMMONS__NS_1_1bubble__gui.html#a71220101fc7328ac5a271ad84ee0af84',1,'BECOMMONS_NS::bubble_gui::defAltura(const int v)']]],
   ['defcorborda_5',['defCorBorda',['../classBECOMMONS__NS_1_1bubble__gui.html#a87336aa13ff9bcebdac0243e4d0653c1',1,'BECOMMONS_NS::bubble_gui']]],
@@ -22,9 +22,7 @@ var searchData=
   ['defpaddingg_19',['defPaddingG',['../classBECOMMONS__NS_1_1bubble__gui.html#a39d47ccb6eaba3391c2e91a138755beb',1,'BECOMMONS_NS::bubble_gui']]],
   ['deftamanhoborda_20',['defTamanhoBorda',['../classBECOMMONS__NS_1_1bubble__gui.html#a2ffaedd3726866e9ae106a5bafc59e3f',1,'BECOMMONS_NS::bubble_gui']]],
   ['desenhar_5fcaixa_21',['desenhar_caixa',['../classBECOMMONS__NS_1_1bubble__gui.html#af931d0a352666d6515bbc084e284e57d',1,'BECOMMONS_NS::bubble_gui']]],
-  ['desenvolvimento_203d_22',['Desenvolvimento 3D',['../index.html#autotoc_md7',1,'']]],
-  ['distancia2_23',['distancia2',['../namespaceBECOMMONS__NS.html#a50e0753157c3a4aad38c7b8791bfffc3',1,'BECOMMONS_NS']]],
-  ['distancia3_24',['distancia3',['../namespaceBECOMMONS__NS.html#a9cc2c027e22bf0fb2a05468ca0a84672',1,'BECOMMONS_NS']]],
-  ['do_20projeto_25',['Fonte do projeto',['../index.html#autotoc_md6',1,'']]],
-  ['do_20youtube_26',['Vídeos do youtube',['../index.html#autotoc_md12',1,'']]]
+  ['distancia2_22',['distancia2',['../namespaceBECOMMONS__NS.html#a50e0753157c3a4aad38c7b8791bfffc3',1,'BECOMMONS_NS']]],
+  ['distancia3_23',['distancia3',['../namespaceBECOMMONS__NS.html#a9cc2c027e22bf0fb2a05468ca0a84672',1,'BECOMMONS_NS']]],
+  ['distros_20strong_24',['&lt;strong&gt;Linux (Debian/Ubuntu-based distros)&lt;/strong&gt;',['../index.html#autotoc_md13',1,'']]]
 ];

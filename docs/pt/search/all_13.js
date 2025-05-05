@@ -16,8 +16,10 @@ var searchData=
   ['texto_13',['texto',['../structBECOMMONS__NS_1_1texto.html',1,'BECOMMONS_NS::texto'],['../classBECOMMONS__NS_1_1elementos_1_1texto.html',1,'BECOMMONS_NS::elementos::texto']]],
   ['textura_14',['textura',['../structBECOMMONS__NS_1_1textura.html',1,'BECOMMONS_NS']]],
   ['textura_2ehpp_15',['textura.hpp',['../textura_8hpp.html',1,'']]],
-  ['textureloader_16',['textureloader',['../classBECOMMONS__NS_1_1textureLoader.html#a28bf9809b46141d0d3750b24d1ab53e8',1,'BECOMMONS_NS::textureLoader::textureLoader()'],['../classBECOMMONS__NS_1_1textureLoader.html#a9895682b22afc9693b1bd44b11ea75ae',1,'BECOMMONS_NS::textureLoader::textureLoader(const textureLoader &amp;)=delete'],['../classBECOMMONS__NS_1_1textureLoader.html',1,'BECOMMONS_NS::textureLoader']]],
-  ['transformacao_17',['transformacao',['../classBECOMMONS__NS_1_1transformacao.html',1,'BECOMMONS_NS']]],
-  ['transformacao_2ecpp_18',['transformacao.cpp',['../transformacao_8cpp.html',1,'']]],
-  ['transformacao_2ehpp_19',['transformacao.hpp',['../transformacao_8hpp.html',1,'']]]
+  ['textureloader_16',['textureloader',['../classBECOMMONS__NS_1_1textureLoader.html',1,'BECOMMONS_NS::textureLoader'],['../classBECOMMONS__NS_1_1textureLoader.html#a28bf9809b46141d0d3750b24d1ab53e8',1,'BECOMMONS_NS::textureLoader::textureLoader()'],['../classBECOMMONS__NS_1_1textureLoader.html#a9895682b22afc9693b1bd44b11ea75ae',1,'BECOMMONS_NS::textureLoader::textureLoader(const textureLoader &amp;)=delete']]],
+  ['the_20a_20href_20https_3a_20www_20youtube_20com_20playlist_20list_20ll_20bubble_20s_20youtube_20channel_20a_17',['Subscribe on the &lt;a href=&quot;https://www.youtube.com/playlist?list=LL&quot; &gt;bubble&apos;s youtube channel&lt;/a&gt;!',['../index.html#autotoc_md18',1,'']]],
+  ['the_20project_20strong_18',['&lt;strong&gt;About the Project&lt;/strong&gt;',['../index.html#autotoc_md6',1,'']]],
+  ['transformacao_19',['transformacao',['../classBECOMMONS__NS_1_1transformacao.html',1,'BECOMMONS_NS']]],
+  ['transformacao_2ecpp_20',['transformacao.cpp',['../transformacao_8cpp.html',1,'']]],
+  ['transformacao_2ehpp_21',['transformacao.hpp',['../transformacao_8hpp.html',1,'']]]
 ];

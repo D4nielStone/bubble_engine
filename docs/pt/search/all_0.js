@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['3d_0',['Desenvolvimento 3D',['../index.html#autotoc_md7',1,'']]]
+  ['7_20x64_20strong_0',['&lt;strong&gt;Windows 7 x64&lt;/strong&gt;',['../index.html#autotoc_md15',1,'']]]
 ];

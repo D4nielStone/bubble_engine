@@ -10,6 +10,7 @@ var searchData=
   ['obterfaseatual_7',['obterFaseAtual',['../structBECOMMONS__NS_1_1projeto.html#adeb60e851f4ff4e4375662a8c82268c8',1,'BECOMMONS_NS::projeto']]],
   ['obterinstancia_8',['obterinstancia',['../classBECOMMONS__NS_1_1gerenciadorFontes.html#ab90747fa9102590cfdccf3cb0c66d62c',1,'BECOMMONS_NS::gerenciadorFontes::obterInstancia()'],['../classBECOMMONS__NS_1_1imageLoader.html#a52c16d1ecc6e05b892e5d72387630f54',1,'BECOMMONS_NS::imageLoader::obterInstancia()']]],
   ['obterlargura_9',['obterLargura',['../classBECOMMONS__NS_1_1imageLoader.html#a34408bcac348e7b151459b3989ac389e',1,'BECOMMONS_NS::imageLoader']]],
-  ['operator_2a_10',['operator*',['../namespaceglm.html#ab0abbb148889cb6185af0560f3f9e0ab',1,'glm']]],
-  ['os_2fsistema_2ehpp_11',['sistema.hpp',['../os_2sistema_8hpp.html',1,'']]]
+  ['on_20the_20a_20href_20https_3a_20www_20youtube_20com_20playlist_20list_20ll_20bubble_20s_20youtube_20channel_20a_10',['Subscribe on the &lt;a href=&quot;https://www.youtube.com/playlist?list=LL&quot; &gt;bubble&apos;s youtube channel&lt;/a&gt;!',['../index.html#autotoc_md18',1,'']]],
+  ['operator_2a_11',['operator*',['../namespaceglm.html#ab0abbb148889cb6185af0560f3f9e0ab',1,'glm']]],
+  ['os_2fsistema_2ehpp_12',['sistema.hpp',['../os_2sistema_8hpp.html',1,'']]]
 ];

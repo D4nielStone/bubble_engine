@@ -1,16 +1,17 @@
-
 # **Bubble Engine**
+
 [![License](https://img.shields.io/github/license/d4nielstone/bubble_engine)](https://github.com/D4nielStone/bubble_engine/blob/master/LICENSE)
 [![Version](https://img.shields.io/github/v/tag/d4nielstone/bubble_engine)](https://github.com/D4nielStone/bubble_engine/tags)
 [![Stars](https://img.shields.io/github/stars/d4nielstone/bubble_engine?style=social)](https://github.com/D4nielStone/bubble_engine/stargazers)
 
+\htmlonly
 <p align="center">
   <a href="https://d4nielstone.github.io/bubble_engine">
     <img src="https://github.com/user-attachments/assets/c5a24614-03ec-405e-8eae-55ab74326a66" width="400" alt="Bubble Engine logo">
   </a>
 </p>
-
----
+<hr>
+\endhtmlonly
 
 ## **About the Project**
 
@@ -24,9 +25,11 @@ This project is licensed under the [MIT License](https://choosealicense.com/lice
 
 A **golf game** was created as a physics test. Several engine features were improved throughout its development.
 
+\htmlonly
 <p align="center">
   <img src="https://github.com/user-attachments/assets/65968911-e9cd-44c7-868b-81286b40889d" width="600" alt="Golf Game">
 </p>
+\endhtmlonly
 
 ---
 
