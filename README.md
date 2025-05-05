@@ -60,8 +60,13 @@ sudo cp -r /tmp/LuaBridge/Source/LuaBridge /usr/local/include
 ```bash
 git clone https://github.com/D4nielStone/bubble_engine.git
 cd bubble_engine
-./scripts/build_editor.sh
+./build_all.sh
 ```
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/20005c5a-ae22-45d6-833a-2c085421b009" width="600" alt="Mint Exemple">
+</p>
+
+> **Image:** Running on Linux mint
 
 ---
 
@@ -81,7 +86,7 @@ cd bubble_engine
 git clone https://github.com/microsoft/vcpkg.git C:/vcpkg
 cd C:/vcpkg
 bootstrap-vcpkg.bat
-vcpkg install lua glm glfw3 assimp freeimage rapidjson bullet3 freetype
+vcpkg install lua:x64-mingw-static glm:x64-mingw-static glfw3:x64-mingw-static assimp:x64-mingw-static freeimage:x64-mingw-static rapidjson:x64-mingw-static bullet3:x64-mingw-static freetype:x64-mingw-static
 ```
 
 **3. Clone and compile the project:**
