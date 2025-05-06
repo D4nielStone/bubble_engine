@@ -60,9 +60,12 @@ cd bubble_engine
 ```
 <p align="center">
   <img src="https://github.com/user-attachments/assets/20005c5a-ae22-45d6-833a-2c085421b009" width="600" alt="Mint Exemple">
+  <img src="https://github.com/user-attachments/assets/79aed716-6801-44bd-9612-29c47c5cda10" width="600" alt="Ubuntu Exemple">
 </p>
 
-> **Image:** Running on Linux mint
+> **Image-1:** Running on Linux mint
+> 
+> **Image-2:** Running on Ubuntu
 
 ---
 
