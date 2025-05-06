@@ -12,6 +12,7 @@ if(WIN32)
     include_directories(
         ${CMAKE_SOURCE_DIR}
         ./include
+        ../libs/LuaBridge
         ../libs/glad
     )
 
@@ -21,7 +22,8 @@ else()
     include_directories(
         ${CMAKE_SOURCE_DIR}
         ./include
-        ../libs/glad
+        ../libs/glad        
+        ../libs/LuaBridge
         /usr/include/lua5.3
         /usr/include/glm
         /usr/include/GLFW
