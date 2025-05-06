@@ -294,6 +294,12 @@ void bubble_gui::adicionarFlags(const std::string& id, flag_estilo f) {
         caixa->m_flag_estilo |= f;
     }
 }
+bool bubble_gui::deveAtualizar() const {
+    bool condition = false;
+    if(m_raiz_old_bounds != raiz->m_limites) condition = true;                            // Atualização de limites
+    if(janela::obterInstancia().m_inputs.mouseEnter != GLFW_RELEASE) condition = true;    // Clique do mouse
+    return condition;                                                                                          
+}
 void bubble_gui::atualizar()
 {
     glCullFace(GL_FRONT);
@@ -313,7 +319,6 @@ janela::obterInstancia().tamanho.y
         static_cast<float>(janela::obterInstancia().tamanho.x),
         static_cast<float>(janela::obterInstancia().tamanho.y)};
 
-
     while(!funcoes.empty())
     {
         auto f = funcoes.front();
@@ -321,14 +326,18 @@ janela::obterInstancia().tamanho.y
         funcoes.pop();
     }
 
-    // ajusta largura de último-primeiro
-    atualizarHDTF(raiz.get(), atualizarLJ);
-    // ajusta altura de último-primeiro
-    atualizarHDTF(raiz.get(), atualizarAJ);
-    
-    atualizarFilhos(raiz.get());
+    if(deveAtualizar())
+    {
+        // depuracao::emitir(info, "Updating gui...");
+        // ajusta largura de último-primeiro
+        atualizarHDTF(raiz.get(), atualizarLJ);
+        // ajusta altura de último-primeiro
+        atualizarHDTF(raiz.get(), atualizarAJ);
+            
+        atualizarFilhos(raiz.get());
+    }
+    m_raiz_old_bounds = raiz->m_limites;
     desenhar_caixa(raiz.get());
-
     glCullFace(GL_BACK);
 }
 
