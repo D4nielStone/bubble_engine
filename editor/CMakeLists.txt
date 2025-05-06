@@ -63,4 +63,4 @@ find_library(BULLET_LINEAR_MATH_LIBRARY LinearMath)
 add_definitions(-D_DEBUG)
 
 # Definir flags de compilação no modo Debug
-set(CMAKE_CXX_FLAGS_DEBUG "-g -O0 -Wall -Wextra")
+set(CMAKE_CXX_FLAGS_DEBUG "-g -O0")
