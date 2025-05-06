@@ -118,5 +118,5 @@ cmake --build . --config Release
 ---
 
 ### **Youtube**
-Subscribe on the [bubble's youtube channel](https://www.youtube.com/playlist?list=LL)!
+Subscribe on the [bubble's youtube channel](https://www.youtube.com/channel/UCzPkiCemP0bCC5P3NhX3T4w)!
 ---
