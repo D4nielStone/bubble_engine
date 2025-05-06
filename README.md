@@ -50,9 +50,6 @@ This project is developed mainly on **Linux Mint** using **NeoVim**.
 sudo apt-get update
 sudo apt-get install -y git build-essential cmake
 sudo apt-get install -y liblua5.3-0 liblua5.3-dev libglm-dev libglfw3-dev libassimp-dev libfreeimage-dev rapidjson-dev libbullet-dev libfreetype6-dev
-
-git clone https://github.com/vinniefalco/LuaBridge.git /tmp/LuaBridge
-sudo cp -r /tmp/LuaBridge/Source/LuaBridge /usr/local/include
 ```
 
 **2. Clone and build the project:**
