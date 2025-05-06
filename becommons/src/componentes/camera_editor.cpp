@@ -52,7 +52,6 @@ void camera_editor::atualizarMovimentacao()
     // Mouse rotation
     float mousex_atual = obterMouse().x;
     float mousey_atual = obterMouse().y;
-    if(imagem_ptr->arrastando()) {
     // Movement
     if (inputs.isKeyPressed("W")) mover(glm::vec3(0, 0, sens * delta));
     if (inputs.isKeyPressed("A")) mover(glm::vec3(-sens * delta, 0, 0));
@@ -66,7 +65,6 @@ void camera_editor::atualizarMovimentacao()
         transform->rotacao.y -= mx * 0.1f; 
         transform->rotacao.x += my * 0.1f; 
         transform->rotacao.x = glm::clamp(transform->rotacao.x, -89.f, 89.f);
-    }
     }
     mousex_antigo = mousex_atual;
     mousey_antigo = mousey_atual;
