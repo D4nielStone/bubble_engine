@@ -25,11 +25,9 @@ This project is licensed under the [MIT License](https://choosealicense.com/lice
 
 A **golf game** was created as a physics test. Several engine features were improved throughout its development.
 
-\htmlonly
 <p align="center">
   <img src="https://github.com/user-attachments/assets/65968911-e9cd-44c7-868b-81286b40889d" width="600" alt="Golf Game">
 </p>
-\endhtmlonly
 
 ---
 
@@ -50,7 +48,8 @@ This project is developed mainly on **Linux Mint** using **NeoVim**.
 **1. Install dependencies:**
 ```bash
 sudo apt-get update
-sudo apt-get install -y cmake build-essential liblua5.3-0 liblua5.3-dev libglm-dev libglfw3-dev libassimp-dev libfreeimage-dev rapidjson-dev libbullet-dev libfreetype6-dev
+sudo apt-get install -y build-essential cmake
+sudo apt-get install -y liblua5.3-0 liblua5.3-dev libglm-dev libglfw3-dev libassimp-dev libfreeimage-dev rapidjson-dev libbullet-dev libfreetype6-dev
 
 git clone https://github.com/vinniefalco/LuaBridge.git /tmp/LuaBridge
 sudo cp -r /tmp/LuaBridge/Source/LuaBridge /usr/local/include
