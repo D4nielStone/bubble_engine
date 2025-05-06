@@ -38,19 +38,15 @@ namespace BECOMMONS_NS{
             /// @name Construtores com ponteiro para aparência
             /// @{
             botao(const std::function<void()> &fctn, std::unique_ptr<texto> m_texto)    : area_de_toque(fctn) {
-                cfgTexto(m_texto.get());
                 m_filhos.push_back(std::move(m_texto));
             }
             botao(const std::function<void()> &fctn, std::unique_ptr<imagem> m_imagem)   : area_de_toque(fctn) {
-                cfgImagem(m_imagem.get());
                 m_filhos.push_back(std::move(m_imagem));
             }
             botao(bool* ptr, std::unique_ptr<imagem> m_imagem)                           : area_de_toque(ptr) {
-                cfgImagem(m_imagem.get());
                 m_filhos.push_back(std::move(m_imagem));
             }
             botao(bool* ptr, std::unique_ptr<texto> m_texto)                           : area_de_toque(ptr) {
-                cfgTexto(m_texto.get());
                 m_filhos.push_back(std::move(m_texto));
             }
             /// @}
@@ -58,12 +54,16 @@ namespace BECOMMONS_NS{
             /// @{
             botao(const std::function<void()> &fctn, const std::string& txt) : area_de_toque(fctn) {
                 auto m_texto = std::make_unique<texto>(txt);
-                cfgTexto(m_texto.get());
                 m_filhos.push_back(std::move(m_texto));
             }
             botao(bool* ptr, const std::string& txt) : area_de_toque(ptr) {
                 auto m_texto = std::make_unique<texto>(txt);
-                cfgTexto(m_texto.get());
+                m_filhos.push_back(std::move(m_texto));
+            }
+            botao(bool* ptr, const std::string& txt, const std::string img) : area_de_toque(ptr) {
+                auto m_texto = std::make_unique<texto>(txt);
+                auto m_imagem = std::make_unique<imagem>(img);
+                m_filhos.push_back(std::move(m_imagem));
                 m_filhos.push_back(std::move(m_texto));
             }
             /// @}
@@ -80,7 +80,7 @@ namespace BECOMMONS_NS{
             inline void cfgTexto(texto* m_texto) {
                 m_flag_estilo = flag_estilo::modular;
                 
-                m_largura = m_texto->obterLargura(m_texto->m_texto_frase) + m_padding_geral.x * 2;
+                m_largura += m_texto->obterLargura(m_texto->m_texto_frase) + m_padding_geral.x * 2;
                 
                 m_texto->m_flag_estilo = m_flag_estilo;
             }
