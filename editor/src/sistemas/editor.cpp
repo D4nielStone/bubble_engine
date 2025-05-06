@@ -92,7 +92,7 @@ void sistema_editor::configurarInterface(becommons::projeto& proj)
         gui->defCrescimentoM(                            0.2f);
     gui->fimEstilo();
         gui->obterElemento("raiz_c")->m_ativo = false;
-        gui->adicionarElemento<elementos::texto>("raiz_c", "console", depuracao::obterMensagens(), 10.f);
+        gui->adicionarElemento<elementos::texto>("raiz_c", "console", depuracao::obterMensagens(), 14.f);
         gui->defAltura(1.0);
         // items menu
     gui->fimEstilo();
@@ -167,13 +167,20 @@ void sistema_editor::configurarInterface(becommons::projeto& proj)
         gui->defPaddingG     (                           5, 5);
         gui->defOrientacao   ( caixa::orientacao::horizontal);
     gui->fimEstilo();
-        gui->adicionarElemento<caixa>("componentes", "inspetor");
+        gui->adicionarElemento<caixa>("componentes", "inspetor_nome");
         gui->defCorFundo     (    cor(0.08f, 0.08f, 0.08f, 0.f));
-        gui->defFlags        (flag_estilo::largura_percentual | flag_estilo::modular | flag_estilo::alinhamento_central);
+        gui->defFlags        (flag_estilo::largura_percentual | flag_estilo::modular | flag_estilo::alinhamento_central | flag_estilo::altura_justa);
+        gui->defLargura       (                           1.0);
+        gui->defPaddingG     (                           5, 5);
+        gui->defOrientacao   ( caixa::orientacao::horizontal);
+    gui->fimEstilo();
+        gui->adicionarElemento<caixa>("componentes", "inspetor");
+        gui->defCorFundo     (    cor(0.08f, 0.08f, 0.08f, 1.f));
+        gui->defFlags        (flag_estilo::largura_percentual | flag_estilo::modular);
         gui->defLargura       (                           1.0);
         gui->defCrescimentoM (1.0);
         gui->defPaddingG     (                           5, 5);
-        gui->defOrientacao   ( caixa::orientacao::horizontal);
+        gui->defOrientacao   ( caixa::orientacao::vertical);
     gui->fimEstilo();
 }
 
@@ -346,19 +353,20 @@ void sistema_editor::atualizarComponente(const becommons::componente::mascara& m
     if (!gui) return;
 
     // Remove os botões antigos para evitar duplicatas
+    gui->removerFilhos("inspetor_nome");
     gui->removerFilhos("inspetor");
     if(entidade_atual == 0) return;
     std::string nome = "nenhum";
     if(becommons::componente::mapa_nomes_componentes.find(mascara) != becommons::componente::mapa_nomes_componentes.end())
         nome = becommons::componente::mapa_nomes_componentes[mascara];
+        gui->adicionarElemento<elementos::texto>("inspetor_nome", "texto_comp", nome);
     gui->fimEstilo();
-        gui->adicionarElemento<elementos::texto>("inspetor", "texto_comp", nome);
-    gui->fimEstilo();
-    /*
+
     switch (mascara) {
-        case componente::COMPONENTE_CAMERA:
-            gui->adicionarElemento<
+        case componente::COMPONENTE_CAM:
+            gui->adicionarElemento<elementos::botao>("inspetor", "botao_cam", nullptr, "Teste botao com foto :)", "check.png");
+            gui->fimEstilo();
         default:
             break;
-    }*/
+    }
 }
