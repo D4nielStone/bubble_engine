@@ -300,7 +300,7 @@ bool bubble_gui::deveAtualizar(caixa* it_caixa) {
         condition = true;                           
         it_caixa->m_old_limites = it_caixa->m_limites;
     }   //< Atualização de limites
-    if(janela::obterInstancia().m_inputs.mouseEnter != (GLFW_RELEASE || GLFW_REPEAT)) condition = true;    // Clique do mouse
+    if(janela::obterInstancia().m_inputs.mouseEnter != GLFW_RELEASE) condition = true;    // Clique do mouse
     return condition;                                                                                          
 }
 void bubble_gui::atualizar()
@@ -329,16 +329,12 @@ janela::obterInstancia().tamanho.y
         funcoes.pop();
     }
 
-    if(deveAtualizar(raiz.get()))
-    {
-        // depuracao::emitir(info, "Updating gui...");
         // ajusta largura de último-primeiro
         atualizarHDTF(raiz.get(), atualizarLJ);
         // ajusta altura de último-primeiro
         atualizarHDTF(raiz.get(), atualizarAJ);
             
         atualizarFilhos(raiz.get());
-    }
     desenhar_caixa(raiz.get());
     glCullFace(GL_BACK);
 }
