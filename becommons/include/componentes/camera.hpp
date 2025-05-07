@@ -53,6 +53,7 @@ namespace BECOMMONS_NS {
 		 */
 
         skybox* m_skybox{nullptr};
+        bool m_use_skybox { false };
         std::unique_ptr<elementos::imagem> framebuffer_ptr{nullptr};
         elementos::imagem* imagem_ptr{nullptr};
 		cor ceu				{0.43F, 0.78F, 0.86F, 1.0F};

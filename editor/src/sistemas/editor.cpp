@@ -44,7 +44,7 @@ inline void abrirLink(const std::string& url) {
     system(comando.c_str());
 }
 
-void sistema_editor::configurarInterface(becommons::projeto& proj)
+void sistema_editor::configurarInterface(projeto& proj)
 {
     // head
     if(!gui) {
@@ -103,7 +103,7 @@ void sistema_editor::configurarInterface(becommons::projeto& proj)
         gui->adicionarElemento<elementos::botao>("menu1", "ajuda", [](){
                 abrirLink("https://d4nielstone.github.io/bubble_engine/pt/md_docs_2ajuda_2ajuda.html");
                 }, "Ajuda");
-        gui->adicionarElemento<elementos::botao>("menu1", "add_primitivas", [](){}, std::make_unique<elementos::imagem>("cubo_branco"));
+        gui->adicionarElemento<elementos::botao>("menu1", "add_primitivas", [](){}, "primitivas", "cubo_branco");
         gui->defFlags(flag_estilo::altura_percentual);
         gui->defCorFundo    (cor(0.11f, 0.11f, 0.11f, 1.f));
         gui->defCorBorda    (cor(0.27f, 0.27f, 0.27f, 0.f));
@@ -196,7 +196,7 @@ void sistema_editor::inicializar(fase* f)
     
     // Adiciona sistema de gui ao projeto
     projeto_atual->adicionar("bubble_gui", new bubble_gui());
-    gui = static_cast<becommons::bubble_gui*>(projeto_atual->obterSistema("bubble_gui"));
+    gui = static_cast<bubble_gui*>(projeto_atual->obterSistema("bubble_gui"));
     /*  Config da interface   */
     configurarInterface(*projeto_atual);
     atualizarEntidades();
@@ -331,8 +331,8 @@ void sistema_editor::atualizarComponentes()
         i++;
         std::string nome = "cube";
         
-        if(becommons::componente::mapa_nomes_componentes.find(mascara) != becommons::componente::mapa_nomes_componentes.end())
-            nome = becommons::componente::mapa_nomes_componentes[mascara];
+        if(componente::mapa_nomes_componentes.find(mascara) != componente::mapa_nomes_componentes.end())
+            nome = componente::mapa_nomes_componentes[mascara];
         gui->adicionarElemento<elementos::botao>(
             "area_comps",
             nome,
@@ -348,7 +348,7 @@ void sistema_editor::atualizarComponentes()
     gui->fimEstilo();
 }
 
-void sistema_editor::atualizarComponente(const becommons::componente::mascara& mascara)
+void sistema_editor::atualizarComponente(const componente::mascara& mascara)
 {
     if (!gui) return;
 
@@ -357,14 +357,14 @@ void sistema_editor::atualizarComponente(const becommons::componente::mascara& m
     gui->removerFilhos("inspetor");
     if(entidade_atual == 0) return;
     std::string nome = "nenhum";
-    if(becommons::componente::mapa_nomes_componentes.find(mascara) != becommons::componente::mapa_nomes_componentes.end())
-        nome = becommons::componente::mapa_nomes_componentes[mascara];
+    if(componente::mapa_nomes_componentes.find(mascara) != componente::mapa_nomes_componentes.end())
+        nome = componente::mapa_nomes_componentes[mascara];
         gui->adicionarElemento<elementos::texto>("inspetor_nome", "texto_comp", nome);
     gui->fimEstilo();
 
     switch (mascara) {
         case componente::COMPONENTE_CAM:
-            gui->adicionarElemento<elementos::botao>("inspetor", "botao_cam", nullptr, "Teste botao com foto :)", "check.png");
+            gui->adicionarElemento<elementos::botao>("inspetor", "botao_cam", &projeto_atual->obterFaseAtual()->obterRegistro()->obter<camera>(entidade_atual)->m_use_skybox, "Teste botao com foto :)", "check.png");
             gui->fimEstilo();
         default:
             break;

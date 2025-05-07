@@ -86,7 +86,7 @@ void sistema_renderizacao::atualizarCamera(camera* cam)
 
         cam->desenharFB();
         
-        if(cam->m_skybox)cam->m_skybox->desenhar(cam->obtViewMatrix(), cam->obtProjectionMatrix());
+        if(cam->m_use_skybox)   cam->m_skybox->desenhar(cam->obtViewMatrix(), cam->obtProjectionMatrix());
         luz_direcional ld;
 
         std::vector<luz_pontual> lps;

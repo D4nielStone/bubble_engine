@@ -72,6 +72,7 @@ camera::camera(const bool orth)
 bool camera::analizar(const rapidjson::Value& value)
 {
 	viewport_ptr = &janela::obterInstancia().tamanho;
+    m_skybox = new skybox();
 	
     if(value.HasMember("fov"))
         fov = value["fov"].GetFloat();
@@ -93,7 +94,9 @@ bool camera::analizar(const rapidjson::Value& value)
 		};
 	}
 	if (value.HasMember("skybox") && !value["skybox"].GetBool()) return true;
-    m_skybox = new skybox();
+    
+    m_use_skybox = true;
+
 	return true;
 }
 bool camera::serializar(rapidjson::Value& value, rapidjson::Document::AllocatorType& allocator) const
@@ -119,7 +122,7 @@ bool camera::serializar(rapidjson::Value& value, rapidjson::Document::AllocatorT
     value.AddMember("ceu", cor_ceu, allocator);
 
     // skybox (flag)
-    value.AddMember("skybox", m_skybox != nullptr, allocator);
+    value.AddMember("skybox", m_use_skybox, allocator);
 
     return true;
 }

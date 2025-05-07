@@ -66,6 +66,12 @@ namespace BECOMMONS_NS{
                 m_filhos.push_back(std::move(m_imagem));
                 m_filhos.push_back(std::move(m_texto));
             }
+            botao(const std::function<void()> &fctn, const std::string& txt, const std::string img) : area_de_toque(fctn) {
+                auto m_texto = std::make_unique<texto>(txt);
+                auto m_imagem = std::make_unique<imagem>(img);
+                m_filhos.push_back(std::move(m_imagem));
+                m_filhos.push_back(std::move(m_texto));
+            }
             /// @}
             ~botao() {
             }
