@@ -26,6 +26,7 @@ SOFTWARE.
  */
 
 #pragma once
+#include <cstdlib>
 #include <iostream>
 #include <fstream>
 #include <unistd.h>
@@ -33,15 +34,68 @@ SOFTWARE.
 #include "namespace.hpp"
 
 namespace BECOMMONS_NS {
-inline static std::string obterExecDir() {
-    char path[PATH_MAX];
-    ssize_t count = readlink("/proc/self/exe", path, PATH_MAX);
-    if (count != -1) {
-        path[count] = '\0'; // Adiciona o terminador de string corretamente
-        std::string exePath(path);
-        size_t lastSlash = exePath.find_last_of('/');
-        return exePath.substr(0, lastSlash); // Retorna apenas o diretório
+    // @brief Obtém o diretório do executável padrão do usuário
+    inline static std::string obterExecDir() {
+        char path[PATH_MAX];
+        ssize_t count = readlink("/proc/self/exe", path, PATH_MAX);
+        if (count != -1) {
+            path[count] = '\0'; // Adiciona o terminador de string corretamente
+            std::string exePath(path);
+            size_t lastSlash = exePath.find_last_of('/');
+            return exePath.substr(0, lastSlash); // Retorna apenas o diretório
+        }
+        return "";
     }
-    return "";
-}
+    inline static bool comandoDisponivel(const std::string& cmd) {
+        std::string check = "command -v " + cmd + " > /dev/null 2>&1";
+        return std::system(check.c_str()) == 0;
+    }
+
+    inline static std::string obterEDT() {
+        const char* env_editor = std::getenv("EDITOR");
+        if (env_editor) return env_editor;
+    
+        const char* env_visual = std::getenv("VISUAL");
+        if (env_visual) return env_visual;
+    
+        // Ordem de preferência
+        if (comandoDisponivel("nvim")) return "nvim";
+        if (comandoDisponivel("subl")) return "subl -w";
+        if (comandoDisponivel("code")) return "code -w";
+        if (comandoDisponivel("vim")) return "vim";
+        if (comandoDisponivel("nano")) return "nano";
+        if (comandoDisponivel("xdg-open")) return "xdg-open";
+    
+        return "vi"; // fallback mínimo
+    }
+    inline static bool terminalDisponivel(const std::string& terminal) {
+        std::string test = "command -v " + terminal + " > /dev/null 2>&1";
+        return std::system(test.c_str()) == 0;
+    }
+
+    inline static std::string obterTerminal() {
+        if (terminalDisponivel("gnome-terminal")) return "gnome-terminal";
+        if (terminalDisponivel("xfce4-terminal")) return "xfce4-terminal";
+        if (terminalDisponivel("konsole")) return "konsole";
+        if (terminalDisponivel("xterm")) return "xterm";
+        if (terminalDisponivel("alacritty")) return "alacritty";
+        return "";
+    }
+
+    inline static void abrirNoTerminal(const std::string& editor, const std::string& arquivo) {
+        std::string terminal = obterTerminal();
+        if (terminal.empty()) {
+            std::cerr << "Nenhum terminal suportado encontrado.\n";
+            return;
+        }
+
+        std::string comando;
+        if (terminal == "xterm" || terminal == "alacritty") {
+            comando = terminal + " -e \"" + editor + " '" + arquivo + "'\"";
+        } else {
+            comando = terminal + " -- bash -c '" + editor + " \"" + arquivo + "\"; exec bash'";
+        }
+    
+        std::system(comando.c_str());
+    }
 }

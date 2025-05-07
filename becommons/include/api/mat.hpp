@@ -71,6 +71,12 @@ namespace glm {
 
 		return std::sqrt(dx * dx + dy * dy + dz * dz);
 	}
+    inline static float distancia2(const glm::vec2& a, const glm::vec2& b) {
+		float dx = b.x - a.x;
+		float dy = b.y - a.y;
+
+		return std::sqrt(dx * dx + dy * dy);
+	}
 	/// Operador de mutiplicação (glm::vec3)
 	/// @param lhs vetor da esquerda
 	/// @param rhs vetor da direita
