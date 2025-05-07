@@ -62,16 +62,6 @@ void codigo::iniciar() const
 	luabridge::setGlobal(L, &projeto_atual, "projetoAtual");
 	// Tentar obter a fun��o "iniciar" definida localmente no script
 	lua_getglobal(L, "iniciar");
-	if (lua_isfunction(L, -1)) {
-	    lua_pcall(L, 0, 0, 0); // Chama a função sem argumentos e sem retorno
-	} else {
-	    std::cerr << "Função 'iniciar' não definida no Lua!" << std::endl;
-	    if (lua_isnil(L, -1)) {
-	        std::cerr << "A função 'iniciar' não foi definida, ou foi definida com valor nil." << std::endl;
-	    } else if (!lua_isfunction(L, -1)) {
-	        std::cerr << "A variável 'iniciar' não é uma função." << std::endl;
-	    }
-	}
 }
 
 bool codigo::analizar(const rapidjson::Value& value) 
@@ -89,7 +79,7 @@ bool codigo::analizar(const rapidjson::Value& value)
 	api::entidade::definir(L);
 
 	if (luaL_dofile(L, arquivoCompleto.c_str()) != LUA_OK) {
-        std::cerr << "Erro ao carregar o script Lua: " << lua_tostring(L, -1) << std::endl;
+        depuracao::emitir(erro, lua_tostring(L, -1));
         lua_pop(L, 1);  // Limpa a mensagem de erro
     }
     return true;
@@ -105,10 +95,10 @@ void codigo::atualizar() const
 {
 	lua_getglobal(L, "atualizar");
 	if (lua_isfunction(L, -1)) {
-	    // Chamar a função 'atualizar' no Lua
 	    lua_pcall(L, 0, 0, 0); // Chama a função sem argumentos e sem retorno
 	} else {
-	    std::cerr << "Função 'atualizar' não definida no Lua!" << std::endl;
+        depuracao::emitir(erro, lua_tostring(L, -1));
+        lua_pop(L, 1);  // Limpa a mensagem de erro
 	}
 }
 void codigo::encerrar()
