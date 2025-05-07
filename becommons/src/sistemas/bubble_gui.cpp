@@ -294,10 +294,13 @@ void bubble_gui::adicionarFlags(const std::string& id, flag_estilo f) {
         caixa->m_flag_estilo |= f;
     }
 }
-bool bubble_gui::deveAtualizar() const {
+bool bubble_gui::deveAtualizar(caixa* it_caixa) {
     bool condition = false;
-    if(m_raiz_old_bounds != raiz->m_limites) condition = true;                            // Atualização de limites
-    if(janela::obterInstancia().m_inputs.mouseEnter != GLFW_RELEASE) condition = true;    // Clique do mouse
+    if(it_caixa->m_old_limites != it_caixa->m_limites) {
+        condition = true;                           
+        it_caixa->m_old_limites = it_caixa->m_limites;
+    }   //< Atualização de limites
+    if(janela::obterInstancia().m_inputs.mouseEnter != (GLFW_RELEASE || GLFW_REPEAT)) condition = true;    // Clique do mouse
     return condition;                                                                                          
 }
 void bubble_gui::atualizar()
@@ -326,7 +329,7 @@ janela::obterInstancia().tamanho.y
         funcoes.pop();
     }
 
-    if(deveAtualizar())
+    if(deveAtualizar(raiz.get()))
     {
         // depuracao::emitir(info, "Updating gui...");
         // ajusta largura de último-primeiro
@@ -336,7 +339,6 @@ janela::obterInstancia().tamanho.y
             
         atualizarFilhos(raiz.get());
     }
-    m_raiz_old_bounds = raiz->m_limites;
     desenhar_caixa(raiz.get());
     glCullFace(GL_BACK);
 }
@@ -349,7 +351,8 @@ void bubble_gui::atualizarFilhos(caixa* it_caixa)
     if (!it_caixa->m_ativo) {
         return; // Não atualiza caso a caixa esteja desativada 
     }
-    
+    if(deveAtualizar(it_caixa)) {
+
     // Se a caixa for modular, atualizar limites dos filhos
     if(it_caixa->tem_flag(flag_estilo::modular)){
         // Define qual é a dimensão principal e a secundária
@@ -570,7 +573,8 @@ void bubble_gui::atualizarFilhos(caixa* it_caixa)
             }
         }
     }
-    
+    }
+
     // Atualiza recursivamente os filhos
     for (auto& filho : it_caixa->m_filhos) {
         atualizarFilhos(filho.get());
