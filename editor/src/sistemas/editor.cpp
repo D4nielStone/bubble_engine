@@ -362,10 +362,27 @@ void sistema_editor::atualizarComponente(const componente::mascara& mascara)
         gui->adicionarElemento<elementos::texto>("inspetor_nome", "texto_comp", nome);
     gui->fimEstilo();
 
+    auto registro = projeto_atual->obterFaseAtual()->obterRegistro();
+
     switch (mascara) {
         case componente::COMPONENTE_CAM:
-            gui->adicionarElemento<elementos::botao>("inspetor", "botao_cam", &projeto_atual->obterFaseAtual()->obterRegistro()->obter<camera>(entidade_atual)->m_use_skybox, "Teste botao com foto :)", "check.png");
+            gui->adicionarElemento<elementos::botao>(
+                    "inspetor",
+                    "botao_cam",
+                    &registro->obter<camera>(entidade_atual)->m_use_skybox, "Ativar/Destativar Skybox", "Camera.png");
+            gui->defCorFundo    (cor(0.11f, 0.11f, 0.11f, 1.f));
+            gui->defCorBorda    (cor(0.27f, 0.27f, 0.27f, 0.f));
             gui->fimEstilo();
+            break;
+        case componente::COMPONENTE_CODIGO:
+            gui->adicionarElemento<elementos::botao>(
+                    "inspetor",
+                    "abrir_editor",
+                    [registro, this](){ abrirNoTerminal(obterEDT(), registro->obter<codigo>(entidade_atual)->arquivoCompleto); }, "Editar Script (" + obterEDT() + ")");
+            gui->defCorFundo    (cor(0.11f, 0.11f, 0.11f, 1.f));
+            gui->defCorBorda    (cor(0.27f, 0.27f, 0.27f, 0.f));
+            gui->fimEstilo();
+            break;
         default:
             break;
     }

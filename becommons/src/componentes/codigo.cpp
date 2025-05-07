@@ -41,6 +41,7 @@ using namespace BECOMMONS_NS;
 codigo::codigo(const std::string& arquivo) : L(luaL_newstate()), arquivo(arquivo)
 
 {
+    arquivoCompleto = projeto_atual->diretorioDoProjeto + arquivo; 
 	luaL_openlibs(L);
 
 	api::definirFisica(L);
@@ -49,7 +50,7 @@ codigo::codigo(const std::string& arquivo) : L(luaL_newstate()), arquivo(arquivo
 	api::definirInputs(L);
 	api::entidade::definir(L);
 
-	if (luaL_dofile(L, arquivo.c_str()) != LUA_OK) {
+	if (luaL_dofile(L, arquivoCompleto.c_str()) != LUA_OK) {
         std::cerr << "Erro ao carregar o script Lua: " << lua_tostring(L, -1) << std::endl;
         lua_pop(L, 1);  // Limpa a mensagem de erro
     }
