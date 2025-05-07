@@ -42,12 +42,12 @@ namespace BECOMMONS_NS {
         struct area_de_toque : caixa
         {
             /// Flags de ativação
-            bool m_gatilho = false, m_pressionado, m_mouse_cima { false }, m_arrastando;
+            bool m_gatilho = false, m_pressionado, m_mouse_cima { false }, m_arrastando, m_use_funcao{ false };
             std::function<void()> m_funcao;
             bool* m_interruptor{nullptr};
             /// Construtor padrão
-            area_de_toque(const std::function<void()> &fctn) : m_funcao(fctn) {};
-            area_de_toque(bool* ptr = nullptr) : m_interruptor(ptr) {};
+            area_de_toque(const std::function<void()> &fctn) : m_funcao(fctn), m_use_funcao(true) {};
+            area_de_toque(bool* ptr = nullptr) : m_interruptor(ptr), m_use_funcao(false) {};
             /// Atualiza função de ativação
             /// @returns Se está presionado ou não
             bool mouseEmCima() {
