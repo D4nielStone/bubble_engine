@@ -30,3 +30,4 @@ jogos/releases
 *.gamestate
 *.internal
 *.make
+*.txt
