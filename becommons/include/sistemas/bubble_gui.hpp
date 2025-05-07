@@ -77,7 +77,6 @@ namespace BECOMMONS_NS {
             std::unordered_map<std::string, caixa*> caixas; ///< Vetor de elementos
             std::unordered_map<std::string, caixa*> estilo_atual;             ///< Todos os elementos presentes no estilo atual
             shader* quad_shader{nullptr};                   ///< Shader do quadrado usado no fundo do elemento
-            fvet4 m_raiz_old_bounds;
             /// Desenha a caixa
             /// Desenha e decide que tipo de elemento ela é
             /// @param c Ponteiro da caixa
@@ -122,7 +121,7 @@ namespace BECOMMONS_NS {
          */
         void atualizar() override;
     
-        bool deveAtualizar() const;
+        bool deveAtualizar(caixa*);
         /**
          * @brief Adiciona um novo elemento à interface, como botão, texto ou imagem.
          * @tparam T Tipo do elemento a ser adicionado (deve herdar de `caixa`).
