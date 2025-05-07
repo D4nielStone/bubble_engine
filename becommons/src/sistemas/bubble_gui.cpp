@@ -93,7 +93,7 @@ void bubble_gui::desenhar_caixa(caixa* c)
     } else
     if(auto btn = dynamic_cast<elementos::botao*>(c)){
         // Renderizar botao
-        if(btn->pressionado())
+        if(btn->pressionado() && btn->m_use_funcao)
             funcoes.push(btn->m_funcao);
     } else
     if(auto img = dynamic_cast<elementos::imagem*>(c)){
