@@ -294,13 +294,21 @@ void bubble_gui::adicionarFlags(const std::string& id, flag_estilo f) {
         caixa->m_flag_estilo |= f;
     }
 }
+<<<<<<< HEAD
 bool bubble_gui::deveAtualizar(caixa* it_caixa) {
+=======
+bool bubble_gui::deveAtualizar(caixa* it_caixa) const {
+>>>>>>> 8d3fd9d32d5566f43421532452123c8c15fb10c2
     bool condition = false;
     if(it_caixa->m_old_limites != it_caixa->m_limites) {
         condition = true;                           
         it_caixa->m_old_limites = it_caixa->m_limites;
     }   //< Atualização de limites
+<<<<<<< HEAD
     if(janela::obterInstancia().m_inputs.mouseEnter != (GLFW_RELEASE || GLFW_REPEAT)) condition = true;    // Clique do mouse
+=======
+    if(janela::obterInstancia().m_inputs.mouseEnter != (GLFW_RELEASE || GLFW_REPEAT) condition = true;    // Clique do mouse
+>>>>>>> 8d3fd9d32d5566f43421532452123c8c15fb10c2
     return condition;                                                                                          
 }
 void bubble_gui::atualizar()
