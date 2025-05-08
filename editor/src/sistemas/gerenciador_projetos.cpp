@@ -208,13 +208,13 @@ void gerenciador_projetos::iniciar()
    
     // Sistema de gui
     gui.inicializar(nullptr);
-    gui.obterElemento("raiz")->m_cor_fundo = {0.18f, 0.18f, 0.18f, 1.f};
+    gui.obterElemento("raiz")->m_estilo.m_cor_fundo = {0.18f, 0.18f, 0.18f, 1.f};
     gui.adicionarFlags("raiz", flag_estilo::modular);
     
     // configura interface
     gui.adicionarElemento<caixa>("raiz", "barra_lateral");
         gui.defFlags(flag_estilo::modular | flag_estilo::largura_justa);
-        gui.defOrientacao(caixa::orientacao::vertical);
+        gui.defOrientacao(estilo::orientacao::vertical);
         gui.defCorFundo({0.1, 0.1, 0.1, 1});
         gui.defPaddingG(5, 5);
         gui.defAltura(1.0);

@@ -562,139 +562,139 @@ void testarBubbleGUI()
         gui.fimEstilo();
 
         // desativa caixa de maneira bruta
-        gui.obterElemento("parent_test")->m_ativo = false;
+        gui.obterElemento("parent_test")->m_estilo.m_ativo = false;
         
         //- Verificação:
         ASSERT_NO_THROW(gui.atualizarFilhos(gui.obterElemento("parent_test")));
 
         // confirma valoras inalterados
         // Valores padrão = 0, 0, 20, 20.
-        ASSERT_EQUAL(gui.obterElemento("filho")->m_limites, fvet4(0.f,0.f,20.f,20.f)); 
+        ASSERT_EQUAL(gui.obterElemento("filho")->m_estilo.m_limites, fvet4(0.f,0.f,20.f,20.f)); 
     });
 
     // Teste 3: Layout horizontal com dimensões fixas
     testes.adicionar("atualizar_filhos_horizontal_fixo", []() {
         becommons::caixa parent;
-        parent.m_flag_estilo = becommons::flag_estilo::modular;
-        parent.m_orientacao_modular = becommons::caixa::orientacao::horizontal;
-        parent.m_limites = {0, 0, 100, 50};
-        parent.m_padding_geral = {5, 0};
+        parent.m_estilo.m_flag_estilo = becommons::flag_estilo::modular;
+        parent.m_estilo.m_orientacao_modular = becommons::estilo::orientacao::horizontal;
+        parent.m_estilo.m_limites = {0, 0, 100, 50};
+        parent.m_estilo.m_padding_geral = {5, 0};
 
         auto* child1 = parent.adicionarFilho<becommons::caixa>("child1");
-        child1->m_largura = 30;
-        child1->m_padding.x = 2;
+        child1->m_estilo.m_largura = 30;
+        child1->m_estilo.m_padding.x = 2;
 
         auto* child2 = parent.adicionarFilho<becommons::caixa>("child2");
-        child2->m_largura = 40;
-        child2->m_padding.x = 3;
+        child2->m_estilo.m_largura = 40;
+        child2->m_estilo.m_padding.x = 3;
 
         becommons::bubble_gui gui;
         gui.atualizarFilhos(&parent);
 
-        ASSERT(child1->m_limites.x == 7);  // 0 +5 +2
-        ASSERT(child1->m_limites.z == 30);
-        ASSERT(child2->m_limites.x == 47); // 39 +5 +3
-        ASSERT(child2->m_limites.z == 40);
+        ASSERT(child1->m_estilo.m_limites.x == 7);  // 0 +5 +2
+        ASSERT(child1->m_estilo.m_limites.z == 30);
+        ASSERT(child2->m_estilo.m_limites.x == 47); // 39 +5 +3
+        ASSERT(child2->m_estilo.m_limites.z == 40);
     });
 
     // Teste 4: Layout horizontal com porcentagem
     testes.adicionar("atualizar_filhos_horizontal_percentual", []() {
         becommons::caixa parent;
-        parent.m_flag_estilo = becommons::flag_estilo::modular;
-        parent.m_orientacao_modular = becommons::caixa::orientacao::horizontal;
-        parent.m_limites.z = 200;
+        parent.m_estilo.m_flag_estilo = becommons::flag_estilo::modular;
+        parent.m_estilo.m_orientacao_modular = becommons::estilo::orientacao::horizontal;
+        parent.m_estilo.m_limites.z = 200;
 
         auto* child = parent.adicionarFilho<becommons::caixa>("child");
-        child->m_flag_estilo |= becommons::flag_estilo::largura_percentual;
-        child->m_largura = 0.5f;
+        child->m_estilo.m_flag_estilo |= becommons::flag_estilo::largura_percentual;
+        child->m_estilo.m_largura = 0.5f;
 
         becommons::bubble_gui gui;
         gui.atualizarFilhos(&parent);
 
-        ASSERT(child->m_limites.z == 100); // 200 * 0.5
+        ASSERT(child->m_estilo.m_limites.z == 100); // 200 * 0.5
     });
 
     // Teste 5: Crescimento modular horizontal
     testes.adicionar("atualizar_filhos_horizontal_crescimento", []() {
         becommons::caixa parent;
-        parent.m_flag_estilo = becommons::flag_estilo::modular;
-        parent.m_orientacao_modular = becommons::caixa::orientacao::horizontal;
-        parent.m_limites.z = 100;
+        parent.m_estilo.m_flag_estilo = becommons::flag_estilo::modular;
+        parent.m_estilo.m_orientacao_modular = becommons::estilo::orientacao::horizontal;
+        parent.m_estilo.m_limites.z = 100;
 
         auto* child1 = parent.adicionarFilho<becommons::caixa>("child1");
-        child1->m_largura = 30;
-        child1->m_crescimento_modular = 1;
+        child1->m_estilo.m_largura = 30;
+        child1->m_estilo.m_crescimento_modular = 1;
 
         auto* child2 = parent.adicionarFilho<becommons::caixa>("child2");
-        child2->m_largura = 40;
-        child2->m_crescimento_modular = 1;
+        child2->m_estilo.m_largura = 40;
+        child2->m_estilo.m_crescimento_modular = 1;
 
         becommons::bubble_gui gui;
         gui.atualizarFilhos(&parent);
 
-        ASSERT(child1->m_limites.z == 45); // 30 + (100-70)/2
-        ASSERT(child2->m_limites.z == 55); // 40 + (100-70)/2
+        ASSERT(child1->m_estilo.m_limites.z == 45); // 30 + (100-70)/2
+        ASSERT(child2->m_estilo.m_limites.z == 55); // 40 + (100-70)/2
     });
 
     // Teste 6: Layout vertical com dimensões fixas e percentual
     testes.adicionar("atualizar_filhos_vertical_misto", []() {
         becommons::caixa parent;
-        parent.m_flag_estilo = becommons::flag_estilo::modular;
-        parent.m_orientacao_modular = becommons::caixa::orientacao::vertical;
-        parent.m_limites = {0, 0, 80, 150};
-        parent.m_padding_geral = {10, 5};
+        parent.m_estilo.m_flag_estilo = becommons::flag_estilo::modular;
+        parent.m_estilo.m_orientacao_modular = becommons::estilo::orientacao::vertical;
+        parent.m_estilo.m_limites = {0, 0, 80, 150};
+        parent.m_estilo.m_padding_geral = {10, 5};
 
         auto* child = parent.adicionarFilho<becommons::caixa>("child");
-        child->m_flag_estilo |= becommons::flag_estilo::largura_percentual;
-        child->m_largura = 0.5f;
-        child->m_altura = 60;
+        child->m_estilo.m_flag_estilo |= becommons::flag_estilo::largura_percentual;
+        child->m_estilo.m_largura = 0.5f;
+        child->m_estilo.m_altura = 60;
 
         becommons::bubble_gui gui;
         gui.atualizarFilhos(&parent);
 
         // Largura esperada: (80 * 0.5) - 2*10 = 40 - 20 = 20
-        ASSERT(child->m_limites.z == 20);
-        ASSERT(child->m_limites.w == 60);
+        ASSERT(child->m_estilo.m_limites.z == 20);
+        ASSERT(child->m_estilo.m_limites.w == 60);
     });
 
     // Teste 7: Atualização recursiva de filhos
     testes.adicionar("atualizar_filhos_recursivo", []() {
         becommons::caixa parent;
-        parent.m_flag_estilo = becommons::flag_estilo::modular;
+        parent.m_estilo.m_flag_estilo = becommons::flag_estilo::modular;
 
         auto* child = parent.adicionarFilho<becommons::caixa>("child");
-        child->m_flag_estilo = becommons::flag_estilo::modular;
-        child->m_orientacao_modular = becommons::caixa::orientacao::vertical;
+        child->m_estilo.m_flag_estilo = becommons::flag_estilo::modular;
+        child->m_estilo.m_orientacao_modular = becommons::estilo::orientacao::vertical;
 
         auto* grandchild = child->adicionarFilho<becommons::caixa>("grandchild");
-        grandchild->m_altura = 30;
+        grandchild->m_estilo.m_altura = 30;
 
         becommons::bubble_gui gui;
         gui.atualizarFilhos(&parent);
 
-        ASSERT(grandchild->m_limites.w == 30); // Verifica se o neto foi atualizado
+        ASSERT(grandchild->m_estilo.m_limites.w == 30); // Verifica se o neto foi atualizado
     });
 
     // Teste 8: Espaço insuficiente para crescimento
     testes.adicionar("atualizar_filhos_espaco_insuficiente", []() {
         becommons::caixa parent;
-        parent.m_flag_estilo = becommons::flag_estilo::modular;
-        parent.m_orientacao_modular = becommons::caixa::orientacao::horizontal;
-        parent.m_limites.z = 50;
+        parent.m_estilo.m_flag_estilo = becommons::flag_estilo::modular;
+        parent.m_estilo.m_orientacao_modular = becommons::estilo::orientacao::horizontal;
+        parent.m_estilo.m_limites.z = 50;
 
         auto* child1 = parent.adicionarFilho<becommons::caixa>("child1");
-        child1->m_largura = 30;
-        child1->m_crescimento_modular = 1;
+        child1->m_estilo.m_largura = 30;
+        child1->m_estilo.m_crescimento_modular = 1;
 
         auto* child2 = parent.adicionarFilho<becommons::caixa>("child2");
-        child2->m_largura = 30;
-        child2->m_crescimento_modular = 1;
+        child2->m_estilo.m_largura = 30;
+        child2->m_estilo.m_crescimento_modular = 1;
 
         becommons::bubble_gui gui;
         gui.atualizarFilhos(&parent);
 
-        ASSERT(child1->m_limites.z == 30); // Sem crescimento (espaço negativo)
-        ASSERT(child2->m_limites.z == 30);
+        ASSERT(child1->m_estilo.m_limites.z == 30); // Sem crescimento (espaço negativo)
+        ASSERT(child2->m_estilo.m_limites.z == 30);
     });
     
     // Teste 9: 
@@ -702,20 +702,20 @@ void testarBubbleGUI()
         becommons::bubble_gui gui;
         
         becommons::caixa parent;
-        parent.m_flag_estilo = becommons::flag_estilo::modular;
-        parent.m_padding_geral = {5, 5};
+        parent.m_estilo.m_flag_estilo = becommons::flag_estilo::modular;
+        parent.m_estilo.m_padding_geral = {5, 5};
         auto* child1 = parent.adicionarFilho<becommons::caixa>("child1");
         auto* child2 = parent.adicionarFilho<becommons::caixa>("child2");
         gui.atualizarFilhos(&parent);
         // Horizontal
         // Assegura que o padding foi aplicado aos filhos
-        ASSERT_EQUAL(child1->m_limites.x, 5)
-        ASSERT_EQUAL(child2->m_limites.x, 30) // Largura do child1 mais o padding
-        parent.m_orientacao_modular = becommons::caixa::orientacao::vertical;
+        ASSERT_EQUAL(child1->m_estilo.m_limites.x, 5)
+        ASSERT_EQUAL(child2->m_estilo.m_limites.x, 30) // Largura do child1 mais o padding
+        parent.m_estilo.m_orientacao_modular = becommons::estilo::orientacao::vertical;
 
         gui.atualizarFilhos(&parent);
-        ASSERT_EQUAL(child1->m_limites.y, 5)
-        ASSERT_EQUAL(child2->m_limites.y, 30) // Largura do child1 mais o padding
+        ASSERT_EQUAL(child1->m_estilo.m_limites.y, 5)
+        ASSERT_EQUAL(child2->m_estilo.m_limites.y, 30) // Largura do child1 mais o padding
     });
 }
 void testarSistemas()

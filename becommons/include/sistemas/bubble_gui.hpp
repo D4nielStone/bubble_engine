@@ -232,7 +232,7 @@ namespace BECOMMONS_NS {
          * @brief Define a orientação modular das caixas.
          * @param v Orientação (horizontal ou vertical).
          */
-        void defOrientacao(const caixa::orientacao v);
+        void defOrientacao(const estilo::orientacao v);
 
         /**
          * @brief Define o padding geral (externo) das caixas.

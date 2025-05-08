@@ -53,50 +53,50 @@ void sistema_editor::configurarInterface(projeto& proj)
     }
 
     gui->adicionarFlags("raiz", flag_estilo::modular);
-    gui->obterElemento("raiz")->m_orientacao_modular = caixa::orientacao::vertical;
+    gui->obterElemento("raiz")->m_estilo.m_orientacao_modular = estilo::orientacao::vertical;
 
-    gui->obterElemento("raiz")->m_cor_fundo = cor(0.15f, 0.15f, 0.15f, 1.f);
+    gui->obterElemento("raiz")->m_estilo.m_cor_fundo = cor(0.15f, 0.15f, 0.15f, 1.f);
     // menu
         gui->adicionarElemento<caixa>("raiz", "top");
         gui->defFlags       (flag_estilo::altura_justa | flag_estilo::modular);
         gui->defLargura     (                           1.0);
-        gui->defOrientacao  (   caixa::orientacao::horizontal);
+        gui->defOrientacao  (   estilo::orientacao::horizontal);
         gui->defCorFundo    (    cor(0.15f, 0.15f, 0.15f, 0.f));
     gui->fimEstilo();
         gui->adicionarElemento<caixa>("top", "menu1");
         gui->defFlags       (flag_estilo::modular | flag_estilo::alinhamento_central);
         gui->defCrescimentoM(                           1.0);
         gui->defAltura      (                           1.0);
-        gui->defOrientacao  (   caixa::orientacao::horizontal);
+        gui->defOrientacao  (   estilo::orientacao::horizontal);
         gui->defCorFundo    (    cor(0.15f, 0.15f, 0.15f, 1.f));
     gui->fimEstilo();
         gui->adicionarElemento<caixa>("top", "menu2");
         gui->defFlags       (flag_estilo::altura_justa | flag_estilo::modular | flag_estilo::alinhamento_fim);
         gui->defCrescimentoM(                           0.3);
-        gui->defOrientacao  (   caixa::orientacao::horizontal);
+        gui->defOrientacao  (   estilo::orientacao::horizontal);
         gui->defPaddingG    (                      5, 0);
         gui->defCorFundo    (    cor(0.11f, 0.11f, 0.11f, 1.f));
     gui->fimEstilo();
         gui->adicionarElemento<caixa>("raiz", "raiz_b");
         gui->defFlags       (flag_estilo::modular);
         gui->defLargura     (                           1.0);
-        gui->defOrientacao  (   caixa::orientacao::horizontal);
+        gui->defOrientacao  (   estilo::orientacao::horizontal);
         gui->defCorFundo    (    cor(0.f, 0.f, 1.f, 0.f));
         gui->defCrescimentoM(                            1.0f);
     gui->fimEstilo();
         gui->adicionarElemento<caixa>("raiz", "raiz_c");
         gui->defFlags       (flag_estilo::modular);
         gui->defLargura     (                           1.0);
-        gui->defOrientacao  (   caixa::orientacao::horizontal);
+        gui->defOrientacao  (   estilo::orientacao::horizontal);
         gui->defCorFundo    (    cor(0.05f, 0.05f, 0.05f, 1.f));
         gui->defCrescimentoM(                            0.2f);
     gui->fimEstilo();
-        gui->obterElemento("raiz_c")->m_ativo = false;
+        gui->obterElemento("raiz_c")->m_estilo.m_ativo = false;
         gui->adicionarElemento<elementos::texto>("raiz_c", "console", depuracao::obterMensagens(), 14.f);
         gui->defAltura(1.0);
         // items menu
     gui->fimEstilo();
-        gui->adicionarElemento<elementos::botao>("menu1", "rc", &gui->obterElemento("raiz_c")->m_ativo, "Mostrar Console");
+        gui->adicionarElemento<elementos::botao>("menu1", "rc", &gui->obterElemento("raiz_c")->m_estilo.m_ativo, "Mostrar Console");
         gui->adicionarElemento<elementos::botao>("menu1", "arquivo", [](){}, "Arquivo");
         gui->adicionarElemento<elementos::botao>("menu1", "editar", [](){}, "Editar");
         gui->adicionarElemento<elementos::botao>("menu1", "visualizar", [](){}, "Exibir");
@@ -120,7 +120,7 @@ void sistema_editor::configurarInterface(projeto& proj)
         gui->defFlags       (flag_estilo::modular);
         gui->defLargura     (                          35);
         gui->defAltura      (                           1.0);
-        gui->defOrientacao  (   caixa::orientacao::vertical);
+        gui->defOrientacao  (   estilo::orientacao::vertical);
         gui->defPaddingG    (                      5, 5);
         gui->defCorFundo    (    cor(0.1f, 0.1f, 0.1f, 1.f));
 
@@ -129,7 +129,7 @@ void sistema_editor::configurarInterface(projeto& proj)
         gui->adicionarElemento("raiz_b", "imagem_editor", std::move(cam.framebuffer_ptr));
         gui->defFlags       (flag_estilo::altura_percentual | flag_estilo::modular);
         gui->defAltura      (                           1.0);
-        gui->defOrientacao  ( caixa::orientacao::horizontal);
+        gui->defOrientacao  ( estilo::orientacao::horizontal);
         gui->defCorFundo    (    cor(0.0f, 0.0f, 0.0f, 0.f));
         gui->defCorBorda    (    cor(0.07f, 0.07f, 0.07f, 1.f));
         gui->defCrescimentoM(                           1.f);
@@ -149,7 +149,7 @@ void sistema_editor::configurarInterface(projeto& proj)
         gui->defFlags        (flag_estilo::altura_percentual | flag_estilo::modular);
         gui->defAltura       (                           1.0);
         gui->defCrescimentoM (0.5);
-        gui->defOrientacao   ( caixa::orientacao::vertical);
+        gui->defOrientacao   ( estilo::orientacao::vertical);
         gui->defCorFundo     (    cor(0.1f, 0.1f, 0.1f, 1.f));
     // texto
     gui->fimEstilo();
@@ -165,14 +165,14 @@ void sistema_editor::configurarInterface(projeto& proj)
         gui->defLargura       (                           1.0);
         gui->defAltura       (                           35);
         gui->defPaddingG     (                           5, 5);
-        gui->defOrientacao   ( caixa::orientacao::horizontal);
+        gui->defOrientacao   ( estilo::orientacao::horizontal);
     gui->fimEstilo();
         gui->adicionarElemento<caixa>("componentes", "inspetor_nome");
         gui->defCorFundo     (    cor(0.08f, 0.08f, 0.08f, 0.f));
         gui->defFlags        (flag_estilo::largura_percentual | flag_estilo::modular | flag_estilo::alinhamento_central | flag_estilo::altura_justa);
         gui->defLargura       (                           1.0);
         gui->defPaddingG     (                           5, 5);
-        gui->defOrientacao   ( caixa::orientacao::horizontal);
+        gui->defOrientacao   ( estilo::orientacao::horizontal);
     gui->fimEstilo();
         gui->adicionarElemento<caixa>("componentes", "inspetor");
         gui->defCorFundo     (    cor(0.08f, 0.08f, 0.08f, 1.f));
@@ -180,7 +180,7 @@ void sistema_editor::configurarInterface(projeto& proj)
         gui->defLargura       (                           1.0);
         gui->defCrescimentoM (1.0);
         gui->defPaddingG     (                           5, 5);
-        gui->defOrientacao   ( caixa::orientacao::vertical);
+        gui->defOrientacao   ( estilo::orientacao::vertical);
     gui->fimEstilo();
 }
 
