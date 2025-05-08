@@ -51,7 +51,7 @@ namespace BECOMMONS_NS {
         bool isKeyPressed(const std::string &key) const;
         inputMode getInputMode() const;
         double mousex, mousey;
-        int mouseEnter{ 0 }, teclado_action{ 0 }, mods{ 0 }, mouseButton{ 0 };
+        int mouseEnter{ 0 }, tecladoAcao{ 0 }, mods{ 0 }, mouseButton{ 0 };
         char letra{ '\0' };
         bool mouseClick{ false }, char_press{ false };
         int gamepad_eixo;

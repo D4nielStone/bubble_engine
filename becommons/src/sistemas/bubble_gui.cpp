@@ -296,12 +296,71 @@ void bubble_gui::adicionarFlags(const std::string& id, flag_estilo f) {
 }
 bool bubble_gui::deveAtualizar(caixa* it_caixa) {
     bool condition = false;
+
+    // Verifica se os limites mudaram
     if(it_caixa->m_old_limites != it_caixa->m_limites) {
         condition = true;                           
         it_caixa->m_old_limites = it_caixa->m_limites;
-    }   //< Atualização de limites
-    if(janela::obterInstancia().m_inputs.mouseEnter != GLFW_RELEASE) condition = true;    // Clique do mouse
-    return condition;                                                                                          
+    }
+
+    // Verificações adicionais de mudança de estado ou estilo
+    if(it_caixa->m_old_ativo != it_caixa->m_ativo) {
+        condition = true;
+        it_caixa->m_old_ativo = it_caixa->m_ativo;
+    }
+    if(it_caixa->m_old_ligar_la != it_caixa->m_ligar_la) {
+        condition = true;
+        it_caixa->m_old_ligar_la = it_caixa->m_ligar_la;
+    }
+    if(it_caixa->m_old_ligar_al != it_caixa->m_ligar_al) {
+        condition = true;
+        it_caixa->m_old_ligar_al = it_caixa->m_ligar_al;
+    }
+    if(it_caixa->m_old_largura != it_caixa->m_largura) {
+        condition = true;
+        it_caixa->m_old_largura = it_caixa->m_largura;
+    }
+    if(it_caixa->m_old_altura != it_caixa->m_altura) {
+        condition = true;
+        it_caixa->m_old_altura = it_caixa->m_altura;
+    }
+    if(it_caixa->m_old_crescimento_modular != it_caixa->m_crescimento_modular) {
+        condition = true;
+        it_caixa->m_old_crescimento_modular = it_caixa->m_crescimento_modular;
+    }
+    if(it_caixa->m_old_espessura_borda != it_caixa->m_espessura_borda) {
+        condition = true;
+        it_caixa->m_old_espessura_borda = it_caixa->m_espessura_borda;
+    }
+    if(it_caixa->m_old_padding != it_caixa->m_padding) {
+        condition = true;
+        it_caixa->m_old_padding = it_caixa->m_padding;
+    }
+    if(it_caixa->m_old_padding_geral != it_caixa->m_padding_geral) {
+        condition = true;
+        it_caixa->m_old_padding_geral = it_caixa->m_padding_geral;
+    }
+    if(it_caixa->m_old_cor_borda != it_caixa->m_cor_borda) {
+        condition = true;
+        it_caixa->m_old_cor_borda = it_caixa->m_cor_borda;
+    }
+    if(it_caixa->m_old_cor_fundo != it_caixa->m_cor_fundo) {
+        condition = true;
+        it_caixa->m_old_cor_fundo = it_caixa->m_cor_fundo;
+    }
+    if(it_caixa->m_old_orientacao_modular != it_caixa->m_orientacao_modular) {
+        condition = true;
+        it_caixa->m_old_orientacao_modular = it_caixa->m_orientacao_modular;
+    }
+
+    // Atualização forçada por evento de entrada
+    if(janela::temInstancia() 
+            && (janela::obterInstancia().m_inputs.mouseEnter == GLFW_PRESS 
+                || janela::obterInstancia().m_inputs.tecladoAcao == GLFW_PRESS)) {
+        condition = true;
+    }
+
+    return condition;
 }
 void bubble_gui::atualizar()
 {

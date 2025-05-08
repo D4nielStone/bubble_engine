@@ -126,7 +126,7 @@ void BECOMMONS_NS::callbackKey(GLFWwindow* window, int key, int scancode, int ac
 {
     auto &input = janela::obterInstancia().m_inputs;
     input.mods = mods;
-    input.teclado_action = action;
+    input.tecladoAcao = action;
 
         std::string mappedkey = glfwkeyTokey(key);
         if (mappedkey != "Erro") {
