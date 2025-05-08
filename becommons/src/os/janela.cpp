@@ -42,8 +42,12 @@ void errorCallback(int error, const char* description) {
     std::cerr << "GLFW Error (" << error << "): " << description << std::endl;
 }
 
+bool janela::temInstancia() {
+    return instanciaAtual;
+}
+
 janela& janela::obterInstancia() {
-    if (!instanciaAtual)
+    if (!temInstancia())
        throw std::runtime_error("Instância da janela não foi gerada!");
     return *instanciaAtual;
 }

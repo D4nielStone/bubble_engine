@@ -83,12 +83,12 @@ namespace BECOMMONS_NS {
 
         std::string m_id;
         flag_estilo m_flag_estilo = flag_estilo::nenhuma;
-        caixa::orientacao m_orientacao_modular = caixa::orientacao::horizontal;
         
         // Estilo
+        caixa::orientacao m_orientacao_modular = caixa::orientacao::horizontal;
         bool m_ativo {true};
-        bool m_ligar_la {false};
-        bool m_ligar_al {false};
+        bool m_ligar_la {false};            // ligar altura-largura
+        bool m_ligar_al {false};            // ligar largura-altura
         float m_largura = 20.f;
         float m_altura = 20.f;
         float m_crescimento_modular = 0.0f; // Fator de crescimento em layouts modulares
@@ -96,10 +96,23 @@ namespace BECOMMONS_NS {
         vetor2<int> m_padding = {0, 0};
         vetor2<int> m_padding_geral = {0, 0};
         fvet4 m_limites  {0, 0, 20, 20};
-        fvet4 m_old_limites {0, 0, 0, 0};
         cor m_cor_borda {0.1f, 0.1f, 0.1f, 0.f};
         cor m_cor_fundo {0.5f, 0.5f, 0.5f, 0.f};
         
+        // Memória de estilo
+        caixa::orientacao m_old_orientacao_modular = caixa::orientacao::horizontal;
+        bool m_old_ativo;
+        bool m_old_ligar_la;
+        bool m_old_ligar_al;
+        float m_old_largura;
+        float m_old_altura;
+        float m_old_crescimento_modular;
+        unsigned int m_old_espessura_borda;
+        vetor2<int> m_old_padding;
+        vetor2<int> m_old_padding_geral;
+        fvet4 m_old_limites;
+        cor m_old_cor_borda;
+        cor m_old_cor_fundo;
         // Hierarquia
         std::vector<std::unique_ptr<caixa>> m_filhos;
         std::unordered_map<std::string, caixa*> m_mapa_filhos;
