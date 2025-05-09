@@ -76,23 +76,23 @@ namespace BECOMMONS_NS{
             ~botao() {
             }
             inline void cfgImagem(imagem* m_imagem) {
-                m_flag_estilo = flag_estilo::modular;
+                m_estilo.m_flag_estilo = flag_estilo::modular;
 
-                m_imagem->m_altura = m_altura;
-                m_imagem->m_largura = m_largura;
-                m_imagem->m_flag_estilo = m_flag_estilo;
-                m_largura += m_padding_geral.x * 2;
+                m_imagem->m_estilo.m_altura = m_estilo.m_altura;
+                m_imagem->m_estilo.m_largura = m_estilo.m_largura;
+                m_imagem->m_estilo.m_flag_estilo = m_estilo.m_flag_estilo;
+                m_estilo.m_largura += m_estilo.m_padding_geral.x * 2;
             }
             inline void cfgTexto(texto* m_texto) {
-                m_flag_estilo = flag_estilo::modular;
+                m_estilo.m_flag_estilo = flag_estilo::modular;
                 
-                m_largura += m_texto->obterLargura(m_texto->m_texto_frase) + m_padding_geral.x * 2;
+                m_estilo.m_largura += m_texto->obterLargura(m_texto->m_texto_frase) + m_estilo.m_padding_geral.x * 2;
                 
-                m_texto->m_flag_estilo = m_flag_estilo;
+                m_texto->m_estilo.m_flag_estilo = m_estilo.m_flag_estilo;
             }
             bool pressionado() override {
                 m_pressionado = area_de_toque::pressionado();
-                m_cor_borda.a = m_mouse_cima ? 1.f : 0.f;
+                m_estilo.m_cor_borda.a = m_mouse_cima ? 1.f : 0.f;
                 return m_pressionado;
             }
             void configurar() override {

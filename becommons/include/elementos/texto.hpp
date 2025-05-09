@@ -65,9 +65,9 @@ namespace BECOMMONS_NS{
                 , m_texto_shader(new shader("texto.vert", "texto.frag"))
                 , m_texto_flags(flags)
             {
-                m_altura = escala;
-                m_largura = obterLargura(m_texto_frase);
-                m_limites.z = m_largura; m_limites.w = m_altura;
+                m_estilo.m_altura = escala;
+                m_estilo.m_largura = obterLargura(m_texto_frase);
+                m_estilo.m_limites.z = m_estilo.m_largura; m_estilo.m_limites.w = m_estilo.m_altura;
             }
             texto(std::string* frase,
                     const unsigned int escala = 14,
@@ -78,9 +78,9 @@ namespace BECOMMONS_NS{
                 , m_texto_shader(new shader("texto.vert", "texto.frag"))
                 , m_texto_flags(flags)
             {
-                m_altura = escala;
-                m_largura = obterLargura(m_texto_frase);
-                m_limites.z = m_largura; m_limites.w = m_altura;
+                m_estilo.m_altura = escala;
+                m_estilo.m_largura = obterLargura(m_texto_frase);
+                m_estilo.m_limites.z = m_estilo.m_largura; m_estilo.m_limites.w = m_estilo.m_altura;
             }
             float obterLargura(const std::string& frase) {
                 if(m_texto_frase_ptr) m_texto_frase = *m_texto_frase_ptr;

@@ -57,8 +57,8 @@ namespace BECOMMONS_NS{
 			    }
 			    m_imagem_id = textureLoader::obterInstancia().
 			        carregarTextura(m_imagem_path, &m_imagem_tamanho.x, &m_imagem_tamanho.y);
-                m_limites.z = m_imagem_tamanho.x;
-			    m_limites.w = m_imagem_tamanho.y;
+                m_estilo.m_limites.z = m_imagem_tamanho.x;
+			    m_estilo.m_limites.w = m_imagem_tamanho.y;
 		    }
 		    imagem(unsigned int id, const bool f = false) : m_imagem_id(id), m_imagem_flip(f), m_imagem_shader(new shader("imagem.vert", "framebuffer.frag")) {}
 	    };

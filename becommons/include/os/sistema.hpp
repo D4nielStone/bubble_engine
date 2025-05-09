@@ -32,8 +32,14 @@ SOFTWARE.
 #include <unistd.h>
 #include <limits.h>
 #include "namespace.hpp"
+#include "depuracao/debug.hpp"
 
 namespace BECOMMONS_NS {
+    inline static void abrirLink(const std::string& url) {
+        depuracao::emitir(info, "Abrindo ajuda...");
+        std::string comando = "xdg-open \\" + url;
+        system(comando.c_str());
+    }
     // @brief Obtém o diretório do executável padrão do usuário
     inline static std::string obterExecDir() {
         char path[PATH_MAX];
