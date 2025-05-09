@@ -42,8 +42,8 @@ enum nivel
 namespace depuracao
 {
     inline bool debug_ativo{true};
-    inline std::stringstream msgs;
-    inline std::string msg_str;
+    inline std::stringstream msgs {"..."};
+    inline std::string msg_str {"..."};
 
     inline void emitir(const nivel& n, const std::string& msg)
     {

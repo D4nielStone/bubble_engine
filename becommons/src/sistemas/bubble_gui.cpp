@@ -176,10 +176,13 @@ void BECOMMONS_NS::renderizarTexto(elementos::texto* tex)
         for(auto ca : texto_final)
         {
             if(ca == '\n') {y_linha += tex->m_texto_escala; x_linha = tex->m_estilo.m_limites.x; continue;}
-            
+            caractere ch;
             if (chs.empty())
                 return;
-            caractere ch = chs.at(ca);
+            if(chs.find(ca) != chs.end())
+                ch = chs.at(ca);
+            else
+                continue;
             
             float xpos = x_linha + ch.apoio.x;
             float ypos = tex->m_estilo.m_limites.y - ch.apoio.y + y_linha;
@@ -213,9 +216,6 @@ void BECOMMONS_NS::renderizarTexto(elementos::texto* tex)
     }
 bubble_gui::bubble_gui()
 {
-    raiz = std::make_unique<caixa>();
-    raiz->m_id = "raiz";
-    caixas["raiz"] = raiz.get();
 }
 
 void bubble_gui::inicializar(fase* f)
@@ -613,7 +613,7 @@ caixa* bubble_gui::obterElemento(const std::string& id) {
         return it->second;
     }
     // Isso também pode acontecer ao adicionar um filho de forma direta pelo ponteiro da caixa.
-    // Use a função "adicionarElemento" invés disso.
+    // Use a função "adicionar" invés disso.
     throw std::runtime_error("elemento não encontrado!");
 }
 bool bubble_gui::elementoExiste(const std::string id) const {
@@ -622,6 +622,12 @@ bool bubble_gui::elementoExiste(const std::string id) const {
 }
 
 // Funções de estilo
+void bubble_gui::iniciarRaiz(const std::string& nome) {
+    raiz = std::make_unique<caixa>();
+    raiz->m_id = nome;
+    estilo_atual[nome] = raiz.get();
+    m_novo_estilo = true;
+}
 void bubble_gui::fimEstilo(){
     for(auto& [id, caixa] : estilo_atual) {
         caixa->configurar();
@@ -644,6 +650,11 @@ void bubble_gui::defLargura(const double v){
 void bubble_gui::defLarguraAltura(const bool b){
     for(auto& [id, caixa] : estilo_atual){
         caixa->m_estilo.m_ligar_la = b;
+    }
+}
+void bubble_gui::defAtivo(const bool b){
+    for(auto& [id, caixa] : estilo_atual){
+        caixa->m_estilo.m_ativo = b;
     }
 }
 void bubble_gui::defAltura(const double v){

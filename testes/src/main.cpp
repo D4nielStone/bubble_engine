@@ -483,8 +483,10 @@ void testarBubbleGUI()
         //- Preparação 1:
         becommons::bubble_gui gui;
 
+        gui.iniciarRaiz("raiz");
+        gui.fimEstilo();
         // adiciona pai
-        gui.adicionarElemento<becommons::caixa>("raiz", "parent_test");
+        gui.adicionar<becommons::caixa>("raiz", "parent_test");
          
         //- Verificação 1:
         // captura exceção do estilo do pai.
@@ -506,7 +508,7 @@ void testarBubbleGUI()
         
         //- Preparação 3:
         // adiciona o filho da maneira correta.
-        gui.adicionarElemento<becommons::caixa>("parent_test", "filho");
+        gui.adicionar<becommons::caixa>("parent_test", "filho");
 
         // corrige exceção
         gui.fimEstilo();
@@ -534,7 +536,7 @@ void testarBubbleGUI()
         
         //- Verificação:
         // deve retornar exceção.
-        ASSERT_THROW(gui.adicionarElemento<becommons::caixa>("empty_parent", "child_test"), std::runtime_error); 
+        ASSERT_THROW(gui.adicionar<becommons::caixa>("empty_parent", "child_test"), std::runtime_error); 
     });
     
     // Teste 3: Caixa nula
@@ -553,11 +555,13 @@ void testarBubbleGUI()
         //- Preparação:
         becommons::bubble_gui gui;
 
+        gui.iniciarRaiz("raiz");
+        gui.fimEstilo();
         // adiciona pai
-        gui.adicionarElemento<becommons::caixa>("raiz", "parent_test");
+        gui.adicionar<becommons::caixa>("raiz", "parent_test");
         
         // adiciona filho
-        gui.adicionarElemento<becommons::caixa>("parent_test", "filho");
+        gui.adicionar<becommons::caixa>("parent_test", "filho");
         
         gui.fimEstilo();
 

@@ -131,7 +131,7 @@ namespace BECOMMONS_NS {
          * @param args Argumentos para construção do novo elemento.
          */
         template <typename T, typename ...Args>
-        void adicionarElemento(const std::string& pai_id, const std::string& nova_id, Args&&... args) {
+        void adicionar(const std::string& pai_id, const std::string& nova_id, Args&&... args) {
                 if (elementoExiste(pai_id)) {
                     m_novo_estilo = false;
                     auto pai = obterElemento(pai_id);
@@ -146,7 +146,7 @@ namespace BECOMMONS_NS {
                 }
                 m_novo_estilo = true;
             }
-        void adicionarElemento(const std::string& pai_id, const std::string& nova_id, std::unique_ptr<elementos::imagem> ptr) {
+        void adicionar(const std::string& pai_id, const std::string& nova_id, std::unique_ptr<elementos::imagem> ptr) {
                 if (elementoExiste(pai_id)) {
                     m_novo_estilo = false;
                     auto pai = obterElemento(pai_id);
@@ -188,6 +188,11 @@ namespace BECOMMONS_NS {
         // === Funções de Estilo ===
 
         /**
+         * @brief inicia a raiz com um id específico
+         * @param nome
+         */
+        void iniciarRaiz(const std::string& nome);
+        /**
          * @brief Limpa o estilo atual.
          */
         void fimEstilo();
@@ -221,6 +226,12 @@ namespace BECOMMONS_NS {
          * @param b Booleano (true linka )
          */
         void defLarguraAltura(const bool b);
+        
+        /**
+         * @brief Define estado de ativação
+         * @param b Booleano (true = ativado)
+         */
+        void defAtivo(const bool b);
 
         /**
          * @brief Define altura absoluta (em pixels) para os elementos.
