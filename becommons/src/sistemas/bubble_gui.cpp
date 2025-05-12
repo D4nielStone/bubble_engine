@@ -347,18 +347,7 @@ janela::obterInstancia().tamanho.y
     glCullFace(GL_BACK);
 }
 
-void bubble_gui::atualizarFilhos(caixa* it_caixa)
-{
-    if (!it_caixa) {
-        throw std::runtime_error("Caixa nula sendo atualizada.");
-    }
-    if (!it_caixa->m_estilo.m_ativo) {
-        return; // Não atualiza caso a caixa esteja desativada 
-    }
-    if(deveAtualizar(it_caixa)) {
-
-    // Se a caixa for modular, atualizar limites dos filhos
-    if(it_caixa->tem_flag(flag_estilo::modular)){
+inline void flagModular(caixa* it_caixa) {
         // Define qual é a dimensão principal e a secundária
         // Se horizontal: principal = largura (z), secundária = altura (w)
         // Se vertical: principal = altura (w), secundária = largura (z)
@@ -576,9 +565,23 @@ void bubble_gui::atualizarFilhos(caixa* it_caixa)
                 }
             }
         }
-    }
-    }
+}
 
+void bubble_gui::atualizarFilhos(caixa* it_caixa)
+{
+    if (!it_caixa) {
+        throw std::runtime_error("Caixa nula sendo atualizada.");
+    }
+    if (!it_caixa->m_estilo.m_ativo) {
+        return; // Não atualiza caso a caixa esteja desativada 
+    }
+    if(deveAtualizar(it_caixa)) {
+
+        // Se a caixa for modular, atualizar limites dos filhos
+        if(it_caixa->tem_flag(flag_estilo::modular)){
+            flagModular(it_caixa);
+        }
+    }
     // Atualiza recursivamente os filhos
     for (auto& filho : it_caixa->m_filhos) {
         atualizarFilhos(filho.get());
