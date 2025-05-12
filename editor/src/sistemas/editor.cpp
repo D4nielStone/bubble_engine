@@ -111,6 +111,7 @@ void sistema_editor::configurarInterface(projeto& proj)
         gui->defPaddingG    (                           5, 5);
         gui->defCorFundo    (     cor(0.1f, 0.1f, 0.1f, 1.f));
     gui->fimEstilo();
+    cam.framebuffer_ptr->m_imagem_shader = new shader("imagem.vert", "vintage.frag");
     gui->adicionar("#centro", "##editor", std::move(cam.framebuffer_ptr));
         gui->defFlags       (flag_estilo::altura_percentual | flag_estilo::modular);
         gui->defAltura      (                            1.0);
@@ -204,7 +205,6 @@ void sistema_editor::configurarInterface(projeto& proj)
         gui->defLargura       (                           1.0);
         gui->defCrescimentoM (1.0);
         gui->defPaddingG     (                           5, 5);
-        gui->defOrientacao   ( estilo::orientacao::vertical);
     gui->fimEstilo();
 }
 
@@ -387,8 +387,9 @@ void sistema_editor::atualizarComponente(const componente::mascara& mascara)
                     "###propriedades",
                     "####btn_cam",
                     &registro->obter<camera>(entidade_atual)->m_use_skybox, "Ativar/Destativar Skybox", "Camera.png");
-            gui->defCorFundo    (cor(0.11f, 0.11f, 0.11f, 1.f));
-            gui->defCorBorda    (cor(0.27f, 0.27f, 0.27f, 0.f));
+                gui->defCorFundo    (cor(0.11f, 0.11f, 0.11f, 1.f));
+                gui->defCorBorda    (cor(0.27f, 0.27f, 0.27f, 0.f));
+                gui->defCrescimentoM(                          1.0);
             gui->fimEstilo();
             break;
         case componente::COMPONENTE_CODIGO:
@@ -396,8 +397,9 @@ void sistema_editor::atualizarComponente(const componente::mascara& mascara)
                     "###propriedades",
                     "####btn_editor",
                     [registro, this](){ abrirNoTerminal(obterEDT(), registro->obter<codigo>(entidade_atual)->arquivoCompleto); }, "Editar Script (" + obterEDT() + ")");
-            gui->defCorFundo    (cor(0.11f, 0.11f, 0.11f, 1.f));
-            gui->defCorBorda    (cor(0.27f, 0.27f, 0.27f, 0.f));
+                gui->defCorFundo    (cor(0.11f, 0.11f, 0.11f, 1.f));
+                gui->defCorBorda    (cor(0.27f, 0.27f, 0.27f, 0.f));
+                gui->defCrescimentoM(                          1.0);
             gui->fimEstilo();
             break;
         default:

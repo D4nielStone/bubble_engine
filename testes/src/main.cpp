@@ -603,24 +603,35 @@ void testarBubbleGUI()
 
     // Teste 4: Layout horizontal com porcentagem
     testes.adicionar("atualizar_filhos_horizontal_percentual", []() {
+        //- Preparação:
+        // prepara instâncias
         becommons::caixa parent;
+        becommons::bubble_gui gui;
+
+        // edita o esitilo
         parent.m_estilo.m_flag_estilo = becommons::flag_estilo::modular;
         parent.m_estilo.m_orientacao_modular = becommons::estilo::orientacao::horizontal;
         parent.m_estilo.m_limites.z = 200;
 
+        // adiciona e obtêm filho
         auto* child = parent.adicionarFilho<becommons::caixa>("child");
         child->m_estilo.m_flag_estilo |= becommons::flag_estilo::largura_percentual;
         child->m_estilo.m_largura = 0.5f;
 
-        becommons::bubble_gui gui;
         gui.atualizarFilhos(&parent);
 
-        ASSERT(child->m_estilo.m_limites.z == 100); // 200 * 0.5
+        //- Verificação:
+        // largura do filho deve ser 50% da largura do pai
+        ASSERT_EQUAL(child->m_estilo.m_limites.z, 100); // 200 * 0.5
     });
 
     // Teste 5: Crescimento modular horizontal
     testes.adicionar("atualizar_filhos_horizontal_crescimento", []() {
+        //- Preparação:
+        // prepara instâncias
         becommons::caixa parent;
+
+        // edita o esitilo
         parent.m_estilo.m_flag_estilo = becommons::flag_estilo::modular;
         parent.m_estilo.m_orientacao_modular = becommons::estilo::orientacao::horizontal;
         parent.m_estilo.m_limites.z = 100;
@@ -636,8 +647,9 @@ void testarBubbleGUI()
         becommons::bubble_gui gui;
         gui.atualizarFilhos(&parent);
 
-        ASSERT(child1->m_estilo.m_limites.z == 45); // 30 + (100-70)/2
-        ASSERT(child2->m_estilo.m_limites.z == 55); // 40 + (100-70)/2
+        //- Verificação:
+        ASSERT_EQUAL(child1->m_estilo.m_limites.z, 45); // 30 + (100-70)/2
+        ASSERT_EQUAL(child2->m_estilo.m_limites.z, 55); // 40 + (100-70)/2
     });
 
     // Teste 6: Layout vertical com dimensões fixas e percentual
@@ -702,7 +714,7 @@ void testarBubbleGUI()
     });
     
     // Teste 9: 
-    testes.adicionar("atualizar_filhos_padding_deral", []() {
+    testes.adicionar("padding_deral_fixo", []() {
         becommons::bubble_gui gui;
         
         becommons::caixa parent;
@@ -720,6 +732,38 @@ void testarBubbleGUI()
         gui.atualizarFilhos(&parent);
         ASSERT_EQUAL(child1->m_estilo.m_limites.y, 5)
         ASSERT_EQUAL(child2->m_estilo.m_limites.y, 30) // Largura do child1 mais o padding
+    });
+    
+    // Teste 10 : Crescimento modular com padding e pai de 100x100
+    testes.adicionar("padding_modular_crescimento_completo", []() {
+        becommons::bubble_gui gui;
+    
+        becommons::caixa parent;
+        parent.m_estilo.m_flag_estilo = becommons::flag_estilo::modular;
+        parent.m_estilo.m_orientacao_modular = becommons::estilo::orientacao::horizontal;
+        parent.m_estilo.m_padding_geral = {5, 5};
+        parent.m_estilo.m_largura = 100;
+        parent.m_estilo.m_altura = 100; 
+    
+        auto* child1 = parent.adicionarFilho<becommons::caixa>("child1");
+        auto* child2 = parent.adicionarFilho<becommons::caixa>("child2");
+    
+        child1->m_estilo.m_crescimento_modular = 1.0f;
+        child2->m_estilo.m_crescimento_modular = 1.0f;
+    
+        gui.atualizarFilhos(&parent);
+    
+        // Área total disponível para largura: 100 - (padding esquerdo + padding entre filhos + padding direito) = 100 - (5 + 5 + 5) = 85
+        // Como ambos têm crescimento 1.0, cada um recebe 85 / 2 = 42.5
+        
+        ASSERT_EQUAL(child1->m_estilo.m_limites.x,   5.f);       // começa no padding esquerdo
+        ASSERT_EQUAL(child1->m_estilo.m_limites.z, 42.5f);      // metade do espaço disponível
+        ASSERT_EQUAL(child2->m_estilo.m_limites.x, 52.5f);      // 5 (padding) + 42 (child1) + 5 (padding)
+        ASSERT_EQUAL(child2->m_estilo.m_limites.z, 42.5f);      // mesma largura
+    
+        // Também podemos verificar altura, se estiver fixa em 100
+        ASSERT_EQUAL(child1->m_estilo.m_limites.w, 100);
+        ASSERT_EQUAL(child2->m_estilo.m_limites.w, 100);
     });
 }
 void testarSistemas()
