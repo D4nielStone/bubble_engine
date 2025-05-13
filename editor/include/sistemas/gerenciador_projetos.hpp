@@ -16,12 +16,16 @@ namespace EDITOR_NS
     {
         public:
             gerenciador_projetos(const std::string& DIR_PADRAO);
-            void atualizarElementos(const std::string& Dir);
-            void iniciar();
+            inline void configurarUI(const std::string&);
+            inline static void atualizarElementos(const std::string&);
+            inline static void abrirProjeto(const std::string&);
+            inline static void removerProjeto(const std::string&);
             void criarProjetoPadrao(const std::string& novo_diretorio, const char* nome);
+            void iniciar();
         private:
-            std::string DIR_PADRAO;
+            std::string m_projeto_selecionado {"nenhum"};
             becommons::bubble_gui gui;
+            inline static std::string DIR_PADRAO;
             gerenciador_projetos() = default;
     };
 }

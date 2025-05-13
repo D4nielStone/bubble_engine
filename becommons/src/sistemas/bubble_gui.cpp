@@ -52,17 +52,38 @@ void bubble_gui::atualizarLJ(caixa* it_caixa) {
 }
 void bubble_gui::atualizarAJ(caixa* it_caixa) {
     const bool is_horizontal = it_caixa->m_estilo.m_orientacao_modular == estilo::orientacao::horizontal;
+    if (!deveAtualizar(it_caixa)) return;
+
     float mais_alto = 0.f;
-    if(!deveAtualizar(it_caixa)) return;
-    for(auto& filho : it_caixa->m_filhos)
-    {
-        if(!deveAtualizar(filho.get()) || filho->tem_flag(flag_estilo::altura_percentual)) continue;
-        if(is_horizontal && it_caixa->tem_flag(flag_estilo::altura_justa)){
-        // Calcular largura justa
-        mais_alto = std::max(mais_alto, filho->m_estilo.m_altura + filho->m_estilo.m_padding.y*(it_caixa->m_filhos.size()+1) + it_caixa->m_estilo.m_padding_geral.y*(it_caixa->m_filhos.size()+1));
-        // Definir dimensão da caixa pai
-        it_caixa->m_estilo.m_altura = mais_alto;
+    float acumulado_altura = 0.f;
+    size_t n_filhos = it_caixa->m_filhos.size();
+
+    for (auto& filho : it_caixa->m_filhos) {
+        if (!deveAtualizar(filho.get()) || filho->tem_flag(flag_estilo::altura_percentual))
+            continue;
+
+        // --- HORIZONTAL: altura justa é a maior altura entre os filhos (+ paddings) ---
+        if (is_horizontal && it_caixa->tem_flag(flag_estilo::altura_justa)) {
+            float height_com_padding =
+                filho->m_estilo.m_altura +
+                filho->m_estilo.m_padding.y * 2 +
+                it_caixa->m_estilo.m_padding_geral.y * 2;
+            mais_alto = std::max(mais_alto, height_com_padding);
+            it_caixa->m_estilo.m_altura = mais_alto;
         }
+        // --- VERTICAL: soma todas as alturas (+ paddings) para ter "altura justa" ---
+        else if (!is_horizontal && it_caixa->tem_flag(flag_estilo::altura_justa)) {
+            // Altura do filho + padding interno (top+bottom) + padding geral (top+bottom)
+            float h = filho->m_estilo.m_altura
+                    + filho->m_estilo.m_padding.y * 2
+                    + it_caixa->m_estilo.m_padding_geral.y * 2;
+            acumulado_altura += h;
+        }
+    }
+
+    // Depois de somar todos os filhos, aplica à caixa pai (apenas no caso vertical)
+    if (!is_horizontal && it_caixa->tem_flag(flag_estilo::altura_justa)) {
+        it_caixa->m_estilo.m_altura = acumulado_altura;
     }
 }
 
@@ -298,7 +319,6 @@ bool bubble_gui::deveAtualizar(caixa* it_caixa) {
     }
 
     if(it_caixa->m_estilo != it_caixa->m_estilo_antigo) {
-        it_caixa->m_estilo_antigo = it_caixa->m_estilo;
         return true;
     }
 
@@ -347,6 +367,7 @@ void bubble_gui::atualizar()
     popFuncoes();
 
     // atualiza dimensões da raiz
+    if(!raiz) throw std::runtime_error("Raiz não definida!");
     raiz->m_estilo.m_limites = {0.f, 0.f,
         static_cast<float>(janela::obterInstancia().tamanho.x),
         static_cast<float>(janela::obterInstancia().tamanho.y)};
@@ -562,6 +583,7 @@ void bubble_gui::atualizarFilhos(caixa* it_caixa)
     if(deveAtualizar(it_caixa)) {
         processarModular(it_caixa);
     }
+    it_caixa->m_estilo_antigo = it_caixa->m_estilo;
     // Atualiza recursivamente os filhos
     for (auto& filho : it_caixa->m_filhos) {
         atualizarFilhos(filho.get());

@@ -160,7 +160,7 @@ namespace BECOMMONS_NS {
                 }
                 m_novo_estilo = true;
             }
-        void adicionar(const std::string& pai_id, const std::string& nova_id, std::unique_ptr<elementos::imagem> ptr) {
+        void adicionar(const std::string& pai_id, const std::string& nova_id, std::unique_ptr<caixa> ptr) {
                 if (elementoExiste(pai_id)) {
                     m_novo_estilo = false;
                     auto pai = obterElemento(pai_id);
