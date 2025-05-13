@@ -1,6 +1,7 @@
 var caixa_8hpp =
 [
-    [ "BECOMMONS_NS::caixa", "classBECOMMONS__NS_1_1caixa.html", null ],
+    [ "BECOMMONS_NS::estilo", "structBECOMMONS__NS_1_1estilo.html", null ],
+    [ "BECOMMONS_NS::caixa", "structBECOMMONS__NS_1_1caixa.html", "structBECOMMONS__NS_1_1caixa" ],
     [ "flag_estilo", "caixa_8hpp.html#a796da1b97588d8865c0e6ff1b369f378", [
       [ "nenhuma", "caixa_8hpp.html#a796da1b97588d8865c0e6ff1b369f378a7d8faf31e59f2c58e5b2d9a70fc8da61", null ],
       [ "largura_percentual", "caixa_8hpp.html#a796da1b97588d8865c0e6ff1b369f378a64e4d8d81ef57ca15f63dc1bd6b55f79", null ],

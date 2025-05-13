@@ -1,8 +1,8 @@
 var searchData=
 [
-  ['adicionar_0',['adicionar',['../structBECOMMONS__NS_1_1projeto.html#a058dfd80d70691dcc2f12cc060ae4fae',1,'BECOMMONS_NS::projeto::adicionar()'],['../classbetest_1_1registro__testes.html#a1191c512f31edfcacaf8321161a05db9',1,'betest::registro_testes::adicionar()']]],
-  ['adicionarelemento_1',['adicionarElemento',['../classBECOMMONS__NS_1_1bubble__gui.html#a315bd9c9ce35a834826aa060efd4c5e8',1,'BECOMMONS_NS::bubble_gui']]],
-  ['adicionarflags_2',['adicionarFlags',['../classBECOMMONS__NS_1_1bubble__gui.html#adfebcc934505ff1c154ab27e16eaa37c',1,'BECOMMONS_NS::bubble_gui']]],
+  ['adicionar_0',['adicionar',['../structBECOMMONS__NS_1_1projeto.html#a058dfd80d70691dcc2f12cc060ae4fae',1,'BECOMMONS_NS::projeto::adicionar()'],['../classBECOMMONS__NS_1_1bubble__gui.html#adbccfadee6c15af1dd8108ea8f889f0d',1,'BECOMMONS_NS::bubble_gui::adicionar()'],['../classbetest_1_1registro__testes.html#a1191c512f31edfcacaf8321161a05db9',1,'betest::registro_testes::adicionar()']]],
+  ['adicionarflags_1',['adicionarFlags',['../classBECOMMONS__NS_1_1bubble__gui.html#adfebcc934505ff1c154ab27e16eaa37c',1,'BECOMMONS_NS::bubble_gui']]],
+  ['analisarprojeto_2',['analisarProjeto',['../structBECOMMONS__NS_1_1projeto.html#a4e8d86ae5725dbcf7a61ae1ab3244544',1,'BECOMMONS_NS::projeto']]],
   ['analizarmalha_3',['analizarMalha',['../namespaceBECOMMONS__NS.html#aaa5c21b9ccc38fce9303e6630cbf14a2',1,'BECOMMONS_NS']]],
   ['area_5fde_5ftoque_4',['area_de_toque',['../structBECOMMONS__NS_1_1elementos_1_1area__de__toque.html#a2eb83febf11b89c2b5d47dc41e2a444a',1,'BECOMMONS_NS::elementos::area_de_toque']]],
   ['arrastando_5',['arrastando',['../structBECOMMONS__NS_1_1elementos_1_1area__de__toque.html#aca8a423f444bb5d401893a1e75518c15',1,'BECOMMONS_NS::elementos::area_de_toque']]],

@@ -87,10 +87,12 @@ projeto::~projeto()
     sistemas_adicionais.clear();
 }
 
-projeto::projeto(const std::string &diretorio) : diretorioDoProjeto(diretorio)
-{
+projeto::projeto(std::string &diretorio) {
     imageLoader::init();
-    auto doc = carregarProjeto();
+    // Torna projeto atual
+    projeto_atual = this;
+    auto doc = analisarProjeto(diretorio);
+    diretorioDoProjeto = diretorio;
     criarJanela(doc);
 }
 projeto::projeto()
@@ -98,16 +100,13 @@ projeto::projeto()
     imageLoader::init();
 }
 
-rapidjson::Document projeto::carregarProjeto()
+rapidjson::Document projeto::analisarProjeto(std::string& path)
 {
-    // Torna projeto atual
-    projeto_atual = this;
-
     // procura recursivamente por config.json
-    std::string caminhoEncontrado = diretorioDoProjeto;
+    std::string caminhoEncontrado = path;
     
-    if(std::filesystem::exists(diretorioDoProjeto))
-    for (const auto& entry : std::filesystem::recursive_directory_iterator(diretorioDoProjeto)) {
+    if(std::filesystem::exists(path))
+    for (const auto& entry : std::filesystem::recursive_directory_iterator(path)) {
             if (entry.is_regular_file() && entry.path().filename() == "config.json") {
                 caminhoEncontrado = entry.path().parent_path().string();
             }
@@ -124,12 +123,12 @@ rapidjson::Document projeto::carregarProjeto()
     rapidjson::Document doc;
     doc.Parse(sb.str().c_str());
 
-    diretorioDoProjeto = caminhoEncontrado;
+    path = caminhoEncontrado;
 
     if (doc.HasParseError()) {
-        depuracao::emitir(erro, "Erro ao analisar o JSON de configuração.");
+        throw  std::runtime_error("Erro ao analisar o JSON de configuração.");
     } else {
-        depuracao::emitir(info, "Iniciando projeto " + std::string(doc["nome"].GetString()) + " em: " + diretorioDoProjeto);
+        depuracao::emitir(info, "Projeto " + std::string(doc["nome"].GetString()) + " encontrado em: " + path);
     }
 
     return doc;

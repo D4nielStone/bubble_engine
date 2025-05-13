@@ -184,7 +184,7 @@ void BECOMMONS_NS::api::definirFisica(lua_State* L)
         addFunction("iniciar", &fase::iniciar).
         endClass().
         beginClass<projeto>("projeto").
-        addConstructor<void(*)(const std::string&)>().
+        addConstructor<void(*)()>().
         addFunction("carregarFase", &projeto::carregarFase).
         addFunction("faseAtual", &projeto::obterFaseAtual).
         endClass().

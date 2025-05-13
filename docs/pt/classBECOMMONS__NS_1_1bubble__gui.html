@@ -95,6 +95,7 @@ $(document).ready(function(){initNavTree('classBECOMMONS__NS_1_1bubble__gui.html
   <div class="summary">
 <a href="#pub-methods">Membros Públicos</a> &#124;
 <a href="#pri-methods">Membros privados</a> &#124;
+<a href="#pri-static-methods">Membros privados estáticos</a> &#124;
 <a href="#pri-attribs">Atributos Privados</a> &#124;
 <a href="classBECOMMONS__NS_1_1bubble__gui-members.html">Lista de todos os Membros</a>  </div>
   <div class="headertitle"><div class="title">Referência da Classe BECOMMONS_NS::bubble_gui</div></div>
@@ -149,7 +150,7 @@ Membros Públicos</h2></td></tr>
 &#160;</td><td class="memItemRight" valign="bottom"><b>~bubble_gui</b> ()</td></tr>
 <tr class="memdesc:a4ce54b330ba3ff2b0cfca9900f55d982"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destrutor da interface. <br /></td></tr>
 <tr class="separator:a4ce54b330ba3ff2b0cfca9900f55d982"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a207773fbbc8dbd03aa73130729db8c4e" id="r_a207773fbbc8dbd03aa73130729db8c4e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBECOMMONS__NS_1_1bubble__gui.html#a207773fbbc8dbd03aa73130729db8c4e">atualizarFilhos</a> (<a class="el" href="classBECOMMONS__NS_1_1caixa.html">caixa</a> *c)</td></tr>
+<tr class="memitem:a207773fbbc8dbd03aa73130729db8c4e" id="r_a207773fbbc8dbd03aa73130729db8c4e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBECOMMONS__NS_1_1bubble__gui.html#a207773fbbc8dbd03aa73130729db8c4e">atualizarFilhos</a> (<a class="el" href="structBECOMMONS__NS_1_1caixa.html">caixa</a> *c)</td></tr>
 <tr class="memdesc:a207773fbbc8dbd03aa73130729db8c4e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Atualiza as posições e tamanhos dos filhos de uma caixa.  <br /></td></tr>
 <tr class="separator:a207773fbbc8dbd03aa73130729db8c4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0d22b36d6fda73ea2b661ea8413c5781" id="r_a0d22b36d6fda73ea2b661ea8413c5781"><td class="memItemLeft" align="right" valign="top"><a id="a0d22b36d6fda73ea2b661ea8413c5781" name="a0d22b36d6fda73ea2b661ea8413c5781"></a>
@@ -165,25 +166,28 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>definirBuffers</b> ()
 <tr class="memitem:a17ca6e0d96ffac3f5c9d8c20155422fc" id="r_a17ca6e0d96ffac3f5c9d8c20155422fc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBECOMMONS__NS_1_1bubble__gui.html#a17ca6e0d96ffac3f5c9d8c20155422fc">atualizar</a> () override</td></tr>
 <tr class="memdesc:a17ca6e0d96ffac3f5c9d8c20155422fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Atualiza o sistema gráfico a cada quadro.  <br /></td></tr>
 <tr class="separator:a17ca6e0d96ffac3f5c9d8c20155422fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a315bd9c9ce35a834826aa060efd4c5e8" id="r_a315bd9c9ce35a834826aa060efd4c5e8"><td class="memTemplParams" colspan="2">template&lt;typename T , typename ... Args&gt; </td></tr>
-<tr class="memitem:a315bd9c9ce35a834826aa060efd4c5e8"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classBECOMMONS__NS_1_1bubble__gui.html#a315bd9c9ce35a834826aa060efd4c5e8">adicionarElemento</a> (const std::string &amp;pai_id, const std::string &amp;nova_id, Args &amp;&amp;... args)</td></tr>
-<tr class="memdesc:a315bd9c9ce35a834826aa060efd4c5e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adiciona um novo elemento à interface, como botão, texto ou imagem.  <br /></td></tr>
-<tr class="separator:a315bd9c9ce35a834826aa060efd4c5e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aca01766f32dbc88c7f6f64ac32c465a0" id="r_aca01766f32dbc88c7f6f64ac32c465a0"><td class="memItemLeft" align="right" valign="top"><a id="aca01766f32dbc88c7f6f64ac32c465a0" name="aca01766f32dbc88c7f6f64ac32c465a0"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>adicionarElemento</b> (const std::string &amp;pai_id, const std::string &amp;nova_id, std::unique_ptr&lt; <a class="el" href="classBECOMMONS__NS_1_1elementos_1_1imagem.html">elementos::imagem</a> &gt; ptr)</td></tr>
-<tr class="separator:aca01766f32dbc88c7f6f64ac32c465a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adbccfadee6c15af1dd8108ea8f889f0d" id="r_adbccfadee6c15af1dd8108ea8f889f0d"><td class="memTemplParams" colspan="2">template&lt;typename T , typename ... Args&gt; </td></tr>
+<tr class="memitem:adbccfadee6c15af1dd8108ea8f889f0d"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classBECOMMONS__NS_1_1bubble__gui.html#adbccfadee6c15af1dd8108ea8f889f0d">adicionar</a> (const std::string &amp;pai_id, const std::string &amp;nova_id, Args &amp;&amp;... args)</td></tr>
+<tr class="memdesc:adbccfadee6c15af1dd8108ea8f889f0d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adiciona um novo elemento à interface, como botão, texto ou imagem.  <br /></td></tr>
+<tr class="separator:adbccfadee6c15af1dd8108ea8f889f0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aef758d6fe508bd8e164375b7424953cd" id="r_aef758d6fe508bd8e164375b7424953cd"><td class="memItemLeft" align="right" valign="top"><a id="aef758d6fe508bd8e164375b7424953cd" name="aef758d6fe508bd8e164375b7424953cd"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>adicionar</b> (const std::string &amp;pai_id, const std::string &amp;nova_id, std::unique_ptr&lt; <a class="el" href="structBECOMMONS__NS_1_1caixa.html">caixa</a> &gt; ptr)</td></tr>
+<tr class="separator:aef758d6fe508bd8e164375b7424953cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2d5396936444319bd413598bb256e9c6" id="r_a2d5396936444319bd413598bb256e9c6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBECOMMONS__NS_1_1bubble__gui.html#a2d5396936444319bd413598bb256e9c6">removerElemento</a> (const std::string &amp;id)</td></tr>
 <tr class="memdesc:a2d5396936444319bd413598bb256e9c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove um elemento da interface, junto com todos os seus filhos.  <br /></td></tr>
 <tr class="separator:a2d5396936444319bd413598bb256e9c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a84b415dd69167c1a6df4a12320e3315c" id="r_a84b415dd69167c1a6df4a12320e3315c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBECOMMONS__NS_1_1bubble__gui.html#a84b415dd69167c1a6df4a12320e3315c">removerFilhos</a> (const std::string &amp;id)</td></tr>
 <tr class="memdesc:a84b415dd69167c1a6df4a12320e3315c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove apenas os filhos de uma determinada caixa.  <br /></td></tr>
 <tr class="separator:a84b415dd69167c1a6df4a12320e3315c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a26432de645c0fe05d5d6a556c66b4277" id="r_a26432de645c0fe05d5d6a556c66b4277"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classBECOMMONS__NS_1_1caixa.html">caixa</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBECOMMONS__NS_1_1bubble__gui.html#a26432de645c0fe05d5d6a556c66b4277">obterElemento</a> (const std::string &amp;id)</td></tr>
+<tr class="memitem:a26432de645c0fe05d5d6a556c66b4277" id="r_a26432de645c0fe05d5d6a556c66b4277"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structBECOMMONS__NS_1_1caixa.html">caixa</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBECOMMONS__NS_1_1bubble__gui.html#a26432de645c0fe05d5d6a556c66b4277">obterElemento</a> (const std::string &amp;id)</td></tr>
 <tr class="memdesc:a26432de645c0fe05d5d6a556c66b4277"><td class="mdescLeft">&#160;</td><td class="mdescRight">Recupera uma caixa da interface pelo seu ID.  <br /></td></tr>
 <tr class="separator:a26432de645c0fe05d5d6a556c66b4277"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aff988baf23d8b1bf605ae147c95862b5" id="r_aff988baf23d8b1bf605ae147c95862b5"><td class="memItemLeft" align="right" valign="top"><a id="aff988baf23d8b1bf605ae147c95862b5" name="aff988baf23d8b1bf605ae147c95862b5"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>elementoExiste</b> (const std::string id) const</td></tr>
 <tr class="separator:aff988baf23d8b1bf605ae147c95862b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac55558938f501fb8affe34258bd7be02" id="r_ac55558938f501fb8affe34258bd7be02"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBECOMMONS__NS_1_1bubble__gui.html#ac55558938f501fb8affe34258bd7be02">iniciarRaiz</a> (const std::string &amp;nome)</td></tr>
+<tr class="memdesc:ac55558938f501fb8affe34258bd7be02"><td class="mdescLeft">&#160;</td><td class="mdescRight">inicia a raiz com um id específico  <br /></td></tr>
+<tr class="separator:ac55558938f501fb8affe34258bd7be02"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a777c4b08599ee0eb3fe02a6e71159206" id="r_a777c4b08599ee0eb3fe02a6e71159206"><td class="memItemLeft" align="right" valign="top"><a id="a777c4b08599ee0eb3fe02a6e71159206" name="a777c4b08599ee0eb3fe02a6e71159206"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>fimEstilo</b> ()</td></tr>
 <tr class="memdesc:a777c4b08599ee0eb3fe02a6e71159206"><td class="mdescLeft">&#160;</td><td class="mdescRight">Limpa o estilo atual. <br /></td></tr>
@@ -203,12 +207,15 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>fimEstilo</b> ()</td>
 <tr class="memitem:a748c2aae671c46011c59e8793430bbac" id="r_a748c2aae671c46011c59e8793430bbac"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBECOMMONS__NS_1_1bubble__gui.html#a748c2aae671c46011c59e8793430bbac">defLarguraAltura</a> (const bool b)</td></tr>
 <tr class="memdesc:a748c2aae671c46011c59e8793430bbac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Define largura lingando-a à altura.  <br /></td></tr>
 <tr class="separator:a748c2aae671c46011c59e8793430bbac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2f808aa25d58972077d3ff7341916ca5" id="r_a2f808aa25d58972077d3ff7341916ca5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBECOMMONS__NS_1_1bubble__gui.html#a2f808aa25d58972077d3ff7341916ca5">defAtivo</a> (const bool b)</td></tr>
+<tr class="memdesc:a2f808aa25d58972077d3ff7341916ca5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Define estado de ativação.  <br /></td></tr>
+<tr class="separator:a2f808aa25d58972077d3ff7341916ca5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a71220101fc7328ac5a271ad84ee0af84" id="r_a71220101fc7328ac5a271ad84ee0af84"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBECOMMONS__NS_1_1bubble__gui.html#a71220101fc7328ac5a271ad84ee0af84">defAltura</a> (const int v)</td></tr>
 <tr class="memdesc:a71220101fc7328ac5a271ad84ee0af84"><td class="mdescLeft">&#160;</td><td class="mdescRight">Define altura absoluta (em pixels) para os elementos.  <br /></td></tr>
 <tr class="separator:a71220101fc7328ac5a271ad84ee0af84"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aff26074c14cca782c9b234076e7fe9db" id="r_aff26074c14cca782c9b234076e7fe9db"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBECOMMONS__NS_1_1bubble__gui.html#aff26074c14cca782c9b234076e7fe9db">defOrientacao</a> (const caixa::orientacao v)</td></tr>
-<tr class="memdesc:aff26074c14cca782c9b234076e7fe9db"><td class="mdescLeft">&#160;</td><td class="mdescRight">Define a orientação modular das caixas.  <br /></td></tr>
-<tr class="separator:aff26074c14cca782c9b234076e7fe9db"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a33c86bcbc9cf24e39de1e1e74f2f57a6" id="r_a33c86bcbc9cf24e39de1e1e74f2f57a6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBECOMMONS__NS_1_1bubble__gui.html#a33c86bcbc9cf24e39de1e1e74f2f57a6">defOrientacao</a> (const estilo::orientacao v)</td></tr>
+<tr class="memdesc:a33c86bcbc9cf24e39de1e1e74f2f57a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Define a orientação modular das caixas.  <br /></td></tr>
+<tr class="separator:a33c86bcbc9cf24e39de1e1e74f2f57a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a39d47ccb6eaba3391c2e91a138755beb" id="r_a39d47ccb6eaba3391c2e91a138755beb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBECOMMONS__NS_1_1bubble__gui.html#a39d47ccb6eaba3391c2e91a138755beb">defPaddingG</a> (const int v1, const int v2)</td></tr>
 <tr class="memdesc:a39d47ccb6eaba3391c2e91a138755beb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Define o padding geral (externo) das caixas.  <br /></td></tr>
 <tr class="separator:a39d47ccb6eaba3391c2e91a138755beb"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -237,11 +244,56 @@ virtual&#160;</td><td class="memItemRight" valign="bottom"><b>~sistema</b> ()=de
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
 Membros privados</h2></td></tr>
-<tr class="memitem:af931d0a352666d6515bbc084e284e57d" id="r_af931d0a352666d6515bbc084e284e57d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBECOMMONS__NS_1_1bubble__gui.html#af931d0a352666d6515bbc084e284e57d">desenhar_caixa</a> (<a class="el" href="classBECOMMONS__NS_1_1caixa.html">caixa</a> *c)</td></tr>
+<tr class="memitem:af931d0a352666d6515bbc084e284e57d" id="r_af931d0a352666d6515bbc084e284e57d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBECOMMONS__NS_1_1bubble__gui.html#af931d0a352666d6515bbc084e284e57d">desenhar_caixa</a> (<a class="el" href="structBECOMMONS__NS_1_1caixa.html">caixa</a> *c)</td></tr>
 <tr class="separator:af931d0a352666d6515bbc084e284e57d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac4cd97084069d3cd807c41197e44fa62" id="r_ac4cd97084069d3cd807c41197e44fa62"><td class="memItemLeft" align="right" valign="top"><a id="ac4cd97084069d3cd807c41197e44fa62" name="ac4cd97084069d3cd807c41197e44fa62"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>configOpenglState</b> () const</td></tr>
+<tr class="separator:ac4cd97084069d3cd807c41197e44fa62"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afa2cd4f1ab336851ca737123a4252280" id="r_afa2cd4f1ab336851ca737123a4252280"><td class="memItemLeft" align="right" valign="top"><a id="afa2cd4f1ab336851ca737123a4252280" name="afa2cd4f1ab336851ca737123a4252280"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>deconfigOpenglState</b> () const</td></tr>
+<tr class="separator:afa2cd4f1ab336851ca737123a4252280"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8e3207660e8e49ee77239c7caa9a609d" id="r_a8e3207660e8e49ee77239c7caa9a609d"><td class="memItemLeft" align="right" valign="top"><a id="a8e3207660e8e49ee77239c7caa9a609d" name="a8e3207660e8e49ee77239c7caa9a609d"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>popFuncoes</b> ()</td></tr>
+<tr class="separator:a8e3207660e8e49ee77239c7caa9a609d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a895887887b68c62cc998bca989ac574e" id="r_a895887887b68c62cc998bca989ac574e"><td class="memItemLeft" align="right" valign="top"><a id="a895887887b68c62cc998bca989ac574e" name="a895887887b68c62cc998bca989ac574e"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>processarModular</b> (<a class="el" href="structBECOMMONS__NS_1_1caixa.html">caixa</a> *)</td></tr>
+<tr class="separator:a895887887b68c62cc998bca989ac574e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3d7902590eb17a9ebc799c4fc63921ae" id="r_a3d7902590eb17a9ebc799c4fc63921ae"><td class="memItemLeft" align="right" valign="top"><a id="a3d7902590eb17a9ebc799c4fc63921ae" name="a3d7902590eb17a9ebc799c4fc63921ae"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>processarDimensaoPercentual</b> (<a class="el" href="structBECOMMONS__NS_1_1caixa.html">caixa</a> *, bool, float &amp;, fvet2 &amp;, fvet2 &amp;)</td></tr>
+<tr class="separator:a3d7902590eb17a9ebc799c4fc63921ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aabfc0d98db540f12e93030a5adf1fbd6" id="r_aabfc0d98db540f12e93030a5adf1fbd6"><td class="memItemLeft" align="right" valign="top"><a id="aabfc0d98db540f12e93030a5adf1fbd6" name="aabfc0d98db540f12e93030a5adf1fbd6"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>aplicarLayoutModular</b> (<a class="el" href="structBECOMMONS__NS_1_1caixa.html">caixa</a> *, bool, float, const fvet2 &amp;)</td></tr>
+<tr class="separator:aabfc0d98db540f12e93030a5adf1fbd6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2026db3f136476f125772e2ee29bacec" id="r_a2026db3f136476f125772e2ee29bacec"><td class="memItemLeft" align="right" valign="top"><a id="a2026db3f136476f125772e2ee29bacec" name="a2026db3f136476f125772e2ee29bacec"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>renderizarImagem</b> (<a class="el" href="classBECOMMONS__NS_1_1elementos_1_1imagem.html">elementos::imagem</a> *) const</td></tr>
+<tr class="separator:a2026db3f136476f125772e2ee29bacec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a10c773619420e1a2d51d0c4d2e2d63ad" id="r_a10c773619420e1a2d51d0c4d2e2d63ad"><td class="memItemLeft" align="right" valign="top"><a id="a10c773619420e1a2d51d0c4d2e2d63ad" name="a10c773619420e1a2d51d0c4d2e2d63ad"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>renderizarFundo</b> (<a class="el" href="structBECOMMONS__NS_1_1caixa.html">caixa</a> *, <a class="el" href="classBECOMMONS__NS_1_1shader.html">BECOMMONS_NS::shader</a> *) const</td></tr>
+<tr class="separator:a10c773619420e1a2d51d0c4d2e2d63ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afa91a92678999312a1c6e397bf5ed640" id="r_afa91a92678999312a1c6e397bf5ed640"><td class="memItemLeft" align="right" valign="top"><a id="afa91a92678999312a1c6e397bf5ed640" name="afa91a92678999312a1c6e397bf5ed640"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>renderizarTexto</b> (<a class="el" href="classBECOMMONS__NS_1_1elementos_1_1texto.html">elementos::texto</a> *tex) const</td></tr>
+<tr class="separator:afa91a92678999312a1c6e397bf5ed640"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-static-methods" name="pri-static-methods"></a>
+Membros privados estáticos</h2></td></tr>
+<tr class="memitem:a97bfc758d4122cbd715a37a59a2c1582" id="r_a97bfc758d4122cbd715a37a59a2c1582"><td class="memItemLeft" align="right" valign="top"><a id="a97bfc758d4122cbd715a37a59a2c1582" name="a97bfc758d4122cbd715a37a59a2c1582"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><b>atualizarLJ</b> (<a class="el" href="structBECOMMONS__NS_1_1caixa.html">caixa</a> *)</td></tr>
+<tr class="separator:a97bfc758d4122cbd715a37a59a2c1582"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0c3253f2797fdcf47212955832e03d2d" id="r_a0c3253f2797fdcf47212955832e03d2d"><td class="memItemLeft" align="right" valign="top"><a id="a0c3253f2797fdcf47212955832e03d2d" name="a0c3253f2797fdcf47212955832e03d2d"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><b>atualizarAJ</b> (<a class="el" href="structBECOMMONS__NS_1_1caixa.html">caixa</a> *)</td></tr>
+<tr class="separator:a0c3253f2797fdcf47212955832e03d2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4582b9689193cede0bd44f51d10a1a7e" id="r_a4582b9689193cede0bd44f51d10a1a7e"><td class="memItemLeft" align="right" valign="top"><a id="a4582b9689193cede0bd44f51d10a1a7e" name="a4582b9689193cede0bd44f51d10a1a7e"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><b>atualizarHDTF</b> (<a class="el" href="structBECOMMONS__NS_1_1caixa.html">caixa</a> *, std::function&lt; void(<a class="el" href="structBECOMMONS__NS_1_1caixa.html">caixa</a> *)&gt;)</td></tr>
+<tr class="separator:a4582b9689193cede0bd44f51d10a1a7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a85466e295c233ab53c90885d8885fc95" id="r_a85466e295c233ab53c90885d8885fc95"><td class="memItemLeft" align="right" valign="top"><a id="a85466e295c233ab53c90885d8885fc95" name="a85466e295c233ab53c90885d8885fc95"></a>
+static bool&#160;</td><td class="memItemRight" valign="bottom"><b>deveAtualizar</b> (<a class="el" href="structBECOMMONS__NS_1_1caixa.html">caixa</a> *)</td></tr>
+<tr class="separator:a85466e295c233ab53c90885d8885fc95"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
 Atributos Privados</h2></td></tr>
+<tr class="memitem:a74d0ec5adbc91f78ea834cba7a9983a2" id="r_a74d0ec5adbc91f78ea834cba7a9983a2"><td class="memItemLeft" align="right" valign="top"><a id="a74d0ec5adbc91f78ea834cba7a9983a2" name="a74d0ec5adbc91f78ea834cba7a9983a2"></a>
+glm::mat4&#160;</td><td class="memItemRight" valign="bottom"><b>proj</b> { 1.f }</td></tr>
+<tr class="separator:a74d0ec5adbc91f78ea834cba7a9983a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5fe4eedd8fb8b85ef04937b8147ff782" id="r_a5fe4eedd8fb8b85ef04937b8147ff782"><td class="memItemLeft" align="right" valign="top"><a id="a5fe4eedd8fb8b85ef04937b8147ff782" name="a5fe4eedd8fb8b85ef04937b8147ff782"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>m_novo_estilo</b> { false }</td></tr>
 <tr class="separator:a5fe4eedd8fb8b85ef04937b8147ff782"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -250,15 +302,15 @@ std::queue&lt; std::function&lt; void()&gt; &gt;&#160;</td><td class="memItemRig
 <tr class="memdesc:ae47714086d1a99c8f9e599b0834c0505"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fila de funções para serem executadas no fim do loop. <br /></td></tr>
 <tr class="separator:ae47714086d1a99c8f9e599b0834c0505"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6b14a64d3869975c50c447e667c7047b" id="r_a6b14a64d3869975c50c447e667c7047b"><td class="memItemLeft" align="right" valign="top"><a id="a6b14a64d3869975c50c447e667c7047b" name="a6b14a64d3869975c50c447e667c7047b"></a>
-std::unique_ptr&lt; <a class="el" href="classBECOMMONS__NS_1_1caixa.html">caixa</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>raiz</b></td></tr>
+std::unique_ptr&lt; <a class="el" href="structBECOMMONS__NS_1_1caixa.html">caixa</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>raiz</b></td></tr>
 <tr class="memdesc:a6b14a64d3869975c50c447e667c7047b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Elemento raiz ( tem as dimensões da janela ) <br /></td></tr>
 <tr class="separator:a6b14a64d3869975c50c447e667c7047b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adfcb6b406c54d17e859c32a3ed041e9b" id="r_adfcb6b406c54d17e859c32a3ed041e9b"><td class="memItemLeft" align="right" valign="top"><a id="adfcb6b406c54d17e859c32a3ed041e9b" name="adfcb6b406c54d17e859c32a3ed041e9b"></a>
-std::unordered_map&lt; std::string, <a class="el" href="classBECOMMONS__NS_1_1caixa.html">caixa</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>caixas</b></td></tr>
+std::unordered_map&lt; std::string, <a class="el" href="structBECOMMONS__NS_1_1caixa.html">caixa</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>caixas</b></td></tr>
 <tr class="memdesc:adfcb6b406c54d17e859c32a3ed041e9b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vetor de elementos. <br /></td></tr>
 <tr class="separator:adfcb6b406c54d17e859c32a3ed041e9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2f15f529bfbeb7d4aa8cf3a7d165f44d" id="r_a2f15f529bfbeb7d4aa8cf3a7d165f44d"><td class="memItemLeft" align="right" valign="top"><a id="a2f15f529bfbeb7d4aa8cf3a7d165f44d" name="a2f15f529bfbeb7d4aa8cf3a7d165f44d"></a>
-std::unordered_map&lt; std::string, <a class="el" href="classBECOMMONS__NS_1_1caixa.html">caixa</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>estilo_atual</b></td></tr>
+std::unordered_map&lt; std::string, <a class="el" href="structBECOMMONS__NS_1_1caixa.html">caixa</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>estilo_atual</b></td></tr>
 <tr class="memdesc:a2f15f529bfbeb7d4aa8cf3a7d165f44d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Todos os elementos presentes no estilo atual. <br /></td></tr>
 <tr class="separator:a2f15f529bfbeb7d4aa8cf3a7d165f44d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a935d52d464954cae32261f28d157901f" id="r_a935d52d464954cae32261f28d157901f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classBECOMMONS__NS_1_1shader.html">shader</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBECOMMONS__NS_1_1bubble__gui.html#a935d52d464954cae32261f28d157901f">quad_shader</a> {nullptr}</td></tr>
@@ -277,8 +329,8 @@ Outros membros herdados</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Descrição detalhada</h2>
 <div class="textblock"><p>Gerencia e organiza as caixas flexíveis da interface. </p>
 </div><h2 class="groupheader">Documentação das funções</h2>
-<a id="a315bd9c9ce35a834826aa060efd4c5e8" name="a315bd9c9ce35a834826aa060efd4c5e8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a315bd9c9ce35a834826aa060efd4c5e8">&#9670;&#160;</a></span>adicionarElemento()</h2>
+<a id="adbccfadee6c15af1dd8108ea8f889f0d" name="adbccfadee6c15af1dd8108ea8f889f0d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adbccfadee6c15af1dd8108ea8f889f0d">&#9670;&#160;</a></span>adicionar()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -289,7 +341,7 @@ template&lt;typename T , typename ... Args&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void BECOMMONS_NS::bubble_gui::adicionarElemento </td>
+          <td class="memname">void BECOMMONS_NS::bubble_gui::adicionar </td>
           <td>(</td>
           <td class="paramtype">const std::string &amp;&#160;</td>
           <td class="paramname"><em>pai_id</em>, </td>
@@ -413,7 +465,7 @@ template&lt;typename T , typename ... Args&gt; </div>
         <tr>
           <td class="memname">void bubble_gui::atualizarFilhos </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classBECOMMONS__NS_1_1caixa.html">caixa</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="structBECOMMONS__NS_1_1caixa.html">caixa</a> *&#160;</td>
           <td class="paramname"><em>c</em></td><td>)</td>
           <td></td>
         </tr>
@@ -476,6 +528,32 @@ template&lt;typename T , typename ... Args&gt; </div>
 <dl class="params"><dt>Parâmetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">v</td><td>Valor inteiro em pixels. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a2f808aa25d58972077d3ff7341916ca5" name="a2f808aa25d58972077d3ff7341916ca5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2f808aa25d58972077d3ff7341916ca5">&#9670;&#160;</a></span>defAtivo()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bubble_gui::defAtivo </td>
+          <td>(</td>
+          <td class="paramtype">const bool&#160;</td>
+          <td class="paramname"><em>b</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Define estado de ativação. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">b</td><td>Booleano (true = ativado) </td></tr>
   </table>
   </dd>
 </dl>
@@ -664,8 +742,8 @@ template&lt;typename T , typename ... Args&gt; </div>
 
 </div>
 </div>
-<a id="aff26074c14cca782c9b234076e7fe9db" name="aff26074c14cca782c9b234076e7fe9db"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aff26074c14cca782c9b234076e7fe9db">&#9670;&#160;</a></span>defOrientacao()</h2>
+<a id="a33c86bcbc9cf24e39de1e1e74f2f57a6" name="a33c86bcbc9cf24e39de1e1e74f2f57a6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a33c86bcbc9cf24e39de1e1e74f2f57a6">&#9670;&#160;</a></span>defOrientacao()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -673,7 +751,7 @@ template&lt;typename T , typename ... Args&gt; </div>
         <tr>
           <td class="memname">void bubble_gui::defOrientacao </td>
           <td>(</td>
-          <td class="paramtype">const caixa::orientacao&#160;</td>
+          <td class="paramtype">const estilo::orientacao&#160;</td>
           <td class="paramname"><em>v</em></td><td>)</td>
           <td></td>
         </tr>
@@ -802,14 +880,14 @@ template&lt;typename T , typename ... Args&gt; </div>
         <tr>
           <td class="memname">void bubble_gui::desenhar_caixa </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classBECOMMONS__NS_1_1caixa.html">caixa</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="structBECOMMONS__NS_1_1caixa.html">caixa</a> *&#160;</td>
           <td class="paramname"><em>c</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -858,6 +936,32 @@ template&lt;typename T , typename ... Args&gt; </div>
 
 </div>
 </div>
+<a id="ac55558938f501fb8affe34258bd7be02" name="ac55558938f501fb8affe34258bd7be02"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac55558938f501fb8affe34258bd7be02">&#9670;&#160;</a></span>iniciarRaiz()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void bubble_gui::iniciarRaiz </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>nome</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>inicia a raiz com um id específico </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">nome</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a26432de645c0fe05d5d6a556c66b4277" name="a26432de645c0fe05d5d6a556c66b4277"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a26432de645c0fe05d5d6a556c66b4277">&#9670;&#160;</a></span>obterElemento()</h2>
 
@@ -865,7 +969,7 @@ template&lt;typename T , typename ... Args&gt; </div>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classBECOMMONS__NS_1_1caixa.html">caixa</a> * bubble_gui::obterElemento </td>
+          <td class="memname"><a class="el" href="structBECOMMONS__NS_1_1caixa.html">caixa</a> * bubble_gui::obterElemento </td>
           <td>(</td>
           <td class="paramtype">const std::string &amp;&#160;</td>
           <td class="paramname"><em>id</em></td><td>)</td>

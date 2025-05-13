@@ -95,15 +95,10 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
   <div class="headertitle"><div class="title"><b>Bubble Engine</b> </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="md_README"></a> <a href="https://github.com/D4nielStone/bubble_engine/blob/master/LICENSE"><img src="https://img.shields.io/github/license/d4nielstone/bubble_engine" alt="License" class="inline"/></a> <a href="https://github.com/D4nielStone/bubble_engine/tags"><img src="https://img.shields.io/github/v/tag/d4nielstone/bubble_engine" alt="Version" class="inline"/></a> <a href="https://github.com/D4nielStone/bubble_engine/stargazers"><img src="https://img.shields.io/github/stars/d4nielstone/bubble_engine?style=social" alt="Stars" class="inline"/></a></p>
-<p> 
-<p align="center">
-  <a href="https://d4nielstone.github.io/bubble_engine">
-    <img src="https://github.com/user-attachments/assets/c5a24614-03ec-405e-8eae-55ab74326a66" width="400" alt="Bubble Engine logo">
-  </a>
-</p>
-<hr>
-</p>
+<div class="textblock"><p><a class="anchor" id="md_README"></a> <a href="https://github.com/D4nielStone/bubble_engine/stargazers"><img src="https://img.shields.io/github/stars/d4nielstone/bubble_engine?style=social" alt="Stars" class="inline"/></a> <a href="https://github.com/D4nielStone/bubble_engine/blob/master/LICENSE"><img src="https://img.shields.io/github/license/d4nielstone/bubble_engine" alt="License" class="inline"/></a> <a href="https://github.com/D4nielStone/bubble_engine/tags"><img src="https://img.shields.io/github/v/tag/d4nielstone/bubble_engine" alt="Version" class="inline"/></a> <a href="https://github.com/D4nielStone/bubble_engine/issues"><img src="https://img.shields.io/github/issues/d4nielstone/bubble_engine" alt="Issues" class="inline"/></a> <a href="https://github.com/D4nielStone/bubble_engine/discussions"><img src="https://img.shields.io/github/discussions/d4nielstone/bubble_engine" alt="Discussions" class="inline"/></a></p>
+<p align="center"></p>
+<p><a href="https://d4nielstone.github.io/bubble_engine"><img src="https://github.com/user-attachments/assets/c5a24614-03ec-405e-8eae-55ab74326a66" alt="Bubble Engine logo" width="400" class="inline"/> </a> </p>
+<hr  />
 <h1><a class="anchor" id="autotoc_md6"></a>
 &lt;strong&gt;About the Project&lt;/strong&gt;</h1>
 <p><a href="https://d4nielstone.github.io/bubble_engine">Bubble Engine</a> is a 3D engine developed for personal learning and future game development. The codebase is fully written in <b>Portuguese</b>, the author’s native language, including all classes, variables, and method names.</p>
@@ -112,11 +107,7 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
 <h1><a class="anchor" id="autotoc_md8"></a>
 &lt;strong&gt;Project Example&lt;/strong&gt;</h1>
 <p>A <b>golf game</b> was created as a physics test. Several engine features were improved throughout its development.</p>
-<p> 
-<p align="center">
-  <img src="https://github.com/user-attachments/assets/65968911-e9cd-44c7-868b-81286b40889d" width="600" alt="Golf Game">
-</p>
-</p>
+<p><img src="https://github.com/user-attachments/assets/65968911-e9cd-44c7-868b-81286b40889d" alt="Golf Game" width="600" class="inline"/> </p>
 <hr  />
 <h1><a class="anchor" id="autotoc_md10"></a>
 &lt;strong&gt;Contributing&lt;/strong&gt;</h1>
@@ -132,14 +123,18 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
 <h2><a class="anchor" id="autotoc_md13"></a>
 &lt;strong&gt;Linux (Debian/Ubuntu-based distros)&lt;/strong&gt;</h2>
 <p><b>1. Install dependencies:</b> </p><div class="fragment"><div class="line">sudo apt-get update</div>
-<div class="line">sudo apt-get install -y cmake build-essential liblua5.3-0 liblua5.3-dev libglm-dev libglfw3-dev libassimp-dev libfreeimage-dev rapidjson-dev libbullet-dev libfreetype6-dev</div>
-<div class="line"> </div>
-<div class="line">git clone https://github.com/vinniefalco/LuaBridge.git /tmp/LuaBridge</div>
-<div class="line">sudo cp -r /tmp/LuaBridge/Source/LuaBridge /usr/local/include</div>
-</div><!-- fragment --><p><b>2. Clone and build the project:</b> </p><div class="fragment"><div class="line">git clone https://github.com/D4nielStone/bubble_engine.git</div>
+<div class="line">sudo apt-get install -y git build-essential cmake</div>
+<div class="line">sudo apt-get install -y liblua5.3-0 liblua5.3-dev libglm-dev libglfw3-dev libassimp-dev libfreeimage-dev rapidjson-dev libbullet-dev libfreetype6-dev</div>
+</div><!-- fragment --><p align="center"><b>2. Clone and build the project:</b> </p><div class="fragment"><div class="line">git clone https://github.com/D4nielStone/bubble_engine.git</div>
 <div class="line">cd bubble_engine</div>
-<div class="line">./scripts/build_editor.sh</div>
-</div><!-- fragment --><hr  />
+<div class="line">./build_all.sh</div>
+</div><!-- fragment --> <p><img src="https://github.com/user-attachments/assets/20005c5a-ae22-45d6-833a-2c085421b009" alt="Mint Exemple" width="600" class="inline"/> <img src="https://github.com/user-attachments/assets/79aed716-6801-44bd-9612-29c47c5cda10" alt="Ubuntu Exemple" width="600" class="inline"/> </p>
+<blockquote class="doxtable">
+<p>&zwj;<b>Image-1:</b> Running on Linux mint</p>
+<p><b>Image-2:</b> Running on Ubuntu </p>
+</blockquote>
+<h1><a class="anchor" id="autotoc_md14"></a>
+&lt;/blockquote&gt;</h1>
 <h2><a class="anchor" id="autotoc_md15"></a>
 &lt;strong&gt;Windows 7 x64&lt;/strong&gt;</h2>
 <blockquote class="doxtable">
@@ -155,7 +150,7 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
 <p><b>2. Set up dependencies using <code>vcpkg</code>:</b> </p><div class="fragment"><div class="line">git clone https://github.com/microsoft/vcpkg.git C:/vcpkg</div>
 <div class="line">cd C:/vcpkg</div>
 <div class="line">bootstrap-vcpkg.bat</div>
-<div class="line">vcpkg install lua glm glfw3 assimp freeimage rapidjson bullet3 freetype</div>
+<div class="line">vcpkg install lua:x64-mingw-static glm:x64-mingw-static glfw3:x64-mingw-static assimp:x64-mingw-static freeimage:x64-mingw-static rapidjson:x64-mingw-static bullet3:x64-mingw-static freetype:x64-mingw-static</div>
 </div><!-- fragment --><p><b>3. Clone and compile the project:</b> </p><div class="fragment"><div class="line">git clone https://github.com/D4nielStone/bubble_engine.git</div>
 <div class="line"> </div>
 <div class="line">cd bubble_engine/becommons</div>
@@ -185,7 +180,7 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
 <h2><a class="anchor" id="autotoc_md17"></a>
 &lt;strong&gt;Youtube&lt;/strong&gt;</h2>
 <h1><a class="anchor" id="autotoc_md18"></a>
-Subscribe on the &lt;a href="https://www.youtube.com/playlist?list=LL" &gt;bubble's youtube channel&lt;/a&gt;!</h1>
+Subscribe on the &lt;a href="https://www.youtube.com/channel/UCzPkiCemP0bCC5P3NhX3T4w" &gt;bubble's youtube channel&lt;/a&gt;!</h1>
 </div></div><!-- PageDoc -->
 </div><!-- contents -->
 </div><!-- doc-content -->

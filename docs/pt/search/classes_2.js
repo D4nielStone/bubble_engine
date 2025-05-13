@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['caixa_0',['caixa',['../classBECOMMONS__NS_1_1caixa.html',1,'BECOMMONS_NS']]],
+  ['caixa_0',['caixa',['../structBECOMMONS__NS_1_1caixa.html',1,'BECOMMONS_NS']]],
   ['camera_1',['camera',['../structBECOMMONS__NS_1_1camera.html',1,'BECOMMONS_NS']]],
   ['camera_5feditor_2',['camera_editor',['../structBECOMMONS__NS_1_1camera__editor.html',1,'BECOMMONS_NS']]],
   ['caractere_3',['caractere',['../structBECOMMONS__NS_1_1caractere.html',1,'BECOMMONS_NS']]],

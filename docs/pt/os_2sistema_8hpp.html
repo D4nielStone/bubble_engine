@@ -101,11 +101,13 @@ $(document).ready(function(){initNavTree('os_2sistema_8hpp.html',''); initResiza
 
 <p>funçoes do sistema  
 <a href="#details">Mais...</a></p>
-<div class="textblock"><code>#include &lt;iostream&gt;</code><br />
+<div class="textblock"><code>#include &lt;cstdlib&gt;</code><br />
+<code>#include &lt;iostream&gt;</code><br />
 <code>#include &lt;fstream&gt;</code><br />
 <code>#include &lt;unistd.h&gt;</code><br />
 <code>#include &lt;limits.h&gt;</code><br />
 <code>#include &quot;<a class="el" href="namespace_8hpp_source.html">namespace.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="debug_8hpp_source.html">depuracao/debug.hpp</a>&quot;</code><br />
 </div><div class="textblock"><div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Gráfico de dependência de inclusões para os/sistema.hpp:</div>
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
@@ -113,17 +115,30 @@ $(document).ready(function(){initNavTree('os_2sistema_8hpp.html',''); initResiza
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="os_2sistema_8hpp__incl.png" border="0" usemap="#asistema_8hpp" alt=""/></div>
 <map name="asistema_8hpp" id="asistema_8hpp">
-<area shape="rect" title="funçoes do sistema" alt="" coords="194,5,297,31"/>
-<area shape="rect" title=" " alt="" coords="5,79,85,104"/>
-<area shape="poly" title=" " alt="" coords="214,33,92,76,90,71,212,28"/>
-<area shape="rect" title=" " alt="" coords="110,79,183,104"/>
-<area shape="poly" title=" " alt="" coords="231,33,175,73,172,68,228,29"/>
-<area shape="rect" title=" " alt="" coords="208,79,283,104"/>
-<area shape="poly" title=" " alt="" coords="248,31,248,65,243,65,243,31"/>
-<area shape="rect" title=" " alt="" coords="307,79,378,104"/>
-<area shape="poly" title=" " alt="" coords="263,29,317,68,314,72,259,33"/>
-<area shape="rect" href="namespace_8hpp.html" title=" " alt="" coords="403,79,528,104"/>
-<area shape="poly" title=" " alt="" coords="281,28,418,72,416,77,280,33"/>
+<area shape="rect" title="funçoes do sistema" alt="" coords="231,5,333,31"/>
+<area shape="rect" title=" " alt="" coords="5,79,71,104"/>
+<area shape="poly" title=" " alt="" coords="244,33,84,79,83,74,242,28"/>
+<area shape="rect" title=" " alt="" coords="258,152,338,177"/>
+<area shape="poly" title=" " alt="" coords="231,31,190,42,153,58,140,67,132,78,130,89,136,103,158,125,186,140,216,151,245,157,244,162,214,156,183,145,155,129,132,105,125,90,127,76,136,63,150,53,188,37,230,26"/>
+<area shape="rect" title=" " alt="" coords="147,79,220,104"/>
+<area shape="poly" title=" " alt="" coords="268,33,212,73,209,68,265,29"/>
+<area shape="rect" title=" " alt="" coords="245,79,319,104"/>
+<area shape="poly" title=" " alt="" coords="285,31,285,65,279,65,279,31"/>
+<area shape="rect" title=" " alt="" coords="344,79,415,104"/>
+<area shape="poly" title=" " alt="" coords="299,29,354,68,351,72,296,33"/>
+<area shape="rect" href="namespace_8hpp.html" title=" " alt="" coords="439,79,565,104"/>
+<area shape="poly" title=" " alt="" coords="318,28,454,72,453,77,317,33"/>
+<area shape="rect" href="debug_8hpp.html" title=" " alt="" coords="589,79,751,104"/>
+<area shape="poly" title=" " alt="" coords="334,26,595,74,594,79,333,31"/>
+<area shape="poly" title=" " alt="" coords="611,107,352,156,351,151,610,101"/>
+<area shape="rect" title=" " alt="" coords="511,152,573,177"/>
+<area shape="poly" title=" " alt="" coords="651,106,576,147,574,143,648,102"/>
+<area shape="rect" title=" " alt="" coords="597,152,657,177"/>
+<area shape="poly" title=" " alt="" coords="665,106,643,142,639,139,661,103"/>
+<area shape="rect" title=" " alt="" coords="682,152,741,177"/>
+<area shape="poly" title=" " alt="" coords="679,103,700,139,695,141,675,106"/>
+<area shape="rect" title=" " alt="" coords="765,152,839,177"/>
+<area shape="poly" title=" " alt="" coords="692,102,770,143,767,148,690,106"/>
 </map>
 </div>
 </div><div class="textblock"><div id="dynsection-1" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
@@ -151,9 +166,27 @@ Namespaces</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Funções</h2></td></tr>
+<tr class="memitem:a9e42cdc61961db4ce3d408546b20f34b" id="r_a9e42cdc61961db4ce3d408546b20f34b"><td class="memItemLeft" align="right" valign="top"><a id="a9e42cdc61961db4ce3d408546b20f34b" name="a9e42cdc61961db4ce3d408546b20f34b"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><b>BECOMMONS_NS::abrirLink</b> (const std::string &amp;url)</td></tr>
+<tr class="separator:a9e42cdc61961db4ce3d408546b20f34b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6cbfe127ebdd240d04791650d888fe02" id="r_a6cbfe127ebdd240d04791650d888fe02"><td class="memItemLeft" align="right" valign="top"><a id="a6cbfe127ebdd240d04791650d888fe02" name="a6cbfe127ebdd240d04791650d888fe02"></a>
 static std::string&#160;</td><td class="memItemRight" valign="bottom"><b>BECOMMONS_NS::obterExecDir</b> ()</td></tr>
 <tr class="separator:a6cbfe127ebdd240d04791650d888fe02"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a760983d05f41b7ca2ce3cb8a1bfb8cbb" id="r_a760983d05f41b7ca2ce3cb8a1bfb8cbb"><td class="memItemLeft" align="right" valign="top"><a id="a760983d05f41b7ca2ce3cb8a1bfb8cbb" name="a760983d05f41b7ca2ce3cb8a1bfb8cbb"></a>
+static bool&#160;</td><td class="memItemRight" valign="bottom"><b>BECOMMONS_NS::comandoDisponivel</b> (const std::string &amp;cmd)</td></tr>
+<tr class="separator:a760983d05f41b7ca2ce3cb8a1bfb8cbb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acdb33dca8944179a0d9412a58bb9bcd3" id="r_acdb33dca8944179a0d9412a58bb9bcd3"><td class="memItemLeft" align="right" valign="top"><a id="acdb33dca8944179a0d9412a58bb9bcd3" name="acdb33dca8944179a0d9412a58bb9bcd3"></a>
+static std::string&#160;</td><td class="memItemRight" valign="bottom"><b>BECOMMONS_NS::obterEDT</b> ()</td></tr>
+<tr class="separator:acdb33dca8944179a0d9412a58bb9bcd3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a042310fdb01dbbd592fc9e9c6b370c90" id="r_a042310fdb01dbbd592fc9e9c6b370c90"><td class="memItemLeft" align="right" valign="top"><a id="a042310fdb01dbbd592fc9e9c6b370c90" name="a042310fdb01dbbd592fc9e9c6b370c90"></a>
+static bool&#160;</td><td class="memItemRight" valign="bottom"><b>BECOMMONS_NS::terminalDisponivel</b> (const std::string &amp;terminal)</td></tr>
+<tr class="separator:a042310fdb01dbbd592fc9e9c6b370c90"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5056abee1ea214451824b0c6d3baf6a6" id="r_a5056abee1ea214451824b0c6d3baf6a6"><td class="memItemLeft" align="right" valign="top"><a id="a5056abee1ea214451824b0c6d3baf6a6" name="a5056abee1ea214451824b0c6d3baf6a6"></a>
+static std::string&#160;</td><td class="memItemRight" valign="bottom"><b>BECOMMONS_NS::obterTerminal</b> ()</td></tr>
+<tr class="separator:a5056abee1ea214451824b0c6d3baf6a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac95ff51398115a234de6e551834926a5" id="r_ac95ff51398115a234de6e551834926a5"><td class="memItemLeft" align="right" valign="top"><a id="ac95ff51398115a234de6e551834926a5" name="ac95ff51398115a234de6e551834926a5"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><b>BECOMMONS_NS::abrirNoTerminal</b> (const std::string &amp;editor, const std::string &amp;arquivo)</td></tr>
+<tr class="separator:ac95ff51398115a234de6e551834926a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Descrição detalhada</h2>
 <div class="textblock"><p>funçoes do sistema </p>

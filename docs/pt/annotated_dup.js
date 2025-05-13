@@ -11,7 +11,7 @@ var annotated_dup =
         [ "texto", "classBECOMMONS__NS_1_1elementos_1_1texto.html", null ]
       ] ],
       [ "bubble_gui", "classBECOMMONS__NS_1_1bubble__gui.html", "classBECOMMONS__NS_1_1bubble__gui" ],
-      [ "caixa", "classBECOMMONS__NS_1_1caixa.html", null ],
+      [ "caixa", "structBECOMMONS__NS_1_1caixa.html", "structBECOMMONS__NS_1_1caixa" ],
       [ "camera", "structBECOMMONS__NS_1_1camera.html", null ],
       [ "camera_editor", "structBECOMMONS__NS_1_1camera__editor.html", null ],
       [ "caractere", "structBECOMMONS__NS_1_1caractere.html", "structBECOMMONS__NS_1_1caractere" ],
@@ -19,6 +19,7 @@ var annotated_dup =
       [ "componente", "structBECOMMONS__NS_1_1componente.html", "structBECOMMONS__NS_1_1componente" ],
       [ "cor", "structBECOMMONS__NS_1_1cor.html", null ],
       [ "entidade", "structBECOMMONS__NS_1_1entidade.html", null ],
+      [ "estilo", "structBECOMMONS__NS_1_1estilo.html", null ],
       [ "fase", "structBECOMMONS__NS_1_1fase.html", "structBECOMMONS__NS_1_1fase" ],
       [ "fisica", "structBECOMMONS__NS_1_1fisica.html", null ],
       [ "gerenciadorFontes", "classBECOMMONS__NS_1_1gerenciadorFontes.html", "classBECOMMONS__NS_1_1gerenciadorFontes" ],
@@ -61,7 +62,7 @@ var annotated_dup =
     ] ],
     [ "EDITOR_NS", "namespaceEDITOR__NS.html", [
       [ "gerenciador_projetos", "classEDITOR__NS_1_1gerenciador__projetos.html", null ],
-      [ "sistema_editor", "structEDITOR__NS_1_1sistema__editor.html", null ]
+      [ "sistema_editor", "structEDITOR__NS_1_1sistema__editor.html", "structEDITOR__NS_1_1sistema__editor" ]
     ] ],
     [ "std", "namespacestd.html", [
       [ "hash< BECOMMONS_NS::entidade >", "structstd_1_1hash_3_01BECOMMONS__NS_1_1entidade_01_4.html", null ],

@@ -147,6 +147,7 @@ void gerenciador_projetos::criarProjetoPadrao(const std::string& novo_diretorio,
             codigo_file.close();
         }
     }
+    atualizarElementos(DIR_PADRAO);
 }
 void gerenciador_projetos::removerProjeto(const std::string& dir) {
     if(std::filesystem::exists(dir)) {
@@ -157,9 +158,10 @@ void gerenciador_projetos::removerProjeto(const std::string& dir) {
 void gerenciador_projetos::abrirProjeto(const std::string& caminho) {
        glfwDestroyWindow(janela::obterInstancia().window);
                 
+       std::string caminho_ = caminho;
        descarregarShaders();
        // Cria projeto
-       becommons::projeto editor(caminho);
+       becommons::projeto editor(caminho_);
        
        // Sistema do editor
        editor.adicionar("editor", new sistema_editor());
@@ -176,6 +178,32 @@ void gerenciador_projetos::abrirProjeto(const std::string& caminho) {
 }
 
 void gerenciador_projetos::atualizarElementos(const std::string& Dir) {
+    // passo 1: iterar sobre os projetos
+    gui.removerFilhos("#barra_lateral");
+    gui.adicionar<elementos::texto>("#barra_lateral", "##texto_l1", "Projetos encontrados", 15);
+    gui.fimEstilo();
+
+    projetos.clear();
+    if(std::filesystem::exists(Dir))
+    for (const auto& entry : std::filesystem::directory_iterator(Dir)) {
+        if (entry.is_directory()) {
+            auto dir = entry.path().string();
+            auto doc = projeto::analisarProjeto(dir);
+            if(!doc.HasMember("nome")) throw std::runtime_error("Alanisando projetos do gerenciador de projetos.");
+            std::string nome = doc["nome"].GetString();
+            depuracao::emitir(info, "gerenciador_projetos", std::string("Projeto encontrados: ") + nome);
+            projetos[nome] = dir;
+        }
+    }
+    // passo 2: configurar UI
+    for(auto& [nome, diretorio] : projetos) {
+        gui.adicionar<elementos::botao>("#barra_lateral", nome, [nome, this]() {
+                m_projeto_selecionado = nome;
+                }, nome, "folder.png");
+    }
+    gui.defCorBorda({0.2, 0.2, 0.2, 0});
+    gui.defCorFundo({0.1, 0.1, 0.1, 1});
+    gui.fimEstilo();
 }
 
 
@@ -190,7 +218,7 @@ void gerenciador_projetos::configurarUI(const std::string& DIR_PADRAO) {
         gui.defFlags(flag_estilo::modular | flag_estilo::largura_justa);
         gui.defOrientacao(estilo::orientacao::vertical);
         gui.defCorFundo({0.1, 0.1, 0.1, 1});
-        gui.defPaddingG(5, 20);
+        gui.defPaddingG(5, 10);
         gui.defAltura(1.0);
     gui.fimEstilo();
     
@@ -211,12 +239,30 @@ void gerenciador_projetos::configurarUI(const std::string& DIR_PADRAO) {
     gui.adicionar<caixa>("#area_maior", "##baixo");
         gui.defFlags(flag_estilo::modular | flag_estilo::alinhamento_central);
         gui.defLargura      (1.0);
+        gui.defPaddingG(5, 0);
         gui.defCorFundo({0.21, 0.21, 0.21, 1});
         gui.defCrescimentoM (1.0);
     gui.fimEstilo();
     gui.adicionar<elementos::texto>("##cima", "###texto1", "Projeto selecionado:", 20);
     gui.adicionar<elementos::texto>("##cima", "###texto2", &m_projeto_selecionado, 15);
-    gui.defPadding(5, 5);
+        gui.defPadding(5, 5);
+    gui.fimEstilo();
+    gui.adicionar<elementos::botao>("##baixo", "###texto3", [this]() {
+            
+            if(m_projeto_selecionado != "nenhum") {
+                abrirProjeto(projetos[m_projeto_selecionado]);
+            }
+        }, "Abrir", "abrir.png");
+    gui.adicionar<elementos::botao>("##baixo", "###texto4", [this]() {
+            if(m_projeto_selecionado != "nenhum") {
+                removerProjeto(projetos[m_projeto_selecionado]);
+            }
+        }, "Remover", "remover.png");
+    gui.adicionar<elementos::botao>("##baixo", "###texto5", [DIR_PADRAO, this]() {
+            if(m_projeto_selecionado != "nenhum") {
+                criarProjetoPadrao(DIR_PADRAO, "Projeto Padrao");
+            }
+        }, "Adicionar", "adicionar.png");
     gui.fimEstilo();
 }
 

@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['s_20youtube_20channel_20a_0',['Subscribe on the &lt;a href=&quot;https://www.youtube.com/playlist?list=LL&quot; &gt;bubble&apos;s youtube channel&lt;/a&gt;!',['../index.html#autotoc_md18',1,'']]],
+  ['s_20youtube_20channel_20a_0',['Subscribe on the &lt;a href=&quot;https://www.youtube.com/channel/UCzPkiCemP0bCC5P3NhX3T4w&quot; &gt;bubble&apos;s youtube channel&lt;/a&gt;!',['../index.html#autotoc_md18',1,'']]],
   ['salvarfase_1',['salvarFase',['../structBECOMMONS__NS_1_1projeto.html#a016d8efb9aaf106b035cf17218e7ed2c',1,'BECOMMONS_NS::projeto']]],
   ['salvarfases_2',['salvarFases',['../structBECOMMONS__NS_1_1projeto.html#a47a6d049b97cea03aa1233af5e525583',1,'BECOMMONS_NS::projeto']]],
   ['salvarprojeto_3',['salvarProjeto',['../structBECOMMONS__NS_1_1projeto.html#a245625354b65b96ce16faeee1d8fcb55',1,'BECOMMONS_NS::projeto']]],
@@ -22,7 +22,7 @@ var searchData=
   ['sistema_5fde_5finterface_2ehpp_19',['sistema_de_interface.hpp',['../sistema__de__interface_8hpp.html',1,'']]],
   ['sistema_5fde_5frenderizacao_2ecpp_20',['sistema_de_renderizacao.cpp',['../sistema__de__renderizacao_8cpp.html',1,'']]],
   ['sistema_5fde_5frenderizacao_2ehpp_21',['sistema_de_renderizacao.hpp',['../sistema__de__renderizacao_8hpp.html',1,'']]],
-  ['sistema_5feditor_22',['sistema_editor',['../structEDITOR__NS_1_1sistema__editor.html',1,'EDITOR_NS']]],
+  ['sistema_5feditor_22',['sistema_editor',['../structEDITOR__NS_1_1sistema__editor.html',1,'EDITOR_NS::sistema_editor'],['../structEDITOR__NS_1_1sistema__editor.html#a83cd53a7ca1d38aa048089cb03041669',1,'EDITOR_NS::sistema_editor::sistema_editor()']]],
   ['sistema_5ffisica_23',['sistema_fisica',['../classBECOMMONS__NS_1_1sistema__fisica.html',1,'BECOMMONS_NS']]],
   ['sistema_5finterface_24',['sistema_interface',['../classBECOMMONS__NS_1_1sistema__interface.html',1,'BECOMMONS_NS']]],
   ['sistema_5frenderizacao_25',['sistema_renderizacao',['../classBECOMMONS__NS_1_1sistema__renderizacao.html',1,'BECOMMONS_NS']]],
@@ -40,6 +40,6 @@ var searchData=
   ['strong_20project_20example_20strong_37',['&lt;strong&gt;Project Example&lt;/strong&gt;',['../index.html#autotoc_md8',1,'']]],
   ['strong_20windows_207_20x64_20strong_38',['&lt;strong&gt;Windows 7 x64&lt;/strong&gt;',['../index.html#autotoc_md15',1,'']]],
   ['strong_20youtube_20strong_39',['&lt;strong&gt;Youtube&lt;/strong&gt;',['../index.html#autotoc_md17',1,'']]],
-  ['subscribe_20on_20the_20a_20href_20https_3a_20www_20youtube_20com_20playlist_20list_20ll_20bubble_20s_20youtube_20channel_20a_40',['Subscribe on the &lt;a href=&quot;https://www.youtube.com/playlist?list=LL&quot; &gt;bubble&apos;s youtube channel&lt;/a&gt;!',['../index.html#autotoc_md18',1,'']]],
+  ['subscribe_20on_20the_20a_20href_20https_3a_20www_20youtube_20com_20channel_20uczpkicemp0bcc5p3nhx3t4w_20bubble_20s_20youtube_20channel_20a_40',['Subscribe on the &lt;a href=&quot;https://www.youtube.com/channel/UCzPkiCemP0bCC5P3NhX3T4w&quot; &gt;bubble&apos;s youtube channel&lt;/a&gt;!',['../index.html#autotoc_md18',1,'']]],
   ['sumário_41',['Sumário',['../group__LuaAPI.html#autotoc_md4',1,'']]]
 ];

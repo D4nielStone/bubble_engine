@@ -5,5 +5,6 @@ var searchData=
   ['salvarprojeto_2',['salvarProjeto',['../structBECOMMONS__NS_1_1projeto.html#a245625354b65b96ce16faeee1d8fcb55',1,'BECOMMONS_NS::projeto']]],
   ['sfisica_3',['sfisica',['../structBECOMMONS__NS_1_1projeto.html#ae0acb10ea6eea4b01ee2ed19512921b8',1,'BECOMMONS_NS::projeto']]],
   ['shutdown_4',['shutdown',['../classBECOMMONS__NS_1_1imageLoader.html#a4dc5406ce88a1a295f19c15a45102cb4',1,'BECOMMONS_NS::imageLoader']]],
-  ['sistema_5',['sistema',['../classBECOMMONS__NS_1_1sistema.html#ab631b76b39d13a627513e6cfba94d781',1,'BECOMMONS_NS::sistema']]]
+  ['sistema_5',['sistema',['../classBECOMMONS__NS_1_1sistema.html#ab631b76b39d13a627513e6cfba94d781',1,'BECOMMONS_NS::sistema']]],
+  ['sistema_5feditor_6',['sistema_editor',['../structEDITOR__NS_1_1sistema__editor.html#a83cd53a7ca1d38aa048089cb03041669',1,'EDITOR_NS::sistema_editor']]]
 ];

@@ -43,7 +43,7 @@ namespace BECOMMONS_NS {
             std::string diretorioDoProjeto;
             /// @brief construtor para carregar arquivos do projeto.
             /// @param diretorio 
-            projeto(const std::string& diretorio);
+            projeto(std::string& diretorio);
             /// @brief construtor para iniciar janela sem carregar arquivos da pasta do projeto.
             projeto();
             ~projeto();
@@ -63,7 +63,7 @@ namespace BECOMMONS_NS {
             void carregarFase(const std::string& nome);
             /// @brief carregar arquivo de configuração e define diretório e outros.
             /// @return retorna documento json do projeto
-            rapidjson::Document carregarProjeto();
+            static rapidjson::Document analisarProjeto(std::string& path);
             /// @brief salva todas as fases e a configuração do projeto
             void salvarProjeto(){};
             /// @brief obtenção de uma fase dentro da lista da fases carregadas

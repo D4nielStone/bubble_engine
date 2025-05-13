@@ -26,12 +26,15 @@ SOFTWARE.
  */
 
 #pragma once
+#include "imagems/adicionar.hpp"
+#include "imagems/abrir.hpp"
 #include "imagems/cubo_branco.hpp"
 #include "imagems/folder.hpp"
 #include "imagems/banner.hpp"
 #include "imagems/icon.hpp"
 #include "imagems/arco_cor.hpp"
 #include "imagems/camera.hpp"
+#include "imagems/remover.hpp"
 #include "imagems/check.hpp"
 #include "imagems/fisica.hpp"
 #include "imagems/iluminacao.hpp"

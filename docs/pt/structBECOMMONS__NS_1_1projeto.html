@@ -94,6 +94,7 @@ $(document).ready(function(){initNavTree('structBECOMMONS__NS_1_1projeto.html','
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Membros Públicos</a> &#124;
+<a href="#pub-static-methods">Membros públicos estáticos</a> &#124;
 <a href="#pub-attribs">Atributos Públicos</a> &#124;
 <a href="#pri-methods">Membros privados</a> &#124;
 <a href="#pri-attribs">Atributos Privados</a> &#124;
@@ -129,9 +130,6 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>carregarFases</b> ()<
 <tr class="memitem:a8df98c60887c31da7c527f25b7dcafba" id="r_a8df98c60887c31da7c527f25b7dcafba"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structBECOMMONS__NS_1_1projeto.html#a8df98c60887c31da7c527f25b7dcafba">carregarFase</a> (const std::string &amp;nome)</td></tr>
 <tr class="memdesc:a8df98c60887c31da7c527f25b7dcafba"><td class="mdescLeft">&#160;</td><td class="mdescRight">carrega fase pelo nome no diretório do projeto e torna atual  <br /></td></tr>
 <tr class="separator:a8df98c60887c31da7c527f25b7dcafba"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a06a491572ffa237df613fe7200f5c7a6" id="r_a06a491572ffa237df613fe7200f5c7a6"><td class="memItemLeft" align="right" valign="top">rapidjson::Document&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structBECOMMONS__NS_1_1projeto.html#a06a491572ffa237df613fe7200f5c7a6">carregarProjeto</a> ()</td></tr>
-<tr class="memdesc:a06a491572ffa237df613fe7200f5c7a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">carregar arquivo de configuração e define diretório e outros.  <br /></td></tr>
-<tr class="separator:a06a491572ffa237df613fe7200f5c7a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a245625354b65b96ce16faeee1d8fcb55" id="r_a245625354b65b96ce16faeee1d8fcb55"><td class="memItemLeft" align="right" valign="top"><a id="a245625354b65b96ce16faeee1d8fcb55" name="a245625354b65b96ce16faeee1d8fcb55"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>salvarProjeto</b> ()</td></tr>
 <tr class="memdesc:a245625354b65b96ce16faeee1d8fcb55"><td class="mdescLeft">&#160;</td><td class="mdescRight">salva todas as fases e a configuração do projeto <br /></td></tr>
@@ -155,6 +153,12 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>salvarProjeto</b> ()<
 <tr class="memitem:adfaefaa183854bc811414335f62d7580" id="r_adfaefaa183854bc811414335f62d7580"><td class="memItemLeft" align="right" valign="top"><a id="adfaefaa183854bc811414335f62d7580" name="adfaefaa183854bc811414335f62d7580"></a>
 <a class="el" href="classBECOMMONS__NS_1_1sistema.html">sistema</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>obterSistema</b> (const std::string)</td></tr>
 <tr class="separator:adfaefaa183854bc811414335f62d7580"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
+Membros públicos estáticos</h2></td></tr>
+<tr class="memitem:a4e8d86ae5725dbcf7a61ae1ab3244544" id="r_a4e8d86ae5725dbcf7a61ae1ab3244544"><td class="memItemLeft" align="right" valign="top">static rapidjson::Document&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structBECOMMONS__NS_1_1projeto.html#a4e8d86ae5725dbcf7a61ae1ab3244544">analisarProjeto</a> (std::string &amp;path)</td></tr>
+<tr class="memdesc:a4e8d86ae5725dbcf7a61ae1ab3244544"><td class="mdescLeft">&#160;</td><td class="mdescRight">carregar arquivo de configuração e define diretório e outros.  <br /></td></tr>
+<tr class="separator:a4e8d86ae5725dbcf7a61ae1ab3244544"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Atributos Públicos</h2></td></tr>
@@ -263,6 +267,35 @@ std::string&#160;</td><td class="memItemRight" valign="bottom"><b>fase_atual</b>
 
 </div>
 </div>
+<a id="a4e8d86ae5725dbcf7a61ae1ab3244544" name="a4e8d86ae5725dbcf7a61ae1ab3244544"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4e8d86ae5725dbcf7a61ae1ab3244544">&#9670;&#160;</a></span>analisarProjeto()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">rapidjson::Document projeto::analisarProjeto </td>
+          <td>(</td>
+          <td class="paramtype">std::string &amp;&#160;</td>
+          <td class="paramname"><em>path</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>carregar arquivo de configuração e define diretório e outros. </p>
+<dl class="section return"><dt>Retorna</dt><dd>retorna documento json do projeto </dd></dl>
+
+</div>
+</div>
 <a id="a8df98c60887c31da7c527f25b7dcafba" name="a8df98c60887c31da7c527f25b7dcafba"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8df98c60887c31da7c527f25b7dcafba">&#9670;&#160;</a></span>carregarFase()</h2>
 
@@ -286,26 +319,6 @@ std::string&#160;</td><td class="memItemRight" valign="bottom"><b>fase_atual</b>
   </table>
   </dd>
 </dl>
-
-</div>
-</div>
-<a id="a06a491572ffa237df613fe7200f5c7a6" name="a06a491572ffa237df613fe7200f5c7a6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a06a491572ffa237df613fe7200f5c7a6">&#9670;&#160;</a></span>carregarProjeto()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">rapidjson::Document projeto::carregarProjeto </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>carregar arquivo de configuração e define diretório e outros. </p>
-<dl class="section return"><dt>Retorna</dt><dd>retorna documento json do projeto </dd></dl>
 
 </div>
 </div>

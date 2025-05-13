@@ -1,6 +1,6 @@
 var hierarchy =
 [
-    [ "BECOMMONS_NS::caixa", "classBECOMMONS__NS_1_1caixa.html", [
+    [ "BECOMMONS_NS::caixa", "structBECOMMONS__NS_1_1caixa.html", [
       [ "BECOMMONS_NS::elementos::area_de_toque", "structBECOMMONS__NS_1_1elementos_1_1area__de__toque.html", [
         [ "BECOMMONS_NS::elementos::botao", "structBECOMMONS__NS_1_1elementos_1_1botao.html", null ],
         [ "BECOMMONS_NS::elementos::imagem", "classBECOMMONS__NS_1_1elementos_1_1imagem.html", null ]
@@ -38,6 +38,7 @@ var hierarchy =
     ] ],
     [ "BECOMMONS_NS::api::entidade", "structBECOMMONS__NS_1_1api_1_1entidade.html", null ],
     [ "BECOMMONS_NS::entidade", "structBECOMMONS__NS_1_1entidade.html", null ],
+    [ "BECOMMONS_NS::estilo", "structBECOMMONS__NS_1_1estilo.html", null ],
     [ "std::exception", null, [
       [ "BECOMMONS_NS::shaderException", "classBECOMMONS__NS_1_1shaderException.html", null ]
     ] ],
