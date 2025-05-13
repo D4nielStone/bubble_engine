@@ -71,6 +71,7 @@ namespace BECOMMONS_NS {
     class bubble_gui : public sistema
     {
         private:
+            glm::mat4 proj { 1.f };
             bool m_novo_estilo { false };
             std::queue<std::function<void()>> funcoes;      ///< Fila de funções para serem executadas no fim do loop
             std::unique_ptr<caixa> raiz;                    ///< Elemento raiz ( tem as dimensões da janela )
@@ -80,7 +81,21 @@ namespace BECOMMONS_NS {
             /// Desenha a caixa
             /// Desenha e decide que tipo de elemento ela é
             /// @param c Ponteiro da caixa
-            void desenhar_caixa(caixa* c);
+            inline void desenhar_caixa(caixa* c);
+            inline static void atualizarLJ(caixa*);
+            inline static void atualizarAJ(caixa*);
+            inline static void atualizarHDTF(caixa*, std::function<void(caixa*)>);
+            inline static bool deveAtualizar(caixa*);
+            inline void configOpenglState() const;
+            inline void deconfigOpenglState() const;
+            inline void popFuncoes();
+            inline void processarModular(caixa*);
+            inline void processarDimensaoPercentual(caixa*, bool, float&, fvet2&, fvet2&);
+            inline void aplicarLayoutModular(caixa*, bool, float, const fvet2&);
+
+            inline void renderizarImagem(elementos::imagem*) const;
+            inline void renderizarFundo(caixa*, BECOMMONS_NS::shader*) const;
+            inline void renderizarTexto(elementos::texto* tex) const;
         public:
         /**
          * @brief Construtor padrão da interface.
@@ -121,7 +136,6 @@ namespace BECOMMONS_NS {
          */
         void atualizar() override;
     
-        bool deveAtualizar(caixa*);
         /**
          * @brief Adiciona um novo elemento à interface, como botão, texto ou imagem.
          * @tparam T Tipo do elemento a ser adicionado (deve herdar de `caixa`).

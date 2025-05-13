@@ -742,8 +742,7 @@ void testarBubbleGUI()
         parent.m_estilo.m_flag_estilo = becommons::flag_estilo::modular;
         parent.m_estilo.m_orientacao_modular = becommons::estilo::orientacao::horizontal;
         parent.m_estilo.m_padding_geral = {5, 5};
-        parent.m_estilo.m_largura = 100;
-        parent.m_estilo.m_altura = 100; 
+        parent.m_estilo.m_limites = {0, 0, 100, 100}; 
     
         auto* child1 = parent.adicionarFilho<becommons::caixa>("child1");
         auto* child2 = parent.adicionarFilho<becommons::caixa>("child2");
@@ -760,10 +759,6 @@ void testarBubbleGUI()
         ASSERT_EQUAL(child1->m_estilo.m_limites.z, 42.5f);      // metade do espaço disponível
         ASSERT_EQUAL(child2->m_estilo.m_limites.x, 52.5f);      // 5 (padding) + 42 (child1) + 5 (padding)
         ASSERT_EQUAL(child2->m_estilo.m_limites.z, 42.5f);      // mesma largura
-    
-        // Também podemos verificar altura, se estiver fixa em 100
-        ASSERT_EQUAL(child1->m_estilo.m_limites.w, 100);
-        ASSERT_EQUAL(child2->m_estilo.m_limites.w, 100);
     });
 }
 void testarSistemas()

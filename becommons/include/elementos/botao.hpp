@@ -87,6 +87,7 @@ namespace BECOMMONS_NS{
                 m_estilo.m_flag_estilo = flag_estilo::modular;
                 
                 m_estilo.m_largura += m_texto->obterLargura(m_texto->m_texto_frase) + m_estilo.m_padding_geral.x * 2;
+                m_estilo.m_altura = m_texto->obterAltura(m_texto->m_texto_frase) + m_estilo.m_padding_geral.y * 2;
                 
                 m_texto->m_estilo.m_flag_estilo = m_estilo.m_flag_estilo;
             }

@@ -82,23 +82,60 @@ namespace BECOMMONS_NS{
                 m_estilo.m_largura = obterLargura(m_texto_frase);
                 m_estilo.m_limites.z = m_estilo.m_largura; m_estilo.m_limites.w = m_estilo.m_altura;
             }
-            float obterLargura(const std::string& frase) {
-                if(m_texto_frase_ptr) m_texto_frase = *m_texto_frase_ptr;
-                auto& caracteres = gerenciadorFontes::obterInstancia().obter(m_texto_fonte, m_texto_escala);
-                if (caracteres.empty()) {
-                    return 0.0f;
-                }
 
-                float larguraTotal = 0.0f;
-                for (char32_t c : frase) {
-                    if(c == '\n') return larguraTotal;
+            // retorna a largura da linha mais longa dentro de 'frase'
+            float obterLargura(const std::string& frase) {
+                if (m_texto_frase_ptr) m_texto_frase = *m_texto_frase_ptr;
+                auto& caracteres = gerenciadorFontes::obterInstancia()
+                                       .obter(m_texto_fonte, m_texto_escala);
+                if (caracteres.empty()) {
+                     return 0.0f;
+                 }
+              
+                 float maxLargura = 0.0f;
+                 float larguraLinha = 0.0f;
+              
+                 for (char32_t c : frase) {
+                     if (c == '\n') {
+                         // finaliza a linha atual, atualiza o máximo e reseta
+                         maxLargura = std::max(maxLargura, larguraLinha);
+                         larguraLinha = 0.0f;
+                         continue;
+                     }
                     auto it = caracteres.find(c);
                     if (it != caracteres.end()) {
                         const caractere& ch = it->second;
-                        larguraTotal += (ch.avanco >> 6);
+                        larguraLinha += (ch.avanco >> 6);
                     }
                 }
-            return larguraTotal;
+                // compara a última linha (caso não termine em '\n')
+                maxLargura = std::max(maxLargura, larguraLinha);
+                return maxLargura;
+            }   
+
+            // retorna a altura total considerando quantas linhas existem em 'frase'
+            float obterAltura(const std::string& frase) {
+                if (m_texto_frase_ptr) m_texto_frase = *m_texto_frase_ptr;
+                auto& caracteres = gerenciadorFontes::obterInstancia()
+                                       .obter(m_texto_fonte, m_texto_escala);
+                if (caracteres.empty()) {
+                    return 0.0f;
+                }
+            
+                // conta quantas quebras de linha existem → número de linhas = quebras + 1
+                size_t numQuebras = 0;
+                for (char32_t c : frase) {
+                    if (c == '\n') {
+                        ++numQuebras;
+                    }
+                }
+                size_t numLinhas = numQuebras + 1;
+            
+                // precisa de um método no gerenciador para expor a "altura de linha"
+                // por exemplo: gerenciadorFontes::obterAlturaLinha(fonte, escala)
+                float alturaLinha = m_texto_escala * 1.4;
+            
+                return alturaLinha * static_cast<float>(numLinhas);
             }
         };
     } // elementos

@@ -89,15 +89,15 @@ void sistema_editor::configurarInterface(projeto& proj)
     gui->fimEstilo();
     /// -- topo
     gui->adicionar<caixa>("#topo", "##barra_menu");
-        gui->defFlags       (flag_estilo::modular | flag_estilo::alinhamento_central);
+        gui->defFlags       (flag_estilo::altura_justa | flag_estilo::modular | flag_estilo::alinhamento_central);
         gui->defCrescimentoM(                           1.0);
-        gui->defAltura      (                           1.0);
         gui->defOrientacao  (   estilo::orientacao::horizontal);
         gui->defCorFundo    (    cor(0.15f, 0.15f, 0.15f, 1.f));
     gui->fimEstilo();
     gui->adicionar<caixa>("#topo", "##barra_versao");
-        gui->defFlags       (flag_estilo::altura_justa | flag_estilo::modular | flag_estilo::alinhamento_fim);
-        gui->defCrescimentoM(                           0.3);
+        gui->defFlags       (flag_estilo::modular | flag_estilo::alinhamento_fim);
+        gui->defCrescimentoM(                           0.2);
+        gui->defAltura      (1.0);
         gui->defOrientacao  (   estilo::orientacao::horizontal);
         gui->defPaddingG    (                      5, 0);
         gui->defCorFundo    (    cor(0.11f, 0.11f, 0.11f, 1.f));
@@ -111,7 +111,6 @@ void sistema_editor::configurarInterface(projeto& proj)
         gui->defPaddingG    (                           5, 5);
         gui->defCorFundo    (     cor(0.1f, 0.1f, 0.1f, 1.f));
     gui->fimEstilo();
-    cam.framebuffer_ptr->m_imagem_shader = new shader("imagem.vert", "vintage.frag");
     gui->adicionar("#centro", "##editor", std::move(cam.framebuffer_ptr));
         gui->defFlags       (flag_estilo::altura_percentual | flag_estilo::modular);
         gui->defAltura      (                            1.0);
@@ -156,7 +155,7 @@ void sistema_editor::configurarInterface(projeto& proj)
             , "Documentacao");
         gui->defFlags        (flag_estilo::altura_percentual);
         gui->defCorFundo     (cor(0.11f, 0.11f, 0.11f, 1.f));
-        gui->defCorBorda     (cor(0.17f, 0.17f, 0.27f, 0.f));
+        gui->defCorBorda     (cor(0.17f, 0.17f, 0.17f, 0.f));
         gui->defAltura       (18);
         gui->defLargura      (18);
         gui->defPaddingG     (5, 0);
@@ -372,13 +371,15 @@ void sistema_editor::atualizarComponente(const componente::mascara& mascara)
     // Remove os botões antigos para evitar duplicatas
     gui->removerFilhos("###componente_atual");
     gui->removerFilhos("###propriedades");
-    if(entidade_atual == 0) return;
     std::string nome = "nenhum";
     if(componente::mapa_nomes_componentes.find(mascara) != componente::mapa_nomes_componentes.end())
         nome = componente::mapa_nomes_componentes[mascara];
-        gui->adicionar<elementos::texto>("###componente_atual", "####texto", nome);
+        
+    gui->adicionar<elementos::texto>("###componente_atual", "####texto", nome);
     gui->fimEstilo();
 
+    if(entidade_atual == 0) return;
+    
     auto registro = projeto_atual->obterFaseAtual()->obterRegistro();
 
     switch (mascara) {
@@ -396,7 +397,7 @@ void sistema_editor::atualizarComponente(const componente::mascara& mascara)
             gui->adicionar<elementos::botao>(
                     "###propriedades",
                     "####btn_editor",
-                    [registro, this](){ abrirNoTerminal(obterEDT(), registro->obter<codigo>(entidade_atual)->arquivoCompleto); }, "Editar Script (" + obterEDT() + ")");
+                    [registro, this](){ abrirNoTerminal(obterEDT(), registro->obter<codigo>(entidade_atual)->arquivoCompleto); }, "Editar Script (" + obterEDT() + ")", "Codigo.png");
                 gui->defCorFundo    (cor(0.11f, 0.11f, 0.11f, 1.f));
                 gui->defCorBorda    (cor(0.27f, 0.27f, 0.27f, 0.f));
                 gui->defCrescimentoM(                          1.0);
