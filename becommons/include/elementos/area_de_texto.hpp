@@ -39,15 +39,14 @@ namespace BECOMMONS_NS {
          * Exemplo: caixa_de_texto
          */ 
         struct area_de_texto : caixa {
-            bool m_mouse_cima;
-            bool mouseEmCima() {
+            bool mouseEmCima() const {
                 /// vetor2 do mouse
-                auto m = obterMouse();
-                m_mouse_cima = (m.x > m_estilo.m_limites.x && m.x < m_estilo.m_limites.z + m_estilo.m_limites.x &&
+                dvet2 m = obterMouse();
+                bool m_mouse_cima = (m.x > m_estilo.m_limites.x && m.x < m_estilo.m_limites.z + m_estilo.m_limites.x &&
                    m.y > m_estilo.m_limites.y && m.y < m_estilo.m_limites.w + m_estilo.m_limites.y);
                 if(m_mouse_cima) {
-                    janela::obterInstancia().defCursor(janela::cursor::mao);
-                    return m_mouse_cima;
+                    janela::obterInstancia().defCursor(janela::cursor::i);
+                    return true;
                 }
             }
         };
