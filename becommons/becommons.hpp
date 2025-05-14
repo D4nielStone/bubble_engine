@@ -10,8 +10,6 @@
  */
 #pragma once
 #include "becommons_namespace.hpp"
-#include "util/area_de_texto.hpp"
-#include "util/area_de_toque.hpp"
 #include "util/vetor2.hpp"
 #include "util/vetor3.hpp"
 #include "util/vetor4.hpp"
@@ -46,6 +44,8 @@
 #include "depuracao/assert.hpp"
 #include "elementos/botao.hpp"
 #include "elementos/imagem.hpp"
+#include "elementos/area_de_texto.hpp"
+#include "elementos/area_de_toque.hpp"
 #include "elementos/texto.hpp"
 #include "entidades/entidade.hpp"
 #include "inputs/inputs.hpp"

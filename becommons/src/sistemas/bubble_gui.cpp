@@ -415,6 +415,8 @@ void bubble_gui::processarDimensaoPercentual(caixa* filho, bool is_horizontal, f
 void bubble_gui::aplicarLayoutModular(caixa* it_caixa, bool is_horizontal, float unidade_crescimento, const fvet2& espaco_disponivel) {
     // Segunda passagem: aplicar dimensões e posicionamento para ambas as direções
     if(is_horizontal) {
+        // quando é horizontal o cursor principal ao x inicial,
+        // quando vertical, igual ao y.
         float cursor_principal = it_caixa->tem_flag(flag_estilo::alinhamento_fim) ? it_caixa->m_estilo.m_limites.x + it_caixa->m_estilo.m_limites.z : it_caixa->m_estilo.m_limites.x;
         float cursor_secundario = it_caixa->m_estilo.m_limites.y;
         
@@ -436,10 +438,8 @@ void bubble_gui::aplicarLayoutModular(caixa* it_caixa, bool is_horizontal, float
             // Ajusta o cursor para centralizar os filhos no espaço disponível
             cursor_principal = inicio + (espaco_disponivel.x - total_tamanho_principal) / 2;
         }
-        
+       
         // Passagem
-        if(!it_caixa->m_filhos.empty() && it_caixa->tem_flag(flag_estilo::alinhamento_fim))
-            cursor_principal -= it_caixa->m_filhos[0]->m_estilo.m_largura;
         for(auto& filho : it_caixa->m_filhos)
         {
             if(!filho->m_estilo.m_ativo) continue;
@@ -461,14 +461,14 @@ void bubble_gui::aplicarLayoutModular(caixa* it_caixa, bool is_horizontal, float
             
             // Posicionamento horizontal (eixo principal)
             if(it_caixa->tem_flag(flag_estilo::alinhamento_fim))
-                cursor_principal -= filho->m_estilo.m_padding.x + it_caixa->m_estilo.m_padding_geral.x;
+                cursor_principal -= filho->m_estilo.m_padding.x + it_caixa->m_estilo.m_padding_geral.x + tamanho_principal;
             else
                 cursor_principal += filho->m_estilo.m_padding.x + it_caixa->m_estilo.m_padding_geral.x;
             
             filho->m_estilo.m_limites.x = cursor_principal;
             filho->m_estilo.m_limites.z = tamanho_principal;
             if(it_caixa->tem_flag(flag_estilo::alinhamento_fim))
-                cursor_principal -= tamanho_principal + filho->m_estilo.m_padding.x;
+                cursor_principal -= filho->m_estilo.m_padding.x;
             else
                 cursor_principal += tamanho_principal + filho->m_estilo.m_padding.x;
             
