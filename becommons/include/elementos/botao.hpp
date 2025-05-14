@@ -33,8 +33,9 @@ SOFTWARE.
 
 namespace BECOMMONS_NS{
     namespace elementos{
-        struct botao : area_de_toque
-        {
+        class botao : public area_de_toque {
+        public:
+            tipo_caixa tipo() const override { return tipo_caixa::botao; }
             /// @name Construtores com ponteiro para aparência
             /// @{
             botao(const std::function<void()> &fctn, std::unique_ptr<texto> m_texto)    : area_de_toque(fctn) {

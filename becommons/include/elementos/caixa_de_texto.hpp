@@ -28,10 +28,12 @@ SOFTWARE.
 #include "becommons_namespace.hpp"
 #include "imagem.hpp"
 #include "texto.hpp"
-#include "area_de_toque.hpp"
+#include "area_de_texto.hpp"
 #include <memory>
 
 namespace BECOMMONS_NS {
     namespace elementos {
-        struct botao : area_de_toque
- 
+        class caixa_de_texto : public area_de_texto {
+        };
+    } 
+}

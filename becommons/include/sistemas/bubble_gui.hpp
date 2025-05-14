@@ -35,6 +35,7 @@ SOFTWARE.
 #include "arquivadores/fonte.hpp"
 #include "util/caixa.hpp"
 #include "elementos/botao.hpp"
+#include "elementos/caixa_de_texto.hpp"
 #include "elementos/imagem.hpp"
 #include "elementos/texto.hpp"
 #include "util/vetor4.hpp"

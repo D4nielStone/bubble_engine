@@ -39,8 +39,8 @@ namespace BECOMMONS_NS {
         /// @struct area_de_toque
         /// Abstração para elementos sensíveis ao toque.
         /// Exemplo: botao
-        struct area_de_toque : caixa
-        {
+        class area_de_toque : public caixa {
+            public:
             /// Flags de ativação
             bool m_gatilho = false, m_pressionado, m_mouse_cima { false }, m_arrastando, m_use_funcao{ false };
             std::function<void()> m_funcao;
