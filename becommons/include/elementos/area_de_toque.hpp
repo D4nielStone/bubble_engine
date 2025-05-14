@@ -21,7 +21,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE. 
 */
 /**
- * @file botao.hpp
+ * @file area_de_toque.hpp
  * @author Daniel O. dos Santos
  *
  * 
