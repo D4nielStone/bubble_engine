@@ -123,8 +123,8 @@ void bubble_gui::desenhar_caixa(caixa* c)
             break;
         }
         case tipo_caixa::caixa_de_texto: {
-            auto ct = static_cast<elementos::area_de_texto*>(c);
-            ct->mouseEmCima();
+            auto ct = static_cast<elementos::caixa_de_texto*>(c);
+            ct->atualizarInputs();
             break;
         }
         default:

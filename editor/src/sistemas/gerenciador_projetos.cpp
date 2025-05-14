@@ -237,7 +237,7 @@ void gerenciador_projetos::configurarUI(const std::string& DIR_PADRAO) {
         gui.defLargura      (1.0);
         gui.defCorFundo({0.2, 0.2, 0.2, 1});
     gui.fimEstilo();
-    gui.adicionar<elementos::area_de_texto>("#area_maior", "##caixa_texto");
+    gui.adicionar<elementos::caixa_de_texto>("#area_maior", "##caixa_texto");
         gui.defLargura      (0.7);
         gui.defCorFundo({0.12, 0.12, 0.12, 1});
         gui.defCorBorda({0.6, 0.6, 0.61, 1});
