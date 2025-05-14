@@ -105,20 +105,30 @@ void bubble_gui::desenhar_caixa(caixa* c)
         renderizarFundo(c, quad_shader);
     }
     
-    if(auto txt = dynamic_cast<elementos::texto*>(c)){
-        // Renderizar texto 
-        renderizarTexto(txt);
-    } else
-    if(auto btn = dynamic_cast<elementos::botao*>(c)){
-        // Renderizar botao
-        if(btn->pressionado() && btn->m_use_funcao)
-            funcoes.push(btn->m_funcao);
-    } else
-    if(auto img = dynamic_cast<elementos::imagem*>(c)){
-        // Renderizar imagem
-        img->m_imagem_tamanho.x = img->m_estilo.m_limites.z; // o m_imagem_tamanho serve para de ponteiro para viewport da camera
-        img->m_imagem_tamanho.y = img->m_estilo.m_limites.w;
-        renderizarImagem(img);
+    switch(c->tipo()) {
+        case tipo_caixa::texto: {
+            renderizarTexto(static_cast<elementos::texto*>(c));
+            break;
+        }
+        case tipo_caixa::botao: {
+            auto btn = static_cast<elementos::botao*>(c);
+            if(btn->pressionado() && btn->m_use_funcao)
+                funcoes.push(btn->m_funcao);
+            break;
+        }
+        case tipo_caixa::imagem: {
+            auto img = static_cast<elementos::imagem*>(c);
+            img->m_imagem_tamanho = { img->m_estilo.m_limites.z, img->m_estilo.m_limites.w };
+            renderizarImagem(img);
+            break;
+        }
+        case tipo_caixa::caixa_de_texto: {
+            auto ct = static_cast<elementos::area_de_texto*>(c);
+            ct->mouseEmCima();
+            break;
+        }
+        default:
+            break;
     }
 
     for(auto& filho : c->m_filhos)

@@ -139,15 +139,18 @@ namespace BECOMMONS_NS {
         }
     };
     /**
-     * @struct caixa
+     * @class caixa
      * @brief funciona como uma div em css
      */
-    struct caixa
+    enum class tipo_caixa { base, texto, botao, imagem, caixa_de_texto };
+    class caixa
     {
+    public:
         /*  Dados  */
         caixa() = default;
         virtual ~caixa() {};
-             
+        virtual tipo_caixa tipo() const { return tipo_caixa::base; }
+
         // Verifica se uma flag está ativa
         inline bool tem_flag(flag_estilo flag) {
             return (static_cast<uint32_t>(m_estilo.m_flag_estilo) & static_cast<uint32_t>(flag)) != 0;

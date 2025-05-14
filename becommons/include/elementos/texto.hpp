@@ -47,9 +47,9 @@ namespace BECOMMONS_NS{
             a = a | b;
             return a;
         }
-        class texto : public caixa
-        {
+        class texto : public caixa {
         public:
+            tipo_caixa tipo() const override { return tipo_caixa::texto; }
             flags_texto m_texto_flags;
             shader* m_texto_shader;
             cor m_texto_cor{1.f, 1.f, 1.f, 1.f};

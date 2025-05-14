@@ -38,7 +38,9 @@ namespace BECOMMONS_NS {
          * Abstração para elementos com espaço de texto
          * Exemplo: caixa_de_texto
          */ 
-        struct area_de_texto : caixa {
+        class area_de_texto : public caixa {
+            public:
+            tipo_caixa tipo() const override { return tipo_caixa::caixa_de_texto; }
             bool mouseEmCima() const {
                 /// vetor2 do mouse
                 dvet2 m = obterMouse();
@@ -48,6 +50,7 @@ namespace BECOMMONS_NS {
                     janela::obterInstancia().defCursor(janela::cursor::i);
                     return true;
                 }
+                return false;
             }
         };
     }
