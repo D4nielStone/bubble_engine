@@ -27,7 +27,7 @@ SOFTWARE.
 #pragma once
 #include <vector>
 #include <string>
-#include "namespace.hpp"
+#include "becommons_namespace.hpp"
 #include "componente.hpp"
 #include "util/malha.hpp"
 #include "arquivadores/shader.hpp"

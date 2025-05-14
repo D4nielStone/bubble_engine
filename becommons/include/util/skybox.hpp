@@ -25,7 +25,7 @@ SOFTWARE.
  */
 
 #pragma once
-#include "namespace.hpp"
+#include "becommons_namespace.hpp"
 #include "arquivadores/shader.hpp"
 #include "arquivadores/imageloader.hpp"
 #include "arquivadores/modelo.hpp"

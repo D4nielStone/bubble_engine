@@ -28,7 +28,7 @@ SOFTWARE.
 #pragma once
 #include <glm/glm.hpp>
 #include <string>
-#include "namespace.hpp"
+#include "becommons_namespace.hpp"
 #include "util/cor.hpp"
 #include "componente.hpp"
 

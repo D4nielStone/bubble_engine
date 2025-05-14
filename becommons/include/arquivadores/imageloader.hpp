@@ -33,7 +33,7 @@ SOFTWARE.
 #include <assimp/scene.h>
 #include <vector>
 #include <memory>
-#include "namespace.hpp"
+#include "becommons_namespace.hpp"
 
 /// namespace becommons
 namespace BECOMMONS_NS {

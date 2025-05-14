@@ -33,7 +33,7 @@ SOFTWARE.
 #include <deque>
 #include <memory>
 #include <functional>
-#include "namespace.hpp"
+#include "becommons_namespace.hpp"
 #include "entidades/entidade.hpp"
 
 namespace BECOMMONS_NS {

@@ -26,7 +26,7 @@ SOFTWARE.
  */
 
 #pragma once
-#include "namespace.hpp"
+#include "becommons_namespace.hpp"
 #include "util/caixa.hpp"
 #include "inputs/inputs.hpp"
 #include "os/janela.hpp"

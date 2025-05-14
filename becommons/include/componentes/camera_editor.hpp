@@ -27,7 +27,7 @@ SOFTWARE.
  */
 
 #pragma once
-#include "namespace.hpp"
+#include "becommons_namespace.hpp"
 #include "camera.hpp"
 
 namespace BECOMMONS_NS {

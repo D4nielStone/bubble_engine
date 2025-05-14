@@ -26,7 +26,7 @@ SOFTWARE.
 
 #pragma once
 #include <cmath>
-#include "namespace.hpp"
+#include "becommons_namespace.hpp"
 
 namespace BECOMMONS_NS {
     template<class T>

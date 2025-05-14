@@ -59,7 +59,7 @@
 #include <lua.hpp>
 #include <LuaBridge/LuaBridge.h>
 
-#include "namespace.hpp"
+#include "becommons_namespace.hpp"
 #include "componentes/luz_direcional.hpp"
 #include "componentes/imagem.hpp"
 #include "componentes/texto.hpp"

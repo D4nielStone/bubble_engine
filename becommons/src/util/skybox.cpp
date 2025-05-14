@@ -24,7 +24,7 @@ SOFTWARE.
  * @file skybox.cpp
  */
 
-#include "namespace.hpp"
+#include "becommons_namespace.hpp"
 #include "util/skybox.hpp"
 
 using namespace BECOMMONS_NS;

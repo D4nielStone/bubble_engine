@@ -27,7 +27,7 @@ SOFTWARE.
 #pragma once
 #include <vector>
 #include <glm/glm.hpp>
-#include "namespace.hpp"
+#include "becommons_namespace.hpp"
 #include "material.hpp"
 #include "vertice.hpp"
 #include "arquivadores/shader.hpp"

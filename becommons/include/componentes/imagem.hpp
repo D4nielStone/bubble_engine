@@ -27,7 +27,7 @@ SOFTWARE.
 #pragma once
 #include <string>
 #include <filesystem>
-#include "namespace.hpp"
+#include "becommons_namespace.hpp"
 #include "arquivadores/imageloader.hpp"
 #include "componente.hpp"
 #include "util/vetor2.hpp"

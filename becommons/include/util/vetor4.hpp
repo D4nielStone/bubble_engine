@@ -26,7 +26,7 @@ SOFTWARE.
 
 #pragma once
 #include <cmath>
-#include "namespace.hpp"
+#include "becommons_namespace.hpp"
 /* Definição da estrutura vetor4 */
 
 namespace BECOMMONS_NS {

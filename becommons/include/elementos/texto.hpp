@@ -25,7 +25,7 @@ SOFTWARE.
  */
 
 #pragma once
-#include "namespace.hpp"
+#include "becommons_namespace.hpp"
 
 namespace BECOMMONS_NS{
     namespace elementos{

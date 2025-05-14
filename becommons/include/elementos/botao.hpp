@@ -25,7 +25,7 @@ SOFTWARE.
  */
 
 #pragma once
-#include "namespace.hpp"
+#include "becommons_namespace.hpp"
 #include "imagem.hpp"
 #include "texto.hpp"
 #include "area_de_toque.hpp"

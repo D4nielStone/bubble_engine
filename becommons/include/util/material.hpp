@@ -27,7 +27,7 @@ SOFTWARE.
 #pragma once
 #include <unordered_map>
 #include <vector>
-#include "namespace.hpp"
+#include "becommons_namespace.hpp"
 #include "textura.hpp"
 #include "cor.hpp"
 

@@ -28,7 +28,7 @@ SOFTWARE.
 #include <unordered_map>
 #include <memory>
 #include <set>
-#include "namespace.hpp"
+#include "becommons_namespace.hpp"
 #include "nucleo/sistema.hpp"
 #include "arquivadores/shader.hpp"
 #include "arquivadores/imageloader.hpp"

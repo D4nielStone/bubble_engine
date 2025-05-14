@@ -24,7 +24,7 @@ SOFTWARE.
  * @file bubble_gui.cpp
  */
 
-#include "namespace.hpp"
+#include "becommons_namespace.hpp"
 #include "sistemas/bubble_gui.hpp"
 #include "os/janela.hpp"
 #include "depuracao/debug.hpp"

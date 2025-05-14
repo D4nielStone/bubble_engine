@@ -31,7 +31,7 @@ SOFTWARE.
 #include <map>
 #include <unordered_map>
 #include <ft2build.h>
-#include "namespace.hpp"
+#include "becommons_namespace.hpp"
 #include "util/vetor2.hpp"
 #include FT_FREETYPE_H
 #include <functional>

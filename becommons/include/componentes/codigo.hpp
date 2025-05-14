@@ -31,7 +31,7 @@ SOFTWARE.
 #include <string>
 #include <lua.hpp>
 #include <rapidjson/rapidjson.h>
-#include "namespace.hpp"
+#include "becommons_namespace.hpp"
 #include "componente.hpp"
 
 extern "C" {

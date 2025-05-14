@@ -31,7 +31,7 @@ SOFTWARE.
 #include <string>
 #include <rapidjson/document.h>
 #include <memory>
-#include "namespace.hpp"
+#include "becommons_namespace.hpp"
 #include "fase.hpp"
 #include "sistema.hpp"
 #include "sistema_de_fisica.hpp"

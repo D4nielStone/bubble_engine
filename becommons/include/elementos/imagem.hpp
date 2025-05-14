@@ -33,7 +33,7 @@ SOFTWARE.
 #include "util/vetor4.hpp"
 #include "arquivadores/shader.hpp"
 #include "arquivadores/imageloader.hpp"
-#include "namespace.hpp"
+#include "becommons_namespace.hpp"
 
 namespace BECOMMONS_NS{
     namespace elementos{

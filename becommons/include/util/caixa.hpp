@@ -32,7 +32,7 @@ SOFTWARE.
 #include "vetor3.hpp"
 #include "cor.hpp"
 #include "vetor4.hpp"
-#include "namespace.hpp"
+#include "becommons_namespace.hpp"
 
 namespace BECOMMONS_NS {
     

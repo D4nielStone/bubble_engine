@@ -25,7 +25,7 @@ SOFTWARE.
  * @file janela.cpp
  */
 #include <stdexcept>
-#include "namespace.hpp"
+#include "becommons_namespace.hpp"
 #include "glad.h"
 #include "GLFW/glfw3.h"
 #include "os/janela.hpp"

@@ -31,7 +31,7 @@ SOFTWARE.
 #include <unordered_map>
 #include <functional>
 #include <glm/glm.hpp>
-#include "namespace.hpp"
+#include "becommons_namespace.hpp"
 #include "util/vetor2.hpp"
 
 namespace BECOMMONS_NS {

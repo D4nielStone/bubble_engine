@@ -32,7 +32,7 @@ SOFTWARE.
 #include <string>
 #include <memory>
 #include <rapidjson/document.h>
-#include "namespace.hpp"
+#include "becommons_namespace.hpp"
 #include "registro.hpp"
 
 /**
