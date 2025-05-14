@@ -26,7 +26,7 @@ SOFTWARE.
  * @file sistema.hpp
  */
 #pragma once
-#include "namespace.hpp"
+#include "becommons_namespace.hpp"
 #include "fase.hpp"
 #include "registro.hpp"
 

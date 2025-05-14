@@ -1,4 +1,3 @@
-
 /** @copyright 
 MIT License
 Copyright (c) 2025 Daniel Oliveira
@@ -22,14 +21,19 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE. 
 */
 /**
- * @file sistema.cpp
+ * @file caixa_de_texto.hpp
  */
-#include "becommons_namespace.hpp"
-#include "nucleo/sistema.hpp"
-#include "nucleo/fase.hpp"
 
-void BECOMMONS_NS::sistema::inicializar(BECOMMONS_NS::fase* fase_ptr)
-{
-	this->m_fase = fase_ptr;
-	this->reg= m_fase->obterRegistro();
+#pragma once
+#include "becommons_namespace.hpp"
+#include "imagem.hpp"
+#include "texto.hpp"
+#include "area_de_texto.hpp"
+#include <memory>
+
+namespace BECOMMONS_NS {
+    namespace elementos {
+        class caixa_de_texto : public area_de_texto {
+        };
+    } 
 }

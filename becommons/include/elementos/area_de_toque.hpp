@@ -21,7 +21,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE. 
 */
 /**
- * @file botao.hpp
+ * @file area_de_toque.hpp
  * @author Daniel O. dos Santos
  *
  * 
@@ -29,7 +29,7 @@ SOFTWARE.
 
 #pragma once
 #include <functional>
-#include "namespace.hpp"
+#include "becommons_namespace.hpp"
 #include "util/caixa.hpp"
 #include "inputs/inputs.hpp"
 #include "os/janela.hpp"
@@ -39,8 +39,8 @@ namespace BECOMMONS_NS {
         /// @struct area_de_toque
         /// Abstração para elementos sensíveis ao toque.
         /// Exemplo: botao
-        struct area_de_toque : caixa
-        {
+        class area_de_toque : public caixa {
+            public:
             /// Flags de ativação
             bool m_gatilho = false, m_pressionado, m_mouse_cima { false }, m_arrastando, m_use_funcao{ false };
             std::function<void()> m_funcao;

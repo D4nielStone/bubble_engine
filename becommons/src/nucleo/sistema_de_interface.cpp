@@ -25,7 +25,7 @@ SOFTWARE.
  * @file sistema_de_interface.cpp
  */
 
-#include "namespace.hpp"
+#include "becommons_namespace.hpp"
 #include "glad.h"
 #include "nucleo/sistema_de_interface.hpp"
 #include "componentes/renderizador.hpp"

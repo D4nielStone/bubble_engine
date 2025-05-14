@@ -228,6 +228,7 @@ void gerenciador_projetos::configurarUI(const std::string& DIR_PADRAO) {
         gui.defFlags(flag_estilo::modular);
         gui.defAltura(1.0);
         gui.defOrientacao(estilo::orientacao::vertical);
+        gui.defCorFundo({0.21, 0.21, 0.21, 1});
         gui.defCrescimentoM(1.0);
     gui.fimEstilo();
     gui.adicionar<caixa>("#area_maior", "##cima");
@@ -235,6 +236,12 @@ void gerenciador_projetos::configurarUI(const std::string& DIR_PADRAO) {
         gui.defFlags(flag_estilo::modular | flag_estilo::altura_justa);
         gui.defLargura      (1.0);
         gui.defCorFundo({0.2, 0.2, 0.2, 1});
+    gui.fimEstilo();
+    gui.adicionar<elementos::area_de_texto>("#area_maior", "##caixa_texto");
+        gui.defLargura      (0.7);
+        gui.defCorFundo({0.12, 0.12, 0.12, 1});
+        gui.defCorBorda({0.6, 0.6, 0.61, 1});
+        gui.defPadding(5, 0);
     gui.fimEstilo();
     gui.adicionar<caixa>("#area_maior", "##baixo");
         gui.defFlags(flag_estilo::modular | flag_estilo::alinhamento_central);

@@ -1,4 +1,3 @@
-
 /** @copyright 
 MIT License
 Copyright (c) 2025 Daniel Oliveira
@@ -22,14 +21,36 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE. 
 */
 /**
- * @file sistema.cpp
+ * @file area_de_texto.hpp
+ * @author Daniel O. dos Santos
  */
-#include "becommons_namespace.hpp"
-#include "nucleo/sistema.hpp"
-#include "nucleo/fase.hpp"
 
-void BECOMMONS_NS::sistema::inicializar(BECOMMONS_NS::fase* fase_ptr)
-{
-	this->m_fase = fase_ptr;
-	this->reg= m_fase->obterRegistro();
+#pragma once
+#include "becommons_namespace.hpp"
+#include "util/caixa.hpp"
+#include "inputs/inputs.hpp"
+#include "os/janela.hpp"
+
+namespace BECOMMONS_NS {
+    namespace elementos {
+        /** 
+         * @struct area_de_texto
+         * Abstração para elementos com espaço de texto
+         * Exemplo: caixa_de_texto
+         */ 
+        class area_de_texto : public caixa {
+            public:
+            tipo_caixa tipo() const override { return tipo_caixa::caixa_de_texto; }
+            bool mouseEmCima() const {
+                /// vetor2 do mouse
+                dvet2 m = obterMouse();
+                bool m_mouse_cima = (m.x > m_estilo.m_limites.x && m.x < m_estilo.m_limites.z + m_estilo.m_limites.x &&
+                   m.y > m_estilo.m_limites.y && m.y < m_estilo.m_limites.w + m_estilo.m_limites.y);
+                if(m_mouse_cima) {
+                    janela::obterInstancia().defCursor(janela::cursor::i);
+                    return true;
+                }
+            }
+        };
+    }
 }

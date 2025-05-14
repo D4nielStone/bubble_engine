@@ -27,7 +27,7 @@
 #pragma once
 #include <glm/glm.hpp>
 #include <glm/detail/type_vec3.hpp>
-#include "namespace.hpp"
+#include "becommons_namespace.hpp"
 
 /// namespace becommons
 namespace BECOMMONS_NS {

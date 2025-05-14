@@ -28,7 +28,7 @@ SOFTWARE.
 #pragma once
 #include <thread>
 #include <chrono>
-#include "namespace.hpp"
+#include "becommons_namespace.hpp"
 namespace BECOMMONS_NS {
     struct tempo {
         tempo() : tempoCorrido(std::chrono::high_resolution_clock::now()) {}

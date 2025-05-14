@@ -32,7 +32,7 @@ SOFTWARE.
 #include <glm/ext/matrix_clip_space.hpp>
 #include <glm/ext/matrix_transform.hpp>
 #include <memory>
-#include "namespace.hpp"
+#include "becommons_namespace.hpp"
 #include "componente.hpp"
 #include "transformacao.hpp"
 #include "elementos/imagem.hpp"

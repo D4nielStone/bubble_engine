@@ -25,7 +25,7 @@ SOFTWARE.
  * @file sistema_de_fisica.cpp
  */
 
-#include "namespace.hpp"
+#include "becommons_namespace.hpp"
 #include "nucleo/sistema_de_fisica.hpp"
 #include "nucleo/fase.hpp"
 #include "os/janela.hpp"

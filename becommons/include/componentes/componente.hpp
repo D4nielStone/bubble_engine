@@ -32,7 +32,7 @@ SOFTWARE.
 #include <rapidjson/document.h>
 #include <rapidjson/writer.h>
 #include <rapidjson/stringbuffer.h>
-#include "namespace.hpp"
+#include "becommons_namespace.hpp"
 
 namespace BECOMMONS_NS {
 	// Operadores bit a bit para mascara

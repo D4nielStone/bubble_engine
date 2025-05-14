@@ -31,7 +31,7 @@ SOFTWARE.
 #include <fstream>
 #include <unistd.h>
 #include <limits.h>
-#include "namespace.hpp"
+#include "becommons_namespace.hpp"
 #include "depuracao/debug.hpp"
 
 namespace BECOMMONS_NS {

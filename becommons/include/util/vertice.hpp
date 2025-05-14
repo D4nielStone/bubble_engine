@@ -25,7 +25,7 @@ SOFTWARE.
  */
 
 #pragma once
-#include "namespace.hpp"
+#include "becommons_namespace.hpp"
 #include "vetor2.hpp"
 #include "vetor3.hpp"
 

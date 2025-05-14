@@ -26,7 +26,7 @@ SOFTWARE.
 
 #pragma once
 #include <rapidjson/rapidjson.h>
-#include "namespace.hpp"
+#include "becommons_namespace.hpp"
 #include "nucleo/projeto.hpp"
 #include "util/malha.hpp"
 #include "arquivadores/modelo.hpp"

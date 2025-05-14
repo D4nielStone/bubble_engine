@@ -25,7 +25,7 @@ SOFTWARE.
  * @file malha.cpp
  */
 
-#include "namespace.hpp"
+#include "becommons_namespace.hpp"
 #include "glad.h"
 #include "util/malha.hpp"
 #include "util/material.hpp"

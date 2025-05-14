@@ -25,7 +25,7 @@ SOFTWARE.
  * @file sistema_de_codigo.cpp
  */
 
-#include "namespace.hpp"
+#include "becommons_namespace.hpp"
 #include "nucleo/sistema_de_codigo.hpp"
 #include "nucleo/fase.hpp"
 #include "componentes/codigo.hpp"

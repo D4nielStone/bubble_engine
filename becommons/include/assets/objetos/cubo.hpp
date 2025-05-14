@@ -24,7 +24,7 @@ SOFTWARE.
  * @file cubo.hpp
  */
 
-#include "namespace.hpp"
+#include "becommons_namespace.hpp"
 #include "util/malha.hpp"
 #include "util/material.hpp"
 #include "util/vertice.hpp"

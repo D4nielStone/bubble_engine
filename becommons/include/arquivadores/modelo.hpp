@@ -30,7 +30,7 @@ SOFTWARE.
 #pragma once
 #include <assimp/scene.h>
 #include <filesystem>
-#include "namespace.hpp"
+#include "becommons_namespace.hpp"
 #include "util/malha.hpp"
 #include "shader.hpp"
 

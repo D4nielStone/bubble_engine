@@ -27,7 +27,7 @@ SOFTWARE.
 #pragma once
 #include <glm/glm.hpp>
 #include <bullet/btBulletDynamicsCommon.h>
-#include "namespace.hpp"
+#include "becommons_namespace.hpp"
 
 namespace BECOMMONS_NS {
     // Estrutura para armazenar os resultados do Raycast

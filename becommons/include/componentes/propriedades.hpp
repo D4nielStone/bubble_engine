@@ -26,7 +26,7 @@ SOFTWARE.
 
 #pragma once
 #include <string>
-#include "namespace.hpp"
+#include "becommons_namespace.hpp"
 #include "componente.hpp"
 
 namespace BECOMMONS_NS {

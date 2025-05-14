@@ -30,7 +30,7 @@ SOFTWARE.
 #pragma once
 #include <bullet/btBulletDynamicsCommon.h>
 #include <glm/glm.hpp>
-#include "namespace.hpp"
+#include "becommons_namespace.hpp"
 #include "util/malha.hpp"
 #include "componente.hpp"
 #include "transformacao.hpp"

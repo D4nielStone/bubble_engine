@@ -33,7 +33,7 @@ SOFTWARE.
 #include <unordered_map>
 #include "glad.h"
 #include <GLFW/glfw3.h>
-#include "namespace.hpp"
+#include "becommons_namespace.hpp"
 #include "tempo.hpp"
 #include "util/vetor2.hpp"
 #include "inputs/inputs.hpp"

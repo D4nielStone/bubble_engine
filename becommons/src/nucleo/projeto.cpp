@@ -26,7 +26,7 @@ SOFTWARE.
  */
 
 
-#include "namespace.hpp"
+#include "becommons_namespace.hpp"
 #include "os/janela.hpp"
 #include "nucleo/projeto.hpp"
 #include "nucleo/sistema_de_fisica.hpp"

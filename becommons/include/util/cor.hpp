@@ -25,7 +25,7 @@ SOFTWARE.
  */
 
 #pragma once
-#include "namespace.hpp"
+#include "becommons_namespace.hpp"
 // Definição da estrutura cor
 namespace BECOMMONS_NS {
     struct cor
