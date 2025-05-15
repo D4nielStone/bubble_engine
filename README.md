@@ -15,9 +15,15 @@
 
 ## **About the Project**
 
-[Bubble Engine](https://d4nielstone.github.io/bubble_engine) is a 3D engine developed for personal learning and future game development. The codebase is fully written in **Portuguese**, the author’s native language, including all classes, variables, and method names.
+[Bubble Engine](https://d4nielstone.github.io/bubble_engine) is a 3D engine developed for personal learning and future game development. The codebase is entirely written in **Portuguese**, my native language, including all classes, variables and method names. But it may change if more contributors appear.
 
 This project is licensed under the [MIT License](https://choosealicense.com/licenses/mit/).
+
+# **Bubble GUI**
+Bubble GUI is the graphical interface library of bubble game engine. It work's like html and css, where box or "caixa" is like a div.
+```cpp
+    class bubble_gui : public sistema { ... }
+```
 
 ---
 
@@ -30,6 +36,13 @@ A **golf game** was created as a physics test. Several engine features were impr
 </p>
 
 ---
+
+> *Running on Debian distibution*
+> ![image](https://github.com/user-attachments/assets/94d53f8b-d197-4270-ad3a-889f67f21167)
+> ![image](https://github.com/user-attachments/assets/8288c203-ac51-46b8-9c38-599650684a78)
+
+---
+
 
 ## **Contributing**
 
@@ -58,17 +71,6 @@ git clone https://github.com/D4nielStone/bubble_engine.git
 cd bubble_engine
 ./build_all.sh
 ```
-> *Running on Linux mint*
-<p align="center">
-  <img src="https://github.com/user-attachments/assets/20005c5a-ae22-45d6-833a-2c085421b009" width="600" alt="Mint Exemple">
-</p>
-
-> *Running on Ubuntu*
-<p align="center">
-  <img src="https://github.com/user-attachments/assets/79aed716-6801-44bd-9612-29c47c5cda10" width="600" alt="Ubuntu Exemple">
-</p>
-
----
 
 ### **Windows 7 x64**
 
