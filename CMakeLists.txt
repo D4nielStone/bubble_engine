@@ -2,7 +2,7 @@
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
 # Subdiretórios
-add_subdirectory(becommos)
-add_subdirectory(runtime)
-add_subdirectory(editor)
-add_subdirectory(testes)
+add_subdirectory(${CMAKE_SOURCE_DIR}/becommos/CMakeLists.txt)
+add_subdirectory(${CMAKE_SOURCE_DIR}/runtime)
+add_subdirectory(${CMAKE_SOURCE_DIR}/editor)
+add_subdirectory(${CMAKE_SOURCE_DIR}/testes)
