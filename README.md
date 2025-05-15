@@ -69,7 +69,9 @@ sudo apt-get install -y liblua5.3-0 liblua5.3-dev libglm-dev libglfw3-dev libass
 ```bash
 git clone https://github.com/D4nielStone/bubble_engine.git
 cd bubble_engine
-./build_all.sh
+mkdir out
+cd out
+cmake .. && cmake --build .
 ```
 
 ### **Windows 7 x64**
