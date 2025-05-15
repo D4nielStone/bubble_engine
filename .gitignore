@@ -9,6 +9,7 @@ jogos/releases
 */Makefile.in
 
 # Ignorar pastas de dependências e binários
+*/editor
 */bin
 */lib
 */lib64
