@@ -35,9 +35,13 @@ namespace BECOMMONS_NS {
     namespace elementos {
         class caixa_de_texto : public area_de_texto {
             private:
+                std::string m_buffer {"buffer_test"};
                 bool m_selecionado {false};
             public:
                 caixa_de_texto() = default;
+                std::string& obterBuffer() {
+                    return m_buffer;
+                }
                 void atualizarInputs() const {
                     mouseEmCima();
                 }
