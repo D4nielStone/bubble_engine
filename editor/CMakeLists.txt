@@ -18,9 +18,6 @@ add_executable(editor
     src/main.cpp
 )
 
-set_target_properties(glad PROPERTIES IMPORTED_LOCATION ../libs/glad/glad.c)
-target_link_libraries(editor PRIVATE glad)
-
 target_include_directories(editor PRIVATE 
     ./
     ../becommons/include
@@ -39,7 +36,7 @@ target_include_directories(editor PRIVATE
 )
 
 target_link_libraries(editor PRIVATE 
-${CMAKE_BINARY_DIR}/bin/becommons/out/libbecommons.a
+ ${CMAKE_BINARY_DIR}/bin/becommons/libbecommons.a
  BulletDynamics
  LinearMath 
  BulletCollision

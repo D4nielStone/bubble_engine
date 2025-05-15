@@ -1,11 +1,8 @@
 name: 🐧 Build and Test
 
 on:
-  push:
-    branches: [ master ]
   pull_request:
     branches: [ master ]
-
 jobs:
   build_and_test:
     runs-on: ubuntu-latest
@@ -28,4 +25,4 @@ jobs:
     - name: Build All Projects ( Linux )
       run: mkdir out && cd out && cmake .. && cmake --build .
     - name: Run Tests
-      run: chmod +x ./bin/testes/testes && ./bin/testes/testes
+      run: chmod +x ./out/bin/testes/testes && ./out/bin/testes/testes

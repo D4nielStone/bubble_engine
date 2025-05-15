@@ -63,12 +63,7 @@ void fase::carregar()
     descarregar();
     carregada = true;
     
-    if(std::filesystem::exists(diretorio))
-		analizar(diretorio);	
-    else
-    {
-        depuracao::emitir(erro, "Erro no parsing de: " + diretorio);
-    }
+	analizar(diretorio);	
 }
 
 void fase::salvar()
@@ -259,17 +254,36 @@ void fase::serializar(const std::string& diretorio)
 }
 void fase::analizar(const std::string& diretorio)
 {
-	std::ifstream file(diretorio);
 	std::stringstream sb;
-	sb << file.rdbuf();
+
+	if (std::filesystem::exists(diretorio))
+	{
+		std::ifstream file(diretorio);
+		if (file)
+		{
+			sb << file.rdbuf();  // Lê todo o conteúdo do arquivo para o stringstream
+		}
+		else
+		{
+			depuracao::emitir(erro, "Erro ao abrir o arquivo: " + diretorio);
+			return;
+		}
+	}
+	else
+	{
+		sb << diretorio;  // Usa a string diretamente
+	}
+
 	Document doc;
 	doc.Parse(sb.str().c_str());
 
 	if (doc.HasParseError()) 
 	{
 		depuracao::emitir(erro, "Parse da fase");
+		return;
 	}
-	/*----Analise da cena-----*/
+
+	/*----Análise da cena-----*/
 	if (doc.HasMember("nome") && doc["nome"].IsString())
 	{
 		m_nome = doc["nome"].GetString();
@@ -278,3 +292,4 @@ void fase::analizar(const std::string& diretorio)
 	/*------------------------*/
 	analizarEntidades(doc);
 }
+

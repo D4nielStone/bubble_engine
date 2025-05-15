@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.28)
 project(testes)
 
 set(CMAKE_CXX_STANDARD 20)
@@ -21,8 +21,6 @@ add_executable(testes
     src/registro_testes.cpp
     src/main.cpp
 )
-
-target_link_libraries(testes PRIVATE ../libs/glad/glad.c)
 
 # Detectar plataforma
 if(WIN32)
@@ -74,7 +72,7 @@ target_link_libraries(testes PRIVATE
 )
 else()
 target_link_libraries(testes PRIVATE 
- ${CMAKE_SOURCE_DIR}/../becommons/out/libbecommons.a 
+    ${CMAKE_BINARY_DIR}/bin/becommons/libbecommons.a 
  BulletDynamics
  LinearMath 
  BulletCollision
