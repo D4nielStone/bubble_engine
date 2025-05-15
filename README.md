@@ -99,21 +99,7 @@ vcpkg install lua:x64-mingw-static glm:x64-mingw-static glfw3:x64-mingw-static a
 ```cmd
 git clone https://github.com/D4nielStone/bubble_engine.git
 
-cd bubble_engine/becommons
-mkdir out
-cd out
-cmake .. -DCMAKE_TOOLCHAIN_FILE=C:/vcpkg/scripts/buildsystems/vcpkg.cmake
-cmake --build . --config Release
-
-cd ..
-cd bubble_engine/runtime
-mkdir out
-cd out
-cmake .. -DCMAKE_TOOLCHAIN_FILE=C:/vcpkg/scripts/buildsystems/vcpkg.cmake
-cmake --build . --config Release
-
-cd ..
-cd bubble_engine/editor
+cd bubble_engine
 mkdir out
 cd out
 cmake .. -DCMAKE_TOOLCHAIN_FILE=C:/vcpkg/scripts/buildsystems/vcpkg.cmake
