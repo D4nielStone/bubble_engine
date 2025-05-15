@@ -1,10 +1,7 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.28)
 project(testes)
 
 set(CMAKE_CXX_STANDARD 20)
-
-add_library(becommons STATIC IMPORTED)
-set_target_properties(becommons PROPERTIES IMPORTED_LOCATION ${CMAKE_SOURCE_DIR}/../becommons/out/libbecommons.a)
 
 include_directories(
     ./include
@@ -24,9 +21,6 @@ add_executable(testes
     src/registro_testes.cpp
     src/main.cpp
 )
-
-add_library(glad STATIC ../libs/glad/glad.c)
-target_link_libraries(testes PRIVATE glad)
 
 # Detectar plataforma
 if(WIN32)
@@ -78,7 +72,7 @@ target_link_libraries(testes PRIVATE
 )
 else()
 target_link_libraries(testes PRIVATE 
- becommons 
+    ${CMAKE_BINARY_DIR}/bin/becommons/libbecommons.a 
  BulletDynamics
  LinearMath 
  BulletCollision
