@@ -34,6 +34,13 @@ SOFTWARE.
 namespace BECOMMONS_NS {
     namespace elementos {
         class caixa_de_texto : public area_de_texto {
+            private:
+                bool m_selecionado {false};
+            public:
+                caixa_de_texto() = default;
+                void atualizarInputs() const {
+                    mouseEmCima();
+                }
         };
     } 
 }

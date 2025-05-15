@@ -106,22 +106,28 @@ void bubble_gui::desenhar_caixa(caixa* c)
     }
     
     switch(c->tipo()) {
-        case tipo_caixa::texto:
+        case tipo_caixa::texto: {
             renderizarTexto(static_cast<elementos::texto*>(c));
             break;
-        case tipo_caixa::botao:
+        }
+        case tipo_caixa::botao: {
             auto btn = static_cast<elementos::botao*>(c);
             if(btn->pressionado() && btn->m_use_funcao)
                 funcoes.push(btn->m_funcao);
             break;
-        case tipo_caixa::imagem:
+        }
+        case tipo_caixa::imagem: {
             auto img = static_cast<elementos::imagem*>(c);
             img->m_imagem_tamanho = { img->m_estilo.m_limites.z, img->m_estilo.m_limites.w };
             renderizarImagem(img);
             break;
-        case tipo_caixa::caixa_de_texto:
-            auto ct = static_cast<elementos::area_de_texto*>(c);
-            ct->mouseEmCima();
+        }
+        case tipo_caixa::caixa_de_texto: {
+            auto ct = static_cast<elementos::caixa_de_texto*>(c);
+            ct->atualizarInputs();
+            break;
+        }
+        default:
             break;
     }
 
@@ -390,7 +396,7 @@ void bubble_gui::processarDimensaoPercentual(caixa* filho, bool is_horizontal, f
     if(is_horizontal) {
         // Dimensão principal (largura)
         if(filho->tem_flag(flag_estilo::largura_percentual))
-            espaco_fixo.x += espaco_disponivel.x * filho->m_estilo.m_largura;
+            espaco_fixo.x += espaco_disponivel.x * filho->m_estilo.m_largura - filho->m_estilo.m_padding.x * 2;
         else
             espaco_fixo.x += filho->m_estilo.m_largura;
         crescimento_total += filho->m_estilo.m_crescimento_modular;
@@ -410,7 +416,7 @@ void bubble_gui::processarDimensaoPercentual(caixa* filho, bool is_horizontal, f
         
         // Dimensão secundária (largura)
         if(filho->tem_flag(flag_estilo::largura_percentual))
-            espaco_fixo.y += espaco_disponivel.y * filho->m_estilo.m_largura;
+            espaco_fixo.y += espaco_disponivel.y * filho->m_estilo.m_largura - filho->m_estilo.m_padding.x * 2;
         else
             espaco_fixo.y += filho->m_estilo.m_largura;
     }

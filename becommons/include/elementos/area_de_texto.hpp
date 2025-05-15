@@ -50,6 +50,7 @@ namespace BECOMMONS_NS {
                     janela::obterInstancia().defCursor(janela::cursor::i);
                     return true;
                 }
+                return false;
             }
         };
     }
