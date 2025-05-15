@@ -153,6 +153,7 @@ void gerenciador_projetos::removerProjeto(const std::string& dir) {
     if(std::filesystem::exists(dir)) {
         std::filesystem::remove_all(dir);
     }
+    m_projeto_selecionado = "n/a";
     atualizarElementos(DIR_PADRAO);
 }
 void gerenciador_projetos::abrirProjeto(const std::string& caminho) {
@@ -268,18 +269,19 @@ void gerenciador_projetos::configurarUI(const std::string& DIR_PADRAO) {
     gui.fimEstilo();
     gui.adicionar<elementos::botao>("##baixo", "###texto3", [this]() {
             
-            if(m_projeto_selecionado != "nenhum") {
+            if(m_projeto_selecionado != "n/a") {
                 abrirProjeto(projetos[m_projeto_selecionado]);
             }
         }, "Abrir", "abrir.png");
     gui.adicionar<elementos::botao>("##baixo", "###texto4", [this]() {
-            if(m_projeto_selecionado != "nenhum") {
+            if(m_projeto_selecionado != "n/a") {
                 removerProjeto(projetos[m_projeto_selecionado]);
             }
         }, "Remover", "remover.png");
     gui.adicionar<elementos::botao>("##baixo", "###texto5", [DIR_PADRAO, this]() {
-            if(m_projeto_selecionado != "nenhum") {
-                criarProjetoPadrao(DIR_PADRAO, "Projeto Padrao");
+            if(gui.elementoExiste("###caixa_texto") && gui.obterElemento("###caixa_texto")->tipo() == tipo_caixa::caixa_de_texto) {
+                auto caixa_de_texto = static_cast<elementos::caixa_de_texto*>(gui.obterElemento("###caixa_texto"));
+                criarProjetoPadrao(DIR_PADRAO, caixa_de_texto->obterBuffer().c_str());
             }
         }, "Adicionar", "adicionar.png");
     gui.fimEstilo();

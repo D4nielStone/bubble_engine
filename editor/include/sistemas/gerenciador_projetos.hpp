@@ -24,7 +24,7 @@ namespace EDITOR_NS
             void iniciar();
         private:
             std::map<std::string, std::string> projetos;
-            std::string m_projeto_selecionado {"nenhum"};
+            std::string m_projeto_selecionado {"n/a"};
             becommons::bubble_gui gui;
             inline static std::string DIR_PADRAO;
             gerenciador_projetos() = default;
