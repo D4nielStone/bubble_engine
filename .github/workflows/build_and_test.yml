@@ -26,6 +26,6 @@ jobs:
           libassimp-dev libfreeimage-dev rapidjson-dev \
           libbullet-dev libfreetype6-dev
     - name: Build All Projects ( Linux )
-      run: chmod +x build_all.sh && ./build_all.sh
+      run: mkdir out && cd out && cmake .. && cmake --build .
     - name: Run Tests
-      run: chmod +x testes/out/testes && ./testes/out/testes
+      run: chmod +x ./bin/testes/testes && ./bin/testes/testes

@@ -3,9 +3,6 @@ project(editor)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_library(becommons STATIC IMPORTED)
-set_target_properties(becommons PROPERTIES IMPORTED_LOCATION ${CMAKE_SOURCE_DIR}/../becommons/out/libbecommons.a)
-
 find_package(Lua REQUIRED)
 find_package(glfw3 REQUIRED)
 find_package(glm REQUIRED)
@@ -21,11 +18,11 @@ add_executable(editor
     src/main.cpp
 )
 
-add_library(glad STATIC ../libs/glad/glad.c)
+set_target_properties(glad PROPERTIES IMPORTED_LOCATION ../libs/glad/glad.c)
 target_link_libraries(editor PRIVATE glad)
 
 target_include_directories(editor PRIVATE 
-    ${CMAKE_SOURCE_DIR}
+    ./
     ../becommons/include
     ../
     ./include
@@ -42,7 +39,7 @@ target_include_directories(editor PRIVATE
 )
 
 target_link_libraries(editor PRIVATE 
- becommons 
+${CMAKE_BINARY_DIR}/bin/becommons/out/libbecommons.a
  BulletDynamics
  LinearMath 
  BulletCollision
