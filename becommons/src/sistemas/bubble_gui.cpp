@@ -396,7 +396,7 @@ void bubble_gui::processarDimensaoPercentual(caixa* filho, bool is_horizontal, f
     if(is_horizontal) {
         // Dimensão principal (largura)
         if(filho->tem_flag(flag_estilo::largura_percentual))
-            espaco_fixo.x += espaco_disponivel.x * filho->m_estilo.m_largura;
+            espaco_fixo.x += espaco_disponivel.x * filho->m_estilo.m_largura - filho->m_estilo.m_padding.x * 2;
         else
             espaco_fixo.x += filho->m_estilo.m_largura;
         crescimento_total += filho->m_estilo.m_crescimento_modular;
@@ -416,7 +416,7 @@ void bubble_gui::processarDimensaoPercentual(caixa* filho, bool is_horizontal, f
         
         // Dimensão secundária (largura)
         if(filho->tem_flag(flag_estilo::largura_percentual))
-            espaco_fixo.y += espaco_disponivel.y * filho->m_estilo.m_largura;
+            espaco_fixo.y += espaco_disponivel.y * filho->m_estilo.m_largura - filho->m_estilo.m_padding.x * 2;
         else
             espaco_fixo.y += filho->m_estilo.m_largura;
     }

@@ -216,6 +216,7 @@ void gerenciador_projetos::configurarUI(const std::string& DIR_PADRAO) {
     // configura interface
     gui.adicionar<caixa>("raiz", "#barra_lateral");
         gui.defFlags(flag_estilo::modular | flag_estilo::largura_justa);
+        gui.defCorBorda({0.05, 0.05, 0.05, 1});
         gui.defOrientacao(estilo::orientacao::vertical);
         gui.defCorFundo({0.1, 0.1, 0.1, 1});
         gui.defPaddingG(5, 10);
@@ -226,6 +227,7 @@ void gerenciador_projetos::configurarUI(const std::string& DIR_PADRAO) {
     // Area Maior
     gui.adicionar<caixa>("raiz", "#area_maior");
         gui.defFlags(flag_estilo::modular);
+        gui.defCorBorda({0.05, 0.05, 0.05, 1});
         gui.defAltura(1.0);
         gui.defOrientacao(estilo::orientacao::vertical);
         gui.defCorFundo({0.21, 0.21, 0.21, 1});
@@ -233,18 +235,28 @@ void gerenciador_projetos::configurarUI(const std::string& DIR_PADRAO) {
     gui.fimEstilo();
     gui.adicionar<caixa>("#area_maior", "##cima");
         gui.defOrientacao(estilo::orientacao::vertical);
+        gui.defCorBorda({0.05, 0.05, 0.05, 1});
         gui.defFlags(flag_estilo::modular | flag_estilo::altura_justa);
         gui.defLargura      (1.0);
-        gui.defCorFundo({0.2, 0.2, 0.2, 1});
+        gui.defCorFundo({0.15, 0.15, 0.15, 1});
     gui.fimEstilo();
-    gui.adicionar<elementos::caixa_de_texto>("#area_maior", "##caixa_texto");
-        gui.defLargura      (0.7);
+    gui.adicionar<caixa>("#area_maior", "##meio");
+        gui.defFlags(flag_estilo::altura_justa | flag_estilo::modular);
+        gui.defCorBorda({0.05, 0.05, 0.05, 1});
+        gui.defCorFundo({0.21, 0.21, 0.21, 1});
+        gui.defLargura      (1.0);
+        gui.defPaddingG(5, 5);
+    gui.fimEstilo();
+    gui.adicionar<elementos::texto>("##meio", "###label", "Nome do novo projeto");
+    gui.fimEstilo();
+    gui.adicionar<elementos::caixa_de_texto>("##meio", "###caixa_texto");
+        gui.defCrescimentoM(1);
         gui.defCorFundo({0.12, 0.12, 0.12, 1});
-        gui.defCorBorda({0.6, 0.6, 0.61, 1});
-        gui.defPadding(5, 0);
+        gui.defCorBorda({0.3, 0.3, 0.3, 1});
     gui.fimEstilo();
     gui.adicionar<caixa>("#area_maior", "##baixo");
         gui.defFlags(flag_estilo::modular | flag_estilo::alinhamento_central);
+        gui.defCorBorda({0.05, 0.05, 0.05, 1});
         gui.defLargura      (1.0);
         gui.defPaddingG(5, 0);
         gui.defCorFundo({0.21, 0.21, 0.21, 1});
