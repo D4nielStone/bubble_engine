@@ -36,14 +36,16 @@ namespace BECOMMONS_NS {
         class caixa_de_texto : public area_de_texto {
             private:
                 std::string m_buffer {"buffer_test"};
-                bool m_selecionado {false};
+                float m_cor_antiga; float m_acrescimo { 0.1f };
             public:
-                caixa_de_texto() = default;
+                caixa_de_texto() {
+                    m_cor_antiga = m_cor_borda.b;
+                };
                 std::string& obterBuffer() {
                     return m_buffer;
                 }
                 void atualizarInputs() const {
-                    mouseEmCima();
+                    m_cor_borda.b = selecionado() ? m_cor_antiga + acrescimo : m_cor_antiga;
                 }
         };
     } 
