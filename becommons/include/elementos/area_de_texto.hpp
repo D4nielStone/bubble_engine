@@ -76,10 +76,11 @@ namespace BECOMMONS_NS {
             // indica se o cursor está sobre a área
             bool m_mouse_cima  { false };
 
-        private:
+        protected:
             // armazena o estado do botão do mouse no frame anterior para detectar clique único
-            bool m_mouse_antes_pressionado { false };
-
+            bool m_mouse_antes_pressionado { false }, m_teclado_foi_solto { true };
+            int m_pipe_offset { 0 };
+            std::string m_buffer {""};
         public:
             tipo_caixa tipo() const override { return tipo_caixa::caixa_de_texto; }
 
@@ -106,7 +107,12 @@ namespace BECOMMONS_NS {
                 m_mouse_antes_pressionado = pressionado;
                 return m_selecionado;
             }
-
+            /**
+             * Obtenção do buffer de texto
+             */
+            std::string obterBuffer() const {
+                return m_buffer;
+            }
             /**
              * Verifica se o cursor está dentro dos limites da caixa.
              */
@@ -124,6 +130,27 @@ namespace BECOMMONS_NS {
                     janela::obterInstancia().defCursor(janela::cursor::i);
                 }
                 return dentro;
+            }
+            void inserirLetra(char c) {
+                if(c == '\0') return;
+                if(m_buffer.empty() || m_buffer.size() == m_pipe_offset)
+                    m_buffer.push_back(c);
+                else
+                    m_buffer.insert(m_pipe_offset, c, 1);
+                m_pipe_offset ++;
+            }
+            void apagar() {
+                m_buffer.erase(m_pipe_offset-1, m_pipe_offset);
+                m_pipe_offset --;
+            }
+            void atualizarBuffer() {
+                auto &input = janela::obterInstancia().m_inputs;
+                if(input.letra_pressionada)
+                    if(input.isKeyPressed("BS"))
+                        apagar();
+                    else
+                        inserirLetra(input.letra);
+                m_teclado_foi_solto = false;
             }
         };
     }

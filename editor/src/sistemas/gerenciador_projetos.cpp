@@ -248,11 +248,13 @@ void gerenciador_projetos::configurarUI(const std::string& DIR_PADRAO) {
     gui.adicionar<elementos::botao>("##meio", "###texto5", [DIR_PADRAO, this]() {
             if(gui.elementoExiste("###caixa_texto") && gui.obterElemento("###caixa_texto")->tipo() == tipo_caixa::caixa_de_texto) {
                 auto caixa_de_texto = static_cast<elementos::caixa_de_texto*>(gui.obterElemento("###caixa_texto"));
-                criarProjetoPadrao(DIR_PADRAO, caixa_de_texto->obterBuffer().c_str());
+                auto buffer = caixa_de_texto->obterBuffer();
+                if(!buffer.empty())
+                    criarProjetoPadrao(DIR_PADRAO, caixa_de_texto->obterBuffer().c_str());
             }
         }, "Novo", "adicionar.png");
     gui.fimEstilo();
-    gui.adicionar<elementos::caixa_de_texto>("##meio", "###caixa_texto");
+    gui.adicionar<elementos::caixa_de_texto>("##meio", "###caixa_texto", "Digite o nome do projeto aqui...");
         gui.defCrescimentoM(1);
         gui.defCorFundo({0.12, 0.12, 0.12, 1});
         gui.defCorBorda({0.3, 0.3, 0.3, 1});

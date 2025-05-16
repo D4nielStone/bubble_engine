@@ -38,7 +38,7 @@ namespace BECOMMONS_NS {
     inline static void abrirLink(const std::string& url) {
         depuracao::emitir(info, "Abrindo ajuda...");
         std::string comando = "xdg-open \\" + url;
-        system(comando.c_str());
+        int result = system(comando.c_str());
     }
     // @brief Obtém o diretório do executável padrão do usuário
     inline static std::string obterExecDir() {
@@ -102,6 +102,6 @@ namespace BECOMMONS_NS {
             comando = terminal + " -- bash -c '" + editor + " \"" + arquivo + "\"; exec bash'";
         }
     
-        std::system(comando.c_str());
+        int result = system(comando.c_str());
     }
 }

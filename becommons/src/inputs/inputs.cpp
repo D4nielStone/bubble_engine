@@ -156,6 +156,7 @@ void BECOMMONS_NS::mouseButtonCallBack(GLFWwindow* window, int button, int actio
     // Processar o clique do mouse
     input.mouseEnter = action;
     input.mouseButton = button;
+    input.mods = mods;
 
     std::string mappedkey = glfwkeyTokey(button);
     if (mappedkey != "Erro") {
@@ -172,38 +173,8 @@ void BECOMMONS_NS::charCallback(GLFWwindow* window, unsigned int codepoint)
 {
     auto& input = janela::obterInstancia().m_inputs;
 
-    // Converte o c�digo Unicode para um caractere UTF-8
-    std::string utf8_char;
-    if (codepoint <= 0x7F) {
-        // Caracteres ASCII
-        utf8_char.push_back(static_cast<char>(codepoint));
-    }
-    else if (codepoint <= 0x7FF) {
-        // Caracteres UTF-8 com 2 bytes
-        utf8_char.push_back(static_cast<char>(0xC0 | (codepoint >> 6)));
-        utf8_char.push_back(static_cast<char>(0x80 | (codepoint & 0x3F)));
-    }
-    else if (codepoint <= 0xFFFF) {
-        // Caracteres UTF-8 com 3 bytes
-        utf8_char.push_back(static_cast<char>(0xE0 | (codepoint >> 12)));
-        utf8_char.push_back(static_cast<char>(0x80 | ((codepoint >> 6) & 0x3F)));
-        utf8_char.push_back(static_cast<char>(0x80 | (codepoint & 0x3F)));
-    }
-    else if (codepoint <= 0x10FFFF) {
-        // Caracteres UTF-8 com 4 bytes
-        utf8_char.push_back(static_cast<char>(0xF0 | (codepoint >> 18)));
-        utf8_char.push_back(static_cast<char>(0x80 | ((codepoint >> 12) & 0x3F)));
-        utf8_char.push_back(static_cast<char>(0x80 | ((codepoint >> 6) & 0x3F)));
-        utf8_char.push_back(static_cast<char>(0x80 | (codepoint & 0x3F)));
-    }
-
-    // Ajusta para letras mai�sculas/min�sculas se a tecla SHIFT estiver pressionada
-    if (input.mods & GLFW_MOD_SHIFT && utf8_char.length() == 1) {
-        utf8_char[0] = toupper(utf8_char[0]);
-    }
-
-    input.letra = utf8_char.empty() ? ' ' : utf8_char[0];
-    input.char_press = true;
+    input.letra = static_cast<char>(codepoint);
+    input.letra_pressionada = true;
 }
 
 void BECOMMONS_NS::posicionarCursor(double x, double y)

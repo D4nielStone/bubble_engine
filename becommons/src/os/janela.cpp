@@ -104,6 +104,7 @@ janela::janela(const char* nome, BECOMMONS_NS::vetor2<double> bounds, const char
     glEnable(GL_FRAMEBUFFER_SRGB);    
 
     glfwSetCursorPosCallback(window,mousePosCallBack);
+    glfwSetCharCallback(window, charCallback);
     glfwSetMouseButtonCallback(window, mouseButtonCallBack);
     glfwSetKeyCallback(window,callbackKey);
     glfwSetWindowUserPointer(window, this);
@@ -165,6 +166,7 @@ if(f)
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     
     glfwSetCursorPosCallback(window,mousePosCallBack);
+    glfwSetCharCallback(window, charCallback);
     glfwSetMouseButtonCallback(window, mouseButtonCallBack);
     glfwSetKeyCallback(window,callbackKey);
     glfwSetWindowUserPointer(window, this);
@@ -193,6 +195,7 @@ void janela::swap()
         m_cursor_antigo = m_cursor;
     }
     m_tempo.calcularDT();
+    m_inputs.letra_pressionada = false;
     glfwSwapBuffers(window);
 }
 
