@@ -39,6 +39,7 @@ namespace BECOMMONS_NS {
          * Exemplo: caixa_de_texto
          */ 
         class area_de_texto : public caixa {
+<<<<<<< HEAD
             public:
             // flags de ativação
             bool m_pode_tocar { false }, m_selecionado { false }, m_mouse_cima { false };
@@ -68,8 +69,61 @@ namespace BECOMMONS_NS {
                 if(m_mouse_cima) {
                     janela::obterInstancia().defCursor(janela::cursor::i);
                     return true;
+=======
+        public:
+            // indica se o elemento está selecionado
+            bool m_selecionado { false };
+            // indica se o cursor está sobre a área
+            bool m_mouse_cima  { false };
+
+        private:
+            // armazena o estado do botão do mouse no frame anterior para detectar clique único
+            bool m_mouse_antes_pressionado { false };
+
+        public:
+            tipo_caixa tipo() const override { return tipo_caixa::caixa_de_texto; }
+
+            /**
+             * Retorna true se o elemento estiver selecionado.
+             * A seleção só ocorre quando há transição de não pressionado para pressionado
+             * dentro da área de toque, evitando cliques já iniciados fora.
+             */
+            bool selecionado() {
+                auto& input = janela::obterInstancia().m_inputs;
+                bool pressionado = input.isKeyPressed("MouseE");
+                bool justPressed = pressionado && !m_mouse_antes_pressionado;
+
+                // atualiza flag de cursor sobre a área
+                m_mouse_cima = mouseEmCima();
+
+                if (justPressed) {
+                    // seleciona somente se o clique começar dentro da área
+                    m_selecionado = m_mouse_cima;
+>>>>>>> 9d483738fb66e2a8a2e501d255de835bc7c83d20
                 }
-                return false;
+
+                // atualiza estado para o próximo frame
+                m_mouse_antes_pressionado = pressionado;
+                return m_selecionado;
+            }
+
+            /**
+             * Verifica se o cursor está dentro dos limites da caixa.
+             */
+            bool mouseEmCima() {
+                dvet2 m = obterMouse();
+                bool dentro = (
+                    m.x > m_estilo.m_limites.x && 
+                    m.x < m_estilo.m_limites.x + m_estilo.m_limites.z &&
+                    m.y > m_estilo.m_limites.y &&
+                    m.y < m_estilo.m_limites.y + m_estilo.m_limites.w
+                );
+                m_mouse_cima = dentro;
+
+                if (dentro) {
+                    janela::obterInstancia().defCursor(janela::cursor::i);
+                }
+                return dentro;
             }
         };
     }
