@@ -36,46 +36,46 @@ SOFTWARE.
 
 namespace BECOMMONS_NS {
     namespace elementos {
-        /// @struct area_de_toque
-        /// Abstração para elementos sensíveis ao toque.
-        /// Exemplo: botao
+        // @struct area_de_toque
+        // Abstração para elementos sensíveis ao toque.
+        // Exemplo: botao
         class area_de_toque : public caixa {
             public:
-            /// Flags de ativação
+            // Flags de ativação
             bool m_gatilho = false, m_pressionado, m_mouse_cima { false }, m_arrastando, m_use_funcao{ false };
             std::function<void()> m_funcao;
             bool* m_interruptor{nullptr};
-            /// Construtor padrão
+            // Construtor padrão
             area_de_toque(const std::function<void()> &fctn) : m_funcao(fctn), m_use_funcao(true) {};
             area_de_toque(bool* ptr = nullptr) : m_interruptor(ptr), m_use_funcao(false) {};
-            /// Atualiza função de ativação
-            /// @returns Se está presionado ou não
+            // Atualiza função de ativação
+            // @returns Se está presionado ou não
             bool mouseEmCima() {
-                /// vetor2 do mouse
+                // vetor2 do mouse
                 auto m = obterMouse();
                 m_mouse_cima = (m.x > m_estilo.m_limites.x && m.x < m_estilo.m_limites.z + m_estilo.m_limites.x &&
                    m.y > m_estilo.m_limites.y && m.y < m_estilo.m_limites.w + m_estilo.m_limites.y);
                 return m_mouse_cima;
             }
             virtual bool pressionado() {
-                /// Reset do flag m_pressionado
+                // Reset do flag m_pressionado
                 m_pressionado = false;
-                /// Se não está pressionado, reseta gatilho
+                // Se não está pressionado, reseta gatilho
                 if(!janela::obterInstancia().m_inputs.isKeyPressed("MouseE"))
                     m_gatilho = false;
-                /// Caso dentro do campo
+                // Caso dentro do campo
                 if(mouseEmCima()) {
-                    /// Define cursor para mão
+                    // Define cursor para mão
                     janela::obterInstancia().defCursor(janela::cursor::mao);
-                    /// Caso o gatilho esteja desativado e o mouse esquerdo tocado
+                    // Caso o gatilho esteja desativado e o mouse esquerdo tocado
                     if(!m_gatilho && janela::obterInstancia().m_inputs.isKeyPressed("MouseE")) {
                         m_arrastando = true;
-                        /// Se m_interruptor é diferente de nullptr
+                        // Se m_interruptor é diferente de nullptr
                         if(m_interruptor) {
-                            /// Lógica de inversão
+                            // Lógica de inversão
                             if(*m_interruptor) *m_interruptor = false;
                             else               *m_interruptor = true;
-                        } else /// Se interruptor é nulo, define m_pressionado como true
+                        } else // Se interruptor é nulo, define m_pressionado como true
                             m_pressionado = true;
                     }
                 }
@@ -86,7 +86,7 @@ namespace BECOMMONS_NS {
             bool arrastando() {
                 if(!janela::obterInstancia().m_inputs.isKeyPressed("MouseE"))
                     m_arrastando = false;
-                /// Caso dentro do campo
+                // Caso dentro do campo
                 if(!m_arrastando && mouseEmCima() && janela::obterInstancia().m_inputs.isKeyPressed("MouseE")) {
                     m_arrastando = true;
                 }

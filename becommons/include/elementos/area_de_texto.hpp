@@ -40,9 +40,28 @@ namespace BECOMMONS_NS {
          */ 
         class area_de_texto : public caixa {
             public:
+            // flags de ativação
+            bool m_pode_tocar { false }, m_selecionado { false }, m_mouse_cima { false };
+            
             tipo_caixa tipo() const override { return tipo_caixa::caixa_de_texto; }
+            virtual bool selecionado() {
+                bool tocou = janela::obterInstancia().m_inputs.isKeyPressed("MouseE");
+                // se não está pressionando, está solto
+                bool esta_solto = !tocou;
+
+                // se está solto e dentro do campo & não está selecionado pode tocar
+                m_pode_tocar = esta_solto && mouseEmCima() && !m_selecionado ? true : false;
+
+                // se tocou fora do campo, deseleciona
+                if(!m_mouse_cima && tocou) m_selecionado = true;
+
+                // se pode tocar e tocou, seleciona
+                if(m_pode_tocar && tocou) m_selecionado = true;
+
+                return m_selecionado;
+            }
             bool mouseEmCima() const {
-                /// vetor2 do mouse
+                // vetor2 do mouse
                 dvet2 m = obterMouse();
                 bool m_mouse_cima = (m.x > m_estilo.m_limites.x && m.x < m_estilo.m_limites.z + m_estilo.m_limites.x &&
                    m.y > m_estilo.m_limites.y && m.y < m_estilo.m_limites.w + m_estilo.m_limites.y);
