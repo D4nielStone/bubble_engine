@@ -35,18 +35,20 @@ namespace BECOMMONS_NS {
     namespace elementos {
         class caixa_de_texto : public area_de_texto {
             private:
-                std::string m_buffer {""};
+                std::string m_buffer {""}, m_etiqueta {""};
                 cor m_cor_antiga, m_acrescimo_cor { 0.1f, 0.1f, 0.25f };
                 float m_borda_antiga, m_acrescimo_borda { 1.f };
-                bool* m_dica_bool;
+                bool* m_dica_bool {nullptr};
             public:
                 caixa_de_texto() = default;
+                caixa_de_texto(const std::string etiqueta) : m_etiqueta(etiqueta) {};
                 void configurar() override {
-                    m_estilo.m_flag_estilo |= flag_estilo::modular;
                     m_estilo.m_padding_geral = { 5, 2 };
+                    if(m_etiqueta.empty()) return;
+                    m_estilo.m_flag_estilo |= flag_estilo::modular;
                     m_borda_antiga = m_estilo.m_espessura_borda;
                     m_cor_antiga = m_estilo.m_cor_borda.b;
-                    auto m_texto = adicionarFilho<elementos::texto>(m_id + "_dica", "Digite um nome ...", cor(1, 1, 1, 0.5));
+                    auto m_texto = adicionarFilho<elementos::texto>(m_id + "_dica", m_etiqueta, cor(1, 1, 1, 0.5));
                     m_dica_bool = &m_texto->m_estilo.m_ativo;
                 };
                 std::string& obterBuffer() {
@@ -55,6 +57,7 @@ namespace BECOMMONS_NS {
                 void atualizarInputs() {
                     m_estilo.m_cor_borda = selecionado() ? m_cor_antiga + m_acrescimo_cor : m_cor_antiga;
                     m_estilo.m_espessura_borda = m_selecionado ? m_borda_antiga + m_acrescimo_borda : m_borda_antiga;
+                    if(m_dica_bool)
                     *m_dica_bool = m_buffer.empty();
                 }
         };
