@@ -34,3 +34,4 @@ jogos/releases
 *.txt
 out/.ninja_log
 out/.ninja_deps
+/out

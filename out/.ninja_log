@@ -30,3 +30,8 @@
 200652	202827	1747424328588925324	bin/becommons/libbecommons.a	9cbe266de886a3d3
 182225	210778	1747424336918951409	bin/runtime/CMakeFiles/runtime.dir/src/main.cpp.o	11b706ffb5b1fdda
 210780	212736	1747424338865957518	bin/runtime/runtime	8df348ae8e449f1f
+202833	314026	1747424440149280925	bin/editor/CMakeFiles/editor.dir/src/sistemas/gerenciador_projetos.cpp.o	7d124b6942f89e55
+212736	318806	1747424444932296452	bin/editor/CMakeFiles/editor.dir/src/main.cpp.o	266605a0967b32c4
+314029	323264	1747424449402310983	bin/testes/CMakeFiles/testes.dir/src/registro_testes.cpp.o	8835fb125b4ae385
+183951	324446	1747424450499314552	bin/editor/CMakeFiles/editor.dir/src/sistemas/editor.cpp.o	aa0dbbf236b85cea
+324450	328682	1747424454783328500	bin/editor/editor	ea7dc520266a430c
