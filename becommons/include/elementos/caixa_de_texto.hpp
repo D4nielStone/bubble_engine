@@ -35,30 +35,33 @@ namespace BECOMMONS_NS {
     namespace elementos {
         class caixa_de_texto : public area_de_texto {
             private:
-                std::string m_buffer {""}, m_etiqueta {""};
+                std::string m_etiqueta {""};
                 cor m_cor_antiga, m_acrescimo_cor { 0.1f, 0.1f, 0.25f };
                 float m_borda_antiga, m_acrescimo_borda { 1.f };
-                bool* m_dica_bool {nullptr};
+                std::string m_display {""};
+                elementos::texto* m_texto_ptr;
             public:
                 caixa_de_texto() = default;
-                caixa_de_texto(const std::string etiqueta) : m_etiqueta(etiqueta) {};
+                caixa_de_texto(const std::string& etiqueta) : m_etiqueta(etiqueta) {};
                 void configurar() override {
                     m_estilo.m_padding_geral = { 5, 2 };
-                    if(m_etiqueta.empty()) return;
                     m_estilo.m_flag_estilo |= flag_estilo::modular;
                     m_borda_antiga = m_estilo.m_espessura_borda;
                     m_cor_antiga = m_estilo.m_cor_borda.b;
-                    auto m_texto = adicionarFilho<elementos::texto>(m_id + "_dica", m_etiqueta, cor(1, 1, 1, 0.5));
-                    m_dica_bool = &m_texto->m_estilo.m_ativo;
+                    m_texto_ptr = adicionarFilho<elementos::texto>(m_id + "_dica", &m_display);
                 };
-                std::string& obterBuffer() {
-                    return m_buffer;
-                }
-                void atualizarInputs() {
+                void atualizar() {
+                    // estilo
                     m_estilo.m_cor_borda = selecionado() ? m_cor_antiga + m_acrescimo_cor : m_cor_antiga;
                     m_estilo.m_espessura_borda = m_selecionado ? m_borda_antiga + m_acrescimo_borda : m_borda_antiga;
-                    if(m_dica_bool)
-                    *m_dica_bool = m_buffer.empty();
+                    // buffer
+                    if(m_selecionado) atualizarBuffer();
+                    if(m_buffer.empty() && !m_etiqueta.empty()) {
+                        m_display = m_etiqueta; m_texto_ptr->m_texto_cor.a = 0.5;
+                    }
+                    else {
+                        m_display = m_buffer; m_texto_ptr->m_texto_cor.a = 1;
+                    }
                 }
         };
     } 

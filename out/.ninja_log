@@ -1,0 +1,7 @@
+# ninja log v5
+6	381	1747424126523320991	bin/becommons/CMakeFiles/becommons.dir/__/libs/glad/glad.c.o	7439fbcdf2b87b83
+382	20313	1747424146450377843	bin/becommons/CMakeFiles/becommons.dir/src/nucleo/registro.cpp.o	645d1d2f67e9a2bc
+8	29328	1747424155454403752	bin/becommons/CMakeFiles/becommons.dir/src/arquivadores/fonte.cpp.o	ae99f19c84fa880f
+4	30696	1747424156814407676	bin/becommons/CMakeFiles/becommons.dir/src/api/api_lua.cpp.o	b22a576d47b2460f
+29330	39823	1747424165956434138	bin/becommons/CMakeFiles/becommons.dir/src/arquivadores/shader.cpp.o	ed58defcabc91e9f
+20332	44934	1747424171064448983	bin/becommons/CMakeFiles/becommons.dir/src/arquivadores/imageloader.cpp.o	bdd925df3580e709

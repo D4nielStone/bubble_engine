@@ -124,7 +124,7 @@ void bubble_gui::desenhar_caixa(caixa* c)
         }
         case tipo_caixa::caixa_de_texto: {
             auto ct = static_cast<elementos::caixa_de_texto*>(c);
-            ct->atualizarInputs();
+            ct->atualizar();
             break;
         }
         default:

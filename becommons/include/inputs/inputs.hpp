@@ -53,7 +53,7 @@ namespace BECOMMONS_NS {
         double mousex, mousey;
         int mouseEnter{ 0 }, tecladoAcao{ 0 }, mods{ 0 }, mouseButton{ 0 };
         char letra{ '\0' };
-        bool mouseClick{ false }, char_press{ false };
+        bool mouseClick{ false }, letra_pressionada {false};
         int gamepad_eixo;
         std::unordered_map<std::string, bool> keyStates;
     protected:
