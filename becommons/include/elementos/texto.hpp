@@ -57,6 +57,21 @@ namespace BECOMMONS_NS{
             std::string m_texto_frase, m_texto_fonte;
             std::string* m_texto_frase_ptr{nullptr};
             texto(const std::string frase,
+                    becommons::cor color,
+                    const unsigned int escala = 14,
+                    const flags_texto flags = flags_texto::padrao,
+                    const std::string path_fonte = "consolas.ttf") : m_texto_frase(frase)
+                , m_texto_cor(color)
+                , m_texto_fonte(path_fonte)
+                , m_texto_escala(escala)
+                , m_texto_shader(new shader("texto.vert", "texto.frag"))
+                , m_texto_flags(flags)
+            {
+                m_estilo.m_altura = escala;
+                m_estilo.m_largura = obterLargura(m_texto_frase);
+                m_estilo.m_limites.z = m_estilo.m_largura; m_estilo.m_limites.w = m_estilo.m_altura;
+            }
+            texto(const std::string frase,
                     const unsigned int escala = 14,
                     const flags_texto flags = flags_texto::padrao,
                     const std::string path_fonte = "consolas.ttf") : m_texto_frase(frase)

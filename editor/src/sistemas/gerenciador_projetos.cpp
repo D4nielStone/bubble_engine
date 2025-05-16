@@ -153,7 +153,7 @@ void gerenciador_projetos::removerProjeto(const std::string& dir) {
     if(std::filesystem::exists(dir)) {
         std::filesystem::remove_all(dir);
     }
-    m_projeto_selecionado = "n/a";
+    m_projeto_selecionado = "Nenhum";
     atualizarElementos(DIR_PADRAO);
 }
 void gerenciador_projetos::abrirProjeto(const std::string& caminho) {
@@ -228,7 +228,6 @@ void gerenciador_projetos::configurarUI(const std::string& DIR_PADRAO) {
     // Area Maior
     gui.adicionar<caixa>("raiz", "#area_maior");
         gui.defFlags(flag_estilo::modular);
-        gui.defCorBorda({0.05, 0.05, 0.05, 1});
         gui.defAltura(1.0);
         gui.defOrientacao(estilo::orientacao::vertical);
         gui.defCorFundo({0.21, 0.21, 0.21, 1});
@@ -236,19 +235,22 @@ void gerenciador_projetos::configurarUI(const std::string& DIR_PADRAO) {
     gui.fimEstilo();
     gui.adicionar<caixa>("#area_maior", "##cima");
         gui.defOrientacao(estilo::orientacao::vertical);
-        gui.defCorBorda({0.05, 0.05, 0.05, 1});
         gui.defFlags(flag_estilo::modular | flag_estilo::altura_justa);
         gui.defLargura      (1.0);
         gui.defCorFundo({0.15, 0.15, 0.15, 1});
     gui.fimEstilo();
     gui.adicionar<caixa>("#area_maior", "##meio");
         gui.defFlags(flag_estilo::altura_justa | flag_estilo::modular);
-        gui.defCorBorda({0.05, 0.05, 0.05, 1});
         gui.defCorFundo({0.21, 0.21, 0.21, 1});
         gui.defLargura      (1.0);
         gui.defPaddingG(5, 5);
     gui.fimEstilo();
-    gui.adicionar<elementos::texto>("##meio", "###label", "Nome do novo projeto");
+    gui.adicionar<elementos::botao>("##meio", "###texto5", [DIR_PADRAO, this]() {
+            if(gui.elementoExiste("###caixa_texto") && gui.obterElemento("###caixa_texto")->tipo() == tipo_caixa::caixa_de_texto) {
+                auto caixa_de_texto = static_cast<elementos::caixa_de_texto*>(gui.obterElemento("###caixa_texto"));
+                criarProjetoPadrao(DIR_PADRAO, caixa_de_texto->obterBuffer().c_str());
+            }
+        }, "Novo", "adicionar.png");
     gui.fimEstilo();
     gui.adicionar<elementos::caixa_de_texto>("##meio", "###caixa_texto");
         gui.defCrescimentoM(1);
@@ -257,7 +259,6 @@ void gerenciador_projetos::configurarUI(const std::string& DIR_PADRAO) {
     gui.fimEstilo();
     gui.adicionar<caixa>("#area_maior", "##baixo");
         gui.defFlags(flag_estilo::modular | flag_estilo::alinhamento_central);
-        gui.defCorBorda({0.05, 0.05, 0.05, 1});
         gui.defLargura      (1.0);
         gui.defPaddingG(5, 0);
         gui.defCorFundo({0.21, 0.21, 0.21, 1});
@@ -269,21 +270,15 @@ void gerenciador_projetos::configurarUI(const std::string& DIR_PADRAO) {
     gui.fimEstilo();
     gui.adicionar<elementos::botao>("##baixo", "###texto3", [this]() {
             
-            if(m_projeto_selecionado != "n/a") {
+            if(m_projeto_selecionado != "Nenhum") {
                 abrirProjeto(projetos[m_projeto_selecionado]);
             }
         }, "Abrir", "abrir.png");
     gui.adicionar<elementos::botao>("##baixo", "###texto4", [this]() {
-            if(m_projeto_selecionado != "n/a") {
+            if(m_projeto_selecionado != "Nenhum") {
                 removerProjeto(projetos[m_projeto_selecionado]);
             }
         }, "Remover", "remover.png");
-    gui.adicionar<elementos::botao>("##baixo", "###texto5", [DIR_PADRAO, this]() {
-            if(gui.elementoExiste("###caixa_texto") && gui.obterElemento("###caixa_texto")->tipo() == tipo_caixa::caixa_de_texto) {
-                auto caixa_de_texto = static_cast<elementos::caixa_de_texto*>(gui.obterElemento("###caixa_texto"));
-                criarProjetoPadrao(DIR_PADRAO, caixa_de_texto->obterBuffer().c_str());
-            }
-        }, "Adicionar", "adicionar.png");
     gui.fimEstilo();
 }
 

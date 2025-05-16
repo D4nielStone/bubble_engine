@@ -26,6 +26,7 @@ SOFTWARE.
 
 #pragma once
 #include "becommons_namespace.hpp"
+#include <algorithm>
 // Definição da estrutura cor
 namespace BECOMMONS_NS {
     struct cor
@@ -36,9 +37,14 @@ namespace BECOMMONS_NS {
         cor(const float& r, const float& g, const float& b) : r(r), g(g), b(b) {};
         cor() = default;
         // Operador de soma (+)
+        cor operator+(const cor& other) const
+        {
+            return { r + other.r, g + other.g, b + other.b, std::min(1.f, a + other.a) };
+        }
+        // Operador de soma (+)
         cor operator+(const float other) const
         {
-            return { r + other, g + other, b + other, 1.f };
+            return { r + other, g + other, b + other, std::min(1.f, a + other) };
         }
         // Operador de igualdade (==)
         bool operator==(const cor& other) const
