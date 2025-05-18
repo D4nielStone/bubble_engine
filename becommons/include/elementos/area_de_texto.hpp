@@ -101,22 +101,24 @@ namespace BECOMMONS_NS {
             }
             void inserirLetra(char c) {
                 if(c == '\0') return;
-                if(m_buffer.empty() || m_buffer.size() == m_pipe_offset)
+                if(m_pipe_offset >= m_buffer.size()) {
                     m_buffer.push_back(c);
+                    m_pipe_offset = m_buffer.size();
+                }
                 else
                     m_buffer.insert(m_pipe_offset, c, 1);
-                m_pipe_offset ++;
             }
             void apagar() {
+                if(m_pipe_offset <= m_buffer.size() && m_pipe_offset > 0)
                 m_buffer.erase(m_pipe_offset-1, m_pipe_offset);
                 m_pipe_offset --;
             }
             void atualizarBuffer() {
                 auto &input = janela::obterInstancia().m_inputs;
-                if(input.letra_pressionada)
-                    if(input.isKeyPressed("BS"))
+                    if(input.m_backspace_pressionado || input.m_backspace_repetido)
                         apagar();
                     else
+                if(input.letra_pressionada)
                         inserirLetra(input.letra);
                 m_teclado_foi_solto = false;
             }

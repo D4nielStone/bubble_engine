@@ -137,6 +137,18 @@ void BECOMMONS_NS::callbackKey(GLFWwindow* window, int key, int scancode, int ac
                 input.keyReleased(mappedkey);
             }
         }
+    if (key == GLFW_KEY_BACKSPACE) {
+        if (action == GLFW_PRESS) {
+            input.m_backspace_pressionado = true;
+            input.m_backspace_segura = true;
+        }
+        else if (action == GLFW_REPEAT) {
+            input.m_backspace_repetido = true;
+        }
+        else if (action == GLFW_RELEASE) {
+            input.m_backspace_segura = false;
+        }
+    }
 }
 
 // Callback de posi��o do mouse

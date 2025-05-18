@@ -52,6 +52,7 @@ namespace BECOMMONS_NS {
         inputMode getInputMode() const;
         double mousex, mousey;
         int mouseEnter{ 0 }, tecladoAcao{ 0 }, mods{ 0 }, mouseButton{ 0 };
+        bool m_backspace_pressionado { false }, m_backspace_repetido { false }, m_backspace_segura { false };
         char letra{ '\0' };
         bool mouseClick{ false }, letra_pressionada {false};
         int gamepad_eixo;

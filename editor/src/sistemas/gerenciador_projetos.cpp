@@ -255,7 +255,7 @@ void gerenciador_projetos::configurarUI(const std::string& DIR_PADRAO) {
         }, "Novo", "adicionar.png");
     gui.fimEstilo();
     gui.adicionar<elementos::caixa_de_texto>("##meio", "###caixa_texto", "Digite o nome do projeto aqui...");
-        gui.defCrescimentoM(1);
+        gui.defCrescimentoM(0.5);
         gui.defCorFundo({0.12, 0.12, 0.12, 1});
         gui.defCorBorda({0.3, 0.3, 0.3, 1});
     gui.fimEstilo();
