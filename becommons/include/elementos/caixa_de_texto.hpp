@@ -49,6 +49,7 @@ namespace BECOMMONS_NS {
                     m_borda_antiga = m_estilo.m_espessura_borda;
                     m_cor_antiga = m_estilo.m_cor_borda.b;
                     m_texto_ptr = adicionarFilho<elementos::texto>(m_id + "_dica", &m_display);
+                    m_estilo.m_altura = m_texto_ptr->obterAltura(m_display) + m_estilo.m_padding_geral.y * 2;
                 };
                 void atualizar() {
                     // estilo
@@ -62,6 +63,7 @@ namespace BECOMMONS_NS {
                     else {
                         m_display = m_buffer; m_texto_ptr->m_texto_cor.a = 1;
                     }
+                    m_estilo.m_altura = m_texto_ptr->obterAltura(m_display) + m_estilo.m_padding_geral.y * 2;
                 }
         };
     } 

@@ -100,6 +100,10 @@ void bubble_gui::atualizarHDTF(caixa* it_caixa, std::function<void(caixa*)> func
 
 void bubble_gui::desenhar_caixa(caixa* c)
 {
+    if(c->tipo() == tipo_caixa::caixa_de_texto) {
+        auto ct = static_cast<elementos::caixa_de_texto*>(c);
+        ct->atualizar();
+    }
     if(!c->m_estilo.m_ativo) return;
     if(c->m_estilo.m_cor_fundo.a != 0) {
         renderizarFundo(c, quad_shader);
@@ -120,11 +124,6 @@ void bubble_gui::desenhar_caixa(caixa* c)
             auto img = static_cast<elementos::imagem*>(c);
             img->m_imagem_tamanho = { img->m_estilo.m_limites.z, img->m_estilo.m_limites.w };
             renderizarImagem(img);
-            break;
-        }
-        case tipo_caixa::caixa_de_texto: {
-            auto ct = static_cast<elementos::caixa_de_texto*>(c);
-            ct->atualizar();
             break;
         }
         default:

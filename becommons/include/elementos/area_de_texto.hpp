@@ -113,10 +113,10 @@ namespace BECOMMONS_NS {
             }
             void atualizarBuffer() {
                 auto &input = janela::obterInstancia().m_inputs;
-                if(input.letra_pressionada)
                     if(input.isKeyPressed("BS"))
                         apagar();
                     else
+                if(input.letra_pressionada)
                         inserirLetra(input.letra);
                 m_teclado_foi_solto = false;
             }
