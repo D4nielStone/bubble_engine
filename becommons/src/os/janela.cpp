@@ -178,6 +178,9 @@ if(f)
 }
 void janela::poll()
 {
+    m_inputs.m_backspace_pressionado = false;
+    m_inputs.m_backspace_repetido = false;
+
     glfwPollEvents();
     int w, h;
     glfwGetWindowSize(window, &w, &h);
