@@ -89,6 +89,3 @@ endif()
 find_library(BULLET_DYNAMICS_LIBRARY BulletDynamics)
 find_library(BULLET_COLLISION_LIBRARY BulletCollision)
 find_library(BULLET_LINEAR_MATH_LIBRARY LinearMath)
-
-add_definitions(-D_DEBUG)
-

@@ -88,10 +88,3 @@ endif()
 find_library(BULLET_DYNAMICS_LIBRARY BulletDynamics)
 find_library(BULLET_COLLISION_LIBRARY BulletCollision)
 find_library(BULLET_LINEAR_MATH_LIBRARY LinearMath)
-
-
-# Adicionar definições para o modo de Debug
-add_definitions(-D_DEBUG)
-
-# Definir flags de compilação no modo Debug
-set(CMAKE_CXX_FLAGS_DEBUG "-g -O0 ")
