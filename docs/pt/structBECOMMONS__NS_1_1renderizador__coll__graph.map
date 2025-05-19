@@ -1,9 +1,0 @@
-<map id="BECOMMONS_NS::renderizador" name="BECOMMONS_NS::renderizador">
-<area shape="rect" id="Node000001" title=" " alt="" coords="73,181,298,207"/>
-<area shape="rect" id="Node000002" href="$structBECOMMONS__NS_1_1componente.html" title="base para as funcionalidades da engine" alt="" coords="5,93,229,119"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="137,128,178,179,174,182,133,131"/>
-<area shape="rect" id="Node000003" href="$classBECOMMONS__NS_1_1modelo.html" title=" " alt="" coords="253,93,445,119"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="316,127,209,183,206,179,314,123"/>
-<area shape="rect" id="Node000004" href="$classBECOMMONS__NS_1_1shader.html" title=" " alt="" coords="256,5,443,31"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="352,45,352,93,347,93,347,45"/>
-</map>

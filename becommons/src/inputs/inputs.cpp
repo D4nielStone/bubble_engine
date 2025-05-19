@@ -37,16 +37,16 @@ SOFTWARE.
 using namespace BECOMMONS_NS;
 
 void inputs::pressionar(const inputs::chave& key) {
-    auto it = keyStates.find(key);
-    if (it != keyStates.end()) {
+    auto it = m_chaves.find(key);
+    if (it != m_chaves.end()) {
         it->second = true;
         handleKey(key);
     }
 }
 
 void inputs::soltar(const std::string &key) {
-    auto it = keyStates.find(key);
-    if (it != keyStates.end()) {
+    auto it = m_chaves.find(key);
+    if (it != m_chaves.end()) {
         it->second = false;
     }
     else {
@@ -56,8 +56,8 @@ void inputs::soltar(const std::string &key) {
 }
 bool inputs::obter(const std::string &key) const
 {
-    auto it = keyStates.find(key);
-    return it != keyStates.end() && it->second;
+    auto it = m_chaves.find(key);
+    return it != m_chaves.end() && it->second;
 }
 void inputs::handleKey(const std::string &key) {
     switch (currentMode) {
@@ -143,29 +143,11 @@ void BECOMMONS_NS::charCallback(GLFWwindow* window, unsigned int codepoint)
     input.letra_pressionada = true;
 }
 
-void BECOMMONS_NS::posicionarCursor(double x, double y)
-{
-    auto& input = janela::obterInstancia().m_inputs;
-    
-    input.mousex = x;
-    input.mousey = y;
-    glfwSetCursorPos(janela::obterInstancia().window, x, y);
-}
-
-vetor2<double> BECOMMONS_NS::obterMouse()
-{
-    auto& input = janela::obterInstancia().m_inputs;
-
-        return vetor2<double>( input.mousex, input.mousey );
+dvet2 inputs::obterMousePos() const {
+   return dvet2(m_mousex, m_mousey);
 };
 
-vetor2<int> BECOMMONS_NS::tamanhoJanela()
-{
-    return vetor2<int>( janela::obterInstancia().tamanho.x, janela::obterInstancia().tamanho.y );
-};
-
-bool BECOMMONS_NS::pressionada(const std::string &letra)
-{
+bool inputs::pressionada(const std::string &letra) {
     auto& input = janela::obterInstancia().m_inputs;
 
     return input.obter(letra);

@@ -60,8 +60,24 @@ void janela::gerarInstancia(const char* nome, const bool f, dvet2 bounds , const
     instanciaAtual = new janela(nome, f, bounds, icon_path);
 }
 
-janela::~janela()
+ivet2 janla::obterTamanhoJanela() const {
+    return ivet2(tamanho.x, tamanho.y);
+};
+
+void janela::posicionarCursor(double x, double y) const {
+    auto mouse = m_inputs.obterMousePos();
+    glfwSetCursorPos(window, mouse.x, mouse.y);
+}
+void BECOMMONS_NS::posicionarCursor(double x, double y)
 {
+    auto& input = janela::obterInstancia().m_inputs;
+    
+    input.mousex = x;
+    input.mousey = y;
+    glfwSetCursorPos(janela::obterInstancia().window, x, y);
+}
+
+janela::~janela() {
     descarregarShaders();
     gerenciadorFontes::limparFontes();
 }

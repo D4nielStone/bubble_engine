@@ -59,8 +59,8 @@ namespace BECOMMONS_NS {
 	        cursor m_cursor_antigo = cursor::seta;
 	        static void modoLegado();
         public:
-            void posicionarCursor                   (double x, double y);
-            ivet2 obterTamanhoJanela                ();
+            void posicionarCursor                   (double x, double y) const;
+            ivet2 obterTamanhoJanela                () const;
             static bool temInstancia();
             static janela& obterInstancia();
             static void gerarInstancia(const char* nome, dvet2 bounds = dvet2(600, 400), const char* icon_path = nullptr);

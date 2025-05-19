@@ -35,6 +35,12 @@ SOFTWARE.
 #include "util/vetor2.hpp"
 
 namespace BECOMMONS_NS {
+    /**
+     * \class inputs
+     * \brief Centraliza os inputs da janela glfw
+     * \enum chave
+     * \brief Facilita o uso das flags do glfw
+     */
     class inputs {
     public:
         enum chave {    
@@ -84,9 +90,26 @@ namespace BECOMMONS_NS {
              MOUSE_D =         GLFW_MOUSE_BUTTON_RIGHT   
         };
         inputs() = default;
-        void pressionar             (const chave&);
+        /**
+         * \brief Define uma tecla como pressionada.
+         * \param p_chave Chave que será definida
+         */
+        void pressionar             (const chave& p_chave);
+        /**
+         * \brief Define uma tecla como `solta`.
+         * \param p_chave Chave que será definida
+         */
         void soltar                 (const chave&);
+        /**
+         * \brief Define uma tecla como pressionada.
+         * \param p_chave Chave que será definida
+         */
         bool obter                  (const chave&) const;
+        /**
+         * \brief Define uma tecla como pressionada.
+         * \param p_chave Chave que será definida
+         */
+        bool obter                  (const std::string&) const;
         dvet2 obterMousePos         () const;
         int m_estado_mouse{ 0 }, m_estado_tecla{ 0 }, m_mods{ 0 };
         char m_ultima_letra{ '\0' };
