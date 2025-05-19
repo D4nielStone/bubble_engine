@@ -35,62 +35,16 @@ SOFTWARE.
 #include "os/janela.hpp"
 
 using namespace BECOMMONS_NS;
-static const std::unordered_map<int, std::string> keyMap = {
-        {GLFW_KEY_W, "W"},
-{GLFW_KEY_A, "A"},
-{GLFW_KEY_S, "S"},
-{GLFW_KEY_D, "D"},
-{GLFW_KEY_X, "X"},
-{GLFW_KEY_E, "E"},
-{GLFW_KEY_Q, "Q"},
-{GLFW_KEY_RIGHT, "Dire"},
-{GLFW_KEY_LEFT, "Esqu"},
-{GLFW_KEY_DOWN, "Baix"},
-{GLFW_KEY_UP, "Cima"},
-{GLFW_KEY_LEFT_SHIFT, "Shif"},
-{GLFW_KEY_RIGHT_SHIFT, "Shif"},
-{GLFW_KEY_LEFT_CONTROL, "Ctrl"},
-{GLFW_KEY_RIGHT_CONTROL, "Ctrl"},
-{GLFW_KEY_LEFT_ALT, "Alt"},
-{GLFW_KEY_RIGHT_ALT, "Alt"},
-{GLFW_KEY_BACKSPACE, "BS"},
-{GLFW_KEY_ENTER, "Ente"},
-{GLFW_KEY_KP_ENTER, "Ente"},
-{GLFW_KEY_DELETE, "Del"},
-{GLFW_KEY_F5, "F5"},
-{GLFW_MOUSE_BUTTON_MIDDLE, "Scrl"},
-{GLFW_MOUSE_BUTTON_LEFT, "MouseE"}
-};
 
-inputMode inputs::getInputMode() const {
-    return currentMode;
-}
-inputs::inputs() : currentMode(inputMode::Game) {
-    
-    // Inicializa o mapa com valores padr�o
-    for (auto& key : keyMap)
-    {
-        keyStates.insert(std::pair(key.second, false));
-    }
-}
-void inputs::setInputMode(inputMode mode) {
-    currentMode = mode;
-}
-void inputs::keyPressed(const std::string &key) {
-    // Acesso direto ao mapa sem verificar se est� vazio
+void inputs::pressionar(const inputs::chave& key) {
     auto it = keyStates.find(key);
     if (it != keyStates.end()) {
         it->second = true;
         handleKey(key);
     }
-    else 
-    {
-        // Tecla inv�lida, pode ser registrado para depura��o se necess�rio
-        std::cerr << "Tecla desconhecida pressionada: " << key << std::endl;
-    }
 }
 
-void inputs::keyReleased(const std::string &key) {
+void inputs::soltar(const std::string &key) {
     auto it = keyStates.find(key);
     if (it != keyStates.end()) {
         it->second = false;
@@ -100,7 +54,7 @@ void inputs::keyReleased(const std::string &key) {
         std::cerr << "Tecla desconhecida liberada: " << key << std::endl;
     }
 }
-bool inputs::isKeyPressed(const std::string &key) const
+bool inputs::obter(const std::string &key) const
 {
     auto it = keyStates.find(key);
     return it != keyStates.end() && it->second;
@@ -131,10 +85,10 @@ void BECOMMONS_NS::callbackKey(GLFWwindow* window, int key, int scancode, int ac
         std::string mappedkey = glfwkeyTokey(key);
         if (mappedkey != "Erro") {
             if (action == GLFW_PRESS || action == GLFW_REPEAT) {
-                input.keyPressed(mappedkey);
+                input.pressionar(mappedkey);
             }
             else if (action == GLFW_RELEASE) {
-                input.keyReleased(mappedkey);
+                input.soltar(mappedkey);
             }
         }
     if (key == GLFW_KEY_BACKSPACE) {
@@ -173,10 +127,10 @@ void BECOMMONS_NS::mouseButtonCallBack(GLFWwindow* window, int button, int actio
     std::string mappedkey = glfwkeyTokey(button);
     if (mappedkey != "Erro") {
         if (action == GLFW_PRESS || action == GLFW_REPEAT) {
-            input.keyPressed(mappedkey);
+            input.pressionar(mappedkey);
         }
         else if (action == GLFW_RELEASE) {
-            input.keyReleased(mappedkey);
+            input.soltar(mappedkey);
         }
     }
 }
@@ -214,5 +168,5 @@ bool BECOMMONS_NS::pressionada(const std::string &letra)
 {
     auto& input = janela::obterInstancia().m_inputs;
 
-    return input.isKeyPressed(letra);
+    return input.obter(letra);
 }

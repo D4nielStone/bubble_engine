@@ -35,44 +35,70 @@ SOFTWARE.
 #include "util/vetor2.hpp"
 
 namespace BECOMMONS_NS {
-    //! OBSOLETO
-    enum inputMode {
-        Editor,
-        Game,
-        Default
-    };
-
     class inputs {
     public:
-        inputs();
-        void setInputMode(inputMode mode);
-        void keyPressed  (const std::string &key);
-        void keyReleased (const std::string &key);
-        bool isKeyPressed(const std::string &key) const;
-        inputMode getInputMode() const;
-        double mousex, mousey;
-        int mouseEnter{ 0 }, tecladoAcao{ 0 }, mods{ 0 }, mouseButton{ 0 };
-        bool m_backspace_pressionado { false }, m_backspace_repetido { false }, m_backspace_segura { false };
-        char letra{ '\0' };
-        bool mouseClick{ false }, letra_pressionada {false};
-        int gamepad_eixo;
-        std::unordered_map<std::string, bool> keyStates;
-    protected:
-        virtual void handleKey(const std::string&key);
+        enum chave {    
+             Q =               GLFW_KEY_Q,                
+             W =               GLFW_KEY_W,                
+             E =               GLFW_KEY_E,                
+             R =               GLFW_KEY_R,                
+             T =               GLFW_KEY_T,                
+             Y =               GLFW_KEY_Y,                
+             U =               GLFW_KEY_U,                
+             I =               GLFW_KEY_I,                
+             O =               GLFW_KEY_O,                
+             P =               GLFW_KEY_P,                
+             A =               GLFW_KEY_A,                
+             S =               GLFW_KEY_S,                
+             D =               GLFW_KEY_D,                
+             F =               GLFW_KEY_F,                
+             G =               GLFW_KEY_G,                
+             H =               GLFW_KEY_H,                
+             J =               GLFW_KEY_J,                
+             K =               GLFW_KEY_K,                
+             L =               GLFW_KEY_L,                
+             Z =               GLFW_KEY_Z,                
+             X =               GLFW_KEY_X,                
+             C =               GLFW_KEY_C,                
+             V =               GLFW_KEY_V,                
+             B =               GLFW_KEY_B,                
+             N =               GLFW_KEY_N,                
+             M =               GLFW_KEY_M,                
+             DIREITA =         GLFW_KEY_RIGHT,            
+             ESQUERDA =        GLFW_KEY_LEFT,             
+             BAIXO =           GLFW_KEY_DOWN,             
+             CIMA =            GLFW_KEY_UP,               
+             E_SHIFT =         GLFW_KEY_LEFT_SHIFT,       
+             D_SHIFT =         GLFW_KEY_RIGHT_SHIFT,      
+             E_CTRL =          GLFW_KEY_LEFT_CONTROL,     
+             D_CTRL =          GLFW_KEY_RIGHT_CONTROL,    
+             E_ALT =           GLFW_KEY_LEFT_ALT,         
+             D_ALT =           GLFW_KEY_RIGHT_ALT,        
+             BACKSPACE =       GLFW_KEY_BACKSPACE,        
+             ENTER =           GLFW_KEY_ENTER,            
+             KP_ENTER =        GLFW_KEY_KP_ENTER,         
+             DELETE =          GLFW_KEY_DELETE,           
+             F5 =              GLFW_KEY_F5,               
+             MOUSE_MEIO =      GLFW_MOUSE_BUTTON_MIDDLE,  
+             MOUSE_E =         GLFW_MOUSE_BUTTON_LEFT,    
+             MOUSE_D =         GLFW_MOUSE_BUTTON_RIGHT   
+        };
+        inputs() = default;
+        void pressionar             (const chave&);
+        void soltar                 (const chave&);
+        bool obter                  (const chave&) const;
+        dvet2 obterMousePos         () const;
+        int m_estado_mouse{ 0 }, m_estado_tecla{ 0 }, m_mods{ 0 };
+        char m_ultima_letra{ '\0' };
+        bool m_mouse_clicou { false }, m_letra_pressionada {false};
+        std::unordered_map<chave, bool> m_chaves;
     private:
-        inputMode currentMode{ inputMode::Editor };
+        double m_mousex, m_mousey;
     };
 
     // Callback de teclado GLFW
-    extern "C" void mousePosCallBack(GLFWwindow* window, double x, double y);
-    extern "C" void callbackKey(GLFWwindow* window, int key, int scancode, int action, int mods);
-    extern "C" void mouseButtonCallBack(GLFWwindow* window, int a, int b, int c);
-    extern "C" void charCallback(GLFWwindow* window, unsigned int codepoint);
-
-    /// @brief posiciona o cursor do mouse em uma posição na tela.
-    /// @param pos 
-    void posicionarCursor(double x, double y);
-    dvet2 obterMouse();
-    vetor2<int> tamanhoJanela();
-    bool pressionada(const std::string &tecla);
+    extern "C" void mousePosCallback        (GLFWwindow* , double , double );
+    extern "C" void keyCallback             (GLFWwindow* , int , int , int , int );
+    extern "C" void mouseButtonCallback     (GLFWwindow* , int , int , int );
+    extern "C" void charCallback            (GLFWwindow* , unsigned int );
 }
