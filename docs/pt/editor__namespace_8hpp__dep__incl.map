@@ -1,0 +1,15 @@
+<map id="editor_namespace.hpp" name="editor_namespace.hpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="154,5,325,31"/>
+<area shape="rect" id="Node000002" href="$editor_8hpp.html" title="Gerencia a configuração do luabridge para api lua." alt="" coords="115,79,201,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="218,42,173,80,170,76,214,38"/>
+<area shape="rect" id="Node000004" href="$gerenciador__projetos_8cpp.html" title=" " alt="" coords="223,152,410,177"/>
+<area shape="poly" id="edge5_Node000001_Node000004" title=" " alt="" coords="246,44,254,73,267,103,286,129,306,150,302,154,282,132,262,105,249,75,241,45"/>
+<area shape="rect" id="Node000006" href="$gerenciador__projetos_8hpp.html" title=" " alt="" coords="277,79,463,104"/>
+<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="274,35,350,76,347,81,271,40"/>
+<area shape="rect" id="Node000003" href="$editor_8cpp.html" title=" " alt="" coords="5,152,92,177"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="130,114,68,154,65,150,128,109"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="197,107,292,149,290,154,195,112"/>
+<area shape="rect" id="Node000005" href="$editor_2src_2main_8cpp.html" title=" " alt="" coords="117,152,199,177"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="161,118,161,152,155,152,155,118"/>
+<area shape="poly" id="edge7_Node000006_Node000004" title=" " alt="" coords="355,117,327,153,323,150,351,113"/>
+</map>

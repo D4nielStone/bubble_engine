@@ -1,0 +1,22 @@
+<map id="propriedades.hpp" name="propriedades.hpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="148,5,283,31"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="119,79,178,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="206,33,171,70,167,67,202,29"/>
+<area shape="rect" id="Node000003" href="$becommons__namespace_8hpp_source.html" title=" " alt="" coords="5,152,217,177"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="217,31,210,66,192,105,171,129,147,147,143,143,167,125,188,103,205,64,212,30"/>
+<area shape="rect" id="Node000004" href="$componente_8hpp.html" title="Estrutura base para componetes." alt="" coords="410,79,541,104"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="258,28,421,72,419,78,256,33"/>
+<area shape="poly" id="edge10_Node000004_Node000003" title=" " alt="" coords="417,107,184,152,183,147,416,101"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="241,152,365,177"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="449,106,345,149,343,144,447,102"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="390,152,457,177"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="469,106,442,142,438,139,465,103"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="481,152,573,177"/>
+<area shape="poly" id="edge6_Node000004_Node000007" title=" " alt="" coords="486,103,513,139,509,142,482,106"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="598,152,761,177"/>
+<area shape="poly" id="edge7_Node000004_Node000008" title=" " alt="" coords="509,102,634,145,633,150,507,107"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="785,152,920,177"/>
+<area shape="poly" id="edge8_Node000004_Node000009" title=" " alt="" coords="536,101,779,147,778,152,535,107"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="944,152,1116,177"/>
+<area shape="poly" id="edge9_Node000004_Node000010" title=" " alt="" coords="541,98,931,148,930,153,541,104"/>
+</map>
