@@ -34,6 +34,8 @@ SOFTWARE.
 namespace BECOMMONS_NS{
     namespace elementos{
         class botao : public area_de_toque {
+        private:
+
         public:
             tipo_caixa tipo() const override { return tipo_caixa::botao; }
             /// @name Construtores com ponteiro para aparência
@@ -95,6 +97,7 @@ namespace BECOMMONS_NS{
             bool pressionado() override {
                 m_pressionado = area_de_toque::pressionado();
                 m_estilo.m_cor_borda.a = m_mouse_cima ? 1.f : 0.f;
+                m_estilo.m_cor_fundo.a = m_mouse_cima ? 1.f : 0.f;
                 return m_pressionado;
             }
             void configurar() override {
