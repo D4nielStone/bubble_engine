@@ -59,8 +59,7 @@ namespace BECOMMONS_NS {
              * dentro da área de toque, evitando cliques já iniciados fora.
              */
             bool selecionado() {
-                auto& input = janela::obterInstancia().m_inputs;
-                bool pressionado = input.isKeyPressed("MouseE");
+                bool pressionado = inputs::obter(inputs::MOUSE_E);
                 bool justPressed = pressionado && !m_mouse_antes_pressionado;
 
                 // atualiza flag de cursor sobre a área
@@ -85,7 +84,7 @@ namespace BECOMMONS_NS {
              * Verifica se o cursor está dentro dos limites da caixa.
              */
             bool mouseEmCima() {
-                dvet2 m = obterMouse();
+                dvet2 m = inputs::obterMousePos();
                 bool dentro = (
                     m.x > m_estilo.m_limites.x && 
                     m.x < m_estilo.m_limites.x + m_estilo.m_limites.z &&
@@ -118,8 +117,8 @@ namespace BECOMMONS_NS {
                     if(input.m_backspace_pressionado || input.m_backspace_repetido)
                         apagar();
                     else
-                if(input.letra_pressionada)
-                        inserirLetra(input.letra);
+                if(input.m_letra_pressionada)
+                        inserirLetra(input.m_ultima_letra);
                 m_teclado_foi_solto = false;
             }
         };

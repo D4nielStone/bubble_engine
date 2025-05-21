@@ -37,81 +37,75 @@ SOFTWARE.
 
 using namespace BECOMMONS_NS;
 
-template <class T>
-T lerp(T start, T end, T alpha) {
-    return start + alpha * (end - start);
-}
-
-void api::entidade::definir(lua_State* L)
-		{
-			luabridge::getGlobalNamespace(L). 
-			    beginClass<malha>("malha").
-			    addConstructor<void(*)()>().
-			    addData("material", &malha::m_material).
-			    endClass().
-			    beginClass<modelo>("modelo").
-			    addConstructor<void(*)()>().
-			    addFunction("obtMalha", &modelo::obterMalha).
-			    endClass().
-				beginClass<renderizador>("renderizador").	
-				addConstructor<void(*)(const char*)>().
-				addData("modelo", &renderizador::m_modelo).
-				endClass().
-				beginClass<transformacao>("transformacao").
-				addConstructor<void(*)()>().
-				addData<glm::vec3>("posicao", &transformacao::posicao, true).
-				addData<glm::vec3>("escala", &transformacao::escala, true).
-				addData<glm::vec3>("rotacao", &transformacao::rotacao, true).
-				addFunction("apontarEntidade", &transformacao::apontarEntidade).
-				addFunction("apontarV3", &transformacao::apontarV3).
-				endClass().
-				beginClass<imagem>("imagem").			
-				addConstructor<void(*)(std::string)>().
-				addConstructor<void(*)(unsigned int)>().
-				addData<vetor2<double>>("padding", &imagem::padding, true).
-				addData<vetor2<double>>("limite", &imagem::limite, true).
-				addData<cor>("difusa", &imagem::difusa, true).
-				addFunction("definirID", &imagem::definirID).
-				endClass().
-				beginClass<texto>("texto").
-				addConstructor<void(*)(const std::string&)>().
-				addConstructor<void(*)(const std::string&,float)>().
-				addData("frase", &texto::frase).
-				addData("fonte", &texto::fonte).
-				addData("cor", &texto::m_cor).
-				addData("refPos", &texto::posicao_referencial).
-				addData("refPosAtiva", &texto::pf_ativa).
-				endClass().
-				beginClass<camera>("camera").			
-				addConstructor<void(*)()>().
-				addFunction("pontoParaRaio", &camera::pontoParaRaio).
-				addData("fov", &camera::fov).
-				addData("corte_curto", &camera::corte_curto).
-				addData("framebuffer", &camera::textura).
-				addData("corte_longo", &camera::corte_longo).
-				addData("frente", &camera::forward).
-				addData("ceu", &camera::ceu).
-				addData("escala", &camera::escala).
-				addData("flag_ortho", &camera::flag_orth).
-				addFunction("telaParaMundo", &camera::telaParaMundo).
-				addFunction("ativarFB", &camera::ativarFB).
-				addFunction("mover", &camera::mover).
-				addFunction("desativarFB", &camera::desativarFB).
-				addFunction("viewport", &camera::viewport).
-				endClass().
-				beginClass<api::entidade>("entidade").			
-				addConstructor<void(*)(int)>().
-				addData("transformacao", &api::entidade::m_transformacao, true).
-				addData("camera", &api::entidade::m_camera, true).
-				addData("imagem", &api::entidade::m_imagem, true).
-				addData("texto", &api::entidade::m_texto, true).
-				addData("fisica", &api::entidade::m_fisica, true).
-	 			addData("id", &api::entidade::id, false).
+void api::entidade::definir(lua_State* L) {
+	luabridge::getGlobalNamespace(L). 
+	    beginClass<malha>("malha").
+	    addConstructor<void(*)()>().
+	    addData("material", &malha::m_material).
+	    endClass().
+	    beginClass<modelo>("modelo").
+	    addConstructor<void(*)()>().
+	    addFunction("obtMalha", &modelo::obterMalha).
+	    endClass().
+		beginClass<renderizador>("renderizador").	
+		addConstructor<void(*)(const char*)>().
+		addData("modelo", &renderizador::m_modelo).
+		endClass().
+		beginClass<transformacao>("transformacao").
+		addConstructor<void(*)()>().
+		addData<glm::vec3>("posicao", &transformacao::posicao, true).
+		addData<glm::vec3>("escala", &transformacao::escala, true).
+		addData<glm::vec3>("rotacao", &transformacao::rotacao, true).
+		addFunction("apontarEntidade", &transformacao::apontarEntidade).
+		addFunction("apontarV3", &transformacao::apontarV3).
+		endClass().
+		beginClass<imagem>("imagem").			
+		addConstructor<void(*)(std::string)>().
+		addConstructor<void(*)(unsigned int)>().
+		addData<vetor2<double>>("padding", &imagem::padding, true).
+		addData<vetor2<double>>("limite", &imagem::limite, true).
+		addData<cor>("difusa", &imagem::difusa, true).
+		addFunction("definirID", &imagem::definirID).
+		endClass().
+		beginClass<texto>("texto").
+		addConstructor<void(*)(const std::string&)>().
+		addConstructor<void(*)(const std::string&,float)>().
+		addData("frase", &texto::frase).
+		addData("fonte", &texto::fonte).
+		addData("cor", &texto::m_cor).
+		addData("refPos", &texto::posicao_referencial).
+		addData("refPosAtiva", &texto::pf_ativa).
+		endClass().
+		beginClass<camera>("camera").			
+		addConstructor<void(*)()>().
+		addFunction("pontoParaRaio", &camera::pontoParaRaio).
+		addData("fov", &camera::fov).
+		addData("corte_curto", &camera::corte_curto).
+		addData("framebuffer", &camera::textura).
+		addData("corte_longo", &camera::corte_longo).
+		addData("frente", &camera::forward).
+		addData("ceu", &camera::ceu).
+		addData("escala", &camera::escala).
+		addData("flag_ortho", &camera::flag_orth).
+		addFunction("telaParaMundo", &camera::telaParaMundo).
+		addFunction("ativarFB", &camera::ativarFB).
+		addFunction("mover", &camera::mover).
+		addFunction("desativarFB", &camera::desativarFB).
+		addFunction("viewport", &camera::viewport).
+		endClass().
+		beginClass<api::entidade>("entidade").			
+		addConstructor<void(*)(int)>().
+		addData("transformacao", &api::entidade::m_transformacao, true).
+		addData("camera", &api::entidade::m_camera, true).
+		addData("imagem", &api::entidade::m_imagem, true).
+		addData("texto", &api::entidade::m_texto, true).
+		addData("fisica", &api::entidade::m_fisica, true).
+		addData("id", &api::entidade::id, false).
         addData("luzDir", &api::entidade::m_luzDir, true).
-                addData("renderizador", &api::entidade::m_renderizador).
-				addFunction("destruir", &api::entidade::destruir).
-				endClass();
-		};
+        addData("renderizador", &api::entidade::m_renderizador).
+		addFunction("destruir", &api::entidade::destruir).
+		endClass();
+};
 void api::entidade::destruir() const
 {
 	auto componentes = projeto_atual->obterFaseAtual()->obterRegistro()->obterComponentes(id);
@@ -246,11 +240,14 @@ void BECOMMONS_NS::api::definirTempo(lua_State *L)
 void BECOMMONS_NS::api::definirInputs(lua_State *L)
 {
 	luabridge::getGlobalNamespace(L)
-		.beginNamespace("inputs")
-		.addFunction("pressionada", &pressionada)
-		.addFunction("mouse", &obterMouse)
-		.addFunction("tamanhoTela", &tamanhoJanela)
-		.addFunction("cursor", &posicionarCursor)
+		.beginNamespace("janela")
+		.addFunction("obterTamanho", janela::obterTamanhoJanela)
+		.addFunction("posicionarCursor", janela::posicionarCursor)
+		.endNamespace();
+	luabridge::getGlobalNamespace(L)
+		.beginNamespace("entradas")
+		.addFunction("obter", inputs::obter_str)
+		.addFunction("obterMousePos", inputs::obterMousePos)
 		.endNamespace();
 }
 

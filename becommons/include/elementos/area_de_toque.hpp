@@ -52,7 +52,7 @@ namespace BECOMMONS_NS {
             // @returns Se está presionado ou não
             bool mouseEmCima() {
                 // vetor2 do mouse
-                auto m = obterMouse();
+                auto m = inputs::obterMousePos();
                 m_mouse_cima = (m.x > m_estilo.m_limites.x && m.x < m_estilo.m_limites.z + m_estilo.m_limites.x &&
                    m.y > m_estilo.m_limites.y && m.y < m_estilo.m_limites.w + m_estilo.m_limites.y);
                 return m_mouse_cima;
@@ -61,14 +61,14 @@ namespace BECOMMONS_NS {
                 // Reset do flag m_pressionado
                 m_pressionado = false;
                 // Se não está pressionado, reseta gatilho
-                if(!janela::obterInstancia().m_inputs.isKeyPressed("MouseE"))
+                if(!inputs::obter(inputs::MOUSE_E))
                     m_gatilho = false;
                 // Caso dentro do campo
                 if(mouseEmCima()) {
                     // Define cursor para mão
                     janela::obterInstancia().defCursor(janela::cursor::mao);
                     // Caso o gatilho esteja desativado e o mouse esquerdo tocado
-                    if(!m_gatilho && janela::obterInstancia().m_inputs.isKeyPressed("MouseE")) {
+                    if(!m_gatilho && inputs::obter(inputs::MOUSE_E)) {
                         m_arrastando = true;
                         // Se m_interruptor é diferente de nullptr
                         if(m_interruptor) {
@@ -79,15 +79,15 @@ namespace BECOMMONS_NS {
                             m_pressionado = true;
                     }
                 }
-                if(!m_gatilho && janela::obterInstancia().m_inputs.isKeyPressed("MouseE"))
+                if(!m_gatilho && inputs::obter(inputs::MOUSE_E))
                     m_gatilho = true;
                 return m_pressionado;
             }
             bool arrastando() {
-                if(!janela::obterInstancia().m_inputs.isKeyPressed("MouseE"))
+                if(!inputs::obter(inputs::MOUSE_E))
                     m_arrastando = false;
                 // Caso dentro do campo
-                if(!m_arrastando && mouseEmCima() && janela::obterInstancia().m_inputs.isKeyPressed("MouseE")) {
+                if(!m_arrastando && mouseEmCima() && inputs::obter(inputs::MOUSE_E)) {
                     m_arrastando = true;
                 }
                 return m_arrastando;

@@ -94,29 +94,29 @@ namespace BECOMMONS_NS {
          * \brief Define uma tecla como pressionada.
          * \param p_chave Chave que será definida
          */
-        void pressionar             (const chave& p_chave);
+        void pressionar             (const chave&);
         /**
          * \brief Define uma tecla como `solta`.
-         * \param p_chave Chave que será definida
+         * \param chave Chave que será definida
          */
         void soltar                 (const chave&);
         /**
          * \brief Define uma tecla como pressionada.
          * \param p_chave Chave que será definida
          */
-        bool obter                  (const chave&) const;
+        static bool obter                  (const chave&);
         /**
          * \brief Define uma tecla como pressionada.
          * \param p_chave Chave que será definida
          */
-        bool obter                  (const std::string&) const;
-        dvet2 obterMousePos         () const;
+        static bool obter_str               (const std::string&);
+
+        static dvet2 obterMousePos         ();
         int m_estado_mouse{ 0 }, m_estado_tecla{ 0 }, m_mods{ 0 };
         char m_ultima_letra{ '\0' };
-        bool m_mouse_clicou { false }, m_letra_pressionada {false};
-        std::unordered_map<chave, bool> m_chaves;
-    private:
+        bool m_mouse_clicou { false }, m_letra_pressionada {false}, m_backspace_pressionado, m_backspace_segura, m_backspace_repetido;
         double m_mousex, m_mousey;
+        std::unordered_map<chave, bool> m_chaves;
     };
 
     // Callback de teclado GLFW

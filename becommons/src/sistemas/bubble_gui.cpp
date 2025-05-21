@@ -333,8 +333,8 @@ bool bubble_gui::deveAtualizar(caixa* it_caixa) {
 
     // Atualização forçada por evento de entrada
     if(janela::temInstancia() 
-            && (janela::obterInstancia().m_inputs.mouseEnter == GLFW_PRESS 
-                || janela::obterInstancia().m_inputs.tecladoAcao == GLFW_PRESS)) {
+            && (janela::obterInstancia().m_inputs.m_estado_mouse == GLFW_PRESS 
+                || janela::obterInstancia().m_inputs.m_estado_tecla == GLFW_PRESS)) {
         return true;
     }
     return false;
