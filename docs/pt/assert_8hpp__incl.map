@@ -1,9 +1,0 @@
-<map id="assert.hpp" name="assert.hpp">
-<area shape="rect" id="Node000001" title=" " alt="" coords="102,5,193,31"/>
-<area shape="rect" id="Node000002" title=" " alt="" coords="5,79,92,104"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="133,33,77,73,74,68,130,29"/>
-<area shape="rect" id="Node000003" title=" " alt="" coords="116,79,179,104"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="150,31,150,65,145,65,145,31"/>
-<area shape="rect" id="Node000004" title=" " alt="" coords="203,79,262,104"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="163,29,210,68,207,72,159,33"/>
-</map>

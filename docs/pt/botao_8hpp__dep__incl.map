@@ -1,7 +1,0 @@
-<map id="botao.hpp" name="botao.hpp">
-<area shape="rect" id="Node000001" title=" " alt="" coords="23,5,109,31"/>
-<area shape="rect" id="Node000002" href="$bubble__gui_8hpp.html" title=" " alt="" coords="5,79,127,104"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="69,44,69,79,63,79,63,44"/>
-<area shape="rect" id="Node000003" href="$bubble__gui_8cpp.html" title=" " alt="" coords="6,152,126,177"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="69,118,69,152,63,152,63,118"/>
-</map>

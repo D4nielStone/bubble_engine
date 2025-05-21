@@ -35,108 +35,83 @@ SOFTWARE.
 #include "os/janela.hpp"
 
 using namespace BECOMMONS_NS;
-static const std::unordered_map<int, std::string> keyMap = {
-        {GLFW_KEY_W, "W"},
-{GLFW_KEY_A, "A"},
-{GLFW_KEY_S, "S"},
-{GLFW_KEY_D, "D"},
-{GLFW_KEY_X, "X"},
-{GLFW_KEY_E, "E"},
-{GLFW_KEY_Q, "Q"},
-{GLFW_KEY_RIGHT, "Dire"},
-{GLFW_KEY_LEFT, "Esqu"},
-{GLFW_KEY_DOWN, "Baix"},
-{GLFW_KEY_UP, "Cima"},
-{GLFW_KEY_LEFT_SHIFT, "Shif"},
-{GLFW_KEY_RIGHT_SHIFT, "Shif"},
-{GLFW_KEY_LEFT_CONTROL, "Ctrl"},
-{GLFW_KEY_RIGHT_CONTROL, "Ctrl"},
-{GLFW_KEY_LEFT_ALT, "Alt"},
-{GLFW_KEY_RIGHT_ALT, "Alt"},
-{GLFW_KEY_BACKSPACE, "BS"},
-{GLFW_KEY_ENTER, "Ente"},
-{GLFW_KEY_KP_ENTER, "Ente"},
-{GLFW_KEY_DELETE, "Del"},
-{GLFW_KEY_F5, "F5"},
-{GLFW_MOUSE_BUTTON_MIDDLE, "Scrl"},
-{GLFW_MOUSE_BUTTON_LEFT, "MouseE"}
-};
+        
+std::unordered_map<std::string, inputs::chave> mapa_string = {    
+           {"Q",          inputs::Q},       
+           {"W",          inputs::W},       
+           {"E",          inputs::E},       
+           {"R",          inputs::R},       
+           {"T",          inputs::T},       
+           {"Y",          inputs::Y},       
+           {"U",          inputs::U},       
+           {"I",          inputs::I},       
+           {"O",          inputs::O},       
+           {"P",          inputs::P},       
+           {"A",          inputs::A},       
+           {"S",          inputs::S},       
+           {"D",          inputs::D},       
+           {"F",          inputs::F},       
+           {"G",          inputs::G},       
+           {"H",          inputs::H},       
+           {"J",          inputs::J},       
+           {"K",          inputs::K},       
+           {"L",          inputs::L},       
+           {"Z",          inputs::Z},       
+           {"X",          inputs::X},       
+           {"C",          inputs::C},       
+           {"V",          inputs::V},       
+           {"B",          inputs::B},       
+           {"N",          inputs::N},       
+           {"M",          inputs::M},       
+           {"DIREITA",    inputs::DIREITA}, 
+           {"ESQUERDA",   inputs::ESQUERDA},
+           {"BAIXO",      inputs::BAIXO},   
+           {"CIMA",       inputs::CIMA},    
+           {"E_SHIFT",    inputs::E_SHIFT}, 
+           {"D_SHIFT",    inputs::D_SHIFT}, 
+           {"E_CTRL",     inputs::E_CTRL},  
+           {"D_CTRL",     inputs::D_CTRL},  
+           {"E_ALT",      inputs::E_ALT},   
+           {"D_ALT",      inputs::D_ALT},   
+           {"BACKSPACE",  inputs::BACKSPACE},
+           {"ENTER",      inputs::ENTER},   
+           {"KP_ENTER",   inputs::KP_ENTER},
+           {"DELETE",     inputs::DELETE},  
+           {"F5",         inputs::F5},      
+           {"MOUSE_MEIO", inputs::MOUSE_MEIO},
+           {"MOUSE_E",    inputs::MOUSE_E}, 
+           {"MOUSE_D",    inputs::MOUSE_D}
+        };
 
-inputMode inputs::getInputMode() const {
-    return currentMode;
-}
-inputs::inputs() : currentMode(inputMode::Game) {
-    
-    // Inicializa o mapa com valores padr�o
-    for (auto& key : keyMap)
-    {
-        keyStates.insert(std::pair(key.second, false));
-    }
-}
-void inputs::setInputMode(inputMode mode) {
-    currentMode = mode;
-}
-void inputs::keyPressed(const std::string &key) {
-    // Acesso direto ao mapa sem verificar se est� vazio
-    auto it = keyStates.find(key);
-    if (it != keyStates.end()) {
-        it->second = true;
-        handleKey(key);
-    }
-    else 
-    {
-        // Tecla inv�lida, pode ser registrado para depura��o se necess�rio
-        std::cerr << "Tecla desconhecida pressionada: " << key << std::endl;
-    }
+void inputs::pressionar(const inputs::chave& key) {
+    m_chaves[key] = true;
 }
 
-void inputs::keyReleased(const std::string &key) {
-    auto it = keyStates.find(key);
-    if (it != keyStates.end()) {
-        it->second = false;
-    }
-    else {
-        // Tecla desconhecida, pode ser registrado para depura��o se necess�rio
-        std::cerr << "Tecla desconhecida liberada: " << key << std::endl;
-    }
+void inputs::soltar(const inputs::chave& key) {
+    m_chaves[key] = false;
 }
-bool inputs::isKeyPressed(const std::string &key) const
-{
-    auto it = keyStates.find(key);
-    return it != keyStates.end() && it->second;
-}
-void inputs::handleKey(const std::string &key) {
-    switch (currentMode) {
-    case Game:
-        break;
-    case Editor:
-        break;
-    default:
-        std::cerr << "Modo de entrada desconhecido." << std::endl;
-        break;
-    }
-}
-static std::string glfwkeyTokey(int glfwkey) {
-
-    auto it = keyMap.find(glfwkey);
-    return it != keyMap.end() ? it->second : "Erro";
-}
-// Callback de teclado GLFW
-void BECOMMONS_NS::callbackKey(GLFWwindow* window, int key, int scancode, int action, int mods) 
-{
+bool inputs::obter(const inputs::chave& key) {
     auto &input = janela::obterInstancia().m_inputs;
-    input.mods = mods;
-    input.tecladoAcao = action;
+    return input.m_chaves[key];
+}
+bool inputs::obter_str(const std::string& key) {
+    auto &input = janela::obterInstancia().m_inputs;
+    inputs::chave key_ = mapa_string[key];
+    return input.m_chaves[key_];
+}
 
-        std::string mappedkey = glfwkeyTokey(key);
-        if (mappedkey != "Erro") {
-            if (action == GLFW_PRESS || action == GLFW_REPEAT) {
-                input.keyPressed(mappedkey);
-            }
-            else if (action == GLFW_RELEASE) {
-                input.keyReleased(mappedkey);
-            }
-        }
+void BECOMMONS_NS::keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods) {
+    auto &input = janela::obterInstancia().m_inputs;
+    input.m_mods = mods;
+    input.m_estado_tecla = action;
+    
+    inputs::chave mappedKey = static_cast<inputs::chave>(key);
+    if (action == GLFW_PRESS || action == GLFW_REPEAT) {
+        input.pressionar(mappedKey);
+    }
+    else if (action == GLFW_RELEASE) {
+        input.soltar(mappedKey);
+    }
     if (key == GLFW_KEY_BACKSPACE) {
         if (action == GLFW_PRESS) {
             input.m_backspace_pressionado = true;
@@ -150,69 +125,38 @@ void BECOMMONS_NS::callbackKey(GLFWwindow* window, int key, int scancode, int ac
         }
     }
 }
-
-// Callback de posi��o do mouse
-void BECOMMONS_NS::mousePosCallBack(GLFWwindow* window, double x, double y)
+void BECOMMONS_NS::mousePosCallback(GLFWwindow* window, double x, double y)
 {
     auto& input = janela::obterInstancia().m_inputs;
-
-        input.mousex = x;
-        input.mousey = y;
-    
+    input.m_mousex = x;
+    input.m_mousey = y;
 }
-// Callback de clique do mouse
-void BECOMMONS_NS::mouseButtonCallBack(GLFWwindow* window, int button, int action, int mods)
+
+void BECOMMONS_NS::mouseButtonCallback(GLFWwindow* window, int button, int action, int mods)
 {
     auto& input = janela::obterInstancia().m_inputs;
+    
+    input.m_estado_mouse = action;
+    input.m_mods = mods;
 
-    // Processar o clique do mouse
-    input.mouseEnter = action;
-    input.mouseButton = button;
-    input.mods = mods;
-
-    std::string mappedkey = glfwkeyTokey(button);
-    if (mappedkey != "Erro") {
-        if (action == GLFW_PRESS || action == GLFW_REPEAT) {
-            input.keyPressed(mappedkey);
-        }
-        else if (action == GLFW_RELEASE) {
-            input.keyReleased(mappedkey);
-        }
+    inputs::chave mappedKey = static_cast<inputs::chave>(button);
+    if (action == GLFW_PRESS || action == GLFW_REPEAT) {
+        input.pressionar(mappedKey);
+    }
+    else if (action == GLFW_RELEASE) {
+        input.soltar(mappedKey);
     }
 }
-// Callback para caracteres
+
 void BECOMMONS_NS::charCallback(GLFWwindow* window, unsigned int codepoint)
 {
     auto& input = janela::obterInstancia().m_inputs;
 
-    input.letra = static_cast<char>(codepoint);
-    input.letra_pressionada = true;
+    input.m_ultima_letra = static_cast<char>(codepoint);
+    input.m_letra_pressionada = true;
 }
 
-void BECOMMONS_NS::posicionarCursor(double x, double y)
-{
+dvet2 inputs::obterMousePos() {
     auto& input = janela::obterInstancia().m_inputs;
-    
-    input.mousex = x;
-    input.mousey = y;
-    glfwSetCursorPos(janela::obterInstancia().window, x, y);
-}
-
-vetor2<double> BECOMMONS_NS::obterMouse()
-{
-    auto& input = janela::obterInstancia().m_inputs;
-
-        return vetor2<double>( input.mousex, input.mousey );
+   return dvet2(input.m_mousex, input.m_mousey);
 };
-
-vetor2<int> BECOMMONS_NS::tamanhoJanela()
-{
-    return vetor2<int>( janela::obterInstancia().tamanho.x, janela::obterInstancia().tamanho.y );
-};
-
-bool BECOMMONS_NS::pressionada(const std::string &letra)
-{
-    auto& input = janela::obterInstancia().m_inputs;
-
-    return input.isKeyPressed(letra);
-}

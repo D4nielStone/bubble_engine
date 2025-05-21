@@ -33,7 +33,10 @@
 namespace BECOMMONS_NS {
     /// @name Funções estáticas de matemática (vetores da engine):
     /// @{
-
+    template <class T>
+    T lerp(T start, T end, T alpha) {
+        return start + alpha * (end - start);
+    }
     /// Calcula distância entre dois vetores (bubble::vetor2<double>)
     /// @param a ( primeiro vetor )
     /// @param b ( segundo vetor  )

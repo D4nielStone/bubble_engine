@@ -38,27 +38,26 @@ camera_editor::camera_editor()
     framebuffer_ptr = std::make_unique<elementos::imagem>(textura, true);
     viewport_ptr = &framebuffer_ptr->m_imagem_tamanho;
     imagem_ptr = framebuffer_ptr.get();
-    mousex_antigo = obterMouse().x;
-    mousey_antigo = obterMouse().y;
+    mousex_antigo = inputs::obterMousePos().x;
+    mousey_antigo = inputs::obterMousePos().y;
     transform = new transformacao();
     ceu = cor(0.2, 0.2, 0.2, 1.f);
 };
 
 void camera_editor::atualizarMovimentacao()
 {
-    auto inputs = janela::obterInstancia().m_inputs;
     float delta = janela::obterInstancia().m_tempo.obterDeltaTime();
 
     // Mouse rotation
-    float mousex_atual = obterMouse().x;
-    float mousey_atual = obterMouse().y;
+    float mousex_atual = inputs::obterMousePos().x;
+    float mousey_atual = inputs::obterMousePos().y;
     // Movement
-    if (inputs.isKeyPressed("W")) mover(glm::vec3(0, 0, sens * delta));
-    if (inputs.isKeyPressed("A")) mover(glm::vec3(-sens * delta, 0, 0));
-    if (inputs.isKeyPressed("S")) mover(glm::vec3(0, 0, -sens * delta));
-    if (inputs.isKeyPressed("D")) mover(glm::vec3(sens * delta, 0, 0));
+    if (inputs::obter(inputs::W)) mover(glm::vec3(0, 0, sens * delta));
+    if (inputs::obter(inputs::A)) mover(glm::vec3(-sens * delta, 0, 0));
+    if (inputs::obter(inputs::S)) mover(glm::vec3(0, 0, -sens * delta));
+    if (inputs::obter(inputs::D)) mover(glm::vec3(sens * delta, 0, 0));
 
-    if (inputs.isKeyPressed("MouseE"))
+    if (inputs::obter(inputs::MOUSE_E))
     {
         float mx = mousex_antigo - mousex_atual;
         float my = mousey_antigo - mousey_atual;

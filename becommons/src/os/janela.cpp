@@ -60,8 +60,21 @@ void janela::gerarInstancia(const char* nome, const bool f, dvet2 bounds , const
     instanciaAtual = new janela(nome, f, bounds, icon_path);
 }
 
-janela::~janela()
+ivet2 janela::obterTamanhoJanela() {
+    ivet2 tamanho = ivet2(janela::obterInstancia().tamanho.x, janela::obterInstancia().tamanho.y);
+    return tamanho;
+};
+
+void janela::posicionarCursor(double x, double y)
 {
+    auto& input = janela::obterInstancia().m_inputs;
+    
+    input.m_mousex = x;
+    input.m_mousey = y;
+    glfwSetCursorPos(janela::obterInstancia().window, x, y);
+}
+
+janela::~janela() {
     descarregarShaders();
     gerenciadorFontes::limparFontes();
 }
@@ -103,10 +116,10 @@ janela::janela(const char* nome, BECOMMONS_NS::vetor2<double> bounds, const char
 
     glEnable(GL_FRAMEBUFFER_SRGB);    
 
-    glfwSetCursorPosCallback(window,mousePosCallBack);
+    glfwSetCursorPosCallback(window,mousePosCallback);
     glfwSetCharCallback(window, charCallback);
-    glfwSetMouseButtonCallback(window, mouseButtonCallBack);
-    glfwSetKeyCallback(window,callbackKey);
+    glfwSetMouseButtonCallback(window, mouseButtonCallback);
+    glfwSetKeyCallback(window,keyCallback);
     glfwSetWindowUserPointer(window, this);
 
     vetor4<int> tam{};
@@ -165,10 +178,10 @@ if(f)
     glEnable(GL_BLEND); 
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     
-    glfwSetCursorPosCallback(window,mousePosCallBack);
+    glfwSetCursorPosCallback(window,mousePosCallback);
     glfwSetCharCallback(window, charCallback);
-    glfwSetMouseButtonCallback(window, mouseButtonCallBack);
-    glfwSetKeyCallback(window,callbackKey);
+    glfwSetMouseButtonCallback(window, mouseButtonCallback);
+    glfwSetKeyCallback(window,keyCallback);
     glfwSetWindowUserPointer(window, this);
 
     vetor4<int> tam{};
@@ -198,7 +211,7 @@ void janela::swap()
         m_cursor_antigo = m_cursor;
     }
     m_tempo.calcularDT();
-    m_inputs.letra_pressionada = false;
+    m_inputs.m_letra_pressionada = false;
     glfwSwapBuffers(window);
 }
 

@@ -35,3 +35,4 @@ jogos/releases
 out/.ninja_log
 out/.ninja_deps
 /out
+editor/include/assets/runtime_embutido.hpp
