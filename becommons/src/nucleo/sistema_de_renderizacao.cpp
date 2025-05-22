@@ -135,7 +135,7 @@ void sistema_renderizacao::atualizarCamera(camera* cam)
             s.setVec3("viewPos", cam->posicao.x, cam->posicao.y, cam->posicao.z);
             s.setMat4("projection", glm::value_ptr(cam->obtProjectionMatrix()));
             s.setVec2("resolution", janela::obterInstancia().tamanho.x, janela::obterInstancia().tamanho.y);
-            s.setMat4("modelo", transform->obter());
+            s.setMat4("modelo", glm::value_ptr(transform->obter()));
             terr->desenhar(s);
         });
         reg->cada<renderizador, transformacao>([&](const uint32_t ent_ren) {
@@ -168,7 +168,7 @@ void sistema_renderizacao::atualizarCamera(camera* cam)
             s.setVec3("viewPos", cam->posicao.x, cam->posicao.y, cam->posicao.z);
             s.setMat4("projection", glm::value_ptr(cam->obtProjectionMatrix()));
             s.setVec2("resolution", janela::obterInstancia().tamanho.x, janela::obterInstancia().tamanho.y);
-            s.setMat4("modelo", transform->obter());
+            s.setMat4("modelo", glm::value_ptr(transform->obter()));
             render->m_modelo->desenhar(s);
         });
         // Caso tenha Frama buffer, limpa a tela
