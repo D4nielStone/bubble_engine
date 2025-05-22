@@ -15,6 +15,24 @@
 ## classe Malha
 
 A classe `malha` é uma abstração em lua da classe [malha](@ref malha.cpp), que pertence ao **núcleo do motor** usada para armazenar dados de vértices, indices, material e etc.
+
+---
+
+Uso comum:
+```lua
+local m = malha()
+
+```
+
+---
+
+## Construtores (1)
+
+
+| Construtores    | Descrição |
+| -------- | ------- |
+| malha()  | Construtor padrao    |
+
 \}
 \defgroup Renderizador
 \{

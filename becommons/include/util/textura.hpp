@@ -26,6 +26,7 @@ SOFTWARE.
 
 #pragma once
 #include <string>
+#include <glad.h>
 
 namespace BECOMMONS_NS {
     struct textura {
@@ -34,7 +35,11 @@ namespace BECOMMONS_NS {
        
         textura() = default;
         textura(unsigned int id, std::string path) : id(id), path(path) {}
-        // Operador de igualdade
+        void bind(int slot) const {
+            glActiveTexture(GL_TEXTURE0 + slot);
+            glBindTexture(GL_TEXTURE_2D, this->id);
+        }
+
         bool operator==(const textura& other) const {
             return id == other.id && path == other.path;
         }

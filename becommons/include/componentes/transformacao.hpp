@@ -79,7 +79,7 @@ namespace BECOMMONS_NS {
 			return matrizmodelo;
 		}
 
-		float* obter() { return glm::value_ptr(matrizmodelo); }
+        glm::mat4 obter() { return matrizmodelo; }
 
 		transformacao& operator=(const transformacao& tr)
 		{

@@ -121,9 +121,9 @@ void terreno::carregarHeightMap(unsigned char* dados, int largura, int altura)
         v.normal.normalizar();
     }
     // Criar a malha
-    m_malha.vertices = vertices;
-    m_malha.indices = indices;
-    m_malha.definirBuffers(); // Configura VBO, VAO, EBO
+    m_malha.definirVertices(vertices);
+    m_malha.definirIndices(indices);
+    m_malha.carregar(); // Configura VBO, VAO, EBO
 }
 
 // Construtor do terreno

@@ -69,7 +69,7 @@ namespace BECOMMONS_NS
         {
             diretorio = path;
             malhas.push_back(primitivas[std::filesystem::path(path).filename().string()]);
-            malhas.back().definirBuffers();
+            malhas.back().carregar();
             return;
         }
         Assimp::Importer import;
@@ -179,7 +179,7 @@ namespace BECOMMONS_NS
         BECOMMONS_NS::material mat(texturas, difusa);
 
         malha m_(vertices, indices, mat);
-        m_.definirBuffers();
+        m_.carregar();
         return m_;
     }
 

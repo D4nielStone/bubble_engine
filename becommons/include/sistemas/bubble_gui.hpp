@@ -117,7 +117,7 @@ namespace BECOMMONS_NS {
         /**
          * @brief Define os buffers de OpenGL necessários para a renderização.
          */
-        void definirBuffers();
+        void carregar();
 
         /**
          * @brief Adiciona uma flag de estilo a uma caixa específica.

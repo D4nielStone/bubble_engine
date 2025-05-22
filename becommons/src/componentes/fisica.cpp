@@ -96,8 +96,8 @@ void fisica::criarMalha()
 
     for (const auto& malha : malhas) {
         // Supondo que malha tenha 'vertices' e 'indices'
-        const auto& vertices = malha.vertices;
-        const auto& indices = malha.indices;
+        const auto& vertices = malha.obterVertices();
+        const auto& indices = malha.obterIndices();
 
         btIndexedMesh mesh;
         mesh.m_numTriangles = indices.size() / 3;

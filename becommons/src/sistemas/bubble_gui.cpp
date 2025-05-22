@@ -244,7 +244,7 @@ bubble_gui::bubble_gui()
 
 void bubble_gui::inicializar(fase* f)
 {
-    definirBuffers();
+    carregar();
 }
 
 bubble_gui::~bubble_gui()
@@ -253,7 +253,7 @@ bubble_gui::~bubble_gui()
     delete quad_shader;
 }
 
-void bubble_gui::definirBuffers()
+void bubble_gui::carregar()
 {
     quad_shader = new shader("imagem.vert", "quad.frag");
 

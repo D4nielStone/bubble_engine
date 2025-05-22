@@ -75,6 +75,7 @@ target_sources(becommons PRIVATE
     src/sistemas/bubble_gui.cpp
     src/util/malha.cpp
     src/util/skybox.cpp
+    src/util/material.cpp
     src/os/janela.cpp
 )
 

@@ -37,9 +37,13 @@ using namespace BECOMMONS_NS;
 malha::malha(const std::vector<vertice>& vertices, const std::vector<unsigned int>& indices, const material& material) :
     m_vertices(vertices), m_indices(indices), m_material(material) {
 }
-        
+         
 std::vector<vertice> malha::obterVertices() const {
     return m_vertices;
+}
+        
+std::vector<fvet3> malha::obterInstancias() const {
+    return m_instancias;
 }
 
 std::vector<unsigned int> malha::obterIndices() const  {
@@ -52,6 +56,10 @@ material malha::obterMaterial() const {
 
 void malha::definirVertices(const std::vector<vertice>& v) {
     m_vertices = v;
+}
+
+void malha::definirInstancias(const std::vector<fvet3>& i) {
+    m_instancias = i;
 }
         
 void malha::definirIndices(const std::vector<unsigned int>& i) {
@@ -67,13 +75,17 @@ void malha::definirSobreposicao(const bool s) {
 }
 
 void malha::descarregar() {
+    if(!m_carregado) return;
     depuracao::emitir(debug, "malha", "descarregando");
     glDeleteVertexArrays(1, &VAO);
     glDeleteBuffers(1, &VBO);
     glDeleteBuffers(1, &EBO);
+    m_carregado = false;
 }
 
 void malha::carregar() {
+    if(m_carregado) return;
+    
     glGenVertexArrays(1, &VAO);
     glGenBuffers(1, &VBO);
     glGenBuffers(1, &EBO);
@@ -98,36 +110,21 @@ void malha::carregar() {
     glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(vertice), (void*)offsetof(vertice, uvcoords));
 
     glBindVertexArray(0);
+    m_carregado = true;
 }
 
 void malha::desenhar(shader &shader) {
     if(m_sobrepor)
         glDepthFunc(GL_ALWAYS);
-
-    // texturas
-    size_t i = 0;
-    for (auto &textura : m_material.texturas)
-    {
-        if(textura.second.id == 0) continue;
-        glActiveTexture(GL_TEXTURE0 + i); // activate proper texture unit before binding
-
-        std::string name = textura.first;
-        shader.setInt(name.c_str(), i);
-        shader.setBool(("use_" + name).c_str(), true);
-
-        glBindTexture(GL_TEXTURE_2D, textura.second.id);
-        i++;
-    }
-    glActiveTexture(GL_TEXTURE0);
+    
+    m_material.usar(shader);
 
     glBindVertexArray(VAO);
-    if (instancias_pos.empty())
-    {
+    if (instancias_pos.empty()) {
         shader.setBool("instancia", false);
         glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, 0);
     }
-    else
-    {
+    else {
         shader.setBool("instancia", true);
         for (size_t i = 0; i < instancias_pos.size(); i++)
         {
@@ -137,19 +134,18 @@ void malha::desenhar(shader &shader) {
     }
     glBindVertexArray(0);
 
-    //desativa texturas
-    for (auto &textura : m_material.texturas)
-    {
-        shader.setBool(("use_" + textura.first).c_str(), false);
-    }
-
     if(m_sobrepor)
         glDepthFunc(GL_LESS);
 }
-        bool                        estaCarregado() const;
-        bool                        estaSobreposto() const;
-
-malha::~malha() {
+        
+bool malha::estaCarregado() const {
+    return m_carregado;
 }
 
+bool malha::estaSobreposto() const {
+    return m_sobrepor;
+}
 
+malha::~malha() {
+    descarregar();
+}

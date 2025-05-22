@@ -47,7 +47,7 @@ namespace BECOMMONS_NS {
                     "skybox_front.png",
                     "skybox_back.png"});
             m_shader = new shader("skybox.vs", "skybox.fs");
-            malhas.back().definirBuffers();
+            malhas.back().carregar();
         }
         void desenhar(glm::mat4 view, glm::mat4 proj);
     };

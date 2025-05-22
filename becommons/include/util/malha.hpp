@@ -43,9 +43,11 @@ namespace BECOMMONS_NS {
         malha() = default;
         malha(const std::vector<vertice>& vertices, const std::vector<unsigned int> &indices, const material& material);
         std::vector<vertice>        obterVertices() const;
+        std::vector<fvet3>          obterInstancias() const;
         std::vector<unsigned int>   obterIndices() const;
         material                    obterMaterial() const;
         void                        definirVertices(const std::vector<vertice>&);
+        void                        definirInstancias(const std::vector<fvet3>&);
         void                        definirIndices(const std::vector<unsigned int>&);
         void                        definirMaterial(const material&);
         void                        definirSobreposicao(const bool);
@@ -54,9 +56,8 @@ namespace BECOMMONS_NS {
         void                        desenhar(shader& shader);
         bool                        estaCarregado() const;
         bool                        estaSobreposto() const;
-
-     private:
         ~malha();
+     private:
         bool                        m_sobrepor, 
                                     m_carregado;
         std::vector<fvet3>          m_instancias;
