@@ -65,7 +65,6 @@ fisica::fisica(bool malha, btScalar massa, btVector3 posicaoInicial, camada cama
 // Destrutor
 fisica::~fisica()
 {
-
     if(corpoRigido && projeto_atual->obterFaseAtual())projeto_atual->sfisica()->remover(corpoRigido);
     if(corpoRigido)delete corpoRigido;
     if(estadoDeMovimento)delete estadoDeMovimento;

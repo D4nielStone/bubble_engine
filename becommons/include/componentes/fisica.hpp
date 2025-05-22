@@ -68,10 +68,10 @@ namespace BECOMMONS_NS {
 
     private:
         bool usar_malha{ false };
-        btCollisionShape* forma;
-        btDefaultMotionState* estadoDeMovimento;
+        btCollisionShape* forma {nullptr};
+        btDefaultMotionState* estadoDeMovimento{nullptr};
         btRigidBody* corpoRigido{ nullptr };
         btVector3 posicaoInicial;
-        transformacao* m_transformacao;
+        transformacao* m_transformacao {nullptr};
     };
 }
