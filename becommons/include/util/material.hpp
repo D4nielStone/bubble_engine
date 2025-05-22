@@ -110,6 +110,14 @@ namespace BECOMMONS_NS {
         {
             texturas["tex_ao"] = tex;
         }
+        void usar(shader &shader) {
+            shader.setBool("recebe_luz", m_material.recebe_luz);
+            shader.setCor("material.albedo", m_material.albedo);
+            shader.setFloat("material.metallic", m_material.metallic);
+            shader.setFloat("material.ao", m_material.ao);
+            shader.setFloat("material.roughness", m_material.roughness);
+            shader.setBool("uvMundo", m_material.uvMundo);
+        }
 
         // Propriedades PBR
         cor albedo;       // Cor base do material (albedo)
