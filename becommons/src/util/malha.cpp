@@ -33,7 +33,7 @@ SOFTWARE.
 #include "util/vertice.hpp"
 
 namespace BECOMMONS_NS {
-    malha::malha(std::vector<vertice>& vertices, std::vector<unsigned int>& indices, material& material)
+    malha::malha(const std::vector<vertice>& vertices, const std::vector<unsigned int>& indices, const material& material)
     {
         this->vertices = vertices;
         this->indices = indices;

@@ -33,6 +33,7 @@ SOFTWARE.
 #include "os/janela.hpp"
 #include "inputs/inputs.hpp"
 #include "util/malha.hpp"
+#include "util/vertice.hpp"
 #include "api/mat.hpp"
 
 using namespace BECOMMONS_NS;
@@ -42,6 +43,9 @@ void api::entidade::definir(lua_State* L) {
 	    beginClass<malha>("malha").
 	    addConstructor<void(*)()>().
 	    addData("material", &malha::m_material).
+	    addData("vertices", &malha::vertices).
+	    addData("indices", &malha::indices).
+	    addData("intancias", &malha::instancias_pos).
 	    endClass().
 	    beginClass<modelo>("modelo").
 	    addConstructor<void(*)()>().
@@ -266,17 +270,17 @@ void BECOMMONS_NS::api::definirUtils(lua_State *L)
 		.addFunction("distancia2", &distancia2)
 		.addFunction("normalizar3", &glm::normalize<3, float, glm::packed_highp>) 
 		.endNamespace()
-		.beginClass<glm::vec3>("vetor3")
+		.beginClass<vertice>("vertice")
+		.addConstructor<void(*)(const fvet3&, const fvet3&, const fvet2&)>()
+		.addData("posicao", &vertice::posicao)
+		.addData("normal", &vertice::normal)
+		.addData("uvcoords", &vertice::uvcoords)
+		.endClass()
+		.beginClass<glm::vec3>("vetor3f")
 		.addConstructor<void(*)(float, float, float)>()
 		.addData<float>("x", &glm::vec3::x)
 		.addData<float>("y", &glm::vec3::y)
 		.addData<float>("z", &glm::vec3::z)
-		.endClass()
-        .beginClass<fvet3>("fvet3")
-		.addConstructor<void(*)(float, float, float)>()
-		.addData<float>("x", &fvet3::x)
-		.addData<float>("y", &fvet3::y)
-		.addData<float>("z", &fvet3::z)
 		.endClass()
         .beginClass<luz_direcional>("luz_direcional")
         .addConstructor<void(*)()>()
@@ -292,9 +296,13 @@ void BECOMMONS_NS::api::definirUtils(lua_State *L)
 		.addData<float>("b", &cor::b)
 		.addData<float>("a", &cor::a)
 		.endClass()
+		.beginClass<vetor2<float>>("vetor2f")
+		.addConstructor<void(*)(float, float)>()
+		.addData("x", &vetor2<float>::x)
+		.addData("y", &vetor2<float>::y)
+		.endClass()
 		.beginClass<vetor2<int>>("vetor2i")
 		.addConstructor<void(*)(int, int)>()
-		.addConstructor<void(*)(float, float)>()
 		.addData<int>("x", &vetor2<int>::x)
 		.addData<int>("y", &vetor2<int>::y)
 		.endClass()
@@ -314,9 +322,7 @@ void BECOMMONS_NS::api::definirUtils(lua_State *L)
 		.addConstructor<void(*)(unsigned int, std::string)>()
 		.addData("id", &textura::id)
 		.addData("caminho", &textura::path)
-		.endClass();
-
-    luabridge::getGlobalNamespace(L)
+		.endClass()
         .beginClass<material>("material")
 		.addConstructor<void(*)()>()
 		.addData<cor>("albedo", &BECOMMONS_NS::material::albedo)

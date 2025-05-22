@@ -31,10 +31,14 @@ var NAVTREE =
       [ "Contributing", "index.html#autotoc_md8", null ],
       [ "Installation", "index.html#autotoc_md10", [
         [ "Linux (Debian/Ubuntu-based distros)", "index.html#autotoc_md11", null ],
-        [ "Windows 7 x64", "index.html#autotoc_md13", null ],
-        [ "Youtube", "index.html#autotoc_md15", null ]
+        [ "Windows 7 x64", "index.html#autotoc_md12", null ],
+        [ "Youtube", "index.html#autotoc_md14", null ]
       ] ]
     ] ],
+    [ "Ajuda", "md_docs_2ajuda_2ajuda.html", [
+      [ "Principais tópicos:", "md_docs_2ajuda_2ajuda.html#autotoc_md17", null ]
+    ] ],
+    [ "Tópicos", "topics.html", "topics" ],
     [ "Namespaces", "namespaces.html", [
       [ "Lista de Namespaces", "namespaces.html", "namespaces_dup" ],
       [ "Membros do namespace", "namespacemembers.html", [
@@ -69,7 +73,7 @@ var NAVTREEINDEX =
 [
 "annotated.html",
 "classBECOMMONS__NS_1_1textureLoader.html",
-"structBECOMMONS__NS_1_1componente.html#a63f9004bc698806fecbc2d677f8ee369a61476cb26bd2282e0ea8ebea0ebf8406"
+"structBECOMMONS__NS_1_1componente.html#a63f9004bc698806fecbc2d677f8ee369a4af5676b64b8d6d231d6549b92cb7d1f"
 ];
 
 var SYNCONMSG = 'clique para desativar a sincronização do painel';

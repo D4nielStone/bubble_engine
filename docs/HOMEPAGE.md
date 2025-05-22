@@ -25,7 +25,11 @@ Bubble GUI is the graphical interface library of bubble game engine. It work's l
     class bubble_gui : public sistema { ... }
 ```
 
----------------------------------------------------------------
+
+
+----------------
+
+
 
 ## Project Example
 
@@ -37,17 +41,17 @@ A golf game was created as a physics test. Several engine features were improved
 
 
 
----------------------------------------------------------------
+----------------
 
 
 
-> *Running on Debian distibution*   
+> Running on Debian distibution   
 > ![image](https://github.com/user-attachments/assets/5662c8da-03a4-420b-b43f-43aff33d0445)
 > ![image](https://github.com/user-attachments/assets/8288c203-ac51-46b8-9c38-599650684a78)
 
 
 
----------------------------------------------------------------
+----------------
 
 
 
@@ -60,7 +64,11 @@ This project is developed mainly on Linux Mint using NeoVim.
 - For major changes, please open a discussion/issue first.
 - Constructive feedback is appreciated.
 
----------------------------------------------------------------
+
+
+----------------
+
+
 
 ## Installation
 
@@ -81,8 +89,6 @@ mkdir out
 cd out
 cmake .. && cmake --build .
 ```
-
----------------------------------------------------------------
 
 ### Windows 7 x64
 
@@ -119,12 +125,15 @@ cmake --build . --config Release
 > Ensure `vcpkg` and `mingw` paths are added to your system's PATH environment variable.
 
 
----------------------------------------------------------------
+
+----------------
+
 
 
 ### Youtube
 Subscribe on the [bubble's youtube channel](https://www.youtube.com/channel/UCzPkiCemP0bCC5P3NhX3T4w)!
 
 
+----------------
 
----------------------------------------------------------------
+

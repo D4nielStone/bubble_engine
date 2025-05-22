@@ -63,6 +63,12 @@ void codigo::iniciar() const
 	luabridge::setGlobal(L, &projeto_atual, "projetoAtual");
 	// Tentar obter a fun��o "iniciar" definida localmente no script
 	lua_getglobal(L, "iniciar");
+	if (lua_isfunction(L, -1)) {
+	    lua_pcall(L, 0, 0, 0); // Chama a função sem argumentos e sem retorno
+	} else {
+        depuracao::emitir(erro, lua_tostring(L, -1));
+        lua_pop(L, 1);  // Limpa a mensagem de erro
+	}
 }
 
 bool codigo::analizar(const rapidjson::Value& value) 

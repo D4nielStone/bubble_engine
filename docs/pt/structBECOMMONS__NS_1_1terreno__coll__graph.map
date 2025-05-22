@@ -2,7 +2,7 @@
 <area shape="rect" id="Node000001" title=" " alt="" coords="250,269,441,295"/>
 <area shape="rect" id="Node000002" href="$structBECOMMONS__NS_1_1componente.html" title="base para as funcionalidades da engine" alt="" coords="5,181,229,207"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="162,209,316,267,314,272,160,214"/>
-<area shape="rect" id="Node000003" href="$classBECOMMONS__NS_1_1malha.html" title=" " alt="" coords="253,181,437,207"/>
+<area shape="rect" id="Node000003" href="$classBECOMMONS__NS_1_1malha.html" title="Gerencia os vertices, indices, material e ect. Usada para renderizar objetos 3D." alt="" coords="253,181,437,207"/>
 <area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="348,221,348,269,343,269,343,221"/>
 <area shape="rect" id="Node000004" href="$structBECOMMONS__NS_1_1material.html" title=" " alt="" coords="246,93,445,119"/>
 <area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="348,133,348,181,343,181,343,133"/>

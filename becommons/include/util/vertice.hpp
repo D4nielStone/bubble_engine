@@ -30,8 +30,9 @@ SOFTWARE.
 #include "vetor3.hpp"
 
 namespace BECOMMONS_NS {
-	struct vertice
-	{
+	struct vertice {
+	    vertice() = default;
+	    vertice(const fvet3& p, const fvet3& n, const fvet2& uv) : posicao(p), normal(n), uvcoords(uv) {}
 		fvet3 posicao, normal;
 		fvet2 uvcoords;
 	};

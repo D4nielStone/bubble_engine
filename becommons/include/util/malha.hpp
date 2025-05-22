@@ -33,16 +33,24 @@ SOFTWARE.
 #include "arquivadores/shader.hpp"
 
 namespace BECOMMONS_NS {
-    class malha
-    {
+    /**
+     * \class malha
+     * \brief Gerencia os vertices, indices, material e ect.
+     * Usada para renderizar objetos 3D.
+     * Construtores(2) | Descrição
+     * ----------------|--------------
+     * **malha()**     | Construtor padrão
+     * **malha(std::vector<vertice>& vertices, std::vector<unsigned int> &indices, material& material)** | Inicializa valores de vertices, indices e material.
+     */
+    class malha {
         public:
         malha() = default;
+        malha(const std::vector<vertice>& vertices, const std::vector<unsigned int> &indices, const material& material);
         bool m_sobrepor = false;
         std::vector<glm::vec3> instancias_pos;
         std::vector<vertice> vertices;
         std::vector<unsigned int> indices;
         material m_material;
-        malha(std::vector<vertice>& vertices, std::vector<unsigned int> &indices, material& material);
         ~malha();
         void descarregar();
         void desenhar(shader& shader);

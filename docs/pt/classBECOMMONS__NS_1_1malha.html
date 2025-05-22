@@ -1,3 +1,4 @@
+<!-- HTML header for doxygen 1.9.8-->
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="pt-BR">
 <head>
@@ -16,6 +17,10 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript" src="doxygen-awesome-darkmode-toggle.js"></script>
+        <script type="text/javascript">
+            DoxygenAwesomeDarkModeToggle.init()
+        </script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
 </head>
@@ -25,7 +30,7 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr id="projectrow">
-  <td id="projectlogo"><img alt="Logo" src="banner.png"/></td>
+  <td id="projectlogo"><img alt="Logo" src="favicon.ico"/></td>
   <td id="projectalign">
    <div id="projectname">Bubble Engine<span id="projectnumber">&#160;1.0b</span>
    </div>
@@ -99,6 +104,11 @@ $(document).ready(function(){initNavTree('classBECOMMONS__NS_1_1malha.html','');
   <div class="headertitle"><div class="title">Referência da Classe BECOMMONS_NS::malha</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Gerencia os vertices, indices, material e ect. Usada para renderizar objetos 3D.  
+ <a href="classBECOMMONS__NS_1_1malha.html#details">Mais...</a></p>
+
+<p><code>#include &lt;<a class="el" href="malha_8hpp_source.html">malha.hpp</a>&gt;</code></p>
 <div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Diagrama de colaboração para BECOMMONS_NS::malha:</div>
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
@@ -106,7 +116,7 @@ $(document).ready(function(){initNavTree('classBECOMMONS__NS_1_1malha.html','');
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="classBECOMMONS__NS_1_1malha__coll__graph.png" border="0" usemap="#aBECOMMONS__NS_1_1malha_coll__map" alt="Collaboration graph"/></div>
 <map name="aBECOMMONS__NS_1_1malha_coll__map" id="aBECOMMONS__NS_1_1malha_coll__map">
-<area shape="rect" title=" " alt="" coords="13,181,197,207"/>
+<area shape="rect" title="Gerencia os vertices, indices, material e ect. Usada para renderizar objetos 3D." alt="" coords="13,181,197,207"/>
 <area shape="rect" href="structBECOMMONS__NS_1_1material.html" title=" " alt="" coords="5,93,204,119"/>
 <area shape="poly" title=" " alt="" coords="107,133,107,181,102,181,102,133"/>
 <area shape="rect" href="structBECOMMONS__NS_1_1cor.html" title=" " alt="" coords="23,5,186,31"/>
@@ -116,9 +126,9 @@ $(document).ready(function(){initNavTree('classBECOMMONS__NS_1_1malha.html','');
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Membros Públicos</h2></td></tr>
-<tr class="memitem:a6eff0276a8152586576fab049f2ff9f1" id="r_a6eff0276a8152586576fab049f2ff9f1"><td class="memItemLeft" align="right" valign="top"><a id="a6eff0276a8152586576fab049f2ff9f1" name="a6eff0276a8152586576fab049f2ff9f1"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>malha</b> (std::vector&lt; <a class="el" href="structBECOMMONS__NS_1_1vertice.html">vertice</a> &gt; &amp;vertices, std::vector&lt; unsigned int &gt; &amp;indices, <a class="el" href="structBECOMMONS__NS_1_1material.html">material</a> &amp;<a class="el" href="structBECOMMONS__NS_1_1material.html">material</a>)</td></tr>
-<tr class="separator:a6eff0276a8152586576fab049f2ff9f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac5633497d9f951e51d3d472b7f6a0bd6" id="r_ac5633497d9f951e51d3d472b7f6a0bd6"><td class="memItemLeft" align="right" valign="top"><a id="ac5633497d9f951e51d3d472b7f6a0bd6" name="ac5633497d9f951e51d3d472b7f6a0bd6"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>malha</b> (const std::vector&lt; <a class="el" href="structBECOMMONS__NS_1_1vertice.html">vertice</a> &gt; &amp;vertices, const std::vector&lt; unsigned int &gt; &amp;indices, const <a class="el" href="structBECOMMONS__NS_1_1material.html">material</a> &amp;<a class="el" href="structBECOMMONS__NS_1_1material.html">material</a>)</td></tr>
+<tr class="separator:ac5633497d9f951e51d3d472b7f6a0bd6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab988f2b5dd06d171bef49ac04a791092" id="r_ab988f2b5dd06d171bef49ac04a791092"><td class="memItemLeft" align="right" valign="top"><a id="ab988f2b5dd06d171bef49ac04a791092" name="ab988f2b5dd06d171bef49ac04a791092"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>descarregar</b> ()</td></tr>
 <tr class="separator:ab988f2b5dd06d171bef49ac04a791092"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -156,7 +166,17 @@ unsigned int&#160;</td><td class="memItemRight" valign="bottom"><b>VBO</b></td><
 unsigned int&#160;</td><td class="memItemRight" valign="bottom"><b>EBO</b></td></tr>
 <tr class="separator:ac8a8ece79d6dc1d88081d7cf83df6724"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<hr/>A documentação para essa classe foi gerada a partir dos seguintes arquivos:<ul>
+<a name="details" id="details"></a><h2 class="groupheader">Descrição detalhada</h2>
+<div class="textblock"><p>Gerencia os vertices, indices, material e ect. Usada para renderizar objetos 3D. </p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Construtores(2)   </th><th class="markdownTableHeadNone">Descrição    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><b>malha()</b>   </td><td class="markdownTableBodyNone">Construtor padrão    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><b>malha(std::vector&lt;vertice&gt;&amp; vertices, std::vector&lt;unsigned int&gt; &amp;indices, material&amp; material)</b>   </td><td class="markdownTableBodyNone">Inicializa valores de vertices, indices e material.   </td></tr>
+</table>
+</div><hr/>A documentação para essa classe foi gerada a partir dos seguintes arquivos:<ul>
 <li><a class="el" href="malha_8hpp_source.html">malha.hpp</a></li>
 <li><a class="el" href="malha_8cpp.html">malha.cpp</a></li>
 </ul>
