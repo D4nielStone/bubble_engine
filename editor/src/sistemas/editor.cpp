@@ -266,6 +266,7 @@ projeto_atual->obterFaseAtual()->obterRegistro()->remover(entidade_atual);
         }
     }
     cam.atualizarMovimentacao();
+    sistema_renderizacao::calcularTransformacao(cam.transform);
 }
 
 void sistema_editor::executarRuntime()

@@ -413,6 +413,41 @@ GLuint textureLoader::carregarTextura(const std::string& caminho, int *width, in
 
     return id;
 }
+
+GLuint textureLoader::carregarTextura(const std::string& caminho, ivet2& vet2) {
+    // Verificar se a textura já foi carregada
+    if (texturasCarregadas.find(caminho) != texturasCarregadas.end()) {
+        return texturasCarregadas[caminho]; // Retorna ID da textura j� carregada
+    }
+
+    int width, height;
+    // Carregar nova textura
+    GLuint id = texturaDoArquivo(caminho.c_str(), &width, &height);
+    texturasCarregadas[caminho] = id; // Armazena o ID da textura no mapa
+
+    vet2.x = width;
+    vet2.y = height;
+
+    return id;
+}
+
+GLuint textureLoader::carregarTextura(const std::string& caminho, fvet2& vet2) {
+    // Verificar se a textura já foi carregada
+    if (texturasCarregadas.find(caminho) != texturasCarregadas.end()) {
+        return texturasCarregadas[caminho]; // Retorna ID da textura j� carregada
+    }
+
+    int width, height;
+    // Carregar nova textura
+    GLuint id = texturaDoArquivo(caminho.c_str(), &width, &height);
+    texturasCarregadas[caminho] = id; // Armazena o ID da textura no mapa
+
+    vet2.x = width;
+    vet2.y = height;
+
+    return id;
+}
+
 GLuint textureLoader::carregarTextura(const std::string& caminho, double *width, double *height)
 {
     // Verificar se a textura j� foi carregada

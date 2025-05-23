@@ -1,6 +1,6 @@
 <map id="BECOMMONS_NS::componente" name="BECOMMONS_NS::componente">
 <area shape="rect" id="Node000001" title="base para as funcionalidades da engine" alt="" coords="5,259,229,285"/>
-<area shape="rect" id="Node000002" href="$structBECOMMONS__NS_1_1camera.html" title="componente que facilita a manipuacao da matriz de visualizacao e projeco" alt="" coords="301,13,493,38"/>
+<area shape="rect" id="Node000002" href="$classBECOMMONS__NS_1_1camera.html" title="componente que facilita a manipuacao da matriz de visualizacao e projeco" alt="" coords="301,13,493,38"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="127,245,148,202,180,147,223,93,248,68,276,47,299,35,302,40,279,52,252,72,227,96,185,150,153,204,132,248"/>
 <area shape="rect" id="Node000004" href="$structBECOMMONS__NS_1_1codigo.html" title=" " alt="" coords="303,62,490,87"/>
 <area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="131,246,155,212,188,171,229,130,276,96,302,85,304,90,279,101,233,134,192,174,160,215,136,249"/>

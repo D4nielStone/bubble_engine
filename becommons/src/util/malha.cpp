@@ -30,6 +30,7 @@
 #include "util/material.hpp"
 #include "depuracao/debug.hpp"
 #include "util/vertice.hpp"
+#include "nucleo/sistema_de_renderizacao.hpp"
 
 using namespace BECOMMONS_NS;
 
@@ -42,7 +43,7 @@ std::vector<vertice> malha::obterVertices() const {
     return m_vertices;
 }
         
-std::vector<fvet3> malha::obterInstancias() const {
+std::vector<transformacao> malha::obterInstancias() const {
     return m_instancias;
 }
 
@@ -53,12 +54,24 @@ std::vector<unsigned int> malha::obterIndices() const  {
 material malha::obterMaterial() const {
     return m_material;
 }
+        
+unsigned int malha::obterVertexArray() const {
+    return m_VAO;
+}
+        
+unsigned int malha::obterElementBuffer() const {
+    return m_EBO;
+}
+        
+unsigned int malha::obterVertexBuffer() const {
+    return m_VBO;
+}
 
 void malha::definirVertices(const std::vector<vertice>& v) {
     m_vertices = v;
 }
 
-void malha::definirInstancias(const std::vector<fvet3>& i) {
+void malha::definirInstancias(const std::vector<transformacao>& i) {
     m_instancias = i;
 }
         
@@ -86,6 +99,16 @@ void malha::descarregar() {
 void malha::carregar() {
     if(m_carregado) return;
     
+    if (m_instancias.empty()) {
+        m_material.definirUniforme("instancia", false);
+    } else {
+        m_material.definirUniforme("instancia", true);
+        for (size_t i = 0; i < m_instancias.size(); i++) {
+            sistema_renderizacao::calcularTransformacao(&m_instancias[i]);
+            m_material.definirUniforme("transformacoes[" + std::to_string(i) + "]", m_instancias[i].obterMatrizModelo());
+        }
+    }
+
     glGenVertexArrays(1, &m_VAO);
     glGenBuffers(1, &m_VBO);
     glGenBuffers(1, &m_EBO);
@@ -93,11 +116,11 @@ void malha::carregar() {
     glBindVertexArray(m_VAO);
     glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
 
-    glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(vertice), &vertices[0], GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, m_vertices.size() * sizeof(vertice), &m_vertices[0], GL_STATIC_DRAW);
 
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_EBO);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(unsigned int),
-        &indices[0], GL_STATIC_DRAW);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, m_indices.size() * sizeof(unsigned int),
+        &m_indices[0], GL_STATIC_DRAW);
 
     // vertex positions
     glEnableVertexAttribArray(0);
@@ -120,17 +143,11 @@ void malha::desenhar(shader &shader) {
     m_material.usar(shader);
 
     glBindVertexArray(m_VAO);
-    if (instancias_pos.empty()) {
-        shader.setBool("instancia", false);
-        glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, 0);
-    }
-    else {
-        shader.setBool("instancia", true);
-        for (size_t i = 0; i < instancias_pos.size(); i++)
-        {
-            shader.setVec3("posicoes[" + std::to_string(i) + "]", instancias_pos[i].x, instancias_pos[i].y, instancias_pos[i].z);
-        }
-        glDrawElementsInstanced(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, 0, instancias_pos.size());
+
+    if (m_instancias.empty()) {
+        glDrawElements(GL_TRIANGLES, m_indices.size(), GL_UNSIGNED_INT, 0);
+    } else {
+        glDrawElementsInstanced(GL_TRIANGLES, m_indices.size(), GL_UNSIGNED_INT, 0, m_instancias.size());
     }
     glBindVertexArray(0);
 

@@ -44,6 +44,23 @@ SOFTWARE.
 
 using namespace BECOMMONS_NS;
 
+void sistema_renderizacao::calcularTransformacao(transformacao* t) {
+    glm::mat4 matrizmodelo = glm::mat4(1.f);
+    if (t->usandoAlvo()) {
+        matrizmodelo = glm::translate(glm::mat4(1.f), t->obterPosicao().to_glm()); // Aplica a translação
+		matrizmodelo *= glm::inverse(glm::lookAt(glm::vec3(0.f), (t->obterAlvo() - t->obterPosicao()).to_glm(), t->obterCima().to_glm()));
+		matrizmodelo = glm::scale(matrizmodelo, t->obterEscala().to_glm());       // Aplica a escala
+	} 
+	else {
+		matrizmodelo = glm::translate(glm::mat4(1.f), t->obterPosicao().to_glm()); // Aplica a translação
+		matrizmodelo = glm::rotate(matrizmodelo, glm::radians(t->obterRotacao().x), glm::vec3(1.f, 0.f, 0.f));
+		matrizmodelo = glm::rotate(matrizmodelo, glm::radians(t->obterRotacao().y), glm::vec3(0.f, 1.f, 0.f));
+		matrizmodelo = glm::rotate(matrizmodelo, glm::radians(t->obterRotacao().z), glm::vec3(0.f, 0.f, 1.f));
+		matrizmodelo = glm::scale(matrizmodelo, t->obterEscala().to_glm());       // Aplica a escala
+	}
+	t->definirMatrizModelo(matrizmodelo);
+}
+
 void sistema_renderizacao::atualizar() {
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_CULL_FACE);
@@ -103,7 +120,7 @@ void sistema_renderizacao::atualizarCamera(camera* cam)
 
         reg->cada<transformacao>([&](const uint32_t ent) {
             auto transform = reg->obter<transformacao>(ent);
-                transform->calcular();
+            calcularTransformacao(transform.get());
         });
 
         reg->cada<terreno, transformacao>([&](const uint32_t ent_ren) {
@@ -135,7 +152,7 @@ void sistema_renderizacao::atualizarCamera(camera* cam)
             s.setVec3("viewPos", cam->posicao.x, cam->posicao.y, cam->posicao.z);
             s.setMat4("projection", glm::value_ptr(cam->obtProjectionMatrix()));
             s.setVec2("resolution", janela::obterInstancia().tamanho.x, janela::obterInstancia().tamanho.y);
-            s.setMat4("modelo", glm::value_ptr(transform->obter()));
+            s.setMat4("modelo", glm::value_ptr(transform->obterMatrizModelo()));
             terr->desenhar(s);
         });
         reg->cada<renderizador, transformacao>([&](const uint32_t ent_ren) {
@@ -168,7 +185,8 @@ void sistema_renderizacao::atualizarCamera(camera* cam)
             s.setVec3("viewPos", cam->posicao.x, cam->posicao.y, cam->posicao.z);
             s.setMat4("projection", glm::value_ptr(cam->obtProjectionMatrix()));
             s.setVec2("resolution", janela::obterInstancia().tamanho.x, janela::obterInstancia().tamanho.y);
-            s.setMat4("modelo", glm::value_ptr(transform->obter()));
+            s.setMat4("modelo", glm::value_ptr(transform->obterMatrizModelo()));
+            
             render->m_modelo->desenhar(s);
         });
         // Caso tenha Frama buffer, limpa a tela

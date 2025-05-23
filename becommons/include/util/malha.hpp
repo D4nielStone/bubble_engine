@@ -30,6 +30,7 @@
 #include "becommons_namespace.hpp"
 #include "material.hpp"
 #include "vertice.hpp"
+#include "componentes/transformacao.hpp"
 #include "arquivadores/shader.hpp"
 
 namespace BECOMMONS_NS {
@@ -43,11 +44,14 @@ namespace BECOMMONS_NS {
         malha() = default;
         malha(const std::vector<vertice>& vertices, const std::vector<unsigned int> &indices, const material& material);
         std::vector<vertice>        obterVertices() const;
-        std::vector<fvet3>          obterInstancias() const;
+        std::vector<transformacao>  obterInstancias() const;
         std::vector<unsigned int>   obterIndices() const;
         material                    obterMaterial() const;
+        unsigned int                obterVertexArray() const;
+        unsigned int                obterElementBuffer() const;
+        unsigned int                obterVertexBuffer() const;
         void                        definirVertices(const std::vector<vertice>&);
-        void                        definirInstancias(const std::vector<fvet3>&);
+        void                        definirInstancias(const std::vector<transformacao>&);
         void                        definirIndices(const std::vector<unsigned int>&);
         void                        definirMaterial(const material&);
         void                        definirSobreposicao(const bool);
@@ -60,7 +64,7 @@ namespace BECOMMONS_NS {
      private:
         bool                        m_sobrepor, 
                                     m_carregado;
-        std::vector<fvet3>          m_instancias;
+        std::vector<transformacao>  m_instancias;
         std::vector<vertice>        m_vertices;
         std::vector<unsigned int>   m_indices;
         material                    m_material;

@@ -11,7 +11,7 @@ var searchData=
   ['registro_5ftestes_2ehpp_8',['registro_testes.hpp',['../registro__testes_8hpp.html',1,'']]],
   ['removerelemento_9',['removerElemento',['../classBECOMMONS__NS_1_1bubble__gui.html#a2d5396936444319bd413598bb256e9c6',1,'BECOMMONS_NS::bubble_gui']]],
   ['removerfilhos_10',['removerFilhos',['../classBECOMMONS__NS_1_1bubble__gui.html#a84b415dd69167c1a6df4a12320e3315c',1,'BECOMMONS_NS::bubble_gui']]],
-  ['renderizador_11',['renderizador',['../group__Renderizador.html#autotoc_md24',1,'classe Renderizador'],['../structBECOMMONS__NS_1_1renderizador.html',1,'BECOMMONS_NS::renderizador'],['../group__Renderizador.html',1,'Renderizador'],['../group__Renderizador.html#autotoc_md23',1,'Renderizador']]],
+  ['renderizador_11',['renderizador',['../group__Renderizador.html#autotoc_md26',1,'classe Renderizador'],['../structBECOMMONS__NS_1_1renderizador.html',1,'BECOMMONS_NS::renderizador'],['../group__Renderizador.html',1,'Renderizador'],['../group__Renderizador.html#autotoc_md25',1,'Renderizador']]],
   ['renderizador_2ehpp_12',['renderizador.hpp',['../renderizador_8hpp.html',1,'']]],
   ['renderizarfundo_13',['renderizarFundo',['../namespaceBECOMMONS__NS.html#a5dba841cca2e8f9373062402145a9c51',1,'BECOMMONS_NS']]],
   ['renderizarimagem_14',['renderizarImagem',['../namespaceBECOMMONS__NS.html#aba2a32c2df8d312a0a325d7d6d2379cf',1,'BECOMMONS_NS']]],

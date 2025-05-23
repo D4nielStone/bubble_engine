@@ -26,20 +26,36 @@ SOFTWARE.
 
 #pragma once
 #include <cmath>
+#include <type_traits>
+#include <bullet/btBulletDynamicsCommon.h>
 #include "becommons_namespace.hpp"
+#include "glm/glm.hpp"
 /* Definição da estrutura vetor3 */
 
 namespace BECOMMONS_NS {
     template<class T>
-    struct vetor3
-    {
+    struct vetor3 {
         T x, y, z;
+        static_assert(std::is_arithmetic_v<T>, "vetor3<T>: T precisa ser um numero aritimético");
+            
+        constexpr vetor3(T x, T y, T z = T{}) : x(x), y(y), z(z) {}
+        constexpr vetor3(T f = {}) : x(f), y(f), z(f) {}
 
-        // Construtor com parâmetros
-        vetor3(T x, T y, T z) : x(x), y(y), z(z) {}
-
-        // Construtor padrão
-        vetor3() : x(T{}), y(T{}), z(T{}) {}
+        constexpr vetor3(const glm::vec<3, T, glm::packed_highp>& other)
+            : x(other.x), y(other.y), z(other.z) {} 
+        
+        constexpr vetor3(const btVector3& other)
+            : x(static_cast<T>(other.getX())),
+              y(static_cast<T>(other.getY())),
+              z(static_cast<T>(other.getZ())) {}
+        
+        glm::vec<3, T, glm::packed_highp> to_glm() const {
+            return glm::vec<3, T, glm::packed_highp>((x), (y), (z));
+        }
+        
+        btVector3 to_btvec() const {
+            return btVector3(static_cast<float>(x), static_cast<float>(y), static_cast<float>(z));
+        }
 
         // Deve somar
         vetor3 operator+(const vetor3& other) const
@@ -143,13 +159,14 @@ namespace BECOMMONS_NS {
         {
             return !(*this == other);
         }
-        void normalizar()
+        vetor3<T> normalizar()
         {
             float mag = std::sqrt(x*x + y*y + z*z);
-            if(mag < 0) return;
+            if(mag < 0) return *this;
             x = x / mag;
             y = y / mag;
             z = z / mag;
+            return *this;
         }
         T tamanho() const
         {

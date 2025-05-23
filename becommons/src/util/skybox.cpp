@@ -33,7 +33,7 @@ void skybox::desenhar(glm::mat4 view, glm::mat4 proj)
         {
             glDepthFunc(GL_ALWAYS);
 
-            glBindVertexArray(malhas.back().VAO);
+            glBindVertexArray(malhas.back().obterVertexArray());
             
             glm::mat4 nview = glm::mat4(glm::mat3(view));
             obterShader().use();
@@ -41,7 +41,7 @@ void skybox::desenhar(glm::mat4 view, glm::mat4 proj)
             obterShader().setMat4("projection", glm::value_ptr(proj));
             
             glBindTexture(GL_TEXTURE_CUBE_MAP, id_skybox);
-            glDrawElements(GL_TRIANGLES, malhas.back().indices.size(), GL_UNSIGNED_INT, 0);
+            glDrawElements(GL_TRIANGLES, malhas.back().obterIndices().size(), GL_UNSIGNED_INT, 0);
             
             glBindVertexArray(0);
             glDepthFunc(GL_LESS);

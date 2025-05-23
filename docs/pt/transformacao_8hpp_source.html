@@ -1,7 +1,8 @@
 <!-- HTML header for doxygen 1.9.8-->
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="pt-BR">
-<head>
+<head icon="docs/favicon.ic">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
@@ -109,77 +110,65 @@ $(document).ready(function(){initNavTree('transformacao_8hpp_source.html',''); i
 <div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="preprocessor">#pragma once</span></div>
 <div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="preprocessor">#include &quot;becommons_namespace.hpp&quot;</span></div>
 <div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="preprocessor">#include &quot;<a class="code" href="componente_8hpp.html">componente.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="preprocessor">#include &quot;<a class="code" href="vetor3_8hpp.html">util/vetor3.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="preprocessor">#define GLM_ENABLE_EXPERIMENTAL</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="preprocessor">#include &quot;<a class="code" href="vetor2_8hpp.html">util/vetor2.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="preprocessor">#include &quot;<a class="code" href="vetor3_8hpp.html">util/vetor3.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="preprocessor">#include &quot;<a class="code" href="vetor4_8hpp.html">util/vetor4.hpp</a>&quot;</span></div>
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="preprocessor">#include &lt;glm/ext/vector_float3.hpp&gt;</span></div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="preprocessor">#include &lt;glm/ext/matrix_float4x4.hpp&gt;</span></div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="preprocessor">#include &lt;glm/gtc/type_ptr.hpp&gt;</span></div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="preprocessor">#include &lt;glm/gtx/quaternion.hpp&gt;</span></div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceBECOMMONS__NS.html">BECOMMONS_NS</a> {</div>
-<div class="foldopen" id="foldopen00043" data-start="{" data-end="};">
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno"><a class="line" href="classBECOMMONS__NS_1_1transformacao.html">   43</a></span>    <span class="keyword">class </span><a class="code hl_class" href="classBECOMMONS__NS_1_1transformacao.html">transformacao</a> : <span class="keyword">public</span> <a class="code hl_struct" href="structBECOMMONS__NS_1_1componente.html">componente</a></div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    {</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    <span class="keyword">public</span>:</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>        glm::vec3 cima{ 0,1,0 };</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>        glm::vec3 posicao{}, rotacao{}, escala{};</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>        glm::vec3* alvo{ <span class="keyword">nullptr</span> };</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>        glm::mat4 matrizmodelo;</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>        <span class="keyword">static</span> <span class="keyword">constexpr</span> <a class="code hl_enumeration" href="structBECOMMONS__NS_1_1componente.html#a63f9004bc698806fecbc2d677f8ee369">mascara</a> <a class="code hl_enumeration" href="structBECOMMONS__NS_1_1componente.html#a63f9004bc698806fecbc2d677f8ee369">mascara</a> = COMPONENTE_TRANSFORMACAO;</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>        <span class="keywordtype">bool</span> analizar(<span class="keyword">const</span> rapidjson::Value&amp;) <span class="keyword">override</span>;</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>        <span class="keywordtype">bool</span> serializar(rapidjson::Value&amp; value, rapidjson::Document::AllocatorType&amp; allocator) <span class="keyword">const override</span>;</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="preprocessor">#define GLM_ENABLE_EXPERIMENTAL</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="preprocessor">#include &lt;glm/ext/vector_float3.hpp&gt;</span></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="preprocessor">#include &lt;glm/ext/matrix_float4x4.hpp&gt;</span></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="preprocessor">#include &lt;glm/gtc/type_ptr.hpp&gt;</span></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="preprocessor">#include &lt;glm/gtx/quaternion.hpp&gt;</span></div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceBECOMMONS__NS.html">BECOMMONS_NS</a> {</div>
+<div class="foldopen" id="foldopen00045" data-start="{" data-end="};">
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno"><a class="line" href="classBECOMMONS__NS_1_1transformacao.html">   45</a></span>    <span class="keyword">class </span><a class="code hl_class" href="classBECOMMONS__NS_1_1transformacao.html">transformacao</a> : <span class="keyword">public</span> <a class="code hl_struct" href="structBECOMMONS__NS_1_1componente.html">componente</a> {</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    <span class="keyword">private</span>:</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>        fvet3 cima, posicao, rotacao, escala;</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>        fvet3* alvo;</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>        <span class="keywordtype">bool</span> m_usar_alvo;</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>        glm::mat4 matrizmodelo;</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>        <span class="keyword">static</span> <span class="keyword">constexpr</span> mascara mascara = COMPONENTE_TRANSFORMACAO;</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>        <a class="code hl_class" href="classBECOMMONS__NS_1_1transformacao.html">~transformacao</a>();</div>
 <div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>        <a class="code hl_class" href="classBECOMMONS__NS_1_1transformacao.html">transformacao</a>(<span class="keyword">const</span> fvet3&amp; p = fvet3(0.f,0.f,0.f),</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>            <span class="keyword">const</span> fvet3&amp; r = fvet3(0.f, 90.f, 0.f), </div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>            <span class="keyword">const</span> fvet3&amp; e = fvet3(1.f, 1.f, 1.f)) :</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>            posicao({ p.x,p.y,p.z }),</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>            rotacao({ r.x,r.y,r.z }),</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>            escala({ e.x,e.y,e.z })</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>        {</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>        }</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span> </div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>        glm::mat4 calcular()</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>        {</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>            <span class="keywordflow">if</span> (alvo)</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>            {</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>                matrizmodelo = glm::translate(glm::mat4(1.f), posicao); <span class="comment">// Aplica a translação</span></div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>                matrizmodelo *= glm::inverse(glm::lookAt(glm::vec3(0.f), *alvo - posicao, cima));</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>                matrizmodelo = glm::scale(matrizmodelo, escala);       <span class="comment">// Aplica a escala</span></div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>            }</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>            <span class="keywordflow">else</span></div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>            {</div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>                matrizmodelo = glm::translate(glm::mat4(1.f), posicao); <span class="comment">// Aplica a translação</span></div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>                matrizmodelo = glm::rotate(matrizmodelo, glm::radians(rotacao.x), glm::vec3(1.f, 0.f, 0.f));</div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>                matrizmodelo = glm::rotate(matrizmodelo, glm::radians(rotacao.y), glm::vec3(0.f, 1.f, 0.f));</div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>                matrizmodelo = glm::rotate(matrizmodelo, glm::radians(rotacao.z), glm::vec3(0.f, 0.f, 1.f));</div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>                matrizmodelo = glm::scale(matrizmodelo, escala);       <span class="comment">// Aplica a escala</span></div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>            }</div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>            <span class="keywordflow">return</span> matrizmodelo;</div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>        }</div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span> </div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>        <span class="keywordtype">float</span>* obter() { <span class="keywordflow">return</span> glm::value_ptr(matrizmodelo); }</div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span> </div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>        <a class="code hl_class" href="classBECOMMONS__NS_1_1transformacao.html">transformacao</a>&amp; operator=(<span class="keyword">const</span> <a class="code hl_class" href="classBECOMMONS__NS_1_1transformacao.html">transformacao</a>&amp; tr)</div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>        {</div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>            this-&gt;posicao = tr.posicao;</div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>            this-&gt;rotacao = tr.rotacao;</div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>            this-&gt;escala = tr.escala;</div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>            <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>        }</div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span> </div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>        <span class="keywordtype">void</span> apontarEntidade(<span class="keyword">const</span> uint32_t&amp; ent);</div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>        <span class="keywordtype">void</span> apontarV3(<span class="keyword">const</span> glm::vec3&amp; pos);</div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>    };</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>            <span class="keyword">const</span> fvet3&amp; r = fvet3(0.f, 0.f, 0.f), </div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>            <span class="keyword">const</span> fvet3&amp; e = fvet3(1.f, 1.f, 1.f));</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>        <span class="keywordtype">bool</span> analizar(<span class="keyword">const</span> rapidjson::Value&amp;) <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>        <span class="keywordtype">bool</span> serializar(rapidjson::Value&amp; value, rapidjson::Document::AllocatorType&amp; allocator) <span class="keyword">const override</span>;</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>        glm::mat4 obterMatrizModelo() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>        fvet3 obterPosicao() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>        fvet3 obterEscala() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>        fvet3 obterRotacao() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>        fvet3 obterAlvo() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>        fvet3 obterCima() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>        <span class="keywordtype">bool</span> usandoAlvo() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>        <span class="keywordtype">void</span> definirMatrizModelo(<span class="keyword">const</span> glm::mat4&amp;);</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>        <span class="keywordtype">void</span> definirCima(<span class="keyword">const</span> fvet3&amp;);</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>        <span class="keywordtype">void</span> definirPosicao(<span class="keyword">const</span> fvet3&amp;);</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>        <span class="keywordtype">void</span> definirEscala(<span class="keyword">const</span> fvet3&amp;);</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>        <span class="keywordtype">void</span> definirRotacao(<span class="keyword">const</span> fvet3&amp;);</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>        <span class="keywordtype">void</span> definirRotacao(<span class="keyword">const</span> fvet4&amp;);</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>        <span class="keywordtype">void</span> mover(<span class="keyword">const</span> fvet3&amp;);</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>        <span class="keywordtype">void</span> rotacionar(<span class="keyword">const</span> fvet3&amp;);</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>        <span class="keywordtype">void</span> escalonar(<span class="keyword">const</span> fvet3&amp;);</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>        <span class="keywordtype">void</span> olharEntidade(<span class="keyword">const</span> uint32_t&amp; ent);</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>        <span class="keywordtype">void</span> olharVetor(<span class="keyword">const</span> fvet3&amp; pos);</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span> </div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>        <a class="code hl_class" href="classBECOMMONS__NS_1_1transformacao.html">transformacao</a>&amp; operator=(<span class="keyword">const</span> <a class="code hl_class" href="classBECOMMONS__NS_1_1transformacao.html">transformacao</a>&amp; tr);</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    };</div>
 </div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>}</div>
-<div class="ttc" id="aclassBECOMMONS__NS_1_1transformacao_html"><div class="ttname"><a href="classBECOMMONS__NS_1_1transformacao.html">BECOMMONS_NS::transformacao</a></div><div class="ttdef"><b>Definição</b> transformacao.hpp:44</div></div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>}</div>
+<div class="ttc" id="aclassBECOMMONS__NS_1_1transformacao_html"><div class="ttname"><a href="classBECOMMONS__NS_1_1transformacao.html">BECOMMONS_NS::transformacao</a></div><div class="ttdef"><b>Definição</b> transformacao.hpp:45</div></div>
 <div class="ttc" id="acomponente_8hpp_html"><div class="ttname"><a href="componente_8hpp.html">componente.hpp</a></div><div class="ttdoc">Estrutura base para componetes.</div></div>
 <div class="ttc" id="anamespaceBECOMMONS__NS_html"><div class="ttname"><a href="namespaceBECOMMONS__NS.html">BECOMMONS_NS</a></div><div class="ttdoc">namespace becommons</div><div class="ttdef"><b>Definição</b> fonte.cpp:33</div></div>
 <div class="ttc" id="astructBECOMMONS__NS_1_1componente_html"><div class="ttname"><a href="structBECOMMONS__NS_1_1componente.html">BECOMMONS_NS::componente</a></div><div class="ttdoc">base para as funcionalidades da engine</div><div class="ttdef"><b>Definição</b> componente.hpp:45</div></div>
-<div class="ttc" id="astructBECOMMONS__NS_1_1componente_html_a63f9004bc698806fecbc2d677f8ee369"><div class="ttname"><a href="structBECOMMONS__NS_1_1componente.html#a63f9004bc698806fecbc2d677f8ee369">BECOMMONS_NS::componente::mascara</a></div><div class="ttdeci">mascara</div><div class="ttdoc">facilita a identificacao dos componentes pertencentes a uma entidade</div><div class="ttdef"><b>Definição</b> componente.hpp:51</div></div>
+<div class="ttc" id="avetor2_8hpp_html"><div class="ttname"><a href="vetor2_8hpp.html">vetor2.hpp</a></div></div>
 <div class="ttc" id="avetor3_8hpp_html"><div class="ttname"><a href="vetor3_8hpp.html">vetor3.hpp</a></div></div>
+<div class="ttc" id="avetor4_8hpp_html"><div class="ttname"><a href="vetor4_8hpp.html">vetor4.hpp</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

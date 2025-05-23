@@ -122,7 +122,7 @@ void bubble_gui::desenhar_caixa(caixa* c)
         }
         case tipo_caixa::imagem: {
             auto img = static_cast<elementos::imagem*>(c);
-            img->m_imagem_tamanho = { img->m_estilo.m_limites.z, img->m_estilo.m_limites.w };
+            img->m_imagem_tamanho = { static_cast<int>(img->m_estilo.m_limites.z), static_cast<int>(img->m_estilo.m_limites.w) };
             renderizarImagem(img);
             break;
         }
@@ -140,19 +140,12 @@ void bubble_gui::desenhar_caixa(caixa* c)
 
 void bubble_gui::renderizarImagem(elementos::imagem* img) const {
     glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, img->m_imagem_id);
-    img->m_imagem_shader->use();
-    img->m_imagem_shader->setVec2("quadrado.posicao", img->m_estilo.m_limites.x, img->m_estilo.m_limites.y);
-    img->m_imagem_shader->setVec2("quadrado.tamanho", img->m_estilo.m_limites.z, img->m_estilo.m_limites.w);
-    img->m_imagem_shader->setVec2("resolucao_textura", img->m_estilo.m_limites.z, img->m_estilo.m_limites.w);
-    img->m_imagem_shader->setCor("cor_borda", img->m_estilo.m_cor_borda);
-    img->m_imagem_shader->setInt("textura", 0);
-    img->m_imagem_shader->setFloat("time", janela::obterInstancia().m_tempo.obterDeltaTime());
-    img->m_imagem_shader->setInt("tamanho_bordas", img->m_estilo.m_espessura_borda);
-    img->m_imagem_shader->setBool("mostrar_bordas", img->m_estilo.m_cor_borda.a != 0);
-    img->m_imagem_shader->setBool("flip", img->m_imagem_flip);
-    img->m_imagem_shader->setMat4("projecao", glm::value_ptr(proj));
-        /*  desenho  */
+
+    img->m_material.definirUniforme("projecao", proj);
+    img->definirUniformesMaterial();
+    img->m_material.usar(*img->m_imagem_shader);
+    
+    /*  desenho  */
     glBindVertexArray(ret_VAO);
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
     glBindVertexArray(0);
@@ -371,15 +364,15 @@ void bubble_gui::atualizar()
 
     janela::obterInstancia().defCursor(janela::cursor::seta);
 
-    proj = glm::ortho(0.0, janela::obterInstancia().tamanho.x, janela::obterInstancia().tamanho.y, 0.0);
+    proj = glm::ortho(0.f, static_cast<float>(janela::obterTamanhoJanela().x), static_cast<float>(janela::obterTamanhoJanela().y), 0.f);
    
     popFuncoes();
 
     // atualiza dimensões da raiz
     if(!raiz) throw std::runtime_error("Raiz não definida!");
     raiz->m_estilo.m_limites = {0.f, 0.f,
-        static_cast<float>(janela::obterInstancia().tamanho.x),
-        static_cast<float>(janela::obterInstancia().tamanho.y)};
+        static_cast<float>(janela::obterTamanhoJanela().x),
+        static_cast<float>(janela::obterTamanhoJanela().y)};
 
     // ajusta largura de último-primeiro
     atualizarHDTF(raiz.get(), atualizarLJ);

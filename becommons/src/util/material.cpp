@@ -29,10 +29,10 @@ using namespace BECOMMONS_NS;
 
 void material::configurarPBR(
                  const std::unordered_map<std::string, textura>& texturas,
-                 const cor& albedo = cor(1.f),
-                 float metallic = 0.5f,
-                 float roughness = 0.1f,
-                 float ao = 1.0f) {
+                 const cor& albedo ,
+                 float metallic,
+                 float roughness,
+                 float ao) {
     for(auto [nome, tex] : texturas) {
         definirTextura(nome, tex);
         definirUniforme("use_" + nome, true);
@@ -53,33 +53,66 @@ void material::definirTextura(const std::string& nome, const textura& prop) {
 }
 
 uniforme material::obterUniforme(const std::string& nome) const {
-    return uniformes[nome];
+    auto it = uniformes.find(nome);
+    if(it != uniformes.end())
+        return it->second;
+    else
+        return uniforme(1.f);
 }
     
 textura material::obterTextura(const std::string& nome) const {
-    return texturas[nome];
+    auto it = texturas.find(nome);
+    if(it != texturas.end())
+        return it->second;
+    else
+        return textura();
 }
 void material::usar(shader& shader) {
+    shader.use();
     for (const auto& [nome, prop] : uniformes) {
         switch (prop.m_tipo) {
             case uniforme::tipo::Float:
-                shader.setFloat(nome, prop.f); break;
+                shader.setFloat(nome, prop.valor.f); break;
+            case uniforme::tipo::Float_ptr:
+                shader.setFloat(nome, *prop.ponteiro.f_ptr); break;
+
             case uniforme::tipo::Int:
-                shader.setInt(nome, prop.i); break;
-            case uniforme::tipo::Cor:
-                shader.setCor(nome, prop.color); break;
+                shader.setInt(nome, prop.valor.i); break;
+            case uniforme::tipo::Int_ptr:
+                shader.setInt(nome, *prop.ponteiro.i_ptr); break;
+
+            case uniforme::tipo::Bool:
+                shader.setBool(nome, prop.valor.b); break;
+            case uniforme::tipo::Bool_ptr:
+                shader.setBool(nome, *prop.ponteiro.b_ptr); break;
+
             case uniforme::tipo::Vet2:
-                shader.setBool(nome, prop.b); break;
-            case uniforme::tipo::Vet2:
-                shader.setVec2(nome, prop.vec2); break;
+                shader.setVec2(nome, prop.valor.vec2.x, prop.valor.vec2.y); break;
+            case uniforme::tipo::Vet2_ptr:
+                shader.setVec2(nome, prop.ponteiro.vec2_ptr->x, prop.ponteiro.vec2_ptr->y); break;
+
             case uniforme::tipo::Vet3:
-                shader.setVec3(nome, prop.vec3); break;
+                shader.setVec3(nome, prop.valor.vec3); break;
+            case uniforme::tipo::Vet3_ptr:
+                shader.setVec3(nome, *prop.ponteiro.vec3_ptr); break;
+
             case uniforme::tipo::Vet4:
-                shader.setVec4(nome, prop.vec4); break;
+                shader.setVec4(nome, prop.valor.vec4); break;
+            case uniforme::tipo::Vet4_ptr:
+                shader.setVec4(nome, *prop.ponteiro.vec4_ptr); break;
+
+            case uniforme::tipo::Cor:
+                shader.setCor(nome, prop.valor.color); break;
+            case uniforme::tipo::Cor_ptr:
+                shader.setCor(nome, *prop.ponteiro.color_ptr); break;
+
             case uniforme::tipo::Mat4:
-                shader.setMat4(nome, glm::value_ptr(prop.mat4)); break;
+                shader.setMat4(nome, glm::value_ptr(prop.valor.mat4)); break;
+            case uniforme::tipo::Mat4_ptr:
+                shader.setMat4(nome, glm::value_ptr(*prop.ponteiro.mat4_ptr)); break;
         }
     }
+
     int slot = 0;
     for (const auto& [nome, tex] : texturas) {
         tex.bind(slot);

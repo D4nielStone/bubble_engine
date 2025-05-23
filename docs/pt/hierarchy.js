@@ -18,7 +18,7 @@ var hierarchy =
       [ "CompB", "structCompB.html", null ]
     ] ],
     [ "BECOMMONS_NS::componente", "structBECOMMONS__NS_1_1componente.html", [
-      [ "BECOMMONS_NS::camera", "structBECOMMONS__NS_1_1camera.html", [
+      [ "BECOMMONS_NS::camera", "classBECOMMONS__NS_1_1camera.html", [
         [ "BECOMMONS_NS::camera_editor", "structBECOMMONS__NS_1_1camera__editor.html", null ]
       ] ],
       [ "BECOMMONS_NS::codigo", "structBECOMMONS__NS_1_1codigo.html", null ],
@@ -58,6 +58,7 @@ var hierarchy =
     [ "BECOMMONS_NS::modelo", "classBECOMMONS__NS_1_1modelo.html", [
       [ "BECOMMONS_NS::skybox", "classBECOMMONS__NS_1_1skybox.html", null ]
     ] ],
+    [ "BECOMMONS_NS::uniforme::ponteiro_t", "unionBECOMMONS__NS_1_1uniforme_1_1ponteiro__t.html", null ],
     [ "BECOMMONS_NS::projeto", "structBECOMMONS__NS_1_1projeto.html", null ],
     [ "BECOMMONS_NS::raio", "structBECOMMONS__NS_1_1raio.html", null ],
     [ "BECOMMONS_NS::registro", "structBECOMMONS__NS_1_1registro.html", null ],
@@ -77,9 +78,10 @@ var hierarchy =
     [ "BECOMMONS_NS::tempo", "structBECOMMONS__NS_1_1tempo.html", null ],
     [ "BECOMMONS_NS::textura", "structBECOMMONS__NS_1_1textura.html", null ],
     [ "BECOMMONS_NS::textureLoader", "classBECOMMONS__NS_1_1textureLoader.html", null ],
+    [ "BECOMMONS_NS::uniforme", "structBECOMMONS__NS_1_1uniforme.html", null ],
+    [ "BECOMMONS_NS::uniforme::valor_t", "unionBECOMMONS__NS_1_1uniforme_1_1valor__t.html", null ],
     [ "BECOMMONS_NS::vertice", "structBECOMMONS__NS_1_1vertice.html", null ],
     [ "BECOMMONS_NS::vetor2< T >", "structBECOMMONS__NS_1_1vetor2.html", null ],
-    [ "BECOMMONS_NS::vetor2< double >", "structBECOMMONS__NS_1_1vetor2.html", null ],
     [ "BECOMMONS_NS::vetor2< float >", "structBECOMMONS__NS_1_1vetor2.html", null ],
     [ "BECOMMONS_NS::vetor2< FT_Int >", "structBECOMMONS__NS_1_1vetor2.html", null ],
     [ "BECOMMONS_NS::vetor2< int >", "structBECOMMONS__NS_1_1vetor2.html", null ],

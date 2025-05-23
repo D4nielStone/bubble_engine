@@ -51,18 +51,17 @@ janela& janela::obterInstancia() {
        throw std::runtime_error("Instância da janela não foi gerada!");
     return *instanciaAtual;
 }
-void janela::gerarInstancia(const char* nome, dvet2 bounds , const char* icon_path ) {
+void janela::gerarInstancia(const char* nome, fvet2 bounds , const char* icon_path ) {
     if(instanciaAtual) delete instanciaAtual;
     instanciaAtual = new janela(nome, bounds, icon_path);
 }
-void janela::gerarInstancia(const char* nome, const bool f, dvet2 bounds , const char* icon_path ) {
+void janela::gerarInstancia(const char* nome, const bool f, fvet2 bounds , const char* icon_path ) {
     if(instanciaAtual) delete instanciaAtual;
     instanciaAtual = new janela(nome, f, bounds, icon_path);
 }
 
 ivet2 janela::obterTamanhoJanela() {
-    ivet2 tamanho = ivet2(janela::obterInstancia().tamanho.x, janela::obterInstancia().tamanho.y);
-    return tamanho;
+    return janela::obterInstancia().tamanho;
 };
 
 void janela::posicionarCursor(double x, double y)
@@ -78,7 +77,7 @@ janela::~janela() {
     descarregarShaders();
     gerenciadorFontes::limparFontes();
 }
-janela::janela(const char* nome, BECOMMONS_NS::vetor2<double> bounds, const char* icon_path)
+janela::janela(const char* nome, fvet2 bounds, const char* icon_path)
 {
     glfwSetErrorCallback(errorCallback);
     // inicia glfw
@@ -128,7 +127,7 @@ janela::janela(const char* nome, BECOMMONS_NS::vetor2<double> bounds, const char
     tamanho.x = tam.z;
 }
 
-janela::janela(const char* nome, const bool f, BECOMMONS_NS::vetor2<double> bounds , const char* icon_path)
+janela::janela(const char* nome, const bool f, fvet2 bounds , const char* icon_path)
 {
     glfwSetErrorCallback(errorCallback);
     // inicia glfw
@@ -184,10 +183,7 @@ if(f)
     glfwSetKeyCallback(window,keyCallback);
     glfwSetWindowUserPointer(window, this);
 
-    vetor4<int> tam{};
-    glfwGetWindowSize(window, &tam.z, &tam.w);
-    tamanho.y = tam.w;
-    tamanho.x = tam.z;
+    glfwGetWindowSize(window, &tamanho.x, &tamanho.y);
 }
 void janela::poll()
 {
@@ -195,10 +191,7 @@ void janela::poll()
     m_inputs.m_backspace_repetido = false;
 
     glfwPollEvents();
-    int w, h;
-    glfwGetWindowSize(window, &w, &h);
-    tamanho.y = h;
-    tamanho.x = w;
+    glfwGetWindowSize(window, &tamanho.x, &tamanho.y);
 }
 
 void janela::swap() 

@@ -30,7 +30,9 @@ SOFTWARE.
 #pragma once
 #include "becommons_namespace.hpp"
 #include "componente.hpp"
+#include "util/vetor2.hpp"
 #include "util/vetor3.hpp"
+#include "util/vetor4.hpp"
 
 #define GLM_ENABLE_EXPERIMENTAL
 
@@ -40,56 +42,41 @@ SOFTWARE.
 #include <glm/gtx/quaternion.hpp>
 
 namespace BECOMMONS_NS {
-	class transformacao : public componente
-	{
-    public:
-		glm::vec3 cima{ 0,1,0 };
-		glm::vec3 posicao{}, rotacao{}, escala{};
-		glm::vec3* alvo{ nullptr };
+	class transformacao : public componente {
+    private:
+		fvet3 cima, posicao, rotacao, escala;
+		fvet3* alvo;
+		bool m_usar_alvo;
 		glm::mat4 matrizmodelo;
+    public:
 		static constexpr mascara mascara = COMPONENTE_TRANSFORMACAO;
+        ~transformacao();
+        transformacao(const fvet3& p = fvet3(0.f,0.f,0.f),
+			const fvet3& r = fvet3(0.f, 0.f, 0.f), 
+			const fvet3& e = fvet3(1.f, 1.f, 1.f));
 
         bool analizar(const rapidjson::Value&) override;
         bool serializar(rapidjson::Value& value, rapidjson::Document::AllocatorType& allocator) const override;
-		transformacao(const fvet3& p = fvet3(0.f,0.f,0.f),
-			const fvet3& r = fvet3(0.f, 90.f, 0.f), 
-			const fvet3& e = fvet3(1.f, 1.f, 1.f)) :
-			posicao({ p.x,p.y,p.z }),
-			rotacao({ r.x,r.y,r.z }),
-			escala({ e.x,e.y,e.z })
-		{
-		}
 
-		glm::mat4 calcular()
-		{
-			if (alvo)
-			{
-				matrizmodelo = glm::translate(glm::mat4(1.f), posicao); // Aplica a translação
-				matrizmodelo *= glm::inverse(glm::lookAt(glm::vec3(0.f), *alvo - posicao, cima));
-				matrizmodelo = glm::scale(matrizmodelo, escala);       // Aplica a escala
-			}
-			else
-			{
-				matrizmodelo = glm::translate(glm::mat4(1.f), posicao); // Aplica a translação
-				matrizmodelo = glm::rotate(matrizmodelo, glm::radians(rotacao.x), glm::vec3(1.f, 0.f, 0.f));
-				matrizmodelo = glm::rotate(matrizmodelo, glm::radians(rotacao.y), glm::vec3(0.f, 1.f, 0.f));
-				matrizmodelo = glm::rotate(matrizmodelo, glm::radians(rotacao.z), glm::vec3(0.f, 0.f, 1.f));
-				matrizmodelo = glm::scale(matrizmodelo, escala);       // Aplica a escala
-			}
-			return matrizmodelo;
-		}
+        glm::mat4 obterMatrizModelo() const;
+        fvet3 obterPosicao() const;
+        fvet3 obterEscala() const;
+        fvet3 obterRotacao() const;
+        fvet3 obterAlvo() const;
+        fvet3 obterCima() const;
+        bool usandoAlvo() const;
+        void definirMatrizModelo(const glm::mat4&);
+        void definirCima(const fvet3&);
+        void definirPosicao(const fvet3&);
+        void definirEscala(const fvet3&);
+        void definirRotacao(const fvet3&);
+        void definirRotacao(const fvet4&);
+        void mover(const fvet3&);
+        void rotacionar(const fvet3&);
+        void escalonar(const fvet3&);
+		void olharEntidade(const uint32_t& ent);
+		void olharVetor(const fvet3& pos);
 
-        glm::mat4 obter() { return matrizmodelo; }
-
-		transformacao& operator=(const transformacao& tr)
-		{
-			this->posicao = tr.posicao;
-			this->rotacao = tr.rotacao;
-			this->escala = tr.escala;
-			return *this;
-		}
-
-		void apontarEntidade(const uint32_t& ent);
-		void apontarV3(const glm::vec3& pos);
+		transformacao& operator=(const transformacao& tr);
 	};
 }

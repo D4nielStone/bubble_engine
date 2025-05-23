@@ -61,11 +61,10 @@ void camera_editor::atualizarMovimentacao()
     {
         float mx = mousex_antigo - mousex_atual;
         float my = mousey_antigo - mousey_atual;
-        transform->rotacao.y -= mx * 0.1f; 
-        transform->rotacao.x += my * 0.1f; 
-        transform->rotacao.x = glm::clamp(transform->rotacao.x, -89.f, 89.f);
+        transform->rotacionar({my * 0.1f, -mx * 0.1f, 0.f}); 
+        fvet3 rot = transform->obterRotacao();
+        transform->definirRotacao(fvet3(glm::clamp(rot.x, -89.f, 89.f), rot.y, rot.z));
     }
     mousex_antigo = mousex_atual;
     mousey_antigo = mousey_atual;
-    transform->calcular();
 }
