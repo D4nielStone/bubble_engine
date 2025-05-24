@@ -30,6 +30,7 @@ SOFTWARE.
 #pragma once
 #include "sistema.hpp"
 #include "componentes/camera.hpp"
+#include "componentes/transformacao.hpp"
 
 namespace BECOMMONS_NS {
 	class sistema_renderizacao : public sistema
@@ -40,6 +41,7 @@ namespace BECOMMONS_NS {
             camera* camera_principal{nullptr};
 	        void definirCamera(camera*);
 	    	sistema_renderizacao() = default;
+	    	static void calcularTransformacao(transformacao*);
 		    void atualizar() override;
 		    void inicializar(fase* fase_ptr) override;
 	};

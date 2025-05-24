@@ -2,7 +2,7 @@ var searchData=
 [
   ['caixa_0',['caixa',['../classBECOMMONS__NS_1_1caixa.html',1,'BECOMMONS_NS']]],
   ['caixa_5fde_5ftexto_1',['caixa_de_texto',['../classBECOMMONS__NS_1_1elementos_1_1caixa__de__texto.html',1,'BECOMMONS_NS::elementos']]],
-  ['camera_2',['camera',['../structBECOMMONS__NS_1_1camera.html',1,'BECOMMONS_NS']]],
+  ['camera_2',['camera',['../classBECOMMONS__NS_1_1camera.html',1,'BECOMMONS_NS']]],
   ['camera_5feditor_3',['camera_editor',['../structBECOMMONS__NS_1_1camera__editor.html',1,'BECOMMONS_NS']]],
   ['caractere_4',['caractere',['../structBECOMMONS__NS_1_1caractere.html',1,'BECOMMONS_NS']]],
   ['carectere_5',['carectere',['../structcarectere.html',1,'']]],

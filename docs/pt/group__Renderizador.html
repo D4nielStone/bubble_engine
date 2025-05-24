@@ -1,7 +1,8 @@
 <!-- HTML header for doxygen 1.9.8-->
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="pt-BR">
-<head>
+<head icon="docs/favicon.ic">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
@@ -17,9 +18,13 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
-<script type="text/javascript" src="doxygen-awesome-darkmode-toggle.js"></script>
+        <script type="text/javascript" src="doxygen-awesome-darkmode-toggle.js"></script>
         <script type="text/javascript">
             DoxygenAwesomeDarkModeToggle.init()
+        </script>
+        <script type="text/javascript" src="doxygen-awesome-fragment-copy-button.js"></script>
+        <script type="text/javascript">
+            DoxygenAwesomeFragmentCopyButton.init()
         </script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
@@ -100,11 +105,46 @@ $(document).ready(function(){initNavTree('group__Renderizador.html',''); initRes
   <div class="headertitle"><div class="title">Renderizador</div></div>
 </div><!--header-->
 <div class="contents">
-<h1><a class="anchor" id="autotoc_md20"></a>
+<h1><a class="anchor" id="autotoc_md26"></a>
 Renderizador</h1>
-<h2><a class="anchor" id="autotoc_md21"></a>
+<h2><a class="anchor" id="autotoc_md27"></a>
 classe Renderizador</h2>
-</div><!-- contents -->
+<p>A classe <code>renderizador</code> é uma abstração em Lua da classe <a href="renderizador.cpp">renderizador</a>, pertencente ao <b>núcleo do motor</b>, usada para controlar e exibir um <a href="modelo.cpp">modelo</a> em cena. Ela encapsula a lógica de renderização de um objeto e permite acesso direto ao modelo associado.</p>
+<h2><a class="anchor" id="autotoc_md28"></a>
+LuaBridge</h2>
+<div class="fragment"><div class="line">.beginClass&lt;renderizador&gt;(<span class="stringliteral">&quot;renderizador&quot;</span>)</div>
+<div class="line">    .addConstructor&lt;<span class="keywordtype">void</span>(*)(<span class="keyword">const</span> <span class="keywordtype">char</span>*)&gt;()</div>
+<div class="line">    .addConstructor&lt;void(*)(modelo*)&gt;()</div>
+<div class="line">    .addData(<span class="stringliteral">&quot;modelo&quot;</span>, &amp;renderizador::m_modelo)</div>
+<div class="line">.endClass()</div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md29"></a>
+Info</h2>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Construtores (2)    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>local r = renderizador("caminho/para/modelo")</code>    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>local r = renderizador(modelo)</code>   </td></tr>
+</table>
+<hr  />
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Membros(1)   </th><th class="markdownTableHeadNone">Descrição    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>modelo</code>   </td><td class="markdownTableBodyNone">Referência ao objeto <code>modelo</code> usado pelo renderizador.   </td></tr>
+</table>
+<h2><a class="anchor" id="autotoc_md31"></a>
+Exemplo</h2>
+<blockquote class="doxtable">
+<p>&zwj;Criando um renderizador a partir de um modelo </p>
+</blockquote>
+<div class="fragment"><div class="line">function iniciar()</div>
+<div class="line">  local m = modelo(&quot;recursos/personagem.obj&quot;)</div>
+<div class="line">  local r = renderizador(m)</div>
+<div class="line">  eu.renderizador = r</div>
+<div class="line">end</div>
+</div><!-- fragment --> </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->

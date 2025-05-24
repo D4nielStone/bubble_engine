@@ -32,21 +32,24 @@ SOFTWARE.
 
 using namespace BECOMMONS_NS;
 
-void transformacao::apontarEntidade(const uint32_t& ent)
-{
-	if (!projeto_atual->obterFaseAtual()->obterRegistro()->tem<transformacao>(ent))return;
-	alvo = &projeto_atual->obterFaseAtual()->obterRegistro()->obter<transformacao>(ent)->posicao;
+transformacao::transformacao(const fvet3& p, const fvet3& r, const fvet3& e) :
+			posicao(p), cima(fvet3(0.f, 1.f, 0.f)),
+			rotacao(r), alvo(new fvet3(1.f)),
+			escala(e), m_usar_alvo(false) {}
+
+transformacao::~transformacao() {
+    delete alvo;
 }
 
-void transformacao::apontarV3(const glm::vec3& pos)
-{
-    if(!alvo)
-	*alvo = pos;
-    else
-        alvo = new glm::vec3(pos);
+transformacao& transformacao::operator=(const transformacao& tr) {
+	this->posicao = tr.obterPosicao();
+	this->rotacao = tr.obterRotacao();
+	this->escala = tr.obterEscala();
+	*this->alvo = tr.obterAlvo();
+	this->cima = tr.obterCima();
+	return *this;
 }
-bool transformacao::analizar(const rapidjson::Value& value)
-{
+bool transformacao::analizar(const rapidjson::Value& value) {
 	if(value.HasMember("posicao"))
     {
         auto pos = value["posicao"].GetArray();
@@ -65,8 +68,7 @@ bool transformacao::analizar(const rapidjson::Value& value)
     return true;
 };
 
-bool transformacao::serializar(rapidjson::Value& value, rapidjson::Document::AllocatorType& allocator) const
-{
+bool transformacao::serializar(rapidjson::Value& value, rapidjson::Document::AllocatorType& allocator) const {
     // posição Vetor 3
     rapidjson::Value pos(rapidjson::kArrayType);
     pos.PushBack(posicao.x, allocator);
@@ -88,4 +90,83 @@ bool transformacao::serializar(rapidjson::Value& value, rapidjson::Document::All
     esc.PushBack(escala.z, allocator);
     value.AddMember("escala", esc, allocator);
     return true;
+}
+        
+glm::mat4 transformacao::obterMatrizModelo() const { 
+    return matrizmodelo; 
+}
+        
+fvet3 transformacao::obterPosicao() const {
+    return posicao;
+}
+        
+fvet3 transformacao::obterEscala() const {
+    return escala;
+}
+
+fvet3 transformacao::obterRotacao() const {
+    return rotacao;
+}
+
+fvet3 transformacao::obterAlvo() const {
+    return *alvo;
+}
+
+fvet3 transformacao::obterCima() const {
+    return cima;
+}
+        
+bool transformacao::usandoAlvo() const {
+    return m_usar_alvo;
+}
+        
+void transformacao::definirMatrizModelo(const glm::mat4& m) {
+    matrizmodelo = m;
+}
+        
+void transformacao::definirCima(const fvet3& c) {
+    cima = c;
+}
+
+void  transformacao::definirPosicao(const fvet3& v) {
+    posicao = v;
+}
+    
+void  transformacao::definirEscala(const fvet3& v) {
+    escala = v;
+}
+        
+void  transformacao::definirRotacao(const fvet3& v) {
+    m_usar_alvo = false;
+    rotacao = v;
+}
+        
+void  transformacao::definirRotacao(const fvet4& v) {
+    m_usar_alvo = false;
+    glm::vec3 euler = glm::eulerAngles(glm::quat(v.to_glm()));
+    rotacao = fvet3(euler);
+}
+
+void  transformacao::mover(const fvet3& v) {
+    posicao += v;
+}
+    
+void  transformacao::escalonar(const fvet3& v) {
+    escala += v;
+}
+        
+void  transformacao::rotacionar(const fvet3& v) {
+    m_usar_alvo = false;
+    rotacao += v;
+}
+
+void  transformacao::olharEntidade(const uint32_t& ent) {
+    m_usar_alvo = true;
+	if (!projeto_atual->obterFaseAtual()->obterRegistro()->tem<transformacao>(ent))return;
+	alvo = &projeto_atual->obterFaseAtual()->obterRegistro()->obter<transformacao>(ent)->posicao;
+}
+		
+void  transformacao::olharVetor(const fvet3& pos) {
+    m_usar_alvo = true;
+    *alvo = pos;
 }

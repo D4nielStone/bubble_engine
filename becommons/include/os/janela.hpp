@@ -63,16 +63,16 @@ namespace BECOMMONS_NS {
             static ivet2 obterTamanhoJanela                ();
             static bool temInstancia();
             static janela& obterInstancia();
-            static void gerarInstancia(const char* nome, dvet2 bounds = dvet2(600, 400), const char* icon_path = nullptr);
-    		static void gerarInstancia(const char* nome, const bool f, dvet2 bounds = dvet2(600, 400), const char* icon_path = nullptr);
+            static void gerarInstancia(const char* nome, fvet2 bounds = fvet2(600, 400), const char* icon_path = nullptr);
+    		static void gerarInstancia(const char* nome, const bool f, fvet2 bounds = fvet2(600, 400), const char* icon_path = nullptr);
 
     		tempo m_tempo;
             std::string m_nome{""};
-    		dvet2 tamanho;
+    		ivet2 tamanho;
     		GLFWwindow* window;
     		inputs m_inputs;
-    		janela(const char* nome, dvet2 bounds = dvet2(600, 400), const char* icon_path = nullptr);
-    		janela(const char* nome, const bool f, dvet2 bounds = dvet2(600, 400), const char* icon_path = nullptr);
+    		janela(const char* nome, fvet2 bounds = fvet2(600, 400), const char* icon_path = nullptr);
+    		janela(const char* nome, const bool f, fvet2 bounds = fvet2(600, 400), const char* icon_path = nullptr);
     		~janela();
     		void poll();
             inline void defCursor(const cursor c) {

@@ -34,6 +34,7 @@ SOFTWARE.
 #include <vector>
 #include <memory>
 #include "becommons_namespace.hpp"
+#include "util/vetor2.hpp"
 
 /// namespace becommons
 namespace BECOMMONS_NS {
@@ -98,6 +99,8 @@ namespace BECOMMONS_NS {
     {
     public:
         static textureLoader& obterInstancia();
+        GLuint carregarTextura(const std::string&, fvet2&);
+        GLuint carregarTextura(const std::string&, ivet2&);
         GLuint carregarTextura(const std::string& caminho, int* width, int* height);
         GLuint carregarTextura(const std::string& caminho, double* width, double* height);
         GLuint carregarTextura(const std::string& caminho);

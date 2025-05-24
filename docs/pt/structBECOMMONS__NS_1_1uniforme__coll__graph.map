@@ -1,0 +1,10 @@
+<map id="BECOMMONS_NS::uniforme" name="BECOMMONS_NS::uniforme">
+<area shape="rect" id="Node000001" title=" " alt="" coords="117,196,320,221"/>
+<area shape="rect" id="Node000002" href="$unionBECOMMONS__NS_1_1uniforme_1_1valor__t.html" title=" " alt="" coords="5,93,208,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="142,140,206,194,203,198,138,144"/>
+<area shape="rect" id="Node000003" href="$structBECOMMONS__NS_1_1cor.html" title=" " alt="" coords="137,5,300,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="196,41,131,95,128,91,193,37"/>
+<area shape="rect" id="Node000004" href="$unionBECOMMONS__NS_1_1uniforme_1_1ponteiro__t.html" title=" " alt="" coords="232,93,435,133"/>
+<area shape="poly" id="edge4_Node000004_Node000003" title=" " alt="" coords="245,37,312,91,308,95,242,41"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="301,144,235,198,231,194,298,140"/>
+</map>

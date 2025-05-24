@@ -180,7 +180,7 @@ void projeto::criarJanela(rapidjson::Document& doc)
 
     // Cria uma instância global de janela.
     janela::gerarInstancia(nome_janela, true,
-     vetor2<double>(doc["janela"].GetObject()["largura"].GetInt(), doc["janela"].GetObject()["altura"].GetInt()),
+     fvet2(doc["janela"].GetObject()["largura"].GetInt(), doc["janela"].GetObject()["altura"].GetInt()),
     (diretorioDoProjeto + "/" + icon_path).c_str());
 
     // Cria fase atual

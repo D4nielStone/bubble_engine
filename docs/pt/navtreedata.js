@@ -55,8 +55,7 @@ var NAVTREE =
       [ "Membros de classe", "functions.html", [
         [ "Todos", "functions.html", null ],
         [ "Funções", "functions_func.html", null ],
-        [ "Variáveis", "functions_vars.html", null ],
-        [ "Enumerações", "functions_enum.html", null ]
+        [ "Variáveis", "functions_vars.html", null ]
       ] ]
     ] ],
     [ "Arquivos", "files.html", [
@@ -72,8 +71,8 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "annotated.html",
-"classBECOMMONS__NS_1_1textureLoader.html",
-"structBECOMMONS__NS_1_1componente.html#a63f9004bc698806fecbc2d677f8ee369a40ecf494da3e59b5c9a484e34de24c42"
+"classBECOMMONS__NS_1_1sistema__renderizacao.html#abe6ba2396444ac4844226681a6444f67",
+"structBECOMMONS__NS_1_1fase.html"
 ];
 
 var SYNCONMSG = 'clique para desativar a sincronização do painel';

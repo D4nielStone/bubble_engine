@@ -28,10 +28,10 @@ SOFTWARE.
  */
 
 #pragma once
-#include <bullet/btBulletDynamicsCommon.h>
 #include <glm/glm.hpp>
 #include "becommons_namespace.hpp"
 #include "util/malha.hpp"
+#include "util/vetor3.hpp"
 #include "componente.hpp"
 #include "transformacao.hpp"
 
@@ -52,26 +52,26 @@ namespace BECOMMONS_NS {
         btRigidBody* obterCorpoRigido();
         void criarMalha();
         void atualizarTransformacao();
-        void aplicarForca(const glm::vec3& vetor);
-        void aplicarVelocidade(const glm::vec3& vetor);
-        void definirPosicao(const glm::vec3& posicao); 
-        void definirFatorLinear(const glm::vec3& fator);
-        void definirFatorAngular(const glm::vec3& fator);
+        void aplicarForca(const fvet3& vetor);
+        void aplicarVelocidade(const fvet3& vetor);
+        void definirPosicao(const fvet3& posicao); 
+        void definirFatorLinear(const fvet3& fator);
+        void definirFatorAngular(const fvet3& fator);
         void definirFriccao(const float fator);
         void definirRestituicao(const float fator);
         void definirRaioCcd(const float fator);
-       void definirRotacao(const glm::vec3& rotacao);
-        glm::vec3 obterVelocidade() const;
-        glm::vec3 obterPosicao() const;
+       void definirRotacao(const fvet3& rotacao);
+        fvet3 obterVelocidade() const;
+        fvet3 obterPosicao() const;
         void init();
         btScalar massa;
 
     private:
         bool usar_malha{ false };
-        btCollisionShape* forma;
-        btDefaultMotionState* estadoDeMovimento;
+        btCollisionShape* forma {nullptr};
+        btDefaultMotionState* estadoDeMovimento{nullptr};
         btRigidBody* corpoRigido{ nullptr };
         btVector3 posicaoInicial;
-        transformacao* m_transformacao;
+        transformacao* m_transformacao {nullptr};
     };
 }

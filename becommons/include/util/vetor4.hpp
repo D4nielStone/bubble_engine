@@ -26,7 +26,9 @@ SOFTWARE.
 
 #pragma once
 #include <cmath>
+#include <glm/glm.hpp>
 #include "becommons_namespace.hpp"
+#include <btBulletDynamicsCommon.h>
 /* Definição da estrutura vetor4 */
 
 namespace BECOMMONS_NS {
@@ -35,8 +37,28 @@ namespace BECOMMONS_NS {
     {
         T x, y, z, w;
 
-        vetor4(T x, T y, T z, T w) : x(x), y(y), w(w), z(z) {}
-        vetor4() = default;
+        static_assert(std::is_arithmetic_v<T>, "vetor4<T>: T precisa ser um numero aritimético");
+            
+        constexpr vetor4(T x = T{}, T y = T{}, T z = T{}, T w = T{}) : x(x), y(y), z(z), w(w) {}
+        constexpr vetor4(T f) : x(f), y(f), z(f), w(f) {}
+
+        constexpr vetor4(const glm::vec<4, T, glm::packed_highp> other)
+            : x(other.x), y(other.y), z(other.z), w(other.w) {} 
+        
+        constexpr vetor4(const btQuaternion& other)
+            : x(static_cast<T>(other.getX())),
+              y(static_cast<T>(other.getY())),
+              z(static_cast<T>(other.getZ())),
+              w(static_cast<T>(other.getW())) {}
+        
+        glm::vec<4, T, glm::packed_highp> to_glm() const {
+            return glm::vec<4, T, glm::packed_highp>(x, y, z, w);
+        }
+
+        btQuaternion to_btvec() const {
+            return btQuaternion(static_cast<float>(x), static_cast<float>(y), static_cast<float>(z), static_cast<float>(w));
+        }
+
         // Deve somar
         vetor4 operator+(const vetor4& other) const
         {
@@ -147,14 +169,15 @@ namespace BECOMMONS_NS {
         {
             return !(*this == other);
         }
-        void normalizar()
+        vetor4<T> normalizar()
         {
             float mag = std::sqrt(x*x + y*y + z*z + w*w);
-            if(mag < 0) return;
+            if(mag < 0) return *this;
             x = x / mag;
             y = y / mag;
             w = w / mag;
             z = z / mag;
+            return *this;
         }
         T tamanho() const
         {

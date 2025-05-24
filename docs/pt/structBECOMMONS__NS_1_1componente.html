@@ -1,7 +1,8 @@
 <!-- HTML header for doxygen 1.9.8-->
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="pt-BR">
-<head>
+<head icon="docs/favicon.ic">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
@@ -17,9 +18,13 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
-<script type="text/javascript" src="doxygen-awesome-darkmode-toggle.js"></script>
+        <script type="text/javascript" src="doxygen-awesome-darkmode-toggle.js"></script>
         <script type="text/javascript">
             DoxygenAwesomeDarkModeToggle.init()
+        </script>
+        <script type="text/javascript" src="doxygen-awesome-fragment-copy-button.js"></script>
+        <script type="text/javascript">
+            DoxygenAwesomeFragmentCopyButton.init()
         </script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
@@ -119,7 +124,7 @@ $(document).ready(function(){initNavTree('structBECOMMONS__NS_1_1componente.html
 <div class="center"><img src="structBECOMMONS__NS_1_1componente__inherit__graph.png" border="0" usemap="#aBECOMMONS__NS_1_1componente_inherit__map" alt="Inheritance graph"/></div>
 <map name="aBECOMMONS__NS_1_1componente_inherit__map" id="aBECOMMONS__NS_1_1componente_inherit__map">
 <area shape="rect" title="base para as funcionalidades da engine" alt="" coords="5,259,229,285"/>
-<area shape="rect" href="structBECOMMONS__NS_1_1camera.html" title="componente que facilita a manipuacao da matriz de visualizacao e projeco" alt="" coords="301,13,493,38"/>
+<area shape="rect" href="classBECOMMONS__NS_1_1camera.html" title="componente que facilita a manipuacao da matriz de visualizacao e projeco" alt="" coords="301,13,493,38"/>
 <area shape="poly" title=" " alt="" coords="127,245,148,202,180,147,223,93,248,68,276,47,299,35,302,40,279,52,252,72,227,96,185,150,153,204,132,248"/>
 <area shape="rect" href="structBECOMMONS__NS_1_1codigo.html" title=" " alt="" coords="303,62,490,87"/>
 <area shape="poly" title=" " alt="" coords="131,246,155,212,188,171,229,130,276,96,302,85,304,90,279,101,233,134,192,174,160,215,136,249"/>
@@ -133,7 +138,7 @@ $(document).ready(function(){initNavTree('structBECOMMONS__NS_1_1componente.html
 <area shape="poly" title=" " alt="" coords="243,269,287,269,287,275,243,275"/>
 <area shape="rect" href="structBECOMMONS__NS_1_1propriedades.html" title=" " alt="" coords="283,309,511,334"/>
 <area shape="poly" title=" " alt="" coords="204,284,324,306,323,311,203,290"/>
-<area shape="rect" href="structBECOMMONS__NS_1_1renderizador.html" title=" " alt="" coords="284,358,509,383"/>
+<area shape="rect" href="classBECOMMONS__NS_1_1renderizador.html" title=" " alt="" coords="284,358,509,383"/>
 <area shape="poly" title=" " alt="" coords="155,289,212,317,278,343,324,355,323,360,276,348,210,321,153,294"/>
 <area shape="rect" href="structBECOMMONS__NS_1_1terreno.html" title=" " alt="" coords="301,407,492,433"/>
 <area shape="poly" title=" " alt="" coords="142,292,201,343,238,370,278,392,313,405,312,410,276,397,236,374,198,348,139,296"/>
@@ -148,7 +153,7 @@ $(document).ready(function(){initNavTree('structBECOMMONS__NS_1_1componente.html
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
 Tipos Públicos</h2></td></tr>
-<tr class="memitem:a63f9004bc698806fecbc2d677f8ee369" id="r_a63f9004bc698806fecbc2d677f8ee369"><td class="memItemLeft" align="right" valign="top"><a id="a63f9004bc698806fecbc2d677f8ee369" name="a63f9004bc698806fecbc2d677f8ee369"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structBECOMMONS__NS_1_1componente.html#a63f9004bc698806fecbc2d677f8ee369">mascara</a> : uint32_t { <br />
+<tr class="memitem:a63f9004bc698806fecbc2d677f8ee369" id="r_a63f9004bc698806fecbc2d677f8ee369"><td class="memItemLeft" align="right" valign="top"><a id="a63f9004bc698806fecbc2d677f8ee369" name="a63f9004bc698806fecbc2d677f8ee369"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>mascara</b> : uint32_t { <br />
 &#160;&#160;<b>COMPONENTE_NONE</b> = 0
 , <b>COMPONENTE_CAM</b> = 1 &lt;&lt; 0
 , <b>COMPONENTE_RENDER</b> = 1 &lt;&lt; 1
@@ -167,7 +172,6 @@ Tipos Públicos</h2></td></tr>
 &#160;&#160;<b>COMPONENTE_TERRENO</b> = 1 &lt;&lt; 11
 <br />
  }</td></tr>
-<tr class="memdesc:a63f9004bc698806fecbc2d677f8ee369"><td class="mdescLeft">&#160;</td><td class="mdescRight">facilita a identificacao dos componentes pertencentes a uma entidade <br /></td></tr>
 <tr class="separator:a63f9004bc698806fecbc2d677f8ee369"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
@@ -181,13 +185,13 @@ virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>serializar</b
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Atributos Públicos</h2></td></tr>
-<tr class="memitem:a198888339edd6c4a74869037e26badc3" id="r_a198888339edd6c4a74869037e26badc3"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structBECOMMONS__NS_1_1componente.html#a198888339edd6c4a74869037e26badc3">meu_objeto</a> { 0 }</td></tr>
+<tr class="memitem:a198888339edd6c4a74869037e26badc3" id="r_a198888339edd6c4a74869037e26badc3"><td class="memItemLeft" align="right" valign="top"><a id="a198888339edd6c4a74869037e26badc3" name="a198888339edd6c4a74869037e26badc3"></a>
+uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>meu_objeto</b> { 0 }</td></tr>
 <tr class="separator:a198888339edd6c4a74869037e26badc3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
 Atributos Públicos Estáticos</h2></td></tr>
-<tr class="memitem:a8736103a6174940b233e4f9d5438524a" id="r_a8736103a6174940b233e4f9d5438524a"><td class="memItemLeft" align="right" valign="top">static std::unordered_map&lt; <a class="el" href="structBECOMMONS__NS_1_1componente.html#a63f9004bc698806fecbc2d677f8ee369">mascara</a>, std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structBECOMMONS__NS_1_1componente.html#a8736103a6174940b233e4f9d5438524a">mapa_nomes_componentes</a></td></tr>
-<tr class="memdesc:a8736103a6174940b233e4f9d5438524a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mapeamento de nomes e mascara.  <br /></td></tr>
+<tr class="memitem:a8736103a6174940b233e4f9d5438524a" id="r_a8736103a6174940b233e4f9d5438524a"><td class="memItemLeft" align="right" valign="top">static std::unordered_map&lt; mascara, std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structBECOMMONS__NS_1_1componente.html#a8736103a6174940b233e4f9d5438524a">mapa_nomes_componentes</a></td></tr>
 <tr class="separator:a8736103a6174940b233e4f9d5438524a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Descrição detalhada</h2>
@@ -203,7 +207,7 @@ Atributos Públicos Estáticos</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::unordered_map&lt;<a class="el" href="structBECOMMONS__NS_1_1componente.html#a63f9004bc698806fecbc2d677f8ee369">mascara</a>, std::string&gt; BECOMMONS_NS::componente::mapa_nomes_componentes</td>
+          <td class="memname">std::unordered_map&lt;mascara, std::string&gt; BECOMMONS_NS::componente::mapa_nomes_componentes</td>
         </tr>
       </table>
   </td>
@@ -222,23 +226,6 @@ Atributos Públicos Estáticos</h2></td></tr>
 <div class="line">            {mascara::COMPONENTE_TERRENO                   ,<span class="stringliteral">&quot;Terreno&quot;</span>}</div>
 <div class="line">        }</div>
 </div><!-- fragment -->
-<p>Mapeamento de nomes e mascara. </p>
-
-</div>
-</div>
-<a id="a198888339edd6c4a74869037e26badc3" name="a198888339edd6c4a74869037e26badc3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a198888339edd6c4a74869037e26badc3">&#9670;&#160;</a></span>meu_objeto</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">uint32_t BECOMMONS_NS::componente::meu_objeto { 0 }</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Id da entidade ECS atual Todo componente deve ter um e ele é utilizado para encontrar o "eu" (entidade do componente de código) para a api lua. </p>
-
 </div>
 </div>
 <hr/>A documentação para essa estrutura foi gerada a partir do seguinte arquivo:<ul>

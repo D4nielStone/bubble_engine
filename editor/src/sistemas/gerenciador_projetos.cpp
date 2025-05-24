@@ -85,15 +85,15 @@ void gerenciador_projetos::criarProjetoPadrao(const std::string& novo_diretorio,
         ]
     })";
     auto codigo_string = R"(
-    -- Autor Daniel O. Santos copyright 2025
-    local vel = 6
-    
-    function iniciar()
-    end
-    function atualizar()
-        eu.transformacao.rotacao.y = eu.transformacao.rotacao.y + vel * tempo.obterDeltaTime()
-        eu.transformacao.rotacao.x = eu.transformacao.rotacao.x + vel * tempo.obterDeltaTime()
-    end)";
+-- Autor Daniel O. Santos copyright 2024
+local vel = 6
+
+function iniciar()
+end
+function atualizar()
+    eu.transformacao.rotacao = fvet3(eu.transformacao.rotacao.x + vel * tempo.obterDeltaTime(), eu.transformacao.rotacao.y + vel * tempo.obterDeltaTime(), 0)
+end
+)";
 
     // Cria diretório do projeto
     std::filesystem::create_directories(novo_diretorio + "/" + nome);

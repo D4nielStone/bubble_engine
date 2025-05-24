@@ -1,7 +1,8 @@
 <!-- HTML header for doxygen 1.9.8-->
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="pt-BR">
-<head>
+<head icon="docs/favicon.ic">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
@@ -17,9 +18,13 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
-<script type="text/javascript" src="doxygen-awesome-darkmode-toggle.js"></script>
+        <script type="text/javascript" src="doxygen-awesome-darkmode-toggle.js"></script>
         <script type="text/javascript">
             DoxygenAwesomeDarkModeToggle.init()
+        </script>
+        <script type="text/javascript" src="doxygen-awesome-fragment-copy-button.js"></script>
+        <script type="text/javascript">
+            DoxygenAwesomeFragmentCopyButton.init()
         </script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
@@ -116,7 +121,7 @@ Membros Públicos</h2></td></tr>
 <a class="el" href="structBECOMMONS__NS_1_1entidade.html">entidade</a>&#160;</td><td class="memItemRight" valign="bottom"><b>criar</b> (const uint32_t id=0)</td></tr>
 <tr class="separator:a5bbfb1f36359ac41ae8b4c9c14007a1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0cbf63391233c3f8761e3322f14a2e34" id="r_a0cbf63391233c3f8761e3322f14a2e34"><td class="memItemLeft" align="right" valign="top"><a id="a0cbf63391233c3f8761e3322f14a2e34" name="a0cbf63391233c3f8761e3322f14a2e34"></a>
-<a class="el" href="structBECOMMONS__NS_1_1componente.html#a63f9004bc698806fecbc2d677f8ee369">componente::mascara</a>&#160;</td><td class="memItemRight" valign="bottom"><b>obterComponentes</b> (const uint32_t &amp;id) const</td></tr>
+componente::mascara&#160;</td><td class="memItemRight" valign="bottom"><b>obterComponentes</b> (const uint32_t &amp;id) const</td></tr>
 <tr class="separator:a0cbf63391233c3f8761e3322f14a2e34"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a90a7cf76b5a52b8743b488e2c5c025bc" id="r_a90a7cf76b5a52b8743b488e2c5c025bc"><td class="memTemplParams" colspan="2"><a id="a90a7cf76b5a52b8743b488e2c5c025bc" name="a90a7cf76b5a52b8743b488e2c5c025bc"></a>
 template&lt;typename T , typename... Args&gt; </td></tr>
@@ -145,11 +150,11 @@ template&lt;typename T &gt; </td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Atributos Públicos</h2></td></tr>
 <tr class="memitem:ababc759798ebf7256db4f9c11e82354a" id="r_ababc759798ebf7256db4f9c11e82354a"><td class="memItemLeft" align="right" valign="top"><a id="ababc759798ebf7256db4f9c11e82354a" name="ababc759798ebf7256db4f9c11e82354a"></a>
-std::unordered_map&lt; uint32_t, <a class="el" href="structBECOMMONS__NS_1_1componente.html#a63f9004bc698806fecbc2d677f8ee369">componente::mascara</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>mascaras</b></td></tr>
+std::unordered_map&lt; uint32_t, componente::mascara &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>mascaras</b></td></tr>
 <tr class="memdesc:ababc759798ebf7256db4f9c11e82354a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Armazena mascara da entidade associada. <br /></td></tr>
 <tr class="separator:ababc759798ebf7256db4f9c11e82354a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6dc14669a4bb01d981d9a17be6ff81a8" id="r_a6dc14669a4bb01d981d9a17be6ff81a8"><td class="memItemLeft" align="right" valign="top"><a id="a6dc14669a4bb01d981d9a17be6ff81a8" name="a6dc14669a4bb01d981d9a17be6ff81a8"></a>
-std::map&lt; uint32_t, std::unordered_map&lt; <a class="el" href="structBECOMMONS__NS_1_1componente.html#a63f9004bc698806fecbc2d677f8ee369">componente::mascara</a>, std::shared_ptr&lt; <a class="el" href="structBECOMMONS__NS_1_1componente.html">componente</a> &gt; &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>entidades</b></td></tr>
+std::map&lt; uint32_t, std::unordered_map&lt; componente::mascara, std::shared_ptr&lt; <a class="el" href="structBECOMMONS__NS_1_1componente.html">componente</a> &gt; &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>entidades</b></td></tr>
 <tr class="memdesc:a6dc14669a4bb01d981d9a17be6ff81a8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Armazena componentes da entidade associada. <br /></td></tr>
 <tr class="separator:a6dc14669a4bb01d981d9a17be6ff81a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>

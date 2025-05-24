@@ -172,43 +172,43 @@ glm::mat4 camera::obtViewMatrix() {
     if (!transform)
         transform = projeto_atual->obterFaseAtual()->obterRegistro()->obter<transformacao>(meu_objeto).get();
 
-    posicao = transform->posicao;
+    posicao = transform->obterPosicao();
 
     // Recalcular os vetores de referência
-    glm::vec3 frente = glm::vec3(
-        cos(glm::radians(transform->rotacao.y)) * cos(glm::radians(transform->rotacao.x)),
-        sin(glm::radians(transform->rotacao.x)),
-        sin(glm::radians(transform->rotacao.y)) * cos(glm::radians(transform->rotacao.x))
+    fvet3 frente = fvet3 (
+        cos(glm::radians(transform->obterRotacao().y)) * cos(glm::radians(transform->obterRotacao().x)),    // x
+        sin(glm::radians(transform->obterRotacao().x)),                                                     // y
+        sin(glm::radians(transform->obterRotacao().y)) * cos(glm::radians(transform->obterRotacao().x))     // z
     );
-    forward = glm::normalize(frente);
+    forward = frente.normalizar();
 
-    cima = glm::vec3(0,1,0);
+    cima = fvet3(0.f , 1.f, 0.f);
 
-    direita = glm::normalize(glm::cross(forward, cima));
-    cima = glm::normalize(glm::cross(direita, forward));
+    direita = fvet3(glm::normalize(glm::cross(forward.to_glm(), cima.to_glm())));
+    cima = fvet3(glm::normalize(glm::cross(direita.to_glm(), forward.to_glm())));
 
     // Atualiza a transformação
-    transform->cima = cima;
+    transform->definirCima(cima);
 
-    glm::vec3 alvo;
-    if (transform->alvo) {
-        alvo = *transform->alvo;
+    fvet3 alvo;
+    if (transform->usandoAlvo()) {
+        alvo = transform->obterAlvo();
     }
     else {
         alvo = posicao + forward;
     }
 
     // Agora, passa o vetor 'cima' atualizado para a viewMatrix
-    viewMatrix = glm::lookAt(posicao, alvo, cima);
+    viewMatrix = glm::lookAt(posicao.to_glm(), alvo.to_glm(), cima.to_glm());
     return viewMatrix;
 }
-void camera::viewport(const BECOMMONS_NS::vetor2<double>& viewp)
+void camera::viewport(const ivet2& viewp)
 {
     viewportFBO = viewp;
 }
 
 glm::mat4 camera::obtProjectionMatrix() {
-    vetor2<double> viewp;
+    ivet2 viewp;
     if (flag_fb && !viewport_ptr)
         viewp = viewportFBO;
     else if(viewport_ptr)
@@ -239,37 +239,37 @@ glm::mat4 camera::obtProjectionMatrix() {
     return projMatriz;
 }
 
-raio BECOMMONS_NS::camera::pontoParaRaio(BECOMMONS_NS::vetor2<double> screenPoint) const 
+raio camera::pontoParaRaio(const fvet2& screenPoint) const 
 {
-    glm::vec3 worldSpaceDirection = telaParaMundo(screenPoint, 0.0f);
+    fvet3 direcaoMundo = telaParaMundo(screenPoint, 0.0f);
 
-    raio ray{};
+    raio ray {};
     ray.origem = posicao;
-    ray.direcao = glm::normalize(worldSpaceDirection);
+    ray.direcao = direcaoMundo.normalizar();
 
     return ray;
 }
 
-glm::vec3 camera::telaParaMundo(const BECOMMONS_NS::vetor2<double> &screenPoint, float profundidade) const
+fvet3 camera::telaParaMundo(const fvet2 &screenPoint, float profundidade) const
 {
     float ndcX = (2.0f * screenPoint.x) / viewportFBO.x - 1.0f;
     float ndcY = 1.0f - (2.0f * screenPoint.y) / viewportFBO.y;
-    glm::vec4 clipCoords = glm::vec4(ndcX, ndcY, profundidade, 1.0f);
+    fvet4 clipCoords = fvet4(ndcX, ndcY, profundidade, 1.0f);
 
-    glm::vec4 eyeCoords = glm::inverse(projMatriz) * clipCoords;
-    eyeCoords = glm::vec4(eyeCoords.x, eyeCoords.y, -1.0f, 0.0f);
+    fvet4 eyeCoords = fvet4(glm::inverse(projMatriz) * clipCoords.to_glm());
+    eyeCoords = fvet4(eyeCoords.x, eyeCoords.y, -1.0f, 0.0f);
 
-    glm::vec4 worldCoords = glm::inverse(viewMatrix) * eyeCoords;
-    return glm::normalize(glm::vec3(worldCoords));
+    fvet4 worldCoords = glm::inverse(viewMatrix) * eyeCoords.to_glm();
+    return fvet3(worldCoords.x,worldCoords.y,worldCoords.z).normalizar();
 }
 
-vetor2<int> BECOMMONS_NS::camera::mundoParaTela(const glm::vec3 &mundoPos)
+ivet2 camera::mundoParaTela(const fvet3 &mundoPos)
 {
-    glm::vec4 clipSpacePos = projMatriz * viewMatrix * glm::vec4(mundoPos, 1.0f);
+    glm::vec4 clipSpacePos = projMatriz * viewMatrix * glm::vec4(mundoPos.x, mundoPos.y, mundoPos.z, 1.0f);
 
     // Validação de w para evitar divisões inválidas
     if (clipSpacePos.w <= 0.0001f) {
-        return vetor2<int>(-1, -1); // ou outro tratamento adequado
+        return ivet2(-1, -1); // ou outro tratamento adequado
     }
 
     glm::vec3 ndcPos = glm::vec3(clipSpacePos) / clipSpacePos.w;
@@ -277,21 +277,19 @@ vetor2<int> BECOMMONS_NS::camera::mundoParaTela(const glm::vec3 &mundoPos)
     int screenWidth = viewport_ptr->x;
     int screenHeight = viewport_ptr->y;
 
-    vetor2<int> screenPos;
+    ivet2 screenPos;
     screenPos.x = static_cast<int>(std::round((ndcPos.x * 0.5f + 0.5f) * screenWidth));
     screenPos.y = static_cast<int>(std::round((1.0f - (ndcPos.y * 0.5f + 0.5f)) * screenHeight)); // Inverter Y
     return screenPos;
 }
 
-void camera::mover(glm::vec3 pos)
+void camera::mover(const fvet3& pos)
 {
     if (!transform)
         transform = projeto_atual->obterFaseAtual()->obterRegistro()->obter<transformacao>(meu_objeto).get();
 
-    
-
     // Atualiza a posição com base na entrada
-    transform->posicao += forward * pos.z;  // Move para frente/trás
-    transform->posicao += direita * pos.x;  // Move para os lados
-    transform->posicao += cima * pos.y;     // Move para cima/baixo
+    transform->mover(forward * pos.z);  // Move para frente/trás
+    transform->mover(direita * pos.x);  // Move para os lados
+    transform->mover(cima * pos.y);     // Move para cima/baixo
 }

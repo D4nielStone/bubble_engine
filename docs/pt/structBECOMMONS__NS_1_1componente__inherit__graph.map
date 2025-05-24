@@ -1,6 +1,6 @@
 <map id="BECOMMONS_NS::componente" name="BECOMMONS_NS::componente">
 <area shape="rect" id="Node000001" title="base para as funcionalidades da engine" alt="" coords="5,259,229,285"/>
-<area shape="rect" id="Node000002" href="$structBECOMMONS__NS_1_1camera.html" title="componente que facilita a manipuacao da matriz de visualizacao e projeco" alt="" coords="301,13,493,38"/>
+<area shape="rect" id="Node000002" href="$classBECOMMONS__NS_1_1camera.html" title="componente que facilita a manipuacao da matriz de visualizacao e projeco" alt="" coords="301,13,493,38"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="127,245,148,202,180,147,223,93,248,68,276,47,299,35,302,40,279,52,252,72,227,96,185,150,153,204,132,248"/>
 <area shape="rect" id="Node000004" href="$structBECOMMONS__NS_1_1codigo.html" title=" " alt="" coords="303,62,490,87"/>
 <area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="131,246,155,212,188,171,229,130,276,96,302,85,304,90,279,101,233,134,192,174,160,215,136,249"/>
@@ -14,7 +14,7 @@
 <area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="243,269,287,269,287,275,243,275"/>
 <area shape="rect" id="Node000009" href="$structBECOMMONS__NS_1_1propriedades.html" title=" " alt="" coords="283,309,511,334"/>
 <area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="204,284,324,306,323,311,203,290"/>
-<area shape="rect" id="Node000010" href="$structBECOMMONS__NS_1_1renderizador.html" title=" " alt="" coords="284,358,509,383"/>
+<area shape="rect" id="Node000010" href="$classBECOMMONS__NS_1_1renderizador.html" title=" " alt="" coords="284,358,509,383"/>
 <area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="155,289,212,317,278,343,324,355,323,360,276,348,210,321,153,294"/>
 <area shape="rect" id="Node000011" href="$structBECOMMONS__NS_1_1terreno.html" title=" " alt="" coords="301,407,492,433"/>
 <area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="142,292,201,343,238,370,278,392,313,405,312,410,276,397,236,374,198,348,139,296"/>

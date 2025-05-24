@@ -1,7 +1,8 @@
 <!-- HTML header for doxygen 1.9.8-->
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="pt-BR">
-<head>
+<head icon="docs/favicon.ic">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
@@ -17,9 +18,13 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
-<script type="text/javascript" src="doxygen-awesome-darkmode-toggle.js"></script>
+        <script type="text/javascript" src="doxygen-awesome-darkmode-toggle.js"></script>
         <script type="text/javascript">
             DoxygenAwesomeDarkModeToggle.init()
+        </script>
+        <script type="text/javascript" src="doxygen-awesome-fragment-copy-button.js"></script>
+        <script type="text/javascript">
+            DoxygenAwesomeFragmentCopyButton.init()
         </script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
@@ -99,8 +104,8 @@ $(document).ready(function(){initNavTree('classBECOMMONS__NS_1_1transformacao.ht
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Membros Públicos</a> &#124;
-<a href="#pub-attribs">Atributos Públicos</a> &#124;
 <a href="#pub-static-attribs">Atributos Públicos Estáticos</a> &#124;
+<a href="#pri-attribs">Atributos Privados</a> &#124;
 <a href="classBECOMMONS__NS_1_1transformacao-members.html">Lista de todos os Membros</a>  </div>
   <div class="headertitle"><div class="title">Referência da Classe BECOMMONS_NS::transformacao</div></div>
 </div><!--header-->
@@ -132,67 +137,108 @@ $(document).ready(function(){initNavTree('classBECOMMONS__NS_1_1transformacao.ht
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Membros Públicos</h2></td></tr>
+<tr class="memitem:aef8b2c7f5d12eef734a04747d7575773" id="r_aef8b2c7f5d12eef734a04747d7575773"><td class="memItemLeft" align="right" valign="top"><a id="aef8b2c7f5d12eef734a04747d7575773" name="aef8b2c7f5d12eef734a04747d7575773"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>transformacao</b> (const fvet3 &amp;p=fvet3(0.f, 0.f, 0.f), const fvet3 &amp;r=fvet3(0.f, 0.f, 0.f), const fvet3 &amp;e=fvet3(1.f, 1.f, 1.f))</td></tr>
+<tr class="separator:aef8b2c7f5d12eef734a04747d7575773"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6d6b6a2ddfb429fffadfe15c75c2c03f" id="r_a6d6b6a2ddfb429fffadfe15c75c2c03f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBECOMMONS__NS_1_1transformacao.html#a6d6b6a2ddfb429fffadfe15c75c2c03f">analizar</a> (const rapidjson::Value &amp;) override</td></tr>
 <tr class="separator:a6d6b6a2ddfb429fffadfe15c75c2c03f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae325e6423b37414d0b017e114f161954" id="r_ae325e6423b37414d0b017e114f161954"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBECOMMONS__NS_1_1transformacao.html#ae325e6423b37414d0b017e114f161954">serializar</a> (rapidjson::Value &amp;value, rapidjson::Document::AllocatorType &amp;allocator) const override</td></tr>
 <tr class="separator:ae325e6423b37414d0b017e114f161954"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a19ca6188a4bd45aeb460b5435377e4f8" id="r_a19ca6188a4bd45aeb460b5435377e4f8"><td class="memItemLeft" align="right" valign="top"><a id="a19ca6188a4bd45aeb460b5435377e4f8" name="a19ca6188a4bd45aeb460b5435377e4f8"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>transformacao</b> (const fvet3 &amp;p=fvet3(0.f, 0.f, 0.f), const fvet3 &amp;r=fvet3(0.f, 90.f, 0.f), const fvet3 &amp;e=fvet3(1.f, 1.f, 1.f))</td></tr>
-<tr class="separator:a19ca6188a4bd45aeb460b5435377e4f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acdc14e27557a87d164fc37f32a80fa16" id="r_acdc14e27557a87d164fc37f32a80fa16"><td class="memItemLeft" align="right" valign="top"><a id="acdc14e27557a87d164fc37f32a80fa16" name="acdc14e27557a87d164fc37f32a80fa16"></a>
-glm::mat4&#160;</td><td class="memItemRight" valign="bottom"><b>calcular</b> ()</td></tr>
-<tr class="separator:acdc14e27557a87d164fc37f32a80fa16"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac2a9c7ceea7a30bd994777d0e11bedc1" id="r_ac2a9c7ceea7a30bd994777d0e11bedc1"><td class="memItemLeft" align="right" valign="top"><a id="ac2a9c7ceea7a30bd994777d0e11bedc1" name="ac2a9c7ceea7a30bd994777d0e11bedc1"></a>
-float *&#160;</td><td class="memItemRight" valign="bottom"><b>obter</b> ()</td></tr>
-<tr class="separator:ac2a9c7ceea7a30bd994777d0e11bedc1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a550b0a1c068f90ed569bf8ff1504b35a" id="r_a550b0a1c068f90ed569bf8ff1504b35a"><td class="memItemLeft" align="right" valign="top"><a id="a550b0a1c068f90ed569bf8ff1504b35a" name="a550b0a1c068f90ed569bf8ff1504b35a"></a>
+<tr class="memitem:afaff8b0955ba3efe9d8f2a79180e286e" id="r_afaff8b0955ba3efe9d8f2a79180e286e"><td class="memItemLeft" align="right" valign="top"><a id="afaff8b0955ba3efe9d8f2a79180e286e" name="afaff8b0955ba3efe9d8f2a79180e286e"></a>
+glm::mat4&#160;</td><td class="memItemRight" valign="bottom"><b>obterMatrizModelo</b> () const</td></tr>
+<tr class="separator:afaff8b0955ba3efe9d8f2a79180e286e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8f3be1c3bd89fb6498d5ab9b6502bc88" id="r_a8f3be1c3bd89fb6498d5ab9b6502bc88"><td class="memItemLeft" align="right" valign="top"><a id="a8f3be1c3bd89fb6498d5ab9b6502bc88" name="a8f3be1c3bd89fb6498d5ab9b6502bc88"></a>
+fvet3&#160;</td><td class="memItemRight" valign="bottom"><b>obterPosicao</b> () const</td></tr>
+<tr class="separator:a8f3be1c3bd89fb6498d5ab9b6502bc88"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a29e87004d3758a4c80a92da60e313b42" id="r_a29e87004d3758a4c80a92da60e313b42"><td class="memItemLeft" align="right" valign="top"><a id="a29e87004d3758a4c80a92da60e313b42" name="a29e87004d3758a4c80a92da60e313b42"></a>
+fvet3&#160;</td><td class="memItemRight" valign="bottom"><b>obterEscala</b> () const</td></tr>
+<tr class="separator:a29e87004d3758a4c80a92da60e313b42"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5f910766573f3c56b3a1f2db731e8862" id="r_a5f910766573f3c56b3a1f2db731e8862"><td class="memItemLeft" align="right" valign="top"><a id="a5f910766573f3c56b3a1f2db731e8862" name="a5f910766573f3c56b3a1f2db731e8862"></a>
+fvet3&#160;</td><td class="memItemRight" valign="bottom"><b>obterRotacao</b> () const</td></tr>
+<tr class="separator:a5f910766573f3c56b3a1f2db731e8862"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a63a5f401aa1f9974fe417966d33732cb" id="r_a63a5f401aa1f9974fe417966d33732cb"><td class="memItemLeft" align="right" valign="top"><a id="a63a5f401aa1f9974fe417966d33732cb" name="a63a5f401aa1f9974fe417966d33732cb"></a>
+fvet3&#160;</td><td class="memItemRight" valign="bottom"><b>obterAlvo</b> () const</td></tr>
+<tr class="separator:a63a5f401aa1f9974fe417966d33732cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acae8cf292f445068c722a5258d0f4ccb" id="r_acae8cf292f445068c722a5258d0f4ccb"><td class="memItemLeft" align="right" valign="top"><a id="acae8cf292f445068c722a5258d0f4ccb" name="acae8cf292f445068c722a5258d0f4ccb"></a>
+fvet3&#160;</td><td class="memItemRight" valign="bottom"><b>obterCima</b> () const</td></tr>
+<tr class="separator:acae8cf292f445068c722a5258d0f4ccb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acf4a3464b97eaa97c145b93bc9788706" id="r_acf4a3464b97eaa97c145b93bc9788706"><td class="memItemLeft" align="right" valign="top"><a id="acf4a3464b97eaa97c145b93bc9788706" name="acf4a3464b97eaa97c145b93bc9788706"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>usandoAlvo</b> () const</td></tr>
+<tr class="separator:acf4a3464b97eaa97c145b93bc9788706"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac3251354f24fc0f330d9cee84cc5dc11" id="r_ac3251354f24fc0f330d9cee84cc5dc11"><td class="memItemLeft" align="right" valign="top"><a id="ac3251354f24fc0f330d9cee84cc5dc11" name="ac3251354f24fc0f330d9cee84cc5dc11"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>definirMatrizModelo</b> (const glm::mat4 &amp;)</td></tr>
+<tr class="separator:ac3251354f24fc0f330d9cee84cc5dc11"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a092ece19093d5bb8db4236f1640f744d" id="r_a092ece19093d5bb8db4236f1640f744d"><td class="memItemLeft" align="right" valign="top"><a id="a092ece19093d5bb8db4236f1640f744d" name="a092ece19093d5bb8db4236f1640f744d"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>definirCima</b> (const fvet3 &amp;)</td></tr>
+<tr class="separator:a092ece19093d5bb8db4236f1640f744d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac2140952a8e12980a7300cb86f13615d" id="r_ac2140952a8e12980a7300cb86f13615d"><td class="memItemLeft" align="right" valign="top"><a id="ac2140952a8e12980a7300cb86f13615d" name="ac2140952a8e12980a7300cb86f13615d"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>definirPosicao</b> (const fvet3 &amp;)</td></tr>
+<tr class="separator:ac2140952a8e12980a7300cb86f13615d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a55b10f97c73cb127c5038818898b9053" id="r_a55b10f97c73cb127c5038818898b9053"><td class="memItemLeft" align="right" valign="top"><a id="a55b10f97c73cb127c5038818898b9053" name="a55b10f97c73cb127c5038818898b9053"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>definirEscala</b> (const fvet3 &amp;)</td></tr>
+<tr class="separator:a55b10f97c73cb127c5038818898b9053"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5ae421a089972faf96d16b16fa1d669e" id="r_a5ae421a089972faf96d16b16fa1d669e"><td class="memItemLeft" align="right" valign="top"><a id="a5ae421a089972faf96d16b16fa1d669e" name="a5ae421a089972faf96d16b16fa1d669e"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>definirRotacao</b> (const fvet3 &amp;)</td></tr>
+<tr class="separator:a5ae421a089972faf96d16b16fa1d669e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a70b30ad417b7c97af9ef96db3a18dc7d" id="r_a70b30ad417b7c97af9ef96db3a18dc7d"><td class="memItemLeft" align="right" valign="top"><a id="a70b30ad417b7c97af9ef96db3a18dc7d" name="a70b30ad417b7c97af9ef96db3a18dc7d"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>definirRotacao</b> (const fvet4 &amp;)</td></tr>
+<tr class="separator:a70b30ad417b7c97af9ef96db3a18dc7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac55ef271e2d5689ce633c0748bcf64e6" id="r_ac55ef271e2d5689ce633c0748bcf64e6"><td class="memItemLeft" align="right" valign="top"><a id="ac55ef271e2d5689ce633c0748bcf64e6" name="ac55ef271e2d5689ce633c0748bcf64e6"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>mover</b> (const fvet3 &amp;)</td></tr>
+<tr class="separator:ac55ef271e2d5689ce633c0748bcf64e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a01a0fe09933f25bf8aca90061545f107" id="r_a01a0fe09933f25bf8aca90061545f107"><td class="memItemLeft" align="right" valign="top"><a id="a01a0fe09933f25bf8aca90061545f107" name="a01a0fe09933f25bf8aca90061545f107"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>rotacionar</b> (const fvet3 &amp;)</td></tr>
+<tr class="separator:a01a0fe09933f25bf8aca90061545f107"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4b45df317da62d9901201934ef1dfdb2" id="r_a4b45df317da62d9901201934ef1dfdb2"><td class="memItemLeft" align="right" valign="top"><a id="a4b45df317da62d9901201934ef1dfdb2" name="a4b45df317da62d9901201934ef1dfdb2"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>escalonar</b> (const fvet3 &amp;)</td></tr>
+<tr class="separator:a4b45df317da62d9901201934ef1dfdb2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac116e6961bad0fa381009b109b45f4e1" id="r_ac116e6961bad0fa381009b109b45f4e1"><td class="memItemLeft" align="right" valign="top"><a id="ac116e6961bad0fa381009b109b45f4e1" name="ac116e6961bad0fa381009b109b45f4e1"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>olharEntidade</b> (const uint32_t &amp;ent)</td></tr>
+<tr class="separator:ac116e6961bad0fa381009b109b45f4e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa6052321c2f5bd905bd1d6b0db28489d" id="r_aa6052321c2f5bd905bd1d6b0db28489d"><td class="memItemLeft" align="right" valign="top"><a id="aa6052321c2f5bd905bd1d6b0db28489d" name="aa6052321c2f5bd905bd1d6b0db28489d"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>olharVetor</b> (const fvet3 &amp;pos)</td></tr>
+<tr class="separator:aa6052321c2f5bd905bd1d6b0db28489d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a84a49cc7c6a43e1b0c54d0430d98738e" id="r_a84a49cc7c6a43e1b0c54d0430d98738e"><td class="memItemLeft" align="right" valign="top"><a id="a84a49cc7c6a43e1b0c54d0430d98738e" name="a84a49cc7c6a43e1b0c54d0430d98738e"></a>
 <a class="el" href="classBECOMMONS__NS_1_1transformacao.html">transformacao</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const <a class="el" href="classBECOMMONS__NS_1_1transformacao.html">transformacao</a> &amp;tr)</td></tr>
-<tr class="separator:a550b0a1c068f90ed569bf8ff1504b35a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae31c539a8be7c7470baa8339f41aea07" id="r_ae31c539a8be7c7470baa8339f41aea07"><td class="memItemLeft" align="right" valign="top"><a id="ae31c539a8be7c7470baa8339f41aea07" name="ae31c539a8be7c7470baa8339f41aea07"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>apontarEntidade</b> (const uint32_t &amp;ent)</td></tr>
-<tr class="separator:ae31c539a8be7c7470baa8339f41aea07"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a024cd12d7dda2099c4364c70d86092e5" id="r_a024cd12d7dda2099c4364c70d86092e5"><td class="memItemLeft" align="right" valign="top"><a id="a024cd12d7dda2099c4364c70d86092e5" name="a024cd12d7dda2099c4364c70d86092e5"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>apontarV3</b> (const glm::vec3 &amp;pos)</td></tr>
-<tr class="separator:a024cd12d7dda2099c4364c70d86092e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
-Atributos Públicos</h2></td></tr>
-<tr class="memitem:a47a19460d0444f9000820697330498bc" id="r_a47a19460d0444f9000820697330498bc"><td class="memItemLeft" align="right" valign="top"><a id="a47a19460d0444f9000820697330498bc" name="a47a19460d0444f9000820697330498bc"></a>
-glm::vec3&#160;</td><td class="memItemRight" valign="bottom"><b>cima</b> { 0,1,0 }</td></tr>
-<tr class="separator:a47a19460d0444f9000820697330498bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7cf346058b148010bd6e64b0c80955a8" id="r_a7cf346058b148010bd6e64b0c80955a8"><td class="memItemLeft" align="right" valign="top"><a id="a7cf346058b148010bd6e64b0c80955a8" name="a7cf346058b148010bd6e64b0c80955a8"></a>
-glm::vec3&#160;</td><td class="memItemRight" valign="bottom"><b>posicao</b> {}</td></tr>
-<tr class="separator:a7cf346058b148010bd6e64b0c80955a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7e320bee005c7d9456b449f96e9db426" id="r_a7e320bee005c7d9456b449f96e9db426"><td class="memItemLeft" align="right" valign="top"><a id="a7e320bee005c7d9456b449f96e9db426" name="a7e320bee005c7d9456b449f96e9db426"></a>
-glm::vec3&#160;</td><td class="memItemRight" valign="bottom"><b>rotacao</b> {}</td></tr>
-<tr class="separator:a7e320bee005c7d9456b449f96e9db426"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aae95bfc5ffd4505a43e7f0ffe63219c2" id="r_aae95bfc5ffd4505a43e7f0ffe63219c2"><td class="memItemLeft" align="right" valign="top"><a id="aae95bfc5ffd4505a43e7f0ffe63219c2" name="aae95bfc5ffd4505a43e7f0ffe63219c2"></a>
-glm::vec3&#160;</td><td class="memItemRight" valign="bottom"><b>escala</b> {}</td></tr>
-<tr class="separator:aae95bfc5ffd4505a43e7f0ffe63219c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa9fdc5e9af91606b836c666a3d6894cf" id="r_aa9fdc5e9af91606b836c666a3d6894cf"><td class="memItemLeft" align="right" valign="top"><a id="aa9fdc5e9af91606b836c666a3d6894cf" name="aa9fdc5e9af91606b836c666a3d6894cf"></a>
-glm::vec3 *&#160;</td><td class="memItemRight" valign="bottom"><b>alvo</b> { nullptr }</td></tr>
-<tr class="separator:aa9fdc5e9af91606b836c666a3d6894cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab997fa099687188bd1b895328a2b838c" id="r_ab997fa099687188bd1b895328a2b838c"><td class="memItemLeft" align="right" valign="top"><a id="ab997fa099687188bd1b895328a2b838c" name="ab997fa099687188bd1b895328a2b838c"></a>
-glm::mat4&#160;</td><td class="memItemRight" valign="bottom"><b>matrizmodelo</b></td></tr>
-<tr class="separator:ab997fa099687188bd1b895328a2b838c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_attribs_structBECOMMONS__NS_1_1componente"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_structBECOMMONS__NS_1_1componente')"><img src="closed.png" alt="-"/>&#160;Atributos Públicos herdados de <a class="el" href="structBECOMMONS__NS_1_1componente.html">BECOMMONS_NS::componente</a></td></tr>
-<tr class="memitem:a198888339edd6c4a74869037e26badc3 inherit pub_attribs_structBECOMMONS__NS_1_1componente" id="r_a198888339edd6c4a74869037e26badc3"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structBECOMMONS__NS_1_1componente.html#a198888339edd6c4a74869037e26badc3">meu_objeto</a> { 0 }</td></tr>
-<tr class="separator:a198888339edd6c4a74869037e26badc3 inherit pub_attribs_structBECOMMONS__NS_1_1componente"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="separator:a84a49cc7c6a43e1b0c54d0430d98738e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
 Atributos Públicos Estáticos</h2></td></tr>
 <tr class="memitem:a24a298825dbfcc21a3fb978c91712ca8" id="r_a24a298825dbfcc21a3fb978c91712ca8"><td class="memItemLeft" align="right" valign="top"><a id="a24a298825dbfcc21a3fb978c91712ca8" name="a24a298825dbfcc21a3fb978c91712ca8"></a>
-static constexpr <a class="el" href="structBECOMMONS__NS_1_1componente.html#a63f9004bc698806fecbc2d677f8ee369">mascara</a>&#160;</td><td class="memItemRight" valign="bottom"><b>mascara</b> = COMPONENTE_TRANSFORMACAO</td></tr>
+static constexpr mascara&#160;</td><td class="memItemRight" valign="bottom"><b>mascara</b> = COMPONENTE_TRANSFORMACAO</td></tr>
 <tr class="separator:a24a298825dbfcc21a3fb978c91712ca8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_static_attribs_structBECOMMONS__NS_1_1componente"><td colspan="2" onclick="javascript:toggleInherit('pub_static_attribs_structBECOMMONS__NS_1_1componente')"><img src="closed.png" alt="-"/>&#160;Atributos Públicos Estáticos herdados de <a class="el" href="structBECOMMONS__NS_1_1componente.html">BECOMMONS_NS::componente</a></td></tr>
-<tr class="memitem:a8736103a6174940b233e4f9d5438524a inherit pub_static_attribs_structBECOMMONS__NS_1_1componente" id="r_a8736103a6174940b233e4f9d5438524a"><td class="memItemLeft" align="right" valign="top">static std::unordered_map&lt; <a class="el" href="structBECOMMONS__NS_1_1componente.html#a63f9004bc698806fecbc2d677f8ee369">mascara</a>, std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structBECOMMONS__NS_1_1componente.html#a8736103a6174940b233e4f9d5438524a">mapa_nomes_componentes</a></td></tr>
-<tr class="memdesc:a8736103a6174940b233e4f9d5438524a inherit pub_static_attribs_structBECOMMONS__NS_1_1componente"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mapeamento de nomes e mascara.  <br /></td></tr>
+<tr class="memitem:a8736103a6174940b233e4f9d5438524a inherit pub_static_attribs_structBECOMMONS__NS_1_1componente" id="r_a8736103a6174940b233e4f9d5438524a"><td class="memItemLeft" align="right" valign="top">static std::unordered_map&lt; mascara, std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structBECOMMONS__NS_1_1componente.html#a8736103a6174940b233e4f9d5438524a">mapa_nomes_componentes</a></td></tr>
 <tr class="separator:a8736103a6174940b233e4f9d5438524a inherit pub_static_attribs_structBECOMMONS__NS_1_1componente"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
+Atributos Privados</h2></td></tr>
+<tr class="memitem:ae268af4626455ddb100b7be28d81af09" id="r_ae268af4626455ddb100b7be28d81af09"><td class="memItemLeft" align="right" valign="top"><a id="ae268af4626455ddb100b7be28d81af09" name="ae268af4626455ddb100b7be28d81af09"></a>
+fvet3&#160;</td><td class="memItemRight" valign="bottom"><b>cima</b></td></tr>
+<tr class="separator:ae268af4626455ddb100b7be28d81af09"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5322f2652845336a6972c2ecb309dba8" id="r_a5322f2652845336a6972c2ecb309dba8"><td class="memItemLeft" align="right" valign="top"><a id="a5322f2652845336a6972c2ecb309dba8" name="a5322f2652845336a6972c2ecb309dba8"></a>
+fvet3&#160;</td><td class="memItemRight" valign="bottom"><b>posicao</b></td></tr>
+<tr class="separator:a5322f2652845336a6972c2ecb309dba8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3bde7c7fec4ce6c317b5db1f03f9e253" id="r_a3bde7c7fec4ce6c317b5db1f03f9e253"><td class="memItemLeft" align="right" valign="top"><a id="a3bde7c7fec4ce6c317b5db1f03f9e253" name="a3bde7c7fec4ce6c317b5db1f03f9e253"></a>
+fvet3&#160;</td><td class="memItemRight" valign="bottom"><b>rotacao</b></td></tr>
+<tr class="separator:a3bde7c7fec4ce6c317b5db1f03f9e253"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a570da393d0cf1fcbfa70830671a87be5" id="r_a570da393d0cf1fcbfa70830671a87be5"><td class="memItemLeft" align="right" valign="top"><a id="a570da393d0cf1fcbfa70830671a87be5" name="a570da393d0cf1fcbfa70830671a87be5"></a>
+fvet3&#160;</td><td class="memItemRight" valign="bottom"><b>escala</b></td></tr>
+<tr class="separator:a570da393d0cf1fcbfa70830671a87be5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a41707b25981f4695133a316de3029bca" id="r_a41707b25981f4695133a316de3029bca"><td class="memItemLeft" align="right" valign="top"><a id="a41707b25981f4695133a316de3029bca" name="a41707b25981f4695133a316de3029bca"></a>
+fvet3 *&#160;</td><td class="memItemRight" valign="bottom"><b>alvo</b></td></tr>
+<tr class="separator:a41707b25981f4695133a316de3029bca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a931630bef60d78b1690194f50b030e60" id="r_a931630bef60d78b1690194f50b030e60"><td class="memItemLeft" align="right" valign="top"><a id="a931630bef60d78b1690194f50b030e60" name="a931630bef60d78b1690194f50b030e60"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>m_usar_alvo</b></td></tr>
+<tr class="separator:a931630bef60d78b1690194f50b030e60"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab997fa099687188bd1b895328a2b838c" id="r_ab997fa099687188bd1b895328a2b838c"><td class="memItemLeft" align="right" valign="top"><a id="ab997fa099687188bd1b895328a2b838c" name="ab997fa099687188bd1b895328a2b838c"></a>
+glm::mat4&#160;</td><td class="memItemRight" valign="bottom"><b>matrizmodelo</b></td></tr>
+<tr class="separator:ab997fa099687188bd1b895328a2b838c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
 Outros membros herdados</h2></td></tr>
 <tr class="inherit_header pub_types_structBECOMMONS__NS_1_1componente"><td colspan="2" onclick="javascript:toggleInherit('pub_types_structBECOMMONS__NS_1_1componente')"><img src="closed.png" alt="-"/>&#160;Tipos Públicos herdados de <a class="el" href="structBECOMMONS__NS_1_1componente.html">BECOMMONS_NS::componente</a></td></tr>
-<tr class="memitem:a63f9004bc698806fecbc2d677f8ee369 inherit pub_types_structBECOMMONS__NS_1_1componente" id="r_a63f9004bc698806fecbc2d677f8ee369"><td class="memItemLeft" align="right" valign="top"><a id="a63f9004bc698806fecbc2d677f8ee369" name="a63f9004bc698806fecbc2d677f8ee369"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structBECOMMONS__NS_1_1componente.html#a63f9004bc698806fecbc2d677f8ee369">mascara</a> : uint32_t { <br />
+<tr class="memitem:a63f9004bc698806fecbc2d677f8ee369 inherit pub_types_structBECOMMONS__NS_1_1componente" id="r_a63f9004bc698806fecbc2d677f8ee369"><td class="memItemLeft" align="right" valign="top"><a id="a63f9004bc698806fecbc2d677f8ee369" name="a63f9004bc698806fecbc2d677f8ee369"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>mascara</b> : uint32_t { <br />
 &#160;&#160;<b>COMPONENTE_NONE</b> = 0
 , <b>COMPONENTE_CAM</b> = 1 &lt;&lt; 0
 , <b>COMPONENTE_RENDER</b> = 1 &lt;&lt; 1
@@ -211,8 +257,11 @@ Outros membros herdados</h2></td></tr>
 &#160;&#160;<b>COMPONENTE_TERRENO</b> = 1 &lt;&lt; 11
 <br />
  }</td></tr>
-<tr class="memdesc:a63f9004bc698806fecbc2d677f8ee369"><td class="mdescLeft">&#160;</td><td class="mdescRight">facilita a identificacao dos componentes pertencentes a uma entidade <br /></td></tr>
 <tr class="separator:a63f9004bc698806fecbc2d677f8ee369 inherit pub_types_structBECOMMONS__NS_1_1componente"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_attribs_structBECOMMONS__NS_1_1componente"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_structBECOMMONS__NS_1_1componente')"><img src="closed.png" alt="-"/>&#160;Atributos Públicos herdados de <a class="el" href="structBECOMMONS__NS_1_1componente.html">BECOMMONS_NS::componente</a></td></tr>
+<tr class="memitem:a198888339edd6c4a74869037e26badc3 inherit pub_attribs_structBECOMMONS__NS_1_1componente" id="r_a198888339edd6c4a74869037e26badc3"><td class="memItemLeft" align="right" valign="top">
+uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>meu_objeto</b> { 0 }</td></tr>
+<tr class="separator:a198888339edd6c4a74869037e26badc3 inherit pub_attribs_structBECOMMONS__NS_1_1componente"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Documentação das funções</h2>
 <a id="a6d6b6a2ddfb429fffadfe15c75c2c03f" name="a6d6b6a2ddfb429fffadfe15c75c2c03f"></a>

@@ -37,8 +37,8 @@ namespace BECOMMONS_NS {
 	{
 		constexpr static componente::mascara mascara = componente::COMPONENTE_IMAGEM;
 		std::string arquivo	{ "" };
-		dvet2 limite			{ 20.0, 20.0 };
-		dvet2 padding			{ 0.0,0.0 };
+		fvet2 limite			{ 20.0, 20.0 };
+		fvet2 padding			{ 0.0,0.0 };
 		bool flip					{ false };
 		unsigned int id;
 		cor difusa					{ 1.f, 1.f, 1.f, 1.f };
@@ -52,7 +52,7 @@ namespace BECOMMONS_NS {
 
 				dir = (std::filesystem::absolute(diretorio).string().c_str());
 			}
-			id = textureLoader::obterInstancia().carregarTextura(dir, &limite.x, &limite.y);
+			id = textureLoader::obterInstancia().carregarTextura(dir, limite);
 		}
 		imagem(unsigned int id) : id(id) {}
 		void definirID(unsigned int id_)

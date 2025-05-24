@@ -26,6 +26,7 @@ SOFTWARE.
 
 #pragma once
 #include <glm/glm.hpp>
+#include "vetor3.hpp"
 #include <bullet/btBulletDynamicsCommon.h>
 #include "becommons_namespace.hpp"
 
@@ -33,13 +34,13 @@ namespace BECOMMONS_NS {
     // Estrutura para armazenar os resultados do Raycast
     struct raio
     {
-        glm::vec3 origem;
-        glm::vec3 direcao;
+        fvet3 origem;
+        fvet3 direcao;
     };
     struct resultadoRaio {
         bool atingiu;                      // Se o raio atingiu algo
-        glm::vec3 pontoDeColisao;            // Ponto de colis�o
-        glm::vec3 normalAtingida;           // Normal da superf�cie atingida
+        fvet3 pontoDeColisao;            // Ponto de colis�o
+        fvet3 normalAtingida;           // Normal da superf�cie atingida
         const btCollisionObject* objetoAtingido; // Objeto atingido
     };
 }

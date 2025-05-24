@@ -65,7 +65,6 @@ fisica::fisica(bool malha, btScalar massa, btVector3 posicaoInicial, camada cama
 // Destrutor
 fisica::~fisica()
 {
-
     if(corpoRigido && projeto_atual->obterFaseAtual())projeto_atual->sfisica()->remover(corpoRigido);
     if(corpoRigido)delete corpoRigido;
     if(estadoDeMovimento)delete estadoDeMovimento;
@@ -96,8 +95,8 @@ void fisica::criarMalha()
 
     for (const auto& malha : malhas) {
         // Supondo que malha tenha 'vertices' e 'indices'
-        const auto& vertices = malha.vertices;
-        const auto& indices = malha.indices;
+        const auto& vertices = malha.obterVertices();
+        const auto& indices = malha.obterIndices();
 
         btIndexedMesh mesh;
         mesh.m_numTriangles = indices.size() / 3;
@@ -120,33 +119,33 @@ void fisica::criarMalha()
 void fisica::atualizarTransformacao()
 {
     m_transformacao = projeto_atual->obterFaseAtual()->obterRegistro()->obter<transformacao>(meu_objeto).get();
-    forma->setLocalScaling(btVector3(m_transformacao->escala.x, m_transformacao->escala.y, m_transformacao->escala.z));
+    forma->setLocalScaling(m_transformacao->obterEscala().to_btvec());
 
     if (massa == 0)  return;
     btTransform bt;
     estadoDeMovimento->getWorldTransform(bt);
 
-    m_transformacao->posicao = { bt.getOrigin().getX(), bt.getOrigin().getY(), bt.getOrigin().getZ() };
-    m_transformacao->rotacao = { bt.getRotation().getX(), bt.getRotation().getY(), bt.getRotation().getZ() };
+    m_transformacao->definirPosicao(fvet3(bt.getOrigin()  ));
+    m_transformacao->definirRotacao(fvet4(bt.getRotation()));
 }
 
 // Aplicar for�a
-void fisica::aplicarForca(const glm::vec3& vetor)
+void fisica::aplicarForca(const fvet3& vetor)
 {
     corpoRigido->applyCentralForce({ vetor.x, vetor.y, vetor.z });
 }
 
 // Aplicar velocidade
-void fisica::aplicarVelocidade(const glm::vec3& velocidade)
+void fisica::aplicarVelocidade(const fvet3& velocidade)
 {
     corpoRigido->activate();
     corpoRigido->setLinearVelocity(btVector3(velocidade.x, velocidade.y, velocidade.z));
 }
 
 // definir posi��o
-void fisica::definirPosicao(const glm::vec3& posicao)
+void fisica::definirPosicao(const fvet3& posicao)
 {
-    m_transformacao->posicao = posicao;
+    m_transformacao->definirPosicao(posicao);
     // Ensure the rigid body exists
     if (estadoDeMovimento)
     {
@@ -165,8 +164,9 @@ void fisica::definirPosicao(const glm::vec3& posicao)
 }
 
 // definir rota��o
-void fisica::definirRotacao(const glm::vec3& rotacao)
+void fisica::definirRotacao(const fvet3& rotacao)
 {
+    m_transformacao->definirRotacao(rotacao);
     btTransform bt;
     estadoDeMovimento->getWorldTransform(bt); // Recupera transforma��o atual
     btQuaternion btRot;
@@ -176,13 +176,13 @@ void fisica::definirRotacao(const glm::vec3& rotacao)
 }
 
 // Obter velocidade
-glm::vec3 fisica::obterVelocidade() const
+fvet3 fisica::obterVelocidade() const
 {
     return { corpoRigido->getLinearVelocity().getX(),
             corpoRigido->getLinearVelocity().getY(),
             corpoRigido->getLinearVelocity().getZ() };
 }// Obter velocidade
-glm::vec3 fisica::obterPosicao() const
+fvet3 fisica::obterPosicao() const
 {
     btTransform bt;
     corpoRigido->getMotionState()->getWorldTransform(bt);
@@ -193,13 +193,13 @@ glm::vec3 fisica::obterPosicao() const
     };
 }
 
-void fisica::definirFatorLinear(const glm::vec3& fator)
+void fisica::definirFatorLinear(const fvet3& fator)
 {
         corpoRigido->setLinearFactor(btVector3(fator.x, fator.y, fator.z)); // Reset velocity to avoid unwanted movement
         corpoRigido->activate(); 
 }
 
-void fisica::definirFatorAngular(const glm::vec3& fator){
+void fisica::definirFatorAngular(const fvet3& fator){
         corpoRigido->setAngularFactor(btVector3(fator.x, fator.y, fator.z)); // Reset velocity to avoid unwanted movement
         corpoRigido->activate(); 
 }

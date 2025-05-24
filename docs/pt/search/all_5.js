@@ -15,5 +15,6 @@ var searchData=
   ['estilo_12',['estilo',['../structBECOMMONS__NS_1_1estilo.html',1,'BECOMMONS_NS']]],
   ['estilo_5fatual_13',['estilo_atual',['../classBECOMMONS__NS_1_1bubble__gui.html#a2f15f529bfbeb7d4aa8cf3a7d165f44d',1,'BECOMMONS_NS::bubble_gui']]],
   ['example_14',['Project Example',['../index.html#autotoc_md5',1,'']]],
-  ['exemplo_20de_20uso_20no_20script_20lua_3a_15',['Exemplo de uso no script lua:',['../api__lua_8hpp.html#autotoc_md0',1,'']]]
+  ['exemplo_15',['exemplo',['../group__Malha.html#autotoc_md24',1,'Exemplo'],['../group__Renderizador.html#autotoc_md31',1,'Exemplo']]],
+  ['exemplo_20de_20uso_20no_20script_20lua_3a_16',['Exemplo de uso no script lua:',['../api__lua_8hpp.html#autotoc_md0',1,'']]]
 ];
