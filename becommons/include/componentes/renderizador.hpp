@@ -33,17 +33,12 @@ SOFTWARE.
 #include "componente.hpp"
 
 namespace BECOMMONS_NS {
-    inline void analizarMalha(malha* m, const rapidjson::Value& malha) {
-    }
-
-	struct renderizador : componente
-	{
+	class renderizador : public componente {
+    public:
 		modelo* m_modelo;
         std::string m_diretorio;
 		static constexpr mascara mascara = COMPONENTE_RENDER;
-
-		renderizador(modelo* malha) : m_modelo(malha)
-		{
+		renderizador(modelo* malha) : m_modelo(malha) {
 		}
         bool analizar(const rapidjson::Value& value) override
         {
@@ -55,28 +50,6 @@ namespace BECOMMONS_NS {
                 m_modelo = new modelo(path.c_str());
             }
             else return false;
-			
-			// extrai material
-			if (value.HasMember("malhas"))
-			{
-				for (auto& v_malha : value["malhas"].GetArray())
-				{
-				    if(!v_malha.HasMember("id")) return false;
-					malha* m_malha;
-					if (v_malha["id"].IsInt())
-					{
-						m_malha = m_modelo->obterMalha(v_malha["id"].GetInt());
-						analizarMalha(m_malha, v_malha);
-					}
-					else if (v_malha["id"].IsString() && v_malha["id"] == "*")
-					{
-					    for (auto& n_malha : m_modelo->malhas)
-						{
-							analizarMalha(&n_malha, v_malha);
-						}
-					}
-				}
-			}
 			return true;
         };
         bool serializar(rapidjson::Value& value, rapidjson::Document::AllocatorType& allocator) const override

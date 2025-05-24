@@ -27,7 +27,7 @@ var namespaceBECOMMONS__NS =
     [ "propriedades", "structBECOMMONS__NS_1_1propriedades.html", null ],
     [ "raio", "structBECOMMONS__NS_1_1raio.html", null ],
     [ "registro", "structBECOMMONS__NS_1_1registro.html", "structBECOMMONS__NS_1_1registro" ],
-    [ "renderizador", "structBECOMMONS__NS_1_1renderizador.html", null ],
+    [ "renderizador", "classBECOMMONS__NS_1_1renderizador.html", null ],
     [ "resultadoRaio", "structBECOMMONS__NS_1_1resultadoRaio.html", null ],
     [ "shader", "classBECOMMONS__NS_1_1shader.html", null ],
     [ "shaderException", "classBECOMMONS__NS_1_1shaderException.html", null ],

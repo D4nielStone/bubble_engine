@@ -68,16 +68,16 @@ namespace BECOMMONS_NS {
         void use();
         // utility uniform functions
         void compilar(const char* vertexPath, const char* fragmentPath);
-        void setBool(const std::string& name, const bool& value) const;
-        void setInt(const std::string& name, const int& value) const;
+        void setBool (const std::string& name, const bool& value) const;
+        void setInt  (const std::string& name, const int& value) const;
         void setFloat(const std::string& name, const float& value) const;
-        void setCor(const std::string& name, const cor& m_cor) const;
-        void setVec4(const std::string& name, const fvet4& vec4) const;
-        void setVec3(const std::string& name, const float& r, const float& g, const float& b) const;
-        void setVec3(const std::string &name, const fvet3 &vet) const;
-        void setVec2(const std::string &name, const float &r, const float &g) const;
-        void setMat4(const std::string& name, const float* value) const;
-        void setMat3(const std::string& name, const float* value) const;
+        void setCor  (const std::string& name, const cor& m_cor) const;
+        void setVec4 (const std::string& name, const fvet4& vec4) const;
+        void setVec3 (const std::string& name, const float& r, const float& g, const float& b) const;
+        void setVec3 (const std::string &name, const fvet3 &vet) const;
+        void setVec2 (const std::string &name, const float &r, const float &g) const;
+        void setMat4 (const std::string& name, const float* value) const;
+        void setMat3 (const std::string& name, const float* value) const;
         bool checkCompileErrors(unsigned int shader, const std::string& type);
         bool checkLinkErrors(unsigned int shader);
     };

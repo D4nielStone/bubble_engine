@@ -27,7 +27,7 @@ var hierarchy =
       [ "BECOMMONS_NS::luz_direcional", "structBECOMMONS__NS_1_1luz__direcional.html", null ],
       [ "BECOMMONS_NS::luz_pontual", "structBECOMMONS__NS_1_1luz__pontual.html", null ],
       [ "BECOMMONS_NS::propriedades", "structBECOMMONS__NS_1_1propriedades.html", null ],
-      [ "BECOMMONS_NS::renderizador", "structBECOMMONS__NS_1_1renderizador.html", null ],
+      [ "BECOMMONS_NS::renderizador", "classBECOMMONS__NS_1_1renderizador.html", null ],
       [ "BECOMMONS_NS::terreno", "structBECOMMONS__NS_1_1terreno.html", null ],
       [ "BECOMMONS_NS::texto", "structBECOMMONS__NS_1_1texto.html", null ],
       [ "BECOMMONS_NS::transformacao", "classBECOMMONS__NS_1_1transformacao.html", null ]

@@ -32,34 +32,27 @@ SOFTWARE.
 #include <filesystem>
 #include "becommons_namespace.hpp"
 #include "util/malha.hpp"
+#include <iostream>
 #include "shader.hpp"
 
 namespace BECOMMONS_NS {
-    class modelo
-    {
-        public:
-            modelo() = default;
-        modelo(const char* diretorio)
-        {
-                carregarmodelo(std::filesystem::absolute(diretorio).string().c_str());
-        }
+    class modelo {
+    public:
+        modelo() = default;
+        modelo(const char* diretorio); 
+        modelo(const std::string& diretorio); 
 
-        malha* obterMalha(size_t i)
-        {
-            if(i < malhas.size()) {
-                return &malhas[i];
-            }
-            return nullptr;
-        }
-        void definirShader(const char* vertex,const char* frag);
-        shader& obterShader();
+        malha& obterMalha(size_t i);
+        shader obterShader() const;
+        void definirShader(const shader&);
         void desenhar(shader& shader);
+        void carregarModelo(const std::string& path);
+        std::string obterDiretorio() const;
         std::vector<malha> malhas;
-        std::string diretorio;
     protected:
-        shader* m_shader{nullptr};
+        std::string diretorio;
+        shader m_shader;
 
-        void carregarmodelo(const std::string& path);
         void processarNo(aiNode* node, const aiScene* scene);
         malha processarMalha(aiMesh* mesh, const aiScene* scene);
         textura carregarTextura(aiMaterial* mat, aiTextureType type) const;

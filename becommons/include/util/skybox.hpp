@@ -36,8 +36,7 @@ namespace BECOMMONS_NS {
     {
         public:
         unsigned int id_skybox = 0;
-        skybox() : modelo("cubo")
-        {
+        skybox() : modelo("cubo") {
             id_skybox = textureLoader::obterInstancia().carregarSkyboxMemoria( 
                     {
                     "skybox_right.png",
@@ -46,7 +45,7 @@ namespace BECOMMONS_NS {
                     "skybox_bottom.png",
                     "skybox_front.png",
                     "skybox_back.png"});
-            m_shader = new shader("skybox.vs", "skybox.fs");
+            definirShader(shader("skybox.vs", "skybox.fs"));
             malhas.back().carregar();
         }
         void desenhar(glm::mat4 view, glm::mat4 proj);
