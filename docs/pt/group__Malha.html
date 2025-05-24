@@ -18,9 +18,13 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
-<script type="text/javascript" src="doxygen-awesome-darkmode-toggle.js"></script>
+        <script type="text/javascript" src="doxygen-awesome-darkmode-toggle.js"></script>
         <script type="text/javascript">
             DoxygenAwesomeDarkModeToggle.init()
+        </script>
+        <script type="text/javascript" src="doxygen-awesome-fragment-copy-button.js"></script>
+        <script type="text/javascript">
+            DoxygenAwesomeFragmentCopyButton.init()
         </script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
@@ -110,16 +114,16 @@ classe Malha</h2>
 LuaBridge</h2>
 <div class="fragment"><div class="line">.beginClass&lt;malha&gt;(<span class="stringliteral">&quot;malha&quot;</span>)</div>
 <div class="line">.addConstructor&lt;<span class="keywordtype">void</span>(*)()&gt;()</div>
-<div class="line">.addFunction(<span class="stringliteral">&quot;carregar         &amp;malha::carregar)</span></div>
-<div class="line"><span class="stringliteral">.addFunction(&quot;</span>descarregar      &amp;malha::descarregar)</div>
-<div class="line">.addProperty(<span class="stringliteral">&quot;material         &amp;malha::obterMaterial,   &amp;malha::definirMaterial)</span></div>
-<div class="line"><span class="stringliteral">.addProperty(&quot;</span>vertices         &amp;malha::obterVertices,   &amp;malha::definirVertices)</div>
-<div class="line">.addProperty(<span class="stringliteral">&quot;indices          &amp;malha::obterIndices,    &amp;malha::definirIndices)</span></div>
-<div class="line"><span class="stringliteral">.addProperty(&quot;</span>instancias       &amp;malha::obterInstancias, &amp;malha::definirInstancias)</div>
-<div class="line">.addProperty(<span class="stringliteral">&quot;sobrepor         &amp;malha::estaSobreposto,  &amp;malha::definirSobreposicao)</span></div>
-<div class="line"><span class="stringliteral">.addProperty(&quot;</span>vao              &amp;malha::obterVertexArray)</div>
-<div class="line">.addProperty(<span class="stringliteral">&quot;ebo              &amp;malha::obterElementBuffer)</span></div>
-<div class="line"><span class="stringliteral">.addProperty(&quot;</span>vbo              &amp;malha::obterVertexBuffer)</div>
+<div class="line">.addFunction(<span class="stringliteral">&quot;carregar&quot;</span>,         &amp;malha::carregar)</div>
+<div class="line">.addFunction(<span class="stringliteral">&quot;descarregar&quot;</span>,      &amp;malha::descarregar)</div>
+<div class="line">.addProperty(<span class="stringliteral">&quot;material&quot;</span>,         &amp;malha::obterMaterial,   &amp;malha::definirMaterial)</div>
+<div class="line">.addProperty(<span class="stringliteral">&quot;vertices&quot;</span>,         &amp;malha::obterVertices,   &amp;malha::definirVertices)</div>
+<div class="line">.addProperty(<span class="stringliteral">&quot;indices&quot;</span>,          &amp;malha::obterIndices,    &amp;malha::definirIndices)</div>
+<div class="line">.addProperty(<span class="stringliteral">&quot;instancias&quot;</span>,       &amp;malha::obterInstancias, &amp;malha::definirInstancias)</div>
+<div class="line">.addProperty(<span class="stringliteral">&quot;sobrepor&quot;</span>,         &amp;malha::estaSobreposto,  &amp;malha::definirSobreposicao)</div>
+<div class="line">.addProperty(<span class="stringliteral">&quot;vao&quot;</span>,              &amp;malha::obterVertexArray)</div>
+<div class="line">.addProperty(<span class="stringliteral">&quot;ebo&quot;</span>,              &amp;malha::obterElementBuffer)</div>
+<div class="line">.addProperty(<span class="stringliteral">&quot;vbo&quot;</span>,              &amp;malha::obterVertexBuffer)</div>
 </div><!-- fragment --><h2><a class="anchor" id="autotoc_md21"></a>
 Info</h2>
 <table class="markdownTable">
@@ -133,13 +137,13 @@ Info</h2>
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone">Membros(8)   </th><th class="markdownTableHeadNone">Descrição    </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><code>material</code>   </td><td class="markdownTableBodyNone">`material` da malha    </td></tr>
+<td class="markdownTableBodyNone"><code>material</code>   </td><td class="markdownTableBodyNone"><code>material</code> ... da malha    </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><code>vertices</code>   </td><td class="markdownTableBodyNone">array de `vertice`. Todos os vertices do modelo.    </td></tr>
+<td class="markdownTableBodyNone"><code>vertices</code>   </td><td class="markdownTableBodyNone">array de <code>vertice</code> .... Todos os vertices do modelo.    </td></tr>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><code>indices</code>   </td><td class="markdownTableBodyNone">array de <code>inteiro</code>.    </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><code>instancias</code>   </td><td class="markdownTableBodyNone">array de `transformacao`. Transformações das intancias.    </td></tr>
+<td class="markdownTableBodyNone"><code>instancias</code>   </td><td class="markdownTableBodyNone">array de <code>transformacao</code> .... Transformações das intancias.    </td></tr>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><code>sobrepor</code>   </td><td class="markdownTableBodyNone"><code>booleano</code> que indica se o objeto deve se sobrepor.    </td></tr>
 <tr class="markdownTableRowEven">
@@ -150,18 +154,16 @@ Info</h2>
 <td class="markdownTableBodyNone"><code>vbo</code>   </td><td class="markdownTableBodyNone"><code>inteiro</code>. Vertex Buffer Object   </td></tr>
 </table>
 <hr  />
-<p><b>Exemplo</b></p>
+<h2><a class="anchor" id="autotoc_md24"></a>
+Exemplo</h2>
 <blockquote class="doxtable">
-<p>&zwj;Sobrepondo um objeto </p><div class="fragment"><div class="line"> lua</div>
-<div class="line">local ent</div>
-<div class="line">function iniciar()</div>
-<div class="line">  ent = entidade(1)</div>
+<p>&zwj;Sobrepondo um objeto </p>
+</blockquote>
+<div class="fragment"><div class="line">function iniciar()</div>
 <div class="line">  eu.renderizador.modelo:obterMalha(0).sobrepor = true</div>
 <div class="line">end</div>
-</div><!-- fragment --> </blockquote>
-<h2><a class="anchor" id="autotoc_md24"></a>
-&lt;/blockquote&gt;</h2>
-</div><!-- contents -->
+</div><!-- fragment --><hr  />
+ </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
