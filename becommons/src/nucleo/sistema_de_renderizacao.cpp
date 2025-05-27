@@ -187,7 +187,7 @@ void sistema_renderizacao::atualizarCamera(camera* cam)
             s.setVec2("resolution", janela::obterInstancia().tamanho.x, janela::obterInstancia().tamanho.y);
             s.setMat4("modelo", glm::value_ptr(transform->obterMatrizModelo()));
             
-            render->m_modelo->desenhar(s);
+            render->m_modelo->desenhar();
         });
         // Caso tenha Frama buffer, limpa a tela
         if (cam->flag_fb) {

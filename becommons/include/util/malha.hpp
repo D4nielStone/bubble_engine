@@ -63,7 +63,7 @@ namespace BECOMMONS_NS {
         ~malha();
      private:
         bool                        m_sobrepor, 
-                                    m_carregado;
+                                    m_carregado { false };
         std::vector<transformacao>  m_instancias;
         std::vector<vertice>        m_vertices;
         std::vector<unsigned int>   m_indices;

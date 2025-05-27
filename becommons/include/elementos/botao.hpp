@@ -35,7 +35,7 @@ namespace BECOMMONS_NS{
     namespace elementos{
         class botao : public area_de_toque {
         private:
-
+            float old_fundo_alpha;
         public:
             tipo_caixa tipo() const override { return tipo_caixa::botao; }
             /// @name Construtores com ponteiro para aparência
@@ -79,6 +79,7 @@ namespace BECOMMONS_NS{
             ~botao() {
             }
             inline void cfgImagem(imagem* m_imagem) {
+                old_fundo_alpha = m_estilo.m_cor_fundo.a;
                 m_estilo.m_flag_estilo = flag_estilo::modular;
 
                 m_imagem->m_estilo.m_altura = m_estilo.m_altura;
@@ -87,6 +88,7 @@ namespace BECOMMONS_NS{
                 m_estilo.m_largura += m_estilo.m_padding_geral.x * 2;
             }
             inline void cfgTexto(texto* m_texto) {
+                old_fundo_alpha = m_estilo.m_cor_fundo.a;
                 m_estilo.m_flag_estilo = flag_estilo::modular;
                 
                 m_estilo.m_largura += m_texto->obterLargura(m_texto->m_texto_frase) + m_estilo.m_padding_geral.x * 2;
@@ -97,7 +99,7 @@ namespace BECOMMONS_NS{
             bool pressionado() override {
                 m_pressionado = area_de_toque::pressionado();
                 m_estilo.m_cor_borda.a = m_mouse_cima ? 1.f : 0.f;
-                m_estilo.m_cor_fundo.a = m_mouse_cima ? 1.f : 0.f;
+                m_estilo.m_cor_fundo.a = m_mouse_cima ? old_fundo_alpha : 0.f;
                 return m_pressionado;
             }
             void configurar() override {

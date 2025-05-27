@@ -54,9 +54,9 @@ malha& modelo::obterMalha(size_t i) {
     }
     return malhas.back();
 }
-void modelo::desenhar(shader& shader) {
+void modelo::desenhar() {
     for(auto& malha : malhas)
-        malha.desenhar(shader);
+        malha.desenhar(m_shader);
 }
 
 shader modelo::obterShader() const {

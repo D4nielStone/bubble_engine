@@ -45,7 +45,7 @@ namespace BECOMMONS_NS {
         malha& obterMalha(size_t i);
         shader obterShader() const;
         void definirShader(const shader&);
-        void desenhar(shader& shader);
+        void desenhar();
         void carregarModelo(const std::string& path);
         std::string obterDiretorio() const;
         std::vector<malha> malhas;

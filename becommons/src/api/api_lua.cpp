@@ -62,6 +62,7 @@ void api::entidade::definir(lua_State* L) {
         .addFunction("mover",           &transformacao::mover)
         .addFunction("rotacionar",      &transformacao::rotacionar)
         .addFunction("escalonar",       &transformacao::escalonar)
+        .addFunction("olharEntidade",       &transformacao::olharEntidade)
         .endClass()
         .beginClass<shader>("shader")
         .addConstructor<void(*)()>()
