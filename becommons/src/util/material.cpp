@@ -33,10 +33,6 @@ void material::configurarPBR(
                  float metallic,
                  float roughness,
                  float ao) {
-    for(auto [nome, tex] : texturas) {
-        definirTextura(nome, tex);
-        definirUniforme("use_" + nome, true);
-    }
     definirUniforme("recebe_luz", true);
     definirUniforme("material.albedo", albedo);
     definirUniforme("material.metallic", metallic);
@@ -118,5 +114,13 @@ void material::usar(shader& shader) {
         tex.bind(slot);
         shader.setInt(nome, slot);
         ++slot;
+    }
+    if(shader.frag == "phong.frag") {
+        shader.setBool("use_use_tex_albedo", false);
+        shader.setBool("use_use_tex_metallic", false);
+        shader.setBool("use_use_tex_roughness", false);
+        shader.setBool("use_use_tex_normal", false);
+        shader.setBool("use_use_tex_ao", false);
+        shader.setBool("use_use_tex_height", false);
     }
 }

@@ -90,6 +90,8 @@ void modelo::carregarModelo(const std::string& path) {
 
     /// Processa o no principal
     processarNo(scene->mRootNode, scene);
+    for(auto& m_ : malhas) 
+        m_.carregar();
 }
 
 void modelo::processarNo(aiNode* node, const aiScene* scene) {
@@ -178,7 +180,6 @@ malha modelo::processarMalha(aiMesh* mesh, const aiScene* scene) {
     BECOMMONS_NS::material mat(texturas, difusa);
 
     malha m_(vertices, indices, mat);
-    m_.carregar();
     return m_;
 }
 

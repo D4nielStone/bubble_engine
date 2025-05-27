@@ -62,7 +62,7 @@ namespace BECOMMONS_NS {
         unsigned int ID;
 
         // constructor reads and builds the shader
-        shader() { compilar("assets/shaders/phong.vert", "assets/shaders/phong.frag"); };
+        shader() { compilar("phong.vert", "phong.frag"); };
         shader(const char* vertexPath, const char* fragmentPath);
         // use/activate the shader
         void use();
