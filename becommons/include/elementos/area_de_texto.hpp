@@ -30,6 +30,7 @@ SOFTWARE.
 #include "util/caixa.hpp"
 #include "inputs/inputs.hpp"
 #include "os/janela.hpp"
+#include <cmath>
 
 namespace BECOMMONS_NS {
     namespace elementos {
@@ -62,7 +63,9 @@ namespace BECOMMONS_NS {
              * dentro da área de toque, evitando cliques já iniciados fora.
              */
             bool selecionado() {
-                bool pressionado = inputs::obter(inputs::MOUSE_E);
+                if(num_ptr)
+                    m_buffer = std::to_string(std::round(*num_ptr));
+                bool pressionado = inputs::obter(inputs::MOUSE_E) || inputs::obter(inputs::ENTER);
                 bool justPressed = pressionado && !m_mouse_antes_pressionado;
 
                 // atualiza flag de cursor sobre a área
@@ -71,6 +74,7 @@ namespace BECOMMONS_NS {
                 if (justPressed) {
                     // seleciona somente se o clique começar dentro da área
                     m_selecionado = m_mouse_cima;
+                    m_pipe_offset = m_buffer.size();
                 }
 
                 // atualiza estado para o próximo frame
@@ -132,20 +136,14 @@ namespace BECOMMONS_NS {
                 if(valido) m_pipe_offset += pos;
             }
             void atualizarBuffer() {
-                if(num_ptr)
-                    m_buffer = std::to_string(*num_ptr);
                 auto &input = janela::obterInstancia().m_inputs;
-                if(input.obter(inputs::DIREITA))
-                    moverCursor(1);
-                else if(input.obter(inputs::ESQUERDA))
-                    moverCursor(-1);
                 if(input.m_backspace_pressionado || input.m_backspace_repetido)
                     apagar();
                 else if(input.m_letra_pressionada)
                     inserirLetra(input.m_ultima_letra);
-                m_teclado_foi_solto = false;
                 if(num_ptr)
                     *num_ptr = std::stof(m_buffer);
+                m_teclado_foi_solto = false;
             }
         };
     }

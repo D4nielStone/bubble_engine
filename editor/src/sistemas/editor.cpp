@@ -334,7 +334,6 @@ void sistema_editor::atualizarEntidades()
     }
     gui->fimEstilo();
     atualizarComponentes();
-    atualizarComponente(componente::COMPONENTE_NONE);
 }
 void sistema_editor::atualizarComponentes()
 {
@@ -363,6 +362,7 @@ void sistema_editor::atualizarComponentes()
     gui->defAltura      (                          25);
     gui->defCorFundo    (    cor(0.0f, 0.0f, 0.0f, 0.f));
     gui->fimEstilo();
+    atualizarComponente(componente::COMPONENTE_TRANSFORMACAO);
 }
 
 void sistema_editor::atualizarComponente(const componente::mascara& mascara)
