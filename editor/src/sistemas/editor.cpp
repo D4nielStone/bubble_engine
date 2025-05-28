@@ -334,7 +334,7 @@ void sistema_editor::atualizarEntidades()
     }
     gui->fimEstilo();
     atualizarComponentes();
-    atualizarComponente(componente::COMPONENTE_TRANSFORMACAO);
+    atualizarComponente(componente::COMPONENTE_NONE);
 }
 void sistema_editor::atualizarComponentes()
 {
@@ -385,14 +385,6 @@ void sistema_editor::atualizarComponente(const componente::mascara& mascara)
 
     switch (mascara) {
         case componente::COMPONENTE_CAM:
-            gui->adicionar<elementos::botao>(
-                    "###propriedades",
-                    "####btn_cam",
-                    &registro->obter<camera>(entidade_atual)->m_use_skybox, "Ativar/Destativar Skybox", "Camera.png");
-                gui->defCorFundo    (cor(0.11f, 0.11f, 0.11f, 1.f));
-                gui->defCorBorda    (cor(0.27f, 0.27f, 0.27f, 0.f));
-                gui->defCrescimentoM(                          1.0);
-            gui->fimEstilo();
             break;
         case componente::COMPONENTE_CODIGO:
             gui->adicionar<elementos::botao>(
@@ -404,6 +396,18 @@ void sistema_editor::atualizarComponente(const componente::mascara& mascara)
                 gui->defCrescimentoM(                          1.0);
             gui->fimEstilo();
             break;
+        case componente::COMPONENTE_TRANSFORMACAO: {
+            auto transf = registro->obter<transformacao>(entidade_atual);
+            gui->adicionar<elementos::caixa_de_texto>("###propriedades", "###a", "x", &transf->posicao.x);
+            gui->adicionar<elementos::caixa_de_texto>("###propriedades", "###b", "y",&transf->posicao.y);
+            gui->adicionar<elementos::caixa_de_texto>("###propriedades", "###c", "z",&transf->posicao.z);
+                gui->defFlags(flag_estilo::alinhamento_central);
+                gui->defCrescimentoM(0.7);
+                gui->defCorFundo({0.12, 0.12, 0.12, 1});
+                gui->defCorBorda({0.3, 0.3, 0.3, 1});
+            gui->fimEstilo();
+            break;
+                                                   }
         default:
             break;
     }

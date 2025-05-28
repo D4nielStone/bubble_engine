@@ -204,6 +204,8 @@ void gerenciador_projetos::atualizarElementos(const std::string& Dir) {
     }
     gui.defCorBorda({0.2, 0.2, 0.2, 0});
     gui.defCorFundo({0.1, 0.1, 0.1, 1});
+    gui.defPadding(5, 1);
+    gui.defPaddingG(5, 5);
     gui.fimEstilo();
 }
 
@@ -220,7 +222,7 @@ void gerenciador_projetos::configurarUI(const std::string& DIR_PADRAO) {
         gui.defCorBorda({0.05, 0.05, 0.05, 1});
         gui.defOrientacao(estilo::orientacao::vertical);
         gui.defCorFundo({0.1, 0.1, 0.1, 1});
-        gui.defPaddingG(5, 10);
+        gui.defPaddingG(5, 3);
         gui.defAltura(1.0);
     gui.fimEstilo();
     

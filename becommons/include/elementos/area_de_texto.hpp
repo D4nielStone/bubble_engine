@@ -50,7 +50,10 @@ namespace BECOMMONS_NS {
             bool m_mouse_antes_pressionado { false }, m_teclado_foi_solto { true };
             int m_pipe_offset { 0 };
             std::string m_buffer {""};
+            float *num_ptr { nullptr };
         public:
+            area_de_texto() = default;
+            area_de_texto(float* f_ptr) : num_ptr(f_ptr) {}
             tipo_caixa tipo() const override { return tipo_caixa::caixa_de_texto; }
 
             /**
@@ -99,27 +102,50 @@ namespace BECOMMONS_NS {
                 return dentro;
             }
             void inserirLetra(char c) {
-                if(c == '\0') return;
-                if(m_pipe_offset >= m_buffer.size()) {
+                if (c == '\0') return;
+            
+                if (num_ptr) {
+                    // Aceita apenas números, ponto flutuante e sinal negativo no início
+                    bool valido = 
+                         (c >= '0' && c <= '9') ||
+                        (c == '.' && m_buffer.find('.') == std::string::npos) || // apenas um ponto
+                        (c == '-' && m_pipe_offset == 0 && m_buffer.find('-') == std::string::npos); // apenas um sinal negativo no início
+            
+                    if (!valido) return;
+                }
+            
+                if (m_pipe_offset >= m_buffer.size()) {
                     m_buffer.push_back(c);
                     m_pipe_offset = m_buffer.size();
+                } else {
+                    m_buffer.insert(m_pipe_offset, 1, c);
+                    m_pipe_offset++;
                 }
-                else
-                    m_buffer.insert(m_pipe_offset, c, 1);
             }
             void apagar() {
                 if(m_pipe_offset <= m_buffer.size() && m_pipe_offset > 0)
                 m_buffer.erase(m_pipe_offset-1, m_pipe_offset);
                 m_pipe_offset --;
             }
+            void moverCursor(const int pos) {   
+                bool valido = ((m_pipe_offset + pos) >= 0 && (m_pipe_offset + pos) <= m_buffer.size());
+                if(valido) m_pipe_offset += pos;
+            }
             void atualizarBuffer() {
+                if(num_ptr)
+                    m_buffer = std::to_string(*num_ptr);
                 auto &input = janela::obterInstancia().m_inputs;
-                    if(input.m_backspace_pressionado || input.m_backspace_repetido)
-                        apagar();
-                    else
-                if(input.m_letra_pressionada)
-                        inserirLetra(input.m_ultima_letra);
+                if(input.obter(inputs::DIREITA))
+                    moverCursor(1);
+                else if(input.obter(inputs::ESQUERDA))
+                    moverCursor(-1);
+                if(input.m_backspace_pressionado || input.m_backspace_repetido)
+                    apagar();
+                else if(input.m_letra_pressionada)
+                    inserirLetra(input.m_ultima_letra);
                 m_teclado_foi_solto = false;
+                if(num_ptr)
+                    *num_ptr = std::stof(m_buffer);
             }
         };
     }

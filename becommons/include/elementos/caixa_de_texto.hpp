@@ -43,6 +43,7 @@ namespace BECOMMONS_NS {
             public:
                 caixa_de_texto() = default;
                 caixa_de_texto(const std::string& etiqueta) : m_etiqueta(etiqueta) {};
+                caixa_de_texto(const std::string& etiqueta, float* f_ptr) : m_etiqueta(etiqueta), area_de_texto(f_ptr) {};
                 void configurar() override {
                     m_estilo.m_padding_geral = { 5, 2 };
                     m_estilo.m_flag_estilo |= flag_estilo::modular;
@@ -50,6 +51,10 @@ namespace BECOMMONS_NS {
                     m_cor_antiga = m_estilo.m_cor_borda.b;
                     m_texto_ptr = adicionarFilho<elementos::texto>(m_id + "_dica", &m_display);
                     m_estilo.m_altura = m_texto_ptr->obterAltura(m_display) + m_estilo.m_padding_geral.y * 2;
+                    if(tem_flag(flag_estilo::alinhamento_central))
+                        m_texto_ptr->m_texto_flags |= flags_texto::alinhamento_central;
+                    if(tem_flag(flag_estilo::alinhamento_fim))
+                        m_texto_ptr->m_texto_flags |= flags_texto::alinhamento_fim;
                 };
                 void atualizar() {
                     // estilo

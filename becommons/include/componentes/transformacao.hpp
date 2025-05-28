@@ -43,12 +43,11 @@ SOFTWARE.
 
 namespace BECOMMONS_NS {
 	class transformacao : public componente {
-    private:
+    public:
 		fvet3 cima, posicao, rotacao, escala;
 		fvet3* alvo;
 		bool m_usar_alvo;
 		glm::mat4 matrizmodelo;
-    public:
 		static constexpr mascara mascara = COMPONENTE_TRANSFORMACAO;
         ~transformacao();
         transformacao(const fvet3& p = fvet3(0.f,0.f,0.f),
