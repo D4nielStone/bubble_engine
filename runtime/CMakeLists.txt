@@ -91,10 +91,12 @@ find_library(BULLET_LINEAR_MATH_LIBRARY LinearMath)
 
 set(RUNTIME_OUTPUT $<TARGET_FILE:runtime>)
 set(RUNTIME_HPP_FILE ${CMAKE_SOURCE_DIR}/editor/include/assets/runtime_embutido.hpp)
+set(RUNTIME_HPP_DIR ${CMAKE_SOURCE_DIR}/editor/include/assets/)
 
 add_custom_command(
     OUTPUT ${RUNTIME_HPP_FILE}
-    COMMAND ${CMAKE_COMMAND} -E touch_nocreate ${RUNTIME_HPP_FILE}
+    COMMAND mkdir ${RUNTIME_HPP_DIR}
+    COMMAND touch ${RUNTIME_HPP_FILE}
     COMMAND ${CMAKE_COMMAND} -E echo ">> Embutindo runtime"
     COMMAND xxd -i "${RUNTIME_OUTPUT}" | sed -E -e "s/unsigned char .*/inline unsigned char runtime[] = {/" -e "/unsigned int/,/=/s/unsigned int [a-zA-Z0-9_]+_len/inline unsigned int runtime_len/" > ${RUNTIME_HPP_FILE}
     DEPENDS ${RUNTIME_OUTPUT}
