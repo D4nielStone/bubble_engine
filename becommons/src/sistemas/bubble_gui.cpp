@@ -100,10 +100,6 @@ void bubble_gui::atualizarHDTF(caixa* it_caixa, std::function<void(caixa*)> func
 
 void bubble_gui::desenhar_caixa(caixa* c)
 {
-    if(c->tipo() == tipo_caixa::caixa_de_texto) {
-        auto ct = static_cast<elementos::caixa_de_texto*>(c);
-        ct->atualizar();
-    }
     if(!c->m_estilo.m_ativo) return;
     if(c->m_estilo.m_cor_fundo.a != 0) {
         renderizarFundo(c, quad_shader);
@@ -112,12 +108,6 @@ void bubble_gui::desenhar_caixa(caixa* c)
     switch(c->tipo()) {
         case tipo_caixa::texto: {
             renderizarTexto(static_cast<elementos::texto*>(c));
-            break;
-        }
-        case tipo_caixa::botao: {
-            auto btn = static_cast<elementos::botao*>(c);
-            if(btn->pressionado() && btn->m_use_funcao)
-                funcoes.push(btn->m_funcao);
             break;
         }
         case tipo_caixa::imagem: {
@@ -580,8 +570,20 @@ void bubble_gui::processarModular(caixa* it_caixa) {
     aplicarLayoutModular(it_caixa, is_horizontal, unidade_crescimento, espaco_disponivel);
 }
 
-void bubble_gui::atualizarFilhos(caixa* it_caixa)
-{
+void bubble_gui::atualizarFilhos(caixa* it_caixa) {
+    switch (it_caixa->tipo()) {
+    case tipo_caixa::caixa_de_texto: {
+        auto ct = static_cast<elementos::caixa_de_texto*>(it_caixa);
+        ct->atualizar(); 
+        break;
+                                     }
+    case tipo_caixa::botao: {
+        auto btn = static_cast<elementos::botao*>(it_caixa);
+        if(btn->pressionado() && btn->m_use_funcao)
+            funcoes.push(btn->m_funcao);
+        break;
+                            }
+    }
     if(deveAtualizar(it_caixa)) {
         processarModular(it_caixa);
     }

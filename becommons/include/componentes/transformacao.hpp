@@ -46,7 +46,7 @@ namespace BECOMMONS_NS {
     public:
 		fvet3 cima, posicao, rotacao, escala;
 		fvet3* alvo;
-		bool m_usar_alvo;
+		bool m_usar_alvo, m_alvo_novo{ false };
 		glm::mat4 matrizmodelo;
 		static constexpr mascara mascara = COMPONENTE_TRANSFORMACAO;
         ~transformacao();

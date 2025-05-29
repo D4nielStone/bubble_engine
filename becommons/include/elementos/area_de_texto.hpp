@@ -54,7 +54,19 @@ namespace BECOMMONS_NS {
             float *num_ptr { nullptr };
         public:
             area_de_texto() = default;
-            area_de_texto(float* f_ptr) : num_ptr(f_ptr) {}
+            area_de_texto(float* f_ptr) : num_ptr(f_ptr), m_buffer() {
+                if(num_ptr) {
+                    m_buffer = std::to_string(*num_ptr);
+                    if(m_buffer.find('.') != std::string::npos) {
+                        // Remove trailing zeroes
+                        m_buffer = m_buffer.substr(0, m_buffer.find_last_not_of('0')+1);
+                        // If the decimal point is now the last character, remove that as well
+                        if(m_buffer.find('.') == m_buffer.size()-1) {
+                            m_buffer = m_buffer.substr(0, m_buffer.size()-1);
+                        }
+                    }
+                }
+            }
             tipo_caixa tipo() const override { return tipo_caixa::caixa_de_texto; }
 
             /**
@@ -63,8 +75,6 @@ namespace BECOMMONS_NS {
              * dentro da área de toque, evitando cliques já iniciados fora.
              */
             bool selecionado() {
-                if(num_ptr)
-                    m_buffer = std::to_string(std::round(*num_ptr));
                 bool pressionado = inputs::obter(inputs::MOUSE_E) || inputs::obter(inputs::ENTER);
                 bool justPressed = pressionado && !m_mouse_antes_pressionado;
 
@@ -112,37 +122,31 @@ namespace BECOMMONS_NS {
                     // Aceita apenas números, ponto flutuante e sinal negativo no início
                     bool valido = 
                          (c >= '0' && c <= '9') ||
-                        (c == '.' && m_buffer.find('.') == std::string::npos) || // apenas um ponto
+                        (c == '.' && m_buffer.find('.') == std::string::npos) || 
                         (c == '-' && m_pipe_offset == 0 && m_buffer.find('-') == std::string::npos); // apenas um sinal negativo no início
             
                     if (!valido) return;
                 }
-            
-                if (m_pipe_offset >= m_buffer.size()) {
-                    m_buffer.push_back(c);
-                    m_pipe_offset = m_buffer.size();
-                } else {
-                    m_buffer.insert(m_pipe_offset, 1, c);
-                    m_pipe_offset++;
-                }
+                m_buffer.push_back(c);
+                m_pipe_offset = m_buffer.size();
             }
             void apagar() {
-                if(m_pipe_offset <= m_buffer.size() && m_pipe_offset > 0)
-                m_buffer.erase(m_pipe_offset-1, m_pipe_offset);
-                m_pipe_offset --;
-            }
-            void moverCursor(const int pos) {   
-                bool valido = ((m_pipe_offset + pos) >= 0 && (m_pipe_offset + pos) <= m_buffer.size());
-                if(valido) m_pipe_offset += pos;
+                if(!m_buffer.empty())
+                m_buffer.pop_back();
+                m_pipe_offset = m_buffer.size();
             }
             void atualizarBuffer() {
+                m_pipe_offset = m_buffer.size();
+                
                 auto &input = janela::obterInstancia().m_inputs;
                 if(input.m_backspace_pressionado || input.m_backspace_repetido)
                     apagar();
                 else if(input.m_letra_pressionada)
                     inserirLetra(input.m_ultima_letra);
-                if(num_ptr)
-                    *num_ptr = std::stof(m_buffer);
+                if(num_ptr) {
+                    if(m_buffer.empty() || m_buffer == "." || m_buffer == "-") *num_ptr = 0;
+                    else *num_ptr = std::stof(m_buffer);
+                }
                 m_teclado_foi_solto = false;
             }
         };

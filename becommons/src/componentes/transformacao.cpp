@@ -34,11 +34,11 @@ using namespace BECOMMONS_NS;
 
 transformacao::transformacao(const fvet3& p, const fvet3& r, const fvet3& e) :
 			posicao(p), cima(fvet3(0.f, 1.f, 0.f)),
-			rotacao(r), alvo(new fvet3(1.f)),
+			rotacao(r), alvo(new fvet3(1.f)), m_alvo_novo(true),
 			escala(e), m_usar_alvo(false) {}
 
 transformacao::~transformacao() {
-    delete alvo;
+    if(m_alvo_novo) delete alvo;
 }
 
 transformacao& transformacao::operator=(const transformacao& tr) {
@@ -163,10 +163,15 @@ void  transformacao::rotacionar(const fvet3& v) {
 void  transformacao::olharEntidade(const uint32_t& ent) {
     m_usar_alvo = true;
 	if (!projeto_atual->obterFaseAtual()->obterRegistro()->tem<transformacao>(ent))return;
+	if(m_alvo_novo) delete alvo;
+	m_alvo_novo = false;
 	alvo = &projeto_atual->obterFaseAtual()->obterRegistro()->obter<transformacao>(ent)->posicao;
 }
 		
 void  transformacao::olharVetor(const fvet3& pos) {
     m_usar_alvo = true;
+    if(!m_alvo_novo)
+        alvo = new fvet3(1.f);
+    m_alvo_novo = true;
     *alvo = pos;
 }
