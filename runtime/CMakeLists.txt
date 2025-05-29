@@ -30,7 +30,7 @@ if(WIN32)
         ../becommons/include
         ./include
         ../libs/glad
-        ../libs/LuaBridges
+        ../libs/sol2/include/sol
     )
 
 else()
@@ -41,7 +41,7 @@ else()
         ../becommons/include
         ./include
         ../libs/glad
-        ../libs/LuaBridge
+        ../libs/sol2/include/sol
         /usr/include/lua5.3
         /usr/include/glm
         /usr/include/GLFW

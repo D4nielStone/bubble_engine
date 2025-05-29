@@ -29,7 +29,7 @@ target_include_directories(editor PRIVATE
     /usr/include/glm
     /usr/include/GLFW
     ../libs/glad
-    ../libs/LuaBridge
+    ../libs/sol2/include/sol
     /usr/include/assimp
     /usr/include
     /usr/include/rapidjson
