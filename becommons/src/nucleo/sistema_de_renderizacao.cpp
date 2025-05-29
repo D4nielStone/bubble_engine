@@ -132,7 +132,7 @@ void sistema_renderizacao::atualizarCamera(camera* cam)
             }
 
 
-            auto s = terr->obterShader();
+            auto s = terr->m_shader;
             s.use();
             s.setMat4("view", glm::value_ptr(cam->obtViewMatrix()));
             s.setVec3("dirLight.direction", ld.direcao);
@@ -153,7 +153,7 @@ void sistema_renderizacao::atualizarCamera(camera* cam)
             s.setMat4("projection", glm::value_ptr(cam->obtProjectionMatrix()));
             s.setVec2("resolution", janela::obterInstancia().tamanho.x, janela::obterInstancia().tamanho.y);
             s.setMat4("modelo", glm::value_ptr(transform->obterMatrizModelo()));
-            terr->desenhar(s);
+            terr->desenhar();
         });
         reg->cada<renderizador, transformacao>([&](const uint32_t ent_ren) {
             auto render = reg->obter<renderizador>(ent_ren);

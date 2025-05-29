@@ -198,6 +198,14 @@ void fase::analizarEntidades(const Document& doc)
                     return;
                 }
             }
+            else if (tipo_str == "terreno") {
+			    reg.adicionar<terreno>(ent);
+			    auto trr = reg.obter<terreno>(ent.id);
+                if(!trr->analizar(componente)) {
+                    depuracao::emitir(erro, "fase", "Problemas analizando terreno");
+                    return;
+                }
+            }
         }
 	}
 }
