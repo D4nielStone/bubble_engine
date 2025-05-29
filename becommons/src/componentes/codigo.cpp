@@ -22,10 +22,10 @@
  * @file codigo.cpp
  */
 
+#include "api/api_lua.hpp"
 #include "componentes/codigo.hpp"
 #include "nucleo/fase.hpp"
 #include "nucleo/projeto.hpp"
-#include "api/api_lua.hpp"
 #include "api/mat.hpp"
 #include "inputs/inputs.hpp"
 #include "os/janela.hpp"
@@ -53,6 +53,11 @@ codigo::codigo(const std::string& arquivo) : arquivo(arquivo) {
 }
 
 void codigo::iniciar() {
+	estado_lua.script_file(arquivoCompleto);
+    // Obtém as funções globais
+    f_iniciar = estado_lua["iniciar"];
+    f_atualizar = estado_lua["atualizar"];
+
    if(f_iniciar.valid()) f_iniciar();
 }
 
@@ -63,16 +68,9 @@ bool codigo::analizar(const rapidjson::Value& value) {
 
 	estado_lua.open_libraries(sol::lib::base);
 
-/*	api::definirFisica(estado_lua);
-	api::definirTempo(estado_lua);
-	api::definirUtils(estado_lua);
-	api::definirInputs(estado_lua);
-	api::entidade::definir(estado_lua);*/
+	api::definirClasses(estado_lua);
+	api::definirNamespaces(estado_lua);
 	
-	estado_lua.script_file(arquivoCompleto);
-    // Obtém as funções globais
-    f_iniciar = estado_lua["iniciar"];
-    f_atualizar = estado_lua["atualizar"];
     return true;
 };
 

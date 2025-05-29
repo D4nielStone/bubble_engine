@@ -63,8 +63,8 @@
 namespace BECOMMONS_NS {
     namespace api {
 	     /**  Define as classes da api */
-	  	static void definirClasses(sol::state&);    
+	  	void definirClasses(sol::state&);    
          /**  Define os namespaces da api como math e inputs */
-	  	static void definirNamespaces(sol::state&);    
+	  	void definirNamespaces(sol::state&);    
    } /// < namespace api 
 } /// < namespace becommons

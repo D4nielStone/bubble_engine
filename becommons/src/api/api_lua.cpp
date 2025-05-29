@@ -36,11 +36,49 @@
 #include "util/malha.hpp"
 #include "util/vertice.hpp"
 #include "api/mat.hpp"
+#include "util/vetor2.hpp"
+#include "util/vetor3.hpp"
+#include "util/vetor4.hpp"
 
 using namespace BECOMMONS_NS;
-/**  Define as classes da api */
-void api::definirClasses(sol::state& lua) {
+template <typename T>
+static void registrar_vetor3(sol::state& lua, const std::string& nome) {
+    using vet = BECOMMONS_NS::vetor3<T>;
+
+    lua.new_usertype<vet>(nome,
+        sol::constructors<vet(), vet(T, T, T)>(),
+        "x", &vet::x,
+        "y", &vet::y,
+        "z", &vet::z,
+        "normalizar", &vet::normalizar,
+        "tamanho", &vet::tamanho,
+
+        // Operadores
+        sol::meta_function::addition, sol::overload(
+            static_cast<vet (vet::*)(const vet&) const>(&vet::operator+),
+            static_cast<vet (vet::*)(T) const>(&vet::operator+)
+        ),
+        sol::meta_function::subtraction, sol::overload(
+            static_cast<vet (vet::*)(const vet&) const>(&vet::operator-),
+            static_cast<vet (vet::*)(T) const>(&vet::operator-)
+        ),
+        sol::meta_function::multiplication, sol::overload(
+            static_cast<vet (vet::*)(const vet&) const>(&vet::operator*),
+            static_cast<vet (vet::*)(T) const>(&vet::operator*)
+        ),
+        sol::meta_function::division, sol::overload(
+            static_cast<vet (vet::*)(const vet&)>(&vet::operator/),
+            static_cast<vet (vet::*)(T)>(&vet::operator/)
+        ),
+        sol::meta_function::equal_to,
+            static_cast<bool (vet::*)(const vet&) const>(&vet::operator==)
+    );
 }
-/**  Define os namespaces da api como math e inputs */
-void api::definirNamespaces(sol::state& lua) {
+
+void becommons::api::definirClasses(sol::state& lua) {
+    registrar_vetor3<float>(lua, "fvet3");
+    registrar_vetor3<double>(lua, "dvet3");
+    registrar_vetor3<int>(lua, "ivet3");
+}
+void becommons::api::definirNamespaces(sol::state& lua) {
 }
