@@ -33,22 +33,18 @@ SOFTWARE.
 #include "arquivadores/shader.hpp"
 
 namespace BECOMMONS_NS {
-    struct terreno : public componente
-    {
+    struct terreno : componente {
         static constexpr mascara mascara = {COMPONENTE_TERRENO};
         terreno() = default;
-        void carregarHeightMap(unsigned char *dados, int largura, int altura);
         explicit terreno(const std::string &path);
-        void desenhar(shader& _shader);
-        shader& obterShader() 
-        {
-            return m_shader;
-        }
+        void gerarHeightMap(unsigned char *dados, int largura, int altura);
+        bool analizar(const rapidjson::Value&) override;
+        bool serializar(rapidjson::Value& value, rapidjson::Document::AllocatorType& allocator) const override;
+        void desenhar();
         malha m_malha;
-        private:
-            shader m_shader;
-            std::string diretorio;
-            std::vector<std::vector<float>> heightmap;
-            int largura{0}, altura{0};
+        shader m_shader;
+        std::string diretorio;
+        std::vector<std::vector<float>> heightmap;
+        int largura{0}, altura{0};
     };
 }

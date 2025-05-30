@@ -30,21 +30,19 @@ SOFTWARE.
 #pragma once
 #include <string>
 #include <lua.hpp>
+#include <sol/sol.hpp>
 #include <rapidjson/rapidjson.h>
 #include "becommons_namespace.hpp"
 #include "componente.hpp"
 
-extern "C" {
-#include <lua5.3/lua.h>
-}
-
 namespace BECOMMONS_NS {
-	struct codigo : componente
-	{
+	struct codigo : componente {
 		static constexpr mascara mascara = COMPONENTE_CODIGO;
 		std::string arquivo;
+
 		std::string arquivoCompleto;
-		lua_State* L;
+        sol::state estado_lua;
+        sol::function f_iniciar, f_atualizar;
 
 		/**
 		* @brief carrega script lua
@@ -57,8 +55,7 @@ namespace BECOMMONS_NS {
 		codigo() = default;
         bool analizar(const rapidjson::Value&) override;
         bool serializar(rapidjson::Value& value, rapidjson::Document::AllocatorType& allocator) const override;
-		void iniciar() const;
-		void encerrar();
-		void atualizar() const;
+		void iniciar();
+		void atualizar();
 	};
 }

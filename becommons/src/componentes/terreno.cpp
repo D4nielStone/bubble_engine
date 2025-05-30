@@ -34,7 +34,23 @@ SOFTWARE.
 
 using namespace BECOMMONS_NS;
 
-void terreno::carregarHeightMap(unsigned char* dados, int largura, int altura)
+bool terreno::analizar(const rapidjson::Value& value) {
+    if(value.HasMember("heightmap") && value["heightmap"].IsString())
+        diretorio = value["heightmap"].GetString();
+    // Carregar imagem como Heightmap
+    imageLoader imagem(diretorio);
+    largura = imagem.obterLargura();
+    altura = imagem.obterAltura();
+    gerarHeightMap(imagem.obterDados(), largura, altura);
+    return true;
+}
+        
+bool terreno::serializar(rapidjson::Value& value, rapidjson::Document::AllocatorType& allocator) const {
+    value.AddMember("heightmap", rapidjson::Value(diretorio.c_str(), allocator), allocator);
+    return true;
+}
+
+void terreno::gerarHeightMap(unsigned char* dados, int largura, int altura)
 {
     heightmap = std::vector<std::vector<float>>(altura, std::vector<float>(largura));
     for (int j = 0; j < altura; j++)
@@ -133,11 +149,11 @@ terreno::terreno(const std::string &path) : diretorio(path)
     imageLoader imagem(path);
     largura = imagem.obterLargura();
     altura = imagem.obterAltura();
-    carregarHeightMap(imagem.obterDados(), largura, altura);
+    gerarHeightMap(imagem.obterDados(), largura, altura);
 }
 
 // Método para desenhar o terreno
-void terreno::desenhar(shader &_shader)
+void terreno::desenhar()
 {
-    m_malha.desenhar(_shader);
+    m_malha.desenhar(m_shader);
 }

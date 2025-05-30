@@ -12,7 +12,7 @@ if(WIN32)
     include_directories(
         ${CMAKE_SOURCE_DIR}
         ./include
-        ../libs/LuaBridge
+        ../libs/sol2/include
         ../libs/glad
     )
 
@@ -23,7 +23,7 @@ else()
         ${CMAKE_SOURCE_DIR}
         ./include
         ../libs/glad        
-        ../libs/LuaBridge
+        ../libs/sol2/include
         /usr/include/lua5.3
         /usr/include/glm
         /usr/include/GLFW
@@ -66,11 +66,10 @@ target_sources(becommons PRIVATE
     src/componentes/terreno.cpp
     src/inputs/inputs.cpp
     src/nucleo/fase.cpp
-    src/nucleo/sistema_de_codigo.cpp
-    src/nucleo/sistema_de_fisica.cpp
-    src/nucleo/sistema_de_interface.cpp
-    src/nucleo/sistema_de_renderizacao.cpp
-    src/nucleo/sistema.cpp
+    src/sistemas/sistema_de_codigo.cpp
+    src/sistemas/sistema_de_fisica.cpp
+    src/sistemas/sistema_de_interface.cpp
+    src/sistemas/sistema_de_renderizacao.cpp
     src/nucleo/projeto.cpp
     src/sistemas/bubble_gui.cpp
     src/util/malha.cpp

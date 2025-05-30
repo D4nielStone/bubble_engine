@@ -33,7 +33,7 @@ if(WIN32)
         ../becommons/include
         ./include
         ../libs/glad
-        ../libs/LuaBridge
+        ../libs/sol2/include
     )
 
 else()
@@ -45,7 +45,7 @@ target_include_directories(testes PRIVATE
     /usr/include/glm
     /usr/include/GLFW
     ../libs/glad
-    ../libs/LuaBridge
+    ../libs/sol2/include
     /usr/include/assimp
     /usr/include
     /usr/include/rapidjson
