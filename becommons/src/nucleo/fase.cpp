@@ -190,6 +190,14 @@ void fase::analizarEntidades(const Document& doc)
                     return;
                 }
             }
+            else if (tipo_str == "fisica") {
+			    reg.adicionar<fisica>(ent);
+			    auto f = reg.obter<fisica>(ent.id);
+                if(!f->analizar(componente)) {
+                    depuracao::emitir(erro, "fase", "Problemas analizando fisica");
+                    return;
+                }
+            }
             else if (tipo_str == "luz_direcional") {
 			    reg.adicionar<luz_direcional>(ent);
 			    auto ld = reg.obter<luz_direcional>(ent.id);

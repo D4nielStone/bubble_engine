@@ -76,9 +76,35 @@ static void registrar_vetor3(sol::state& lua, const std::string& nome) {
 }
 
 void becommons::api::definirClasses(sol::state& lua) {
+    // \brief definindo classes:
+    // \{
+    // - vetores
     registrar_vetor3<float>(lua, "fvet3");
     registrar_vetor3<double>(lua, "dvet3");
     registrar_vetor3<int>(lua, "ivet3");
+    // - componentes
+    lua.new_usertype<transformacao>("transformacao",
+            sol::constructors<transformacao(const fvet3&, const fvet3&, const fvet3&)>(),
+            "posicao", &transformacao::posicao,
+            "escala", &transformacao::escala,
+            "rotacao", &transformacao::rotacao,
+            "alvo", &transformacao::alvo,
+            "olharEntidade", &transformacao::olharEntidade
+            );
+    // - nucleo
+    lua.new_usertype<projeto>("projeto",
+            sol::constructors<projeto(), projeto(std::string&)>(),
+            "salvarFases", &projeto::salvarFases,
+            "salvarFase",  &projeto::salvarFase,
+            "salvarFases", &projeto::salvarFases,
+            "salvarFases", &projeto::salvarFases,
+            "salvarFases", &projeto::salvarFases,
+            "salvarFases", &projeto::salvarFases,
+            "salvarFases", &projeto::salvarFases,
+            "salvarFases", &projeto::salvarFases,
+            );
 }
 void becommons::api::definirNamespaces(sol::state& lua) {
+    auto bubble = lua["bubble"].get_or_create<sol::table>(); /// < namespace bubble na api
+    bubble["projeto"] = projeto_atual;
 }
