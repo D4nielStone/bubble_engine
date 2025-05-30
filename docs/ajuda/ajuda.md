@@ -1,11 +1,30 @@
-# Ajuda
+# **Ajuda**
 
-# Principais tópicos:
+## Principais tópicos:
 
+- Namespaces
+ -  [bubble](@ref Bubble)
 - Classes
  -  [Malha](@ref Malha)
  -  [Renderizador](@ref Renderizador)
 
+\defgroup Bubble
+\{
+
+# Bubble
+## Namespace Bubble
+
+O namespace `bubble` agrupa variáveis e constantes *globais*.
+
+## Info
+
+| Membros(3)           | Descrição   |
+|    --------------    |   ------    |
+| `bubble.meuID`       | ID da entidade com o componente de código. |
+| `bubble.projeto`     | [Projeto](@ref Projeto) em execução |
+| `bubble.janela`      | [Janela](@ref Janela) principal |
+
+\}
 
 \defgroup Malha
 \{
@@ -16,24 +35,7 @@
 
 A classe `malha` é uma abstração em lua da classe [malha](@ref malha.cpp), que pertence ao **núcleo do motor** usada para armazenar dados de vértices, indices, material e etc.
 
-## LuaBridge
-
-```cpp
-	    .beginClass<malha>("malha")
-        .addConstructor<void(*)()>()
-        .addFunction("carregar",         &malha::carregar)
-        .addFunction("descarregar",      &malha::descarregar)
-        .addProperty("material",         &malha::obterMaterial,   &malha::definirMaterial)
-        .addProperty("vertices",         &malha::obterVertices,   &malha::definirVertices)
-        .addProperty("indices",          &malha::obterIndices,    &malha::definirIndices)
-        .addProperty("instancias",       &malha::obterInstancias, &malha::definirInstancias)
-        .addProperty("sobrepor",         &malha::estaSobreposto,  &malha::definirSobreposicao)
-        .addProperty("vao",              &malha::obterVertexArray)
-        .addProperty("ebo",              &malha::obterElementBuffer)
-        .addProperty("vbo",              &malha::obterVertexBuffer)
-```
-
-## Info
+### Info
 
 | Construtores (1)      |
 |   -----------------   |
@@ -54,7 +56,7 @@ A classe `malha` é uma abstração em lua da classe [malha](@ref malha.cpp), qu
 
 ---
 
-## Exemplo
+### Exemplo
 
 > Sobrepondo um objeto
 ```lua
@@ -76,17 +78,8 @@ end
 
 A classe `renderizador` é uma abstração em Lua da classe [renderizador](renderizador.cpp), pertencente ao **núcleo do motor**, usada para controlar e exibir um [modelo](modelo.cpp) em cena. Ela encapsula a lógica de renderização de um objeto e permite acesso direto ao modelo associado.
 
-## LuaBridge
 
-```cpp
-.beginClass<renderizador>("renderizador")
-    .addConstructor<void(*)(const char*)>()
-    .addConstructor<void(*)(modelo*)>()
-    .addData("modelo", &renderizador::m_modelo)
-.endClass()
-```
-
-## Info
+### Info
 
 | Construtores (2)                                  |
 |   ----------------------------------------------  |
@@ -99,7 +92,7 @@ A classe `renderizador` é uma abstração em Lua da classe [renderizador](rende
 |   -----       |   --------------------------------------------------------------- |
 | `modelo`      | Referência ao objeto `modelo` usado pelo renderizador.            |
 
-## Exemplo
+### Exemplo
 
 > Criando um renderizador a partir de um modelo
 ```lua
