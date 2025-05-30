@@ -1,4 +1,3 @@
-
 /** @copyright 
 MIT License
 Copyright (c) 2025 Daniel Oliveira
@@ -20,16 +19,41 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE. 
-*/
-/**
- * @file sistema.cpp
- */
-#include "becommons_namespace.hpp"
-#include "nucleo/sistema.hpp"
-#include "nucleo/fase.hpp"
 
-void BECOMMONS_NS::sistema::inicializar(BECOMMONS_NS::fase* fase_ptr)
-{
-	this->m_fase = fase_ptr;
-	this->reg= m_fase->obterRegistro();
+*/
+
+/**
+ * @file sistema.hpp
+ */
+#pragma once
+#include "becommons_namespace.hpp"
+
+namespace BECOMMONS_NS {
+    /**
+     * @struct sistema
+     * Classe base para sistemas do loop principal
+     */
+    struct sistema {
+        /**
+         * Construtor virtual da classe Sistema
+         * @param nome Nome do sistema
+         */
+        sistema() = default;
+
+        /**
+         * @brief Destrutor virtual para garantir a destruição adequada das subclasses
+         */
+        virtual ~sistema() = default;
+
+        /**
+         * @brief Inicializa o sistema
+         */
+        virtual void inicializar() = 0;
+
+        /**
+         * @brief Atualiza o sistema dentro do loop principal
+         * @param deltaTime Tempo desde a última atualização (em segundos)
+         */
+        virtual void atualizar() = 0;
+    };
 }

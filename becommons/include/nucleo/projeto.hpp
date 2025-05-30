@@ -38,8 +38,7 @@ SOFTWARE.
 #include "sistema_de_renderizacao.hpp"
 
 namespace BECOMMONS_NS {
-    struct projeto
-    {
+    struct projeto {
             std::string diretorioDoProjeto;
             /// @brief construtor para carregar arquivos do projeto.
             /// @param diretorio 
@@ -57,7 +56,7 @@ namespace BECOMMONS_NS {
             /// @param nome nome da fase
             void salvarFase(const std::string& nome);
             /// @brief carrega todas as fases da pasta do projeto
-            void carregarFases(){};
+            void carregarFases();
             /// @brief carrega fase pelo nome no diretório do projeto e torna atual
             /// @param nome diretório e nome da fase
             void carregarFase(const std::string& nome);

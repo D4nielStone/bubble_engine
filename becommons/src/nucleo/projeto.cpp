@@ -98,6 +98,7 @@ projeto::projeto(std::string &diretorio) {
 projeto::projeto()
 {
     imageLoader::init();
+    iniciarSistemas();
 }
 
 rapidjson::Document projeto::analisarProjeto(std::string& path)
@@ -198,10 +199,9 @@ void projeto::carregarFase(const std::string &n)
     m_fases[nome] = std::make_shared<fase>(nome + ".fase");
 
     m_fases[nome]->carregar();
-    iniciarSistemas(m_fases[nome].get());
 }
 
-void projeto::iniciarSistemas(fase* f)
+void projeto::iniciarSistemas()
 {
     sistemas["fisica"] = new sistema_fisica();
     sistemas["interface"] = new sistema_interface();
@@ -210,7 +210,7 @@ void projeto::iniciarSistemas(fase* f)
 
     for(auto& sistema : sistemas)
     {
-        sistema.second->inicializar(f);
+        sistema.second->inicializar();
     }
 }
 

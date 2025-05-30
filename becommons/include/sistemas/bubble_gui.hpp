@@ -127,10 +127,9 @@ namespace BECOMMONS_NS {
         void adicionarFlags(const std::string& id, flag_estilo f);
 
         /**
-         * @brief Inicializa o sistema gráfico dentro de uma fase.
-         * @param f Ponteiro para a fase.
+         * @brief Inicializa o sistema gráfico.
          */
-        void inicializar(fase* f) override;
+        void inicializar() override;
 
         /**
          * @brief Atualiza o sistema gráfico a cada quadro.

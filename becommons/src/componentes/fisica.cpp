@@ -84,10 +84,7 @@ btRigidBody* fisica::obterCorpoRigido()
 }
 
 // Criar forma para m�ltiplas malhas
-void fisica::criarMalha()
-{
-    // Obt�m as malhas do modelo associado ao objeto
-    auto modelo = projeto_atual->obterFaseAtual()->obterRegistro()->obter<renderizador>(meu_objeto)->m_modelo;
+void fisica::criarMalha() {
     auto& malhas = modelo->malhas;
 
     // Criar o btTriangleIndexVertexArray para todas as malhas
@@ -113,20 +110,6 @@ void fisica::criarMalha()
 
     // Cria a forma de colis�o como um btBvhTriangleMeshShape
     forma = new btBvhTriangleMeshShape(indexVertexArray, true);
-}
-
-// Atualizar transforma��o
-void fisica::atualizarTransformacao()
-{
-    m_transformacao = projeto_atual->obterFaseAtual()->obterRegistro()->obter<transformacao>(meu_objeto).get();
-    forma->setLocalScaling(m_transformacao->obterEscala().to_btvec());
-
-    if (massa == 0)  return;
-    btTransform bt;
-    estadoDeMovimento->getWorldTransform(bt);
-
-    m_transformacao->definirPosicao(fvet3(bt.getOrigin()  ));
-    m_transformacao->definirRotacao(fvet4(bt.getRotation()));
 }
 
 // Aplicar for�a
@@ -181,18 +164,7 @@ fvet3 fisica::obterVelocidade() const
     return { corpoRigido->getLinearVelocity().getX(),
             corpoRigido->getLinearVelocity().getY(),
             corpoRigido->getLinearVelocity().getZ() };
-}// Obter velocidade
-fvet3 fisica::obterPosicao() const
-{
-    btTransform bt;
-    corpoRigido->getMotionState()->getWorldTransform(bt);
-    return { 
-        bt.getOrigin().getX(),
-        bt.getOrigin().getY(),
-        bt.getOrigin().getZ()
-    };
 }
-
 void fisica::definirFatorLinear(const fvet3& fator)
 {
         corpoRigido->setLinearFactor(btVector3(fator.x, fator.y, fator.z)); // Reset velocity to avoid unwanted movement

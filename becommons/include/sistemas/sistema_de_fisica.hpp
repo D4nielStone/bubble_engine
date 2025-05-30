@@ -32,11 +32,8 @@ SOFTWARE.
 #include <iostream>
 #include "util/raio.hpp"
 #include <bullet/btBulletDynamicsCommon.h>
-#include <thread>
-#include <atomic>
 
-class MyContactCallback : public btCollisionWorld::ContactResultCallback
-{
+class MyContactCallback : public btCollisionWorld::ContactResultCallback {
 public:
     int colisoes = 0;
     btScalar addSingleResult 	( 	btManifoldPoint &  	cp,
@@ -54,25 +51,16 @@ public:
 };
 
 namespace BECOMMONS_NS {
-
-    inline static btDiscreteDynamicsWorld* mundoDinamicoPrincipal;
-    
-    class sistema_fisica : public sistema {
-    public:
+    struct sistema_fisica : sistema {
          sistema_fisica();
         ~sistema_fisica();
 
         void atualizar() override;
-        void inicializar(fase* f) override;
-        void iniciarThread();
-        void pararThread();
+        void inicializar() override;
         bool remover(btRigidBody*& corpo);
         btDiscreteDynamicsWorld* mundo();
-        inline static float velocidade = 1.f;
+        float velocidade;
     private:
-        std::atomic<bool> rodando{ false }; // Controle da thread
-        std::thread fisicaThread;
-
         btDefaultCollisionConfiguration* configColisao{nullptr};
         btCollisionDispatcher* expedidor{nullptr};
         btBroadphaseInterface* faseAmpla{nullptr};
@@ -81,5 +69,5 @@ namespace BECOMMONS_NS {
     };
 
     // Função de Raycast
-    resultadoRaio raioIntersecta(const raio& raio);
+    inline static resultadoRaio emitirRaio(const raio& raio);
 }

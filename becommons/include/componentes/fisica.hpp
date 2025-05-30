@@ -30,7 +30,7 @@ SOFTWARE.
 #pragma once
 #include <glm/glm.hpp>
 #include "becommons_namespace.hpp"
-#include "util/malha.hpp"
+#include "arquivadores/modelo.hpp"
 #include "util/vetor3.hpp"
 #include "componente.hpp"
 #include "transformacao.hpp"
@@ -38,20 +38,17 @@ SOFTWARE.
 namespace BECOMMONS_NS {
     struct fisica : componente {
         static constexpr mascara mascara { COMPONENTE_FISICA };
-        enum camada {
-            COLISAO_PADRAO = 1 << 0,  // Objetos comuns
-            COLISAO_ESPECIAL = 1 << 1 // Objeto especial
+        enum flags : char {
+            colisao_padrao = 1 << 0,  // Objetos comuns
+            colisao_especial = 1 << 1 // Objeto especial
         };
 
         camada camada_colisao{camada::COLISAO_PADRAO};
-        fisica() = default;
         fisica(btCollisionShape* forma, btScalar massa, btVector3 posicaoInicial, camada camada = COLISAO_PADRAO);
-        fisica(bool usar_malha, btScalar massa, btVector3 posicaoInicial, camada camada = fisica::COLISAO_PADRAO);
         virtual ~fisica();
 
         btRigidBody* obterCorpoRigido();
-        void criarMalha();
-        void atualizarTransformacao();
+        void definirModelo(modelo*);
         void aplicarForca(const fvet3& vetor);
         void aplicarVelocidade(const fvet3& vetor);
         void definirPosicao(const fvet3& posicao); 
@@ -60,14 +57,13 @@ namespace BECOMMONS_NS {
         void definirFriccao(const float fator);
         void definirRestituicao(const float fator);
         void definirRaioCcd(const float fator);
-       void definirRotacao(const fvet3& rotacao);
+        void definirRotacao(const fvet3& rotacao);
         fvet3 obterVelocidade() const;
-        fvet3 obterPosicao() const;
         void init();
         btScalar massa;
 
     private:
-        bool usar_malha{ false };
+        modelo* m_modelo;
         btCollisionShape* forma {nullptr};
         btDefaultMotionState* estadoDeMovimento{nullptr};
         btRigidBody* corpoRigido{ nullptr };
