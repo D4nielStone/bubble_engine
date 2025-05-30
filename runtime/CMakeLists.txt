@@ -30,7 +30,7 @@ if(WIN32)
         ../becommons/include
         ./include
         ../libs/glad
-        ../libs/LuaBridges
+        ../libs/sol2/include
     )
 
 else()
@@ -41,7 +41,7 @@ else()
         ../becommons/include
         ./include
         ../libs/glad
-        ../libs/LuaBridge
+        ../libs/sol2/include
         /usr/include/lua5.3
         /usr/include/glm
         /usr/include/GLFW
@@ -95,7 +95,7 @@ set(RUNTIME_HPP_DIR ${CMAKE_SOURCE_DIR}/editor/include/assets/)
 
 add_custom_command(
     OUTPUT ${RUNTIME_HPP_FILE}
-    COMMAND touch ${RUNTIME_HPP_DIR}
+    COMMAND mkdir -p ${RUNTIME_HPP_DIR}
     COMMAND touch ${RUNTIME_HPP_FILE}
     COMMAND ${CMAKE_COMMAND} -E echo ">> Embutindo runtime"
     COMMAND xxd -i "${RUNTIME_OUTPUT}" | sed -E -e "s/unsigned char .*/inline unsigned char runtime[] = {/" -e "/unsigned int/,/=/s/unsigned int [a-zA-Z0-9_]+_len/inline unsigned int runtime_len/" > ${RUNTIME_HPP_FILE}

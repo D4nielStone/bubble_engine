@@ -62,7 +62,7 @@ namespace BECOMMONS_NS {
         {
             return vetor3{ x + other.x, y + other.y, z + other.z };
         };
-        vetor3 operator+(const float other) const
+        vetor3 operator+(const T other) const
         {
             return vetor3{ x + other, y + other, z + other };
         };
@@ -73,7 +73,7 @@ namespace BECOMMONS_NS {
             z += other.z;
             return *this;
         };
-        vetor3& operator+=(const float other)
+        vetor3& operator+=(const T other)
         {
             x += other;
             y += other;
@@ -85,7 +85,7 @@ namespace BECOMMONS_NS {
         {
             return vetor3{ x - other.x, y - other.y, z - other.z };
         };
-        vetor3 operator-(const float other) const
+        vetor3 operator-(const T other) const
         {
             return vetor3{ x - other, y - other, z - other };
         };
@@ -96,7 +96,7 @@ namespace BECOMMONS_NS {
             z -= other.z;
             return *this;
         };
-        vetor3& operator-=(const float other)
+        vetor3& operator-=(const T other)
         {
             x -= other;
             y -= other;
@@ -104,11 +104,11 @@ namespace BECOMMONS_NS {
             return *this;
         };
         // Deve multiplicar
-        vetor3 operator*(const vetor3& other)
+        vetor3 operator*(const vetor3& other) const
         {
             return vetor3{ x * other.x, y * other.y, z * other.z };
         };
-        vetor3 operator*(float other)
+        vetor3 operator*(T other) const 
         {
             return vetor3{ x * other, y * other, z * other };
         };
@@ -119,7 +119,7 @@ namespace BECOMMONS_NS {
             z *= other.z;
             return *this;
         };
-        vetor3 operator*=(float other)
+        vetor3 operator*=(T other)
         {
             x *= other;
             y *= other;
@@ -131,7 +131,7 @@ namespace BECOMMONS_NS {
         {
             return vetor3{ x / other.x, y / other.y, z / other.z};
         };
-        vetor3 operator/(float other)
+        vetor3 operator/(T other)
         {
             return vetor3{ x / other, y / other, z / other };
         };
@@ -142,7 +142,7 @@ namespace BECOMMONS_NS {
             z /= other.z;
             return *this;
         };
-        vetor3 operator/=(float other)
+        vetor3 operator/=(T other)
         {
             x /= other;
             y /= other;
