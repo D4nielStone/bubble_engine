@@ -24,7 +24,7 @@
 
 #include "becommons_namespace.hpp"
 #include "glad.h"
-#include "nucleo/sistema_de_renderizacao.hpp"
+#include "sistemas/sistema_de_renderizacao.hpp"
 #include "componentes/renderizador.hpp"
 #include "componentes/transformacao.hpp"
 #include "componentes/luz_direcional.hpp"
@@ -62,18 +62,18 @@ void sistema_renderizacao::atualizar() {
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_CULL_FACE);
    
+    auto reg = projeto_atual->obterFaseAtual()->obterRegistro();
     reg->cada<camera>([&](const uint32_t ent){
             auto cam = reg->obter<camera>(ent);
-            if (cam.get() == camera_principal) return;
+            if (cam.get() == camera_principal || !cam->flag_fb) return;
             atualizarCamera(cam.get());
             });
     atualizarCamera(camera_principal);
 } 
 
-void sistema_renderizacao::inicializar(fase* fase_ptr)
+void sistema_renderizacao::inicializar()
 {
-        this->m_fase = fase_ptr;
-        this->reg = m_fase->obterRegistro();
+        auto reg = projeto_atual->obterFaseAtual()->obterRegistro();
 
         reg->cada<camera>([&](const uint32_t e){
                 camera_principal = reg->obter<camera>(e).get();
@@ -88,13 +88,9 @@ void sistema_renderizacao::definirCamera(camera* cam)
 
 void sistema_renderizacao::atualizarCamera(camera* cam)
 {
-        if (!cam) {
-            return;
-        }
+        auto reg = projeto_atual->obterFaseAtual()->obterRegistro();
 
-        // Pula camera sem buffer e não principal
-        if(!cam->flag_fb && cam!=camera_principal)
-        {
+        if (!cam) {
             return;
         }
 

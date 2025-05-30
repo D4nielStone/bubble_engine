@@ -8,7 +8,6 @@
 #include "becommons/becommons.hpp"
 #include "editor_namespace.hpp"
 #include "sistemas/editor.hpp"
-#include "util/runtime.hpp"
 #include "sistemas/gerenciador_projetos.hpp"
 
 using namespace EDITOR_NS;
@@ -212,7 +211,7 @@ void gerenciador_projetos::atualizarElementos(const std::string& Dir) {
 
 void gerenciador_projetos::configurarUI(const std::string& DIR_PADRAO) {
     // Sistema de gui
-    gui.inicializar(nullptr);
+    gui.inicializar();
     gui.iniciarRaiz("raiz");
         gui.defFlags(flag_estilo::modular);
     gui.fimEstilo();

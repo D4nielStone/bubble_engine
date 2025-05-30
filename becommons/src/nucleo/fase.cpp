@@ -31,14 +31,13 @@ SOFTWARE.
 #include "nucleo/projeto.hpp"
 #include "os/janela.hpp"
 #include "componentes/renderizador.hpp"
-#include "componentes/luz_pontual.hpp"
 #include "componentes/camera.hpp"
 #include "componentes/codigo.hpp"
 #include "componentes/terreno.hpp"
+#include "componentes/luz_pontual.hpp"
 #include "componentes/luz_direcional.hpp"
 #include "componentes/transformacao.hpp"
-#include "componentes/texto.hpp"
-#include "componentes/imagem.hpp"
+#include "componentes/fisica.hpp"
 #include "entidades/entidade.hpp"
 #include <filesystem>
 #include <iostream>

@@ -26,17 +26,15 @@ SOFTWARE.
  */
 
 #include "becommons_namespace.hpp"
-#include "nucleo/sistema_de_codigo.hpp"
+#include "sistemas/sistema_de_codigo.hpp"
 #include "nucleo/fase.hpp"
+#include "nucleo/projeto.hpp"
 #include "componentes/codigo.hpp"
 #include "os/janela.hpp"
-#include <mutex>
-
-std::mutex mtx;
 
 namespace BECOMMONS_NS {
-    void sistema_codigo::atualizar()
-    {
+    void sistema_codigo::atualizar() {
+        auto reg = projeto_atual->obterFaseAtual()->obterRegistro();
         reg->cada<codigo>([&](const uint32_t entidade)
             {
                 auto componente_codigo = reg->obter<codigo>(entidade);
@@ -45,10 +43,8 @@ namespace BECOMMONS_NS {
         );
     }
 
-    void sistema_codigo::inicializar(fase* fase_ptr)
-    {
-        this->m_fase = fase_ptr;
-        this->reg = m_fase->obterRegistro();
+    void sistema_codigo::inicializar() {
+        auto reg = projeto_atual->obterFaseAtual()->obterRegistro();
 
         reg->cada<codigo>([&](const uint32_t entidade)
             {
@@ -56,27 +52,6 @@ namespace BECOMMONS_NS {
                 componente_codigo->iniciar();
             }
         );
-    }
-
-    void sistema_codigo::iniciarThread() {
-        rodando = true;
-        codigoThread = std::thread([this]() {
-            while (rodando) {
-                {
-                    this->atualizar();
-                }
-            }
-            });
-    }
-
-    void sistema_codigo::pararThread() {
-        // Chama a fun��o `encerrar` para todos os componentes de c�digo
-        std::lock_guard<std::mutex> lock(mtx); // Protege o registro durante o encerramento
-       
-        rodando = false;
-        if (codigoThread.joinable()) {
-            codigoThread.join();
-        }
     }
 
     sistema_codigo::~sistema_codigo() {

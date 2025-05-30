@@ -1,97 +1,85 @@
-
 /** @copyright 
-MIT License
-Copyright (c) 2025 Daniel Oliveira
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE. 
-*/
-/**
+ * MIT License
+ * Copyright (c) 2025 Daniel Oliveira
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE. 
  * @file fisica.cpp
  */
 
 #include "componentes/fisica.hpp"
-#include "componentes/transformacao.hpp"
-#include "nucleo/fase.hpp"
-#include "nucleo/projeto.hpp"
-#include "componentes/renderizador.hpp"
 #include "depuracao/assert.hpp"
+#include "nucleo/projeto.hpp"
 
 using namespace BECOMMONS_NS;
 
-// Construtor para forma gen�rica
-fisica::fisica(btCollisionShape* forma, btScalar massa, btVector3 posicaoInicial, camada camada) 
-    : forma(forma), usar_malha(false), massa(massa), posicaoInicial(posicaoInicial), camada_colisao(camada)
-{
-    ASSERT(forma != nullptr);
-    init();
-}
-void fisica::init()
-{
-    btVector3 inertia(0, 0, 0);
-    if (massa > 0) {
-        forma->calculateLocalInertia(massa, inertia);
+fisica::fisica(bool estatico, const formas e_forma) : e_forma(e_forma) {
+    m_massa = estatico ? 0 : 1;
+
+    switch (e_forma) {
+        case formas::forma_caixa:
+            m_forma = new btBoxShape(btVector3(0.5f, 0.5f, 0.5f));
+            break;
+        case formas::forma_esfera:
+            m_forma = new btSphereShape(0.5f);
+            break;
+        case formas::forma_capsula:
+            m_forma = new btCapsuleShape(0.5f, 1.8f);
+            break;
+        case formas::forma_cilindro:
+            m_forma = new btCylinderShape(btVector3(0.5f, 0.5f, 0.5f));
+            break;
+        case formas::forma_cone:
+            m_forma = new btConeShape(0.5f, 1.f);
+            break;
+        case formas::forma_plano:
+            m_forma = new btStaticPlaneShape(btVector3(0.f, 1.f, 0.f), 1.f);
+            break;
+        case formas::forma_malha:
+            m_forma = nullptr;
+            break;
     }
 
-    estadoDeMovimento = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), posicaoInicial));
-    btRigidBody::btRigidBodyConstructionInfo rigidBodyCI(massa, estadoDeMovimento, forma, inertia);
-    corpoRigido = new btRigidBody(rigidBodyCI);
-    corpoRigido->setRollingFriction(0.1);
-    corpoRigido->setRestitution(0.8f);
-    corpoRigido->setCcdMotionThreshold(0.01f); // Pequeno movimento necess�rio para ativar o CCD
-    corpoRigido->setCcdSweptSphereRadius(0.05f); // Define um raio de varredura para detectar colis�es
-}
-// Construtor para cria��o de malha
-fisica::fisica(bool malha, btScalar massa, btVector3 posicaoInicial, camada camada)
-    : usar_malha(malha), massa(0), posicaoInicial(posicaoInicial), camada_colisao(camada)
-{
+
+    btVector3 inertia(0, 0, 0);
+    if(m_massa > 0) m_forma->calculateLocalInertia(m_massa, inertia);
+    m_estado_de_movimento = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 0, 0)));
+    btRigidBody::btRigidBodyConstructionInfo rigidBodyCI(m_massa, m_estado_de_movimento, m_forma, inertia);
+    m_corpo_rigido = new btRigidBody(rigidBodyCI);
 }
 
 // Destrutor
-fisica::~fisica()
-{
-    if(corpoRigido && projeto_atual->obterFaseAtual())projeto_atual->sfisica()->remover(corpoRigido);
-    if(corpoRigido)delete corpoRigido;
-    if(estadoDeMovimento)delete estadoDeMovimento;
-    if(forma)delete forma;
+fisica::~fisica() {
+    if(m_corpo_rigido && projeto_atual)projeto_atual->sfisica()->remover(m_corpo_rigido);
+    if(m_corpo_rigido)delete m_corpo_rigido;
+    if(m_estado_de_movimento)delete m_estado_de_movimento;
+    if(m_forma)delete m_forma;
 }
 
-// Obter o corpo r�gido
-btRigidBody* fisica::obterCorpoRigido()
-{
+// Criar forma para múltiplas malhas
+void fisica::definirModelo(modelo* p_modelo) {
+    if(!p_modelo) throw std::runtime_error("Física: modelo inválido.");
+    m_modelo = p_modelo;
+    if(e_forma != formas::forma_malha) return;
 
-    if (usar_malha &&!corpoRigido) {
-        criarMalha();
-        init();
-        usar_malha = false; // Garante que as malhas sejam criadas apenas uma vez
-    }
-    return corpoRigido;
-}
-
-// Criar forma para m�ltiplas malhas
-void fisica::criarMalha() {
-    auto& malhas = modelo->malhas;
-
-    // Criar o btTriangleIndexVertexArray para todas as malhas
     btTriangleIndexVertexArray* indexVertexArray = new btTriangleIndexVertexArray();
 
-    for (const auto& malha : malhas) {
-        // Supondo que malha tenha 'vertices' e 'indices'
+    for (const auto& malha : m_modelo->malhas) {
         const auto& vertices = malha.obterVertices();
         const auto& indices = malha.obterIndices();
 
@@ -101,93 +89,53 @@ void fisica::criarMalha() {
         mesh.m_triangleIndexStride = 3 * sizeof(unsigned int);
         mesh.m_numVertices = vertices.size();
         mesh.m_vertexBase = (const unsigned char*)vertices.data();
-        mesh.m_vertexStride = sizeof(vertice); // Supondo que Vertex tem posi��es cont�guas
+        mesh.m_vertexStride = sizeof(vertice);
         mesh.m_indexType = PHY_INTEGER;
         mesh.m_vertexType = PHY_FLOAT;
 
         indexVertexArray->addIndexedMesh(mesh, PHY_INTEGER);
     }
 
-    // Cria a forma de colis�o como um btBvhTriangleMeshShape
-    forma = new btBvhTriangleMeshShape(indexVertexArray, true);
+    m_forma = new btBvhTriangleMeshShape(indexVertexArray, true);
 }
 
-// Aplicar for�a
-void fisica::aplicarForca(const fvet3& vetor)
-{
-    corpoRigido->applyCentralForce({ vetor.x, vetor.y, vetor.z });
+// Aplicar força
+void fisica::definirForca(const fvet3& vetor) {
+    m_corpo_rigido->activate();
+    m_corpo_rigido->applyCentralForce(vetor.to_btvec());
 }
 
 // Aplicar velocidade
-void fisica::aplicarVelocidade(const fvet3& velocidade)
-{
-    corpoRigido->activate();
-    corpoRigido->setLinearVelocity(btVector3(velocidade.x, velocidade.y, velocidade.z));
-}
-
-// definir posi��o
-void fisica::definirPosicao(const fvet3& posicao)
-{
-    m_transformacao->definirPosicao(posicao);
-    // Ensure the rigid body exists
-    if (estadoDeMovimento)
-    {
-        // Create a new transform with the updated position
-        btTransform bt;
-        estadoDeMovimento->getWorldTransform(bt); // Get the current transform
-        bt.setOrigin(btVector3(posicao.x, posicao.y, posicao.z)); // Set the new position
-
-            estadoDeMovimento->setWorldTransform(bt); // Update the transform
-            corpoRigido->setLinearVelocity(btVector3(0, 0, 0)); // Reset velocity to avoid unwanted movement
-            corpoRigido->setAngularVelocity(btVector3(0, 0, 0)); // Reset angular velocity
-            corpoRigido->activate(); // Reactivate the body if it was sleeping
-            corpoRigido->setMotionState(estadoDeMovimento);
-        
-    }
-}
-
-// definir rota��o
-void fisica::definirRotacao(const fvet3& rotacao)
-{
-    m_transformacao->definirRotacao(rotacao);
-    btTransform bt;
-    estadoDeMovimento->getWorldTransform(bt); // Recupera transforma��o atual
-    btQuaternion btRot;
-    btRot.setEulerZYX(rotacao.z, rotacao.y, rotacao.x); // Define rota��o com Euler ZYX
-    bt.setRotation(btRot); // Aplica rota��o
-    estadoDeMovimento->setWorldTransform(bt); // Aplica transforma��o
+void fisica::definirVelocidade(const fvet3& velocidade) {
+    m_corpo_rigido->activate();
+    m_corpo_rigido->setLinearVelocity(velocidade.to_btvec());
 }
 
 // Obter velocidade
-fvet3 fisica::obterVelocidade() const
-{
-    return { corpoRigido->getLinearVelocity().getX(),
-            corpoRigido->getLinearVelocity().getY(),
-            corpoRigido->getLinearVelocity().getZ() };
+fvet3 fisica::obterVelocidade() const {
+    return { m_corpo_rigido->getLinearVelocity().getX(),
+            m_corpo_rigido->getLinearVelocity().getY(),
+            m_corpo_rigido->getLinearVelocity().getZ() };
 }
-void fisica::definirFatorLinear(const fvet3& fator)
-{
-        corpoRigido->setLinearFactor(btVector3(fator.x, fator.y, fator.z)); // Reset velocity to avoid unwanted movement
-        corpoRigido->activate(); 
+void fisica::definirFatorLinear(const fvet3& fator) {
+        m_corpo_rigido->activate(); 
+        m_corpo_rigido->setLinearFactor(fator.to_btvec()); 
 }
 
 void fisica::definirFatorAngular(const fvet3& fator){
-        corpoRigido->setAngularFactor(btVector3(fator.x, fator.y, fator.z)); // Reset velocity to avoid unwanted movement
-        corpoRigido->activate(); 
+        m_corpo_rigido->activate(); 
+        m_corpo_rigido->setAngularFactor(fator.to_btvec()); 
 }
 
-void fisica::definirRestituicao(const float fator){
-        corpoRigido->setRestitution(fator); // Reset velocity to avoid unwanted movement
-        corpoRigido->activate(); 
+void fisica::definirRestituicao(const float fator) {
+        m_corpo_rigido->activate(); 
+        m_corpo_rigido->setRestitution(fator); 
 }
-void fisica::definirFriccao(const float fator){
-        corpoRigido->setFriction(fator); // Reset velocity to avoid unwanted movement
-        corpoRigido->activate(); 
+void fisica::definirFriccao(const float fator) {
+        m_corpo_rigido->activate(); 
+        m_corpo_rigido->setFriction(fator);
 }
-void fisica::definirRaioCcd(const float fator)
-{
-    corpoRigido->setContactProcessingThreshold(0.0001f);
-    corpoRigido->setCcdMotionThreshold(0.0001f);
-    corpoRigido->setCcdSweptSphereRadius(fator);
-    corpoRigido->activate();
+void fisica::definirRaioCCD(const float fator) {
+    m_corpo_rigido->activate();
+    m_corpo_rigido->setCcdSweptSphereRadius(fator);
 }

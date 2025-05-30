@@ -30,7 +30,7 @@
 #include "util/material.hpp"
 #include "depuracao/debug.hpp"
 #include "util/vertice.hpp"
-#include "nucleo/sistema_de_renderizacao.hpp"
+#include "sistemas/sistema_de_renderizacao.hpp"
 
 using namespace BECOMMONS_NS;
 

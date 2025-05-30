@@ -30,7 +30,7 @@
 #include "componentes/terreno.hpp"
 #include "componentes/texto.hpp"
 #include "componentes/codigo.hpp"
-#include "nucleo/sistema_de_fisica.hpp"
+#include "sistemas/sistema_de_fisica.hpp"
 #include "os/janela.hpp"
 #include "inputs/inputs.hpp"
 #include "util/malha.hpp"
@@ -93,15 +93,12 @@ void becommons::api::definirClasses(sol::state& lua) {
             );
     // - nucleo
     lua.new_usertype<projeto>("projeto",
-            sol::constructors<projeto(), projeto(std::string&)>(),
+            sol::constructors<projeto()>(),
             "salvarFases", &projeto::salvarFases,
             "salvarFase",  &projeto::salvarFase,
-            "salvarFases", &projeto::salvarFases,
-            "salvarFases", &projeto::salvarFases,
-            "salvarFases", &projeto::salvarFases,
-            "salvarFases", &projeto::salvarFases,
-            "salvarFases", &projeto::salvarFases,
-            "salvarFases", &projeto::salvarFases,
+            "carregarFase", &projeto::carregarFase,
+            "carregarFases", &projeto::carregarFases,
+            "obterFaseAtual", &projeto::obterFaseAtual
             );
 }
 void becommons::api::definirNamespaces(sol::state& lua) {

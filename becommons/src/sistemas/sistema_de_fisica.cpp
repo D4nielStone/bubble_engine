@@ -23,8 +23,10 @@
  */
 
 #include "becommons_namespace.hpp"
-#include "nucleo/sistema_de_fisica.hpp"
+#include "sistemas/sistema_de_fisica.hpp"
+#include "depuracao/debug.hpp"
 #include "nucleo/fase.hpp"
+#include "nucleo/projeto.hpp"
 #include "os/janela.hpp"
 #include "componentes/transformacao.hpp"
 #include "componentes/fisica.hpp"
@@ -49,48 +51,43 @@ sistema_fisica::~sistema_fisica() {
 
 void sistema_fisica::atualizar() {
     auto reg = projeto_atual->obterFaseAtual()->obterRegistro();
+    reg->cada<fisica, transformacao>([&](const uint32_t entidade) {
+        auto f = reg->obter<fisica>(entidade);
+        auto t = reg->obter<transformacao>(entidade);
+
+        btTransform bt;
+        btQuaternion btRot;
+        // define posicao
+        bt.setOrigin(t->posicao.to_btvec());
+        // define rotação
+        btRot.setEulerZYX(t->rotacao.x, t->rotacao.y, t->rotacao.z); 
+        bt.setRotation(btRot); 
+
+        f->m_estado_de_movimento->setWorldTransform(bt); 
+        f->m_corpo_rigido->activate();
+        f->m_corpo_rigido->setMotionState(f->m_estado_de_movimento);
+    });
+    
     mundoDinamico->stepSimulation(janela::obterInstancia().m_tempo.obterDeltaTime() * velocidade, 1);
-    reg->cada<fisica, transformacao>([&](const uint32_t entidade)
-        {
-            reg->obter<fisica>(entidade)->atualizarTransformacao();
-        }
-    );
+    
+    reg->cada<fisica, transformacao>([&](const uint32_t entidade) {
+        auto f = reg->obter<fisica>(entidade);
+        auto t = reg->obter<transformacao>(entidade);
+        btTransform bt;
+        f->m_estado_de_movimento->getWorldTransform(bt);
+        t->posicao = fvet3(bt.getOrigin());
+        t->definirRotacao(fvet4(bt.getRotation()));
+    });
 }
 
-void sistema_fisica::inicializar()
-{
-    depuracao::emitir(debug, "fisica", "Inicializando sistema de Física.");
-    depuracao::emitir(debug, "fisica", "Adicionando corpos rígidos...");
+void sistema_fisica::inicializar() {
     auto reg = projeto_atual->obterFaseAtual()->obterRegistro();
-    reg->cada<fisica, transformacao>([&](const uint32_t entidade) {
+    reg->cada<fisica, transformacao>([reg, this](const uint32_t entidade) {
             /// adiciona corpos rigidos
             auto comp_fisica = reg->obter<fisica>(entidade);
-            // Adicionar ao mundo com grupo e m�scara
-            int camada = comp_fisica->camada_colisao;
-            int mascara = comp_fisica->camada_colisao;
-            mundoDinamicoPrincipal->addRigidBody(comp_fisica->obterCorpoRigido(), camada, mascara);
+            mundoDinamico->addRigidBody(comp_fisica->m_corpo_rigido);
         }
     );
-}
-
-void sistema_fisica::iniciarThread()
-{
-    rodando = true;
-    fisicaThread = std::thread([this]() {
-        while (rodando) {
-            {
-                this->atualizar();
-            }
-        }
-        });
-}
-
-void sistema_fisica::pararThread()
-{
-    rodando = false;
-    if (fisicaThread.joinable()) {
-        fisicaThread.join();
-    }
 }
 
 bool sistema_fisica::remover(btRigidBody*& corpo)
@@ -118,22 +115,16 @@ btDiscreteDynamicsWorld* sistema_fisica::mundo()
     return mundoDinamico;
 }
 
-resultadoRaio BECOMMONS_NS::raioIntersecta(const raio& raio)
+resultadoRaio sistema_fisica::emitirRaio(const raio& raio)
 {
-    // Configura��o do ponto inicial e final do raio no espa�o 3D
     btVector3 origem(raio.origem.x, raio.origem.y, raio.origem.z);
     btVector3 destino = origem + btVector3(raio.direcao.x, raio.direcao.y, raio.direcao.z) * 300.0f;
 
-    // Criar o callback com m�scaras de camada
     btCollisionWorld::ClosestRayResultCallback callback(origem, destino);
-    callback.m_collisionFilterGroup = fisica::COLISAO_PADRAO | fisica::COLISAO_ESPECIAL; // Raycast pode detectar ambas
-    callback.m_collisionFilterMask = fisica::COLISAO_ESPECIAL;                  // Detectar apenas o especial
 
-    // Executar o raycast
-    mundoDinamicoPrincipal->rayTest(origem, destino, callback);
+    mundoDinamico->rayTest(origem, destino, callback);
 
-    // Estrutura de retorno
-    resultadoRaio resultado = { false, glm::vec3(0.0f), glm::vec3(0.0f), nullptr };
+    resultadoRaio resultado = { false, fvet3(0.0f), fvet3(0.0f), nullptr };
 
     if (callback.hasHit()) {
         btVector3 ponto = callback.m_hitPointWorld;

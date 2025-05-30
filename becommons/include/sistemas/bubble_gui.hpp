@@ -29,7 +29,7 @@ SOFTWARE.
 #include <memory>
 #include <set>
 #include "becommons_namespace.hpp"
-#include "nucleo/sistema.hpp"
+#include "sistemas/sistema.hpp"
 #include "arquivadores/shader.hpp"
 #include "arquivadores/imageloader.hpp"
 #include "arquivadores/fonte.hpp"

@@ -29,10 +29,9 @@ SOFTWARE.
 #include "becommons_namespace.hpp"
 #include "os/janela.hpp"
 #include "nucleo/projeto.hpp"
-#include "nucleo/sistema_de_fisica.hpp"
-#include "nucleo/sistema_de_renderizacao.hpp"
-#include "nucleo/sistema_de_codigo.hpp"
-#include "nucleo/sistema_de_interface.hpp"
+#include "sistemas/sistema_de_fisica.hpp"
+#include "sistemas/sistema_de_renderizacao.hpp"
+#include "sistemas/sistema_de_codigo.hpp"
 #include "depuracao/debug.hpp"
 
 #include <string>
@@ -49,8 +48,7 @@ SOFTWARE.
 using namespace BECOMMONS_NS;
 
 // Main loop
-void projeto::rodar()
-{
+void projeto::rodar() {
     while(!glfwWindowShouldClose(janela::obterInstancia().window))
 	{
 		janela::obterInstancia().poll();
@@ -77,8 +75,7 @@ void projeto::rodar()
 	}
 }
 
-projeto::~projeto()
-{
+projeto::~projeto() {
     for(auto& sistema : sistemas)
     {
         delete sistema.second;
@@ -95,14 +92,11 @@ projeto::projeto(std::string &diretorio) {
     diretorioDoProjeto = diretorio;
     criarJanela(doc);
 }
-projeto::projeto()
-{
+projeto::projeto() {
     imageLoader::init();
-    iniciarSistemas();
 }
 
-rapidjson::Document projeto::analisarProjeto(std::string& path)
-{
+rapidjson::Document projeto::analisarProjeto(std::string& path) {
     // procura recursivamente por config.json
     std::string caminhoEncontrado = path;
     
@@ -135,8 +129,7 @@ rapidjson::Document projeto::analisarProjeto(std::string& path)
     return doc;
 }
 
-void projeto::criarJanela(rapidjson::Document& doc)
-{
+void projeto::criarJanela(rapidjson::Document& doc) {
     /*      ERROS     */
     if(doc.HasParseError()) 
     {
@@ -188,8 +181,7 @@ void projeto::criarJanela(rapidjson::Document& doc)
     carregarFase(doc["lancamento"].GetString());
 }
 
-void projeto::carregarFase(const std::string &n)
-{
+void projeto::carregarFase(const std::string &n) {
     auto nome = diretorioDoProjeto + n;
     depuracao::emitir(info, "carregando fase em: " + nome + ".fase");
     
@@ -199,48 +191,49 @@ void projeto::carregarFase(const std::string &n)
     m_fases[nome] = std::make_shared<fase>(nome + ".fase");
 
     m_fases[nome]->carregar();
+    iniciarSistemas();
 }
 
-void projeto::iniciarSistemas()
-{
+void projeto::carregarFases() {
+    for(auto& entry : std::filesystem::directory_iterator(diretorioDoProjeto)) {
+        if(entry.is_regular_file() && entry.path().extension() == ".fase") {
+            auto nome = entry.path().string();
+            depuracao::emitir(info, "carregando fase em: " + nome);
+            m_fases[nome] = std::make_shared<fase>(nome);
+            m_fases[nome]->carregar();
+        }
+    }
+}
+
+void projeto::iniciarSistemas() {
     sistemas["fisica"] = new sistema_fisica();
-    sistemas["interface"] = new sistema_interface();
     sistemas["render"] = new sistema_renderizacao();
     sistemas["codigo"] = new sistema_codigo();
 
-    for(auto& sistema : sistemas)
-    {
+    for(auto& sistema : sistemas) {
         sistema.second->inicializar();
     }
 }
 
-void projeto::adicionar(const std::string nome, sistema* s)
-{
-    if(obterFaseAtual())
-    s->inicializar(obterFaseAtual().get());
-    else
-        s->inicializar(nullptr);
+void projeto::adicionar(const std::string nome, sistema* s) {
     sistemas_adicionais[nome] = s;
+    s->inicializar();
 }
 
-std::shared_ptr<fase> projeto::obterFaseAtual()
-{
+std::shared_ptr<fase> projeto::obterFaseAtual() {
     if(m_fases.find(fase_atual) != m_fases.end())
-	return m_fases[fase_atual];
+	    return m_fases[fase_atual];
     else
         return nullptr;
 }
 
-sistema_fisica* projeto::sfisica()
-{
-    return dynamic_cast<sistema_fisica*>(sistemas["fisica"]);
+sistema_fisica* projeto::sfisica() {
+    return static_cast<sistema_fisica*>(sistemas["fisica"]);
 }
-sistema_renderizacao* projeto::srender()
-{
-    return dynamic_cast<sistema_renderizacao*>(sistemas["render"]);
+sistema_renderizacao* projeto::srender() {
+    return static_cast<sistema_renderizacao*>(sistemas["render"]);
 }
-sistema* projeto::obterSistema(const std::string nome)
-{
+sistema* projeto::obterSistema(const std::string nome) {
     if(sistemas_adicionais.find(nome) != sistemas_adicionais.end())
     {
         return sistemas_adicionais[nome];
@@ -248,17 +241,12 @@ sistema* projeto::obterSistema(const std::string nome)
     return nullptr;
 }
 
-void projeto::salvarFases()
-{
-    depuracao::emitir(info, "salvando projeto.");
-    for(auto& [nome, fase] : m_fases)
-    {
-        fase->salvar();
+void projeto::salvarFases() {
+    for(auto& [nome, fase] : m_fases) {
+        salvarFase(nome);
     }
 }
-void projeto::salvarFase(const std::string& nome)
-{
-
+void projeto::salvarFase(const std::string& nome) {
     depuracao::emitir(info, "salvando fase " + nome);
     if(m_fases.find(nome) != m_fases.end())
         m_fases[nome]->salvar();

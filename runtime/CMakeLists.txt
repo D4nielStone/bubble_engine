@@ -98,7 +98,7 @@ add_custom_command(
     COMMAND mkdir -p ${RUNTIME_HPP_DIR}
     COMMAND touch ${RUNTIME_HPP_FILE}
     COMMAND ${CMAKE_COMMAND} -E echo ">> Embutindo runtime"
-    COMMAND xxd -i "${RUNTIME_OUTPUT}" | sed -E -e "s/unsigned char .*/inline unsigned char runtime[] = {/" -e "/unsigned int/,/=/s/unsigned int [a-zA-Z0-9_]+_len/inline unsigned int runtime_len/" > ${RUNTIME_HPP_FILE}
+    COMMAND xxd -i "${RUNTIME_OUTPUT}" | sed -E -e "s/unsigned char .*/unsigned char runtime[] = {/" -e "/unsigned int/,/=/s/unsigned int [a-zA-Z0-9_]+_len/unsigned int runtime_len/" > ${RUNTIME_HPP_FILE}
     DEPENDS ${RUNTIME_OUTPUT}
     COMMENT ">> Gerado runtime_embutido.hpp."
 )

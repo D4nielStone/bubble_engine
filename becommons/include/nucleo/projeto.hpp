@@ -33,9 +33,9 @@ SOFTWARE.
 #include <memory>
 #include "becommons_namespace.hpp"
 #include "fase.hpp"
-#include "sistema.hpp"
-#include "sistema_de_fisica.hpp"
-#include "sistema_de_renderizacao.hpp"
+#include "sistemas/sistema.hpp"
+#include "sistemas/sistema_de_fisica.hpp"
+#include "sistemas/sistema_de_renderizacao.hpp"
 
 namespace BECOMMONS_NS {
     struct projeto {
@@ -68,7 +68,7 @@ namespace BECOMMONS_NS {
             /// @brief obtenção de uma fase dentro da lista da fases carregadas
             /// @param nome diretório da fase
 	        /// @return ponteiro inteligente da fase
-	        std::shared_ptr<fase> obterFase(const std::string& nome){return nullptr;};
+	        std::shared_ptr<fase> obterFase(const std::string& nome){return m_fases[nome];};
 	        /// @brief obtenção da fase atualmente em execução
 	        /// @return retorna ponteiro da fase atual
 	        std::shared_ptr<fase> obterFaseAtual();
@@ -94,7 +94,7 @@ namespace BECOMMONS_NS {
             /// @brief cria janela glfw e inicia contexto opengl
             void criarJanela(rapidjson::Document& doc);
             /// @brief adiciona sistemas padrão como interface, renderização e física
-            void iniciarSistemas(fase*);
+            void iniciarSistemas();
             /// @brief id para fase atual
             std::string fase_atual;
     };

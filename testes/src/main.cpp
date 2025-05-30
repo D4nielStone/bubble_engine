@@ -347,7 +347,6 @@ void testarFase()
 void testarRegistro()
 {
     testes.classe("NUCLEO", "REGISTRO");
-    
     // Teste de inicialização
     
     testes.adicionar("criando_entidades", [](){
@@ -445,7 +444,7 @@ void testarRegistro()
             auto e = reg.criar();
         
             // adiciona e remove componente
-            reg.adicionar<becommons::fisica>(e, false, 0.0f, btVector3(0.0f, 0.0f, 0.0f));
+            reg.adicionar<becommons::fisica>(e);
             reg.remover<becommons::fisica>(e.id);
             reg.remover<becommons::transformacao>(e.id);
         

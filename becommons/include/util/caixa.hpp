@@ -38,7 +38,7 @@ namespace BECOMMONS_NS {
     
     /// @enum flag_estilo
     /// Flags que definem o estilo da caixa. Também controlam o alinhamento e estilo dos filhos.
-    enum class flag_estilo : uint32_t {
+    enum class flag_estilo : uint8_t {
         nenhuma             = 0,
         largura_percentual  = 1 << 0,   // 1
         altura_percentual   = 1 << 1,   // 2
@@ -47,7 +47,7 @@ namespace BECOMMONS_NS {
         alinhamento_fim     = 1 << 4,
         mesma_linha         = 1 << 5,
         largura_justa       = 1 << 6,
-        altura_justa        = 1 << 7
+        altura_justa        = 1 << 7    // max = 8.
     };
 
     inline flag_estilo operator|(flag_estilo a, flag_estilo b) {

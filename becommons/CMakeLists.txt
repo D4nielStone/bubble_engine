@@ -68,10 +68,9 @@ target_sources(becommons PRIVATE
     src/nucleo/fase.cpp
     src/sistemas/sistema_de_codigo.cpp
     src/sistemas/sistema_de_fisica.cpp
-    src/sistemas/sistema_de_interface.cpp
     src/sistemas/sistema_de_renderizacao.cpp
-    src/nucleo/projeto.cpp
     src/sistemas/bubble_gui.cpp
+    src/nucleo/projeto.cpp
     src/util/malha.cpp
     src/util/skybox.cpp
     src/util/material.cpp
