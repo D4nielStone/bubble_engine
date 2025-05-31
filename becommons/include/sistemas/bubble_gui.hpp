@@ -88,7 +88,6 @@ namespace BECOMMONS_NS {
             inline void configOpenglState() const;
             inline void deconfigOpenglState() const;
             inline void popFuncoes();
-            inline void processarModular(caixa*);
             inline void processarDimensaoModular(caixa*, fvet2&, fvet2&);
             inline void organizarLinha(caixa*, bool, const ivet2 , const fvet2&, const fvet2&, fvet2&);
 
@@ -96,6 +95,7 @@ namespace BECOMMONS_NS {
             inline void renderizarFundo(caixa*, BECOMMONS_NS::shader*) const;
             inline void renderizarTexto(elementos::texto* tex) const;
         public:
+            void processarModular(caixa*);
         /**
          * @brief Construtor padrão da interface.
          */
