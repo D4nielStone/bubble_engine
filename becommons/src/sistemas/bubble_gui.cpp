@@ -298,10 +298,6 @@ void bubble_gui::adicionarFlags(const std::string& id, flag_estilo f) {
     }
 }
 bool bubble_gui::deveAtualizar(caixa* it_caixa) {
-    // Condição para atualizar, true atualiza
-    if (!it_caixa) {
-        throw std::runtime_error("Caixa nula sendo atualizada.");
-    }
     if (!it_caixa->m_estilo.m_ativo) {
         return false; // Não atualiza caso a caixa esteja desativada 
     }
@@ -567,6 +563,10 @@ void bubble_gui::processarModular(caixa* it_caixa) {
 }
 
 void bubble_gui::atualizarFilhos(caixa* it_caixa) {
+    if (!it_caixa) {
+        throw std::runtime_error("Caixa nula sendo atualizada.");
+    }
+
     switch (it_caixa->tipo()) {
     case tipo_caixa::caixa_de_texto: {
         auto ct = static_cast<elementos::caixa_de_texto*>(it_caixa);

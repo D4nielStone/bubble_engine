@@ -37,4 +37,3 @@ out/.ninja_deps
 /out
 */assets/*
 editor/include/assets/runtime_embutido.hpp
-/libs/sol2
