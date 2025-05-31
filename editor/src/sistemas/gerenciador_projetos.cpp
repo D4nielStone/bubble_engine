@@ -203,8 +203,8 @@ void gerenciador_projetos::atualizarElementos(const std::string& Dir) {
     }
     gui.defCorBorda({0.2, 0.2, 0.2, 0});
     gui.defCorFundo({0.1, 0.1, 0.1, 1});
-    gui.defPadding(5, 1);
-    gui.defPaddingG(5, 5);
+    gui.defLargura(22);
+    gui.defAltura(22);
     gui.fimEstilo();
 }
 
@@ -217,12 +217,13 @@ void gerenciador_projetos::configurarUI(const std::string& DIR_PADRAO) {
     gui.fimEstilo();
     // configura interface
     gui.adicionar<caixa>("raiz", "#barra_lateral");
-        gui.defFlags(flag_estilo::modular | flag_estilo::largura_justa);
+        gui.defFlags(flag_estilo::modular);
         gui.defCorBorda({0.05, 0.05, 0.05, 1});
         gui.defOrientacao(estilo::orientacao::vertical);
         gui.defCorFundo({0.1, 0.1, 0.1, 1});
         gui.defPaddingG(5, 3);
         gui.defAltura(1.0);
+        gui.defLargura(200);
     gui.fimEstilo();
     
     atualizarElementos(DIR_PADRAO);
@@ -230,9 +231,9 @@ void gerenciador_projetos::configurarUI(const std::string& DIR_PADRAO) {
     gui.adicionar<caixa>("raiz", "#area_maior");
         gui.defFlags(flag_estilo::modular);
         gui.defAltura(1.0);
+        gui.defLargura(1.0);
         gui.defOrientacao(estilo::orientacao::vertical);
         gui.defCorFundo({0.21, 0.21, 0.21, 1});
-        gui.defCrescimentoM(1.0);
     gui.fimEstilo();
     gui.adicionar<caixa>("#area_maior", "##cima");
         gui.defOrientacao(estilo::orientacao::vertical);
@@ -256,32 +257,31 @@ void gerenciador_projetos::configurarUI(const std::string& DIR_PADRAO) {
         }, "Novo", "adicionar.png");
     gui.fimEstilo();
     gui.adicionar<elementos::caixa_de_texto>("##meio", "###caixa_texto", "Digite o nome do projeto aqui...");
-        gui.defCrescimentoM(0.5);
+        gui.defCrescimentoM(1);
         gui.defCorFundo({0.12, 0.12, 0.12, 1});
         gui.defCorBorda({0.3, 0.3, 0.3, 1});
     gui.fimEstilo();
     gui.adicionar<caixa>("#area_maior", "##baixo");
         gui.defFlags(flag_estilo::modular | flag_estilo::alinhamento_central);
         gui.defLargura      (1.0);
+        gui.defAltura       (1.0);
         gui.defPaddingG(5, 0);
-        gui.defCorFundo({0.21, 0.21, 0.21, 1});
-        gui.defCrescimentoM (1.0);
+        gui.defCorFundo({0.23, 0.23, 0.23, 1});
     gui.fimEstilo();
     gui.adicionar<elementos::texto>("##cima", "###texto1", "Projeto selecionado:", 20);
     gui.adicionar<elementos::texto>("##cima", "###texto2", &m_projeto_selecionado, 15);
-        gui.defPadding(5, 5);
+        gui.defPadding(10, 5);
     gui.fimEstilo();
     gui.adicionar<elementos::botao>("##baixo", "###texto3", [this]() {
-            
             if(m_projeto_selecionado != "Nenhum") {
                 abrirProjeto(projetos[m_projeto_selecionado]);
             }
-        }, "Abrir", "abrir.png");
+        }, " abrir ", "abrir.png");
     gui.adicionar<elementos::botao>("##baixo", "###texto4", [this]() {
             if(m_projeto_selecionado != "Nenhum") {
                 removerProjeto(projetos[m_projeto_selecionado]);
             }
-        }, "Remover", "remover.png");
+        }, " remover ", "remover.png");
     gui.fimEstilo();
 }
 

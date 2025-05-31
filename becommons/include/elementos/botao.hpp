@@ -85,7 +85,6 @@ namespace BECOMMONS_NS{
                 m_imagem->m_estilo.m_altura = m_estilo.m_altura;
                 m_imagem->m_estilo.m_largura = m_estilo.m_largura;
                 m_imagem->m_estilo.m_flag_estilo = m_estilo.m_flag_estilo;
-                m_estilo.m_largura += m_estilo.m_padding_geral.x * 2;
             }
             inline void cfgTexto(texto* m_texto) {
                 old_fundo_alpha = m_estilo.m_cor_fundo.a;
