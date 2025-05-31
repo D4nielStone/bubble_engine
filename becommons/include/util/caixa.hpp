@@ -45,7 +45,7 @@ namespace BECOMMONS_NS {
         modular             = 1 << 2,   // 4
         alinhamento_central = 1 << 3,
         alinhamento_fim     = 1 << 4,
-        mesma_linha         = 1 << 5,
+        quebrar_linha       = 1 << 5,
         largura_justa       = 1 << 6,
         altura_justa        = 1 << 7    // max = 8.
     };
@@ -77,7 +77,6 @@ namespace BECOMMONS_NS {
         bool                m_ligar_al {false};            // ligar largura-altura
         float               m_largura = 20.f;
         float               m_altura = 20.f;
-        float               m_crescimento_modular = 0.0f; // fator de crescimento em layouts modulares
         unsigned int        m_espessura_borda = 1;
         ivet2               m_padding {0, 0};
         ivet2               m_padding_geral {0, 0};
@@ -104,9 +103,6 @@ namespace BECOMMONS_NS {
                 return true;
             }
             if(other.m_altura != m_altura) {
-                return true;
-            }
-            if(other.m_crescimento_modular != m_crescimento_modular) {
                 return true;
             }
             if(other.m_espessura_borda != m_espessura_borda) {
@@ -156,7 +152,8 @@ namespace BECOMMONS_NS {
             return (static_cast<uint32_t>(m_estilo.m_flag_estilo) & static_cast<uint32_t>(flag)) != 0;
         }
 
-        std::string m_id;        
+        std::string m_id;
+        caixa* m_pai{ nullptr };        
         /// Estilo da caixa
         estilo m_estilo;
         /// Estilo antigo para comparação
@@ -170,6 +167,7 @@ namespace BECOMMONS_NS {
         T* adicionarFilho(const std::string& id, Args&&... args) {
             auto nova_caixa = std::make_unique<T>(std::forward<Args>(args)...);
             nova_caixa->m_id = id;
+            nova_caixa->m_pai = this;
             auto ptr = nova_caixa.get();
             m_filhos.push_back(std::move(nova_caixa));
             m_mapa_filhos[id] = ptr;

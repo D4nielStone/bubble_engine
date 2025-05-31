@@ -595,11 +595,11 @@ void testarBubbleGUI()
         child2->m_estilo.m_padding.x = 3;
 
         becommons::bubble_gui gui;
-        gui.atualizarFilhos(&parent);
+        gui.processarModular(&parent);
 
         ASSERT(child1->m_estilo.m_limites.x == 7);  // 0 +5 +2
         ASSERT(child1->m_estilo.m_limites.z == 30);
-        ASSERT(child2->m_estilo.m_limites.x == 47); // 39 +5 +3
+        ASSERT(child2->m_estilo.m_limites.x == 45); // 37 + 5 + 3
         ASSERT(child2->m_estilo.m_limites.z == 40);
     });
 
@@ -612,19 +612,18 @@ void testarBubbleGUI()
 
         // edita o esitilo
         parent.m_estilo.m_flag_estilo = becommons::flag_estilo::modular;
-        parent.m_estilo.m_orientacao_modular = becommons::estilo::orientacao::horizontal;
         parent.m_estilo.m_limites.z = 200;
 
         // adiciona e obtêm filho
         auto* child = parent.adicionarFilho<becommons::caixa>("child");
         child->m_estilo.m_flag_estilo |= becommons::flag_estilo::largura_percentual;
-        child->m_estilo.m_largura = 0.5f;
+        child->m_estilo.m_largura = 2;
 
-        gui.atualizarFilhos(&parent);
+        gui.processarModular(&parent);
 
         //- Verificação:
-        // largura do filho deve ser 50% da largura do pai
-        ASSERT_EQUAL(child->m_estilo.m_limites.z, 100); // 200 * 0.5
+        // largura do filho deve ser igual da largura do pai
+        ASSERT_EQUAL(child->m_estilo.m_limites.z, 200);
     });
 
     // Teste 5: Crescimento modular horizontal
@@ -639,19 +638,19 @@ void testarBubbleGUI()
         parent.m_estilo.m_limites.z = 100;
 
         auto* child1 = parent.adicionarFilho<becommons::caixa>("child1");
-        child1->m_estilo.m_largura = 30;
-        child1->m_estilo.m_crescimento_modular = 1;
+        child1->m_estilo.m_largura = 1;
+        child1->m_estilo.m_flag_estilo = becommons::flag_estilo::largura_percentual;
 
         auto* child2 = parent.adicionarFilho<becommons::caixa>("child2");
-        child2->m_estilo.m_largura = 40;
-        child2->m_estilo.m_crescimento_modular = 1;
+        child2->m_estilo.m_largura = 3;
+        child2->m_estilo.m_flag_estilo = becommons::flag_estilo::largura_percentual;
 
         becommons::bubble_gui gui;
         gui.atualizarFilhos(&parent);
 
         //- Verificação:
-        ASSERT_EQUAL(child1->m_estilo.m_limites.z, 45); // 30 + (100-70)/2
-        ASSERT_EQUAL(child2->m_estilo.m_limites.z, 55); // 40 + (100-70)/2
+        ASSERT_EQUAL(child1->m_estilo.m_limites.z, 25); // 1/4 * 100
+        ASSERT_EQUAL(child2->m_estilo.m_limites.z, 75); // 3/4 * 100
     });
 
     // Teste 6: Layout vertical com dimensões fixas e percentual
@@ -664,14 +663,14 @@ void testarBubbleGUI()
 
         auto* child = parent.adicionarFilho<becommons::caixa>("child");
         child->m_estilo.m_flag_estilo |= becommons::flag_estilo::largura_percentual;
-        child->m_estilo.m_largura = 0.5f;
+        child->m_estilo.m_largura = 1.f;
         child->m_estilo.m_altura = 60;
 
         becommons::bubble_gui gui;
         gui.atualizarFilhos(&parent);
 
-        // Largura esperada: (80 * 0.5) - 2*10 = 40 - 20 = 20
-        ASSERT(child->m_estilo.m_limites.z == 20);
+        // Largura esperada: 80 - 2*10 = 80 - 20 = 60
+        ASSERT(child->m_estilo.m_limites.z == 60);
         ASSERT(child->m_estilo.m_limites.w == 60);
     });
 
@@ -694,25 +693,25 @@ void testarBubbleGUI()
     });
 
     // Teste 8: Espaço insuficiente para crescimento
-    testes.adicionar("atualizar_filhos_espaco_insuficiente", []() {
+    testes.adicionar("atualizar_filhos_espaco_negativo", []() {
         becommons::caixa parent;
         parent.m_estilo.m_flag_estilo = becommons::flag_estilo::modular;
         parent.m_estilo.m_orientacao_modular = becommons::estilo::orientacao::horizontal;
         parent.m_estilo.m_limites.z = 50;
 
         auto* child1 = parent.adicionarFilho<becommons::caixa>("child1");
-        child1->m_estilo.m_largura = 30;
-        child1->m_estilo.m_crescimento_modular = 1;
+        child1->m_estilo.m_largura = 1;
+        child1->m_estilo.m_flag_estilo = becommons::flag_estilo::largura_percentual;
 
         auto* child2 = parent.adicionarFilho<becommons::caixa>("child2");
-        child2->m_estilo.m_largura = 30;
-        child2->m_estilo.m_crescimento_modular = 1;
+        child2->m_estilo.m_largura = 1;
+        child2->m_estilo.m_flag_estilo = becommons::flag_estilo::largura_percentual;
 
         becommons::bubble_gui gui;
         gui.atualizarFilhos(&parent);
 
-        ASSERT(child1->m_estilo.m_limites.z == 30); // Sem crescimento (espaço negativo)
-        ASSERT(child2->m_estilo.m_limites.z == 30);
+        ASSERT(child1->m_estilo.m_limites.z == 25);
+        ASSERT(child2->m_estilo.m_limites.z == 25);
     });
     
     // Teste 9: 
@@ -749,8 +748,10 @@ void testarBubbleGUI()
         auto* child1 = parent.adicionarFilho<becommons::caixa>("child1");
         auto* child2 = parent.adicionarFilho<becommons::caixa>("child2");
     
-        child1->m_estilo.m_crescimento_modular = 1.0f;
-        child2->m_estilo.m_crescimento_modular = 1.0f;
+        child1->m_estilo.m_largura = 1;
+        child1->m_estilo.m_flag_estilo = becommons::flag_estilo::largura_percentual;
+        child2->m_estilo.m_largura = 1;
+        child2->m_estilo.m_flag_estilo = becommons::flag_estilo::largura_percentual;
     
         gui.atualizarFilhos(&parent);
     
@@ -761,6 +762,22 @@ void testarBubbleGUI()
         ASSERT_EQUAL(child1->m_estilo.m_limites.z, 42.5f);      // metade do espaço disponível
         ASSERT_EQUAL(child2->m_estilo.m_limites.x, 52.5f);      // 5 (padding) + 42 (child1) + 5 (padding)
         ASSERT_EQUAL(child2->m_estilo.m_limites.z, 42.5f);      // mesma largura
+    });
+    
+    // Teste 11 : Testando flag "quebrar_linha"
+    testes.adicionar("flag_quebrar_linha", []() {
+        //- Preparação:
+        becommons::bubble_gui gui;
+        becommons::caixa box; 
+        box.m_estilo.m_altura = 40; // 20*40
+        box.m_estilo.m_flag_estilo = becommons::flag_estilo::modular;
+        auto* child1 = box.adicionarFilho<becommons::caixa>("child1");
+        auto* child2 = box.adicionarFilho<becommons::caixa>("child2");
+        child1->m_estilo.m_flag_estilo =  becommons::flag_estilo::quebrar_linha;
+        gui.processarModular(&box);
+        //- Verificação:
+        ASSERT_EQUAL(child1->m_estilo.m_limites.y, 0);
+        ASSERT_EQUAL(child2->m_estilo.m_limites.y, 20);
     });
 }
 void testarSistemas()
