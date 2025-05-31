@@ -88,7 +88,9 @@ namespace BECOMMONS_NS {
             inline void configOpenglState() const;
             inline void deconfigOpenglState() const;
             inline void popFuncoes();
-            inline void processarDimensaoPercentual(caixa*, bool, float&, fvet2&, fvet2&);
+            inline void processarModular(caixa*);
+            inline void processarDimensaoModular(caixa*, fvet2&, fvet2&);
+            inline void organizarLinha(caixa*, bool, const ivet2 , const fvet2&, const fvet2&, fvet2&);
 
             inline void renderizarImagem(elementos::imagem*) const;
             inline void renderizarFundo(caixa*, BECOMMONS_NS::shader*) const;
@@ -106,9 +108,9 @@ namespace BECOMMONS_NS {
 
         /**
          * @brief Atualiza as posições e tamanhos dos filhos de uma caixa.
+         * @param c Caixa a ser atualizada.
          */
-        void atualizarFilhos(caixa*);
-        void processarModular(caixa*);
+        void atualizarFilhos(caixa* c);
 
         /**
          * @brief Define os buffers de OpenGL necessários para a renderização.
@@ -161,11 +163,13 @@ namespace BECOMMONS_NS {
                     m_novo_estilo = false;
                     auto pai = obterElemento(pai_id);
                     ptr->m_id = nova_id;
+                    ptr->m_pai = caixas[pai_id];
                     estilo_atual[nova_id] = ptr.get();
                     pai->m_filhos.push_back(std::move(ptr));
                 } else if(estilo_atual.find(pai_id) != estilo_atual.end()) {
                     auto pai = estilo_atual[pai_id];
                     ptr->m_id = nova_id;
+                    ptr->m_pai = estilo_atual[pai_id];
                     estilo_atual[nova_id] = ptr.get();
                     pai->m_filhos.push_back(std::move(ptr));
                 } else {
