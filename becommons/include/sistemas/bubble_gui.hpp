@@ -88,7 +88,6 @@ namespace BECOMMONS_NS {
             inline void configOpenglState() const;
             inline void deconfigOpenglState() const;
             inline void popFuncoes();
-            inline void processarModular(caixa*);
             inline void processarDimensaoPercentual(caixa*, bool, float&, fvet2&, fvet2&);
             inline void aplicarLayoutModular(caixa*, bool, float, const fvet2&);
 
@@ -108,9 +107,9 @@ namespace BECOMMONS_NS {
 
         /**
          * @brief Atualiza as posições e tamanhos dos filhos de uma caixa.
-         * @param c Caixa a ser atualizada.
          */
-        void atualizarFilhos(caixa* c);
+        void atualizarFilhos(caixa*);
+        void processarModular(caixa*);
 
         /**
          * @brief Define os buffers de OpenGL necessários para a renderização.

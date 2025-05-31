@@ -762,6 +762,21 @@ void testarBubbleGUI()
         ASSERT_EQUAL(child2->m_estilo.m_limites.x, 52.5f);      // 5 (padding) + 42 (child1) + 5 (padding)
         ASSERT_EQUAL(child2->m_estilo.m_limites.z, 42.5f);      // mesma largura
     });
+    
+    // Teste 11 : Testando flag "quebrar_linha"
+    testes.adicionar("flag_quebrar_linha", []() {
+        //- Preparação:
+        becommons::bubble_gui gui;
+        becommons::caixa box; 
+        box.m_estilo.m_altura = 40; // 20*40
+        box.m_estilo.m_flag_estilo = becommons::flag_estilo::modular;
+        auto* child1 = box.adicionarFilho<becommons::caixa>("child1");
+        auto* child2 = box.adicionarFilho<becommons::caixa>("child2");
+        child1->m_estilo.m_flag_estilo =  becommons::flag_estilo::quebrar_linha;
+        gui.processarModular(&box);
+        //- Verificação:
+        ASSERT_EQUAL(child2->m_estilo.m_limites.y, 20);
+    });
 }
 void testarSistemas()
 {

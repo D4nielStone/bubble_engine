@@ -26,7 +26,5 @@ jobs:
           liblua5.3-0 liblua5.3-dev libglm-dev libglfw3-dev \
           libassimp-dev libfreeimage-dev rapidjson-dev \
           libbullet-dev libfreetype6-dev
-    - name: Build All Projects ( Linux )
+    - name: Build All Projects and Run tests ( Linux )
       run: mkdir out && cd out && cmake .. && cmake --build .
-    - name: Run Tests
-      run: chmod +x ./out/bin/testes/testes && ./out/bin/testes/testes

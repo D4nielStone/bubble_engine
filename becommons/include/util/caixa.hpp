@@ -19,8 +19,6 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE. 
- */
-/**
  * @file caixa.hpp
  */
 
@@ -45,7 +43,7 @@ namespace BECOMMONS_NS {
         modular             = 1 << 2,   // 4
         alinhamento_central = 1 << 3,
         alinhamento_fim     = 1 << 4,
-        mesma_linha         = 1 << 5,
+        quebrar_linha         = 1 << 5,
         largura_justa       = 1 << 6,
         altura_justa        = 1 << 7    // max = 8.
     };
@@ -66,7 +64,7 @@ namespace BECOMMONS_NS {
     struct estilo {
         /// @enum estilo::orientacao
         /// Horizontal ou vertical
-        enum class orientacao : uint32_t {
+        enum class orientacao : uint8_t {
             horizontal,
             vertical
         };

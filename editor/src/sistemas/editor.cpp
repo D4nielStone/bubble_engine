@@ -196,7 +196,7 @@ void sistema_editor::configurarInterface(projeto& proj)
         gui->defFlags        (flag_estilo::largura_percentual | flag_estilo::modular);
         gui->defLargura       (                           1.0);
         gui->defCrescimentoM (1.0);
-        gui->defPaddingG     (                           5, 5);
+        gui->defPaddingG     (                           5, 2);
     gui->fimEstilo();
 }
 
@@ -210,7 +210,6 @@ void sistema_editor::inicializar() {
     configurarInterface(*projeto_atual);
     atualizarEntidades();
     atualizarComponentes();
-    /*                        */
 }
 
 void sistema_editor::atualizar()
@@ -388,11 +387,33 @@ void sistema_editor::atualizarComponente(const componente::mascara& mascara)
             break;
         case componente::COMPONENTE_TRANSFORMACAO: {
             auto transf = registro->obter<transformacao>(entidade_atual);
+            gui->adicionar<elementos::texto>("###propriedades", "###posicao_txt", "Posicao");
+            gui->fimEstilo();
             gui->adicionar<elementos::caixa_de_texto>("###propriedades", "###a", "x", &transf->posicao.x);
             gui->adicionar<elementos::caixa_de_texto>("###propriedades", "###b", "y",&transf->posicao.y);
             gui->adicionar<elementos::caixa_de_texto>("###propriedades", "###c", "z",&transf->posicao.z);
                 gui->defFlags(flag_estilo::alinhamento_central);
-                gui->defCrescimentoM(0.7);
+                gui->defCrescimentoM(1.0);
+                gui->defCorFundo({0.12, 0.12, 0.12, 1});
+                gui->defCorBorda({0.3, 0.3, 0.3, 1});
+            gui->fimEstilo();
+            gui->adicionar<elementos::texto>("###propriedades", "###rotacao_txt", "Rotacao");
+            gui->fimEstilo();
+            gui->adicionar<elementos::caixa_de_texto>("###propriedades", "###d", "x", &transf->rotacao.x);
+            gui->adicionar<elementos::caixa_de_texto>("###propriedades", "###e", "y",&transf->rotacao.y);
+            gui->adicionar<elementos::caixa_de_texto>("###propriedades", "###f", "z",&transf->rotacao.z);
+                gui->defFlags(flag_estilo::alinhamento_central);
+                gui->defCrescimentoM(1.0);
+                gui->defCorFundo({0.12, 0.12, 0.12, 1});
+                gui->defCorBorda({0.3, 0.3, 0.3, 1});
+            gui->fimEstilo();
+            gui->adicionar<elementos::texto>("###propriedades", "###escala_txt", "Escala");
+            gui->fimEstilo();
+            gui->adicionar<elementos::caixa_de_texto>("###propriedades", "###g", "x", &transf->escala.x);
+            gui->adicionar<elementos::caixa_de_texto>("###propriedades", "###h", "y",&transf->escala.y);
+            gui->adicionar<elementos::caixa_de_texto>("###propriedades", "###i", "z",&transf->escala.z);
+                gui->defFlags(flag_estilo::alinhamento_central);
+                gui->defCrescimentoM(1.0);
                 gui->defCorFundo({0.12, 0.12, 0.12, 1});
                 gui->defCorBorda({0.3, 0.3, 0.3, 1});
             gui->fimEstilo();
