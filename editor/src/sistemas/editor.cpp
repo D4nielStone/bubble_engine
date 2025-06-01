@@ -408,6 +408,21 @@ void sistema_editor::atualizarComponente(const componente::mascara& mascara)
             gui.fimEstilo();
             break;
                                                    }
+        case componente::COMPONENTE_RENDER:
+            gui.adicionar<elementos::caixa_de_texto>("###propriedades", "j", "Diretorio do modelo");
+                gui.defFlags(flag_estilo::quebrar_linha);
+                gui.defLargura(1.0);
+                gui.defCorFundo({0.12, 0.12, 0.12, 1});
+                gui.defCorBorda({0.3, 0.3, 0.3, 1});
+            gui.fimEstilo();
+            gui.adicionar<elementos::botao>("###propriedades", "k", [registro, this](){
+                        auto buffer = static_cast<elementos::caixa_de_texto*>(gui.obterElemento("j"))->obterBuffer();
+                        registro->obter<renderizador>(entidade_atual)->m_modelo->carregarModelo(buffer);
+                    }, "Carregar Modelo");
+                gui.defLargura(1.0);
+                gui.defCorFundo({0.12, 0.12, 0.12, 1});
+            gui.fimEstilo();
+            break;
         default:
             break;
     }

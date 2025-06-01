@@ -139,7 +139,6 @@ void main() {
     vec3 V = normalize(viewPos - Position);
 
     vec3 result;
-    if (recebe_luz) {
         // Luz ambiente com intensidade aplicada
         vec3 ambient = dirLight.ambient * albedo.rgb * ao * dirLight.intensity;
         // Luz direcional
@@ -148,9 +147,6 @@ void main() {
         vec3 Lo = calculateLightLo(L_dir, radiance_dir, N, V, albedo.rgb, metallic, roughness);
 
         result = ambient + Lo;
-    } else {
-        result = albedo.rgb;
-    }
 
     float gamma = 2.2;
     FragColor = vec4(pow(result.rgb, vec3(1.0 / gamma)), albedo.a);

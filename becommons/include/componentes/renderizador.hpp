@@ -36,7 +36,6 @@ namespace BECOMMONS_NS {
 	class renderizador : public componente {
     public:
 		modelo* m_modelo;
-        std::string m_diretorio;
 		static constexpr mascara mascara = COMPONENTE_RENDER;
 		renderizador(modelo* malha) : m_modelo(malha) {
 		}
@@ -44,7 +43,7 @@ namespace BECOMMONS_NS {
         {
             if(value.HasMember("modelo") && value["modelo"].IsString())
             {
-                m_diretorio = std::string(value["modelo"].GetString());
+                auto m_diretorio = std::string(value["modelo"].GetString());
 				std::string path = projeto_atual->diretorioDoProjeto + m_diretorio;
                 if(m_modelo) delete m_modelo;
                 m_modelo = new modelo(path.c_str());
@@ -54,7 +53,7 @@ namespace BECOMMONS_NS {
         };
         bool serializar(rapidjson::Value& value, rapidjson::Document::AllocatorType& allocator) const override
         {
-            value.AddMember("modelo", rapidjson::Value(m_diretorio.c_str(), allocator), allocator);
+            value.AddMember("modelo", rapidjson::Value(m_modelo->obterDiretorio().c_str(), allocator), allocator);
             return true;
         };
         
