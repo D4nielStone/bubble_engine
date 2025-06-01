@@ -27,6 +27,11 @@
 #include "util/material.hpp"
 using namespace BECOMMONS_NS;
 
+material::material(std::map<std::string, uniforme> unifs) {
+    for(auto& [nome, u] : unifs) {
+        uniformes[nome] = u;
+    }
+}
 void material::definirUniforme(const std::string& nome, const uniforme& prop) {
     uniformes[nome] = prop;
 }

@@ -37,6 +37,10 @@ using namespace BECOMMONS_NS;
 
 void camera::desenharFB() const
 {
+    glEnable(GL_DEPTH_TEST);
+    glEnable(GL_CULL_FACE);
+    glDepthFunc(GL_LESS);
+    glDepthMask(GL_TRUE);
     if (flag_fb)
     {
         glBindTexture(GL_TEXTURE_2D, textura);

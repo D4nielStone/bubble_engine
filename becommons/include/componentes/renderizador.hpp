@@ -44,9 +44,8 @@ namespace BECOMMONS_NS {
             if(value.HasMember("modelo") && value["modelo"].IsString())
             {
                 auto m_diretorio = std::string(value["modelo"].GetString());
-				std::string path = projeto_atual->diretorioDoProjeto + m_diretorio;
                 if(m_modelo) delete m_modelo;
-                m_modelo = new modelo(path.c_str());
+                m_modelo = new modelo(m_diretorio.c_str());
             }
             else return false;
 			return true;

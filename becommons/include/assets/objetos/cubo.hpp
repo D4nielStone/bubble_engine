@@ -24,6 +24,7 @@ SOFTWARE.
  * @file cubo.hpp
  */
 
+#pragma once
 #include "becommons_namespace.hpp"
 #include "util/malha.hpp"
 #include "util/material.hpp"
@@ -32,7 +33,7 @@ SOFTWARE.
 
 using namespace BECOMMONS_NS;
 
-inline std::vector<vertice> vertices = {
+std::vector<vertice> vertices = {
     // Positions (8 vertices matching the OBJ file)
     //       Position              Normal               UV
     {{-1.0f, -1.0f,  1.0f}, {-1.0f,  0.0f,  0.0f}, {0.0f, 0.0f}}, // 0 (Left face)
@@ -66,7 +67,7 @@ inline std::vector<vertice> vertices = {
     {{ 1.0f,  1.0f,  1.0f}, { 0.0f,  1.0f,  0.0f}, {0.0f, 1.0f}}, // 23 (Top face)
 };
 
-inline std::vector<unsigned int> indices = {
+std::vector<unsigned int> indices = {
     // Left face (1//1 2//1 4//1 3//1)
     0, 1, 3,  0, 3, 2,
 
@@ -86,5 +87,17 @@ inline std::vector<unsigned int> indices = {
     20, 21, 22, 20, 22, 23
 };
 
-inline material m_material;
-inline malha malha_cubo(vertices, indices, m_material);
+material bmat({
+    {"use_tex_albedo", false},
+    {"use_tex_metallic", false},
+    {"use_tex_roughness", false},
+    {"use_tex_normal", false},
+    {"use_tex_ao", false},
+    {"use_tex_height", false},
+    {"material.albedo", cor(1, 1, 1, 1)},
+    {"material.roughness", 0.3f},
+    {"material.ao", 0.5f},
+    {"material.metallic", 0.1f}
+    }
+    );
+malha malha_cubo(vertices, indices, bmat);

@@ -24,13 +24,15 @@ SOFTWARE.
  * @file esfera.hpp
  */
 
+#pragma once
+#include "cubo.hpp"
 #include "util/malha.hpp"
 #include "util/material.hpp"
 #include "util/vertice.hpp"
 #include <vector>
 #include <cmath>
 
-inline std::vector<vertice> create_sphere_vertices(float radius, int sectors, int stacks) {
+std::vector<vertice> create_sphere_vertices(float radius, int sectors, int stacks) {
     std::vector<vertice> vertices;
     
     const float PI = 3.14159265358979323846f;
@@ -69,7 +71,7 @@ inline std::vector<vertice> create_sphere_vertices(float radius, int sectors, in
     return vertices;
 }
 
-inline std::vector<unsigned int> create_sphere_indices(int sectors, int stacks) {
+std::vector<unsigned int> create_sphere_indices(int sectors, int stacks) {
     std::vector<unsigned int> indices;
     
     for (int i = 0; i < stacks; ++i) {
@@ -95,8 +97,7 @@ inline std::vector<unsigned int> create_sphere_indices(int sectors, int stacks) 
 }
 
 // Example usage with 36 sectors and 18 stacks (adjust as needed)
-inline std::vector<vertice> sphere_vertices = create_sphere_vertices(1.0f, 36, 18);
-inline std::vector<unsigned int> sphere_indices = create_sphere_indices(36, 18);
+std::vector<vertice> sphere_vertices = create_sphere_vertices(1.0f, 36, 18);
+std::vector<unsigned int> sphere_indices = create_sphere_indices(36, 18);
 
-inline material material_esf;
-inline malha malha_esfera(sphere_vertices, sphere_indices, material_esf);
+malha malha_esfera(sphere_vertices, sphere_indices, bmat);

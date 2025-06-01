@@ -27,6 +27,7 @@
 #pragma once
 #include <unordered_map>
 #include <vector>
+#include <map>
 #include "becommons_namespace.hpp"
 #include "arquivadores/shader.hpp"
 #include "textura.hpp"
@@ -144,6 +145,7 @@ struct uniforme {
 
     struct material {
         material() = default;
+        material(std::map<std::string, uniforme>);
         void definirUniforme(const std::string&, const uniforme&); 
         void definirTextura(const std::string&, const textura&); 
         uniforme obterUniforme(const std::string&) const;

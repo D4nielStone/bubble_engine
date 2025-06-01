@@ -413,7 +413,7 @@ void bubble_gui::organizarLinha(caixa* it_caixa,
         filho->m_estilo.m_limites.x = cursor.x + filho->m_estilo.m_padding.x + it_caixa->m_estilo.m_padding_geral.x;
         filho->m_estilo.m_limites.y = cursor.y + filho->m_estilo.m_padding.y + it_caixa->m_estilo.m_padding_geral.y;
         if (is_horizontal) {
-            maior = std::max(maior, filho->m_estilo.m_limites.w + filho->m_estilo.m_padding.y + it_caixa->m_estilo.m_padding_geral.y); // maior altura
+            maior = std::max(maior, filho->m_estilo.m_limites.w + filho->m_estilo.m_padding.y * 2 + it_caixa->m_estilo.m_padding_geral.y * 2); // maior altura
             cursor.x += filho->m_estilo.m_limites.z + filho->m_estilo.m_padding.x + it_caixa->m_estilo.m_padding_geral.x;
         } else {
             maior = std::max(maior, filho->m_estilo.m_limites.z+ filho->m_estilo.m_padding.x + it_caixa->m_estilo.m_padding_geral.x); // maior largura

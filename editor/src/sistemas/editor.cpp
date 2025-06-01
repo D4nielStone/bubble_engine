@@ -184,8 +184,7 @@ void sistema_editor::configurarInterface(projeto& proj)
 void sistema_editor::inicializar() {
     projeto_atual->srender()->definirCamera(&cam);
     
-    // Adiciona sistema de gui ao projeto
-    projeto_atual->adicionar("bubble_gui", &gui);
+    gui.inicializar();
     /*  Config da interface   */
     configurarInterface(*projeto_atual);
     atualizarEntidades();
@@ -236,6 +235,7 @@ projeto_atual->obterFaseAtual()->obterRegistro()->remover(entidade_atual);
     }
     cam.atualizarMovimentacao();
     sistema_renderizacao::calcularTransformacao(cam.transform);
+    gui.atualizar();
 }
 
 void sistema_editor::executarRuntime()
@@ -366,13 +366,11 @@ void sistema_editor::atualizarComponente(const componente::mascara& mascara)
             gui.adicionar<elementos::caixa_de_texto>("###propriedades", "###b", "y",&transf->posicao.y);
                 gui.defLargura(1.0);
                 gui.defCorFundo({0.12, 0.12, 0.12, 1});
-                gui.defCorBorda({0.3, 0.3, 0.3, 1});
             gui.fimEstilo();
             gui.adicionar<elementos::caixa_de_texto>("###propriedades", "###c", "z",&transf->posicao.z);
                 gui.defFlags(flag_estilo::quebrar_linha);
                 gui.defLargura(1.0);
                 gui.defCorFundo({0.12, 0.12, 0.12, 1});
-                gui.defCorBorda({0.3, 0.3, 0.3, 1});
             gui.fimEstilo();
             gui.adicionar<elementos::texto>("###propriedades", "###rotacao_txt", "Rotacao", 16, elementos::flags_texto::alinhamento_central);
                 gui.defFlags(flag_estilo::quebrar_linha);
@@ -382,13 +380,11 @@ void sistema_editor::atualizarComponente(const componente::mascara& mascara)
             gui.adicionar<elementos::caixa_de_texto>("###propriedades", "###e", "y",&transf->rotacao.y);
                 gui.defLargura(1.0);
                 gui.defCorFundo({0.12, 0.12, 0.12, 1});
-                gui.defCorBorda({0.3, 0.3, 0.3, 1});
             gui.fimEstilo();
             gui.adicionar<elementos::caixa_de_texto>("###propriedades", "###f", "z",&transf->rotacao.z);
                 gui.defFlags(flag_estilo::quebrar_linha);
                 gui.defLargura(1.0);
                 gui.defCorFundo({0.12, 0.12, 0.12, 1});
-                gui.defCorBorda({0.3, 0.3, 0.3, 1});
             gui.fimEstilo();
             gui.adicionar<elementos::texto>("###propriedades", "###escala_txt", "Escala", 16, elementos::flags_texto::alinhamento_central);
                 gui.defFlags(flag_estilo::quebrar_linha);
@@ -398,32 +394,30 @@ void sistema_editor::atualizarComponente(const componente::mascara& mascara)
             gui.adicionar<elementos::caixa_de_texto>("###propriedades", "###h", "y",&transf->escala.y);
                 gui.defLargura(1.0);
                 gui.defCorFundo({0.12, 0.12, 0.12, 1});
-                gui.defCorBorda({0.3, 0.3, 0.3, 1});
             gui.fimEstilo();
             gui.adicionar<elementos::caixa_de_texto>("###propriedades", "###i", "z",&transf->escala.z);
                 gui.defFlags(flag_estilo::quebrar_linha);
                 gui.defLargura(1.0);
                 gui.defCorFundo({0.12, 0.12, 0.12, 1});
-                gui.defCorBorda({0.3, 0.3, 0.3, 1});
             gui.fimEstilo();
             break;
                                                    }
         case componente::COMPONENTE_RENDER:
-            gui.adicionar<elementos::caixa_de_texto>("###propriedades", "j", "Diretorio do modelo");
+            gui.adicionar<elementos::texto>("###propriedades", "t", "Diretorio do modelo");
+                gui.defFlags(flag_estilo::quebrar_linha);
+                gui.defPadding(0, 5);
+                gui.fimEstilo();
+            gui.adicionar<elementos::caixa_de_texto>("###propriedades", "j", "Diretorio do modelo", registro->obter<renderizador>(entidade_atual)->m_modelo->obterDiretorio());
                 gui.defFlags(flag_estilo::quebrar_linha);
                 gui.defLargura(1.0);
-                gui.defCorFundo({0.12, 0.12, 0.12, 1});
-                gui.defCorBorda({0.3, 0.3, 0.3, 1});
-            gui.fimEstilo();
             gui.adicionar<elementos::botao>("###propriedades", "k", [registro, this](){
                         auto buffer = static_cast<elementos::caixa_de_texto*>(gui.obterElemento("j"))->obterBuffer();
                         registro->obter<renderizador>(entidade_atual)->m_modelo->carregarModelo(buffer);
                     }, "Carregar Modelo");
-                gui.defLargura(1.0);
-                gui.defCorFundo({0.12, 0.12, 0.12, 1});
+                gui.defCorFundo({0.05, 0.05, 0.05, 1});
             gui.fimEstilo();
             break;
         default:
             break;
     }
-}
+}        

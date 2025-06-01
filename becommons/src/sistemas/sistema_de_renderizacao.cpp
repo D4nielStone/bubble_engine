@@ -59,8 +59,6 @@ void sistema_renderizacao::calcularTransformacao(transformacao* t) {
 }
 
 void sistema_renderizacao::atualizar() {
-    glEnable(GL_DEPTH_TEST);
-    glEnable(GL_CULL_FACE);
    
     auto reg = projeto_atual->obterFaseAtual()->obterRegistro();
     reg->cada<camera>([&](const uint32_t ent){

@@ -62,7 +62,7 @@ namespace BECOMMONS_NS {
         bool                        estaSobreposto() const;
         ~malha();
      private:
-        bool                        m_sobrepor, 
+        bool                        m_sobrepor { false }, 
                                     m_carregado { false };
         std::vector<transformacao>  m_instancias;
         std::vector<vertice>        m_vertices;

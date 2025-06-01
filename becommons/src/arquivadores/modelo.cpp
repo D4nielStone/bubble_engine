@@ -79,13 +79,43 @@ void modelo::carregarModelo(const std::string& path) {
         malhas.back().carregar();
         return;
     }
-    Assimp::Importer import;
-    const aiScene* scene = import.ReadFile(path, aiProcess_Triangulate | aiProcess_FlipUVs | aiProcess_JoinIdenticalVertices);
-
-    if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode) {
-        depuracao::emitir(erro, import.GetErrorString());
+    Assimp::Importer importer;
+    auto flags = aiProcess_Triangulate | aiProcess_FlipUVs | aiProcess_JoinIdenticalVertices;
+    
+    // Carrega a cena sem colapsar ainda
+    const aiScene* scene = importer.ReadFile(path, flags);
+    if (!scene || !scene->HasMeshes() || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode) {
+        // erro de carregamento
+        depuracao::emitir(erro, importer.GetErrorString());
         return;
     }
+    
+    // Verifica se é estático
+    bool is_static = true;
+
+    // Verifica se há animações ou bones
+    if (scene->HasAnimations())
+        is_static = false;
+    
+    for (unsigned int i = 0; i < scene->mNumMeshes && is_static; ++i) {
+        if (scene->mMeshes[i]->HasBones()) {
+            is_static = false;
+            break;
+        }
+    }
+    if (is_static && std::filesystem::path(path).extension() != ".dae") {
+        importer.FreeScene(); // limpa a cena anterior
+
+        flags |= aiProcess_PreTransformVertices;
+    
+        scene = importer.ReadFile(path, flags);
+        if (!scene || !scene->HasMeshes() || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode) {
+            // erro de carregamento
+            depuracao::emitir(erro, importer.GetErrorString());
+            return;
+        }
+    }
+
     diretorio = path.substr(0, path.find_last_of('\\'));
 
     /// Processa o no principal
