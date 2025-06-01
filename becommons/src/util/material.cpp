@@ -27,19 +27,6 @@
 #include "util/material.hpp"
 using namespace BECOMMONS_NS;
 
-void material::configurarPBR(
-                 const std::unordered_map<std::string, textura>& texturas,
-                 const cor& albedo ,
-                 float metallic,
-                 float roughness,
-                 float ao) {
-    definirUniforme("recebe_luz", true);
-    definirUniforme("material.albedo", albedo);
-    definirUniforme("material.metallic", metallic);
-    definirUniforme("material.ao", ao);
-    definirUniforme("material.roughness", roughness);
-    definirUniforme("uvMundo", false);
-}
 void material::definirUniforme(const std::string& nome, const uniforme& prop) {
     uniformes[nome] = prop;
 }
@@ -65,6 +52,7 @@ textura material::obterTextura(const std::string& nome) const {
 }
 void material::usar(shader& shader) {
     shader.use();
+
     for (const auto& [nome, prop] : uniformes) {
         switch (prop.m_tipo) {
             case uniforme::tipo::Float:
@@ -114,13 +102,5 @@ void material::usar(shader& shader) {
         tex.bind(slot);
         shader.setInt(nome, slot);
         ++slot;
-    }
-    if(shader.frag == "phong.frag") {
-        shader.setBool("use_use_tex_albedo", false);
-        shader.setBool("use_use_tex_metallic", false);
-        shader.setBool("use_use_tex_roughness", false);
-        shader.setBool("use_use_tex_normal", false);
-        shader.setBool("use_use_tex_ao", false);
-        shader.setBool("use_use_tex_height", false);
     }
 }

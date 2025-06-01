@@ -59,7 +59,7 @@ void modelo::desenhar() {
         malha.desenhar(m_shader);
 }
 
-shader modelo::obterShader() const {
+shader& modelo::obterShader() {
     return m_shader;
 }
 
@@ -110,7 +110,6 @@ void modelo::processarNo(aiNode* node, const aiScene* scene) {
 malha modelo::processarMalha(aiMesh* mesh, const aiScene* scene) {
     std::vector<vertice> vertices;
     std::vector<unsigned int> indices;
-    std::unordered_map<std::string, textura> texturas;
 
     for (unsigned int i = 0; i < mesh->mNumVertices; i++) {
         vertice vertex;
@@ -153,46 +152,67 @@ malha modelo::processarMalha(aiMesh* mesh, const aiScene* scene) {
     }
 
     // processa materiais
-    aiMaterial* material = scene->mMaterials[mesh->mMaterialIndex];
+    aiMaterial* ai_material = scene->mMaterials[mesh->mMaterialIndex];
+    becommons::material bmat;
 
-    // 1. diffusa
-    texturas["tex_albedo"] = carregarTextura(material, aiTextureType_DIFFUSE);
-    // 2. metallico
-    texturas["tex_metallic"] = carregarTextura(material, aiTextureType_METALNESS);
-    // 3. roughness
-    texturas["tex_roughness"] = carregarTextura(material, aiTextureType_DIFFUSE_ROUGHNESS);
-    // 4. normal
-    texturas["tex_normal"] = carregarTextura(material, aiTextureType_NORMALS);
-    // 5. ao
-    texturas["tex_ao"] = carregarTextura(material, aiTextureType_AMBIENT_OCCLUSION);
-    // 6. height
-    texturas["tex_height"] = carregarTextura(material, aiTextureType_HEIGHT);
+    if(temTextura(ai_material, aiTextureType_DIFFUSE))
+        bmat.definirTextura("tex_albedo", carregarTextura(ai_material, aiTextureType_DIFFUSE));
     
+    if(temTextura(ai_material, aiTextureType_METALNESS))
+        bmat.definirTextura("tex_metallic", carregarTextura(ai_material, aiTextureType_METALNESS));
+
+    if(temTextura(ai_material, aiTextureType_DIFFUSE_ROUGHNESS))
+        bmat.definirTextura("tex_roughness", carregarTextura(ai_material, aiTextureType_DIFFUSE_ROUGHNESS));
+
+    if(temTextura(ai_material, aiTextureType_NORMALS))
+        bmat.definirTextura("tex_normal", carregarTextura(ai_material, aiTextureType_NORMALS));
+
+    if(temTextura(ai_material, aiTextureType_AMBIENT_OCCLUSION))
+        bmat.definirTextura("tex_ao", carregarTextura(ai_material, aiTextureType_AMBIENT_OCCLUSION));
+
+    if(temTextura(ai_material, aiTextureType_HEIGHT))
+        bmat.definirTextura("tex_height", carregarTextura(ai_material, aiTextureType_HEIGHT));
+    
+    bmat.definirUniforme("use_tex_albedo", false);
+    bmat.definirUniforme("use_tex_metallic", false);
+    bmat.definirUniforme("use_tex_roughness", false);
+    bmat.definirUniforme("use_tex_normal", false);
+    bmat.definirUniforme("use_tex_ao", false);
+    bmat.definirUniforme("use_tex_height", false);
+    for (auto& [nome, tex] : bmat.texturas) {
+        bmat.definirUniforme(std::string("use_") + nome, true);
+    }
     /// extrai cor difusa
     aiColor4D diffuse_color;
     cor difusa;
-    if (AI_SUCCESS == material->Get(AI_MATKEY_COLOR_DIFFUSE, diffuse_color)) {
+    if (AI_SUCCESS == ai_material->Get(AI_MATKEY_COLOR_DIFFUSE, diffuse_color)) {
         difusa.r = diffuse_color.r;
         difusa.g = diffuse_color.g;
         difusa.b = diffuse_color.b;
         difusa.a = diffuse_color.a;
     }
-    BECOMMONS_NS::material mat(texturas, difusa);
+    bmat.definirUniforme("material.albedo", difusa);
+    bmat.definirUniforme("material.metallic", 0.5f);
+    bmat.definirUniforme("material.ao", 0.2f);
+    bmat.definirUniforme("material.roughness", 0.3f);
 
-    malha m_(vertices, indices, mat);
+    malha m_(vertices, indices, bmat);
     return m_;
 }
 
 // Carrega Textura assimp2bubble
-textura modelo::carregarTextura(aiMaterial* mat, aiTextureType type) const {
+textura modelo::carregarTextura(aiMaterial* mat, const aiTextureType& type) {
     textura tex;
-    if (mat->GetTextureCount(type) > 0) {
+    if (temTextura(mat, type)) {
         aiString str;
         mat->GetTexture(type, 0, &str);
 
-        tex.path = std::filesystem::path(diretorio).parent_path().string() + "/" + std::string(str.C_Str());
+        tex.path = std::filesystem::path(diretorio).parent_path().string() + "/" + std::filesystem::path(str.C_Str()).filename().string();
         tex.id = textureLoader::obterInstancia().carregarTextura(tex.path);
     }
-
     return tex;
+}
+
+bool modelo::temTextura(aiMaterial* mat, const aiTextureType& type) {
+    return (mat->GetTextureCount(type) > 0);
 }

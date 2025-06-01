@@ -43,18 +43,19 @@ namespace BECOMMONS_NS {
         modelo(const std::string& diretorio); 
 
         malha& obterMalha(size_t i);
-        shader obterShader() const;
+        shader& obterShader();
         void definirShader(const shader&);
         void desenhar();
         void carregarModelo(const std::string& path);
         std::string obterDiretorio() const;
         std::vector<malha> malhas;
-    protected:
-        std::string diretorio;
-        shader m_shader;
 
         void processarNo(aiNode* node, const aiScene* scene);
         malha processarMalha(aiMesh* mesh, const aiScene* scene);
-        textura carregarTextura(aiMaterial* mat, aiTextureType type) const;
+        textura carregarTextura(aiMaterial*, const aiTextureType&);
+        static bool temTextura(aiMaterial*, const aiTextureType&);
+    protected:
+        std::string diretorio;
+        shader m_shader;
     };
 }

@@ -39,7 +39,7 @@
 
 namespace BECOMMONS_NS {
 struct uniforme {
-    enum class tipo {
+    enum class tipo : uint16_t{
         Float, Int, Bool, Vet2, Vet3, Vet4, Cor, Mat4,
         Float_ptr, Int_ptr, Bool_ptr, Vet2_ptr, Vet3_ptr, Vet4_ptr, Cor_ptr, Mat4_ptr
     };
@@ -143,22 +143,7 @@ struct uniforme {
     };
 
     struct material {
-        material() {configurarPBR({}, 1.f, 0.5, 0.1, 1.0);}
-
-
-        material(
-                 const std::unordered_map<std::string, textura>& _texturas,
-                 const cor& albedo = cor(1.f),
-                 float metallic = 0.5f,
-                 float roughness = 0.1f,
-                 float ao = 1.0f) {configurarPBR(_texturas, albedo, metallic, roughness, ao);}
-
-        void configurarPBR(
-                 const std::unordered_map<std::string, textura>& texturas,
-                 const cor& albedo = cor(1.f),
-                 float metallic = 0.5f,
-                 float roughness = 0.1f,
-                 float ao = 1.0f);
+        material() = default;
         void definirUniforme(const std::string&, const uniforme&); 
         void definirTextura(const std::string&, const textura&); 
         uniforme obterUniforme(const std::string&) const;
