@@ -1,4 +1,4 @@
-/** @copyright 
+/** \copyright 
  * MIT License
  * Copyright (c) 2025 Daniel Oliveira
  * 
@@ -21,23 +21,26 @@
  * SOFTWARE. 
  */
 /**
- * @file caixa.hpp
+ * \file caixa.hpp
  */
 
 #pragma once
 #include <string>    
 #include <memory>
 #include <vector>
+#include "material.hpp"
 #include "vetor2.hpp"
 #include "vetor3.hpp"
 #include "cor.hpp"
 #include "vetor4.hpp"
+#include <glm/glm.hpp>
+#include "arquivadores/shader.hpp"
 #include "becommons_namespace.hpp"
 
 namespace BECOMMONS_NS {
     
-    /// @enum flag_estilo
-    /// Flags que definem o estilo da caixa. Também controlam o alinhamento e estilo dos filhos.
+    // \enum flag_estilo
+    // Flags que definem o estilo da caixa. Também controlam o alinhamento e estilo dos filhos.
     enum class flag_estilo : uint8_t {
         nenhuma             = 0,
         largura_percentual  = 1 << 0,   // 1
@@ -64,13 +67,13 @@ namespace BECOMMONS_NS {
     }
 
     struct estilo {
-        /// @enum estilo::orientacao
-        /// Horizontal ou vertical
-        enum class orientacao : uint32_t {
+        // \enum estilo::orientacao
+        // Horizontal ou vertical
+        enum class orientacao : bool {
             horizontal,
             vertical
         };
-        flag_estilo         m_flag_estilo = flag_estilo::nenhuma;
+        flag_estilo         m_flag_estilo = flag_estilo::modular;
         orientacao          m_orientacao_modular = orientacao::horizontal;  // como organiza seus filhos
         bool                m_ativo {true};
         bool                m_ligar_la {false};            // ligar altura-largura
@@ -82,11 +85,10 @@ namespace BECOMMONS_NS {
         ivet2               m_padding_geral {0, 0};
         fvet4               m_limites {0, 0, 20, 20};
         cor                 m_cor_borda {0.1f, 0.1f, 0.1f, 0.f};
-        cor                 m_cor_fundo {0.5f, 0.5f, 0.5f, 0.f};
+        cor                 m_cor_fundo {1.f, 1.f, 1.f, 0.f};
         
         // Operador de diferença (!=)
-        bool operator!=(const estilo& other) const
-        {
+        bool operator!=(const estilo& other) const {
             if(other.m_limites != m_limites) {
                 return true;
             }
@@ -135,52 +137,54 @@ namespace BECOMMONS_NS {
         }
     };
     /**
-     * @class caixa
-     * @brief funciona como uma div em css
+     * \class caixa
+     * \brief funciona como uma div em css
      */
-    enum class tipo_caixa { base, texto, botao, imagem, caixa_de_texto };
-    class caixa
-    {
+    enum class tipo_caixa : uint8_t {
+        base, texto, botao, imagem, caixa_de_texto 
+    };
+    class caixa {
     public:
-        /*  Dados  */
-        caixa() = default;
-        virtual ~caixa() {};
-        virtual tipo_caixa tipo() const { return tipo_caixa::base; }
+        caixa() : m_projecao(1.f) {
+            m_material.definirUniforme("quadrado", &m_estilo.m_limites);
+            m_material.definirUniforme("cor_borda", &m_estilo.m_cor_borda);
+            m_material.definirUniforme("cor", &m_estilo.m_cor_fundo);
+            m_material.definirUniforme("tamanho_bordas", &m_estilo.m_espessura_borda);
+            m_material.definirUniforme("projecao", &m_projecao);
+        };
 
-        // Verifica se uma flag está ativa
-        inline bool tem_flag(flag_estilo flag) {
-            return (static_cast<uint32_t>(m_estilo.m_flag_estilo) & static_cast<uint32_t>(flag)) != 0;
+        virtual ~caixa() { };
+        virtual tipo_caixa tipo() const { return tipo_caixa::base; };
+
+        bool tem(const flag_estilo& flag) const {
+            return static_cast<uint16_t>(m_estilo.m_flag_estilo & flag) != 0;
         }
 
-        std::string m_id;
-        caixa* m_pai{ nullptr };        
-        /// Estilo da caixa
-        estilo m_estilo;
-        /// Estilo antigo para comparação
-        estilo m_estilo_antigo;
-
-        /// Hierarquia
+        bool m_novo_projecao;
+        glm::mat4 m_projecao;
+        std::unique_ptr<shader> m_shader {nullptr};
+        material m_material;
+        caixa* m_pai;
+        estilo m_estilo, m_estilo_antigo;
         std::vector<std::unique_ptr<caixa>> m_filhos;
-        std::unordered_map<std::string, caixa*> m_mapa_filhos;
         
         template <typename T, typename ...Args>
-        T* adicionarFilho(const std::string& id, Args&&... args) {
+        T* adicionar(Args&&... args) {
             auto nova_caixa = std::make_unique<T>(std::forward<Args>(args)...);
-            nova_caixa->m_id = id;
             nova_caixa->m_pai = this;
-            auto ptr = nova_caixa.get();
+            nova_caixa->configurar();
+            auto* ptr = nova_caixa.get();
             m_filhos.push_back(std::move(nova_caixa));
-            m_mapa_filhos[id] = ptr;
             return ptr;
         }
-        
-        caixa* obterFilho(const std::string& id) {
-            auto it = m_mapa_filhos.find(id);
-            if (it != m_mapa_filhos.end()) {
-                return it->second;
-            }
-            return nullptr;
-        }
-        virtual void configurar() {};
+        virtual void configurar() {
+        };
+        virtual void desenhar(unsigned int ret_VAO) {
+            if(!m_shader)m_shader = std::make_unique<shader>("imagem.vert", "quad.frag");
+            m_material.usar(*m_shader);
+            glBindVertexArray(ret_VAO);
+            glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+            glBindVertexArray(0);
+        };
     };
 }

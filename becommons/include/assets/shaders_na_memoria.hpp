@@ -28,7 +28,6 @@ SOFTWARE.
 #pragma once
 #include "shaders/quad_frag.hpp"
 #include "shaders/texto_frag.hpp"
-#include "shaders/texto_vert.hpp"
 #include "shaders/imagem_frag.hpp"
 #include "shaders/imagem_vert.hpp"
 #include "shaders/framebuffer_frag.hpp"

@@ -1,50 +1,25 @@
-/** @copyright 
-MIT License
-Copyright (c) 2025 Daniel Oliveira
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE. 
-*/
-
-/** @copyright 
-MIT License
-Copyright (c) 2025 Daniel Oliveira
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE. 
-*/
-/**
- * @file main.cpp
+/** \copyright 
+ * MIT License
+ * Copyright (c) 2025 Daniel Oliveira
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ * \file main.cpp
  */
 
 
@@ -480,105 +455,54 @@ void testarNucleo()
 void testarBubbleGUI()
 {
     testes.classe("SISTEMAS", "BUBBLE_GUI");
-    // Teste 0: obtenção / adição.
+    // Teste 1: obtenção / adição.
     testes.adicionar("obtencao_e_adicao", []() {
-        //- Preparação 1:
-        becommons::bubble_gui gui;
+        //- Preparação:
+        becommons::interface ui;
 
-        gui.iniciarRaiz("raiz");
-        gui.fimEstilo();
         // adiciona pai
-        gui.adicionar<becommons::caixa>("raiz", "parent_test");
-         
-        //- Verificação 1:
-        // captura exceção do estilo do pai.
-        ASSERT_THROW(gui.obterElemento("parent_test"), std::runtime_error); 
-        
-        //- Preparação 2:
-        // corrige exceção de estilo
-        gui.fimEstilo();
-        
-        // adiciona filho de forma incorreta
-        gui.obterElemento("parent_test")->adicionarFilho<becommons::caixa>("filho");
-        
-        //- Verificação 2:
-        // sem exceção do estilo
-        ASSERT_NO_THROW(gui.obterElemento("parent_test"));
-        
-        // captura exceção de filho não encontrado.
-        ASSERT_THROW(gui.obterElemento("filho"), std::runtime_error); 
-        
-        //- Preparação 3:
-        // adiciona o filho da maneira correta.
-        gui.adicionar<becommons::caixa>("parent_test", "filho");
+        auto* box = ui.m_raiz->adicionar<becommons::caixa>();
 
-        // corrige exceção
-        gui.fimEstilo();
-
-        //- Verificação 3:
-        // sem exceção do filho não encontrado.
-        ASSERT_NO_THROW(gui.obterElemento("filho"));
-    });
-
-
-    // Teste 1: obtenção vazia
-    testes.adicionar("obtencao_vazia", []() {
-        //- Preparação:
-        becommons::bubble_gui gui;
-
-        //- Verificação:
-        // deve retornar exceção de caixa não encontrada.
-        ASSERT_THROW(gui.obterElemento("empty_element"), std::runtime_error);
-    });
-
-    // Teste 2: Parente inexistente
-    testes.adicionar("parente_vazio", []() {
-        //- Preparação:
-        becommons::bubble_gui gui;
+        auto* child = box->adicionar<becommons::caixa>();
         
         //- Verificação:
-        // deve retornar exceção.
-        ASSERT_THROW(gui.adicionar<becommons::caixa>("empty_parent", "child_test"), std::runtime_error); 
+        ASSERT(child != nullptr);
     });
     
-    // Teste 3: Caixa nula
+    // Teste 2: Caixa nula
     testes.adicionar("atualizar_filhos_caixa_nula", []() {
         //- Preparação:
-        becommons::bubble_gui gui;
+        becommons::interface ui;
         
         //- Verificação:
         // deve retornar exceção de atualização.
-        ASSERT_THROW(gui.atualizarFilhos(nullptr), std::runtime_error);
+        ASSERT_THROW(ui.atualizarFilhos(nullptr), std::runtime_error);
     });
 
-    // @name Teste 4: Caixa inativa
-    // @brief
+    // \name Teste 3: Caixa inativa
+    // \brief
     testes.adicionar("atualizar_filhos_caixa_inativa", []() {
         //- Preparação:
-        becommons::bubble_gui gui;
+        becommons::interface ui;
 
-        gui.iniciarRaiz("raiz");
-        gui.fimEstilo();
         // adiciona pai
-        gui.adicionar<becommons::caixa>("raiz", "parent_test");
+        auto* parent = ui.m_raiz->adicionar<becommons::caixa>();
         
         // adiciona filho
-        gui.adicionar<becommons::caixa>("parent_test", "filho");
+        auto* child  = parent->adicionar<becommons::caixa>();
         
-        gui.fimEstilo();
-
-        // desativa caixa de maneira bruta
-        gui.obterElemento("parent_test")->m_estilo.m_ativo = false;
+        // desativa caixa 
+        parent->m_estilo.m_ativo = false;
         
         //- Verificação:
-        ASSERT_NO_THROW(gui.atualizarFilhos(gui.obterElemento("parent_test")));
+        ASSERT_NO_THROW(ui.atualizarFilhos(parent));
 
         // confirma valoras inalterados
         // Valores padrão = 0, 0, 20, 20.
-        ASSERT_EQUAL(gui.obterElemento("filho")->m_estilo.m_limites, fvet4(0.f,0.f,20.f,20.f)); 
+        ASSERT_EQUAL(child->m_estilo.m_limites, fvet4(0.f,0.f,20.f,20.f)); 
     });
 
-    // Teste 3: Layout horizontal com dimensões fixas
+    // Teste 4: Layout horizontal com dimensões fixas
     testes.adicionar("atualizar_filhos_horizontal_fixo", []() {
         becommons::caixa parent;
         parent.m_estilo.m_flag_estilo = becommons::flag_estilo::modular;
@@ -586,16 +510,16 @@ void testarBubbleGUI()
         parent.m_estilo.m_limites = {0, 0, 100, 50};
         parent.m_estilo.m_padding_geral = {5, 0};
 
-        auto* child1 = parent.adicionarFilho<becommons::caixa>("child1");
+        auto* child1 = parent.adicionar<becommons::caixa>();
         child1->m_estilo.m_largura = 30;
         child1->m_estilo.m_padding.x = 2;
 
-        auto* child2 = parent.adicionarFilho<becommons::caixa>("child2");
+        auto* child2 = parent.adicionar<becommons::caixa>();
         child2->m_estilo.m_largura = 40;
         child2->m_estilo.m_padding.x = 3;
 
-        becommons::bubble_gui gui;
-        gui.processarModular(&parent);
+        becommons::interface ui;
+        ui.atualizarFilhos(&parent);
 
         ASSERT(child1->m_estilo.m_limites.x == 7);  // 0 +5 +2
         ASSERT(child1->m_estilo.m_limites.z == 30);
@@ -607,19 +531,18 @@ void testarBubbleGUI()
     testes.adicionar("atualizar_filhos_horizontal_percentual", []() {
         //- Preparação:
         // prepara instâncias
+        becommons::interface ui;
         becommons::caixa parent;
-        becommons::bubble_gui gui;
 
         // edita o esitilo
-        parent.m_estilo.m_flag_estilo = becommons::flag_estilo::modular;
         parent.m_estilo.m_limites.z = 200;
 
         // adiciona e obtêm filho
-        auto* child = parent.adicionarFilho<becommons::caixa>("child");
+        auto* child = parent.adicionar<becommons::caixa>();
         child->m_estilo.m_flag_estilo |= becommons::flag_estilo::largura_percentual;
         child->m_estilo.m_largura = 2;
 
-        gui.processarModular(&parent);
+        ui.atualizarFilhos(&parent);
 
         //- Verificação:
         // largura do filho deve ser igual da largura do pai
@@ -633,20 +556,19 @@ void testarBubbleGUI()
         becommons::caixa parent;
 
         // edita o esitilo
-        parent.m_estilo.m_flag_estilo = becommons::flag_estilo::modular;
         parent.m_estilo.m_orientacao_modular = becommons::estilo::orientacao::horizontal;
         parent.m_estilo.m_limites.z = 100;
 
-        auto* child1 = parent.adicionarFilho<becommons::caixa>("child1");
+        auto* child1 = parent.adicionar<becommons::caixa>();
         child1->m_estilo.m_largura = 1;
         child1->m_estilo.m_flag_estilo = becommons::flag_estilo::largura_percentual;
 
-        auto* child2 = parent.adicionarFilho<becommons::caixa>("child2");
+        auto* child2 = parent.adicionar<becommons::caixa>();
         child2->m_estilo.m_largura = 3;
         child2->m_estilo.m_flag_estilo = becommons::flag_estilo::largura_percentual;
 
-        becommons::bubble_gui gui;
-        gui.atualizarFilhos(&parent);
+        becommons::interface ui;
+        ui.atualizarFilhos(&parent);
 
         //- Verificação:
         ASSERT_EQUAL(child1->m_estilo.m_limites.z, 25); // 1/4 * 100
@@ -661,13 +583,13 @@ void testarBubbleGUI()
         parent.m_estilo.m_limites = {0, 0, 80, 150};
         parent.m_estilo.m_padding_geral = {10, 5};
 
-        auto* child = parent.adicionarFilho<becommons::caixa>("child");
+        auto* child = parent.adicionar<becommons::caixa>();
         child->m_estilo.m_flag_estilo |= becommons::flag_estilo::largura_percentual;
         child->m_estilo.m_largura = 1.f;
         child->m_estilo.m_altura = 60;
 
-        becommons::bubble_gui gui;
-        gui.atualizarFilhos(&parent);
+        becommons::interface ui;
+        ui.atualizarFilhos(&parent);
 
         // Largura esperada: 80 - 2*10 = 80 - 20 = 60
         ASSERT(child->m_estilo.m_limites.z == 60);
@@ -676,20 +598,17 @@ void testarBubbleGUI()
 
     // Teste 7: Atualização recursiva de filhos
     testes.adicionar("atualizar_filhos_recursivo", []() {
+        becommons::interface ui;
+
         becommons::caixa parent;
-        parent.m_estilo.m_flag_estilo = becommons::flag_estilo::modular;
+        auto* child = parent.adicionar<becommons::caixa>();
+        child->m_estilo.m_altura = 200;
+        auto* grandchild = child->adicionar<becommons::caixa>();
 
-        auto* child = parent.adicionarFilho<becommons::caixa>("child");
-        child->m_estilo.m_flag_estilo = becommons::flag_estilo::modular;
-        child->m_estilo.m_orientacao_modular = becommons::estilo::orientacao::vertical;
+        grandchild->m_estilo.m_altura = 100;
 
-        auto* grandchild = child->adicionarFilho<becommons::caixa>("grandchild");
-        grandchild->m_estilo.m_altura = 30;
-
-        becommons::bubble_gui gui;
-        gui.atualizarFilhos(&parent);
-
-        ASSERT(grandchild->m_estilo.m_limites.w == 30); // Verifica se o neto foi atualizado
+        ui.atualizarFilhos(&parent);
+        ASSERT(grandchild->m_estilo.m_limites.w == 100); // Verifica se o neto foi atualizado
     });
 
     // Teste 8: Espaço insuficiente para crescimento
@@ -699,16 +618,16 @@ void testarBubbleGUI()
         parent.m_estilo.m_orientacao_modular = becommons::estilo::orientacao::horizontal;
         parent.m_estilo.m_limites.z = 50;
 
-        auto* child1 = parent.adicionarFilho<becommons::caixa>("child1");
+        auto* child1 = parent.adicionar<becommons::caixa>();
         child1->m_estilo.m_largura = 1;
         child1->m_estilo.m_flag_estilo = becommons::flag_estilo::largura_percentual;
 
-        auto* child2 = parent.adicionarFilho<becommons::caixa>("child2");
+        auto* child2 = parent.adicionar<becommons::caixa>();
         child2->m_estilo.m_largura = 1;
         child2->m_estilo.m_flag_estilo = becommons::flag_estilo::largura_percentual;
 
-        becommons::bubble_gui gui;
-        gui.atualizarFilhos(&parent);
+        becommons::interface ui;
+        ui.atualizarFilhos(&parent);
 
         ASSERT(child1->m_estilo.m_limites.z == 25);
         ASSERT(child2->m_estilo.m_limites.z == 25);
@@ -716,44 +635,47 @@ void testarBubbleGUI()
     
     // Teste 9: 
     testes.adicionar("padding_deral_fixo", []() {
-        becommons::bubble_gui gui;
+        becommons::interface ui;
         
         becommons::caixa parent;
         parent.m_estilo.m_flag_estilo = becommons::flag_estilo::modular;
         parent.m_estilo.m_padding_geral = {5, 5};
-        auto* child1 = parent.adicionarFilho<becommons::caixa>("child1");
-        auto* child2 = parent.adicionarFilho<becommons::caixa>("child2");
-        gui.atualizarFilhos(&parent);
+        auto* child1 = parent.adicionar<becommons::caixa>();
+        auto* child2 = parent.adicionar<becommons::caixa>();
+        ui.atualizarFilhos(&parent);
         // Horizontal
         // Assegura que o padding foi aplicado aos filhos
         ASSERT_EQUAL(child1->m_estilo.m_limites.x, 5)
         ASSERT_EQUAL(child2->m_estilo.m_limites.x, 30) // Largura do child1 mais o padding
+        ASSERT_EQUAL(child1->m_estilo.m_limites.y, 5)
+        ASSERT_EQUAL(child2->m_estilo.m_limites.y, 5) // padding
         parent.m_estilo.m_orientacao_modular = becommons::estilo::orientacao::vertical;
 
-        gui.atualizarFilhos(&parent);
+        ui.atualizarFilhos(&parent);
         ASSERT_EQUAL(child1->m_estilo.m_limites.y, 5)
         ASSERT_EQUAL(child2->m_estilo.m_limites.y, 30) // Largura do child1 mais o padding
+        ASSERT_EQUAL(child1->m_estilo.m_limites.x, 5)
+        ASSERT_EQUAL(child2->m_estilo.m_limites.x, 5) // padding
     });
     
     // Teste 10 : Crescimento modular com padding e pai de 100x100
     testes.adicionar("padding_modular_crescimento_completo", []() {
-        becommons::bubble_gui gui;
+        becommons::interface ui;
     
         becommons::caixa parent;
-        parent.m_estilo.m_flag_estilo = becommons::flag_estilo::modular;
         parent.m_estilo.m_orientacao_modular = becommons::estilo::orientacao::horizontal;
         parent.m_estilo.m_padding_geral = {5, 5};
         parent.m_estilo.m_limites = {0, 0, 100, 100}; 
     
-        auto* child1 = parent.adicionarFilho<becommons::caixa>("child1");
-        auto* child2 = parent.adicionarFilho<becommons::caixa>("child2");
+        auto* child1 = parent.adicionar<becommons::caixa>();
+        auto* child2 = parent.adicionar<becommons::caixa>();
     
         child1->m_estilo.m_largura = 1;
         child1->m_estilo.m_flag_estilo = becommons::flag_estilo::largura_percentual;
         child2->m_estilo.m_largura = 1;
         child2->m_estilo.m_flag_estilo = becommons::flag_estilo::largura_percentual;
     
-        gui.atualizarFilhos(&parent);
+        ui.atualizarFilhos(&parent);
     
         // Área total disponível para largura: 100 - (padding esquerdo + padding entre filhos + padding direito) = 100 - (5 + 5 + 5) = 85
         // Como ambos têm crescimento 1.0, cada um recebe 85 / 2 = 42.5
@@ -763,18 +685,16 @@ void testarBubbleGUI()
         ASSERT_EQUAL(child2->m_estilo.m_limites.x, 52.5f);      // 5 (padding) + 42 (child1) + 5 (padding)
         ASSERT_EQUAL(child2->m_estilo.m_limites.z, 42.5f);      // mesma largura
     });
-    
     // Teste 11 : Testando flag "quebrar_linha"
     testes.adicionar("flag_quebrar_linha", []() {
         //- Preparação:
-        becommons::bubble_gui gui;
+        becommons::interface ui;
         becommons::caixa box; 
         box.m_estilo.m_altura = 40; // 20*40
-        box.m_estilo.m_flag_estilo = becommons::flag_estilo::modular;
-        auto* child1 = box.adicionarFilho<becommons::caixa>("child1");
-        auto* child2 = box.adicionarFilho<becommons::caixa>("child2");
+        auto* child1 = box.adicionar<becommons::caixa>();
+        auto* child2 = box.adicionar<becommons::caixa>();
         child1->m_estilo.m_flag_estilo =  becommons::flag_estilo::quebrar_linha;
-        gui.processarModular(&box);
+        ui.atualizarFilhos(&box);
         //- Verificação:
         ASSERT_EQUAL(child1->m_estilo.m_limites.y, 0);
         ASSERT_EQUAL(child2->m_estilo.m_limites.y, 20);

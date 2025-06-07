@@ -1,26 +1,24 @@
-/** @copyright 
-MIT License
-Copyright (c) 2025 Daniel Oliveira
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE. 
-*/
-/**
+/** \copyright 
+ * MIT License
+ * Copyright (c) 2025 Daniel Oliveira
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
  * @file caixa_de_texto.hpp
  */
 
@@ -49,11 +47,11 @@ namespace BECOMMONS_NS {
                     m_estilo.m_flag_estilo |= flag_estilo::modular;
                     m_borda_antiga = m_estilo.m_espessura_borda;
                     m_cor_antiga = m_estilo.m_cor_borda.b;
-                    m_texto_ptr = adicionarFilho<elementos::texto>(m_id + "_dica", &m_display);
+                    m_texto_ptr = adicionar<texto>(&m_display);
                     m_estilo.m_altura = m_texto_ptr->obterAltura(m_display) + m_estilo.m_padding_geral.y * 2;
-                    if(tem_flag(flag_estilo::alinhamento_central))
+                    if(tem(flag_estilo::alinhamento_central))
                         m_texto_ptr->m_texto_flags |= flags_texto::alinhamento_central;
-                    if(tem_flag(flag_estilo::alinhamento_fim))
+                    if(tem(flag_estilo::alinhamento_fim))
                         m_texto_ptr->m_texto_flags |= flags_texto::alinhamento_fim;
                 };
                 void atualizar() {
@@ -63,10 +61,10 @@ namespace BECOMMONS_NS {
                     // buffer
                     if(m_selecionado) atualizarBuffer();
                     if(m_buffer.empty() && !m_etiqueta.empty()) {
-                        m_display = m_etiqueta; m_texto_ptr->m_texto_cor.a = 0.5;
+                        m_display = m_etiqueta; m_texto_ptr->m_estilo.m_cor_fundo.a = 0.5;
                     }
                     else {
-                        m_display = m_buffer; m_texto_ptr->m_texto_cor.a = 1;
+                        m_display = m_buffer; m_texto_ptr->m_estilo.m_cor_fundo.a = 1;
                     }
                     m_estilo.m_altura = m_texto_ptr->obterAltura(m_display) + m_estilo.m_padding_geral.y * 2;
                 }

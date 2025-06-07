@@ -19,7 +19,9 @@ add_executable(editor
     src/main.cpp
 )
 
+if(BUILD_RUNTIME)
 add_dependencies(editor embed_runtime)
+endif()
 
 target_include_directories(editor PRIVATE 
     ./

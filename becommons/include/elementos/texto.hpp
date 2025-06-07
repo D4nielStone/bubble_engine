@@ -51,8 +51,7 @@ namespace BECOMMONS_NS{
         public:
             tipo_caixa tipo() const override { return tipo_caixa::texto; }
             flags_texto m_texto_flags;
-            shader* m_texto_shader;
-            cor m_texto_cor{1.f, 1.f, 1.f, 1.f};
+            fvet4 limites_iniciais;
             unsigned int m_texto_escala;
             std::string m_texto_frase, m_texto_fonte;
             std::string* m_texto_frase_ptr{nullptr};
@@ -61,15 +60,12 @@ namespace BECOMMONS_NS{
                     const unsigned int escala = 16,
                     const flags_texto flags = flags_texto::padrao,
                     const std::string path_fonte = "consolas.ttf") : m_texto_frase(frase)
-                , m_texto_cor(color)
                 , m_texto_fonte(path_fonte)
                 , m_texto_escala(escala)
-                , m_texto_shader(new shader("texto.vert", "texto.frag"))
                 , m_texto_flags(flags)
             {
-                m_estilo.m_altura = escala;
-                m_estilo.m_largura = obterLargura(m_texto_frase);
-                m_estilo.m_limites.z = m_estilo.m_largura; m_estilo.m_limites.w = m_estilo.m_altura;
+                m_estilo.m_largura = obterLargura(frase);
+                m_shader = (std::make_unique<shader>("imagem.vert", "texto.frag"));
             }
             texto(const std::string frase,
                     const unsigned int escala = 16,
@@ -77,12 +73,10 @@ namespace BECOMMONS_NS{
                     const std::string path_fonte = "consolas.ttf") : m_texto_frase(frase)
                 , m_texto_fonte(path_fonte)
                 , m_texto_escala(escala)
-                , m_texto_shader(new shader("texto.vert", "texto.frag"))
                 , m_texto_flags(flags)
             {
-                m_estilo.m_altura = escala;
-                m_estilo.m_largura = obterLargura(m_texto_frase);
-                m_estilo.m_limites.z = m_estilo.m_largura; m_estilo.m_limites.w = m_estilo.m_altura;
+                m_estilo.m_largura = obterLargura(frase);
+                m_shader = (std::make_unique<shader>("imagem.vert", "texto.frag"));
             }
             texto(std::string* frase,
                     const unsigned int escala = 16,
@@ -90,12 +84,10 @@ namespace BECOMMONS_NS{
                     const std::string path_fonte = "consolas.ttf") : m_texto_frase_ptr(frase)
                 , m_texto_fonte(path_fonte)
                 , m_texto_escala(escala)
-                , m_texto_shader(new shader("texto.vert", "texto.frag"))
                 , m_texto_flags(flags)
             {
-                m_estilo.m_altura = escala;
-                m_estilo.m_largura = obterLargura(m_texto_frase);
-                m_estilo.m_limites.z = m_estilo.m_largura; m_estilo.m_limites.w = m_estilo.m_altura;
+                m_estilo.m_largura = obterLargura(*frase);
+                m_shader = (std::make_unique<shader>("imagem.vert", "texto.frag"));
             }
 
             // retorna a largura da linha mais longa dentro de 'frase'
@@ -152,6 +144,48 @@ namespace BECOMMONS_NS{
             
                 return alturaLinha * static_cast<float>(numLinhas);
             }
+            void desenhar(unsigned int ret_VAO) override {
+                limites_iniciais = m_estilo.m_limites;
+                m_estilo.m_cor_fundo.a = 1;
+
+                auto& chs = gerenciadorFontes::obterInstancia().obter(m_texto_fonte, m_texto_escala);
+                float y_linha = m_texto_escala;
+                float x_linha = m_estilo.m_limites.x; 
+        if(((uint32_t)m_texto_flags & (uint32_t)elementos::flags_texto::alinhamento_central)!=0) {
+            x_linha += m_estilo.m_limites.z / 2 - obterLargura(m_texto_frase)/2;
+        }
+        if(m_texto_frase_ptr) m_texto_frase = *m_texto_frase_ptr;
+        
+        std::string texto_final = m_texto_frase;
+
+        for(auto ca : texto_final)
+        {
+            if(ca == '\n') {y_linha += m_texto_escala; x_linha = m_estilo.m_limites.x; continue;}
+            caractere ch;
+            if (chs.empty())
+                return;
+            if(chs.find(ca) != chs.end())
+                ch = chs.at(ca);
+            else
+                continue;
+            
+            float xpos = x_linha + ch.apoio.x;
+            float ypos = limites_iniciais.y - ch.apoio.y + y_linha;
+
+            if(y_linha > m_estilo.m_limites.y + m_estilo.m_limites.w) break;
+            float w = ch.tamanho.x;
+            float h = ch.tamanho.y;
+
+            m_estilo.m_limites = {xpos, ypos, w, h};
+            // render glyph texture over quad
+            m_material.definirTextura("text", {ch.id, ""});
+            caixa::desenhar(ret_VAO);
+            // now advance cursors for next glyph (note that advance is number of 1/64 pixels)
+            x_linha += (ch.avanco >> 6);
+        }
+
+            m_estilo.m_limites = limites_iniciais;
+            };
         };
     } // elementos
 } // namespace becommons

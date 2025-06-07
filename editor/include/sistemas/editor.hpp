@@ -43,7 +43,7 @@ namespace EDITOR_NS {
      
     becommons::camera_editor cam;
 private:
-    becommons::bubble_gui gui;
+    becommons::interface gui;
     size_t num_entidades_anterior = 0;
     size_t entidade_anterior = 0;
     void configurarInterface(becommons::projeto& proj);

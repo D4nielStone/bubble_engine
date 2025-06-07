@@ -49,6 +49,7 @@ sistema_editor::sistema_editor() {
 }
 void sistema_editor::configurarInterface(projeto& proj)
 {
+    /*
     /// raiz
     gui.iniciarRaiz        ("raiz");
         gui.defFlags       (           flag_estilo::modular);
@@ -178,17 +179,17 @@ void sistema_editor::configurarInterface(projeto& proj)
         gui.defLargura      (1.0);
         gui.defAltura       (1.0);
         gui.defPaddingG     (                           5, 2);
-    gui.fimEstilo();
+    gui.fimEstilo();*/
 }
 
-void sistema_editor::inicializar() {
+void sistema_editor::inicializar() {/*
     projeto_atual->srender()->definirCamera(&cam);
     
     gui.inicializar();
-    /*  Config da interface   */
+    // Config da interface   
     configurarInterface(*projeto_atual);
     atualizarEntidades();
-    atualizarComponentes();
+    atualizarComponentes();*/
 }
 
 void sistema_editor::atualizar()
@@ -268,7 +269,7 @@ void sistema_editor::monitorarRuntime()
     }
 }
 void sistema_editor::atualizarEntidades()
-{
+{/*
     // Remove os botões antigos para evitar duplicatas
     gui.removerFilhos("##entidades");
     
@@ -296,10 +297,10 @@ void sistema_editor::atualizarEntidades()
         texto_entidade = "Nenhuma entidade selecionada";
     }
     gui.fimEstilo();
-    atualizarComponentes();
+    atualizarComponentes();*/
 }
 void sistema_editor::atualizarComponentes()
-{
+{/*
     // Remove os botões antigos para evitar duplicatas
     gui.removerFilhos("###componentes");
     if(entidade_atual == 0) return;
@@ -323,11 +324,11 @@ void sistema_editor::atualizarComponentes()
     gui.defAltura      (                          25);
     gui.defCorFundo    (    cor(0.0f, 0.0f, 0.0f, 0.f));
     gui.fimEstilo();
-    atualizarComponente(componente::COMPONENTE_TRANSFORMACAO);
+    atualizarComponente(componente::COMPONENTE_TRANSFORMACAO);*/
 }
 
 void sistema_editor::atualizarComponente(const componente::mascara& mascara)
-{
+{/*
     // Remove os botões antigos para evitar duplicatas
     gui.removerFilhos("###componente_atual");
     gui.removerFilhos("###propriedades");
@@ -419,5 +420,5 @@ void sistema_editor::atualizarComponente(const componente::mascara& mascara)
             break;
         default:
             break;
-    }
+    }*/
 }        

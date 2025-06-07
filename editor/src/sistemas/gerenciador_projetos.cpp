@@ -1,9 +1,25 @@
-/// @copyright Copyright (c) 2025 Daniel Oliveira */
-///
-/// @file gerenciador_projetos.cpp
-///
-/// @author Daniel O. dos Santos
-///
+/** \copyright 
+ * MIT License
+ * Copyright (c) 2025 Daniel Oliveira
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE. 
+ */
 
 #include "becommons/becommons.hpp"
 #include "editor_namespace.hpp"
@@ -12,77 +28,75 @@
 
 using namespace EDITOR_NS;
 
-gerenciador_projetos::gerenciador_projetos(const std::string& Dir) {
-    DIR_PADRAO = Dir;
+gerenciador_projetos::gerenciador_projetos(const std::string& dir) : DIR_PADRAO(dir) {
 }
-void gerenciador_projetos::criarProjetoPadrao(const std::string& novo_diretorio, const char* nome)
-{       
+void gerenciador_projetos::criarProjetoPadrao(const std::string& novo_diretorio, const char* nome) {       
     auto fase_string = R"({
-        "nome": "FaseMain",
-        "entidades":
-        [
-            {
-                "id": 1,
-                "componentes":[
-                    {
-                        "tipo": "luz_direcional",
-                        "direcao": [-0.25, -0.75, 1],
-                        "cor": [1, 1, 1],
-                        "ambiente": [0.1, 0.1, 0.1],
-                        "intensidade": 1.0
-                    }
-                ]
-            },
-            {
-                "id": 2,
-                "componentes":[
-                    {
-                        "tipo": "renderizador",
-                        "modelo": "/cubo"
-                    },
-                    {
-                        "tipo": "transformacao",
-                        "posicao": [0,-2, 15],
-                        "rotacao": [0,0,0],
-                        "escala": [10, 0.25, 10]
-                    }
-                ]
-            },
-            {
-                "id": 3,
-                "componentes":[
-                    {
-                        "tipo": "renderizador",
-                        "modelo": "/cubo"
-                    },
-                    {
-                        "tipo": "transformacao",
-                        "posicao": [0,0,15],
-                        "rotacao": [0,0,0],
-                        "escala": [1, 1, 1]
-                    },
-                    {
-                        "tipo": "codigo",
-                        "diretorio": "/codigos/rotacao.lua"
-                    }
-                ]
-            },
-            {
-                "id": 4,
-                "componentes":[
-                    {
-                        "tipo": "transformacao",
-                        "posicao": [0,0,0],
-                        "rotacao": [0,90,0],
-                        "escala": [1, 1, 1]
-                    },
-                    {
-                        "tipo": "camera"
-                    }
-                ]
-            }
-        ]
-    })";
+    "nome": "FaseMain",
+    "entidades":
+    [
+        {
+            "id": 1,
+            "componentes":[
+                {
+                    "tipo": "luz_direcional",
+                    "direcao": [-0.25, -0.75, 1],
+                    "cor": [1, 1, 1],
+                    "ambiente": [0.1, 0.1, 0.1],
+                    "intensidade": 1.0
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "componentes":[
+                {
+                    "tipo": "renderizador",
+                    "modelo": "/cubo"
+                },
+                {
+                    "tipo": "transformacao",
+                    "posicao": [0,-2, 15],
+                    "rotacao": [0,0,0],
+                    "escala": [10, 0.25, 10]
+                }
+            ]
+        },
+        {
+            "id": 3,
+            "componentes":[
+                {
+                    "tipo": "renderizador",
+                    "modelo": "/cubo"
+                },
+                {
+                    "tipo": "transformacao",
+                    "posicao": [0,0,15],
+                    "rotacao": [0,0,0],
+                    "escala": [1, 1, 1]
+                },
+                {
+                    "tipo": "codigo",
+                    "diretorio": "/codigos/rotacao.lua"
+                }
+            ]
+        },
+        {
+            "id": 4,
+            "componentes":[
+                {
+                    "tipo": "transformacao",
+                    "posicao": [0,0,0],
+                    "rotacao": [0,90,0],
+                    "escala": [1, 1, 1]
+                },
+                {
+                    "tipo": "camera"
+                }
+            ]
+        }
+    ]
+})";
     auto codigo_string = R"(
 -- Autor Daniel O. Santos copyright 2024
 local vel = 6
@@ -92,7 +106,7 @@ end
 function atualizar()
     eu.transformacao.rotacao = fvet3(eu.transformacao.rotacao.x + vel * tempo.obterDeltaTime(), eu.transformacao.rotacao.y + vel * tempo.obterDeltaTime(), 0)
 end
-)";
+    )";
 
     // Cria diretório do projeto
     std::filesystem::create_directories(novo_diretorio + "/" + nome);
@@ -146,14 +160,17 @@ end
             codigo_file.close();
         }
     }
-    atualizarElementos(DIR_PADRAO);
+
+    buscarProjetos();
 }
+
 void gerenciador_projetos::removerProjeto(const std::string& dir) {
     if(std::filesystem::exists(dir)) {
         std::filesystem::remove_all(dir);
     }
-    m_projeto_selecionado = "Nenhum";
-    atualizarElementos(DIR_PADRAO);
+
+    m_projeto_selecionado = projetos.empty() ? "nenhum" : projetos.end()->first;
+    buscarProjetos();
 }
 void gerenciador_projetos::abrirProjeto(const std::string& caminho) {
        glfwDestroyWindow(janela::obterInstancia().window);
@@ -174,115 +191,75 @@ void gerenciador_projetos::abrirProjeto(const std::string& caminho) {
        
        // Inicia main loop
        editor.rodar();
-       atualizarElementos(DIR_PADRAO);
-}
-
-void gerenciador_projetos::atualizarElementos(const std::string& Dir) {
-    // passo 1: iterar sobre os projetos
-    gui.removerFilhos("#barra_lateral");
-    gui.adicionar<elementos::texto>("#barra_lateral", "##texto_l1", "Projetos encontrados", 15);
-    gui.fimEstilo();
-
-    projetos.clear();
-    if(std::filesystem::exists(Dir))
-    for (const auto& entry : std::filesystem::directory_iterator(Dir)) {
-        if (entry.is_directory()) {
-            auto dir = entry.path().string();
-            auto doc = projeto::analisarProjeto(dir);
-            if(!doc.HasMember("nome")) throw std::runtime_error("Alanisando projetos do gerenciador de projetos.");
-            std::string nome = doc["nome"].GetString();
-            depuracao::emitir(info, "gerenciador_projetos", std::string("Projeto encontrados: ") + nome);
-            projetos[nome] = dir;
-        }
-    }
-    // passo 2: configurar UI
-    for(auto& [nome, diretorio] : projetos) {
-        gui.adicionar<elementos::botao>("#barra_lateral", nome, [nome, this]() {
-                m_projeto_selecionado = nome;
-                }, nome, "folder.png");
-    }
-    gui.defCorBorda({0.2, 0.2, 0.2, 0});
-    gui.defCorFundo({0.1, 0.1, 0.1, 1});
-    gui.defLargura(22);
-    gui.defAltura(22);
-    gui.fimEstilo();
 }
 
 
-void gerenciador_projetos::configurarUI(const std::string& DIR_PADRAO) {
-    // Sistema de gui
-    gui.inicializar();
-    gui.iniciarRaiz("raiz");
-        gui.defFlags(flag_estilo::modular);
-    gui.fimEstilo();
+void gerenciador_projetos::configurarUI() {
     // configura interface
-    gui.adicionar<caixa>("raiz", "#barra_lateral");
-        gui.defFlags(flag_estilo::modular);
-        gui.defCorBorda({0.05, 0.05, 0.05, 1});
-        gui.defOrientacao(estilo::orientacao::vertical);
-        gui.defCorFundo({0.1, 0.1, 0.1, 1});
-        gui.defPaddingG(5, 3);
-        gui.defAltura(1.0);
-        gui.defLargura(200);
-    gui.fimEstilo();
+    auto& raiz = ui.m_raiz;
+    barra_lateral = raiz->adicionar<caixa>();
+    barra_lateral->m_estilo.m_flag_estilo |= flag_estilo::altura_percentual;
+    barra_lateral->m_estilo.m_cor_borda = {0.05f, 0.05f, 0.05f, 1.f};
+    barra_lateral->m_estilo.m_cor_fundo = {0.1f, 0.1f, 0.1f, 1.f};
+    barra_lateral->m_estilo.m_padding_geral = {5, 3};
+    barra_lateral->m_estilo.m_altura = 1.0;
+    barra_lateral->m_estilo.m_largura = 200;
     
-    atualizarElementos(DIR_PADRAO);
-    // Area Maior
-    gui.adicionar<caixa>("raiz", "#area_maior");
-        gui.defFlags(flag_estilo::modular);
-        gui.defAltura(1.0);
-        gui.defLargura(1.0);
-        gui.defOrientacao(estilo::orientacao::vertical);
-        gui.defCorFundo({0.21, 0.21, 0.21, 1});
-    gui.fimEstilo();
-    gui.adicionar<caixa>("#area_maior", "##cima");
-        gui.defOrientacao(estilo::orientacao::vertical);
-        gui.defFlags(flag_estilo::modular | flag_estilo::altura_justa);
-        gui.defLargura      (1.0);
-        gui.defCorFundo({0.15, 0.15, 0.15, 1});
-    gui.fimEstilo();
-    gui.adicionar<caixa>("#area_maior", "##meio");
-        gui.defFlags(flag_estilo::altura_justa | flag_estilo::modular);
-        gui.defCorFundo({0.21, 0.21, 0.21, 1});
-        gui.defLargura      (1.0);
-        gui.defPaddingG(5, 5);
-    gui.fimEstilo();
-    gui.adicionar<elementos::botao>("##meio", "###texto5", [DIR_PADRAO, this]() {
-            if(gui.elementoExiste("###caixa_texto") && gui.obterElemento("###caixa_texto")->tipo() == tipo_caixa::caixa_de_texto) {
-                auto caixa_de_texto = static_cast<elementos::caixa_de_texto*>(gui.obterElemento("###caixa_texto"));
-                auto buffer = caixa_de_texto->obterBuffer();
-                if(!buffer.empty())
-                    criarProjetoPadrao(DIR_PADRAO, caixa_de_texto->obterBuffer().c_str());
-            }
-        }, "Novo", "adicionar.png");
-    gui.fimEstilo();
-    gui.adicionar<elementos::caixa_de_texto>("##meio", "###caixa_texto", "Digite o nome do projeto aqui...");
-        gui.defCrescimentoM(1);
-        gui.defCorFundo({0.12, 0.12, 0.12, 1});
-        gui.defCorBorda({0.3, 0.3, 0.3, 1});
-    gui.fimEstilo();
-    gui.adicionar<caixa>("#area_maior", "##baixo");
-        gui.defFlags(flag_estilo::modular | flag_estilo::alinhamento_central);
-        gui.defLargura      (1.0);
-        gui.defAltura       (1.0);
-        gui.defPaddingG(5, 0);
-        gui.defCorFundo({0.23, 0.23, 0.23, 1});
-    gui.fimEstilo();
-    gui.adicionar<elementos::texto>("##cima", "###texto1", "Projeto selecionado:", 20);
-    gui.adicionar<elementos::texto>("##cima", "###texto2", &m_projeto_selecionado, 15);
-        gui.defPadding(10, 5);
-    gui.fimEstilo();
-    gui.adicionar<elementos::botao>("##baixo", "###texto3", [this]() {
-            if(m_projeto_selecionado != "Nenhum") {
+    buscarProjetos();
+
+    // area maior
+    auto* area_maior = raiz->adicionar<caixa>();
+    area_maior->m_estilo.m_flag_estilo |= flag_estilo::altura_percentual | flag_estilo::largura_percentual;
+    area_maior->m_estilo.m_altura = 1;
+    area_maior->m_estilo.m_largura = 1;
+    area_maior->m_estilo.m_orientacao_modular = estilo::orientacao::vertical;
+    area_maior->m_estilo.m_cor_fundo = cor(0.21, 0.21, 0.21, 1);
+    // cima
+    auto* cima = area_maior->adicionar<caixa>();
+    cima->m_estilo.m_flag_estilo |= flag_estilo::largura_percentual | flag_estilo::altura_justa;
+    cima->m_estilo.m_largura = 1;
+    cima->m_estilo.m_altura = 80;
+    cima->m_estilo.m_cor_fundo = {0.1, 0.1, 0.1, 1};
+    cima->m_estilo.m_padding_geral = {5, 5};
+    cima->adicionar<elementos::texto>("Projetos Selecionado: ", cor(1.f), 20);
+    cima->adicionar<elementos::texto>(&m_projeto_selecionado);
+    // meio
+    auto* meio = area_maior->adicionar<caixa>();
+    meio->m_estilo.m_flag_estilo |= flag_estilo::largura_percentual | flag_estilo::altura_justa;
+    meio->m_estilo.m_largura = 1;
+    meio->m_estilo.m_padding_geral = ivet2(5, 5);
+    meio->m_estilo.m_cor_fundo = cor(0.18f, 0.18f, 0.185f, 1.f);
+
+    // caixa texto
+    auto* caixa_texto = meio->adicionar<elementos::caixa_de_texto>("Digite o nome do projeto aqui...");
+    caixa_texto->m_estilo.m_flag_estilo |= flag_estilo::largura_percentual | flag_estilo::alinhamento_central | flag_estilo::quebrar_linha;
+    caixa_texto->m_estilo.m_largura = 1;
+    caixa_texto->m_estilo.m_cor_fundo = cor(0.12f, 0.12f, 0.12f, 1.f);
+    caixa_texto->m_estilo.m_cor_borda = cor(0.3f, 0.3f, 0.3f, 1.f);
+    
+    meio->adicionar<elementos::botao>([this]() {
+            if(m_projeto_selecionado != "nenhum") {
                 abrirProjeto(projetos[m_projeto_selecionado]);
             }
         }, " abrir ", "abrir.png");
-    gui.adicionar<elementos::botao>("##baixo", "###texto4", [this]() {
-            if(m_projeto_selecionado != "Nenhum") {
+    meio->adicionar<elementos::botao>([this]() {
+            if(m_projeto_selecionado != "nenhum") {
                 removerProjeto(projetos[m_projeto_selecionado]);
             }
         }, " remover ", "remover.png");
-    gui.fimEstilo();
+    /*
+    ui.adicionar<caixa>("#area_maior", "##baixo");
+        m_estilo.m_flag_estilo = flag_estilo::modular | flag_estilo::alinhamento_central);
+        m_estilo.m_largura =       (1.0);
+        m_estilo.m_altura =        (1.0);
+        m_estilo.m_padding_geral = (5, 0);
+        m_estilo.m_cor_fundo = ({0.23, 0.23, 0.23, 1});
+    ui.fimEstilo();
+    ui.adicionar<elementos::texto>("##cima", "###texto1", "Projeto selecionado:", 20);
+    ui.adicionar<elementos::texto>("##cima", "###texto2", &m_projeto_selecionado, 15);
+        m_estilo.m_padding = (10, 5);
+    ui.fimEstilo();
+    ui.fimEstilo();*/
 }
 
 void gerenciador_projetos::iniciar() {
@@ -297,14 +274,42 @@ void gerenciador_projetos::iniciar() {
         }
     janela::gerarInstancia("gerenciador de projetos | Daniel O. dos Santos© Bubble 2025", true);
    
-    configurarUI(DIR_PADRAO);
+    ui.inicializar();
+    configurarUI();
 
     while(!glfwWindowShouldClose(janela::obterInstancia().window))
     {
         janela::obterInstancia().poll();
         
-        gui.atualizar();
+        ui.atualizar();
 
         janela::obterInstancia().swap();
+    }
+}
+
+void gerenciador_projetos::buscarProjetos() {
+    projetos.clear();
+    if(std::filesystem::exists(DIR_PADRAO))
+    for (const auto& entry : std::filesystem::directory_iterator(DIR_PADRAO)) {
+        if (entry.is_directory()) {
+            auto dir = entry.path().string();
+            auto doc = projeto::analisarProjeto(dir);
+            if(!doc.HasMember("nome")) throw std::runtime_error("Alanisando projetos do gerenciador de projetos.");
+            std::string nome = doc["nome"].GetString();
+            projetos[nome] = dir;
+            depuracao::emitir(info, "gerenciador_projetos", std::string("Projeto encontrados: ") + nome);
+        }
+    }
+    if(barra_lateral) {
+    barra_lateral->m_filhos.clear();
+    auto* txt = barra_lateral->adicionar<elementos::texto>("Projetos encontrados:");
+    txt->m_estilo.m_flag_estilo |= flag_estilo::quebrar_linha;
+    for(auto& [nome, diretorio] : projetos) {
+        auto* btn = barra_lateral->adicionar<elementos::botao>([nome, this]() {
+                m_projeto_selecionado = nome;
+                }, " " + nome + " ", "folder.png");
+        btn->m_estilo.m_flag_estilo |= flag_estilo::quebrar_linha;
+        btn->m_estilo.m_cor_borda = cor(1.f);
+    }
     }
 }

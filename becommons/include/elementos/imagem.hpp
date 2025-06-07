@@ -39,44 +39,31 @@ SOFTWARE.
 
 namespace BECOMMONS_NS{
     namespace elementos{
-	    class imagem : public area_de_toque
-	    {
+	    class imagem : public area_de_toque {
         public:
             tipo_caixa tipo() const override { return tipo_caixa::imagem; }
-            shader* m_imagem_shader                 {nullptr};
-            material m_material;
             std::string m_imagem_path	            { "" };
 		    ivet2 m_imagem_tamanho                  {100, 100};
 		    bool m_imagem_flip                      { false };
-		    textura m_textura;
-            
-            void definirUniformesMaterial() {
-                m_material.definirUniforme("quadrado.posicao", fvet2(m_estilo.m_limites.x, m_estilo.m_limites.y));
-                m_material.definirUniforme("quadrado.tamanho", fvet2(m_estilo.m_limites.z, m_estilo.m_limites.w));
-                m_material.definirUniforme("resolucao_textura", fvet2(m_estilo.m_limites.z, m_estilo.m_limites.w));
-                m_material.definirUniforme("cor_borda", m_estilo.m_cor_borda);
-                m_material.definirUniforme("time", static_cast<float>(janela::obterInstancia().m_tempo.obterDeltaTime()));
-                m_material.definirUniforme("tamanho_bordas", static_cast<int>(m_estilo.m_espessura_borda));
-                m_material.definirUniforme("mostrar_bordas", m_estilo.m_cor_borda.a != 0);
-                m_material.definirUniforme("flip", m_imagem_flip);
-                m_material.definirTextura("textura", m_textura);
-            }
+            unsigned int id = 0;
 
 		    ~imagem() override {
-		        delete m_imagem_shader;
 		    }
-		    imagem(const std::string& diretorio, const bool f = false) : m_imagem_flip(f), m_imagem_path(diretorio), m_imagem_shader(new shader("imagem.vert", "imagem.frag")) {
+
+		    imagem(const std::string& diretorio, const bool f = false) : m_imagem_flip(f), m_imagem_path(diretorio) {
     		    if (!std::filesystem::exists(diretorio) && std::filesystem::exists(std::filesystem::absolute(diretorio))) {
                     m_imagem_path = (std::filesystem::absolute(diretorio).string().c_str());
 	    		}
-	    		m_textura.path = m_imagem_path;
-		    	m_textura.id = textureLoader::obterInstancia().
+	    		m_shader = std::make_unique<shader>("imagem.vert", "imagem.frag");
+		    	id = textureLoader::obterInstancia().
 			    carregarTextura(m_imagem_path, m_imagem_tamanho);
                 m_estilo.m_limites.z = m_imagem_tamanho.x;
     			m_estilo.m_limites.w = m_imagem_tamanho.y;
+                m_material.definirTextura("textura", {id, m_imagem_path});
 		    }
-		    imagem(unsigned int id, const bool f = false) : m_imagem_flip(f), m_imagem_shader(new shader("imagem.vert", "framebuffer.frag")) {
-		    	m_textura.id = id;
+		    imagem(unsigned int id, const bool f = false) : m_imagem_flip(f) {
+	    		m_shader = std::make_unique<shader>("imagem.vert", "imagem.frag");
+                m_material.definirTextura("textura", {id, m_imagem_path});
 		    }
 	    };
     } ///< elementos
