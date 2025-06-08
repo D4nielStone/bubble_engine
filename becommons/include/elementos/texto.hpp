@@ -148,7 +148,6 @@ namespace BECOMMONS_NS{
             }
             void desenhar(unsigned int ret_VAO) override {
                 limites_iniciais = m_estilo.m_limites;
-                m_estilo.m_cor_fundo.a = 1;
 
                 auto& chs = gerenciadorFontes::obterInstancia().obter(m_texto_fonte, m_texto_escala);
                 float y_linha = m_texto_escala;
