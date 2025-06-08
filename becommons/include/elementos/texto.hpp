@@ -66,6 +66,7 @@ namespace BECOMMONS_NS{
             {
                 m_estilo.m_largura = obterLargura(frase);
                 m_estilo.m_altura = obterAltura(frase);
+                m_estilo.m_cor_fundo.a = 1;
                 m_shader = (std::make_unique<shader>("imagem.vert", "texto.frag"));
             }
             texto(const std::string frase,
@@ -78,6 +79,7 @@ namespace BECOMMONS_NS{
             {
                 m_estilo.m_largura = obterLargura(frase);
                 m_estilo.m_altura = obterAltura(frase);
+                m_estilo.m_cor_fundo.a = 1;
                 m_shader = (std::make_unique<shader>("imagem.vert", "texto.frag"));
             }
             texto(std::string* frase,
@@ -89,6 +91,7 @@ namespace BECOMMONS_NS{
                 , m_texto_flags(flags)
             {
                 m_estilo.m_largura = obterLargura(*frase);
+                m_estilo.m_cor_fundo.a = 1;
                 m_shader = (std::make_unique<shader>("imagem.vert", "texto.frag"));
             }
 
@@ -184,10 +187,9 @@ namespace BECOMMONS_NS{
             // now advance cursors for next glyph (note that advance is number of 1/64 pixels)
             x_linha += (ch.avanco >> 6);
         }
-
                 m_estilo.m_largura = obterLargura(m_texto_frase);
                 m_estilo.m_altura = obterAltura(m_texto_frase);
-                m_estilo.m_limites = limites_iniciais;
+                m_estilo.m_limites = {limites_iniciais.x, limites_iniciais.y, m_estilo.m_largura, m_estilo.m_altura};
             };
         };
     } // elementos

@@ -63,37 +63,24 @@ namespace BECOMMONS_NS{
                 auto m_texto = std::make_unique<texto>(txt);
                 m_filhos.push_back(std::move(m_texto));
             }
-            botao(bool* ptr, const std::string& txt, const std::string img) : area_de_toque(ptr) {
+            botao(bool* ptr, const std::string& txt, const std::string img, const unsigned int size = 20) : area_de_toque(ptr) {
                 auto m_texto = std::make_unique<texto>(txt);
                 auto m_imagem = std::make_unique<imagem>(img);
+                m_imagem->m_estilo.m_altura = size;
+                m_imagem->m_estilo.m_largura = size;
                 m_filhos.push_back(std::move(m_imagem));
                 m_filhos.push_back(std::move(m_texto));
             }
-            botao(const std::function<void()> &fctn, const std::string& txt, const std::string img) : area_de_toque(fctn) {
+            botao(const std::function<void()> &fctn, const std::string& txt, const std::string img, const unsigned int size = 20) : area_de_toque(fctn) {
                 auto m_texto = std::make_unique<texto>(txt);
                 auto m_imagem = std::make_unique<imagem>(img);
+                m_imagem->m_estilo.m_altura = size;
+                m_imagem->m_estilo.m_largura = size;
                 m_filhos.push_back(std::move(m_imagem));
                 m_filhos.push_back(std::move(m_texto));
             }
             /// @}
             ~botao() {
-            }
-            inline void cfgImagem(imagem* m_imagem) {
-                old_fundo_alpha = m_estilo.m_cor_fundo.a;
-                m_estilo.m_flag_estilo = flag_estilo::modular;
-
-                m_imagem->m_estilo.m_altura = m_estilo.m_altura;
-                m_imagem->m_estilo.m_largura = m_estilo.m_largura;
-                m_imagem->m_estilo.m_flag_estilo = m_estilo.m_flag_estilo;
-            }
-            inline void cfgTexto(texto* m_texto) {
-                old_fundo_alpha = m_estilo.m_cor_fundo.a;
-                m_estilo.m_flag_estilo = flag_estilo::modular;
-                
-                m_estilo.m_largura += m_texto->obterLargura(m_texto->m_texto_frase) + m_estilo.m_padding_geral.x * 2;
-                m_estilo.m_altura = m_texto->obterAltura(m_texto->m_texto_frase) + m_estilo.m_padding_geral.y * 2;
-                
-                m_texto->m_estilo.m_flag_estilo = m_estilo.m_flag_estilo;
             }
             bool pressionado() override {
                 m_pressionado = area_de_toque::pressionado();
@@ -102,15 +89,8 @@ namespace BECOMMONS_NS{
                 return m_pressionado;
             }
             void configurar() override {
-                for(auto& f : m_filhos) {
-                    if(auto img = dynamic_cast<imagem*>(f.get())) {
-
-                        cfgImagem(img);
-                    } else
-                    if(auto txt = dynamic_cast<texto*>(f.get())) {
-                        cfgTexto(txt);
-                    }
-                }
+                m_estilo.m_flag_estilo |= tem(flag_estilo::largura_percentual) ? flag_estilo::modular : flag_estilo::largura_justa | flag_estilo::altura_justa | flag_estilo::modular;
+                old_fundo_alpha = m_estilo.m_cor_fundo.a;
             }
         };  
     } // elementos

@@ -201,7 +201,7 @@ void gerenciador_projetos::configurarUI() {
     barra_lateral->m_estilo.m_flag_estilo |= flag_estilo::altura_percentual;
     barra_lateral->m_estilo.m_cor_borda = {0.05f, 0.05f, 0.05f, 1.f};
     barra_lateral->m_estilo.m_cor_fundo = {0.1f, 0.1f, 0.1f, 1.f};
-    barra_lateral->m_estilo.m_padding_geral = {5, 3};
+    barra_lateral->m_estilo.m_padding_geral = {5, 1};
     barra_lateral->m_estilo.m_altura = 1.0;
     barra_lateral->m_estilo.m_largura = 200;
     
@@ -235,7 +235,7 @@ void gerenciador_projetos::configurarUI() {
     caixa_texto->m_estilo.m_flag_estilo |= flag_estilo::largura_percentual | flag_estilo::alinhamento_central | flag_estilo::quebrar_linha;
     caixa_texto->m_estilo.m_largura = 1;
     caixa_texto->m_estilo.m_cor_fundo = cor(0.12f, 0.12f, 0.12f, 1.f);
-    caixa_texto->m_estilo.m_cor_borda = cor(0.3f, 0.3f, 0.3f, 1.f);
+    caixa_texto->m_estilo.m_cor_borda = cor(0.1f, 0.1f, 0.1f, 1.f);
     
     meio->adicionar<elementos::botao>([this]() {
             if(m_projeto_selecionado != "nenhum") {
@@ -309,7 +309,9 @@ void gerenciador_projetos::buscarProjetos() {
                 m_projeto_selecionado = nome;
                 }, " " + nome + " ", "folder.png");
         btn->m_estilo.m_flag_estilo |= flag_estilo::quebrar_linha;
-        btn->m_estilo.m_cor_borda = cor(1.f);
+        btn->m_estilo.m_cor_borda = cor(0.3f);
+        btn->m_estilo.m_espessura_borda = 1;
+        btn->m_estilo.m_padding_geral = {5, 0};
     }
     }
 }

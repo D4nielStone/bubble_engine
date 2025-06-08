@@ -34,7 +34,7 @@ namespace BECOMMONS_NS {
         class caixa_de_texto : public area_de_texto {
             private:
                 std::string m_etiqueta {""};
-                cor m_cor_antiga, m_acrescimo_cor { 0.1f, 0.1f, 0.25f };
+                cor m_cor_antiga, m_acrescimo_cor { 0.1f, 0.1f, 0.1f };
                 float m_borda_antiga, m_acrescimo_borda { 1.f };
                 std::string m_display {""};
                 elementos::texto* m_texto_ptr;
@@ -67,6 +67,9 @@ namespace BECOMMONS_NS {
                         m_display = m_buffer; m_texto_ptr->m_estilo.m_cor_fundo.a = 1;
                     }
                     m_estilo.m_altura = m_texto_ptr->obterAltura(m_display) + m_estilo.m_padding_geral.y * 2;
+
+                    m_texto_ptr->m_estilo.m_largura = m_texto_ptr->obterLargura(m_texto_ptr->m_texto_frase);
+                    m_texto_ptr->m_estilo.m_altura = m_texto_ptr->obterAltura(m_texto_ptr->m_texto_frase);
                 }
         };
     } 

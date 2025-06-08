@@ -33,19 +33,39 @@ using namespace BECOMMONS_NS;
 
 void interface::atualizarLJ(caixa* it_caixa) {
     const bool is_horizontal = it_caixa->m_estilo.m_orientacao_modular == estilo::orientacao::horizontal;
-    float mais_largo = 0.f;
-    if(!deveAtualizar(it_caixa)) return;
+    if (!deveAtualizar(it_caixa)) return;
 
-    for(auto& filho : it_caixa->m_filhos)
-    {
-        if(!deveAtualizar(filho.get()) || filho->tem(flag_estilo::largura_percentual)) continue;
-        if(!is_horizontal && it_caixa->tem(flag_estilo::largura_justa))
-        {
-        // Calcular largura justa
-        mais_largo = std::max(mais_largo, filho->m_estilo.m_largura + filho->m_estilo.m_padding.x*(it_caixa->m_filhos.size()+1) + it_caixa->m_estilo.m_padding_geral.x*(it_caixa->m_filhos.size()+1));
-        // Definir dimensão da caixa pai
-        it_caixa->m_estilo.m_largura = mais_largo;
+    float mais_largo = 0.f;
+    float acumulado_largura = 0.f;
+    size_t n_filhos = it_caixa->m_filhos.size();
+
+    for (auto& filho : it_caixa->m_filhos) {
+        if (!deveAtualizar(filho.get()) || filho->tem(flag_estilo::largura_percentual))
+            continue;
+
+        // --- VERTICAL: largura justa é a maior largura entre os filhos (+ paddings) ---
+        if (!is_horizontal && it_caixa->tem(flag_estilo::largura_justa)) {
+            float width_com_padding =
+                filho->m_estilo.m_largura +
+                filho->m_estilo.m_padding.x * 2 +
+                it_caixa->m_estilo.m_padding_geral.x * 2;
+            mais_largo = std::max(mais_largo, width_com_padding);
         }
+        // --- HORIZONTAL: soma todas as larguras (+ paddings) para ter "largura justa" ---
+        else if (is_horizontal && it_caixa->tem(flag_estilo::largura_justa)) {
+            float w = filho->m_estilo.m_largura
+                    + filho->m_estilo.m_padding.x * 2
+                    + it_caixa->m_estilo.m_padding_geral.x * 2;
+            acumulado_largura += w;
+        }
+    }
+
+    // Aplica a largura final à caixa pai
+    if (!is_horizontal && it_caixa->tem(flag_estilo::largura_justa)) {
+        it_caixa->m_estilo.m_largura = mais_largo;
+    }
+    else if (is_horizontal && it_caixa->tem(flag_estilo::largura_justa)) {
+        it_caixa->m_estilo.m_largura = acumulado_largura;
     }
 }
 void interface::atualizarAJ(caixa* it_caixa) {
@@ -381,7 +401,6 @@ void interface::atualizarFilhos(caixa* it_caixa) {
     if (!it_caixa) {
         throw std::runtime_error("Caixa nula sendo atualizada.");
     }
-    if(deveAtualizar(it_caixa))
         processarModular(it_caixa);
 
     switch (it_caixa->tipo()) {
