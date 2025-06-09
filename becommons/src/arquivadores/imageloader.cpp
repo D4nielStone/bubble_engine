@@ -36,7 +36,7 @@ SOFTWARE.
 
 using namespace BECOMMONS_NS;
 
-const std::map<const std::string, std::pair<BYTE*, const unsigned int>> imagems_memoria
+static const std::map<const std::string, std::pair<BYTE*, const unsigned int>> imagems_memoria
 {
     {"abrir.png", std::pair(abrir_png, abrir_png_len)},
     {"adicionar.png", std::pair(adicionar_png, adicionar_png_len)},
@@ -55,6 +55,7 @@ const std::map<const std::string, std::pair<BYTE*, const unsigned int>> imagems_
     {"check.png", std::pair(check_png, check_png_len)},
     {"Codigo.png", std::pair(codigo_png, codigo_png_len)},
     {"cube.png", std::pair(cube_png, cube_png_len)},
+    {"joystick.png", std::pair(joystick_png, joystick_png_len)},
     {"Fisica.png", std::pair(fisica_png, fisica_png_len)},
     {"Iluminacao.png", std::pair(iluminacao_png, iluminacao_png_len)},
     {"Play.png", std::pair(play_png, play_png_len)},

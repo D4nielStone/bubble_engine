@@ -237,19 +237,25 @@ void gerenciador_projetos::configurarUI() {
     caixa_texto->m_estilo.m_cor_fundo = cor(0.12f, 0.12f, 0.12f, 1.f);
     caixa_texto->m_estilo.m_cor_borda = cor(0.1f, 0.1f, 0.1f, 1.f);
     
+    estilo e;
+    e.m_flag_estilo |= flag_estilo::largura_percentual | flag_estilo::quebrar_linha;
+    e.m_cor_borda = cor(0.3f);
+    e.m_largura = 1;
+    e.m_padding_geral = {5, 0};
+
     meio->adicionar<elementos::botao>([this]() {
             if (!buffer_projeto.empty()) criarProjetoPadrao(DIR_PADRAO, buffer_projeto.c_str());
-        }, " adicionar ", "adicionar.png")->m_estilo.m_cor_borda = cor(0.3f);
+        }, "adicionar", "adicionar.png")->m_estilo = e;
     meio->adicionar<elementos::botao>([this]() {
             if(m_projeto_selecionado != "nenhum") {
                 abrirProjeto(projetos[m_projeto_selecionado]);
             }
-        }, " abrir ", "abrir.png")->m_estilo.m_cor_borda = cor(0.3f);
+        }, "abrir", "abrir.png")->m_estilo = e;
     meio->adicionar<elementos::botao>([this]() {
             if(m_projeto_selecionado != "nenhum") {
                 removerProjeto(projetos[m_projeto_selecionado]);
             }
-        }, " remover ", "remover.png")->m_estilo.m_cor_borda = cor(0.3f);
+        }, "remover", "remover.png")->m_estilo = e;
 }
 
 void gerenciador_projetos::iniciar() {
@@ -270,9 +276,7 @@ void gerenciador_projetos::iniciar() {
     while(!glfwWindowShouldClose(janela::obterInstancia().window))
     {
         janela::obterInstancia().poll();
-        
         ui.atualizar();
-
         janela::obterInstancia().swap();
     }
 }
@@ -297,7 +301,7 @@ void gerenciador_projetos::buscarProjetos() {
     for(auto& [nome, diretorio] : projetos) {
         auto* btn = barra_lateral->adicionar<elementos::botao>([nome, this]() {
                 m_projeto_selecionado = nome;
-                }, " " + nome + " ", "folder.png");
+                }, nome, "joystick.png");
         btn->m_estilo.m_flag_estilo |= flag_estilo::largura_percentual | flag_estilo::quebrar_linha;
         btn->m_estilo.m_cor_borda = cor(0.3f);
         btn->m_estilo.m_largura = 1;

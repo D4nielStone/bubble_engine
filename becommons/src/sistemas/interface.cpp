@@ -204,6 +204,7 @@ bool interface::deveAtualizar(caixa* it_caixa) {
                 || janela::obterInstancia().m_inputs.m_estado_tecla == GLFW_PRESS)) {
         return true;
     }
+    it_caixa->m_estilo_antigo = it_caixa->m_estilo;
     return false;
 }
 
@@ -235,6 +236,7 @@ void interface::atualizar() {
         static_cast<float>(janela::obterTamanhoJanela().x),
         static_cast<float>(janela::obterTamanhoJanela().y)};
 
+    chamarFuncoes(m_raiz.get());
     atualizarHDTF(m_raiz.get(), atualizarLJ);
     atualizarHDTF(m_raiz.get(), atualizarAJ); 
     atualizarFilhos(m_raiz.get());
@@ -400,27 +402,31 @@ void interface::processarModular(caixa* it_caixa) {
     }
 }
 
+void interface::chamarFuncoes(caixa* c) {
+    for (auto& it_caixa : c->m_filhos) {
+        switch (it_caixa->tipo()) {
+        case tipo_caixa::caixa_de_texto: {
+            auto ct = static_cast<elementos::caixa_de_texto*>(it_caixa.get());
+            ct->atualizar(); 
+            break;
+                                         }
+        case tipo_caixa::botao: {
+            auto btn = static_cast<elementos::botao*>(it_caixa.get());
+            if(btn->pressionado() && btn->m_use_funcao)
+                btn->m_funcao();
+            break;
+                                }
+        default: break;
+        }
+        chamarFuncoes(it_caixa.get());
+    }
+}
 void interface::atualizarFilhos(caixa* it_caixa) {
     if (!it_caixa) throw std::runtime_error("Caixa nula sendo atualizada.");
     if (deveAtualizar(it_caixa)) processarModular(it_caixa);
 
-    switch (it_caixa->tipo()) {
-    case tipo_caixa::caixa_de_texto: {
-        auto ct = static_cast<elementos::caixa_de_texto*>(it_caixa);
-        ct->atualizar(); 
-        break;
-                                     }
-    case tipo_caixa::botao: {
-        auto btn = static_cast<elementos::botao*>(it_caixa);
-        if(btn->pressionado() && btn->m_use_funcao)
-            btn->m_funcao();
-        break;
-                            }
-    default: break;
-    }
     // Atualiza recursivamente os filhos
     for (auto& filho : it_caixa->m_filhos) {
         atualizarFilhos(filho.get());
     }
-    it_caixa->m_estilo_antigo = it_caixa->m_estilo;
 }

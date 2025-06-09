@@ -50,6 +50,7 @@ namespace BECOMMONS_NS {
         void organizarLinha(caixa*, bool, const ivet2 , const fvet2&, const fvet2&, fvet2&);
         void processarModular(caixa*);
         void atualizarFilhos(caixa*);
+        void chamarFuncoes(caixa*);
         interface();
         ~interface();
 

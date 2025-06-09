@@ -46,6 +46,7 @@ SOFTWARE.
 #include "imagems/scene.hpp"
 #include "imagems/codigo.hpp"
 #include "imagems/renderizador.hpp"
+#include "imagems/joystick.hpp"
 #include "imagems/DaylightBox_Right.hpp"
 #include "imagems/DaylightBox_Top.hpp"
 #include "imagems/DaylightBox_Left.hpp"
