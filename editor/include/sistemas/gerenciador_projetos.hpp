@@ -23,7 +23,7 @@ namespace EDITOR_NS
             void iniciar();
         private:
             std::map<std::string, std::string> projetos;
-            std::string m_projeto_selecionado {"nenhum"};
+            std::string m_projeto_selecionado {"nenhum"}, buffer_projeto {""};
             caixa* barra_lateral {nullptr};
             becommons::interface ui;
             std::string DIR_PADRAO;

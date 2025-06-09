@@ -1,26 +1,24 @@
 /** @copyright 
-MIT License
-Copyright (c) 2025 Daniel Oliveira
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE. 
-*/
-/**
+ * MIT License
+ * Copyright (c) 2025 Daniel Oliveira
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE. 
  * @file area_de_texto.hpp
  * @author Daniel O. dos Santos
  */
@@ -50,10 +48,13 @@ namespace BECOMMONS_NS {
             // armazena o estado do botão do mouse no frame anterior para detectar clique único
             bool m_mouse_antes_pressionado { false }, m_teclado_foi_solto { true };
             int m_pipe_offset { 0 };
-            std::string m_buffer {""};
+            std::string m_buffer {""}, *str_ptr {nullptr};
             float *num_ptr { nullptr };
         public:
             area_de_texto() = default;
+            area_de_texto(std::string* buffer) : str_ptr(buffer), m_buffer() {
+                if(buffer) m_buffer = *buffer;
+            }
             area_de_texto(float* f_ptr) : num_ptr(f_ptr), m_buffer() {
                 if(num_ptr) {
                     m_buffer = std::to_string(*num_ptr);
@@ -146,6 +147,8 @@ namespace BECOMMONS_NS {
                 if(num_ptr) {
                     if(m_buffer.empty() || m_buffer == "." || m_buffer == "-") *num_ptr = 0;
                     else *num_ptr = std::stof(m_buffer);
+                } else if (str_ptr) {
+                    *str_ptr = m_buffer;
                 }
                 m_teclado_foi_solto = false;
             }

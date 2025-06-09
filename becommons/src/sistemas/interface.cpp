@@ -75,6 +75,7 @@ void interface::atualizarAJ(caixa* it_caixa) {
     float mais_alto = 0.f;
     float acumulado_altura = 0.f;
     size_t n_filhos = it_caixa->m_filhos.size();
+    bool quebra_linha = false;
 
     for (auto& filho : it_caixa->m_filhos) {
         if (!deveAtualizar(filho.get()) || filho->tem(flag_estilo::altura_percentual))
@@ -86,6 +87,7 @@ void interface::atualizarAJ(caixa* it_caixa) {
                 filho->m_estilo.m_altura +
                 filho->m_estilo.m_padding.y * 2 +
                 it_caixa->m_estilo.m_padding_geral.y * 2;
+            if (quebra_linha) height_com_padding += mais_alto;
             mais_alto = std::max(mais_alto, height_com_padding);
             it_caixa->m_estilo.m_altura = mais_alto;
         }
@@ -97,6 +99,7 @@ void interface::atualizarAJ(caixa* it_caixa) {
                     + it_caixa->m_estilo.m_padding_geral.y * 2;
             acumulado_altura += h;
         }
+        quebra_linha = filho->tem(flag_estilo::quebrar_linha);
     }
 
     // Depois de somar todos os filhos, aplica à caixa pai (apenas no caso vertical)
@@ -398,10 +401,8 @@ void interface::processarModular(caixa* it_caixa) {
 }
 
 void interface::atualizarFilhos(caixa* it_caixa) {
-    if (!it_caixa) {
-        throw std::runtime_error("Caixa nula sendo atualizada.");
-    }
-        processarModular(it_caixa);
+    if (!it_caixa) throw std::runtime_error("Caixa nula sendo atualizada.");
+    if (deveAtualizar(it_caixa)) processarModular(it_caixa);
 
     switch (it_caixa->tipo()) {
     case tipo_caixa::caixa_de_texto: {

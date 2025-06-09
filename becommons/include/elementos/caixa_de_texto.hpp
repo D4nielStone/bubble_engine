@@ -41,6 +41,7 @@ namespace BECOMMONS_NS {
             public:
                 caixa_de_texto() = default;
                 caixa_de_texto(const std::string& etiqueta, const std::string& buffer_ini = "") : m_etiqueta(etiqueta) {m_buffer = buffer_ini;};
+                caixa_de_texto(const std::string& etiqueta, std::string* buffer) : m_etiqueta(etiqueta), area_de_texto(buffer) {};
                 caixa_de_texto(const std::string& etiqueta, float* f_ptr) : m_etiqueta(etiqueta), area_de_texto(f_ptr) {};
                 void configurar() override {
                     m_estilo.m_padding_geral = { 5, 2 };

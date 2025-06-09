@@ -169,8 +169,8 @@ void gerenciador_projetos::removerProjeto(const std::string& dir) {
         std::filesystem::remove_all(dir);
     }
 
-    m_projeto_selecionado = projetos.empty() ? "nenhum" : projetos.end()->first;
     buscarProjetos();
+    m_projeto_selecionado = projetos.empty() ? "nenhum" : projetos.begin()->first;
 }
 void gerenciador_projetos::abrirProjeto(const std::string& caminho) {
        glfwDestroyWindow(janela::obterInstancia().window);
@@ -231,35 +231,25 @@ void gerenciador_projetos::configurarUI() {
     meio->m_estilo.m_cor_fundo = cor(0.18f, 0.18f, 0.185f, 1.f);
 
     // caixa texto
-    auto* caixa_texto = meio->adicionar<elementos::caixa_de_texto>("Digite o nome do projeto aqui...");
-    caixa_texto->m_estilo.m_flag_estilo |= flag_estilo::largura_percentual | flag_estilo::alinhamento_central | flag_estilo::quebrar_linha;
+    auto* caixa_texto = meio->adicionar<elementos::caixa_de_texto>("Digite o nome do projeto aqui...", &buffer_projeto);
+    caixa_texto->m_estilo.m_flag_estilo |= flag_estilo::largura_percentual | flag_estilo::quebrar_linha;
     caixa_texto->m_estilo.m_largura = 1;
     caixa_texto->m_estilo.m_cor_fundo = cor(0.12f, 0.12f, 0.12f, 1.f);
     caixa_texto->m_estilo.m_cor_borda = cor(0.1f, 0.1f, 0.1f, 1.f);
     
     meio->adicionar<elementos::botao>([this]() {
+            if (!buffer_projeto.empty()) criarProjetoPadrao(DIR_PADRAO, buffer_projeto.c_str());
+        }, " adicionar ", "adicionar.png")->m_estilo.m_cor_borda = cor(0.3f);
+    meio->adicionar<elementos::botao>([this]() {
             if(m_projeto_selecionado != "nenhum") {
                 abrirProjeto(projetos[m_projeto_selecionado]);
             }
-        }, " abrir ", "abrir.png");
+        }, " abrir ", "abrir.png")->m_estilo.m_cor_borda = cor(0.3f);
     meio->adicionar<elementos::botao>([this]() {
             if(m_projeto_selecionado != "nenhum") {
                 removerProjeto(projetos[m_projeto_selecionado]);
             }
-        }, " remover ", "remover.png");
-    /*
-    ui.adicionar<caixa>("#area_maior", "##baixo");
-        m_estilo.m_flag_estilo = flag_estilo::modular | flag_estilo::alinhamento_central);
-        m_estilo.m_largura =       (1.0);
-        m_estilo.m_altura =        (1.0);
-        m_estilo.m_padding_geral = (5, 0);
-        m_estilo.m_cor_fundo = ({0.23, 0.23, 0.23, 1});
-    ui.fimEstilo();
-    ui.adicionar<elementos::texto>("##cima", "###texto1", "Projeto selecionado:", 20);
-    ui.adicionar<elementos::texto>("##cima", "###texto2", &m_projeto_selecionado, 15);
-        m_estilo.m_padding = (10, 5);
-    ui.fimEstilo();
-    ui.fimEstilo();*/
+        }, " remover ", "remover.png")->m_estilo.m_cor_borda = cor(0.3f);
 }
 
 void gerenciador_projetos::iniciar() {
@@ -308,9 +298,9 @@ void gerenciador_projetos::buscarProjetos() {
         auto* btn = barra_lateral->adicionar<elementos::botao>([nome, this]() {
                 m_projeto_selecionado = nome;
                 }, " " + nome + " ", "folder.png");
-        btn->m_estilo.m_flag_estilo |= flag_estilo::quebrar_linha;
+        btn->m_estilo.m_flag_estilo |= flag_estilo::largura_percentual | flag_estilo::quebrar_linha;
         btn->m_estilo.m_cor_borda = cor(0.3f);
-        btn->m_estilo.m_espessura_borda = 1;
+        btn->m_estilo.m_largura = 1;
         btn->m_estilo.m_padding_geral = {5, 0};
     }
     }
