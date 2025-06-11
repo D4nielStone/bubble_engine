@@ -32,6 +32,7 @@ SOFTWARE.
 #include "imagems/folder.hpp"
 #include "imagems/banner.hpp"
 #include "imagems/icon.hpp"
+#include "imagems/info.hpp"
 #include "imagems/arco_cor.hpp"
 #include "imagems/camera.hpp"
 #include "imagems/remover.hpp"

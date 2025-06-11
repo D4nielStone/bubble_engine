@@ -46,24 +46,32 @@ namespace BECOMMONS_NS{
 		    ivet2 m_imagem_tamanho                  {100, 100};
 		    bool m_imagem_flip                      { false };
             unsigned int id = 0;
+            float m_escala = 1.f;
+
+            void desenhar(unsigned int ret_VAO) override {
+                caixa::desenhar(ret_VAO);
+                m_imagem_tamanho = {static_cast<int>(m_estilo.m_limites.z), static_cast<int>(m_estilo.m_limites.w)};
+            }
 
 		    ~imagem() override {
 		    }
 
-		    imagem(const std::string& diretorio, const bool f = false) : m_imagem_flip(f), m_imagem_path(diretorio) {
+		    imagem(const std::string& diretorio, const bool f = false, const float escala=1) : m_escala(escala), m_imagem_flip(f), m_imagem_path(diretorio) {
     		    if (!std::filesystem::exists(diretorio) && std::filesystem::exists(std::filesystem::absolute(diretorio))) {
                     m_imagem_path = (std::filesystem::absolute(diretorio).string().c_str());
 	    		}
 	    		m_shader = std::make_unique<shader>("imagem.vert", "imagem.frag");
 		    	id = textureLoader::obterInstancia().
 			    carregarTextura(m_imagem_path, m_imagem_tamanho);
-                m_estilo.m_limites.z = m_imagem_tamanho.x;
-    			m_estilo.m_limites.w = m_imagem_tamanho.y;
+                m_estilo.m_largura = m_imagem_tamanho.x*m_escala;
+    			m_estilo.m_altura = m_imagem_tamanho.y*m_escala;
                 m_material.definirTextura("textura", {id, m_imagem_path});
+                m_material.definirUniforme("flip", &m_imagem_flip);
 		    }
 		    imagem(unsigned int id, const bool f = false) : m_imagem_flip(f) {
 	    		m_shader = std::make_unique<shader>("imagem.vert", "imagem.frag");
                 m_material.definirTextura("textura", {id, m_imagem_path});
+                m_material.definirUniforme("flip", &m_imagem_flip);
 		    }
 	    };
     } ///< elementos

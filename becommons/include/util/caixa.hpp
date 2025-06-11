@@ -177,6 +177,15 @@ namespace BECOMMONS_NS {
             m_filhos.push_back(std::move(nova_caixa));
             return ptr;
         }
+        
+        template <typename T>
+        T* adicionar(std::unique_ptr<T> nova_caixa) {
+            nova_caixa->m_pai = this;
+            nova_caixa->configurar();
+            auto* ptr = nova_caixa.get();
+            m_filhos.push_back(std::move(nova_caixa));
+            return ptr;
+        }
         virtual void configurar() {
         };
         virtual void desenhar(unsigned int ret_VAO) {

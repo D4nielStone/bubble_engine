@@ -152,43 +152,35 @@ namespace BECOMMONS_NS{
             void desenhar(unsigned int ret_VAO) override {
                 limites_iniciais = m_estilo.m_limites;
 
-                auto& chs = gerenciadorFontes::obterInstancia().obter(m_texto_fonte, m_texto_escala);
+                const auto& chs = gerenciadorFontes::obterInstancia().obter(m_texto_fonte, m_texto_escala);
                 float y_linha = m_texto_escala;
                 float x_linha = m_estilo.m_limites.x; 
-        if(((uint32_t)m_texto_flags & (uint32_t)elementos::flags_texto::alinhamento_central)!=0) {
-            x_linha += m_estilo.m_limites.z / 2 - obterLargura(m_texto_frase)/2;
-        }
-        if(m_texto_frase_ptr) m_texto_frase = *m_texto_frase_ptr;
-        
-        std::string texto_final = m_texto_frase;
-
-        for(auto ca : texto_final)
-        {
-            if(ca == '\n') {y_linha += m_texto_escala; x_linha = m_estilo.m_limites.x; continue;}
-            caractere ch;
-            if (chs.empty())
-                return;
-            if(chs.find(ca) != chs.end())
-                ch = chs.at(ca);
-            else
-                continue;
+                if((static_cast<uint32_t>(m_texto_flags) & static_cast<uint32_t>(elementos::flags_texto::alinhamento_central))!=0) {
+                    x_linha += m_estilo.m_limites.z / 2 - obterLargura(m_texto_frase)/2;
+                }
+                if(m_texto_frase_ptr) m_texto_frase = *m_texto_frase_ptr;
             
-            float xpos = x_linha + ch.apoio.x;
-            float ypos = limites_iniciais.y - ch.apoio.y + y_linha;
+                for(const auto& ca : m_texto_frase) {
+                    if (chs.empty()) return;
+                    if(ca == '\n') {y_linha += m_texto_escala; x_linha = m_estilo.m_limites.x; continue;}
+                    caractere ch;
+                    if(chs.find(ca) != chs.end()) ch = chs.at(ca);
+                    else continue;
+            
+                    float xpos = x_linha + ch.apoio.x;
+                    float ypos = limites_iniciais.y - ch.apoio.y + y_linha;
+                    float w = ch.tamanho.x;
+                    float h = ch.tamanho.y;
 
-            if(y_linha > m_estilo.m_limites.y + m_estilo.m_limites.w) break;
-            float w = ch.tamanho.x;
-            float h = ch.tamanho.y;
-
-            m_estilo.m_limites = {xpos, ypos, w, h};
-            // render glyph texture over quad
-            m_material.definirTextura("text", {ch.id, ""});
-            caixa::desenhar(ret_VAO);
-            // now advance cursors for next glyph (note that advance is number of 1/64 pixels)
-            x_linha += (ch.avanco >> 6);
-        }
-                m_estilo.m_largura = obterLargura(m_texto_frase);
-                m_estilo.m_altura = obterAltura(m_texto_frase);
+                    m_estilo.m_limites = {xpos, ypos, w, h};
+                    m_material.definirTextura("text", {ch.id, ""});
+                    caixa::desenhar(ret_VAO);
+                    x_linha += (ch.avanco >> 6);
+                }
+                if (m_texto_frase_ptr) {
+                    m_estilo.m_largura = obterLargura(m_texto_frase);
+                    m_estilo.m_altura = obterAltura(m_texto_frase);
+                }
                 m_estilo.m_limites = {limites_iniciais.x, limites_iniciais.y, m_estilo.m_largura, m_estilo.m_altura};
             };
         };

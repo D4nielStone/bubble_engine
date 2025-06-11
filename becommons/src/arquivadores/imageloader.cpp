@@ -50,6 +50,7 @@ static const std::map<const std::string, std::pair<BYTE*, const unsigned int>> i
     {"skybox_front.png", std::pair(DaylightBox_Front, DaylightBox_Front_size)},
     {"icon.ico", std::pair(icon_png, icon_png_len)},
     {"banner.png", std::pair(banner_png, banner_png_len)},
+    {"info.png", std::pair(info_png, info_png_len)},
     {"arco_cor.png", std::pair(arco_cor_png, arco_cor_png_len)},
     {"Camera.png", std::pair(camera_png, camera_png_len)},
     {"check.png", std::pair(check_png, check_png_len)},

@@ -85,7 +85,6 @@ namespace BECOMMONS_NS{
             bool pressionado() override {
                 m_pressionado = area_de_toque::pressionado();
                 m_estilo.m_cor_borda.a = m_mouse_cima ? 1.f : 0.f;
-                m_estilo.m_cor_fundo.a = m_mouse_cima ? old_fundo_alpha : 0.f;
                 return m_pressionado;
             }
             void configurar() override {

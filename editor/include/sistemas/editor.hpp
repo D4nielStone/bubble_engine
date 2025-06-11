@@ -30,26 +30,22 @@
 
 namespace EDITOR_NS {
     struct sistema_editor : becommons::sistema {
-    
-    std::string texto_entidade = "id:1";
-    uint32_t entidade_atual = 1;
-    sistema_editor();
-    void atualizarEntidades();
-    void atualizarComponentes();
-    void atualizarComponente(const becommons::componente::mascara&);
-    void inicializar() override;
-    void atualizar() override;
-    static void executarRuntime();
-     
-    becommons::camera_editor cam;
-private:
-    becommons::interface gui;
-    size_t num_entidades_anterior = 0;
-    size_t entidade_anterior = 0;
-    void configurarInterface(becommons::projeto& proj);
-    inline static std::thread threadRuntime;
-    inline static std::atomic<bool> rodando{false}; // Variável para controlar a execução da thread
+        sistema_editor();
+        void inicializar() override;
+        void atualizar() override;
+        void adicionarCaixas();
+        void chamarInputs();
+         
+        becommons::camera_editor cam;
+        becommons::interface ui;
+        size_t num_entidades_anterior = 0;
+        size_t entidade_anterior = 0;
+        size_t entidade_atual = 1;
+        std::string texto_entidade = "id:1";
 
-    static void monitorarRuntime();
+        static void executarRuntime();
+        inline static std::thread threadRuntime;
+        inline static std::atomic<bool> rodando{false};
+        static void monitorarRuntime();
 };
 }
