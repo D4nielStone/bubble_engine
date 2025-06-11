@@ -26,14 +26,14 @@ var indexSectionNames =
 
 var indexSectionLabels =
 {
-  0: "Todos",
+  0: "All",
   1: "Classes",
   2: "Namespaces",
-  3: "Arquivos",
-  4: "Funções",
-  5: "Variáveis",
-  6: "Definições de Tipos",
-  7: "Grupos",
-  8: "Páginas"
+  3: "Files",
+  4: "Functions",
+  5: "Variables",
+  6: "Typedefs",
+  7: "Modules",
+  8: "Pages"
 };
 

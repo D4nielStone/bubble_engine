@@ -38,29 +38,29 @@ var NAVTREE =
     [ "Ajuda", "md_docs_2ajuda_2ajuda.html", [
       [ "Principais tópicos:", "md_docs_2ajuda_2ajuda.html#autotoc_md17", null ]
     ] ],
-    [ "Tópicos", "topics.html", "topics" ],
+    [ "Topics", "topics.html", "topics" ],
     [ "Namespaces", "namespaces.html", [
-      [ "Lista de Namespaces", "namespaces.html", "namespaces_dup" ],
-      [ "Membros do namespace", "namespacemembers.html", [
-        [ "Todos", "namespacemembers.html", null ],
-        [ "Variáveis", "namespacemembers_vars.html", null ]
+      [ "Namespace List", "namespaces.html", "namespaces_dup" ],
+      [ "Namespace Members", "namespacemembers.html", [
+        [ "All", "namespacemembers.html", null ],
+        [ "Variables", "namespacemembers_vars.html", null ]
       ] ]
     ] ],
     [ "Classes", "annotated.html", [
-      [ "Lista de Classes", "annotated.html", "annotated_dup" ],
-      [ "Índice dos Componentes", "classes.html", null ],
-      [ "Hierarquia de Classes", "hierarchy.html", "hierarchy" ],
-      [ "Membros de classe", "functions.html", [
-        [ "Todos", "functions.html", null ],
-        [ "Funções", "functions_func.html", null ],
-        [ "Variáveis", "functions_vars.html", null ]
+      [ "Class List", "annotated.html", "annotated_dup" ],
+      [ "Class Index", "classes.html", null ],
+      [ "Class Hierarchy", "hierarchy.html", "hierarchy" ],
+      [ "Class Members", "functions.html", [
+        [ "All", "functions.html", null ],
+        [ "Functions", "functions_func.html", null ],
+        [ "Variables", "functions_vars.html", null ]
       ] ]
     ] ],
-    [ "Arquivos", "files.html", [
-      [ "Lista de Arquivos", "files.html", "files_dup" ],
-      [ "Membros dos Arquivos", "globals.html", [
-        [ "Todos", "globals.html", null ],
-        [ "Definições de Tipos", "globals_type.html", null ]
+    [ "Files", "files.html", [
+      [ "File List", "files.html", "files_dup" ],
+      [ "File Members", "globals.html", [
+        [ "All", "globals.html", null ],
+        [ "Typedefs", "globals_type.html", null ]
       ] ]
     ] ]
   ] ]
@@ -72,5 +72,5 @@ var NAVTREEINDEX =
 "md_docs_2ajuda_2ajuda.html"
 ];
 
-var SYNCONMSG = 'clique para desativar a sincronização do painel';
-var SYNCOFFMSG = 'clique para ativar a sincronização do painel';
+var SYNCONMSG = 'click to disable panel synchronisation';
+var SYNCOFFMSG = 'click to enable panel synchronisation';
