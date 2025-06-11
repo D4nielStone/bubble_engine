@@ -49,8 +49,8 @@ namespace BECOMMONS_NS{
             float m_escala = 1.f;
 
             void desenhar(unsigned int ret_VAO) override {
-                caixa::desenhar(ret_VAO);
                 m_imagem_tamanho = {static_cast<int>(m_estilo.m_limites.z), static_cast<int>(m_estilo.m_limites.w)};
+                caixa::desenhar(ret_VAO);
             }
 
 		    ~imagem() override {

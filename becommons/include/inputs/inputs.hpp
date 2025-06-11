@@ -84,7 +84,13 @@ namespace BECOMMONS_NS {
              ENTER =           GLFW_KEY_ENTER,            
              KP_ENTER =        GLFW_KEY_KP_ENTER,         
              DELETE =          GLFW_KEY_DELETE,           
+             F1 =              GLFW_KEY_F1,               
+             F2 =              GLFW_KEY_F2,               
+             F3 =              GLFW_KEY_F3,               
+             F4 =              GLFW_KEY_F4,               
              F5 =              GLFW_KEY_F5,               
+             F6 =              GLFW_KEY_F6,               
+             F7 =              GLFW_KEY_F7,               
              MOUSE_MEIO =      GLFW_MOUSE_BUTTON_MIDDLE,  
              MOUSE_E =         GLFW_MOUSE_BUTTON_LEFT,    
              MOUSE_D =         GLFW_MOUSE_BUTTON_RIGHT   

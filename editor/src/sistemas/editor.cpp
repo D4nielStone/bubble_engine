@@ -87,9 +87,9 @@ void sistema_editor::adicionarCaixas() {
     center->m_estilo.m_altura = 1;
 
     // veiwport do editor
-    auto* fb = center->adicionar(std::move(cam.framebuffer_ptr));
-    fb->m_estilo.m_cor_borda = cor(0.11f);
-    fb->m_estilo.m_espessura_borda = 10;
+    cam.framebuffer_ptr->m_estilo.m_cor_borda = cor(0.11f);
+    cam.framebuffer_ptr->m_estilo.m_espessura_borda = 4;
+    center->adicionar(std::move(cam.framebuffer_ptr));
 }
 
 void sistema_editor::inicializar() {
@@ -99,12 +99,12 @@ void sistema_editor::inicializar() {
 }
         
 void sistema_editor::chamarInputs() {
-    if(inputs::obter(inputs::F5)) {
+    if(inputs::obter(inputs::F1)) {
         projeto_atual->salvarFases();
         executarRuntime();
     }
-    if(inputs::obter(inputs::E_CTRL) && inputs::obter(inputs::S)) {
-        projeto_atual->salvarFases();
+    if(inputs::obter(inputs::F2)) {
+        executarRuntime();
     }
     if(inputs::obter(inputs::E_SHIFT)) {
         if(gatilho_ && inputs::obter(inputs::A)) {
@@ -113,8 +113,11 @@ void sistema_editor::chamarInputs() {
         }else if(gatilho_ && inputs::obter(inputs::X)) {
 projeto_atual->obterFaseAtual()->obterRegistro()->remover(entidade_atual);
         gatilho_ = false;
+        }else if(gatilho_ && inputs::obter(inputs::S)) {
+        projeto_atual->salvarFases();
+        gatilho_ = false;
         }
-        else if(!inputs::obter(inputs::X) && !inputs::obter(inputs::A)) {
+        else if(!inputs::obter(inputs::X) && !inputs::obter(inputs::A) && !inputs::obter(inputs::S)) {
         gatilho_ = true;
         }
     }
