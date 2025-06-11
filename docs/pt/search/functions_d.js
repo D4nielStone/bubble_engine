@@ -1,9 +1,11 @@
 var searchData=
 [
-  ['removerelemento_0',['removerElemento',['../classBECOMMONS__NS_1_1bubble__gui.html#a2d5396936444319bd413598bb256e9c6',1,'BECOMMONS_NS::bubble_gui']]],
-  ['removerfilhos_1',['removerFilhos',['../classBECOMMONS__NS_1_1bubble__gui.html#a84b415dd69167c1a6df4a12320e3315c',1,'BECOMMONS_NS::bubble_gui']]],
-  ['renderizarfundo_2',['renderizarFundo',['../namespaceBECOMMONS__NS.html#a5dba841cca2e8f9373062402145a9c51',1,'BECOMMONS_NS']]],
-  ['renderizarimagem_3',['renderizarImagem',['../namespaceBECOMMONS__NS.html#aba2a32c2df8d312a0a325d7d6d2379cf',1,'BECOMMONS_NS']]],
-  ['renderizartexto_4',['renderizarTexto',['../namespaceBECOMMONS__NS.html#a396d7c6669c6b5f613a3a1e927316ad7',1,'BECOMMONS_NS']]],
-  ['rodar_5',['rodar',['../structBECOMMONS__NS_1_1projeto.html#a9e7f853a1582f69ba5725c48bf1a7034',1,'BECOMMONS_NS::projeto']]]
+  ['salvarfase_0',['salvarFase',['../structBECOMMONS__NS_1_1projeto.html#a016d8efb9aaf106b035cf17218e7ed2c',1,'BECOMMONS_NS::projeto']]],
+  ['salvarfases_1',['salvarFases',['../structBECOMMONS__NS_1_1projeto.html#a47a6d049b97cea03aa1233af5e525583',1,'BECOMMONS_NS::projeto']]],
+  ['salvarprojeto_2',['salvarProjeto',['../structBECOMMONS__NS_1_1projeto.html#a245625354b65b96ce16faeee1d8fcb55',1,'BECOMMONS_NS::projeto']]],
+  ['selecionado_3',['selecionado',['../classBECOMMONS__NS_1_1elementos_1_1area__de__texto.html#a4540b1cd13feaef981384ec9ded9cc5a',1,'BECOMMONS_NS::elementos::area_de_texto']]],
+  ['sfisica_4',['sfisica',['../structBECOMMONS__NS_1_1projeto.html#ae0acb10ea6eea4b01ee2ed19512921b8',1,'BECOMMONS_NS::projeto']]],
+  ['shutdown_5',['shutdown',['../classBECOMMONS__NS_1_1imageLoader.html#a4dc5406ce88a1a295f19c15a45102cb4',1,'BECOMMONS_NS::imageLoader']]],
+  ['sistema_6',['sistema',['../structBECOMMONS__NS_1_1sistema.html#ab631b76b39d13a627513e6cfba94d781',1,'BECOMMONS_NS::sistema']]],
+  ['soltar_7',['soltar',['../classBECOMMONS__NS_1_1inputs.html#a44aed74979e95c156ee90fbd19bdd054',1,'BECOMMONS_NS::inputs']]]
 ];

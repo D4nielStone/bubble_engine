@@ -30,9 +30,7 @@ var menudata={children:[
 {text:"Lista de Namespaces",url:"namespaces.html"},
 {text:"Membros do namespace",url:"namespacemembers.html",children:[
 {text:"Todos",url:"namespacemembers.html"},
-{text:"Funções",url:"namespacemembers_func.html"},
-{text:"Variáveis",url:"namespacemembers_vars.html"},
-{text:"Enumerações",url:"namespacemembers_enum.html"}]}]},
+{text:"Variáveis",url:"namespacemembers_vars.html"}]}]},
 {text:"Classes",url:"annotated.html",children:[
 {text:"Lista de Classes",url:"annotated.html"},
 {text:"Índice dos Componentes",url:"classes.html"},
@@ -40,7 +38,6 @@ var menudata={children:[
 {text:"Membros de classe",url:"functions.html",children:[
 {text:"Todos",url:"functions.html",children:[
 {text:"a",url:"functions.html#index_a"},
-{text:"b",url:"functions.html#index_b"},
 {text:"c",url:"functions.html#index_c"},
 {text:"d",url:"functions.html#index_d"},
 {text:"e",url:"functions.html#index_e"},
@@ -53,7 +50,6 @@ var menudata={children:[
 {text:"n",url:"functions.html#index_n"},
 {text:"o",url:"functions.html#index_o"},
 {text:"p",url:"functions.html#index_p"},
-{text:"q",url:"functions.html#index_q"},
 {text:"r",url:"functions.html#index_r"},
 {text:"s",url:"functions.html#index_s"},
 {text:"t",url:"functions.html#index_t"},
@@ -61,9 +57,7 @@ var menudata={children:[
 {text:"~",url:"functions.html#index__7E"}]},
 {text:"Funções",url:"functions_func.html",children:[
 {text:"a",url:"functions_func.html#index_a"},
-{text:"b",url:"functions_func.html#index_b"},
 {text:"c",url:"functions_func.html#index_c"},
-{text:"d",url:"functions_func.html#index_d"},
 {text:"e",url:"functions_func.html#index_e"},
 {text:"f",url:"functions_func.html#index_f"},
 {text:"g",url:"functions_func.html#index_g"},

@@ -150,7 +150,7 @@ $(document).ready(function(){initNavTree('vetor3_8hpp_source.html',''); initResi
 <div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="keyword">        </span>{</div>
 <div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>            <span class="keywordflow">return</span> <a class="code hl_struct" href="structBECOMMONS__NS_1_1vetor3.html">vetor3</a>{ x + other.x, y + other.y, z + other.z };</div>
 <div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>        };</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>        <a class="code hl_struct" href="structBECOMMONS__NS_1_1vetor3.html">vetor3</a> operator+(<span class="keyword">const</span> <span class="keywordtype">float</span> other)<span class="keyword"> const</span></div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>        <a class="code hl_struct" href="structBECOMMONS__NS_1_1vetor3.html">vetor3</a> operator+(<span class="keyword">const</span> T other)<span class="keyword"> const</span></div>
 <div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><span class="keyword">        </span>{</div>
 <div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>            <span class="keywordflow">return</span> <a class="code hl_struct" href="structBECOMMONS__NS_1_1vetor3.html">vetor3</a>{ x + other, y + other, z + other };</div>
 <div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>        };</div>
@@ -161,7 +161,7 @@ $(document).ready(function(){initNavTree('vetor3_8hpp_source.html',''); initResi
 <div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>            z += other.z;</div>
 <div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>            <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
 <div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>        };</div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>        <a class="code hl_struct" href="structBECOMMONS__NS_1_1vetor3.html">vetor3</a>&amp; operator+=(<span class="keyword">const</span> <span class="keywordtype">float</span> other)</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>        <a class="code hl_struct" href="structBECOMMONS__NS_1_1vetor3.html">vetor3</a>&amp; operator+=(<span class="keyword">const</span> T other)</div>
 <div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>        {</div>
 <div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>            x += other;</div>
 <div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>            y += other;</div>
@@ -173,7 +173,7 @@ $(document).ready(function(){initNavTree('vetor3_8hpp_source.html',''); initResi
 <div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span><span class="keyword">        </span>{</div>
 <div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>            <span class="keywordflow">return</span> <a class="code hl_struct" href="structBECOMMONS__NS_1_1vetor3.html">vetor3</a>{ x - other.x, y - other.y, z - other.z };</div>
 <div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>        };</div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>        <a class="code hl_struct" href="structBECOMMONS__NS_1_1vetor3.html">vetor3</a> operator-(<span class="keyword">const</span> <span class="keywordtype">float</span> other)<span class="keyword"> const</span></div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>        <a class="code hl_struct" href="structBECOMMONS__NS_1_1vetor3.html">vetor3</a> operator-(<span class="keyword">const</span> T other)<span class="keyword"> const</span></div>
 <div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span><span class="keyword">        </span>{</div>
 <div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>            <span class="keywordflow">return</span> <a class="code hl_struct" href="structBECOMMONS__NS_1_1vetor3.html">vetor3</a>{ x - other, y - other, z - other };</div>
 <div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>        };</div>
@@ -184,7 +184,7 @@ $(document).ready(function(){initNavTree('vetor3_8hpp_source.html',''); initResi
 <div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>            z -= other.z;</div>
 <div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>            <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
 <div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>        };</div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>        <a class="code hl_struct" href="structBECOMMONS__NS_1_1vetor3.html">vetor3</a>&amp; operator-=(<span class="keyword">const</span> <span class="keywordtype">float</span> other)</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>        <a class="code hl_struct" href="structBECOMMONS__NS_1_1vetor3.html">vetor3</a>&amp; operator-=(<span class="keyword">const</span> T other)</div>
 <div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>        {</div>
 <div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>            x -= other;</div>
 <div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>            y -= other;</div>
@@ -192,12 +192,12 @@ $(document).ready(function(){initNavTree('vetor3_8hpp_source.html',''); initResi
 <div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>            <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
 <div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>        };</div>
 <div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>        <span class="comment">// Deve multiplicar</span></div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>        <a class="code hl_struct" href="structBECOMMONS__NS_1_1vetor3.html">vetor3</a> operator*(<span class="keyword">const</span> <a class="code hl_struct" href="structBECOMMONS__NS_1_1vetor3.html">vetor3</a>&amp; other)</div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>        {</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>        <a class="code hl_struct" href="structBECOMMONS__NS_1_1vetor3.html">vetor3</a> operator*(<span class="keyword">const</span> <a class="code hl_struct" href="structBECOMMONS__NS_1_1vetor3.html">vetor3</a>&amp; other)<span class="keyword"> const</span></div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span><span class="keyword">        </span>{</div>
 <div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>            <span class="keywordflow">return</span> <a class="code hl_struct" href="structBECOMMONS__NS_1_1vetor3.html">vetor3</a>{ x * other.x, y * other.y, z * other.z };</div>
 <div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>        };</div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>        <a class="code hl_struct" href="structBECOMMONS__NS_1_1vetor3.html">vetor3</a> operator*(<span class="keywordtype">float</span> other)</div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>        {</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>        <a class="code hl_struct" href="structBECOMMONS__NS_1_1vetor3.html">vetor3</a> operator*(T other)<span class="keyword"> const </span></div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span><span class="keyword">        </span>{</div>
 <div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>            <span class="keywordflow">return</span> <a class="code hl_struct" href="structBECOMMONS__NS_1_1vetor3.html">vetor3</a>{ x * other, y * other, z * other };</div>
 <div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>        };</div>
 <div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>        <a class="code hl_struct" href="structBECOMMONS__NS_1_1vetor3.html">vetor3</a> operator*=(<span class="keyword">const</span> <a class="code hl_struct" href="structBECOMMONS__NS_1_1vetor3.html">vetor3</a>&amp; other)</div>
@@ -207,7 +207,7 @@ $(document).ready(function(){initNavTree('vetor3_8hpp_source.html',''); initResi
 <div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>            z *= other.z;</div>
 <div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>            <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
 <div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>        };</div>
-<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>        <a class="code hl_struct" href="structBECOMMONS__NS_1_1vetor3.html">vetor3</a> operator*=(<span class="keywordtype">float</span> other)</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>        <a class="code hl_struct" href="structBECOMMONS__NS_1_1vetor3.html">vetor3</a> operator*=(T other)</div>
 <div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>        {</div>
 <div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>            x *= other;</div>
 <div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>            y *= other;</div>
@@ -219,7 +219,7 @@ $(document).ready(function(){initNavTree('vetor3_8hpp_source.html',''); initResi
 <div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>        {</div>
 <div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>            <span class="keywordflow">return</span> <a class="code hl_struct" href="structBECOMMONS__NS_1_1vetor3.html">vetor3</a>{ x / other.x, y / other.y, z / other.z};</div>
 <div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>        };</div>
-<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>        <a class="code hl_struct" href="structBECOMMONS__NS_1_1vetor3.html">vetor3</a> operator/(<span class="keywordtype">float</span> other)</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>        <a class="code hl_struct" href="structBECOMMONS__NS_1_1vetor3.html">vetor3</a> operator/(T other)</div>
 <div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>        {</div>
 <div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>            <span class="keywordflow">return</span> <a class="code hl_struct" href="structBECOMMONS__NS_1_1vetor3.html">vetor3</a>{ x / other, y / other, z / other };</div>
 <div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>        };</div>
@@ -230,7 +230,7 @@ $(document).ready(function(){initNavTree('vetor3_8hpp_source.html',''); initResi
 <div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>            z /= other.z;</div>
 <div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>            <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
 <div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>        };</div>
-<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>        <a class="code hl_struct" href="structBECOMMONS__NS_1_1vetor3.html">vetor3</a> operator/=(<span class="keywordtype">float</span> other)</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>        <a class="code hl_struct" href="structBECOMMONS__NS_1_1vetor3.html">vetor3</a> operator/=(T other)</div>
 <div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>        {</div>
 <div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>            x /= other;</div>
 <div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>            y /= other;</div>

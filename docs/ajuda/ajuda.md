@@ -1,4 +1,4 @@
-# **Ajuda**
+# Ajuda
 
 ## Principais tópicos:
 

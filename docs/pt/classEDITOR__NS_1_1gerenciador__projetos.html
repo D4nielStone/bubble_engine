@@ -105,7 +105,6 @@ $(document).ready(function(){initNavTree('classEDITOR__NS_1_1gerenciador__projet
   <div class="summary">
 <a href="#pub-methods">Membros Públicos</a> &#124;
 <a href="#pri-attribs">Atributos Privados</a> &#124;
-<a href="#pri-static-attribs">Atributos Privados Estáticos</a> &#124;
 <a href="classEDITOR__NS_1_1gerenciador__projetos-members.html">Lista de todos os Membros</a>  </div>
   <div class="headertitle"><div class="title">Referência da Classe EDITOR_NS::gerenciador_projetos</div></div>
 </div><!--header-->
@@ -116,12 +115,12 @@ Membros Públicos</h2></td></tr>
 <tr class="memitem:aadc23c53d5c4ec7f42213e1841aaf02a" id="r_aadc23c53d5c4ec7f42213e1841aaf02a"><td class="memItemLeft" align="right" valign="top"><a id="aadc23c53d5c4ec7f42213e1841aaf02a" name="aadc23c53d5c4ec7f42213e1841aaf02a"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>gerenciador_projetos</b> (const std::string &amp;DIR_PADRAO)</td></tr>
 <tr class="separator:aadc23c53d5c4ec7f42213e1841aaf02a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3c23a254bcb29f4c855e636ff14c2822" id="r_a3c23a254bcb29f4c855e636ff14c2822"><td class="memItemLeft" align="right" valign="top"><a id="a3c23a254bcb29f4c855e636ff14c2822" name="a3c23a254bcb29f4c855e636ff14c2822"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>configurarUI</b> (const std::string &amp;)</td></tr>
-<tr class="separator:a3c23a254bcb29f4c855e636ff14c2822"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a72f9813bd8a36611bced69d5c4ad55cf" id="r_a72f9813bd8a36611bced69d5c4ad55cf"><td class="memItemLeft" align="right" valign="top"><a id="a72f9813bd8a36611bced69d5c4ad55cf" name="a72f9813bd8a36611bced69d5c4ad55cf"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>atualizarElementos</b> (const std::string &amp;)</td></tr>
-<tr class="separator:a72f9813bd8a36611bced69d5c4ad55cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a96f25f328726edd427ff1babd013f4ae" id="r_a96f25f328726edd427ff1babd013f4ae"><td class="memItemLeft" align="right" valign="top"><a id="a96f25f328726edd427ff1babd013f4ae" name="a96f25f328726edd427ff1babd013f4ae"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>configurarUI</b> ()</td></tr>
+<tr class="separator:a96f25f328726edd427ff1babd013f4ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aabc229506641a5d3821362b1f106eb78" id="r_aabc229506641a5d3821362b1f106eb78"><td class="memItemLeft" align="right" valign="top"><a id="aabc229506641a5d3821362b1f106eb78" name="aabc229506641a5d3821362b1f106eb78"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>buscarProjetos</b> ()</td></tr>
+<tr class="separator:aabc229506641a5d3821362b1f106eb78"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ada57d71cb8d87648f648a5ad12c503e9" id="r_ada57d71cb8d87648f648a5ad12c503e9"><td class="memItemLeft" align="right" valign="top"><a id="ada57d71cb8d87648f648a5ad12c503e9" name="ada57d71cb8d87648f648a5ad12c503e9"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>abrirProjeto</b> (const std::string &amp;)</td></tr>
 <tr class="separator:ada57d71cb8d87648f648a5ad12c503e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -141,21 +140,24 @@ Atributos Privados</h2></td></tr>
 std::map&lt; std::string, std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>projetos</b></td></tr>
 <tr class="separator:aab119d25e320d207d687db799da563c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a392fdf58ddd0d5df622bd0e81d64d9e1" id="r_a392fdf58ddd0d5df622bd0e81d64d9e1"><td class="memItemLeft" align="right" valign="top"><a id="a392fdf58ddd0d5df622bd0e81d64d9e1" name="a392fdf58ddd0d5df622bd0e81d64d9e1"></a>
-std::string&#160;</td><td class="memItemRight" valign="bottom"><b>m_projeto_selecionado</b> {&quot;Nenhum&quot;}</td></tr>
+std::string&#160;</td><td class="memItemRight" valign="bottom"><b>m_projeto_selecionado</b> {&quot;nenhum&quot;}</td></tr>
 <tr class="separator:a392fdf58ddd0d5df622bd0e81d64d9e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7770637c16aa62877647f8768caeb1a8" id="r_a7770637c16aa62877647f8768caeb1a8"><td class="memItemLeft" align="right" valign="top"><a id="a7770637c16aa62877647f8768caeb1a8" name="a7770637c16aa62877647f8768caeb1a8"></a>
-becommons::bubble_gui&#160;</td><td class="memItemRight" valign="bottom"><b>gui</b></td></tr>
-<tr class="separator:a7770637c16aa62877647f8768caeb1a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-static-attribs" name="pri-static-attribs"></a>
-Atributos Privados Estáticos</h2></td></tr>
+<tr class="memitem:af06eb0f1fcd1eb2d47b8b53c1768001c" id="r_af06eb0f1fcd1eb2d47b8b53c1768001c"><td class="memItemLeft" align="right" valign="top"><a id="af06eb0f1fcd1eb2d47b8b53c1768001c" name="af06eb0f1fcd1eb2d47b8b53c1768001c"></a>
+std::string&#160;</td><td class="memItemRight" valign="bottom"><b>buffer_projeto</b> {&quot;&quot;}</td></tr>
+<tr class="separator:af06eb0f1fcd1eb2d47b8b53c1768001c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae466de76d1bf010b9e23c6dcf1d2d0aa" id="r_ae466de76d1bf010b9e23c6dcf1d2d0aa"><td class="memItemLeft" align="right" valign="top"><a id="ae466de76d1bf010b9e23c6dcf1d2d0aa" name="ae466de76d1bf010b9e23c6dcf1d2d0aa"></a>
+caixa *&#160;</td><td class="memItemRight" valign="bottom"><b>barra_lateral</b> {nullptr}</td></tr>
+<tr class="separator:ae466de76d1bf010b9e23c6dcf1d2d0aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4527f82268a9b34d4ae3971c09d2e6a7" id="r_a4527f82268a9b34d4ae3971c09d2e6a7"><td class="memItemLeft" align="right" valign="top"><a id="a4527f82268a9b34d4ae3971c09d2e6a7" name="a4527f82268a9b34d4ae3971c09d2e6a7"></a>
+becommons::interface&#160;</td><td class="memItemRight" valign="bottom"><b>ui</b></td></tr>
+<tr class="separator:a4527f82268a9b34d4ae3971c09d2e6a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af43b4625e6e8bb0d148855a90c3f586e" id="r_af43b4625e6e8bb0d148855a90c3f586e"><td class="memItemLeft" align="right" valign="top"><a id="af43b4625e6e8bb0d148855a90c3f586e" name="af43b4625e6e8bb0d148855a90c3f586e"></a>
-static std::string&#160;</td><td class="memItemRight" valign="bottom"><b>DIR_PADRAO</b></td></tr>
+std::string&#160;</td><td class="memItemRight" valign="bottom"><b>DIR_PADRAO</b></td></tr>
 <tr class="separator:af43b4625e6e8bb0d148855a90c3f586e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <hr/>A documentação para essa classe foi gerada a partir dos seguintes arquivos:<ul>
 <li><a class="el" href="gerenciador__projetos_8hpp_source.html">gerenciador_projetos.hpp</a></li>
-<li><a class="el" href="gerenciador__projetos_8cpp.html">gerenciador_projetos.cpp</a></li>
+<li><b>gerenciador_projetos.cpp</b></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

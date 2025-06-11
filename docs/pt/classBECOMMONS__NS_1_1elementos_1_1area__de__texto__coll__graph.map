@@ -1,9 +1,12 @@
 <map id="BECOMMONS_NS::elementos::area_de_texto" name="BECOMMONS_NS::elementos::area_de_texto">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,285,217,325"/>
-<area shape="rect" id="Node000002" href="$classBECOMMONS__NS_1_1caixa.html" title="funciona como uma div em css" alt="" coords="22,211,201,236"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="114,250,114,285,109,285,109,250"/>
-<area shape="rect" id="Node000003" href="$structBECOMMONS__NS_1_1estilo.html" title=" " alt="" coords="22,108,201,133"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="114,147,114,211,109,211,109,147"/>
-<area shape="rect" id="Node000004" href="$structBECOMMONS__NS_1_1cor.html" title=" " alt="" coords="30,5,193,31"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="114,45,114,108,109,108,109,45"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="53,285,265,325"/>
+<area shape="rect" id="Node000002" href="$classBECOMMONS__NS_1_1caixa.html" title="funciona como uma div em css" alt="" coords="70,211,249,236"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="162,250,162,285,157,285,157,250"/>
+<area shape="poly" id="edge3_Node000002_Node000002" title=" " alt="" coords="264,216,275,223,267,230,249,232,249,227,265,225,270,223,262,221"/>
+<area shape="rect" id="Node000003" href="$structBECOMMONS__NS_1_1material.html" title=" " alt="" coords="5,108,204,133"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="120,144,155,209,151,212,115,147"/>
+<area shape="rect" id="Node000004" href="$structBECOMMONS__NS_1_1estilo.html" title=" " alt="" coords="229,108,407,133"/>
+<area shape="poly" id="edge4_Node000002_Node000004" title=" " alt="" coords="293,144,226,189,183,213,181,208,223,184,290,139"/>
+<area shape="rect" id="Node000005" href="$structBECOMMONS__NS_1_1cor.html" title=" " alt="" coords="237,5,399,31"/>
+<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="321,45,321,108,315,108,315,45"/>
 </map>

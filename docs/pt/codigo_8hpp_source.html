@@ -114,37 +114,34 @@ $(document).ready(function(){initNavTree('codigo_8hpp_source.html',''); initResi
 <div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="preprocessor">#pragma once</span></div>
 <div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="preprocessor">#include &lt;string&gt;</span></div>
 <div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="preprocessor">#include &lt;lua.hpp&gt;</span></div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="preprocessor">#include &lt;rapidjson/rapidjson.h&gt;</span></div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="preprocessor">#include &quot;becommons_namespace.hpp&quot;</span></div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="preprocessor">#include &quot;<a class="code" href="componente_8hpp.html">componente.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="preprocessor">#include &lt;lua5.3/lua.h&gt;</span></div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>}</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceBECOMMONS__NS.html">BECOMMONS_NS</a> {</div>
-<div class="foldopen" id="foldopen00042" data-start="{" data-end="};">
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno"><a class="line" href="structBECOMMONS__NS_1_1codigo.html">   42</a></span>    <span class="keyword">struct </span><a class="code hl_struct" href="structBECOMMONS__NS_1_1codigo.html">codigo</a> : <a class="code hl_struct" href="structBECOMMONS__NS_1_1componente.html">componente</a></div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    {</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        <span class="keyword">static</span> <span class="keyword">constexpr</span> mascara mascara = COMPONENTE_CODIGO;</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>        std::string arquivo;</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>        std::string arquivoCompleto;</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>        lua_State* L;</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>        <a class="code hl_struct" href="structBECOMMONS__NS_1_1codigo.html">codigo</a>(<span class="keyword">const</span> std::string&amp; arquivo);</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        <a class="code hl_struct" href="structBECOMMONS__NS_1_1codigo.html">~codigo</a>();</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>        <a class="code hl_struct" href="structBECOMMONS__NS_1_1codigo.html">codigo</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>        <span class="keywordtype">bool</span> analizar(<span class="keyword">const</span> rapidjson::Value&amp;) <span class="keyword">override</span>;</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>        <span class="keywordtype">bool</span> serializar(rapidjson::Value&amp; value, rapidjson::Document::AllocatorType&amp; allocator) <span class="keyword">const override</span>;</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>        <span class="keywordtype">void</span> iniciar() <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>        <span class="keywordtype">void</span> encerrar();</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>        <span class="keywordtype">void</span> atualizar() <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    };</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="preprocessor">#include &lt;sol/sol.hpp&gt;</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="preprocessor">#include &lt;rapidjson/rapidjson.h&gt;</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="preprocessor">#include &quot;becommons_namespace.hpp&quot;</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="preprocessor">#include &quot;<a class="code" href="componente_8hpp.html">componente.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceBECOMMONS__NS.html">BECOMMONS_NS</a> {</div>
+<div class="foldopen" id="foldopen00039" data-start="{" data-end="};">
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno"><a class="line" href="structBECOMMONS__NS_1_1codigo.html">   39</a></span>    <span class="keyword">struct </span><a class="code hl_struct" href="structBECOMMONS__NS_1_1codigo.html">codigo</a> : <a class="code hl_struct" href="structBECOMMONS__NS_1_1componente.html">componente</a> {</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>        <span class="keyword">static</span> <span class="keyword">constexpr</span> mascara mascara = COMPONENTE_CODIGO;</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        std::string arquivo;</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>        std::string arquivoCompleto;</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        sol::state estado_lua;</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>        sol::function f_iniciar, f_atualizar;</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>        <a class="code hl_struct" href="structBECOMMONS__NS_1_1codigo.html">codigo</a>(<span class="keyword">const</span> std::string&amp; arquivo);</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>        <a class="code hl_struct" href="structBECOMMONS__NS_1_1codigo.html">~codigo</a>();</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>        <a class="code hl_struct" href="structBECOMMONS__NS_1_1codigo.html">codigo</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        <span class="keywordtype">bool</span> analizar(<span class="keyword">const</span> rapidjson::Value&amp;) <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>        <span class="keywordtype">bool</span> serializar(rapidjson::Value&amp; value, rapidjson::Document::AllocatorType&amp; allocator) <span class="keyword">const override</span>;</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>        <span class="keywordtype">void</span> iniciar();</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>        <span class="keywordtype">void</span> atualizar();</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    };</div>
 </div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>}</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>}</div>
 <div class="ttc" id="acomponente_8hpp_html"><div class="ttname"><a href="componente_8hpp.html">componente.hpp</a></div><div class="ttdoc">Estrutura base para componetes.</div></div>
 <div class="ttc" id="anamespaceBECOMMONS__NS_html"><div class="ttname"><a href="namespaceBECOMMONS__NS.html">BECOMMONS_NS</a></div><div class="ttdoc">namespace becommons</div><div class="ttdef"><b>Definição</b> fonte.cpp:33</div></div>
-<div class="ttc" id="astructBECOMMONS__NS_1_1codigo_html"><div class="ttname"><a href="structBECOMMONS__NS_1_1codigo.html">BECOMMONS_NS::codigo</a></div><div class="ttdef"><b>Definição</b> codigo.hpp:43</div></div>
+<div class="ttc" id="astructBECOMMONS__NS_1_1codigo_html"><div class="ttname"><a href="structBECOMMONS__NS_1_1codigo.html">BECOMMONS_NS::codigo</a></div><div class="ttdef"><b>Definição</b> codigo.hpp:39</div></div>
 <div class="ttc" id="astructBECOMMONS__NS_1_1componente_html"><div class="ttname"><a href="structBECOMMONS__NS_1_1componente.html">BECOMMONS_NS::componente</a></div><div class="ttdoc">base para as funcionalidades da engine</div><div class="ttdef"><b>Definição</b> componente.hpp:45</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->

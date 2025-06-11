@@ -39,7 +39,6 @@ var hierarchy =
     [ "std::enable_shared_from_this", null, [
       [ "BECOMMONS_NS::fase", "structBECOMMONS__NS_1_1fase.html", null ]
     ] ],
-    [ "BECOMMONS_NS::api::entidade", "structBECOMMONS__NS_1_1api_1_1entidade.html", null ],
     [ "BECOMMONS_NS::entidade", "structBECOMMONS__NS_1_1entidade.html", null ],
     [ "BECOMMONS_NS::estilo", "structBECOMMONS__NS_1_1estilo.html", null ],
     [ "std::exception", null, [
@@ -68,12 +67,11 @@ var hierarchy =
     [ "becommons::sistema", null, [
       [ "EDITOR_NS::sistema_editor", "structEDITOR__NS_1_1sistema__editor.html", null ]
     ] ],
-    [ "BECOMMONS_NS::sistema", "classBECOMMONS__NS_1_1sistema.html", [
-      [ "BECOMMONS_NS::bubble_gui", "classBECOMMONS__NS_1_1bubble__gui.html", null ],
-      [ "BECOMMONS_NS::sistema_codigo", "classBECOMMONS__NS_1_1sistema__codigo.html", null ],
-      [ "BECOMMONS_NS::sistema_fisica", "classBECOMMONS__NS_1_1sistema__fisica.html", null ],
-      [ "BECOMMONS_NS::sistema_interface", "classBECOMMONS__NS_1_1sistema__interface.html", null ],
-      [ "BECOMMONS_NS::sistema_renderizacao", "classBECOMMONS__NS_1_1sistema__renderizacao.html", null ]
+    [ "BECOMMONS_NS::sistema", "structBECOMMONS__NS_1_1sistema.html", [
+      [ "BECOMMONS_NS::interface", "structBECOMMONS__NS_1_1interface.html", null ],
+      [ "BECOMMONS_NS::sistema_codigo", "structBECOMMONS__NS_1_1sistema__codigo.html", null ],
+      [ "BECOMMONS_NS::sistema_fisica", "structBECOMMONS__NS_1_1sistema__fisica.html", null ],
+      [ "BECOMMONS_NS::sistema_renderizacao", "structBECOMMONS__NS_1_1sistema__renderizacao.html", null ]
     ] ],
     [ "BECOMMONS_NS::tempo", "structBECOMMONS__NS_1_1tempo.html", null ],
     [ "BECOMMONS_NS::textura", "structBECOMMONS__NS_1_1textura.html", null ],
