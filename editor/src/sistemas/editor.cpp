@@ -27,6 +27,9 @@
 #include "becommons/becommons.hpp"
 #include "sistemas/editor.hpp"
 #include "util/runtime.hpp"
+#include <filesystem>
+#include <rapidjson/document.h>
+#include <rapidjson/prettywriter.h>
 
 using namespace becommons;
 using namespace EDITOR_NS;
@@ -120,20 +123,57 @@ void sistema_editor::adicionarCaixas() {
 }
 
 void sistema_editor::inicializar() {
+    // \brief analizar camera do editor
+    auto _usr = projeto_atual->diretorioDoProjeto + "/usr";
+	std::stringstream sb;
+	if (std::filesystem::exists(_usr + "/cam.json")) {
+		std::ifstream file(_usr + "/cam.json");
+        sb << file.rdbuf();
+
+        rapidjson::Document doc;
+	    doc.Parse(sb.str().c_str());
+    	if (doc.HasParseError())  {
+		    depuracao::emitir(erro, "parse da camera do editor");
+	    } else {
+	        if(!cam.analizar(doc))
+		        depuracao::emitir(erro, "analize da camera do editor");
+	    }
+	}
     projeto_atual->srender()->definirCamera(&cam);
     ui.inicializar();
     adicionarCaixas();
 }
+
+void sistema_editor::salvarEditor() {
+    auto _usr = projeto_atual->diretorioDoProjeto + "/usr";
+    if(!std::filesystem::exists(_usr))
+        std::filesystem::create_directory(_usr);
+
+    rapidjson::Document doc;
+    doc.SetObject();
+    rapidjson::Document::AllocatorType& allocator = doc.GetAllocator();
+    cam.serializar(doc, allocator);
+
+    // escrevendo no arquivo
+    std::ofstream ofs(_usr + "/cam.json");
+    rapidjson::StringBuffer buffer;
+    rapidjson::PrettyWriter<rapidjson::StringBuffer> writer(buffer);
+    doc.Accept(writer);
+    ofs << buffer.GetString();
+}
         
 void sistema_editor::chamarInputs() {
+    // \brief salva e roda
     if(inputs::obter(inputs::F1)) {
+        salvarEditor();
         projeto_atual->salvarFases();
         executarRuntime();
     }
+    // \brief apenas roda a versão mais recente
     if(inputs::obter(inputs::F2)) {
         executarRuntime();
     }
-    if(inputs::obter(inputs::E_SHIFT)) {
+    if(inputs::obter(inputs::E_CTRL)) {
         if(gatilho_ && inputs::obter(inputs::A)) {
         projeto_atual->obterFaseAtual()->obterRegistro()->criar();
         gatilho_ = false;
@@ -141,6 +181,7 @@ void sistema_editor::chamarInputs() {
 projeto_atual->obterFaseAtual()->obterRegistro()->remover(entidade_atual);
         gatilho_ = false;
         }else if(gatilho_ && inputs::obter(inputs::S)) {
+        salvarEditor();
         projeto_atual->salvarFases();
         gatilho_ = false;
         }
@@ -166,7 +207,7 @@ void sistema_editor::atualizar() {
             }, std::make_unique<elementos::imagem>("cube.png", false, 0.2f));
         }
     }
-    // Verifica se a entidade atual mudou
+    //  Verifica se a entidade atual mudou
     if (entidade_anterior != entidade_atual) {
         entidade_anterior = entidade_atual;
     }

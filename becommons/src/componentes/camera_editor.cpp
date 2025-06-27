@@ -33,7 +33,6 @@ using namespace BECOMMONS_NS;
 
 camera_editor::camera_editor()
 {
-    m_skybox = new skybox();
     ativarFB(); // Ativa framebuffer
     framebuffer_ptr = std::make_unique<elementos::imagem>(textura, true);
     framebuffer_ptr->m_estilo.m_flag_estilo |= flag_estilo::largura_percentual | flag_estilo::altura_percentual;
@@ -46,6 +45,25 @@ camera_editor::camera_editor()
     transform->rotacao.y = 90;
     ceu = cor(0.2, 0.2, 0.2, 1.f);
 };
+        
+bool camera_editor::analizar(const rapidjson::Value& value) {
+    delete transform;
+    transform = new transformacao();
+    bool b = true;
+    b = b == true ? transform->analizar(value) : false;
+    b = camera::analizar(value);
+    return true;
+}
+
+camera_editor::~camera_editor() {
+    delete transform;
+}
+        
+bool camera_editor::serializar(rapidjson::Value& value, rapidjson::Document::AllocatorType& allocator) const {
+    camera::serializar(value, allocator);
+    transform->serializar(value, allocator);
+    return true;
+}
 
 void camera_editor::atualizarMovimentacao()
 {

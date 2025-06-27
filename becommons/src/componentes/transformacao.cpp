@@ -60,7 +60,7 @@ bool transformacao::analizar(const rapidjson::Value& value) {
         auto rot = value["rotacao"].GetArray();
         rotacao = { rot[0].GetFloat(), rot[1].GetFloat(), rot[2].GetFloat() };
     } else return false;
-    if(value.HasMember("escala"))
+    if(value.HasMember("escala") && value["escala"].IsArray())
     {
     auto esc = value["escala"].GetArray();
     escala = { esc[0].GetFloat(), esc[1].GetFloat(), esc[2].GetFloat() };			

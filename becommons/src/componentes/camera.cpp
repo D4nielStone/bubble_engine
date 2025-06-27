@@ -97,9 +97,7 @@ bool camera::analizar(const rapidjson::Value& value)
 			_ceu[3].GetFloat() / 255,
 		};
 	}
-	if (value.HasMember("skybox") && !value["skybox"].GetBool()) return true;
-    
-    m_use_skybox = true;
+	if (value.HasMember("skybox") && value["skybox"].IsBool()) m_use_skybox = value["skybox"].GetBool();
 
 	return true;
 }

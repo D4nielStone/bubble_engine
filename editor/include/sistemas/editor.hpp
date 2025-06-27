@@ -30,21 +30,27 @@
 
 namespace EDITOR_NS {
     struct sistema_editor : becommons::sistema {
+        // \brief construtor
         sistema_editor();
+
+        // \brief funcoes
         void inicializar() override;
         void atualizar() override;
         void adicionarCaixas();
         void chamarInputs();
+        void salvarEditor();
+
+        // \brief thread
+        static void executarRuntime();
+        inline static std::thread threadRuntime;
+        inline static std::atomic<bool> rodando{false};
+        static void monitorarRuntime();
          
+        // \brief atributos
         becommons::camera_editor cam;
         becommons::interface ui;
         size_t num_entidades_anterior = 0;
         size_t entidade_anterior = 0;
         size_t entidade_atual = 1;
-
-        static void executarRuntime();
-        inline static std::thread threadRuntime;
-        inline static std::atomic<bool> rodando{false};
-        static void monitorarRuntime();
 };
 }

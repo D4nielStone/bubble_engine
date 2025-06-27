@@ -35,6 +35,9 @@ namespace BECOMMONS_NS {
     {
         float sens = 10.f, mousex_antigo, mousey_antigo;
         camera_editor(); 
+        ~camera_editor();
         void atualizarMovimentacao();
+        bool analizar(const rapidjson::Value&) override;
+        bool serializar(rapidjson::Value& value, rapidjson::Document::AllocatorType& allocator) const override;
     };
 }
