@@ -295,7 +295,7 @@ void interface::organizarLinha(caixa* it_caixa,
             maior = std::max(maior, filho->m_estilo.m_limites.w + filho->m_estilo.m_padding.y * 2 + it_caixa->m_estilo.m_padding_geral.y * 2); // maior altura
             cursor.x += filho->m_estilo.m_limites.z + filho->m_estilo.m_padding.x + it_caixa->m_estilo.m_padding_geral.x;
         } else {
-            maior = std::max(maior, filho->m_estilo.m_limites.z+ filho->m_estilo.m_padding.x + it_caixa->m_estilo.m_padding_geral.x); // maior largura
+            maior = std::max(maior, filho->m_estilo.m_limites.z+ filho->m_estilo.m_padding.x * 2 + it_caixa->m_estilo.m_padding_geral.x * 2); // maior largura
             cursor.y += filho->m_estilo.m_limites.w + filho->m_estilo.m_padding.y + it_caixa->m_estilo.m_padding_geral.y;
         }
         i++;
@@ -312,21 +312,26 @@ void interface::organizarLinha(caixa* it_caixa,
 }
 
 void interface::processarDimensaoModular(caixa* filho, fvet2& crescimento_total, fvet2& espaco_ocupado) {
-        if(filho->tem(flag_estilo::largura_percentual)) 
-            if(filho->m_pai && filho->m_pai->m_estilo.m_orientacao_modular == estilo::orientacao::horizontal)
-                crescimento_total.x += filho->m_estilo.m_largura;
-            else
-                crescimento_total.x = std::max(crescimento_total.x, filho->m_estilo.m_largura);
-        else 
-            espaco_ocupado.x += filho->m_estilo.m_largura + filho->m_estilo.m_padding.x;
-        
-        if(filho->tem(flag_estilo::altura_percentual))
-            if(filho->m_pai && filho->m_pai->m_estilo.m_orientacao_modular == estilo::orientacao::vertical)
-                crescimento_total.y += filho->m_estilo.m_altura;
-            else
-                crescimento_total.y = std::max(crescimento_total.y, filho->m_estilo.m_altura);
-        else 
-            espaco_ocupado.y += filho->m_estilo.m_altura + filho->m_estilo.m_padding.y;
+    if(filho->tem(flag_estilo::largura_percentual)) 
+        if(filho->m_pai && filho->m_pai->m_estilo.m_orientacao_modular == estilo::orientacao::horizontal)
+            crescimento_total.x += filho->m_estilo.m_largura;
+        else
+            crescimento_total.x = std::max(crescimento_total.x, filho->m_estilo.m_largura);
+    else 
+        espaco_ocupado.x += filho->m_estilo.m_largura;
+    
+    if(filho->tem(flag_estilo::altura_percentual))
+        if(filho->m_pai && filho->m_pai->m_estilo.m_orientacao_modular == estilo::orientacao::vertical)
+            crescimento_total.y += filho->m_estilo.m_altura;
+        else
+            crescimento_total.y = std::max(crescimento_total.y, filho->m_estilo.m_altura);
+    else 
+        espaco_ocupado.y += filho->m_estilo.m_altura;
+    
+    if(filho->m_pai) {
+        espaco_ocupado.x += filho->m_estilo.m_padding.x;
+        espaco_ocupado.y += filho->m_estilo.m_padding.y;
+    }
 }
 
 void interface::processarModular(caixa* it_caixa) {
@@ -340,6 +345,8 @@ void interface::processarModular(caixa* it_caixa) {
           cursor            = fvet2(it_caixa->m_estilo.m_limites.x, it_caixa->m_estilo.m_limites.y),
           crescimento_total = fvet2(0.f, 0.f);  // total ocupado pelo crescimento dos filhos.
    
+    espaco_ocupado.x += it_caixa->m_estilo.m_padding_geral.x;
+    espaco_ocupado.y += it_caixa->m_estilo.m_padding_geral.y;
     // calcula espaços e aplica dimenções
     ivet2 range_filhos = ivet2(0, 0);
     for(size_t i = 0; i < it_caixa->m_filhos.size(); i++) {
@@ -350,10 +357,6 @@ void interface::processarModular(caixa* it_caixa) {
         espaco_ocupado.y += it_caixa->m_estilo.m_padding_geral.y;
     
         bool finalizar_linha = (i == it_caixa->m_filhos.size() - 1) || (filho->tem(flag_estilo::quebrar_linha));
-        if(finalizar_linha) {
-            espaco_ocupado.x += it_caixa->m_estilo.m_padding_geral.x;
-            espaco_ocupado.y += it_caixa->m_estilo.m_padding_geral.y;
-        }
 
         processarDimensaoModular(filho.get(),
                 crescimento_total,
@@ -389,11 +392,13 @@ void interface::processarModular(caixa* it_caixa) {
             if(is_horizontal) {
                 espaco_disponivel.x = it_caixa->m_estilo.m_limites.z;
                 espaco_ocupado.x = 0;
+                espaco_ocupado.x += it_caixa->m_estilo.m_padding_geral.x;
                 crescimento_total.x = 0;
             }
             else {
                 espaco_disponivel.y = it_caixa->m_estilo.m_limites.w;
                 espaco_ocupado.y = 0;
+                espaco_ocupado.y += it_caixa->m_estilo.m_padding_geral.y;
                 crescimento_total.y = 0;
             }    
             // \}

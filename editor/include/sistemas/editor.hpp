@@ -41,7 +41,6 @@ namespace EDITOR_NS {
         size_t num_entidades_anterior = 0;
         size_t entidade_anterior = 0;
         size_t entidade_atual = 1;
-        std::string texto_entidade = "id:1";
 
         static void executarRuntime();
         inline static std::thread threadRuntime;

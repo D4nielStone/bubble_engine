@@ -44,9 +44,11 @@ bool gatilho_ = true;
 // -- console
 // -- -- output
 
-
 sistema_editor::sistema_editor() {
 }
+
+// waraper da barra lateral.
+caixa* lateral;
 
 void sistema_editor::adicionarCaixas() {
     // raiz
@@ -79,17 +81,42 @@ void sistema_editor::adicionarCaixas() {
     e.m_cor_borda = cor(0.3f);
     e.m_cor_fundo = cor(0.11f);
     e.m_padding_geral = {2, 2};
+    
+    auto img1 = std::make_unique<elementos::imagem>("info.png");
+    img1->m_estilo.m_largura = 18;
+    img1->m_estilo.m_altura = 18;
+    estilo& e1 = barra_menu->adicionar<elementos::botao>([]() {
+            becommons::abrirLink("https://d4nielstone.github.io/bubble_engine/pt/md_docs_2ajuda_2ajuda.html");
+            }
+            , std::move(img1))->m_estilo;
+    e1.m_cor_borda = cor(0.3f);
+    e1.m_cor_fundo = cor(0.11f);
+    e1.m_padding_geral = {2, 2};
+
+    auto img2 = std::make_unique<elementos::imagem>("cube.png");
+    img2->m_estilo.m_largura = 18;
+    img2->m_estilo.m_altura = 18;
+    estilo& e2 = barra_menu->adicionar<elementos::botao>([]() {
+            }
+            , std::move(img2))->m_estilo;
+    e2.m_cor_borda = cor(0.3f);
+    e2.m_cor_fundo = cor(0.11f);
+    e2.m_padding_geral = {2, 2};
 
     // centro
     auto* center = ui.m_raiz->adicionar<caixa>();
+    lateral = center->adicionar<caixa>();
     center->m_estilo.m_flag_estilo |= flag_estilo::largura_percentual | flag_estilo::altura_percentual;
     center->m_estilo.m_largura = 1;
     center->m_estilo.m_altura = 1;
-
-    // veiwport do editor
-    cam.framebuffer_ptr->m_estilo.m_cor_borda = cor(0.11f);
-    cam.framebuffer_ptr->m_estilo.m_espessura_borda = 4;
     center->adicionar(std::move(cam.framebuffer_ptr));
+    
+    lateral->m_estilo.m_orientacao_modular = estilo::orientacao::vertical;
+    lateral->m_estilo.m_flag_estilo |= flag_estilo::altura_percentual | flag_estilo::largura_justa;
+    lateral->m_estilo.m_largura = 50;
+    lateral->m_estilo.m_altura = 1;
+    lateral->m_estilo.m_cor_fundo = cor(0.1f, 0.1f, 0.1f, 1.f);
+
 }
 
 void sistema_editor::inicializar() {
@@ -130,7 +157,14 @@ void sistema_editor::atualizar() {
     // Verifica se o número de entidades mudou
     size_t num_entidades_atual = projeto_atual->obterFaseAtual()->obterRegistro()->entidades.size();
     if (num_entidades_atual != num_entidades_anterior) {
+        entidade_atual = projeto_atual->obterFaseAtual()->obterRegistro()->entidades.empty() ? 0 : projeto_atual->obterFaseAtual()->obterRegistro()->entidades.end()->first;
         num_entidades_anterior = num_entidades_atual; // Atualiza a referência
+        lateral->m_filhos.clear();
+        for (auto& ent : projeto_atual->obterFaseAtual()->obterRegistro()->entidades) {
+            lateral->adicionar<elementos::botao>([this, ent]() {
+                entidade_atual = ent.first;
+            }, std::make_unique<elementos::imagem>("cube.png", false, 0.2f));
+        }
     }
     // Verifica se a entidade atual mudou
     if (entidade_anterior != entidade_atual) {
