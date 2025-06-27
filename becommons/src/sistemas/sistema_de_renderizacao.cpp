@@ -27,7 +27,6 @@
 #include "sistemas/sistema_de_renderizacao.hpp"
 #include "componentes/renderizador.hpp"
 #include "componentes/transformacao.hpp"
-#include "componentes/luz_direcional.hpp"
 #include "componentes/luz_pontual.hpp"
 #include "componentes/camera.hpp"
 #include "componentes/terreno.hpp"
@@ -63,6 +62,7 @@ void sistema_renderizacao::atualizar() {
     auto reg = projeto_atual->obterFaseAtual()->obterRegistro();
     reg->cada<camera>([&](const uint32_t ent){
             auto cam = reg->obter<camera>(ent);
+            if (!camera_principal) camera_principal = cam.get();
             if (cam.get() == camera_principal || !cam->flag_fb) return;
             atualizarCamera(cam.get());
             });
@@ -71,13 +71,9 @@ void sistema_renderizacao::atualizar() {
 
 void sistema_renderizacao::inicializar()
 {
-        auto reg = projeto_atual->obterFaseAtual()->obterRegistro();
-
-        reg->cada<camera>([&](const uint32_t e){
-                camera_principal = reg->obter<camera>(e).get();
-                });
-
-        glCullFace(GL_BACK);
+    auto reg = projeto_atual->obterFaseAtual()->obterRegistro();
+    
+    glCullFace(GL_BACK);
 }
 void sistema_renderizacao::definirCamera(camera* cam)
 {
@@ -95,56 +91,10 @@ void sistema_renderizacao::atualizarCamera(camera* cam)
         cam->desenharFB();
         
         if(cam->m_use_skybox)   cam->m_skybox->desenhar(cam->obtViewMatrix(), cam->obtProjectionMatrix());
-        luz_direcional ld;
-
-        std::vector<luz_pontual> lps;
-        lps.reserve(MAX_LPS);
-
-        reg->cada<luz_pontual>([&](const uint32_t ent) {
-            if (lps.size() >= MAX_LPS) return;
-            lps.push_back(*reg->obter<luz_pontual>(ent));
-        });
-
-        reg->cada<luz_direcional>([&](const uint32_t ent) {
-            ld = *reg->obter<luz_direcional>(ent);
-        });
 
         reg->cada<transformacao>([&](const uint32_t ent) {
             auto transform = reg->obter<transformacao>(ent);
             calcularTransformacao(transform.get());
-        });
-
-        reg->cada<terreno, transformacao>([&](const uint32_t ent_ren) {
-            auto terr = reg->obter<terreno>(ent_ren);
-            auto transform = reg->obter<transformacao>(ent_ren);
-
-            if (!terr || !transform) {
-                return;
-            }
-
-
-            auto s = terr->m_shader;
-            s.use();
-            s.setMat4("view", glm::value_ptr(cam->obtViewMatrix()));
-            s.setVec3("dirLight.direction", ld.direcao);
-            s.setVec3("dirLight.ambient", ld.ambiente);
-            s.setVec3("dirLight.color", ld.cor);
-            s.setFloat("dirLight.intensity", ld.intensidade);
-
-            for(size_t i = 0; i < lps.size(); i++) {
-            s.setVec3("pointLights["+std::to_string(i)+"].position", lps[i].position);
-                s.setVec3("pointLights["+std::to_string(i)+"].color", lps[i].color);
-                s.setFloat("pointLights["+std::to_string(i)+"].intensity", lps[i].intensity);
-                s.setFloat("pointLights["+std::to_string(i)+"].constant", lps[i].constant);
-                s.setFloat("pointLights["+std::to_string(i)+"].linear", lps[i].linear);
-                s.setFloat("pointLights["+std::to_string(i)+"].quadratic", lps[i].quadratic);
-            }
-
-            s.setVec3("viewPos", cam->posicao.x, cam->posicao.y, cam->posicao.z);
-            s.setMat4("projection", glm::value_ptr(cam->obtProjectionMatrix()));
-            s.setVec2("resolution", janela::obterInstancia().tamanho.x, janela::obterInstancia().tamanho.y);
-            s.setMat4("modelo", glm::value_ptr(transform->obterMatrizModelo()));
-            terr->desenhar();
         });
         reg->cada<renderizador, transformacao>([&](const uint32_t ent_ren) {
             auto render = reg->obter<renderizador>(ent_ren);
@@ -159,23 +109,8 @@ void sistema_renderizacao::atualizarCamera(camera* cam)
             auto s = render->m_modelo->obterShader();
             s.use();
             s.setMat4("view", glm::value_ptr(cam->obtViewMatrix()));
-            s.setVec3("dirLight.direction", ld.direcao);
-            s.setVec3("dirLight.ambient", ld.ambiente);
-            s.setVec3("dirLight.color", ld.cor);
-            s.setFloat("dirLight.intensity", ld.intensidade);
-
-            for(size_t i = 0; i < lps.size(); i++) {
-            s.setVec3("pointLights["+std::to_string(i)+"].position", lps[i].position);
-                s.setVec3("pointLights["+std::to_string(i)+"].color", lps[i].color);
-                s.setFloat("pointLights["+std::to_string(i)+"].intensity", lps[i].intensity);
-                s.setFloat("pointLights["+std::to_string(i)+"].constant", lps[i].constant);
-                s.setFloat("pointLights["+std::to_string(i)+"].linear", lps[i].linear);
-                s.setFloat("pointLights["+std::to_string(i)+"].quadratic", lps[i].quadratic);
-            }
-
             s.setVec3("viewPos", cam->posicao.x, cam->posicao.y, cam->posicao.z);
             s.setMat4("projection", glm::value_ptr(cam->obtProjectionMatrix()));
-            s.setVec2("resolution", janela::obterInstancia().tamanho.x, janela::obterInstancia().tamanho.y);
             s.setMat4("modelo", glm::value_ptr(transform->obterMatrizModelo()));
             
             render->m_modelo->desenhar();

@@ -41,18 +41,6 @@ void main()
     vec2 nUv = flip ? vec2(Uv.x, -Uv.y) : Uv;
     vec4 cor_textura = texture(textura, nUv);
 
-    vec2 resolucao_textura = vec2(quadrado.z, quadrado.w);
-    float bordax = tamanho_bordas / resolucao_textura.x;
-    float borday = tamanho_bordas / resolucao_textura.y;
-    // Detectar borda com base nas coordenadas UV
-    if (cor_borda.w != 0)
-    {
-        if (Uv.x < bordax || Uv.x > 1.0 - bordax || Uv.y < borday || Uv.y > 1.0 - borday)
-        {
-            FragColor = cor_borda; // Cor da borda
-            return;
-        }
-    }
     FragColor = cor_textura;
 }
 )"; 

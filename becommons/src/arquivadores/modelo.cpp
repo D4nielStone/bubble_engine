@@ -36,6 +36,7 @@ SOFTWARE.
 #include "assets/objetos/cubo.hpp"
 #include "assets/objetos/esfera.hpp"
 #include "util/material.hpp"
+#include "nucleo/projeto.hpp"
 
 using namespace BECOMMONS_NS;
 
@@ -77,6 +78,11 @@ void modelo::carregarModelo(const std::string& path) {
         diretorio = path;
         malhas.push_back(primitivas[std::filesystem::path(path).filename().string()]);
         malhas.back().carregar();
+        malhas.back().m_material.definirUniforme("dirLight.direction", &projeto_atual->obterFaseAtual()->luz_global->direcao);
+        malhas.back().m_material.definirUniforme("dirLight.ambient", &projeto_atual->obterFaseAtual()->luz_global->ambiente);
+        malhas.back().m_material.definirUniforme("dirLight.color", &projeto_atual->obterFaseAtual()->luz_global->cor);
+        malhas.back().m_material.definirUniforme("dirLight.intensity", &projeto_atual->obterFaseAtual()->luz_global->intensidade);
+        malhas.back().m_material.definirUniforme("resolution", &janela::obterInstancia().tamanho);
         return;
     }
     Assimp::Importer importer;
@@ -209,6 +215,12 @@ malha modelo::processarMalha(aiMesh* mesh, const aiScene* scene) {
     bmat.definirUniforme("use_tex_normal", false);
     bmat.definirUniforme("use_tex_ao", false);
     bmat.definirUniforme("use_tex_height", false);
+    bmat.definirUniforme("dirLight.direction", &projeto_atual->obterFaseAtual()->luz_global->direcao);
+    bmat.definirUniforme("dirLight.ambient", &projeto_atual->obterFaseAtual()->luz_global->ambiente);
+    bmat.definirUniforme("dirLight.color", &projeto_atual->obterFaseAtual()->luz_global->cor);
+    bmat.definirUniforme("dirLight.intensity", &projeto_atual->obterFaseAtual()->luz_global->intensidade);
+    bmat.definirUniforme("resolution", &janela::obterInstancia().tamanho);
+
     for (auto& [nome, tex] : bmat.texturas) {
         bmat.definirUniforme(std::string("use_") + nome, true);
     }
@@ -237,7 +249,10 @@ textura modelo::carregarTextura(aiMaterial* mat, const aiTextureType& type) {
         aiString str;
         mat->GetTexture(type, 0, &str);
 
-        tex.path = std::filesystem::path(diretorio).parent_path().string() + "/" + std::filesystem::path(str.C_Str()).filename().string();
+        tex.path = std::filesystem::path(str.C_Str()).filename().string();
+        size_t barra = tex.path.find_last_of("/\\");
+        tex.path = (barra == std::string::npos) ? tex.path : tex.path.substr(barra + 1);
+        tex.path = std::filesystem::path(diretorio).parent_path().string() + "/" + tex.path;
         tex.id = textureLoader::obterInstancia().carregarTextura(tex.path);
     }
     return tex;

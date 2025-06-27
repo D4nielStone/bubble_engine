@@ -81,7 +81,7 @@ void fase::descarregar()
     reg.entidades.clear();
 }
 
-fase::fase(const char* diretorio) : diretorio(diretorio)
+fase::fase(const char* diretorio) : luz_global(std::make_shared<luz_direcional>()), diretorio(diretorio)
 {
 	
 }
@@ -133,10 +133,10 @@ void fase::analizarEntidades(const Document& doc)
 	    return;
     }
 
+	// Cria entidade
+	uint32_t id = 0;
 	for (auto& entidade : doc["entidades"].GetArray())
 	{
-		// Cria entidade
-		uint32_t id = 0;
 		if(entidade.HasMember("id") && entidade["id"].IsInt())
             id = entidade["id"].GetInt();
         BECOMMONS_NS::entidade ent = reg.criar(id);
@@ -199,8 +199,9 @@ void fase::analizarEntidades(const Document& doc)
             }
             else if (tipo_str == "luz_direcional") {
 			    reg.adicionar<luz_direcional>(ent);
-			    auto ld = reg.obter<luz_direcional>(ent.id);
-                if(!ld->analizar(componente)) {
+			    luz_global = reg.obter<luz_direcional>(ent.id);
+                
+                if(!luz_global->analizar(componente)) {
                     depuracao::emitir(erro, "fase", "Problemas analizando luz direcional");
                     return;
                 }

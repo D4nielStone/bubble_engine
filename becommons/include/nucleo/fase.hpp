@@ -34,6 +34,7 @@ SOFTWARE.
 #include <rapidjson/document.h>
 #include "becommons_namespace.hpp"
 #include "registro.hpp"
+#include "componentes/luz_direcional.hpp"
 
 /**
  * @struct fase
@@ -43,6 +44,7 @@ namespace BECOMMONS_NS {
 	struct fase : public std::enable_shared_from_this<fase>
 	{
 		bool rodando{false};
+        std::shared_ptr<luz_direcional> luz_global = nullptr;
 	    /// @brief Construtores
 		fase(const char* diretorio);
 		fase(const std::string& diretorio);

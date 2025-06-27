@@ -46,14 +46,12 @@ namespace BECOMMONS_NS {
         std::vector<vertice>        obterVertices() const;
         std::vector<transformacao>  obterInstancias() const;
         std::vector<unsigned int>   obterIndices() const;
-        material                    obterMaterial() const;
         unsigned int                obterVertexArray() const;
         unsigned int                obterElementBuffer() const;
         unsigned int                obterVertexBuffer() const;
         void                        definirVertices(const std::vector<vertice>&);
         void                        definirInstancias(const std::vector<transformacao>&);
         void                        definirIndices(const std::vector<unsigned int>&);
-        void                        definirMaterial(const material&);
         void                        definirSobreposicao(const bool);
         void                        descarregar();
         void                        carregar();
@@ -61,13 +59,13 @@ namespace BECOMMONS_NS {
         bool                        estaCarregado() const;
         bool                        estaSobreposto() const;
         ~malha();
+        material                    m_material;
      private:
         bool                        m_sobrepor { false }, 
                                     m_carregado { false };
         std::vector<transformacao>  m_instancias;
         std::vector<vertice>        m_vertices;
         std::vector<unsigned int>   m_indices;
-        material                    m_material;
         unsigned int                m_VAO,
                                     m_VBO,
                                     m_EBO;

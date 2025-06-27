@@ -45,7 +45,9 @@ codigo::codigo(const std::string& arquivo) : arquivo(arquivo) {
 }
 
 void codigo::iniciar() {
-    estado_lua["bubble.meuID"] = meu_objeto;
+    auto bubble = estado_lua["bubble"].get_or_create<sol::table>();
+    bubble["meuID"] = meu_objeto;
+    bubble["janela"] = instanciaAtual;
 	estado_lua.script_file(arquivoCompleto);
     // Obtém as funções globais
     f_iniciar = estado_lua["iniciar"];

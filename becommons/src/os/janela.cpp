@@ -203,9 +203,9 @@ void janela::swap()
         glfwSetCursor(window, cursor_glfw);
         m_cursor_antigo = m_cursor;
     }
-    m_tempo.calcularDT();
     m_inputs.m_letra_pressionada = false;
     glfwSwapBuffers(window);
+    m_tempo.calcularDT();
 }
 
 void janela::viewport() const
