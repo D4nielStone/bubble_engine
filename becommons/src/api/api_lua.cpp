@@ -42,6 +42,38 @@
 
 using namespace BECOMMONS_NS;
 template <typename T>
+static void registrar_vetor2(sol::state& lua, const std::string& nome) {
+    using vet = BECOMMONS_NS::vetor2<T>;
+
+    lua.new_usertype<vet>(nome,
+        sol::constructors<vet(), vet(T, T)>(),
+        "x", &vet::x,
+        "y", &vet::y,
+        "normalizar", &vet::normalizar,
+        "tamanho", &vet::tamanho,
+
+        // Operadores
+        sol::meta_function::addition, sol::overload(
+            static_cast<vet (vet::*)(const vet&) const>(&vet::operator+),
+            static_cast<vet (vet::*)(T) const>(&vet::operator+)
+        ),
+        sol::meta_function::subtraction, sol::overload(
+            static_cast<vet (vet::*)(const vet&) const>(&vet::operator-),
+            static_cast<vet (vet::*)(T) const>(&vet::operator-)
+        ),
+        sol::meta_function::multiplication, sol::overload(
+            static_cast<vet (vet::*)(const vet&) const>(&vet::operator*),
+            static_cast<vet (vet::*)(T) const>(&vet::operator*)
+        ),
+        sol::meta_function::division, sol::overload(
+            static_cast<vet (vet::*)(const vet&)>(&vet::operator/),
+            static_cast<vet (vet::*)(T)>(&vet::operator/)
+        ),
+        sol::meta_function::equal_to,
+            static_cast<bool (vet::*)(const vet&) const>(&vet::operator==)
+    );
+}
+template <typename T>
 static void registrar_vetor3(sol::state& lua, const std::string& nome) {
     using vet = BECOMMONS_NS::vetor3<T>;
 
@@ -82,6 +114,9 @@ void becommons::api::definirClasses(sol::state& lua) {
     registrar_vetor3<float>(lua, "fvet3");
     registrar_vetor3<double>(lua, "dvet3");
     registrar_vetor3<int>(lua, "ivet3");
+    registrar_vetor2<float>(lua, "fvet2");
+    registrar_vetor2<double>(lua, "dvet2");
+    registrar_vetor2<int>(lua, "ivet2");
     // - componentes
     lua.new_usertype<transformacao>("transformacao",
             sol::constructors<transformacao(const fvet3&, const fvet3&, const fvet3&)>(),
@@ -92,6 +127,10 @@ void becommons::api::definirClasses(sol::state& lua) {
             "olharEntidade", &transformacao::olharEntidade
             );
     // - nucleo
+    lua.new_usertype<janela>("janela",
+            sol::constructors<janela()>(),
+            "tamanho", &janela::tamanho // ivet
+            );
     lua.new_usertype<projeto>("projeto",
             sol::constructors<projeto()>(),
             "salvarFases", &projeto::salvarFases,
