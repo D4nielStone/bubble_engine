@@ -43,6 +43,7 @@ camera_editor::camera_editor()
     mousex_antigo = inputs::obterMousePos().x;
     mousey_antigo = inputs::obterMousePos().y;
     transform = new transformacao();
+    transform->rotacao.y = 90;
     ceu = cor(0.2, 0.2, 0.2, 1.f);
 };
 
