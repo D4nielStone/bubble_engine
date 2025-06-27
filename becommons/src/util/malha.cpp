@@ -51,10 +51,6 @@ std::vector<unsigned int> malha::obterIndices() const  {
     return m_indices;
 }
         
-material malha::obterMaterial() const {
-    return m_material;
-}
-        
 unsigned int malha::obterVertexArray() const {
     return m_VAO;
 }
@@ -77,10 +73,6 @@ void malha::definirInstancias(const std::vector<transformacao>& i) {
         
 void malha::definirIndices(const std::vector<unsigned int>& i) {
     m_indices = i;
-}
-        
-void malha::definirMaterial(const material& m) {
-    m_material = m;
 }
         
 void malha::definirSobreposicao(const bool s) {
