@@ -36,7 +36,6 @@ SOFTWARE.
 
 namespace BECOMMONS_NS {
     inline static void abrirLink(const std::string& url) {
-        depuracao::emitir(info, "Abrindo ajuda...");
         std::string comando = "xdg-open \\" + url;
         int result = system(comando.c_str());
     }
