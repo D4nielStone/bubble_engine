@@ -26,26 +26,31 @@ SOFTWARE.
 
 #pragma once
 #include <cmath>
+#include <type_traits>
+#include <bullet/btBulletDynamicsCommon.h>
 #include "becommons_namespace.hpp"
+#include "glm/glm.hpp"
+/* Definição da estrutura vetor2 */
 
 namespace BECOMMONS_NS {
     template<class T>
-    struct vetor2
-    {
+    struct vetor2 {
         T x, y;
+        static_assert(std::is_arithmetic_v<T>, "vetor2<T>: T precisa ser um numero aritimético");
+            
+        constexpr vetor2(T x, T y) : x(x), y(y) {}
+        constexpr vetor2(T f = {}) : x(f), y(f) {}
 
-        // Construtor com par�metros
-        vetor2(T x, T y) : x(x), y(y) {}
-
-        // Construtor padr�o
-        vetor2() : x(T{}), y(T{}) {}
+        glm::vec<2, T, glm::packed_highp> to_glm() const {
+            return glm::vec<2, T, glm::packed_highp>((x), (y));
+        }
 
         // Deve somar
         vetor2 operator+(const vetor2& other) const
         {
             return vetor2{ x + other.x, y + other.y };
         };
-        vetor2 operator+(const float other) const
+        vetor2 operator+(const T other) const
         {
             return vetor2{ x + other, y + other };
         };
@@ -55,7 +60,7 @@ namespace BECOMMONS_NS {
             y += other.y;
             return *this;
         };
-        vetor2& operator+=(const float other)
+        vetor2& operator+=(const T other)
         {
             x += other;
             y += other;
@@ -66,7 +71,7 @@ namespace BECOMMONS_NS {
         {
             return vetor2{ x - other.x, y - other.y };
         };
-        vetor2 operator-(const float other) const
+        vetor2 operator-(const T other) const
         {
             return vetor2{ x - other, y - other};
         };
@@ -76,20 +81,20 @@ namespace BECOMMONS_NS {
             y -= other.y;
             return *this;
         };
-        vetor2& operator-=(const float other)
+        vetor2& operator-=(const T other)
         {
             x -= other;
             y -= other;
             return *this;
         };
         // Deve multiplicar
-        vetor2 operator*(const vetor2& other)
+        vetor2 operator*(const vetor2& other) const
         {
             return vetor2{ x * other.x, y * other.y };
         };
-        vetor2 operator*(float other)
+        vetor2 operator*(T other) const 
         {
-            return vetor2{ x * other, y * other };
+            return vetor2{ x * other, y * other};
         };
         vetor2 operator*=(const vetor2& other)
         {
@@ -97,7 +102,7 @@ namespace BECOMMONS_NS {
             y *= other.y;
             return *this;
         };
-        vetor2 operator*=(float other)
+        vetor2 operator*=(T other)
         {
             x *= other;
             y *= other;
@@ -108,7 +113,7 @@ namespace BECOMMONS_NS {
         {
             return vetor2{ x / other.x, y / other.y};
         };
-        vetor2 operator/(float other)
+        vetor2 operator/(T other)
         {
             return vetor2{ x / other, y / other };
         };
@@ -118,7 +123,7 @@ namespace BECOMMONS_NS {
             y /= other.y;
             return *this;
         };
-        vetor2 operator/=(float other)
+        vetor2 operator/=(T other)
         {
             x /= other;
             y /= other;
@@ -134,12 +139,13 @@ namespace BECOMMONS_NS {
         {
             return !(*this == other);
         }
-        void normalizar()
+        vetor2<T> normalizar()
         {
             float mag = std::sqrt(x*x + y*y);
-            if(mag < 0) return;
+            if(mag < 0) return *this;
             x = x / mag;
             y = y / mag;
+            return *this;
         }
         T tamanho() const
         {
