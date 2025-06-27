@@ -80,7 +80,7 @@ namespace BECOMMONS_NS {
         bool                m_ligar_al {false};            // ligar largura-altura
         float               m_largura = 20.f;
         float               m_altura = 20.f;
-        unsigned int        m_espessura_borda = 1;
+        unsigned int        m_espessura_borda = 4;
         ivet2               m_padding {0, 0};
         ivet2               m_padding_geral {0, 0};
         fvet4               m_limites {0, 0, 20, 20};
