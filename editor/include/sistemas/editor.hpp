@@ -49,6 +49,7 @@ namespace EDITOR_NS {
         // \brief atributos
         becommons::camera_editor cam;
         becommons::interface ui;
+        bool m_salvar_ao_fechar;
         size_t num_entidades_anterior = 0;
         size_t entidade_anterior = 0;
         size_t entidade_atual = 1;

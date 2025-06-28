@@ -59,6 +59,7 @@ namespace BECOMMONS_NS {
 	        cursor m_cursor_antigo = cursor::seta;
 	        static void modoLegado();
         public:
+            static bool deveFechar();
             static void posicionarCursor                   (double x, double y);
             static ivet2 obterTamanhoJanela                ();
             static bool temInstancia();

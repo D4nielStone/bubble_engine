@@ -55,6 +55,11 @@ void janela::gerarInstancia(const char* nome, fvet2 bounds , const char* icon_pa
     if(instanciaAtual) delete instanciaAtual;
     instanciaAtual = new janela(nome, bounds, icon_path);
 }
+            
+bool janela::deveFechar() {
+    return glfwWindowShouldClose(janela::obterInstancia().window);
+}
+
 void janela::gerarInstancia(const char* nome, const bool f, fvet2 bounds , const char* icon_path ) {
     if(instanciaAtual) delete instanciaAtual;
     instanciaAtual = new janela(nome, f, bounds, icon_path);

@@ -47,7 +47,7 @@ bool gatilho_ = true;
 // -- console
 // -- -- output
 
-sistema_editor::sistema_editor() {
+sistema_editor::sistema_editor() : m_salvar_ao_fechar(true) {
 }
 
 // waraper da barra lateral.
@@ -194,6 +194,9 @@ projeto_atual->obterFaseAtual()->obterRegistro()->remover(entidade_atual);
 }
 
 void sistema_editor::atualizar() {
+    if(m_salvar_ao_fechar && janela::deveFechar()) {
+        salvarEditor();
+    }
     chamarInputs();
     // Verifica se o número de entidades mudou
     size_t num_entidades_atual = projeto_atual->obterFaseAtual()->obterRegistro()->entidades.size();

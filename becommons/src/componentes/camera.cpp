@@ -44,20 +44,22 @@ void camera::desenharFB() const
     if (flag_fb)
     {
         glBindTexture(GL_TEXTURE_2D, textura);
+    if(viewport_ptr)
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, viewport_ptr->x, viewport_ptr->y, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
+    else
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, viewportFBO.x, viewportFBO.y, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
         glBindTexture(GL_TEXTURE_2D, 0);
         glBindRenderbuffer(GL_RENDERBUFFER, rbo);
+    if(viewport_ptr)
+        glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, viewport_ptr->x, viewport_ptr->y);
+    else
         glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, viewportFBO.x, viewportFBO.y);
         glBindRenderbuffer(GL_RENDERBUFFER, 0);
         glBindFramebuffer(GL_FRAMEBUFFER, fbo);
-        glViewport(0, 0, viewportFBO.x, viewportFBO.y);
     }
     glClearColor(ceu.r, ceu.g, ceu.b, ceu.a);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    if(viewport_ptr)
-    glViewport(0, 0, viewport_ptr->x, viewport_ptr->y);
-    else
-    glViewport(0, 0, viewportFBO.x, viewportFBO.y);
+    glViewport(0, 1, janela::obterInstancia().tamanho.x, janela::obterInstancia().tamanho.y);
 }
 
 
@@ -75,7 +77,6 @@ camera::camera(const bool orth)
         
 bool camera::analizar(const rapidjson::Value& value)
 {
-	viewport_ptr = &janela::obterInstancia().tamanho;
     m_skybox = new skybox();
 	
     if(value.HasMember("fov"))
