@@ -411,6 +411,11 @@ void interface::processarModular(caixa* it_caixa) {
 void interface::chamarFuncoes(caixa* c) {
     for (auto& it_caixa : c->m_filhos) {
         switch (it_caixa->tipo()) {
+        case tipo_caixa::popup: {
+            auto pop = static_cast<elementos::popup*>(it_caixa.get());
+            pop->atualizar(); 
+            break;
+                                         }
         case tipo_caixa::caixa_de_texto: {
             auto ct = static_cast<elementos::caixa_de_texto*>(it_caixa.get());
             ct->atualizar(); 
