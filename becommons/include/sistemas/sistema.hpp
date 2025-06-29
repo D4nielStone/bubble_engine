@@ -31,6 +31,7 @@ namespace BECOMMONS_NS {
      * Classe base para sistemas do loop principal
      */
     struct sistema {
+        bool init {false};
         /**
          * Construtor virtual da classe Sistema
          * @param nome Nome do sistema
@@ -45,7 +46,7 @@ namespace BECOMMONS_NS {
         /**
          * @brief Inicializa o sistema
          */
-        virtual void inicializar() = 0;
+        virtual void inicializar() { init = true; };
 
         /**
          * @brief Atualiza o sistema dentro do loop principal

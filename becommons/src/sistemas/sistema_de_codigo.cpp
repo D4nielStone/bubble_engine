@@ -44,6 +44,7 @@ namespace BECOMMONS_NS {
     }
 
     void sistema_codigo::inicializar() {
+        sistema::inicializar();
         auto reg = projeto_atual->obterFaseAtual()->obterRegistro();
 
         reg->cada<codigo>([&](const uint32_t entidade)

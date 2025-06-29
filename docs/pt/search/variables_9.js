@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['sistemas_0',['sistemas',['../structBECOMMONS__NS_1_1projeto.html#a2db353027fac6ea10e83e5194c7b52b4',1,'BECOMMONS_NS::projeto']]],
-  ['sistemas_5fadicionais_1',['sistemas_adicionais',['../structBECOMMONS__NS_1_1projeto.html#a2cd8f2a0a7d318add55fa95b85010f0f',1,'BECOMMONS_NS::projeto']]]
+  ['tamanho_0',['tamanho',['../structBECOMMONS__NS_1_1caractere.html#aeb9b952854cb283b9ca4211f0c2af0b4',1,'BECOMMONS_NS::caractere']]]
 ];

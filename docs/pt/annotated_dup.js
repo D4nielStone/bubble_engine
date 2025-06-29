@@ -1,6 +1,9 @@
 var annotated_dup =
 [
     [ "BECOMMONS_NS", "namespaceBECOMMONS__NS.html", [
+      [ "api", null, [
+        [ "entidade", "structBECOMMONS__NS_1_1api_1_1entidade.html", null ]
+      ] ],
       [ "elementos", null, [
         [ "area_de_texto", "classBECOMMONS__NS_1_1elementos_1_1area__de__texto.html", "classBECOMMONS__NS_1_1elementos_1_1area__de__texto" ],
         [ "area_de_toque", "classBECOMMONS__NS_1_1elementos_1_1area__de__toque.html", null ],

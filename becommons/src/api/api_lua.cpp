@@ -41,12 +41,24 @@
 #include "util/vetor4.hpp"
 
 using namespace BECOMMONS_NS;
+
+void api::entidade::destruir() const {
+	projeto_atual->obterFaseAtual()->obterRegistro()->remover(id);
+}
+
+api::entidade::entidade(const uint32_t& id) : id(id) {
+	m_renderizador = projeto_atual->obterFaseAtual()->obterRegistro()->obter<renderizador>(id).get();
+	m_transformacao = projeto_atual->obterFaseAtual()->obterRegistro()->obter<transformacao>(id).get();
+	m_camera = projeto_atual->obterFaseAtual()->obterRegistro()->obter<camera>(id).get();
+	m_fisica = projeto_atual->obterFaseAtual()->obterRegistro()->obter<fisica>(id).get();
+}
+
 template <typename T>
 static void registrar_vetor2(sol::state& lua, const std::string& nome) {
     using vet = BECOMMONS_NS::vetor2<T>;
 
     lua.new_usertype<vet>(nome,
-        sol::constructors<vet(), vet(T, T)>(),
+        sol::constructors<sol::types<>, sol::types<T, T>>(),
         "x", &vet::x,
         "y", &vet::y,
         "normalizar", &vet::normalizar,
@@ -78,7 +90,7 @@ static void registrar_vetor3(sol::state& lua, const std::string& nome) {
     using vet = BECOMMONS_NS::vetor3<T>;
 
     lua.new_usertype<vet>(nome,
-        sol::constructors<vet(), vet(T, T, T)>(),
+        sol::constructors<sol::types<>, sol::types<T, T, T>>(),
         "x", &vet::x,
         "y", &vet::y,
         "z", &vet::z,
@@ -119,7 +131,7 @@ void becommons::api::definirClasses(sol::state& lua) {
     registrar_vetor2<int>(lua, "ivet2");
     // - componentes
     lua.new_usertype<transformacao>("transformacao",
-            sol::constructors<transformacao(const fvet3&, const fvet3&, const fvet3&)>(),
+            sol::call_constructor, sol::constructors<sol::types<const fvet3&, const fvet3&, const fvet3&>>(),
             "posicao", &transformacao::posicao,
             "escala", &transformacao::escala,
             "rotacao", &transformacao::rotacao,
@@ -129,10 +141,38 @@ void becommons::api::definirClasses(sol::state& lua) {
     // - nucleo
     lua.new_usertype<janela>("janela",
             sol::constructors<janela()>(),
-            "tamanho", &janela::tamanho // ivet
+            "tamanho", &janela::tamanho, // ivet2
+            "nome", sol::overload(
+                    static_cast<std::string (janela::*)() const>(&janela::nome)            // get
+                ),
+            "nome", sol::overload(
+                    static_cast<void (janela::*)(const char*)>(&janela::nome)            // set
+                )
+            );
+    lua.new_usertype<fase>("fase",
+            sol::constructors<fase(), fase(const std::string&)>(),
+            "nome", sol::overload(
+                    static_cast<std::string (fase::*)() const>(&fase::nome)            // get
+                ),
+            "nome", sol::overload(
+                    static_cast<void (fase::*)(const std::string&)>(&fase::nome)            // set
+                ),
+            "pausar", &fase::pausar,
+            "iniciar", &fase::iniciar,
+            "parar", &fase::parar,
+            "obterRegistro", &fase::obterRegistro
+            );
+    lua.new_usertype<api::entidade>("entidade",
+            sol::call_constructor, sol::constructors<sol::types<const uint32_t&>>(),
+            "transformacao", &api::entidade::m_transformacao,
+            "fisica", &api::entidade::m_fisica,
+            "camera", &api::entidade::m_camera,
+            "renderizador", &api::entidade::m_renderizador,
+            "id", &api::entidade::id,
+            "destruir", &api::entidade::destruir
             );
     lua.new_usertype<projeto>("projeto",
-            sol::constructors<projeto()>(),
+            sol::call_constructor, sol::constructors<sol::types<>>(),
             "salvarFases", &projeto::salvarFases,
             "salvarFase",  &projeto::salvarFase,
             "carregarFase", &projeto::carregarFase,

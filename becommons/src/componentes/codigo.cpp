@@ -47,13 +47,10 @@ codigo::codigo(const std::string& arquivo) : arquivo(arquivo) {
 void codigo::iniciar() {
     auto bubble = estado_lua["bubble"].get_or_create<sol::table>();
     bubble["meuID"] = meu_objeto;
-    bubble["janela"] = instanciaAtual;
+    bubble["janela"] = &janela::obterInstancia();
 	estado_lua.script_file(arquivoCompleto);
     // Obtém as funções globais
-    f_iniciar = estado_lua["iniciar"];
     f_atualizar = estado_lua["atualizar"];
-
-   if(f_iniciar.valid()) f_iniciar();
 }
 
 bool codigo::analizar(const rapidjson::Value& value) {

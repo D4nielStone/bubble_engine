@@ -65,7 +65,7 @@ fisica::fisica(bool estatico, const formas e_forma) : e_forma(e_forma) {
 
 // Destrutor
 fisica::~fisica() {
-    if(m_corpo_rigido && projeto_atual)projeto_atual->sfisica()->remover(m_corpo_rigido);
+    if(m_corpo_rigido && projeto_atual)projeto_atual->m_fisica.remover(m_corpo_rigido);
     if(m_corpo_rigido)delete m_corpo_rigido;
     if(m_estado_de_movimento)delete m_estado_de_movimento;
     if(m_forma)delete m_forma;

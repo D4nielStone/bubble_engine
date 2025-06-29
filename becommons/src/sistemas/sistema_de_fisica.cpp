@@ -81,6 +81,7 @@ void sistema_fisica::atualizar() {
 }
 
 void sistema_fisica::inicializar() {
+    sistema::inicializar();
     auto reg = projeto_atual->obterFaseAtual()->obterRegistro();
     reg->cada<fisica, transformacao>([reg, this](const uint32_t entidade) {
             /// adiciona corpos rigidos

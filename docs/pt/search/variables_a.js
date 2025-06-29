@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['tamanho_0',['tamanho',['../structBECOMMONS__NS_1_1caractere.html#aeb9b952854cb283b9ca4211f0c2af0b4',1,'BECOMMONS_NS::caractere']]]
+  ['width_0',['width',['../classBECOMMONS__NS_1_1imageLoader.html#a032f3066fe068e2268f6f92ea8855993',1,'BECOMMONS_NS::imageLoader']]]
 ];

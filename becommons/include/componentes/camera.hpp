@@ -35,7 +35,6 @@ SOFTWARE.
 #include "becommons_namespace.hpp"
 #include "componente.hpp"
 #include "transformacao.hpp"
-#include "elementos/imagem.hpp"
 #include "util/skybox.hpp"
 #include "util/vetor3.hpp"
 #include "util/cor.hpp"
@@ -55,7 +54,6 @@ namespace BECOMMONS_NS {
 
         skybox* m_skybox{nullptr};
         bool m_use_skybox { false };
-        std::unique_ptr<elementos::imagem> framebuffer_ptr{nullptr};
 		cor ceu				{0.43F, 0.78F, 0.86F, 1.0F};
 
 		fvet3 forward, direita, cima, posicao;

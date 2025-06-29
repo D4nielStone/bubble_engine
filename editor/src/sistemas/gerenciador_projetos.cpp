@@ -97,16 +97,14 @@ void gerenciador_projetos::criarProjetoPadrao(const std::string& novo_diretorio,
         }
     ]
 })";
-    auto codigo_string = R"(
--- Autor Daniel O. Santos copyright 2024
-local vel = 6
-
-function iniciar()
-end
+    auto codigo_string = R"(-- Autor Daniel O. © 2025
+local vel= 6
+local eu = entidade(bubble.meuID)
 function atualizar()
-    eu.transformacao.rotacao = fvet3(eu.transformacao.rotacao.x + vel * tempo.obterDeltaTime(), eu.transformacao.rotacao.y + vel * tempo.obterDeltaTime(), 0)
-end
-    )";
+    eu.transformacao.rotacao.y = eu.transformacao.rotacao.y + vel
+    eu.transformacao.rotacao.x = eu.transformacao.rotacao.x + vel
+    eu.transformacao.rotacao.z = eu.transformacao.rotacao.z + vel
+end)";
 
     // Cria diretório do projeto
     std::filesystem::create_directories(novo_diretorio + "/" + nome);
@@ -179,9 +177,10 @@ void gerenciador_projetos::abrirProjeto(const std::string& caminho) {
        descarregarShaders();
        // Cria projeto
        becommons::projeto editor(caminho_);
-       
        // Sistema do editor
-       editor.adicionar("editor", new sistema_editor());
+       sistema_editor* e = new sistema_editor();
+       e->inicializar();
+       editor.sistemas.push_back(e);
        
        
        // Define o nome da janela
