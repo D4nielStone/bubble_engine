@@ -137,6 +137,7 @@ interface::interface() {
 }
 
 void interface::inicializar() {
+    sistema::inicializar();
     gerarBuffers();
 }
 

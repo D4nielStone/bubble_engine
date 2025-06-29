@@ -49,39 +49,38 @@ using namespace BECOMMONS_NS;
 
 // Main loop
 void projeto::rodar() {
-    while(!glfwWindowShouldClose(janela::obterInstancia().window))
-	{
+    m_render.inicializar();
+    while(!janela::deveFechar()) {
 		janela::obterInstancia().poll();
-        if(obterFaseAtual() && obterFaseAtual()->rodando)
-        {
-            if(sistemas.find("fisica") != sistemas.end())
-                sistemas["fisica"]->atualizar();        
-            if(sistemas.find("codigo") != sistemas.end())
-                sistemas["codigo"]->atualizar();        
+        if(obterFaseAtual() && obterFaseAtual()->rodando) {
+            if(!m_fisica.init) m_fisica.inicializar();
+            m_fisica.atualizar();        
+            if(!m_codigo.init) m_codigo.inicializar();
+            m_codigo.atualizar();        
         }
-        if(sistemas.find("render") != sistemas.end())
-            sistemas["render"]->atualizar();        
-
-        if(obterFaseAtual() && obterFaseAtual()->rodando)
-            if(sistemas.find("interface") != sistemas.end())
-                sistemas["interface"]->atualizar();        
-
-        for(auto& s : sistemas_adicionais)
-        {
-            s.second->atualizar();
+        m_render.atualizar();        
+        if(obterFaseAtual() && obterFaseAtual()->rodando) {
+            if(!m_interface.init) {
+                if(m_render.camera_principal) {
+                auto cam = m_render.camera_principal;
+                cam->ativarFB();
+                m_interface.inicializar();
+                auto framebuffer_ptr = std::make_unique<elementos::imagem>(cam->textura, true);
+                cam->viewport_ptr = &framebuffer_ptr->m_imagem_tamanho;
+                m_interface.m_raiz = std::move(framebuffer_ptr);
+                }
+            }
+            m_interface.atualizar();        
         }
-
+        for (auto& s : sistemas) {
+            if(!s->init) s->inicializar();
+            s->atualizar();        
+        }
 		janela::obterInstancia().swap();
 	}
 }
 
 projeto::~projeto() {
-    for(auto& sistema : sistemas)
-    {
-        delete sistema.second;
-    }
-    sistemas.clear();
-    sistemas_adicionais.clear();
 }
 
 projeto::projeto(std::string &diretorio) {
@@ -191,7 +190,6 @@ void projeto::carregarFase(const std::string &n) {
     m_fases[nome] = std::make_shared<fase>(nome + ".fase");
 
     m_fases[nome]->carregar();
-    iniciarSistemas();
 }
 
 void projeto::carregarFases() {
@@ -205,40 +203,11 @@ void projeto::carregarFases() {
     }
 }
 
-void projeto::iniciarSistemas() {
-    sistemas["fisica"] = new sistema_fisica();
-    sistemas["render"] = new sistema_renderizacao();
-    sistemas["codigo"] = new sistema_codigo();
-
-    for(auto& sistema : sistemas) {
-        sistema.second->inicializar();
-    }
-}
-
-void projeto::adicionar(const std::string nome, sistema* s) {
-    sistemas_adicionais[nome] = s;
-    s->inicializar();
-}
-
 std::shared_ptr<fase> projeto::obterFaseAtual() {
     if(m_fases.find(fase_atual) != m_fases.end())
 	    return m_fases[fase_atual];
     else
         return nullptr;
-}
-
-sistema_fisica* projeto::sfisica() {
-    return static_cast<sistema_fisica*>(sistemas["fisica"]);
-}
-sistema_renderizacao* projeto::srender() {
-    return static_cast<sistema_renderizacao*>(sistemas["render"]);
-}
-sistema* projeto::obterSistema(const std::string nome) {
-    if(sistemas_adicionais.find(nome) != sistemas_adicionais.end())
-    {
-        return sistemas_adicionais[nome];
-    }
-    return nullptr;
 }
 
 void projeto::salvarFases() {

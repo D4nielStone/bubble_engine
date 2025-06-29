@@ -34,11 +34,6 @@ using namespace BECOMMONS_NS;
 camera_editor::camera_editor()
 {
     ativarFB(); // Ativa framebuffer
-    framebuffer_ptr = std::make_unique<elementos::imagem>(textura, true);
-    framebuffer_ptr->m_estilo.m_flag_estilo |= flag_estilo::largura_percentual | flag_estilo::altura_percentual;
-    framebuffer_ptr->m_estilo.m_largura = 1;
-    framebuffer_ptr->m_estilo.m_altura = 1;
-    viewport_ptr = &framebuffer_ptr->m_imagem_tamanho;
     mousex_antigo = inputs::obterMousePos().x;
     mousey_antigo = inputs::obterMousePos().y;
     transform = new transformacao();

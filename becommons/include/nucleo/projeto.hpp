@@ -36,6 +36,8 @@ SOFTWARE.
 #include "sistemas/sistema.hpp"
 #include "sistemas/sistema_de_fisica.hpp"
 #include "sistemas/sistema_de_renderizacao.hpp"
+#include "sistemas/sistema_de_codigo.hpp"
+#include "sistemas/interface.hpp"
 
 namespace BECOMMONS_NS {
     struct projeto {
@@ -73,28 +75,18 @@ namespace BECOMMONS_NS {
 	        /// @return retorna ponteiro da fase atual
 	        std::shared_ptr<fase> obterFaseAtual();
 
-            /// @brief adiciona sistema
-            /// @param nome Nome do sistema
-            /// @param s Ponteiro do Sistema 
-            void adicionar(const std::string nome, sistema* s);
-
-	        /// @gets para Sistemas
-	        sistema_fisica* sfisica();
-	        sistema_renderizacao* srender();
-	        sistema* obterSistema(const std::string);
+            sistema_fisica m_fisica;
+            sistema_renderizacao m_render;
+            sistema_codigo m_codigo;
+            interface m_interface;
+            std::vector<sistema*> sistemas;
         private:
             /// @brief cria projeto com cubo, luz direcional e código de rotação.
             void criarProjetoVazio(const std::string& path, const char* nome);
-            /// @brief sistemas padrão
-            std::unordered_map<std::string, sistema*> sistemas;
-            /// @brief sistemas adicionais
-            std::unordered_map<std::string, sistema*> sistemas_adicionais;
             /// @brief vetor de fases carregadas
             std::unordered_map<std::string, std::shared_ptr<fase>> m_fases;
             /// @brief cria janela glfw e inicia contexto opengl
             void criarJanela(rapidjson::Document& doc);
-            /// @brief adiciona sistemas padrão como interface, renderização e física
-            void iniciarSistemas();
             /// @brief id para fase atual
             std::string fase_atual;
     };

@@ -42,7 +42,7 @@ namespace BECOMMONS_NS {
 
 		std::string arquivoCompleto;
         sol::state estado_lua;
-        sol::function f_iniciar, f_atualizar;
+        sol::function f_atualizar;
 
 		/**
 		* @brief carrega script lua

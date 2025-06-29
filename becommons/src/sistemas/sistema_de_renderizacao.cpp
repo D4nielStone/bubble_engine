@@ -71,6 +71,7 @@ void sistema_renderizacao::atualizar() {
 
 void sistema_renderizacao::inicializar()
 {
+    sistema::inicializar();
     auto reg = projeto_atual->obterFaseAtual()->obterRegistro();
     
     glCullFace(GL_BACK);

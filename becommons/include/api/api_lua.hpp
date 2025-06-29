@@ -1,5 +1,5 @@
 /**
- *  @file api_lua.hpp
+ *  \file api_lua.hpp
  *  Gerencia a configuração e registro da API do motor com Lua via LuaBridge.
  *  
  *  Este arquivo é responsável por expor componentes internos do motor gráfico ao ambiente
@@ -30,7 +30,7 @@
  *  end
  *  \endcode
  *  
- *  @copyright 
+ *  \copyright 
  *  MIT License
  *  Copyright (c) 2025 Daniel Oliveira
  *  
@@ -52,19 +52,39 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  *  SOFTWARE. 
  *  
- *  @see api_lua.cpp
+ *  \see api_lua.cpp
  */
 #pragma once
 #include <cstdint>
 #include <bullet/btBulletDynamicsCommon.h>
 #include <sol/sol.hpp>
+#include "componentes/fisica.hpp"
+#include "componentes/renderizador.hpp"
+#include "componentes/transformacao.hpp"
+#include "componentes/camera.hpp"
 #include "becommons_namespace.hpp"
 
 namespace BECOMMONS_NS {
     namespace api {
+        // \struct entidade
+        // \brief Estrutura para api lua
+        // \note É diferente da entidade do sistema ECS, aqui serve como uma ponte para a api lua
+    	struct entidade {
+    	    uint32_t id;
+    		void destruir() const;
+	    	entidade(const uint32_t& id);
+		   	// \name Componentes-propriedade da entidade
+		   	// Conjunto de ponteiros para a entidade na api lua
+		   	// \{
+		   	transformacao* m_transformacao{ nullptr };
+		   	fisica* m_fisica{ nullptr };
+		   	camera* m_camera{ nullptr };
+           	renderizador* m_renderizador{nullptr};
+            // \}
+        };
 	     /**  Define as classes da api */
 	  	void definirClasses(sol::state&);    
          /**  Define os namespaces da api como math e inputs */
 	  	void definirNamespaces(sol::state&);    
-   } /// < namespace api 
-} /// < namespace becommons
+   } // < namespace api 
+} // < namespace becommons

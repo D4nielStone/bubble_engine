@@ -177,6 +177,14 @@ namespace BECOMMONS_NS {
             m_filhos.push_back(std::move(nova_caixa));
             return ptr;
         }
+
+        template <typename T>
+        T* adicionar(T* nova_caixa) {
+            nova_caixa->m_pai = this;
+            nova_caixa->configurar();
+            m_filhos.push_back(nova_caixa);
+            return nova_caixa;
+        }
         
         template <typename T>
         T* adicionar(std::unique_ptr<T> nova_caixa) {
