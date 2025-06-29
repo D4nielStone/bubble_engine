@@ -84,7 +84,6 @@ projeto::~projeto() {
 }
 
 projeto::projeto(std::string &diretorio) {
-    imageLoader::init();
     // Torna projeto atual
     projeto_atual = this;
     auto doc = analisarProjeto(diretorio);
@@ -92,7 +91,6 @@ projeto::projeto(std::string &diretorio) {
     criarJanela(doc);
 }
 projeto::projeto() {
-    imageLoader::init();
 }
 
 rapidjson::Document projeto::analisarProjeto(std::string& path) {

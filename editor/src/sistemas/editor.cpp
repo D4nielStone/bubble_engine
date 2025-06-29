@@ -132,6 +132,17 @@ void sistema_editor::adicionarCaixas() {
     c_inspetor->m_estilo.m_cor_fundo = cor(0.1f);
     c_inspetor->m_estilo.m_cor_borda = cor(0.07f);
     c_inspetor->m_estilo.m_padding_geral = {2, 2};
+    
+    estilo e3;
+    e3.m_flag_estilo |= flag_estilo::largura_percentual | flag_estilo::alinhamento_central;
+    e3.m_cor_borda = cor(0.3f);
+    e3.m_largura = 1;
+    e3.m_padding_geral = {5, 0};
+
+    c_inspetor->adicionar<elementos::botao>([this]() {
+        }, std::make_unique<elementos::imagem>("remover.png", false, 0.4))->m_estilo = e3;
+    c_inspetor->adicionar<elementos::botao>([this]() {
+        }, std::make_unique<elementos::imagem>("adicionar.png", false, 0.4))->m_estilo = e3;
 }
 
 void sistema_editor::inicializar() {

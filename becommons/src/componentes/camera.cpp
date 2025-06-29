@@ -59,7 +59,10 @@ void camera::desenharFB() const
     }
     glClearColor(ceu.r, ceu.g, ceu.b, ceu.a);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    glViewport(0, 0, janela::obterInstancia().tamanho.x, janela::obterInstancia().tamanho.y);
+    if(viewport_ptr)
+        glViewport(0, 0, viewport_ptr->x, viewport_ptr->y);
+    else
+        glViewport(0, 0, janela::obterInstancia().tamanho.x, janela::obterInstancia().tamanho.y);
 }
 
 

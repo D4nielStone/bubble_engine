@@ -171,10 +171,11 @@ void gerenciador_projetos::removerProjeto(const std::string& dir) {
     m_projeto_selecionado = projetos.empty() ? "nenhum" : projetos.begin()->first;
 }
 void gerenciador_projetos::abrirProjeto(const std::string& caminho) {
+       descarregarShaders();
+       imageLoader::init();
        glfwDestroyWindow(janela::obterInstancia().window);
                 
        std::string caminho_ = caminho;
-       descarregarShaders();
        // Cria projeto
        becommons::projeto editor(caminho_);
        // Sistema do editor
@@ -258,6 +259,7 @@ void gerenciador_projetos::configurarUI() {
 }
 
 void gerenciador_projetos::iniciar() {
+    imageLoader::init();
     if(!std::filesystem::exists(DIR_PADRAO))
         {
             depuracao::emitir(alerta, "Diretório do projeto inexistente.");

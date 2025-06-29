@@ -67,10 +67,13 @@ static const std::map<const std::string, std::pair<BYTE*, const unsigned int>> i
     {"Transformacao.png", std::pair(transformacao_png, transformacao_png_len)},
     {"folder.png", std::pair(folder_png, folder_png_len)}
 };
-void imageLoader::shutdown()
-{ FreeImage_DeInitialise(); imagens_carregadas.clear(); }
-imageLoader::imageLoader()
-{
+void imageLoader::shutdown() { 
+    FreeImage_DeInitialise(); textureLoader::obterInstancia().texturasCarregadas.clear(); imagens_carregadas.clear(); 
+}
+void imageLoader::init() { 
+    imageLoader::shutdown(); FreeImage_Initialise(); 
+}
+imageLoader::imageLoader() {
 }
 imageLoader::imageLoader(const std::string& filepath)
     : width(0), height(0), channels(0), data(nullptr), path(filepath.c_str()), carregado(false)

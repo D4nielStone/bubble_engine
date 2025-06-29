@@ -38,7 +38,7 @@ uniform vec4 cor_borda; // Cor da borda
 
 void main()
 {
-    vec2 nUv = flip ? vec2(Uv.x, -Uv.y) : Uv;
+    vec2 nUv = flip ? vec2(Uv.x, 1-Uv.y) : Uv;
     vec4 cor_textura = texture(textura, nUv);
 
     FragColor = cor_textura;

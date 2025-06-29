@@ -45,7 +45,7 @@ namespace BECOMMONS_NS {
         /// Inicializa/Desliga Biblioteca FreeImage
         /// @{
         /// Inicializa a biblioteca
-        static void init() { FreeImage_Initialise(); }
+        static void init();
         /// Deslica a biblioteca
         static void shutdown(); 
         /// @}
@@ -92,7 +92,7 @@ namespace BECOMMONS_NS {
     int texturaDoArquivo(const std::string& directory, double* width = nullptr, double* height = nullptr);
     int texturaDoArquivo(const std::string& directory, GLuint tipo_textura);
     int texturaDoArquivo(unsigned char* data, unsigned int width, unsigned int height, int format);
-    inline std::unordered_map<std::string, std::shared_ptr<imageLoader>> imagens_carregadas;
+    static inline std::unordered_map<std::string, std::shared_ptr<imageLoader>> imagens_carregadas;
     /// @}
     /// @class Carregador de textura
     class  textureLoader
