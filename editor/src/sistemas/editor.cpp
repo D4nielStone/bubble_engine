@@ -116,6 +116,7 @@ void sistema_editor::adicionarCaixas() {
     framebuffer_ptr->m_estilo.m_flag_estilo |= flag_estilo::largura_percentual | flag_estilo::altura_percentual;
     framebuffer_ptr->m_estilo.m_largura = 1;
     framebuffer_ptr->m_estilo.m_altura = 1;
+    framebuffer_ptr->m_estilo.m_cor_borda = cor(0.1f);
     cam.viewport_ptr = &framebuffer_ptr->m_imagem_tamanho;
     center->adicionar(std::move(framebuffer_ptr));
     c_inspetor = center->adicionar<caixa>();
