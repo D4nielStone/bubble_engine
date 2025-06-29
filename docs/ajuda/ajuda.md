@@ -2,27 +2,106 @@
 
 ## Principais tópicos:
 
-- Namespaces
- -  [bubble](@ref Bubble)
+- Tables
+ -  [Bubble](@ref Bubble)
 - Classes
+ -  [Janela](@ref Janela)
+ -  [Projeto](@ref Projeto)
  -  [Malha](@ref Malha)
  -  [Renderizador](@ref Renderizador)
 
 \defgroup Bubble
 \{
 
-# Bubble
-## Namespace Bubble
+## Table Bubble
 
-O namespace `bubble` agrupa variáveis e constantes *globais*.
+A table `bubble` agrupa variáveis e constantes *globais*.
 
 ## Info
 
 | Membros(3)           | Descrição   |
 |    --------------    |   ------    |
-| `bubble.meuID`       | ID da entidade com o componente de código. |
+| `bubble.meuID`       | [ID](@ref MeuID) da entidade com o componente de código. |
 | `bubble.projeto`     | [Projeto](@ref Projeto) em execução |
 | `bubble.janela`      | [Janela](@ref Janela) principal |
+
+\}
+
+\defgroup Projeto
+\{
+
+## classe Projeto
+Instância do `projeto` atual. é acessível na table `bubble.projeto`.
+
+---
+
+## Info
+
+| Membros(3)           | Descrição   |
+|    --------------    |   ------    |
+| `janela.tamanho`     | [Vetor 2 inteiro](@ref Vetores) com os valores `x` e `y` iguais a largura e altura da janela. |
+| `janela.nome()`      | Retorna uma string com o nome da janela. |
+| `janela.nome(string)`| Define o nome da janela baseado em uma string. |
+
+### Exemplo
+
+> Exibindo a largura
+> ```lua
+>     print(bubble.janela.tamanho.x)
+> ```
+> Output
+> ```shell
+> 1300
+> ```
+
+\defgroup Janela
+\{
+
+## classe Janela
+Instância da `janela` atual. é acessível na table `bubble.janela`.
+
+---
+
+## Info
+
+| Membros(2)           | Descrição   |
+|    --------------    |   ------    |
+| `janela.tamanho`     | [Vetor 2 inteiro](@ref Vetores) com os valores `x` e `y` iguais a largura e altura da janela. |
+| `janela.nome()`      | Retorna o título da janela |
+
+
+### Exemplo
+
+> Exibindo a largura
+> ```lua
+>     print(bubble.janela.tamanho.x)
+>     print(bubble.janela.nome())
+> ```
+> Output
+> ```shell
+> 1300
+> projeto_teste
+> ```
+
+\}
+\defgroup MeuID
+\{
+
+## Constante meuID
+A constante `meuID` representa o id do objeto com o componente de código. é acessível no namespace/table [bubble](@ref Bubble).
+
+---
+
+### Exemplo
+
+> Exibindo o ID da entidade 1
+> ```lua
+>     print(bubble.meuID)
+> ```
+> Output
+> ```shell
+> 1
+> ```
 
 \}
 
@@ -60,9 +139,7 @@ A classe `malha` é uma abstração em lua da classe [malha](@ref malha.cpp), qu
 
 > Sobrepondo um objeto
 ```lua
-function iniciar()
   eu.renderizador.modelo:obterMalha(0).sobrepor = true
-end
 ```
 
 
@@ -96,11 +173,9 @@ A classe `renderizador` é uma abstração em Lua da classe [renderizador](rende
 
 > Criando um renderizador a partir de um modelo
 ```lua
-function iniciar()
-  local m = modelo("recursos/personagem.obj")
-  local r = renderizador(m)
-  eu.renderizador = r
-end
+local m = modelo("recursos/personagem.obj")
+local r = renderizador(m)
+eu.renderizador = r
 ```
 
 \}

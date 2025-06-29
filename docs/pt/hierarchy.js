@@ -39,6 +39,7 @@ var hierarchy =
     [ "std::enable_shared_from_this", null, [
       [ "BECOMMONS_NS::fase", "structBECOMMONS__NS_1_1fase.html", null ]
     ] ],
+    [ "BECOMMONS_NS::api::entidade", "structBECOMMONS__NS_1_1api_1_1entidade.html", null ],
     [ "BECOMMONS_NS::entidade", "structBECOMMONS__NS_1_1entidade.html", null ],
     [ "BECOMMONS_NS::estilo", "structBECOMMONS__NS_1_1estilo.html", null ],
     [ "std::exception", null, [
