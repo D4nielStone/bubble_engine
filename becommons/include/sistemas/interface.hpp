@@ -25,6 +25,7 @@
 #pragma once
 #include <glad.h>
 #include <memory>
+#include <set>
 #include "becommons_namespace.hpp"
 #include "sistemas/sistema.hpp"
 #include "arquivadores/imageloader.hpp"
@@ -44,13 +45,13 @@ namespace BECOMMONS_NS {
         static void atualizarAJ(caixa*);
         static void atualizarHDTF(caixa*, std::function<void(caixa*)>);
         static bool deveAtualizar(caixa*);
+        static void chamarFuncoes(caixa*);
         void configOpenglState() const;
         void deconfigOpenglState() const;
         void processarDimensaoModular(caixa*, fvet2&, fvet2&);
         void organizarLinha(caixa*, bool, const ivet2 , const fvet2&, const fvet2&, fvet2&);
         void processarModular(caixa*);
         void atualizarFilhos(caixa*);
-        void chamarFuncoes(caixa*);
         interface();
         ~interface();
 
@@ -58,6 +59,7 @@ namespace BECOMMONS_NS {
         void inicializar() override;
         void atualizar() override;
         
+        std::set<caixa*> pos_render;
         std::unique_ptr<caixa> m_raiz;
         glm::mat4 projecao_viewport;
     };

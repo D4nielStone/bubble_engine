@@ -26,6 +26,7 @@
 #include "sistemas/interface.hpp"
 #include "os/janela.hpp"
 #include "depuracao/debug.hpp"
+#include "elementos/popup.hpp"
 #include <cmath>
 #include <functional>
 
@@ -35,12 +36,12 @@ void interface::atualizarLJ(caixa* it_caixa) {
     const bool is_horizontal = it_caixa->m_estilo.m_orientacao_modular == estilo::orientacao::horizontal;
     if (!deveAtualizar(it_caixa)) return;
 
-    float mais_largo = 0.f;
+    float mais_largo = 20.f;
     float acumulado_largura = 0.f;
     size_t n_filhos = it_caixa->m_filhos.size();
 
     for (auto& filho : it_caixa->m_filhos) {
-        if (!deveAtualizar(filho.get()) || filho->tem(flag_estilo::largura_percentual))
+        if (!deveAtualizar(filho.get()) || filho->tipo() == tipo_caixa::popup || filho->tem(flag_estilo::largura_percentual))
             continue;
 
         // --- VERTICAL: largura justa é a maior largura entre os filhos (+ paddings) ---
@@ -72,13 +73,13 @@ void interface::atualizarAJ(caixa* it_caixa) {
     const bool is_horizontal = it_caixa->m_estilo.m_orientacao_modular == estilo::orientacao::horizontal;
     if (!deveAtualizar(it_caixa)) return;
 
-    float mais_alto = 0.f;
+    float mais_alto = 20.f;
     float acumulado_altura = 0.f;
     size_t n_filhos = it_caixa->m_filhos.size();
     bool quebra_linha = false;
 
     for (auto& filho : it_caixa->m_filhos) {
-        if (!deveAtualizar(filho.get()) || filho->tem(flag_estilo::altura_percentual))
+        if (!deveAtualizar(filho.get()) || filho->tipo() == tipo_caixa::popup || filho->tem(flag_estilo::altura_percentual))
             continue;
 
         // --- HORIZONTAL: altura justa é a maior altura entre os filhos (+ paddings) ---
@@ -118,17 +119,22 @@ void interface::atualizarHDTF(caixa* it_caixa, std::function<void(caixa*)> func)
         func((*it).get());
     }
 }
-
 void interface::desenhar(caixa* c) {
+    if(c) {
     c->m_projecao = projecao_viewport;
     c->desenhar(VAO);
 
     for(auto& filho : c->m_filhos)
     {
+        if (filho->tipo() == tipo_caixa::popup && filho->m_estilo.m_ativo) {
+            pos_render.insert(filho.get());
+            continue;
+        }
         if(     filho->m_estilo.m_limites.x < c->m_estilo.m_limites.x + c->m_estilo.m_limites.z
                 && filho->m_estilo.m_limites.y < c->m_estilo.m_limites.y + c->m_estilo.m_limites.w
                 && filho->m_estilo.m_ativo)
         desenhar(filho.get());
+    }
     }
 }
 
@@ -237,11 +243,20 @@ void interface::atualizar() {
         static_cast<float>(janela::obterTamanhoJanela().x),
         static_cast<float>(janela::obterTamanhoJanela().y)};
 
-    chamarFuncoes(m_raiz.get());
+    // reseta a flag de detecção de toque
+    elementos::area_detectada = false;
+
+    atualizarHDTF(m_raiz.get(), chamarFuncoes);
     atualizarHDTF(m_raiz.get(), atualizarLJ);
     atualizarHDTF(m_raiz.get(), atualizarAJ); 
     atualizarFilhos(m_raiz.get());
     desenhar(m_raiz.get());
+    for(auto& filho : pos_render) {
+        if(     filho->m_estilo.m_limites.x < c->m_estilo.m_limites.x + c->m_estilo.m_limites.z
+                && filho->m_estilo.m_limites.y < c->m_estilo.m_limites.y + c->m_estilo.m_limites.w
+                && filho->m_estilo.m_ativo)
+        desenhar(filho);
+    }
 
     deconfigOpenglState();
 }
@@ -286,6 +301,7 @@ void interface::organizarLinha(caixa* it_caixa,
     int i = range_filhos.x;
     while (i < range_filhos.y) {
         auto& filho = it_caixa->m_filhos[i];
+        if(filho->tipo() != tipo_caixa::popup) {
         // atualiza dimenções
         filho->m_estilo.m_limites.z = filho->tem(flag_estilo::largura_percentual) ? filho->m_estilo.m_largura * unidade_crescimento.x : filho->m_estilo.m_largura;
         filho->m_estilo.m_limites.w = filho->tem(flag_estilo::altura_percentual) ? filho->m_estilo.m_altura * unidade_crescimento.y : filho->m_estilo.m_altura;
@@ -298,6 +314,7 @@ void interface::organizarLinha(caixa* it_caixa,
         } else {
             maior = std::max(maior, filho->m_estilo.m_limites.z+ filho->m_estilo.m_padding.x * 2 + it_caixa->m_estilo.m_padding_geral.x * 2); // maior largura
             cursor.y += filho->m_estilo.m_limites.w + filho->m_estilo.m_padding.y + it_caixa->m_estilo.m_padding_geral.y;
+        }
         }
         i++;
     }
@@ -350,19 +367,22 @@ void interface::processarModular(caixa* it_caixa) {
     espaco_ocupado.y += it_caixa->m_estilo.m_padding_geral.y;
     // calcula espaços e aplica dimenções
     ivet2 range_filhos = ivet2(0, 0);
+    bool finalizar_linha;
     for(size_t i = 0; i < it_caixa->m_filhos.size(); i++) {
         auto& filho = it_caixa->m_filhos[i];
-        if(!filho->m_estilo.m_ativo) continue;
-
+        if(filho->tipo() != tipo_caixa::popup) {
         espaco_ocupado.x += it_caixa->m_estilo.m_padding_geral.x;
         espaco_ocupado.y += it_caixa->m_estilo.m_padding_geral.y;
     
-        bool finalizar_linha = (i == it_caixa->m_filhos.size() - 1) || (filho->tem(flag_estilo::quebrar_linha));
+        finalizar_linha = (i == it_caixa->m_filhos.size() - 1) || (filho->tem(flag_estilo::quebrar_linha));
 
         processarDimensaoModular(filho.get(),
                 crescimento_total,
                 espaco_ocupado
                 );
+        } else {
+            finalizar_linha = (i == it_caixa->m_filhos.size() - 1);
+        }
         // continua iterando até finalizar linha...
         if(finalizar_linha) {
             range_filhos.x = range_filhos.y;
@@ -408,29 +428,26 @@ void interface::processarModular(caixa* it_caixa) {
     }
 }
 
-void interface::chamarFuncoes(caixa* c) {
-    for (auto& it_caixa : c->m_filhos) {
+void interface::chamarFuncoes(caixa* it_caixa) {
         switch (it_caixa->tipo()) {
         case tipo_caixa::popup: {
-            auto pop = static_cast<elementos::popup*>(it_caixa.get());
+            auto pop = static_cast<elementos::popup*>(it_caixa);
             pop->atualizar(); 
             break;
                                          }
         case tipo_caixa::caixa_de_texto: {
-            auto ct = static_cast<elementos::caixa_de_texto*>(it_caixa.get());
+            auto ct = static_cast<elementos::caixa_de_texto*>(it_caixa);
             ct->atualizar(); 
             break;
                                          }
         case tipo_caixa::botao: {
-            auto btn = static_cast<elementos::botao*>(it_caixa.get());
+            auto btn = static_cast<elementos::botao*>(it_caixa);
             if(btn->pressionado() && btn->m_use_funcao)
                 btn->m_funcao();
             break;
                                 }
         default: break;
         }
-        chamarFuncoes(it_caixa.get());
-    }
 }
 void interface::atualizarFilhos(caixa* it_caixa) {
     if (!it_caixa) throw std::runtime_error("Caixa nula sendo atualizada.");

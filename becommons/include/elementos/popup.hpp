@@ -21,3 +21,45 @@
  * SOFTWARE.
  * @file popup.hpp
  */
+
+#pragma once
+#include "becommons_namespace.hpp"
+#include "area_de_toque.hpp"
+#include <memory>
+
+namespace BECOMMONS_NS {
+    namespace elementos {
+        class popup : public area_de_toque {
+            private:
+                botao* m_referencia {nullptr};
+            public:
+                popup() {
+                }
+                void configurar() override {
+                    if (m_pai && m_pai->tipo() == tipo_caixa::botao)
+                        m_referencia = static_cast<botao*>(m_pai);
+                    m_estilo.m_cor_fundo = cor(0.1f);
+                    m_estilo.m_cor_borda = cor(0.07f);
+                    m_estilo.m_flag_estilo |= flag_estilo::largura_justa | flag_estilo::altura_justa;
+                    m_estilo.m_orientacao_modular = estilo::orientacao::vertical;
+                    m_estilo.m_padding_geral = {2, 2};
+                }
+                void atualizar() {
+                    if(!m_referencia) return;
+                    m_estilo.m_ativo = m_estilo.m_ativo ? m_referencia->mouseEmCima() || mouseEmCima() : m_referencia->mouseEmCima();
+                    float mais_largo = 20.f;
+                    m_estilo.m_limites.w = m_estilo.m_padding_geral.y;
+                    for(auto& filho : m_filhos) {
+                        mais_largo = std::max(filho->m_estilo.m_limites.z+m_estilo.m_padding_geral.x*2, mais_largo);
+                        m_estilo.m_limites.w += filho->m_estilo.m_limites.w + m_estilo.m_padding_geral.y;
+                    }
+                    m_estilo.m_limites.z = mais_largo;
+                    m_estilo.m_limites.x = m_referencia->m_estilo.m_limites.x-m_estilo.m_limites.z;
+                    m_estilo.m_limites.y = m_referencia->m_estilo.m_limites.y;
+                }
+                tipo_caixa tipo() const override {
+                    return tipo_caixa::popup;
+                }
+        };
+    }
+}
