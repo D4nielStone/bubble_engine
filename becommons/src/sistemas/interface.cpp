@@ -252,9 +252,7 @@ void interface::atualizar() {
     atualizarFilhos(m_raiz.get());
     desenhar(m_raiz.get());
     for(auto& filho : pos_render) {
-        if(     filho->m_estilo.m_limites.x < c->m_estilo.m_limites.x + c->m_estilo.m_limites.z
-                && filho->m_estilo.m_limites.y < c->m_estilo.m_limites.y + c->m_estilo.m_limites.w
-                && filho->m_estilo.m_ativo)
+        if(filho->m_estilo.m_ativo)
         desenhar(filho);
     }
 
