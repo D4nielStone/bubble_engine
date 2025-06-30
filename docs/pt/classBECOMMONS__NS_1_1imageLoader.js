@@ -6,7 +6,7 @@ var classBECOMMONS__NS_1_1imageLoader =
     [ "converterParaGlfw", "classBECOMMONS__NS_1_1imageLoader.html#a0a5634575ed2f12827fa119249bdcb34", null ],
     [ "embutida", "classBECOMMONS__NS_1_1imageLoader.html#a4a80ac411adbc440f820bfe262d00572", null ],
     [ "flipVertical", "classBECOMMONS__NS_1_1imageLoader.html#a5222e6548e0dba8fb0eec431f8133b23", null ],
-    [ "init", "classBECOMMONS__NS_1_1imageLoader.html#a59912fba142fd898997899f63422dd6a", null ],
+    [ "init", "classBECOMMONS__NS_1_1imageLoader.html#a72a05e6c016d09aa111fe6d994bace59", null ],
     [ "obterAltura", "classBECOMMONS__NS_1_1imageLoader.html#abb60dd20b3073a5872de03a9ff7a3d4e", null ],
     [ "obterCanal", "classBECOMMONS__NS_1_1imageLoader.html#ab6496b85acb01b00e7ffa317f6ab9e7d", null ],
     [ "obterDados", "classBECOMMONS__NS_1_1imageLoader.html#a60e78e783cb1d5f35c77b411d2d58b6f", null ],

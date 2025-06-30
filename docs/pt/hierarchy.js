@@ -6,7 +6,8 @@ var hierarchy =
       ] ],
       [ "BECOMMONS_NS::elementos::area_de_toque", "classBECOMMONS__NS_1_1elementos_1_1area__de__toque.html", [
         [ "BECOMMONS_NS::elementos::botao", "classBECOMMONS__NS_1_1elementos_1_1botao.html", null ],
-        [ "BECOMMONS_NS::elementos::imagem", "classBECOMMONS__NS_1_1elementos_1_1imagem.html", null ]
+        [ "BECOMMONS_NS::elementos::imagem", "classBECOMMONS__NS_1_1elementos_1_1imagem.html", null ],
+        [ "BECOMMONS_NS::elementos::popup", "classBECOMMONS__NS_1_1elementos_1_1popup.html", null ]
       ] ],
       [ "BECOMMONS_NS::elementos::texto", "classBECOMMONS__NS_1_1elementos_1_1texto.html", null ]
     ] ],

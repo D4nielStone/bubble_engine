@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['fase_0',['fase',['../structBECOMMONS__NS_1_1fase.html#a3134bfed75712b5d6cb79107fb04be6a',1,'BECOMMONS_NS::fase']]],
-  ['flipvertical_1',['flipVertical',['../classBECOMMONS__NS_1_1imageLoader.html#a5222e6548e0dba8fb0eec431f8133b23',1,'BECOMMONS_NS::imageLoader']]]
+  ['embutida_0',['embutida',['../classBECOMMONS__NS_1_1imageLoader.html#a4a80ac411adbc440f820bfe262d00572',1,'BECOMMONS_NS::imageLoader']]],
+  ['executarruntime_1',['executarRuntime',['../structEDITOR__NS_1_1sistema__editor.html#a02e28af64168e75a1e8ace04752ebeee',1,'EDITOR_NS::sistema_editor']]]
 ];

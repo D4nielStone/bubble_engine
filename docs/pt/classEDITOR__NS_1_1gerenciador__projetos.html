@@ -112,26 +112,29 @@ $(document).ready(function(){initNavTree('classEDITOR__NS_1_1gerenciador__projet
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aadc23c53d5c4ec7f42213e1841aaf02a" id="r_aadc23c53d5c4ec7f42213e1841aaf02a"><td class="memItemLeft" align="right" valign="top"><a id="aadc23c53d5c4ec7f42213e1841aaf02a" name="aadc23c53d5c4ec7f42213e1841aaf02a"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>gerenciador_projetos</b> (const std::string &amp;DIR_PADRAO)</td></tr>
+<tr class="memitem:aadc23c53d5c4ec7f42213e1841aaf02a" id="r_aadc23c53d5c4ec7f42213e1841aaf02a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEDITOR__NS_1_1gerenciador__projetos.html#aadc23c53d5c4ec7f42213e1841aaf02a">gerenciador_projetos</a> (const std::string &amp;DIR_PADRAO)</td></tr>
+<tr class="memdesc:aadc23c53d5c4ec7f42213e1841aaf02a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construtor da classe <a class="el" href="classEDITOR__NS_1_1gerenciador__projetos.html">gerenciador_projetos</a>. Inicializa o diretório raiz padrão onde os projetos serão armazenados.  <br /></td></tr>
 <tr class="separator:aadc23c53d5c4ec7f42213e1841aaf02a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a96f25f328726edd427ff1babd013f4ae" id="r_a96f25f328726edd427ff1babd013f4ae"><td class="memItemLeft" align="right" valign="top"><a id="a96f25f328726edd427ff1babd013f4ae" name="a96f25f328726edd427ff1babd013f4ae"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>configurarUI</b> ()</td></tr>
+<tr class="memdesc:a96f25f328726edd427ff1babd013f4ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configura a interface do usuário (UI) do gerenciador de projetos. Define a estrutura visual do gerenciador, incluindo a barra lateral para listagem de projetos e a área principal para criação, abertura e remoção de projetos. <br /></td></tr>
 <tr class="separator:a96f25f328726edd427ff1babd013f4ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aabc229506641a5d3821362b1f106eb78" id="r_aabc229506641a5d3821362b1f106eb78"><td class="memItemLeft" align="right" valign="top"><a id="aabc229506641a5d3821362b1f106eb78" name="aabc229506641a5d3821362b1f106eb78"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>buscarProjetos</b> ()</td></tr>
+<tr class="memdesc:aabc229506641a5d3821362b1f106eb78"><td class="mdescLeft">&#160;</td><td class="mdescRight">Busca e lista todos os projetos existentes no diretório padrão. Popula o mapa <code>projetos</code> com os nomes e caminhos dos projetos encontrados. Se a barra lateral da UI estiver disponível, atualiza dinamicamente os botões para cada projeto encontrado. <br /></td></tr>
 <tr class="separator:aabc229506641a5d3821362b1f106eb78"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ada57d71cb8d87648f648a5ad12c503e9" id="r_ada57d71cb8d87648f648a5ad12c503e9"><td class="memItemLeft" align="right" valign="top"><a id="ada57d71cb8d87648f648a5ad12c503e9" name="ada57d71cb8d87648f648a5ad12c503e9"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>abrirProjeto</b> (const std::string &amp;)</td></tr>
+<tr class="memitem:ada57d71cb8d87648f648a5ad12c503e9" id="r_ada57d71cb8d87648f648a5ad12c503e9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEDITOR__NS_1_1gerenciador__projetos.html#ada57d71cb8d87648f648a5ad12c503e9">abrirProjeto</a> (const std::string &amp;)</td></tr>
+<tr class="memdesc:ada57d71cb8d87648f648a5ad12c503e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Abre e inicia um projeto no editor. Esta função descarrega recursos existentes, destrói a janela atual (do gerenciador), inicializa uma nova instância do projeto e do sistema do editor, configura o título da janela, e inicia o loop principal do editor.  <br /></td></tr>
 <tr class="separator:ada57d71cb8d87648f648a5ad12c503e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a92d9adb49bb1bcbc2252413e70911e85" id="r_a92d9adb49bb1bcbc2252413e70911e85"><td class="memItemLeft" align="right" valign="top"><a id="a92d9adb49bb1bcbc2252413e70911e85" name="a92d9adb49bb1bcbc2252413e70911e85"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>removerProjeto</b> (const std::string &amp;)</td></tr>
+<tr class="memitem:a92d9adb49bb1bcbc2252413e70911e85" id="r_a92d9adb49bb1bcbc2252413e70911e85"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEDITOR__NS_1_1gerenciador__projetos.html#a92d9adb49bb1bcbc2252413e70911e85">removerProjeto</a> (const std::string &amp;)</td></tr>
+<tr class="memdesc:a92d9adb49bb1bcbc2252413e70911e85"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove um projeto existente. Exclui recursivamente o diretório do projeto e atualiza a lista de projetos. O projeto selecionado é redefinido para "nenhum" ou para o primeiro projeto disponível.  <br /></td></tr>
 <tr class="separator:a92d9adb49bb1bcbc2252413e70911e85"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af5189c91d8f1a663cbaebfa8cb58efae" id="r_af5189c91d8f1a663cbaebfa8cb58efae"><td class="memItemLeft" align="right" valign="top"><a id="af5189c91d8f1a663cbaebfa8cb58efae" name="af5189c91d8f1a663cbaebfa8cb58efae"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>criarProjetoPadrao</b> (const std::string &amp;novo_diretorio, const char *nome)</td></tr>
+<tr class="memitem:af5189c91d8f1a663cbaebfa8cb58efae" id="r_af5189c91d8f1a663cbaebfa8cb58efae"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEDITOR__NS_1_1gerenciador__projetos.html#af5189c91d8f1a663cbaebfa8cb58efae">criarProjetoPadrao</a> (const std::string &amp;novo_diretorio, const char *nome)</td></tr>
+<tr class="memdesc:af5189c91d8f1a663cbaebfa8cb58efae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cria um novo projeto padrão com uma estrutura inicial de entidades. Este método gera o diretório do projeto, um arquivo de configuração <code>config.json</code>, uma fase padrão <code>main.fase</code> com entidades predefinidas (luz, plano, cubo com script) e um script Lua de exemplo.  <br /></td></tr>
 <tr class="separator:af5189c91d8f1a663cbaebfa8cb58efae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa46dafb7cc85308148529e3fc92c2644" id="r_aa46dafb7cc85308148529e3fc92c2644"><td class="memItemLeft" align="right" valign="top"><a id="aa46dafb7cc85308148529e3fc92c2644" name="aa46dafb7cc85308148529e3fc92c2644"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>iniciar</b> ()</td></tr>
+<tr class="memdesc:aa46dafb7cc85308148529e3fc92c2644"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inicia o gerenciador de projetos. Este é o ponto de entrada principal para a aplicação do gerenciador. Inicializa recursos gráficos, verifica e cria o diretório padrão de projetos, configura a janela e a UI, e inicia o loop de eventos principal. <br /></td></tr>
 <tr class="separator:aa46dafb7cc85308148529e3fc92c2644"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
@@ -155,6 +158,123 @@ becommons::interface&#160;</td><td class="memItemRight" valign="bottom"><b>ui</b
 std::string&#160;</td><td class="memItemRight" valign="bottom"><b>DIR_PADRAO</b></td></tr>
 <tr class="separator:af43b4625e6e8bb0d148855a90c3f586e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="aadc23c53d5c4ec7f42213e1841aaf02a" name="aadc23c53d5c4ec7f42213e1841aaf02a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aadc23c53d5c4ec7f42213e1841aaf02a">&#9670;&#160;</a></span>gerenciador_projetos()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">gerenciador_projetos::gerenciador_projetos </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>dir</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Construtor da classe <a class="el" href="classEDITOR__NS_1_1gerenciador__projetos.html">gerenciador_projetos</a>. Inicializa o diretório raiz padrão onde os projetos serão armazenados. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">dir</td><td>O caminho do diretório raiz padrão. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="ada57d71cb8d87648f648a5ad12c503e9" name="ada57d71cb8d87648f648a5ad12c503e9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ada57d71cb8d87648f648a5ad12c503e9">&#9670;&#160;</a></span>abrirProjeto()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void gerenciador_projetos::abrirProjeto </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>caminho</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Abre e inicia um projeto no editor. Esta função descarrega recursos existentes, destrói a janela atual (do gerenciador), inicializa uma nova instância do projeto e do sistema do editor, configura o título da janela, e inicia o loop principal do editor. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">caminho</td><td>O caminho completo para o diretório do projeto a ser aberto. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="af5189c91d8f1a663cbaebfa8cb58efae" name="af5189c91d8f1a663cbaebfa8cb58efae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af5189c91d8f1a663cbaebfa8cb58efae">&#9670;&#160;</a></span>criarProjetoPadrao()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void gerenciador_projetos::criarProjetoPadrao </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>novo_diretorio</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>nome</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Cria um novo projeto padrão com uma estrutura inicial de entidades. Este método gera o diretório do projeto, um arquivo de configuração <code>config.json</code>, uma fase padrão <code>main.fase</code> com entidades predefinidas (luz, plano, cubo com script) e um script Lua de exemplo. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">novo_diretorio</td><td>O diretório pai onde o novo projeto será criado. </td></tr>
+    <tr><td class="paramname">nome</td><td>O nome do novo projeto. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a92d9adb49bb1bcbc2252413e70911e85" name="a92d9adb49bb1bcbc2252413e70911e85"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a92d9adb49bb1bcbc2252413e70911e85">&#9670;&#160;</a></span>removerProjeto()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void gerenciador_projetos::removerProjeto </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>dir</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Remove um projeto existente. Exclui recursivamente o diretório do projeto e atualiza a lista de projetos. O projeto selecionado é redefinido para "nenhum" ou para o primeiro projeto disponível. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">dir</td><td>O caminho completo do diretório do projeto a ser removido. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li><a class="el" href="gerenciador__projetos_8hpp_source.html">gerenciador_projetos.hpp</a></li>
 <li><b>gerenciador_projetos.cpp</b></li>

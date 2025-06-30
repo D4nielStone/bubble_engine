@@ -1,8 +1,8 @@
 var searchData=
 [
-  ['salvarfase_0',['salvarFase',['../structBECOMMONS__NS_1_1projeto.html#a016d8efb9aaf106b035cf17218e7ed2c',1,'BECOMMONS_NS::projeto']]],
-  ['salvarfases_1',['salvarFases',['../structBECOMMONS__NS_1_1projeto.html#a47a6d049b97cea03aa1233af5e525583',1,'BECOMMONS_NS::projeto']]],
-  ['salvarprojeto_2',['salvarProjeto',['../structBECOMMONS__NS_1_1projeto.html#a245625354b65b96ce16faeee1d8fcb55',1,'BECOMMONS_NS::projeto']]],
+  ['salvareditor_0',['salvarEditor',['../structEDITOR__NS_1_1sistema__editor.html#a2f246309bc8938e3b52af5a8eb756347',1,'EDITOR_NS::sistema_editor']]],
+  ['salvarfase_1',['salvarFase',['../structBECOMMONS__NS_1_1projeto.html#a016d8efb9aaf106b035cf17218e7ed2c',1,'BECOMMONS_NS::projeto']]],
+  ['salvarfases_2',['salvarFases',['../structBECOMMONS__NS_1_1projeto.html#a47a6d049b97cea03aa1233af5e525583',1,'BECOMMONS_NS::projeto']]],
   ['script_20lua_3a_3',['Exemplo de uso no script lua:',['../api__lua_8hpp.html#autotoc_md0',1,'']]],
   ['selecionado_4',['selecionado',['../classBECOMMONS__NS_1_1elementos_1_1area__de__texto.html#a4540b1cd13feaef981384ec9ded9cc5a',1,'BECOMMONS_NS::elementos::area_de_texto']]],
   ['shader_5',['shader',['../classBECOMMONS__NS_1_1shader.html',1,'BECOMMONS_NS']]],
@@ -18,7 +18,7 @@ var searchData=
   ['sistema_5fde_5ffisica_2ehpp_15',['sistema_de_fisica.hpp',['../sistema__de__fisica_8hpp.html',1,'']]],
   ['sistema_5fde_5frenderizacao_2ecpp_16',['sistema_de_renderizacao.cpp',['../sistema__de__renderizacao_8cpp.html',1,'']]],
   ['sistema_5fde_5frenderizacao_2ehpp_17',['sistema_de_renderizacao.hpp',['../sistema__de__renderizacao_8hpp.html',1,'']]],
-  ['sistema_5feditor_18',['sistema_editor',['../structEDITOR__NS_1_1sistema__editor.html',1,'EDITOR_NS']]],
+  ['sistema_5feditor_18',['sistema_editor',['../structEDITOR__NS_1_1sistema__editor.html#a83cd53a7ca1d38aa048089cb03041669',1,'EDITOR_NS::sistema_editor::sistema_editor()'],['../structEDITOR__NS_1_1sistema__editor.html',1,'EDITOR_NS::sistema_editor']]],
   ['sistema_5ffisica_19',['sistema_fisica',['../structBECOMMONS__NS_1_1sistema__fisica.html',1,'BECOMMONS_NS']]],
   ['sistema_5frenderizacao_20',['sistema_renderizacao',['../structBECOMMONS__NS_1_1sistema__renderizacao.html',1,'BECOMMONS_NS']]],
   ['sistemas_2fsistema_2ehpp_21',['sistema.hpp',['../sistemas_2sistema_8hpp.html',1,'']]],

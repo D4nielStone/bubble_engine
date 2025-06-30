@@ -1,11 +1,11 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
 <area shape="rect" id="Node000000" href="$structBECOMMONS__NS_1_1sistema.html" title=" " alt="" coords="5,95,200,120"/>
 <area shape="rect" id="Node000001" href="$structBECOMMONS__NS_1_1interface.html" title=" " alt="" coords="248,5,449,31"/>
-<area shape="poly" id="edge23_Node000000_Node000001" title=" " alt="" coords="141,86,247,41,290,28,291,33,249,46,143,91"/>
+<area shape="poly" id="edge24_Node000000_Node000001" title=" " alt="" coords="141,86,247,41,290,28,291,33,249,46,143,91"/>
 <area shape="rect" id="Node000002" href="$structBECOMMONS__NS_1_1sistema__codigo.html" title=" " alt="" coords="251,55,446,95"/>
-<area shape="poly" id="edge24_Node000000_Node000002" title=" " alt="" coords="213,90,251,85,251,91,214,96"/>
+<area shape="poly" id="edge25_Node000000_Node000002" title=" " alt="" coords="213,90,251,85,251,91,214,96"/>
 <area shape="rect" id="Node000003" href="$structBECOMMONS__NS_1_1sistema__fisica.html" title=" " alt="" coords="251,119,446,159"/>
-<area shape="poly" id="edge25_Node000000_Node000003" title=" " alt="" coords="214,119,251,124,251,129,213,124"/>
+<area shape="poly" id="edge26_Node000000_Node000003" title=" " alt="" coords="214,119,251,124,251,129,213,124"/>
 <area shape="rect" id="Node000004" href="$structBECOMMONS__NS_1_1sistema__renderizacao.html" title=" " alt="" coords="251,183,446,223"/>
-<area shape="poly" id="edge26_Node000000_Node000004" title=" " alt="" coords="144,124,249,169,283,181,281,186,247,174,142,128"/>
+<area shape="poly" id="edge27_Node000000_Node000004" title=" " alt="" coords="144,124,249,169,283,181,281,186,247,174,142,128"/>
 </map>

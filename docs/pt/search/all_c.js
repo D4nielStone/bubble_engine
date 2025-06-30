@@ -12,6 +12,7 @@ var searchData=
   ['modelo_9',['modelo',['../classBECOMMONS__NS_1_1modelo.html',1,'BECOMMONS_NS']]],
   ['modelo_2ecpp_10',['modelo.cpp',['../modelo_8cpp.html',1,'']]],
   ['modelo_2ehpp_11',['modelo.hpp',['../modelo_8hpp.html',1,'']]],
-  ['mouseemcima_12',['mouseEmCima',['../classBECOMMONS__NS_1_1elementos_1_1area__de__texto.html#ac1e7033165139bde952f41ae4230aaa9',1,'BECOMMONS_NS::elementos::area_de_texto']]],
-  ['mycontactcallback_13',['MyContactCallback',['../classMyContactCallback.html',1,'']]]
+  ['monitorarruntime_12',['monitorarRuntime',['../structEDITOR__NS_1_1sistema__editor.html#a3022cf36ee4ee8557e4b4633a7d02127',1,'EDITOR_NS::sistema_editor']]],
+  ['mouseemcima_13',['mouseEmCima',['../classBECOMMONS__NS_1_1elementos_1_1area__de__texto.html#ac1e7033165139bde952f41ae4230aaa9',1,'BECOMMONS_NS::elementos::area_de_texto']]],
+  ['mycontactcallback_14',['MyContactCallback',['../classMyContactCallback.html',1,'']]]
 ];

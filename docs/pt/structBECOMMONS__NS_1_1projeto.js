@@ -12,7 +12,6 @@ var structBECOMMONS__NS_1_1projeto =
     [ "rodar", "structBECOMMONS__NS_1_1projeto.html#a9e7f853a1582f69ba5725c48bf1a7034", null ],
     [ "salvarFase", "structBECOMMONS__NS_1_1projeto.html#a016d8efb9aaf106b035cf17218e7ed2c", null ],
     [ "salvarFases", "structBECOMMONS__NS_1_1projeto.html#a47a6d049b97cea03aa1233af5e525583", null ],
-    [ "salvarProjeto", "structBECOMMONS__NS_1_1projeto.html#a245625354b65b96ce16faeee1d8fcb55", null ],
     [ "fase_atual", "structBECOMMONS__NS_1_1projeto.html#a9a1697f84e3f3c4f9deded9be316b981", null ],
     [ "m_fases", "structBECOMMONS__NS_1_1projeto.html#a64c66febf33d42cbbbf64838dcddbf57", null ]
 ];

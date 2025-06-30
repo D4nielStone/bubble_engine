@@ -10,6 +10,7 @@ var annotated_dup =
         [ "botao", "classBECOMMONS__NS_1_1elementos_1_1botao.html", null ],
         [ "caixa_de_texto", "classBECOMMONS__NS_1_1elementos_1_1caixa__de__texto.html", null ],
         [ "imagem", "classBECOMMONS__NS_1_1elementos_1_1imagem.html", null ],
+        [ "popup", "classBECOMMONS__NS_1_1elementos_1_1popup.html", null ],
         [ "texto", "classBECOMMONS__NS_1_1elementos_1_1texto.html", null ]
       ] ],
       [ "caixa", "classBECOMMONS__NS_1_1caixa.html", null ],
@@ -63,8 +64,8 @@ var annotated_dup =
       [ "registro_testes", "classbetest_1_1registro__testes.html", "classbetest_1_1registro__testes" ]
     ] ],
     [ "EDITOR_NS", "namespaceEDITOR__NS.html", [
-      [ "gerenciador_projetos", "classEDITOR__NS_1_1gerenciador__projetos.html", null ],
-      [ "sistema_editor", "structEDITOR__NS_1_1sistema__editor.html", null ]
+      [ "gerenciador_projetos", "classEDITOR__NS_1_1gerenciador__projetos.html", "classEDITOR__NS_1_1gerenciador__projetos" ],
+      [ "sistema_editor", "structEDITOR__NS_1_1sistema__editor.html", "structEDITOR__NS_1_1sistema__editor" ]
     ] ],
     [ "std", "namespacestd.html", [
       [ "hash< BECOMMONS_NS::entidade >", "structstd_1_1hash_3_01BECOMMONS__NS_1_1entidade_01_4.html", null ],

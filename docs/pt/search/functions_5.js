@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['gerenciadorfontes_0',['gerenciadorFontes',['../classBECOMMONS__NS_1_1gerenciadorFontes.html#a106ae9c34cbe5b554a944ffc0b4959de',1,'BECOMMONS_NS::gerenciadorFontes']]]
+  ['fase_0',['fase',['../structBECOMMONS__NS_1_1fase.html#a3134bfed75712b5d6cb79107fb04be6a',1,'BECOMMONS_NS::fase']]],
+  ['flipvertical_1',['flipVertical',['../classBECOMMONS__NS_1_1imageLoader.html#a5222e6548e0dba8fb0eec431f8133b23',1,'BECOMMONS_NS::imageLoader']]]
 ];

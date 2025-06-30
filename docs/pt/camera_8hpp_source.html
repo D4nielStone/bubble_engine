@@ -151,7 +151,7 @@ $(document).ready(function(){initNavTree('camera_8hpp_source.html',''); initResi
 <div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span> </div>
 <div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>        <span class="keyword">static</span> <span class="keyword">constexpr</span> mascara mascara = COMPONENTE_CAM;</div>
 <div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span> </div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>        ivet2* viewport_ptr{ <span class="keyword">nullptr</span> };</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>        fvet4* viewport_ptr{ <span class="keyword">nullptr</span> };</div>
 <div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>        ivet2 viewportFBO{ 400, 400 };</div>
 <div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span> </div>
 <div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>        <span class="keywordtype">void</span> desenharFB() <span class="keyword">const</span>;</div>
@@ -168,9 +168,9 @@ $(document).ready(function(){initNavTree('camera_8hpp_source.html',''); initResi
 <div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span> </div>
 <div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>        glm::mat4 obtProjectionMatrix();</div>
 <div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span> </div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>        <a class="code hl_struct" href="structBECOMMONS__NS_1_1raio.html">raio</a> pontoParaRaio(<span class="keyword">const</span> fvet2&amp; screenPoint) <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>        fvet3 telaParaMundo(<span class="keyword">const</span> fvet2&amp; screenPoint, <span class="keywordtype">float</span> profundidade) <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>        ivet2 mundoParaTela(<span class="keyword">const</span> fvet3&amp; mundoPos);</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>        <a class="code hl_struct" href="structBECOMMONS__NS_1_1raio.html">raio</a> pontoParaRaio(<span class="keyword">const</span> ivet2&amp; screenPoint) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>        fvet3 telaParaMundo(<span class="keyword">const</span> ivet2&amp;, <span class="keywordtype">float</span>) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>        ivet3 mundoParaTela(<span class="keyword">const</span> fvet3&amp;);</div>
 <div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>        </div>
 <div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>        <span class="keywordtype">void</span> mover(<span class="keyword">const</span> fvet3&amp; pos);</div>
 <div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>    };</div>

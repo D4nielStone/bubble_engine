@@ -138,29 +138,40 @@ $(document).ready(function(){initNavTree('structEDITOR__NS_1_1sistema__editor.ht
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:a83cd53a7ca1d38aa048089cb03041669" id="r_a83cd53a7ca1d38aa048089cb03041669"><td class="memItemLeft" align="right" valign="top"><a id="a83cd53a7ca1d38aa048089cb03041669" name="a83cd53a7ca1d38aa048089cb03041669"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>sistema_editor</b> ()</td></tr>
+<tr class="memdesc:a83cd53a7ca1d38aa048089cb03041669"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construtor da classe <a class="el" href="structEDITOR__NS_1_1sistema__editor.html">sistema_editor</a>. Inicializa a flag m_salvar_ao_fechar para garantir que o editor salve as configurações ao ser encerrado. <br /></td></tr>
+<tr class="separator:a83cd53a7ca1d38aa048089cb03041669"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae60d30bae8849c72f79157f3ea5a397d" id="r_ae60d30bae8849c72f79157f3ea5a397d"><td class="memItemLeft" align="right" valign="top"><a id="ae60d30bae8849c72f79157f3ea5a397d" name="ae60d30bae8849c72f79157f3ea5a397d"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>inicializar</b> () override</td></tr>
+<tr class="memdesc:ae60d30bae8849c72f79157f3ea5a397d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inicializa o sistema do editor. Carrega a configuração da câmera do editor, define a câmera de renderização e inicializa a interface do usuário, adicionando suas caixas. <br /></td></tr>
 <tr class="separator:ae60d30bae8849c72f79157f3ea5a397d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5d6a986cc0b8170737e5ce4a04134272" id="r_a5d6a986cc0b8170737e5ce4a04134272"><td class="memItemLeft" align="right" valign="top"><a id="a5d6a986cc0b8170737e5ce4a04134272" name="a5d6a986cc0b8170737e5ce4a04134272"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>atualizar</b> () override</td></tr>
+<tr class="memdesc:a5d6a986cc0b8170737e5ce4a04134272"><td class="mdescLeft">&#160;</td><td class="mdescRight">Atualiza o estado do editor em cada frame. Gerencia inputs, atualiza as caixas da UI, sincroniza a lista de entidades e posiciona os ícones de entidades no viewport. <br /></td></tr>
 <tr class="separator:a5d6a986cc0b8170737e5ce4a04134272"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afba93f0c91fc6c5ff0f6ba91dc9a661f" id="r_afba93f0c91fc6c5ff0f6ba91dc9a661f"><td class="memItemLeft" align="right" valign="top"><a id="afba93f0c91fc6c5ff0f6ba91dc9a661f" name="afba93f0c91fc6c5ff0f6ba91dc9a661f"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>adicionarCaixas</b> ()</td></tr>
+<tr class="memdesc:afba93f0c91fc6c5ff0f6ba91dc9a661f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adiciona e configura as caixas (containers) da interface do usuário do editor. Esta função estrutura a UI em seções lógicas como topo, centro e console, e configura seus estilos e comportamentos iniciais. <br /></td></tr>
 <tr class="separator:afba93f0c91fc6c5ff0f6ba91dc9a661f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2dc2e7cd5b5a0587d1a6f1f1db9c0403" id="r_a2dc2e7cd5b5a0587d1a6f1f1db9c0403"><td class="memItemLeft" align="right" valign="top"><a id="a2dc2e7cd5b5a0587d1a6f1f1db9c0403" name="a2dc2e7cd5b5a0587d1a6f1f1db9c0403"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>chamarInputs</b> ()</td></tr>
+<tr class="memdesc:a2dc2e7cd5b5a0587d1a6f1f1db9c0403"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gerencia os inputs do usuário para ações do editor. Inclui atalhos para salvar, rodar o runtime, criar/remover entidades e salvar fases. Também atualiza a movimentação da câmera do editor. <br /></td></tr>
 <tr class="separator:a2dc2e7cd5b5a0587d1a6f1f1db9c0403"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2f246309bc8938e3b52af5a8eb756347" id="r_a2f246309bc8938e3b52af5a8eb756347"><td class="memItemLeft" align="right" valign="top"><a id="a2f246309bc8938e3b52af5a8eb756347" name="a2f246309bc8938e3b52af5a8eb756347"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>salvarEditor</b> ()</td></tr>
+<tr class="memdesc:a2f246309bc8938e3b52af5a8eb756347"><td class="mdescLeft">&#160;</td><td class="mdescRight">Salva as configurações da câmera e do estado do editor em um arquivo JSON. Cria o diretório 'usr' se não existir e serializa os dados da câmera. <br /></td></tr>
 <tr class="separator:a2f246309bc8938e3b52af5a8eb756347"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a02e28af64168e75a1e8ace04752ebeee" id="r_a02e28af64168e75a1e8ace04752ebeee"><td class="memItemLeft" align="right" valign="top"><a id="a02e28af64168e75a1e8ace04752ebeee" name="a02e28af64168e75a1e8ace04752ebeee"></a>
 static void&#160;</td><td class="memItemRight" valign="bottom"><b>executarRuntime</b> ()</td></tr>
+<tr class="memdesc:a02e28af64168e75a1e8ace04752ebeee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inicia a execução do runtime do projeto em uma thread separada. Impede múltiplas instâncias do runtime rodando simultaneamente. <br /></td></tr>
 <tr class="separator:a02e28af64168e75a1e8ace04752ebeee"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3022cf36ee4ee8557e4b4633a7d02127" id="r_a3022cf36ee4ee8557e4b4633a7d02127"><td class="memItemLeft" align="right" valign="top"><a id="a3022cf36ee4ee8557e4b4633a7d02127" name="a3022cf36ee4ee8557e4b4633a7d02127"></a>
 static void&#160;</td><td class="memItemRight" valign="bottom"><b>monitorarRuntime</b> ()</td></tr>
+<tr class="memdesc:a3022cf36ee4ee8557e4b4633a7d02127"><td class="mdescLeft">&#160;</td><td class="mdescRight">Monitora o estado de execução do runtime em segundo plano. A thread de monitoramento verifica periodicamente se o runtime ainda está ativo. Quando o runtime encerra, a flag 'rodando' é definida como false. <br /></td></tr>
 <tr class="separator:a3022cf36ee4ee8557e4b4633a7d02127"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
