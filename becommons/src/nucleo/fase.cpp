@@ -250,6 +250,8 @@ void fase::serializar(const std::string& diretorio)
             componente_v.AddMember("tipo", "transformacao", allocator);
             if(mask == componente::COMPONENTE_CODIGO)
             componente_v.AddMember("tipo", "codigo", allocator);
+            if(mask == componente::COMPONENTE_TERRENO)
+            componente_v.AddMember("tipo", "terreno", allocator);
 
             componente->serializar(componente_v, allocator);
             componentes_v.PushBack(componente_v, allocator);

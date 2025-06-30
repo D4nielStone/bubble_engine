@@ -45,13 +45,13 @@ void camera::desenharFB() const
     {
         glBindTexture(GL_TEXTURE_2D, textura);
     if(viewport_ptr)
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, viewport_ptr->x, viewport_ptr->y, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, viewport_ptr->z, viewport_ptr->w, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
     else
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, viewportFBO.x, viewportFBO.y, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
         glBindTexture(GL_TEXTURE_2D, 0);
         glBindRenderbuffer(GL_RENDERBUFFER, rbo);
     if(viewport_ptr)
-        glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, viewport_ptr->x, viewport_ptr->y);
+        glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, viewport_ptr->z, viewport_ptr->w);
     else
         glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, viewportFBO.x, viewportFBO.y);
         glBindRenderbuffer(GL_RENDERBUFFER, 0);
@@ -60,7 +60,7 @@ void camera::desenharFB() const
     glClearColor(ceu.r, ceu.g, ceu.b, ceu.a);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     if(viewport_ptr)
-        glViewport(0, 0, viewport_ptr->x, viewport_ptr->y);
+        glViewport(0, 0, viewport_ptr->z, viewport_ptr->w);
     else
         glViewport(0, 0, janela::obterInstancia().tamanho.x, janela::obterInstancia().tamanho.y);
 }
@@ -219,8 +219,8 @@ glm::mat4 camera::obtProjectionMatrix() {
         viewp = viewportFBO;
     else if(viewport_ptr)
     {
-        viewp = *viewport_ptr;
-        viewportFBO = *viewport_ptr;
+        viewp = {viewport_ptr->z, viewport_ptr->w};
+        viewportFBO = {viewport_ptr->z, viewport_ptr->w};
     }
     else return glm::mat4(1.f);
 
@@ -245,8 +245,7 @@ glm::mat4 camera::obtProjectionMatrix() {
     return projMatriz;
 }
 
-raio camera::pontoParaRaio(const fvet2& screenPoint) const 
-{
+raio camera::pontoParaRaio(const ivet2& screenPoint) const {
     fvet3 direcaoMundo = telaParaMundo(screenPoint, 0.0f);
 
     raio ray {};
@@ -256,7 +255,7 @@ raio camera::pontoParaRaio(const fvet2& screenPoint) const
     return ray;
 }
 
-fvet3 camera::telaParaMundo(const fvet2 &screenPoint, float profundidade) const
+fvet3 camera::telaParaMundo(const ivet2 &screenPoint, float profundidade) const
 {
     float ndcX = (2.0f * screenPoint.x) / viewportFBO.x - 1.0f;
     float ndcY = 1.0f - (2.0f * screenPoint.y) / viewportFBO.y;
@@ -269,24 +268,32 @@ fvet3 camera::telaParaMundo(const fvet2 &screenPoint, float profundidade) const
     return fvet3(worldCoords.x,worldCoords.y,worldCoords.z).normalizar();
 }
 
-ivet2 camera::mundoParaTela(const fvet3 &mundoPos)
-{
-    glm::vec4 clipSpacePos = projMatriz * viewMatrix * glm::vec4(mundoPos.x, mundoPos.y, mundoPos.z, 1.0f);
+ivet3 camera::mundoParaTela(const fvet3 &mundoPos) {
+    glm::mat4 view = obtViewMatrix();
+    glm::mat4 projection = obtProjectionMatrix();
 
-    // Validação de w para evitar divisões inválidas
-    if (clipSpacePos.w <= 0.0001f) {
-        return ivet2(-1, -1); // ou outro tratamento adequado
+    glm::vec4 clipCoords = projection * view * glm::vec4(mundoPos.x, mundoPos.y, mundoPos.z, 1.0f);
+    glm::vec3 ndcCoords = glm::vec3(clipCoords) / clipCoords.w;
+
+    ivet2 currentViewport;
+    if (viewport_ptr) {
+        currentViewport = {viewport_ptr->z, viewport_ptr->w};
+    } else {
+        currentViewport = viewportFBO; 
+    }
+    bool visivel = true;
+    if (ndcCoords.x < -1.0f || ndcCoords.x > 1.0f ||
+        ndcCoords.y < -1.0f || ndcCoords.y > 1.0f ||
+        ndcCoords.z < -1.0f || ndcCoords.z > 1.0f) {
+        visivel = false;
     }
 
-    glm::vec3 ndcPos = glm::vec3(clipSpacePos) / clipSpacePos.w;
+    float screenX = (ndcCoords.x + 1.0f) * 0.5f * currentViewport.x;
+    float screenY = (1.0f - ndcCoords.y) * 0.5f * currentViewport.y;
 
-    int screenWidth = viewport_ptr->x;
-    int screenHeight = viewport_ptr->y;
+    int screenZ = visivel ? 1 : -1;
 
-    ivet2 screenPos;
-    screenPos.x = static_cast<int>(std::round((ndcPos.x * 0.5f + 0.5f) * screenWidth));
-    screenPos.y = static_cast<int>(std::round((1.0f - (ndcPos.y * 0.5f + 0.5f)) * screenHeight)); // Inverter Y
-    return screenPos;
+    return ivet3(static_cast<int>(screenX + viewport_ptr->x), static_cast<int>(screenY + viewport_ptr->y), screenZ);
 }
 
 void camera::mover(const fvet3& pos)

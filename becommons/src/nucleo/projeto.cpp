@@ -66,7 +66,7 @@ void projeto::rodar() {
                 cam->ativarFB();
                 m_interface.inicializar();
                 auto framebuffer_ptr = std::make_unique<elementos::imagem>(cam->textura, true);
-                cam->viewport_ptr = &framebuffer_ptr->m_imagem_tamanho;
+                cam->viewport_ptr = &framebuffer_ptr->m_estilo.m_limites;
                 m_interface.m_raiz = std::move(framebuffer_ptr);
                 }
             }

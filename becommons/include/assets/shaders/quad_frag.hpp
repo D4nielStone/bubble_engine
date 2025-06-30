@@ -37,17 +37,14 @@ in vec2 Uv;
 uniform vec4 cor;
 uniform vec4 quadrado;
 uniform vec4 cor_borda; // Cor da borda
-uniform int tamanho_bordas; // Espessura da borda em px
-
+uniform int tamanho_bordas;
 out vec4 FragColor;
 void main()
 {
-    vec2 resolucao_textura = vec2(quadrado.z, quadrado.w);
-    float bordax = tamanho_bordas / resolucao_textura.x;
-    float borday = tamanho_bordas / resolucao_textura.y;
     // Detectar borda com base nas coordenadas UV
-    if (cor_borda.w != 0)
-    {
+    if (cor_borda.w != 0) {
+        float bordax = tamanho_bordas / quadrado.z;
+        float borday = tamanho_bordas / quadrado.w;
         if (Uv.x < bordax || Uv.x > 1.0 - bordax || Uv.y < borday || Uv.y > 1.0 - borday)
         {
             FragColor = cor_borda; // Cor da borda

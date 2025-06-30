@@ -65,8 +65,6 @@ namespace BECOMMONS_NS {
             /// @brief carregar arquivo de configuração e define diretório e outros.
             /// @return retorna documento json do projeto
             static rapidjson::Document analisarProjeto(std::string& path);
-            /// @brief salva todas as fases e a configuração do projeto
-            void salvarProjeto(){};
             /// @brief obtenção de uma fase dentro da lista da fases carregadas
             /// @param nome diretório da fase
 	        /// @return ponteiro inteligente da fase
@@ -80,6 +78,8 @@ namespace BECOMMONS_NS {
             sistema_codigo m_codigo;
             interface m_interface;
             std::vector<sistema*> sistemas;
+            /// @brief id para fase atual
+            std::string fase_atual;
         private:
             /// @brief cria projeto com cubo, luz direcional e código de rotação.
             void criarProjetoVazio(const std::string& path, const char* nome);
@@ -87,8 +87,6 @@ namespace BECOMMONS_NS {
             std::unordered_map<std::string, std::shared_ptr<fase>> m_fases;
             /// @brief cria janela glfw e inicia contexto opengl
             void criarJanela(rapidjson::Document& doc);
-            /// @brief id para fase atual
-            std::string fase_atual;
     };
     /// @brief Instância global do projeto atual
     inline projeto* projeto_atual{nullptr}; 

@@ -97,6 +97,25 @@ void sistema_renderizacao::atualizarCamera(camera* cam)
             auto transform = reg->obter<transformacao>(ent);
             calcularTransformacao(transform.get());
         });
+        reg->cada<terreno, transformacao>([&](const uint32_t ent_ren) {
+            auto trr = reg->obter<terreno>(ent_ren);
+            auto transform = reg->obter<transformacao>(ent_ren);
+
+            if (!trr || !transform ) {
+                depuracao::emitir(debug, "render", "Terreno ou transformação inválida");
+                return;
+            }
+
+
+            auto s = trr->m_shader;
+            s.use();
+            s.setMat4("view", glm::value_ptr(cam->obtViewMatrix()));
+            s.setVec3("viewPos", cam->posicao.x, cam->posicao.y, cam->posicao.z);
+            s.setMat4("projection", glm::value_ptr(cam->obtProjectionMatrix()));
+            s.setMat4("modelo", glm::value_ptr(transform->obterMatrizModelo()));
+            
+            trr->desenhar();
+        });
         reg->cada<renderizador, transformacao>([&](const uint32_t ent_ren) {
             auto render = reg->obter<renderizador>(ent_ren);
             auto transform = reg->obter<transformacao>(ent_ren);

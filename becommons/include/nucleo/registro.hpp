@@ -56,6 +56,8 @@ namespace BECOMMONS_NS {
 		/* Adiciona um componente a uma entidade */
 		template <typename T, typename... Args>
 		void adicionar(entidade& ent, Args&&... args);
+		template <typename T, typename... Args>
+		void adicionar(uint32_t, Args&&... args);
 
 		/* Remove um componente a uma entidade */
 		template <typename T>
@@ -77,6 +79,12 @@ namespace BECOMMONS_NS {
 	};
 
 	/* Definições de templates */
+	template<typename T, typename ...Args>
+	void registro::adicionar(uint32_t id, Args&&... args) {
+		mascaras[id] |= T::mascara; // Atualiza a máscara no mapa auxiliar
+		entidades[id][T::mascara] = std::make_shared<T>(std::forward<Args>(args)...); // Adiciona o componente
+		entidades[id][T::mascara]->meu_objeto = id;
+	}
 
 	template<typename T, typename ...Args>
 	void registro::adicionar(entidade& ent, Args&&... args) {

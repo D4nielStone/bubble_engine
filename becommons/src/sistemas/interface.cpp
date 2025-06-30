@@ -427,25 +427,13 @@ void interface::processarModular(caixa* it_caixa) {
 }
 
 void interface::chamarFuncoes(caixa* it_caixa) {
-        switch (it_caixa->tipo()) {
-        case tipo_caixa::popup: {
-            auto pop = static_cast<elementos::popup*>(it_caixa);
-            pop->atualizar(); 
-            break;
-                                         }
-        case tipo_caixa::caixa_de_texto: {
-            auto ct = static_cast<elementos::caixa_de_texto*>(it_caixa);
-            ct->atualizar(); 
-            break;
-                                         }
-        case tipo_caixa::botao: {
-            auto btn = static_cast<elementos::botao*>(it_caixa);
-            if(btn->pressionado() && btn->m_use_funcao)
-                btn->m_funcao();
-            break;
-                                }
-        default: break;
-        }
+    if (it_caixa->tipo() == tipo_caixa::popup || it_caixa->tipo() == tipo_caixa::caixa_de_texto)
+        it_caixa->atualizar();
+    else if (it_caixa->tipo() == tipo_caixa::botao) {
+        auto btn = static_cast<elementos::botao*>(it_caixa);
+        if(btn->pressionado() && btn->m_use_funcao)
+        btn->m_funcao();
+    }
 }
 void interface::atualizarFilhos(caixa* it_caixa) {
     if (!it_caixa) throw std::runtime_error("Caixa nula sendo atualizada.");

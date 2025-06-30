@@ -26,6 +26,7 @@
 #include "becommons_namespace.hpp"
 #include "area_de_toque.hpp"
 #include <memory>
+#include <cmath>
 
 namespace BECOMMONS_NS {
     namespace elementos {
@@ -42,9 +43,9 @@ namespace BECOMMONS_NS {
                     m_estilo.m_cor_borda = cor(0.07f);
                     m_estilo.m_flag_estilo |= flag_estilo::largura_justa | flag_estilo::altura_justa;
                     m_estilo.m_orientacao_modular = estilo::orientacao::vertical;
-                    m_estilo.m_padding_geral = {2, 2};
+                    m_estilo.m_padding_geral = {3, 3};
                 }
-                void atualizar() {
+                void atualizar() override {
                     if(!m_referencia) return;
                     m_estilo.m_ativo = m_estilo.m_ativo ? m_referencia->mouseEmCima() || mouseEmCima() : m_referencia->mouseEmCima();
                     float mais_largo = 20.f;
@@ -53,8 +54,13 @@ namespace BECOMMONS_NS {
                         mais_largo = std::max(filho->m_estilo.m_limites.z+m_estilo.m_padding_geral.x*2, mais_largo);
                         m_estilo.m_limites.w += filho->m_estilo.m_limites.w + m_estilo.m_padding_geral.y;
                     }
-                    m_estilo.m_limites.z = mais_largo;
-                    m_estilo.m_limites.x = m_referencia->m_estilo.m_limites.x-m_estilo.m_limites.z;
+                    if(m_estilo.m_ativo) {
+                        m_estilo.m_limites.z = std::lerp<float>(m_estilo.m_limites.z, mais_largo, 0.5);
+                        m_estilo.m_limites.x = std::lerp<float>(m_estilo.m_limites.x, m_referencia->m_estilo.m_limites.x- m_estilo.m_limites.z + 5, 0.1);
+                    } else {
+                        m_estilo.m_limites.z = 20;
+                        m_estilo.m_limites.x = m_referencia->m_estilo.m_limites.x;
+                    }
                     m_estilo.m_limites.y = m_referencia->m_estilo.m_limites.y;
                 }
                 tipo_caixa tipo() const override {

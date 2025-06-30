@@ -76,7 +76,7 @@ namespace BECOMMONS_NS {
 
 		static constexpr mascara mascara = COMPONENTE_CAM;
 
-		ivet2* viewport_ptr{ nullptr };
+		fvet4* viewport_ptr{ nullptr };
 		ivet2 viewportFBO{ 400, 400 };
 
 		void desenharFB() const;
@@ -93,9 +93,9 @@ namespace BECOMMONS_NS {
 
 		glm::mat4 obtProjectionMatrix();
 
-		raio pontoParaRaio(const fvet2& screenPoint) const;
-		fvet3 telaParaMundo(const fvet2& screenPoint, float profundidade) const;
-        ivet2 mundoParaTela(const fvet3& mundoPos);
+		raio pontoParaRaio(const ivet2& screenPoint) const;
+		fvet3 telaParaMundo(const ivet2&, float) const;
+        ivet3 mundoParaTela(const fvet3&);
 		
 		void mover(const fvet3& pos);
 	};

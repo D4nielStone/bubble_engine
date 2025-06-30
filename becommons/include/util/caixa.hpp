@@ -196,6 +196,8 @@ namespace BECOMMONS_NS {
         }
         virtual void configurar() {
         };
+        virtual void atualizar() {
+        };
         virtual void desenhar(unsigned int ret_VAO) {
             if(!m_shader)m_shader = std::make_unique<shader>("imagem.vert", "quad.frag");
             m_material.usar(*m_shader);
