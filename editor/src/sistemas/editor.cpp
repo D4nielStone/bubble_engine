@@ -25,6 +25,7 @@
 #include <cstdlib>
 #include "util/versao.hpp"
 #include "becommons/becommons.hpp"
+#include "elementos/popup.hpp"
 #include "sistemas/editor.hpp"
 #include "util/runtime.hpp"
 #include <filesystem>
@@ -78,12 +79,24 @@ void sistema_editor::adicionarCaixas() {
     auto img = std::make_unique<elementos::imagem>("folder.png");
     img->m_estilo.m_largura = 18;
     img->m_estilo.m_altura = 18;
-    estilo& e = barra_menu->adicionar<elementos::botao>([]() {
+    auto* btn_folder = barra_menu->adicionar<elementos::botao>([]() {
             }
-            , std::move(img))->m_estilo;
-    e.m_cor_borda = cor(0.3f);
-    e.m_cor_fundo = cor(0.11f);
-    e.m_padding_geral = {2, 2};
+            , std::move(img));
+    btn_folder->m_estilo.m_cor_borda = cor(0.3f);
+    btn_folder->m_estilo.m_cor_fundo = cor(0.11f);
+    btn_folder->m_estilo.m_padding_geral = {2, 2};
+    estilo e = btn_folder->m_estilo;
+    
+    auto* popup_folder = btn_folder->adicionar<elementos::popup>();
+    popup_folder->adicionar<elementos::botao>([this]() {
+
+            }, "salvar projeto     ")->m_estilo = e;
+    popup_folder->adicionar<elementos::botao>([this]() {
+
+            }, "salvar fase atual  ")->m_estilo = e;
+    popup_folder->adicionar<elementos::botao>([this]() {
+
+            }, "abrir outro projeto")->m_estilo = e;
     
     auto img1 = std::make_unique<elementos::imagem>("info.png");
     img1->m_estilo.m_largura = 18;
@@ -142,8 +155,22 @@ void sistema_editor::adicionarCaixas() {
 
     c_inspetor->adicionar<elementos::botao>([this]() {
         }, std::make_unique<elementos::imagem>("remover.png", false, 0.4))->m_estilo = e3;
-    c_inspetor->adicionar<elementos::botao>([this]() {
-        }, std::make_unique<elementos::imagem>("adicionar.png", false, 0.4))->m_estilo = e3;
+    auto* btn_add_comp = c_inspetor->adicionar<elementos::botao>([this]() {
+        }, std::make_unique<elementos::imagem>("adicionar.png", false, 0.4));
+    btn_add_comp->m_estilo = e3;
+    auto* popup_comp = btn_add_comp->adicionar<elementos::popup>();
+    popup_comp->adicionar<elementos::botao>([this]() {
+
+            }, "codigo ", "Codigo.png")->m_estilo = e;
+    popup_comp->adicionar<elementos::botao>([this]() {
+
+            }, "camera ", "Camera.png")->m_estilo = e;
+    popup_comp->adicionar<elementos::botao>([this]() {
+
+            }, "terreno", "Terreno.png")->m_estilo = e;
+    popup_comp->adicionar<elementos::botao>([this]() {
+
+            }, "fisica ", "Fisica.png")->m_estilo = e;
 }
 
 void sistema_editor::inicializar() {

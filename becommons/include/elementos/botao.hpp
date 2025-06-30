@@ -74,6 +74,9 @@ namespace BECOMMONS_NS{
                 auto m_imagem = std::make_unique<imagem>(img);
                 m_imagem->m_estilo.m_altura = size;
                 m_imagem->m_estilo.m_largura = size;
+
+                m_estilo.m_limites.z = m_texto->obterLargura(txt) + size;
+                
                 m_filhos.push_back(std::move(m_imagem));
                 m_filhos.push_back(std::move(m_texto));
             }
@@ -82,7 +85,7 @@ namespace BECOMMONS_NS{
             }
             bool pressionado() override {
                 m_pressionado = area_de_toque::pressionado();
-                m_estilo.m_cor_borda.a = m_mouse_cima ? 1.f : 0.1f;
+                m_estilo.m_cor_borda.a = pode_click && m_mouse_cima ? 1.f : 0.1f;
                 return m_pressionado;
             }
             void configurar() override {

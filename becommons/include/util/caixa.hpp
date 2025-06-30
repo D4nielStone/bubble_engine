@@ -141,7 +141,7 @@ namespace BECOMMONS_NS {
      * \brief funciona como uma div em css
      */
     enum class tipo_caixa : uint8_t {
-        base, texto, botao, imagem, caixa_de_texto 
+        base, texto, botao, imagem, popup, caixa_de_texto 
     };
     class caixa {
     public:
