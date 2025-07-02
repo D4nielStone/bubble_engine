@@ -38,9 +38,9 @@ A **golf game** was created as a physics test. Several engine features were impr
 ---
 
 > *Running on Debian distibution*   
-> ![image](https://github.com/user-attachments/assets/728653dd-f00c-4d27-88b4-d23136965709)
+> ![image](https://github.com/user-attachments/assets/6e0bb5d2-0bbf-4f91-b612-5d9d6eccdc24)
 
-> ![image](https://github.com/user-attachments/assets/8288c203-ac51-46b8-9c38-599650684a78)
+> ![image](https://github.com/user-attachments/assets/d12ee5f8-5d18-4c16-8fd0-b501380bf0be)
 
 ---
 
