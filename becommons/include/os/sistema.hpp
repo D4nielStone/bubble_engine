@@ -87,20 +87,30 @@ namespace BECOMMONS_NS {
         return "";
     }
 
-    inline static void abrirNoTerminal(const std::string& editor, const std::string& arquivo) {
+    inline static int abrirNoTerminal(const std::string& editor, const std::string& arquivo) {
         std::string terminal = obterTerminal();
         if (terminal.empty()) {
             std::cerr << "Nenhum terminal suportado encontrado.\n";
-            return;
-        }
-
-        std::string comando;
-        if (terminal == "xterm" || terminal == "alacritty") {
-            comando = terminal + " -e \"" + editor + " '" + arquivo + "'\"";
-        } else {
-            comando = terminal + " -- bash -c '" + editor + " \"" + arquivo + "\"; exec bash'";
+            return -1;
         }
     
-        int result = system(comando.c_str());
+        if (editor.empty() || arquivo.empty()) {
+            std::cerr << "Editor ou arquivo inválido.\n";
+            return -2;
+        }
+    
+        std::string comando;
+        try {
+            if (terminal == "xterm" || terminal == "alacritty") {
+                comando = terminal + " -e " + editor + " \"" + arquivo + "\"";
+            } else {
+                comando = terminal + " -- bash -c \"" + editor + " '" + arquivo + "'; exec bash\"";
+            }
+        } catch (const std::bad_alloc& e) {
+            std::cerr << "Erro de memória ao montar comando: " << e.what() << std::endl;
+            return -3;
+        }
+    
+        return system(comando.c_str());
     }
 }

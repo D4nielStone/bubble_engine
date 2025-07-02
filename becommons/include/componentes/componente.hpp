@@ -63,6 +63,7 @@ namespace BECOMMONS_NS {
         inline static std::unordered_map<mascara, std::string> mapa_nomes_componentes = {
             {mascara::COMPONENTE_LUZ_DIRECIONAL            ,"Iluminacao"},
             {mascara::COMPONENTE_LUZ_PONTUAL               ,"Iluminacao"},
+            {mascara::COMPONENTE_FISICA                    ,"Fisica"},
             {mascara::COMPONENTE_RENDER                    ,"Renderizador"},
             {mascara::COMPONENTE_TRANSFORMACAO             ,"Transformacao"},
             {mascara::COMPONENTE_CODIGO                    ,"Codigo"},

@@ -470,6 +470,21 @@ void sistema_editor::atualizarGizmo() {
                         comp_pop->adicionar<elementos::caixa_de_texto>("z", &tr_ptr->escala.z)->m_estilo.m_flag_estilo |= flag_estilo::quebrar_linha;
                     }
                 }
+                else if (nome_comp == "Codigo") {
+                    auto cdg_ptr = reg->obter<codigo>(entidade_atual);
+                    if (cdg_ptr) {
+                        comp_pop->m_estilo.m_orientacao_modular = estilo::orientacao::vertical;
+                        std::string _editor = obterEDT();
+                        std::string _arquivo = std::filesystem::path(cdg_ptr->arquivoCompleto).filename().string();
+                        int entidade = entidade_atual;
+                        comp_pop->adicionar<elementos::botao>([reg, entidade](){
+                                auto cdg_ptr = reg->obter<codigo>(entidade);
+                                std::string editor = obterEDT();
+                                std::string arquivo = cdg_ptr->arquivoCompleto;
+                                abrirNoTerminal(editor, arquivo);
+                                }, "abrir " + _arquivo + "\ncom " + _editor, "Codigo.png");
+                    }
+                }
                 else if (nome_comp == "Camera") {
                     auto cam_ptr = reg->obter<camera>(entidade_atual);
                     if (cam_ptr) {

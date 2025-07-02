@@ -153,7 +153,7 @@ namespace BECOMMONS_NS{
                 limites_iniciais = m_estilo.m_limites;
 
                 const auto& chs = gerenciadorFontes::obterInstancia().obter(m_texto_fonte, m_texto_escala);
-                float y_linha = m_texto_escala;
+                float y_linha = m_texto_escala, x_inicial = m_estilo.m_limites.x;
                 float x_linha = m_estilo.m_limites.x; 
                 if((static_cast<uint32_t>(m_texto_flags) & static_cast<uint32_t>(elementos::flags_texto::alinhamento_central))!=0) {
                     x_linha += m_estilo.m_limites.z / 2 - obterLargura(m_texto_frase)/2;
@@ -162,7 +162,7 @@ namespace BECOMMONS_NS{
             
                 for(const auto& ca : m_texto_frase) {
                     if (chs.empty()) return;
-                    if(ca == '\n') {y_linha += m_texto_escala; x_linha = m_estilo.m_limites.x; continue;}
+                    if(ca == '\n') {y_linha += m_texto_escala; x_linha = x_inicial; continue;}
                     caractere ch;
                     if(chs.find(ca) != chs.end()) ch = chs.at(ca);
                     else continue;
