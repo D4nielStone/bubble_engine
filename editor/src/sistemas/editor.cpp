@@ -54,6 +54,9 @@ bool gatilho_ = true; // Usado para controlar a ativação de inputs baseados em
 // para manipulação de entidades e seus componentes.
 caixa* c_entidades, *c_inspetor;
 
+// Estilos de caixa pré-definidos
+estilo e, e3;
+
 // Framebuffer principal que exibe a renderização da câmera do editor.
 // O viewport da câmera é ajustado para as dimensões deste framebuffer.
 elementos::imagem* framebuffer;
@@ -66,9 +69,19 @@ elementos::imagem* framebuffer;
 sistema_editor::sistema_editor() : m_salvar_ao_fechar(true) {
 }
 
+// Mapa para armazenar os botões do painel de entidades, associando-os aos IDs das entidades.
+std::unordered_map<unsigned int, elementos::botao*> botoes_entidades; 
+
+// Mapa para armazenar os ícones de entidades no viewport, associando-os aos IDs das entidades.
+// O valor é o "caixa*" que representa o ícone (geralmente um botão com imagem).
+std::unordered_map<unsigned int, caixa*> icones_entidades; 
+
 // Mapa para armazenar ícones de entidades no viewport, associando-os às posições 3D.
 // Isso permite que os ícones se movam e escalem com a câmera do editor.
-std::unordered_map<fvet3*, elementos::imagem*> icones;
+std::unordered_map<fvet3*, caixa*> icones;
+
+// Map para criação dos popups depois
+std::unordered_map<std::string, elementos::popup*> pop_ups;
 
 /**
  * @brief Adiciona e configura as caixas (containers) da interface do usuário do editor.
@@ -106,10 +119,11 @@ void sistema_editor::adicionarCaixas() {
             // Ação principal do botão (pode ser vazia se as ações estiverem no popup)
         }
         , std::move(img));
-    btn_folder->m_estilo.m_cor_borda = cor(0.3f);
+    btn_folder->m_estilo.m_cor_borda = cor(0.1f);
+    btn_folder->m_estilo.m_cor_borda.a = 1.f;
     btn_folder->m_estilo.m_cor_fundo = cor(0.11f);
     btn_folder->m_estilo.m_padding_geral = {2, 2};
-    estilo e = btn_folder->m_estilo; // Reutiliza estilo para os botões do popup
+    e = btn_folder->m_estilo; // Reutiliza estilo para os botões do popup
 
     auto* popup_folder = btn_folder->adicionar<elementos::popup>();
     popup_folder->adicionar<elementos::botao>([this]() {
@@ -117,7 +131,17 @@ void sistema_editor::adicionarCaixas() {
         }, "salvar projeto", "folder.png")->m_estilo = e;
     popup_folder->adicionar<elementos::botao>([this]() {
             projeto_atual->salvarFase(projeto_atual->fase_atual); // Salva apenas a fase atual
-        }, "salvar fase atual", "folder.png")->m_estilo = e;
+        }, "salvar fase atual", "scene.png")->m_estilo = e;
+    auto* btn_luz = popup_folder->adicionar<elementos::botao>([]()
+            {}, "luz global", "Iluminacao.png");
+    btn_luz->m_estilo = e;        
+    // Interação especial da luz direcional
+    auto lg = projeto_atual->obterFaseAtual()->luz_global;
+    auto* popup = btn_luz->adicionar<elementos::popup>();
+    popup->m_estilo.m_orientacao_modular = estilo::orientacao::horizontal;
+    popup->adicionar<elementos::caixa_de_texto>("x", &lg->direcao.x);
+    popup->adicionar<elementos::caixa_de_texto>("y", &lg->direcao.y);
+    popup->adicionar<elementos::caixa_de_texto>("z", &lg->direcao.z);
 
     // Botão "Info" para abrir link de ajuda
     auto img1 = std::make_unique<elementos::imagem>("info.png");
@@ -127,7 +151,7 @@ void sistema_editor::adicionarCaixas() {
             becommons::abrirLink("https://d4nielstone.github.io/bubble_engine/pt/md_docs_2ajuda_2ajuda.html"); // Abre o link de documentação
         }
         , std::move(img1))->m_estilo;
-    e1.m_cor_borda = cor(0.3f);
+    e1.m_cor_borda = cor(0.1f);
     e1.m_cor_fundo = cor(0.11f);
     e1.m_padding_geral = {2, 2};
 
@@ -139,7 +163,7 @@ void sistema_editor::adicionarCaixas() {
             // Ação do botão (placeholder)
         }
         , std::move(img2))->m_estilo;
-    e2.m_cor_borda = cor(0.3f);
+    e2.m_cor_borda = cor(0.1f);
     e2.m_cor_fundo = cor(0.11f);
     e2.m_padding_geral = {2, 2};
 
@@ -151,8 +175,8 @@ void sistema_editor::adicionarCaixas() {
 
     // Painel de entidades (lado esquerdo)
     c_entidades = center->adicionar<caixa>();
+    c_entidades->m_estilo.m_flag_estilo |= flag_estilo::largura_justa | flag_estilo::altura_percentual;
     c_entidades->m_estilo.m_orientacao_modular = estilo::orientacao::vertical;
-    c_entidades->m_estilo.m_flag_estilo |= flag_estilo::altura_percentual | flag_estilo::largura_justa;
     c_entidades->m_estilo.m_altura = 1;
     c_entidades->m_estilo.m_cor_fundo = cor(0.1f);
     c_entidades->m_estilo.m_padding_geral = {2, 2};
@@ -168,29 +192,29 @@ void sistema_editor::adicionarCaixas() {
     // Painel do inspetor (lado direito, para propriedades de entidades/componentes)
     c_inspetor = center->adicionar<caixa>();
     c_inspetor->m_estilo.m_flag_estilo |= flag_estilo::altura_percentual;
-    c_inspetor->m_estilo.m_largura = 200;
+    c_inspetor->m_estilo.m_largura = 150;
     c_inspetor->m_estilo.m_altura = 1;
     c_inspetor->m_estilo.m_cor_fundo = cor(0.1f);
     c_inspetor->m_estilo.m_cor_borda = cor(0.07f);
     c_inspetor->m_estilo.m_padding_geral = {2, 2};
 
     // Estilo para botões de remoção e adição de componentes
-    estilo e3;
     e3.m_flag_estilo |= flag_estilo::largura_percentual | flag_estilo::alinhamento_central;
-    e3.m_cor_borda = cor(0.3f);
+    e3.m_cor_borda = cor(0.1f);
     e3.m_largura = 1;
     e3.m_padding_geral = {5, 0};
 
     // Botão para remover componentes (placeholder)
     c_inspetor->adicionar<elementos::botao>([this]() {
         // Ação de remover componente (placeholder)
-        }, std::make_unique<elementos::imagem>("remover.png", false, 0.4))->m_estilo = e3;
+        }, std::make_unique<elementos::imagem>("remover.png", false, 0.2))->m_estilo = e3;
 
     // Botão para adicionar componentes com popup de seleção
     auto* btn_add_comp = c_inspetor->adicionar<elementos::botao>([this]() {
         // Ação de adicionar componente (placeholder)
-        }, std::make_unique<elementos::imagem>("adicionar.png", false, 0.4));
+        }, std::make_unique<elementos::imagem>("adicionar.png", false, 0.2));
     btn_add_comp->m_estilo = e3;
+    btn_add_comp->m_estilo.m_flag_estilo |= flag_estilo::quebrar_linha;
     auto* popup_comp = btn_add_comp->adicionar<elementos::popup>();
 
     // Opções de componentes no popup "Adicionar Componente"
@@ -206,9 +230,6 @@ void sistema_editor::adicionarCaixas() {
     popup_comp->adicionar<elementos::botao>([this]() {
             projeto_atual->obterFaseAtual()->obterRegistro()->adicionar<fisica>(entidade_atual);
         }, "fisica", "Fisica.png")->m_estilo = e;
-    popup_comp->adicionar<elementos::botao>([this]() {
-            projeto_atual->obterFaseAtual()->obterRegistro()->adicionar<luz_direcional>(entidade_atual);
-        }, "luz direcional", "Iluminacao.png")->m_estilo = e;
     popup_comp->adicionar<elementos::botao>([this]() {
             projeto_atual->obterFaseAtual()->obterRegistro()->adicionar<renderizador>(entidade_atual);
         }, "renderizador", "Renderizador.png")->m_estilo = e;
@@ -304,56 +325,199 @@ void sistema_editor::chamarInputs() {
         salvarEditor(); // Salva o editor se a janela estiver fechando e a flag estiver ativa
     }
 }
+        
+/**
+ * @brief Atualiza os icones de interface interativos
+ * com o editor.
+ */
+void sistema_editor::atualizarGizmo() {
+    auto reg = projeto_atual->obterFaseAtual()->obterRegistro();
 
+    // 1. Identificar entidades que foram removidas
+    std::vector<unsigned int> ids_a_remover;
+    for (auto const& [id, btn_entidade] : botoes_entidades) {
+        if (reg->entidades.find(id) == reg->entidades.end()) {
+            ids_a_remover.push_back(id);
+        }
+    }
+
+    // 2. Remover elementos de UI das entidades que não existem mais
+    for (unsigned int id_removido : ids_a_remover) {
+        // Remover do painel de entidades
+        auto it_btn = botoes_entidades.find(id_removido);
+        if (it_btn != botoes_entidades.end()) {
+            c_entidades->remover(it_btn->second); // Assume que 'remover' destrói o elemento
+            botoes_entidades.erase(it_btn);
+        }
+
+        // Remover do viewport (ícone)
+        auto it_icone = icones_entidades.find(id_removido);
+        if (it_icone != icones_entidades.end()) {
+            framebuffer->remover(it_icone->second); // Assume que 'remover' destrói o elemento
+            icones_entidades.erase(it_icone);
+        }
+    }
+
+    // 3. Adicionar/Atualizar entidades existentes e novas
+    for (auto& [id, comps] : reg->entidades) {
+        // Obter o componente de transformação (crucial para o ícone no viewport)
+        auto tr_ptr = reg->obter<transformacao>(id);
+        if (!tr_ptr) {
+            // Se a entidade não tem transformação, não deve ter ícone no viewport
+            // Mas ainda pode ter botão no painel de entidades.
+            // Decida o comportamento adequado aqui: remover ícone existente se houver?
+            auto it_icone = icones_entidades.find(id);
+            if(it_icone != icones_entidades.end()){
+                framebuffer->remover(it_icone->second);
+                icones_entidades.erase(it_icone);
+            }
+            // Continue para a próxima iteração, mas podemos adicionar o botão do painel abaixo.
+            // Para simplificar, vou manter a lógica de adicionar/atualizar dentro do mesmo bloco.
+        }
+
+        // --- Lógica para o Painel de Entidades (c_entidades) ---
+        if (botoes_entidades.find(id) == botoes_entidades.end()) {
+            // Entidade é nova ou não tinha botão: Adicionar
+            auto* btn_entidade = c_entidades->adicionar<elementos::botao>([this, id]() {
+                entidade_atual = id;
+            }, std::make_unique<elementos::imagem>("cube.png", false, 0.2f)); // Talvez exibir o nome da entidade aqui?
+            botoes_entidades[id] = btn_entidade;
+        }
+        // Se o botão já existe, não precisamos fazer nada específico, a menos que 
+        // seu texto/imagem precise ser atualizado dinamicamente.
+
+
+        // --- Lógica para o Viewport (framebuffer - ícones) ---
+        if (tr_ptr) { // Apenas entidades com transformação têm ícone no viewport
+            if (icones_entidades.find(id) == icones_entidades.end()) {
+                // Entidade é nova ou não tinha ícone: Adicionar
+                std::string nome_comp_icone = "cube"; // Ícone padrão
+                if(!comps.empty()){
+                    nome_comp_icone = componente::mapa_nomes_componentes[comps.rbegin()->first];
+                    nome_comp_icone = (nome_comp_icone == "Transformacao") ? "cube" : nome_comp_icone;
+                }
+
+                auto* btn_icone = framebuffer->adicionar<elementos::botao>([this, id]() {
+                    entidade_atual = id;
+                }, std::make_unique<elementos::imagem>(nome_comp_icone + ".png", false, 0.2f));
+                btn_icone->m_estilo.m_cor_borda.a = 0;
+                icones_entidades[id] = btn_icone;
+
+                // Interação especial da câmera
+                if (nome_comp_icone == "Camera") {
+                    auto cam_ptr = reg->obter<camera>(id);
+                    if (cam_ptr) {
+                        cam_ptr->ativarFB();
+                        auto* cam_pop = btn_icone->adicionar<elementos::popup>();
+                        cam_pop->m_estilo.m_padding_geral = {1, 1};
+                        auto* cam_framebuffer = cam_pop->adicionar<elementos::imagem>(cam_ptr->textura, true);
+                        cam_framebuffer->m_estilo.m_largura = 80;
+                        cam_framebuffer->m_estilo.m_altura = 50;
+                        cam_ptr->viewport_ptr = &cam_framebuffer->m_estilo.m_limites;
+                    }
+                }
+            }
+        }
+    }
+
+    // Lógica para Componentes (Inspetor) - Esta parte permanece basicamente a mesma,
+    // pois é reconstruída se a entidade selecionada ou seus componentes mudam.
+    size_t current_entity_component_count = 0;
+    if (reg->entidades.count(entidade_atual)) {
+        current_entity_component_count = reg->entidades[entidade_atual].size();
+    }
+
+    if (entidade_atual != entidade_anterior || current_entity_component_count != num_componentes_anterior) {
+        c_inspetor->m_filhos.clear();
+        pop_ups.clear(); 
+
+        c_inspetor->adicionar<elementos::botao>([](){ /* Ação de remover */ }, std::make_unique<elementos::imagem>("remover.png", false, 0.2))->m_estilo = e3;
+        auto* btn_add_comp = c_inspetor->adicionar<elementos::botao>([](){ /* Ação de adicionar */ }, std::make_unique<elementos::imagem>("adicionar.png", false, 0.2));
+        btn_add_comp->m_estilo = e3;
+        btn_add_comp->m_estilo.m_flag_estilo |= flag_estilo::quebrar_linha;
+        auto* popup_comp = btn_add_comp->adicionar<elementos::popup>();
+
+        // Popula o popup de adicionar componentes (função auxiliar seria útil aqui)
+        popup_comp->adicionar<elementos::botao>([this]() { projeto_atual->obterFaseAtual()->obterRegistro()->adicionar<codigo>(entidade_atual); }, "codigo", "Codigo.png")->m_estilo = e;
+        popup_comp->adicionar<elementos::botao>([this]() { projeto_atual->obterFaseAtual()->obterRegistro()->adicionar<camera>(entidade_atual); }, "camera", "Camera.png")->m_estilo = e;
+        popup_comp->adicionar<elementos::botao>([this]() { projeto_atual->obterFaseAtual()->obterRegistro()->adicionar<terreno>(entidade_atual); }, "terreno", "Terreno.png")->m_estilo = e;
+        popup_comp->adicionar<elementos::botao>([this]() { projeto_atual->obterFaseAtual()->obterRegistro()->adicionar<fisica>(entidade_atual); }, "fisica", "Fisica.png")->m_estilo = e;
+        popup_comp->adicionar<elementos::botao>([this]() { projeto_atual->obterFaseAtual()->obterRegistro()->adicionar<renderizador>(entidade_atual); }, "renderizador", "Renderizador.png")->m_estilo = e;
+
+        if (!reg->entidades.empty() && reg->entidades.count(entidade_atual)) {
+            for (auto& [mask, comp_ptr] : reg->entidades[entidade_atual]) {
+                auto nome_comp = componente::mapa_nomes_componentes[mask];
+                auto* comp_btn = c_inspetor->adicionar<elementos::botao>(nullptr, nome_comp, nome_comp + ".png");
+                comp_btn->m_estilo.m_flag_estilo |= flag_estilo::quebrar_linha;
+                auto* comp_pop = comp_btn->adicionar<elementos::popup>();
+                pop_ups[nome_comp] = comp_pop;
+
+                comp_pop->m_estilo.m_orientacao_modular = estilo::orientacao::horizontal;
+                if (nome_comp == "Transformacao") {
+                    auto tr_ptr = reg->obter<transformacao>(entidade_atual);
+                    if (tr_ptr) {
+                        comp_pop->adicionar<elementos::texto>("posicao");
+                        comp_pop->adicionar<elementos::caixa_de_texto>("x", &tr_ptr->posicao.x);
+                        comp_pop->adicionar<elementos::caixa_de_texto>("y", &tr_ptr->posicao.y);
+                        comp_pop->adicionar<elementos::caixa_de_texto>("z", &tr_ptr->posicao.z)->m_estilo.m_flag_estilo |= flag_estilo::quebrar_linha;
+                        comp_pop->adicionar<elementos::texto>("rotacao");
+                        comp_pop->adicionar<elementos::caixa_de_texto>("x", &tr_ptr->rotacao.x);
+                        comp_pop->adicionar<elementos::caixa_de_texto>("y", &tr_ptr->rotacao.y);
+                        comp_pop->adicionar<elementos::caixa_de_texto>("z", &tr_ptr->rotacao.z)->m_estilo.m_flag_estilo |= flag_estilo::quebrar_linha;
+                        comp_pop->adicionar<elementos::texto>("escala");
+                        comp_pop->adicionar<elementos::caixa_de_texto>("x", &tr_ptr->escala.x);
+                        comp_pop->adicionar<elementos::caixa_de_texto>("y", &tr_ptr->escala.y);
+                        comp_pop->adicionar<elementos::caixa_de_texto>("z", &tr_ptr->escala.z)->m_estilo.m_flag_estilo |= flag_estilo::quebrar_linha;
+                    }
+                }
+                else if (nome_comp == "Camera") {
+                    auto cam_ptr = reg->obter<camera>(entidade_atual);
+                    if (cam_ptr) {
+                        comp_pop->m_estilo.m_orientacao_modular = estilo::orientacao::vertical;
+                        comp_pop->adicionar<elementos::texto>("foco de visao")                          ;
+                        comp_pop->adicionar<elementos::caixa_de_texto>("...", &cam_ptr->fov)            ;
+                        comp_pop->adicionar<elementos::texto>("corte proximo")                          ;
+                        comp_pop->adicionar<elementos::caixa_de_texto>("...", &cam_ptr->corte_curto)    ;
+                        comp_pop->adicionar<elementos::texto>("corte distante")                         ;
+                        comp_pop->adicionar<elementos::caixa_de_texto>("...", &cam_ptr->corte_longo)    ;
+                        comp_pop->adicionar<elementos::texto>("escala ortografica")                     ;
+                        comp_pop->adicionar<elementos::caixa_de_texto>("...", &cam_ptr->escala)         ;
+                        comp_pop->adicionar<elementos::botao>(&cam_ptr->m_use_skybox, "usar skybox", "Camera.png");
+                        comp_pop->adicionar<elementos::botao>(&cam_ptr->flag_orth, "ortografica", "Camera.png");
+                    }
+                }
+            }
+        }
+        num_componentes_anterior = current_entity_component_count;
+        entidade_anterior = entidade_atual;
+    }
+
+    // 4. Posicionar os ícones das entidades no viewport (sempre atualizado, mesmo se não houver adição/remoção)
+    for (auto& [id, img] : icones_entidades) {
+        auto tr_ptr = reg->obter<transformacao>(id);
+        if (tr_ptr) { // Garante que a transformação ainda existe
+            auto vet = cam.mundoParaTela(tr_ptr->posicao);
+            img->m_estilo.m_limites.x = vet.x - img->m_estilo.m_limites.z / 2;
+            img->m_estilo.m_limites.y = vet.y - img->m_estilo.m_limites.w / 2;
+            img->m_estilo.m_ativo = (vet.z >= 0); // Ativa/desativa baseado na profundidade
+        } else {
+            // Este caso só deve acontecer se houver um bug onde o icone_entidades não foi limpo.
+            // Para robustez, podemos desativar o ícone ou removê-lo aqui também.
+            img->m_estilo.m_ativo = false; 
+        }
+    }
+}
 /**
  * @brief Atualiza o estado do editor em cada frame.
  * Gerencia inputs, atualiza as caixas da UI, sincroniza a lista de entidades
  * e posiciona os ícones de entidades no viewport.
  */
+
 void sistema_editor::atualizar() {
     chamarInputs();
 
-    // Atualiza a exibição de entidades no painel e no viewport.
-    // Verifica se o número de entidades mudou para reconstruir a lista e os ícones.
-    size_t num_entidades_atual = projeto_atual->obterFaseAtual()->obterRegistro()->entidades.size();
-    if (num_entidades_atual != num_entidades_anterior) {
-        auto reg = projeto_atual->obterFaseAtual()->obterRegistro();
-        // Define a entidade atual; se não houver entidades, define como 0.
-        entidade_atual = reg->entidades.empty() ? 0 : projeto_atual->obterFaseAtual()->obterRegistro()->entidades.empty() ? 0 : reg->entidades.rbegin()->first;
-        num_entidades_anterior = num_entidades_atual; // Atualiza a referência para a próxima verificação
+    atualizarGizmo();
 
-        c_entidades->m_filhos.clear(); // Limpa os botões de entidades existentes
-        framebuffer->m_filhos.clear(); // Limpa os ícones de entidades existentes
-        icones.clear(); // Limpa o mapa de ícones
-
-        // Recria os botões e ícones para cada entidade
-        for (auto& [id, comps] : reg->entidades) {
-            c_entidades->adicionar<elementos::botao>([this, id]() {
-                entidade_atual = id; // Define a entidade selecionada ao clicar no botão
-            }, std::make_unique<elementos::imagem>("cube.png", false, 0.2f));
-
-            // Adiciona o ícone da entidade no framebuffer do editor
-            auto nome_comp = componente::mapa_nomes_componentes[comps.begin()->first];
-            elementos::imagem* img = framebuffer->adicionar<elementos::imagem>(nome_comp+".png", false, 2);
-            icones[&reg->obter<transformacao>(id)->posicao] = img; // Associa o ícone à posição da transformação da entidade
-        }
-    }
-    // Verifica se a entidade atual mudou (para futuras atualizações do inspetor)
-    if (entidade_anterior != entidade_atual) {
-        entidade_anterior = entidade_atual;
-        // Lógica para atualizar o inspetor com base na 'entidade_atual' pode ser adicionada aqui
-    }
-    // Posiciona os ícones das entidades no viewport com base nas suas posições 3D e na câmera
-    for (auto& [pos, img] : icones) {
-        auto vet = cam.mundoParaTela(*pos); // Converte a posição 3D para coordenadas de tela
-        img->m_estilo.m_limites.x = vet.x - img->m_estilo.m_limites.z/2; // Centraliza X
-        img->m_estilo.m_limites.y = vet.y - img->m_estilo.m_limites.w/2; // Centraliza Y
-        // Ativa/desativa o ícone se ele estiver fora da tela (atrás da câmera)
-        if(vet.z < 0)
-            img->m_estilo.m_ativo = false;
-        else
-            img->m_estilo.m_ativo = true;
-    }
     ui.atualizar(); // Atualiza a interface do usuário
 }
 

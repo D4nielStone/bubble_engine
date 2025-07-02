@@ -170,7 +170,7 @@ void projeto::criarJanela(rapidjson::Document& doc) {
     std::string icon_path = doc["janela"].GetObject()["icone"].GetString();
 
     // Cria uma instância global de janela.
-    janela::gerarInstancia(nome_janela, true,
+    janela::gerarInstancia(nome_janela, false,
      fvet2(doc["janela"].GetObject()["largura"].GetInt(), doc["janela"].GetObject()["altura"].GetInt()),
     (diretorioDoProjeto + "/" + icon_path).c_str());
 

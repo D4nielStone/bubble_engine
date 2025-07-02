@@ -34,8 +34,7 @@ namespace BECOMMONS_NS {
     struct luz_direcional : public componente
     {
         fvet3 direcao, ambiente, cor; float intensidade = 1.f;
-        luz_direcional() = default;
-        explicit  luz_direcional(fvet3 direcao, fvet3 ambiente, fvet3 cor, float intensidade) :
+        explicit  luz_direcional(fvet3 direcao = {-1.f, -1.f, -1.f}, fvet3 ambiente = {0.1f, 0.1f, 0.1f}, fvet3 cor = {1.f, 1.f, 1.f}, float intensidade = 1.f) :
         direcao(direcao), ambiente(ambiente), cor(cor), intensidade(intensidade){}
         bool serializar(rapidjson::Value& value, rapidjson::Document::AllocatorType& allocator) const override;
         bool analizar(const rapidjson::Value& value) override;

@@ -194,6 +194,18 @@ namespace BECOMMONS_NS {
             m_filhos.push_back(std::move(nova_caixa));
             return ptr;
         }
+        bool remover(caixa* alvo) {
+            auto it = std::remove_if(m_filhos.begin(), m_filhos.end(),
+                [alvo](const std::unique_ptr<caixa>& ptr) {
+                    return ptr.get() == alvo;
+                });
+                
+            if (it != m_filhos.end()) {
+                m_filhos.erase(it, m_filhos.end());
+                return true;
+            }
+            return false;
+        }
         virtual void configurar() {
         };
         virtual void atualizar() {

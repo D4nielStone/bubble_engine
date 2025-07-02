@@ -123,7 +123,6 @@ void interface::desenhar(caixa* c) {
     if(c) {
     c->m_projecao = projecao_viewport;
     c->desenhar(VAO);
-
     for(auto& filho : c->m_filhos)
     {
         if (filho->tipo() == tipo_caixa::popup && filho->m_estilo.m_ativo) {
@@ -145,6 +144,9 @@ interface::interface() {
 void interface::inicializar() {
     sistema::inicializar();
     gerarBuffers();
+    atualizarHDTF(m_raiz.get(), [](caixa* it_caixa) {
+            it_caixa->configurar();
+            }); 
 }
 
 interface::~interface() {
@@ -251,11 +253,19 @@ void interface::atualizar() {
     atualizarHDTF(m_raiz.get(), atualizarAJ); 
     atualizarFilhos(m_raiz.get());
     desenhar(m_raiz.get());
+    glEnable(GL_SCISSOR_TEST);
     for(auto& filho : pos_render) {
-        if(filho->m_estilo.m_ativo)
+        if(filho->m_estilo.m_ativo) {
+        glScissor(
+            filho->m_estilo.m_limites.x,
+            janela::obterTamanhoJanela().y - filho->m_estilo.m_limites.y - filho->m_estilo.m_limites.w,
+            filho->m_estilo.m_limites.z+1,
+            filho->m_estilo.m_limites.w+1
+        );
         desenhar(filho);
+        }
     }
-
+    glDisable(GL_SCISSOR_TEST);
     deconfigOpenglState();
 }
 

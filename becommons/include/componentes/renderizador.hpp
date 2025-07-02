@@ -56,7 +56,7 @@ namespace BECOMMONS_NS {
             return true;
         };
         
-		renderizador(const char* m_diretorio ) : m_modelo(new modelo(m_diretorio)) {};
+		renderizador(const char* m_diretorio = "/cubo") : m_modelo(new modelo(m_diretorio)) {};
 		~renderizador()
 		{
 			for(auto& malha : m_modelo->malhas)
@@ -65,6 +65,5 @@ namespace BECOMMONS_NS {
 			}
 			delete m_modelo;
 		}
-        renderizador() = default;
 	};
 }

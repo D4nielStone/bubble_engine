@@ -43,12 +43,15 @@ namespace BECOMMONS_NS{
             }
             botao(const std::function<void()> &fctn, std::unique_ptr<imagem> m_imagem)   : area_de_toque(fctn) {
                 m_filhos.push_back(std::move(m_imagem));
+                old_fundo_alpha = m_estilo.m_cor_fundo.a;
             }
             botao(bool* ptr, std::unique_ptr<imagem> m_imagem)                           : area_de_toque(ptr) {
                 m_filhos.push_back(std::move(m_imagem));
+                old_fundo_alpha = m_estilo.m_cor_fundo.a;
             }
             botao(bool* ptr, std::unique_ptr<texto> m_texto)                           : area_de_toque(ptr) {
                 m_filhos.push_back(std::move(m_texto));
+                old_fundo_alpha = m_estilo.m_cor_fundo.a;
             }
             /// @}
             /// @name Construtores de texto simplificado
@@ -56,10 +59,12 @@ namespace BECOMMONS_NS{
             botao(const std::function<void()> &fctn, const std::string& txt) : area_de_toque(fctn) {
                 auto m_texto = std::make_unique<texto>(txt);
                 m_filhos.push_back(std::move(m_texto));
+                old_fundo_alpha = m_estilo.m_cor_fundo.a;
             }
             botao(bool* ptr, const std::string& txt) : area_de_toque(ptr) {
                 auto m_texto = std::make_unique<texto>(txt);
                 m_filhos.push_back(std::move(m_texto));
+                old_fundo_alpha = m_estilo.m_cor_fundo.a;
             }
             botao(bool* ptr, const std::string& txt, const std::string img, const unsigned int size = 20) : area_de_toque(ptr) {
                 auto m_texto = std::make_unique<texto>(txt);
@@ -68,6 +73,7 @@ namespace BECOMMONS_NS{
                 m_imagem->m_estilo.m_largura = size;
                 m_filhos.push_back(std::move(m_imagem));
                 m_filhos.push_back(std::move(m_texto));
+                old_fundo_alpha = m_estilo.m_cor_fundo.a;
             }
             botao(const std::function<void()> &fctn, const std::string& txt, const std::string img, const unsigned int size = 20) : area_de_toque(fctn) {
                 auto m_texto = std::make_unique<texto>(txt);
@@ -79,14 +85,13 @@ namespace BECOMMONS_NS{
                 
                 m_filhos.push_back(std::move(m_imagem));
                 m_filhos.push_back(std::move(m_texto));
+                old_fundo_alpha = m_estilo.m_cor_fundo.a;
             }
             /// @}
             ~botao() {
             }
-            bool pressionado() override {
-                m_pressionado = area_de_toque::pressionado();
-                m_estilo.m_cor_borda.a = pode_click && m_mouse_cima ? 1.f : 0.1f;
-                return m_pressionado;
+            void atualizar() override {
+                m_estilo.m_cor_borda.a = pode_click && mouseEmCima() ? old_fundo_alpha : old_fundo_alpha*0.1f;
             }
             void configurar() override {
                 m_estilo.m_flag_estilo |= tem(flag_estilo::largura_percentual) ? flag_estilo::modular : flag_estilo::largura_justa | flag_estilo::altura_justa | flag_estilo::modular;

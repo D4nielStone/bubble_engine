@@ -28,7 +28,6 @@
 #include "componentes/renderizador.hpp"
 #include "componentes/transformacao.hpp"
 #include "componentes/terreno.hpp"
-#include "componentes/texto.hpp"
 #include "componentes/codigo.hpp"
 #include "sistemas/sistema_de_fisica.hpp"
 #include "os/janela.hpp"

@@ -36,6 +36,7 @@ namespace EDITOR_NS {
         // \brief funcoes
         void inicializar() override;
         void atualizar() override;
+        void atualizarGizmo();
         void adicionarCaixas();
         void chamarInputs();
         void salvarEditor();
@@ -50,7 +51,10 @@ namespace EDITOR_NS {
         becommons::camera_editor cam;
         becommons::interface ui;
         bool m_salvar_ao_fechar;
+        size_t num_entidades_atual = 0;
+        size_t num_componentes_atual = 0;
         size_t num_entidades_anterior = 0;
+        size_t num_componentes_anterior = 0;
         size_t entidade_anterior = 0;
         size_t entidade_atual = 1;
 };

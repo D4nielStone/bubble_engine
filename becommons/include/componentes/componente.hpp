@@ -48,19 +48,16 @@ namespace BECOMMONS_NS {
 		// @brief facilita a identificacao dos componentes pertencentes a uma entidade
 		//
 		enum mascara : uint32_t {
-			COMPONENTE_NONE = 0,
-			COMPONENTE_CAM = 1 << 0,
-			COMPONENTE_RENDER = 1 << 1,
-			COMPONENTE_PROPRIEDADES = 1 << 2,
-			COMPONENTE_TRANSFORMACAO = 1 << 3,
-			COMPONENTE_TEXTO = 1 << 4,
-			COMPONENTE_CODIGO = 1 << 5,
-			COMPONENTE_IMAGEM = 1 << 6,
-			COMPONENTE_FISICA = 1 << 7,
-			COMPONENTE_LUZ_PONTUAL = 1 << 8,
-			COMPONENTE_LUZ_DIRECIONAL = 1 << 9,
-			COMPONENTE_LUZ_HOLOFOTE = 1 << 10,
-			COMPONENTE_TERRENO = 1 << 11
+			COMPONENTE_CAM =            1 << 9,
+			COMPONENTE_FISICA =         1 << 8,
+			COMPONENTE_RENDER =         1 << 7,
+			COMPONENTE_CODIGO =         1 << 6,
+			COMPONENTE_LUZ_PONTUAL =    1 << 5,
+			COMPONENTE_LUZ_HOLOFOTE =   1 << 4,
+			COMPONENTE_LUZ_DIRECIONAL = 1 << 3,
+			COMPONENTE_TERRENO =        1 << 2,
+			COMPONENTE_TRANSFORMACAO =  1 << 1,
+			COMPONENTE_NONE =                0
 		};
 		//  Mapeamento de nomes e mascara
         inline static std::unordered_map<mascara, std::string> mapa_nomes_componentes = {

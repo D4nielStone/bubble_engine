@@ -44,6 +44,7 @@ namespace BECOMMONS_NS {
                 caixa_de_texto(const std::string& etiqueta, std::string* buffer) : m_etiqueta(etiqueta), area_de_texto(buffer) {};
                 caixa_de_texto(const std::string& etiqueta, float* f_ptr) : m_etiqueta(etiqueta), area_de_texto(f_ptr) {};
                 void configurar() override {
+                    m_filhos.clear();
                     m_estilo.m_padding_geral = { 5, 2 };
                     m_estilo.m_flag_estilo |= flag_estilo::modular;
                     m_borda_antiga = m_estilo.m_espessura_borda;
@@ -54,6 +55,7 @@ namespace BECOMMONS_NS {
                         m_texto_ptr->m_texto_flags |= flags_texto::alinhamento_central;
                     if(tem(flag_estilo::alinhamento_fim))
                         m_texto_ptr->m_texto_flags |= flags_texto::alinhamento_fim;
+                    if(!tem(flag_estilo::largura_percentual)) m_estilo.m_flag_estilo |= flag_estilo::largura_justa;
                 };
                 void atualizar() {
                     // estilo

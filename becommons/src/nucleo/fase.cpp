@@ -48,7 +48,7 @@ SOFTWARE.
 using namespace rapidjson;
 using namespace BECOMMONS_NS;
 
-fase::fase() : m_nome("")
+fase::fase() : m_nome(""), luz_global(std::make_shared<luz_direcional>())
 {
 }
 
@@ -86,7 +86,7 @@ fase::fase(const char* diretorio) : luz_global(std::make_shared<luz_direcional>(
 	
 }
 
-fase::fase(const std::string& diretorio) : diretorio(diretorio)
+fase::fase(const std::string& diretorio) : luz_global(std::make_shared<luz_direcional>()), diretorio(diretorio)
 {
 	
 }
@@ -135,6 +135,8 @@ void fase::analizarEntidades(const Document& doc)
 
 	// Cria entidade
 	uint32_t id = 0;
+	if(doc.HasMember("luz global") && doc["luz global"].IsObject())
+        luz_global->analizar(doc["luz global"]);
 	for (auto& entidade : doc["entidades"].GetArray())
 	{
 		if(entidade.HasMember("id") && entidade["id"].IsInt())
@@ -197,15 +199,6 @@ void fase::analizarEntidades(const Document& doc)
                     return;
                 }
             }
-            else if (tipo_str == "luz_direcional") {
-			    reg.adicionar<luz_direcional>(ent);
-			    luz_global = reg.obter<luz_direcional>(ent.id);
-                
-                if(!luz_global->analizar(componente)) {
-                    depuracao::emitir(erro, "fase", "Problemas analizando luz direcional");
-                    return;
-                }
-            }
             else if (tipo_str == "terreno") {
 			    reg.adicionar<terreno>(ent);
 			    auto trr = reg.obter<terreno>(ent.id);
@@ -229,6 +222,8 @@ void fase::serializar(const std::string& diretorio)
 
     // Array de entidades
     Value entidades_v(kArrayType);
+    Value lg_v(kObjectType);
+    luz_global->serializar(lg_v, allocator);
 
     for (auto& [id, componentes] : reg.entidades)
     {
@@ -261,6 +256,7 @@ void fase::serializar(const std::string& diretorio)
         entidades_v.PushBack(entidade_v, allocator);
     }
 
+    doc.AddMember("luz global", lg_v, allocator);
     doc.AddMember("entidades", entidades_v, allocator);
 
     // Escrevendo no arquivo

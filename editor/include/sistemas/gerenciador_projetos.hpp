@@ -19,7 +19,7 @@ namespace EDITOR_NS
             void buscarProjetos();
             void abrirProjeto(const std::string&);
             void removerProjeto(const std::string&);
-            void criarProjetoPadrao(const std::string& novo_diretorio, const char* nome);
+            void criarProjeto(const std::string& novo_diretorio, const char* nome, const bool padrao = false);
             void iniciar();
         private:
             std::map<std::string, std::string> projetos;

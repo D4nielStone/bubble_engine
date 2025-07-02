@@ -382,23 +382,18 @@ void testarRegistro()
         testes.adicionar("iteracao_com_multiplos_componentes", []() {
             becommons::registro reg;
             
-            // cria combinações de entidades
-            auto e1 = reg.criar();
-            auto e2 = reg.criar();
-            auto e3 = reg.criar();
+            reg.adicionar<CompA>(1);
+            reg.adicionar<CompB>(1);  // tem ambos
             
-            reg.adicionar<CompA>(e1);
-            reg.adicionar<CompB>(e1);  // tem ambos
+            reg.adicionar<CompA>(2);   // apenas CompA
             
-            reg.adicionar<CompA>(e2);   // apenas CompA
-            
-            reg.adicionar<CompB>(e3);   // apenas CompB
+            reg.adicionar<CompB>(3);   // apenas CompB
         
             // testa iterações para entidades com ambos
             int count = 0;
             reg.cada<CompA, CompB>([&](uint32_t entity) {
                 count++;
-                ASSERT_EQUAL(entity, e1.id);
+                ASSERT_EQUAL(entity, 1);
             });
             ASSERT_EQUAL(count, 1);
         });
@@ -430,19 +425,18 @@ void testarRegistro()
         
         testes.adicionar("multiplos_componentes_mascara", []() {
             becommons::registro reg;
-            auto e = reg.criar();
         
-            reg.adicionar<CompA>(e);
-            reg.adicionar<CompB>(e);
-            reg.remover<becommons::transformacao>(e.id);
+            reg.remover<becommons::transformacao>(1);
+            reg.adicionar<CompA>(1);
+            reg.adicionar<CompB>(1);
 
-            ASSERT_EQUAL(reg.obterComponentes(e.id), (CompA::mascara | CompB::mascara));
+            ASSERT_EQUAL(reg.obterComponentes(1), (CompA::mascara | CompB::mascara));
         
-            reg.remover<CompA>(e.id);
-            ASSERT_EQUAL(reg.obterComponentes(e.id), CompB::mascara);
+            reg.remover<CompA>(1);
+            ASSERT_EQUAL(reg.obterComponentes(1), CompB::mascara);
         
-            reg.adicionar<CompA>(e);
-            ASSERT_EQUAL(reg.obterComponentes(e.id), (CompA::mascara | CompB::mascara));
+            reg.adicionar<CompA>(1);
+            ASSERT_EQUAL(reg.obterComponentes(1), (CompA::mascara | CompB::mascara));
         });
 }
 

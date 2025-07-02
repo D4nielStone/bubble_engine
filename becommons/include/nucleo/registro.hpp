@@ -48,7 +48,7 @@ namespace BECOMMONS_NS {
 		/// Armazena mascara da entidade associada
 		std::unordered_map<uint32_t, componente::mascara> mascaras;
 		/// Armazena componentes da entidade associada
-		std::map<uint32_t, std::unordered_map<componente::mascara, std::shared_ptr<componente>>> entidades;
+		std::map<uint32_t, std::map<componente::mascara, std::shared_ptr<componente>>> entidades;
 		/* Cria nova entidade */
 		entidade criar(const uint32_t id = 0);
 		/* Retorna todos os componentes da entidade */

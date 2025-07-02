@@ -37,39 +37,29 @@ gerenciador_projetos::gerenciador_projetos(const std::string& dir) : DIR_PADRAO(
 }
 
 /**
- * @brief Cria um novo projeto padrão com uma estrutura inicial de entidades.
+ * @brief Cria um novo projeto com uma estrutura inicial.
  * Este método gera o diretório do projeto, um arquivo de configuração `config.json`,
  * uma fase padrão `main.fase` com entidades predefinidas (luz, plano, cubo com script)
  * e um script Lua de exemplo.
  *
  * @param novo_diretorio O diretório pai onde o novo projeto será criado.
  * @param nome O nome do novo projeto.
+ * @param padrao Flag para criar estrutura padrão.
  */
-void gerenciador_projetos::criarProjetoPadrao(const std::string& novo_diretorio, const char* nome) {
+void gerenciador_projetos::criarProjeto(const std::string& novo_diretorio, const char* nome, const bool padrao) {
     // String JSON que define a fase inicial do projeto com entidades predefinidas.
     // Inclui uma luz direcional, um plano (cubo escalado) e um cubo com um script de rotação.
-    auto fase_string = R"({
+    auto fase_string = 
+    R"({
+    "nome": "FaseMain",
+    "entidades":
+    []
+    })";
+    if(padrao) fase_string =
+    R"({
     "nome": "FaseMain",
     "entidades":
     [
-        {
-            "id": 1,
-            "componentes":[
-                {
-                    "tipo": "transformacao",
-                    "posicao": [0, 5, 15],
-                    "rotacao": [0,0,0],
-                    "escala": [1, 1, 1]
-                },
-                {
-                    "tipo": "luz_direcional",
-                    "direcao": [-0.25, -0.75, 1],
-                    "cor": [1, 1, 1],
-                    "ambiente": [0.1, 0.1, 0.1],
-                    "intensidade": 1.0
-                }
-            ]
-        },
         {
             "id": 2,
             "componentes":[
@@ -143,10 +133,10 @@ end)";
 
     // Adiciona as propriedades da janela ao JSON de configuração.
     rapidjson::Value _janela(rapidjson::kObjectType);
-    _janela.AddMember("largura", 800, allocator);
-    _janela.AddMember("altura",  460, allocator);
+    _janela.AddMember("largura", 440, allocator);
+    _janela.AddMember("altura",  440, allocator);
     _janela.AddMember("titulo",  rapidjson::Value(nome, allocator), allocator);
-    _janela.AddMember("icone",   rapidjson::Value("icon.ico", allocator), allocator);
+    _janela.AddMember("icone",   rapidjson::Value("scene.png", allocator), allocator);
 
     // Adiciona as propriedades gerais do projeto ao JSON de configuração.
     newDoc.AddMember("nome", rapidjson::Value(nome, allocator), allocator);
@@ -228,7 +218,7 @@ void gerenciador_projetos::abrirProjeto(const std::string& caminho) {
 
     // Define o título da janela para indicar que o editor está ativo e qual projeto está aberto.
     janela::obterInstancia().nome(
-        (std::string("editor | Daniel O. dos Santos© Bubble 2025 | ")
+        (std::string("Bubble::Editor © 2025 - projeto::")
         + janela::obterInstancia().nome()).c_str());
 
     // Inicia o main loop do projeto/editor.
@@ -262,7 +252,7 @@ void gerenciador_projetos::configurarUI() {
     area_maior->m_estilo.m_largura = 1;
     area_maior->m_estilo.m_orientacao_modular = estilo::orientacao::vertical;
     area_maior->m_estilo.m_cor_fundo = cor(0.21, 0.21, 0.21, 1);
-
+    
     // Seção superior da área principal, exibindo o projeto selecionado.
     auto* cima = area_maior->adicionar<caixa>();
     cima->m_estilo.m_flag_estilo |= flag_estilo::largura_percentual | flag_estilo::altura_justa;
@@ -289,15 +279,18 @@ void gerenciador_projetos::configurarUI() {
 
     // Estilo padrão para os botões de ação.
     estilo e;
-    e.m_flag_estilo |= flag_estilo::largura_percentual | flag_estilo::quebrar_linha;
-    e.m_cor_borda = cor(0.3f);
-    e.m_largura = 1;
+    e.m_flag_estilo |= flag_estilo::quebrar_linha;
+    e.m_cor_borda = cor(0.2f);
+    e.m_largura = 100;
     e.m_padding_geral = {5, 0};
 
     // Botões para adicionar, abrir e remover projetos.
     meio->adicionar<elementos::botao>([this]() {
-            if (!buffer_projeto.empty()) criarProjetoPadrao(DIR_PADRAO, buffer_projeto.c_str());
-        }, "adicionar", "adicionar.png")->m_estilo = e;
+            if (!buffer_projeto.empty()) criarProjeto(DIR_PADRAO, buffer_projeto.c_str(), true);
+        }, "criar projeto padrao", "scene.png")->m_estilo = e;
+    meio->adicionar<elementos::botao>([this]() {
+            if (!buffer_projeto.empty()) criarProjeto(DIR_PADRAO, buffer_projeto.c_str(), false);
+        }, "criar projeto vazio", "adicionar.png")->m_estilo = e;
     meio->adicionar<elementos::botao>([this]() {
             if(m_projeto_selecionado != "nenhum") {
                 abrirProjeto(projetos[m_projeto_selecionado]);
@@ -330,10 +323,10 @@ void gerenciador_projetos::iniciar() {
         }
     }
     // Gera a instância da janela para o gerenciador de projetos.
-    janela::gerarInstancia("gerenciador de projetos | Daniel O. dos Santos© Bubble 2025", true);
+    janela::gerarInstancia("gerenciador de projetos | Daniel O. dos Santos© Bubble 2025", false, {440, 440}, "folder.png");
 
-    ui.inicializar(); // Inicializa o sistema de UI.
     configurarUI(); // Configura a interface gráfica do gerenciador.
+    ui.inicializar(); // Inicializa o sistema de UI.
 
     // Loop principal do gerenciador de projetos.
     // Continua executando enquanto a janela não for solicitada a fechar.
@@ -377,8 +370,8 @@ void gerenciador_projetos::buscarProjetos() {
                 m_projeto_selecionado = nome; // Define o projeto selecionado ao clicar.
                 }, nome, "joystick.png"); // Usa um ícone de joystick para projetos.
             btn->m_estilo.m_flag_estilo |= flag_estilo::largura_percentual | flag_estilo::quebrar_linha;
-            btn->m_estilo.m_cor_borda = cor(0.3f);
-            btn->m_estilo.m_largura = 1;
+            btn->m_estilo.m_cor_borda = cor(0.12f);
+            btn->m_estilo.m_largura = 2;
             btn->m_estilo.m_padding_geral = {5, 0};
         }
     }
