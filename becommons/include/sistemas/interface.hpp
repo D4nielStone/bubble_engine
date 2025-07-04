@@ -38,7 +38,7 @@
 #include "util/vetor4.hpp"
 
 namespace BECOMMONS_NS { 
-	static unsigned int VAO, VBO, EBO;
+	static GLuint VAO, VBO, EBO;
     struct interface : sistema {
         void desenhar(caixa*);
         static void atualizarLJ(caixa*);

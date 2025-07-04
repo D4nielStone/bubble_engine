@@ -133,8 +133,8 @@ end)";
 
     // Adiciona as propriedades da janela ao JSON de configuração.
     rapidjson::Value _janela(rapidjson::kObjectType);
-    _janela.AddMember("largura", 440, allocator);
-    _janela.AddMember("altura",  440, allocator);
+    _janela.AddMember("largura", 640, allocator);
+    _janela.AddMember("altura",  480, allocator);
     _janela.AddMember("titulo",  rapidjson::Value(nome, allocator), allocator);
     _janela.AddMember("icone",   rapidjson::Value("scene.png", allocator), allocator);
 
@@ -265,42 +265,41 @@ void gerenciador_projetos::configurarUI() {
 
     // Seção do meio da área principal, com controles para gerenciar projetos.
     auto* meio = area_maior->adicionar<caixa>();
-    meio->m_estilo.m_flag_estilo |= flag_estilo::largura_percentual | flag_estilo::altura_justa;
+    meio->m_estilo.m_flag_estilo |= flag_estilo::alinhamento_central | flag_estilo::largura_percentual | flag_estilo::altura_justa;
     meio->m_estilo.m_largura = 1;
     meio->m_estilo.m_padding_geral = ivet2(5, 5);
     meio->m_estilo.m_cor_fundo = cor(0.18f, 0.18f, 0.185f, 1.f);
 
-    // Caixa de texto para inserir o nome de um novo projeto.
-    auto* caixa_texto = meio->adicionar<elementos::caixa_de_texto>("Digite o nome do projeto aqui...", &buffer_projeto);
-    caixa_texto->m_estilo.m_flag_estilo |= flag_estilo::largura_percentual | flag_estilo::quebrar_linha;
-    caixa_texto->m_estilo.m_largura = 1;
-    caixa_texto->m_estilo.m_cor_fundo = cor(0.12f, 0.12f, 0.12f, 1.f);
-    caixa_texto->m_estilo.m_cor_borda = cor(0.1f, 0.1f, 0.1f, 1.f);
-
     // Estilo padrão para os botões de ação.
     estilo e;
-    e.m_flag_estilo |= flag_estilo::quebrar_linha;
-    e.m_cor_borda = cor(0.2f);
-    e.m_largura = 100;
     e.m_padding_geral = {5, 0};
 
     // Botões para adicionar, abrir e remover projetos.
-    meio->adicionar<elementos::botao>([this]() {
-            if (!buffer_projeto.empty()) criarProjeto(DIR_PADRAO, buffer_projeto.c_str(), true);
-        }, "criar projeto padrao", "scene.png")->m_estilo = e;
-    meio->adicionar<elementos::botao>([this]() {
+    auto* btn_add = meio->adicionar<elementos::botao>(nullptr, std::make_unique<elementos::imagem>("adicionar.png", false, 1));
+    auto* add_popup = btn_add->adicionar<elementos::popup>();
+
+    // Caixa de texto para inserir o nome de um novo projeto.
+    auto* caixa_texto = add_popup->adicionar<elementos::caixa_de_texto>("Digite o nome do projeto aqui...", &buffer_projeto);
+    caixa_texto->m_estilo.m_cor_fundo = cor(0.12f, 0.12f, 0.12f, 1.f);
+    caixa_texto->m_estilo.m_cor_borda = cor(0.1f, 0.1f, 0.1f, 1.f);
+    btn_add->m_estilo = e;
+    add_popup->adicionar<elementos::botao>([this]() {
             if (!buffer_projeto.empty()) criarProjeto(DIR_PADRAO, buffer_projeto.c_str(), false);
-        }, "criar projeto vazio", "adicionar.png")->m_estilo = e;
+        }, "Projeto Vazio");
+    add_popup->adicionar<elementos::botao>([this]() {
+            if (!buffer_projeto.empty()) criarProjeto(DIR_PADRAO, buffer_projeto.c_str(), true);
+        }, "Projeto Padrao");
+
     meio->adicionar<elementos::botao>([this]() {
             if(m_projeto_selecionado != "nenhum") {
                 abrirProjeto(projetos[m_projeto_selecionado]);
             }
-        }, "abrir", "abrir.png")->m_estilo = e;
+        }, std::make_unique<elementos::imagem>("abrir.png", false, 1))->m_estilo = e;
     meio->adicionar<elementos::botao>([this]() {
             if(m_projeto_selecionado != "nenhum") {
                 removerProjeto(projetos[m_projeto_selecionado]);
             }
-        }, "remover", "remover.png")->m_estilo = e;
+        }, std::make_unique<elementos::imagem>("remover.png", false, 1))->m_estilo = e;
 }
 
 /**
@@ -323,7 +322,7 @@ void gerenciador_projetos::iniciar() {
         }
     }
     // Gera a instância da janela para o gerenciador de projetos.
-    janela::gerarInstancia("gerenciador de projetos | Daniel O. dos Santos© Bubble 2025", false, {440, 440}, "folder.png");
+    janela::gerarInstancia("gerenciador de projetos | Daniel O. dos Santos© Bubble 2025", false, {640, 480}, "folder.png");
 
     configurarUI(); // Configura a interface gráfica do gerenciador.
     ui.inicializar(); // Inicializa o sistema de UI.
@@ -370,7 +369,7 @@ void gerenciador_projetos::buscarProjetos() {
                 m_projeto_selecionado = nome; // Define o projeto selecionado ao clicar.
                 }, nome, "joystick.png"); // Usa um ícone de joystick para projetos.
             btn->m_estilo.m_flag_estilo |= flag_estilo::largura_percentual | flag_estilo::quebrar_linha;
-            btn->m_estilo.m_cor_borda = cor(0.12f);
+            btn->m_estilo.m_cor_borda = cor(0.11f);
             btn->m_estilo.m_largura = 2;
             btn->m_estilo.m_padding_geral = {5, 0};
         }

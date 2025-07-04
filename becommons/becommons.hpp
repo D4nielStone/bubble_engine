@@ -41,6 +41,7 @@
 #include "depuracao/assert.hpp"
 #include "elementos/botao.hpp"
 #include "elementos/imagem.hpp"
+#include "elementos/popup.hpp"
 #include "elementos/caixa_de_texto.hpp"
 #include "elementos/texto.hpp"
 #include "entidades/entidade.hpp"
