@@ -223,6 +223,7 @@ void gerenciador_projetos::abrirProjeto(const std::string& caminho) {
 
     // Inicia o main loop do projeto/editor.
     editor.rodar();
+    delete e;
 }
 
 /**
@@ -251,17 +252,16 @@ void gerenciador_projetos::configurarUI() {
     area_maior->m_estilo.m_altura = 1;
     area_maior->m_estilo.m_largura = 1;
     area_maior->m_estilo.m_orientacao_modular = estilo::orientacao::vertical;
-    area_maior->m_estilo.m_cor_fundo = cor(0.21, 0.21, 0.21, 1);
+    area_maior->m_estilo.m_cor_fundo = cor(0.14);
     
     // Seção superior da área principal, exibindo o projeto selecionado.
     auto* cima = area_maior->adicionar<caixa>();
-    cima->m_estilo.m_flag_estilo |= flag_estilo::largura_percentual | flag_estilo::altura_justa;
+    cima->m_estilo.m_flag_estilo |= flag_estilo::largura_percentual | flag_estilo::alinhamento_central | flag_estilo::altura_justa;
     cima->m_estilo.m_largura = 1;
-    cima->m_estilo.m_cor_fundo = {0.1, 0.1, 0.1, 1};
+    cima->m_estilo.m_cor_fundo = cor(0.1f);
     cima->m_estilo.m_padding_geral = {5, 5};
-    cima->adicionar<elementos::texto>("[ Projeto Selecionado: ", cor(1.f), 25);
+    cima->adicionar<elementos::texto>("Projeto Selecionado: ", cor(1.f), 25);
     cima->adicionar<elementos::texto>(&m_projeto_selecionado, 25); // Exibe o nome do projeto selecionado.
-    cima->adicionar<elementos::texto>(" ]", cor(1.f), 25);
 
     // Seção do meio da área principal, com controles para gerenciar projetos.
     auto* meio = area_maior->adicionar<caixa>();

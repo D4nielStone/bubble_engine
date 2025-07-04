@@ -37,28 +37,16 @@ namespace BECOMMONS_NS {
         // @struct area_de_toque
         // Abstração para elementos sensíveis ao toque.
         // Exemplo: botao
-        inline bool area_detectada = false;
         class area_de_toque : public caixa {
             public:
             // Flags de ativação
-            bool m_gatilho = false, m_pressionado, m_mouse_cima { false }, m_arrastando, m_use_funcao{ false };
-            bool pode_click;
+            bool m_gatilho = false, m_pressionado, m_arrastando, m_use_funcao{ false };
             std::function<void()> m_funcao;
             bool* m_interruptor{nullptr};
             // Construtor padrão
             area_de_toque(const std::function<void()> &fctn) : m_funcao(fctn), m_use_funcao(true) {};
             area_de_toque(bool* ptr = nullptr) : m_interruptor(ptr), m_use_funcao(false) {};
             // Atualiza função de ativação
-            // @returns Se está presionado ou não
-            bool mouseEmCima() {
-                if(!m_estilo.m_ativo || !m_pai->m_estilo.m_ativo) return false;
-                // vetor2 do mouse
-                auto m = inputs::obterMousePos();
-                m_mouse_cima = (m.x > m_estilo.m_limites.x && m.x < m_estilo.m_limites.z + m_estilo.m_limites.x &&
-                   m.y > m_estilo.m_limites.y && m.y < m_estilo.m_limites.w + m_estilo.m_limites.y);
-                if(!area_detectada)area_detectada = m_mouse_cima;
-                return m_mouse_cima;
-            }
             virtual bool pressionado() {
                 // Reset do flag m_pressionado
                 m_pressionado = false;
@@ -66,13 +54,12 @@ namespace BECOMMONS_NS {
                 if(!inputs::obter(inputs::MOUSE_E))
                     m_gatilho = false;
 
-                pode_click = !area_detectada;
                 // Caso dentro do campo
-                if(mouseEmCima()) {
+                if(mouseEmCima() && s_contagem_areas <= 1) {
                     // Define cursor para mão
                     janela::obterInstancia().defCursor(janela::cursor::mao);
                     // Caso o gatilho esteja desativado e o mouse esquerdo tocado
-                    if(!m_gatilho && pode_click && inputs::obter(inputs::MOUSE_E)) {
+                    if(!m_gatilho && inputs::obter(inputs::MOUSE_E)) {
                         m_arrastando = true;
                         // Se m_interruptor é diferente de nullptr
                         if(m_interruptor) {
