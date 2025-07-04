@@ -257,11 +257,11 @@ void gerenciador_projetos::configurarUI() {
     auto* cima = area_maior->adicionar<caixa>();
     cima->m_estilo.m_flag_estilo |= flag_estilo::largura_percentual | flag_estilo::altura_justa;
     cima->m_estilo.m_largura = 1;
-    cima->m_estilo.m_altura = 80;
     cima->m_estilo.m_cor_fundo = {0.1, 0.1, 0.1, 1};
     cima->m_estilo.m_padding_geral = {5, 5};
-    cima->adicionar<elementos::texto>("Projetos Selecionado: ", cor(1.f), 20);
-    cima->adicionar<elementos::texto>(&m_projeto_selecionado); // Exibe o nome do projeto selecionado.
+    cima->adicionar<elementos::texto>("[ Projeto Selecionado: ", cor(1.f), 25);
+    cima->adicionar<elementos::texto>(&m_projeto_selecionado, 25); // Exibe o nome do projeto selecionado.
+    cima->adicionar<elementos::texto>(" ]", cor(1.f), 25);
 
     // Seção do meio da área principal, com controles para gerenciar projetos.
     auto* meio = area_maior->adicionar<caixa>();
@@ -270,36 +270,31 @@ void gerenciador_projetos::configurarUI() {
     meio->m_estilo.m_padding_geral = ivet2(5, 5);
     meio->m_estilo.m_cor_fundo = cor(0.18f, 0.18f, 0.185f, 1.f);
 
-    // Estilo padrão para os botões de ação.
-    estilo e;
-    e.m_padding_geral = {5, 0};
-
     // Botões para adicionar, abrir e remover projetos.
     auto* btn_add = meio->adicionar<elementos::botao>(nullptr, std::make_unique<elementos::imagem>("adicionar.png", false, 1));
     auto* add_popup = btn_add->adicionar<elementos::popup>();
 
     // Caixa de texto para inserir o nome de um novo projeto.
-    auto* caixa_texto = add_popup->adicionar<elementos::caixa_de_texto>("Digite o nome do projeto aqui...", &buffer_projeto);
-    caixa_texto->m_estilo.m_cor_fundo = cor(0.12f, 0.12f, 0.12f, 1.f);
-    caixa_texto->m_estilo.m_cor_borda = cor(0.1f, 0.1f, 0.1f, 1.f);
-    btn_add->m_estilo = e;
+    auto* caixa_texto = add_popup->adicionar<elementos::caixa_de_texto>("Nome do novo projeto", &buffer_projeto);
+    caixa_texto->m_estilo.m_cor_fundo = cor(0.14f);
+    caixa_texto->m_estilo.m_cor_borda = cor(0.12f);
     add_popup->adicionar<elementos::botao>([this]() {
             if (!buffer_projeto.empty()) criarProjeto(DIR_PADRAO, buffer_projeto.c_str(), false);
-        }, "Projeto Vazio");
+        }, "Projeto Vazio", "scene.png");
     add_popup->adicionar<elementos::botao>([this]() {
             if (!buffer_projeto.empty()) criarProjeto(DIR_PADRAO, buffer_projeto.c_str(), true);
-        }, "Projeto Padrao");
+        }, "Projeto Padrao", "Terreno.png");
 
     meio->adicionar<elementos::botao>([this]() {
             if(m_projeto_selecionado != "nenhum") {
                 abrirProjeto(projetos[m_projeto_selecionado]);
             }
-        }, std::make_unique<elementos::imagem>("abrir.png", false, 1))->m_estilo = e;
+        }, std::make_unique<elementos::imagem>("abrir.png", false, 1));
     meio->adicionar<elementos::botao>([this]() {
             if(m_projeto_selecionado != "nenhum") {
                 removerProjeto(projetos[m_projeto_selecionado]);
             }
-        }, std::make_unique<elementos::imagem>("remover.png", false, 1))->m_estilo = e;
+        }, std::make_unique<elementos::imagem>("remover.png", false, 1));
 }
 
 /**
