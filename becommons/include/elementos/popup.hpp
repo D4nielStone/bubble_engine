@@ -93,7 +93,7 @@ namespace BECOMMONS_NS {
                             }
                         }
                         // Garante que a última coluna seja contabilizada na largura total
-                        max_largura_total = std::max(max_largura_total, cursor_x + largura_coluna_atual);
+                        max_largura_total = std::max(max_largura_total + m_estilo.m_padding_geral.x, cursor_x + largura_coluna_atual + m_estilo.m_padding_geral.x);
              
                         // Atualiza os limites do container (ex: m_estilo.m_limites.z = max_largura_total)
              
@@ -113,12 +113,12 @@ namespace BECOMMONS_NS {
                                 altura_linha_atual = 0.f;
                             }
                         }
-                        max_altura_total = std::max(max_altura_total, cursor_y + altura_linha_atual);
+                        max_altura_total = std::max(max_altura_total + m_estilo.m_padding_geral.y, cursor_y + altura_linha_atual + m_estilo.m_padding_geral.y);
                     }
                     m_estilo.m_limites.z = std::lerp<float>(m_estilo.m_limites.z, max_largura_total, m_velocidade_lerp * dt);
-                    m_estilo.m_limites.x = std::lerp<float>(m_estilo.m_limites.x, x_antigo - m_estilo.m_limites.z/2, m_velocidade_lerp * dt);
+                    m_estilo.m_limites.x = std::lerp<float>(m_estilo.m_limites.x, x_antigo - m_estilo.m_limites.z + 20, m_velocidade_lerp * dt);
                     m_estilo.m_limites.w = std::lerp<float>(m_estilo.m_limites.w, max_altura_total, m_velocidade_lerp * dt);
-                    m_estilo.m_limites.y = std::lerp<float>(m_estilo.m_limites.y, y_antigo + 10, m_velocidade_lerp * dt);
+                    m_estilo.m_limites.y = std::lerp<float>(m_estilo.m_limites.y, y_antigo + 20, m_velocidade_lerp * dt);
                 } else {
                         // Desativado
                         m_estilo.m_limites = {m_referencia->m_estilo.m_limites.x, m_referencia->m_estilo.m_limites.y, 20, 20};

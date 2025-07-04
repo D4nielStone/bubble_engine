@@ -258,9 +258,9 @@ void interface::atualizar() {
         if(filho->m_estilo.m_ativo) {
         glScissor(
             filho->m_estilo.m_limites.x,
-            janela::obterTamanhoJanela().y - filho->m_estilo.m_limites.y - filho->m_estilo.m_limites.w,
-            filho->m_estilo.m_limites.z+1,
-            filho->m_estilo.m_limites.w+1
+            janela::obterTamanhoJanela().y - filho->m_estilo.m_limites.y - filho->m_estilo.m_limites.w + 1.f,
+            filho->m_estilo.m_limites.z + 1.f,
+            filho->m_estilo.m_limites.w
         );
         desenhar(filho);
         }
