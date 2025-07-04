@@ -138,10 +138,16 @@ void sistema_editor::adicionarCaixas() {
     // Interação especial da luz direcional
     auto lg = projeto_atual->obterFaseAtual()->luz_global;
     auto* popup = btn_luz->adicionar<elementos::popup>();
+
+    estilo estilo_ct;
+    estilo_ct.m_cor_fundo = cor(0.14f);
+    estilo_ct.m_cor_borda = cor(0.13f);
+    estilo_ct.m_flag_estilo |= flag_estilo::largura_justa;
+    estilo_ct.m_padding_geral.x = 5;
     popup->m_estilo.m_orientacao_modular = estilo::orientacao::horizontal;
-    popup->adicionar<elementos::caixa_de_texto>("x", &lg->direcao.x);
-    popup->adicionar<elementos::caixa_de_texto>("y", &lg->direcao.y);
-    popup->adicionar<elementos::caixa_de_texto>("z", &lg->direcao.z);
+    popup->adicionar<elementos::caixa_de_texto>("x", &lg->direcao.x)->m_estilo = estilo_ct;
+    popup->adicionar<elementos::caixa_de_texto>("y", &lg->direcao.y)->m_estilo = estilo_ct;
+    popup->adicionar<elementos::caixa_de_texto>("z", &lg->direcao.z)->m_estilo = estilo_ct;
 
     // Botão "Info" para abrir link de ajuda
     auto img1 = std::make_unique<elementos::imagem>("info.png");
@@ -444,6 +450,12 @@ void sistema_editor::atualizarGizmo() {
         popup_comp->adicionar<elementos::botao>([this]() { projeto_atual->obterFaseAtual()->obterRegistro()->adicionar<fisica>(entidade_atual); }, "fisica", "Fisica.png")->m_estilo = e;
         popup_comp->adicionar<elementos::botao>([this]() { projeto_atual->obterFaseAtual()->obterRegistro()->adicionar<renderizador>(entidade_atual); }, "renderizador", "Renderizador.png")->m_estilo = e;
 
+        estilo estilo_ct;
+        estilo_ct.m_cor_fundo = cor(0.14f);
+        estilo_ct.m_cor_borda = cor(0.13f);
+        estilo_ct.m_flag_estilo |= flag_estilo::largura_justa;
+        estilo_ct.m_padding_geral.x = 5;
+
         if (!reg->entidades.empty() && reg->entidades.count(entidade_atual)) {
             for (auto& [mask, comp_ptr] : reg->entidades[entidade_atual]) {
                 auto nome_comp = componente::mapa_nomes_componentes[mask];
@@ -457,17 +469,23 @@ void sistema_editor::atualizarGizmo() {
                     auto tr_ptr = reg->obter<transformacao>(entidade_atual);
                     if (tr_ptr) {
                         comp_pop->adicionar<elementos::texto>("posicao");
-                        comp_pop->adicionar<elementos::caixa_de_texto>("x", &tr_ptr->posicao.x);
-                        comp_pop->adicionar<elementos::caixa_de_texto>("y", &tr_ptr->posicao.y);
-                        comp_pop->adicionar<elementos::caixa_de_texto>("z", &tr_ptr->posicao.z)->m_estilo.m_flag_estilo |= flag_estilo::quebrar_linha;
+                        comp_pop->adicionar<elementos::caixa_de_texto>("x", &tr_ptr->posicao.x)->m_estilo = estilo_ct;
+                        comp_pop->adicionar<elementos::caixa_de_texto>("y", &tr_ptr->posicao.y)->m_estilo = estilo_ct;
+                        auto* z = comp_pop->adicionar<elementos::caixa_de_texto>("z", &tr_ptr->posicao.z);
+                        z->m_estilo = estilo_ct;
+                        z->m_estilo.m_flag_estilo |= flag_estilo::quebrar_linha;
                         comp_pop->adicionar<elementos::texto>("rotacao");
-                        comp_pop->adicionar<elementos::caixa_de_texto>("x", &tr_ptr->rotacao.x);
-                        comp_pop->adicionar<elementos::caixa_de_texto>("y", &tr_ptr->rotacao.y);
-                        comp_pop->adicionar<elementos::caixa_de_texto>("z", &tr_ptr->rotacao.z)->m_estilo.m_flag_estilo |= flag_estilo::quebrar_linha;
-                        comp_pop->adicionar<elementos::texto>("escala");
-                        comp_pop->adicionar<elementos::caixa_de_texto>("x", &tr_ptr->escala.x);
-                        comp_pop->adicionar<elementos::caixa_de_texto>("y", &tr_ptr->escala.y);
-                        comp_pop->adicionar<elementos::caixa_de_texto>("z", &tr_ptr->escala.z)->m_estilo.m_flag_estilo |= flag_estilo::quebrar_linha;
+                        comp_pop->adicionar<elementos::caixa_de_texto>("x", &tr_ptr->rotacao.x)->m_estilo = estilo_ct;
+                        comp_pop->adicionar<elementos::caixa_de_texto>("y", &tr_ptr->rotacao.y)->m_estilo = estilo_ct;
+                        auto* zi = comp_pop->adicionar<elementos::caixa_de_texto>("z", &tr_ptr->rotacao.z);
+                        zi->m_estilo = estilo_ct;
+                        zi->m_estilo.m_flag_estilo |= flag_estilo::quebrar_linha;
+                        comp_pop->adicionar<elementos::texto>("escala ");
+                        comp_pop->adicionar<elementos::caixa_de_texto>("x", &tr_ptr->escala.x)->m_estilo = estilo_ct;
+                        comp_pop->adicionar<elementos::caixa_de_texto>("y", &tr_ptr->escala.y)->m_estilo = estilo_ct;
+                        auto* zii = comp_pop->adicionar<elementos::caixa_de_texto>("z", &tr_ptr->escala.z);
+                        zii->m_estilo = estilo_ct;
+                        zii->m_estilo.m_flag_estilo |= flag_estilo::quebrar_linha;
                     }
                 }
                 else if (nome_comp == "Codigo") {

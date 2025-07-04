@@ -35,7 +35,7 @@ namespace BECOMMONS_NS {
                 botao* m_referencia {nullptr};
                 int x_antigo = 0;
                 int y_antigo = 0;
-                float m_velocidade_lerp = 10.f;
+                float m_velocidade_lerp = 13.f;
             public:
 
                 popup() {
@@ -52,9 +52,9 @@ namespace BECOMMONS_NS {
                 void atualizar() override {
                     if(!m_referencia) return;
                     float dt = janela::obterInstancia().m_tempo.obterDeltaTime();
-                    m_estilo.m_ativo = m_estilo.m_ativo ? m_referencia->mouseEmCima() || mouseEmCima() : m_referencia->pressionado();
-                    x_antigo = m_referencia->m_mouse_cima ? m_referencia->m_estilo.m_limites.x : x_antigo;
-                    y_antigo = m_referencia->m_mouse_cima ? m_referencia->m_estilo.m_limites.y : y_antigo;
+                    x_antigo = m_referencia->pressionado() ? inputs::obterMousePos().x : x_antigo;
+                    y_antigo = m_referencia->m_pressionado ? inputs::obterMousePos().y : y_antigo;
+                    m_estilo.m_ativo = m_estilo.m_ativo ? m_referencia->mouseEmCima() || mouseEmCima() : m_referencia->m_pressionado;
                     float mais_largo = 20.f, cursorx = 0.f;
                     float mais_alto = 20.f, cursory = 0.f;
                     cursorx = m_estilo.m_padding_geral.x;
@@ -93,7 +93,7 @@ namespace BECOMMONS_NS {
                             }
                         }
                         // Garante que a última coluna seja contabilizada na largura total
-                        max_largura_total = std::max(max_largura_total, cursor_x + largura_coluna_atual);
+                        max_largura_total = std::max(max_largura_total + m_estilo.m_padding_geral.x, cursor_x + largura_coluna_atual + m_estilo.m_padding_geral.x);
              
                         // Atualiza os limites do container (ex: m_estilo.m_limites.z = max_largura_total)
              
@@ -113,12 +113,19 @@ namespace BECOMMONS_NS {
                                 altura_linha_atual = 0.f;
                             }
                         }
-                        max_altura_total = std::max(max_altura_total, cursor_y + altura_linha_atual);
+                        max_altura_total = std::max(max_altura_total + m_estilo.m_padding_geral.y, cursor_y + altura_linha_atual + m_estilo.m_padding_geral.y);
                     }
-                    m_estilo.m_limites.z = std::lerp<float>(m_estilo.m_limites.z, max_largura_total, m_velocidade_lerp * dt);
-                    m_estilo.m_limites.x = std::lerp<float>(m_estilo.m_limites.x, x_antigo - m_estilo.m_limites.z/2, m_velocidade_lerp * dt);
-                    m_estilo.m_limites.w = std::lerp<float>(m_estilo.m_limites.w, max_altura_total, m_velocidade_lerp * dt);
-                    m_estilo.m_limites.y = std::lerp<float>(m_estilo.m_limites.y, y_antigo + 10, m_velocidade_lerp * dt);
+                    // Atualiza domenções
+                    m_estilo.m_limites.z = std::lerp(m_estilo.m_limites.z, max_largura_total, m_velocidade_lerp * dt);
+                    m_estilo.m_limites.w = std::lerp(m_estilo.m_limites.w, max_altura_total, m_velocidade_lerp * dt);
+
+                    bool pode_aparecer_direita = (x_antigo + m_estilo.m_limites.z) < janela::obterInstancia().tamanho.x;
+                    bool pode_aparecer_abaixo = (y_antigo + m_estilo.m_limites.w) < janela::obterInstancia().tamanho.y;
+
+                    float novo_x = pode_aparecer_direita ? x_antigo : x_antigo - m_estilo.m_limites.z;
+                    float novo_y = pode_aparecer_abaixo ? y_antigo : y_antigo - m_estilo.m_limites.w ;
+                    m_estilo.m_limites.x = std::lerp(m_estilo.m_limites.x, novo_x, m_velocidade_lerp * dt);
+                    m_estilo.m_limites.y = std::lerp(m_estilo.m_limites.y, novo_y, m_velocidade_lerp * dt);
                 } else {
                         // Desativado
                         m_estilo.m_limites = {m_referencia->m_estilo.m_limites.x, m_referencia->m_estilo.m_limites.y, 20, 20};

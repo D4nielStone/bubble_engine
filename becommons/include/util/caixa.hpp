@@ -35,6 +35,7 @@
 #include "vetor4.hpp"
 #include <glm/glm.hpp>
 #include "arquivadores/shader.hpp"
+#include "inputs/inputs.hpp"
 #include "becommons_namespace.hpp"
 
 namespace BECOMMONS_NS {
@@ -65,6 +66,8 @@ namespace BECOMMONS_NS {
         a = a | b;
         return a;
     }
+    // Flag para detecções de mouse
+	static unsigned int s_contagem_areas;
 
     struct estilo {
         // \enum estilo::orientacao
@@ -160,11 +163,11 @@ namespace BECOMMONS_NS {
             return static_cast<uint16_t>(m_estilo.m_flag_estilo & flag) != 0;
         }
 
-        bool m_novo_projecao;
+        bool m_novo_projecao, m_mouse_cima { false };
         glm::mat4 m_projecao;
         std::unique_ptr<shader> m_shader {nullptr};
         material m_material;
-        caixa* m_pai;
+        caixa* m_pai{nullptr};
         estilo m_estilo, m_estilo_antigo;
         std::vector<std::unique_ptr<caixa>> m_filhos;
         
@@ -210,6 +213,16 @@ namespace BECOMMONS_NS {
         };
         virtual void atualizar() {
         };
+        // @returns Se está presionado ou não
+        bool mouseEmCima() {
+            if(m_pai)
+            if(!m_estilo.m_ativo || !m_pai->m_estilo.m_ativo) return false;
+            // vetor2 do mouse
+            auto m = inputs::obterMousePos();
+            m_mouse_cima = (m.x > m_estilo.m_limites.x && m.x < m_estilo.m_limites.z + m_estilo.m_limites.x &&
+               m.y > m_estilo.m_limites.y && m.y < m_estilo.m_limites.w + m_estilo.m_limites.y);
+            return m_mouse_cima;
+        }
         virtual void desenhar(unsigned int ret_VAO) {
             if(!m_shader)m_shader = std::make_unique<shader>("imagem.vert", "quad.frag");
             m_material.usar(*m_shader);

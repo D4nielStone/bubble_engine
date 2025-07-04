@@ -246,7 +246,7 @@ void interface::atualizar() {
         static_cast<float>(janela::obterTamanhoJanela().y)};
 
     // reseta a flag de detecção de toque
-    elementos::area_detectada = false;
+    s_contagem_areas = 0;
 
     atualizarHDTF(m_raiz.get(), chamarFuncoes);
     atualizarHDTF(m_raiz.get(), atualizarLJ);
@@ -258,9 +258,9 @@ void interface::atualizar() {
         if(filho->m_estilo.m_ativo) {
         glScissor(
             filho->m_estilo.m_limites.x,
-            janela::obterTamanhoJanela().y - filho->m_estilo.m_limites.y - filho->m_estilo.m_limites.w,
-            filho->m_estilo.m_limites.z+1,
-            filho->m_estilo.m_limites.w+1
+            janela::obterTamanhoJanela().y - filho->m_estilo.m_limites.y - filho->m_estilo.m_limites.w + 1.f,
+            filho->m_estilo.m_limites.z + 1.f,
+            filho->m_estilo.m_limites.w
         );
         desenhar(filho);
         }
@@ -437,12 +437,14 @@ void interface::processarModular(caixa* it_caixa) {
 }
 
 void interface::chamarFuncoes(caixa* it_caixa) {
-    if (it_caixa->tipo() == tipo_caixa::popup || it_caixa->tipo() == tipo_caixa::caixa_de_texto)
+    if (it_caixa->tipo() == tipo_caixa::popup || it_caixa->tipo() == tipo_caixa::caixa_de_texto) {
+        if(it_caixa->mouseEmCima()) s_contagem_areas++;
         it_caixa->atualizar();
+    }
     else if (it_caixa->tipo() == tipo_caixa::botao) {
+        if(it_caixa->mouseEmCima()) s_contagem_areas++;
         auto btn = static_cast<elementos::botao*>(it_caixa);
-        if(btn->pressionado() && btn->m_use_funcao)
-        btn->m_funcao();
+        if(btn->pressionado() && btn->m_use_funcao) btn->m_funcao();
     }
 }
 void interface::atualizarFilhos(caixa* it_caixa) {

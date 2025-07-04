@@ -37,15 +37,10 @@ namespace BECOMMONS_NS {
          * Abstração para elementos com espaço de texto
          * Exemplo: caixa_de_texto
          */ 
-        inline bool area_detectada_texto = false;
         class area_de_texto : public caixa {
         public:
             // indica se o elemento está selecionado
             bool m_selecionado { false };
-            // indica se o cursor está sobre a área
-            bool m_mouse_cima  { false };
-            // Flag se pode clicar
-            bool pode_click;
         protected:
             // armazena o estado do botão do mouse no frame anterior para detectar clique único
             bool m_mouse_antes_pressionado { false }, m_teclado_foi_solto { true };
@@ -79,16 +74,15 @@ namespace BECOMMONS_NS {
              */
             bool selecionado() {
                 bool pressionado = inputs::obter(inputs::MOUSE_E) || inputs::obter(inputs::ENTER);
-                pode_click = !area_detectada;
                 bool justPressed = pressionado && !m_mouse_antes_pressionado;
 
                 // atualiza flag de cursor sobre a área
                 m_mouse_cima = mouseEmCima();
 
-                if (m_mouse_cima && pode_click) {
+                if (m_mouse_cima && s_contagem_areas <= 1) {
                     janela::obterInstancia().defCursor(janela::cursor::i);
                 }
-                if (justPressed && pode_click) {
+                if (justPressed) {
                     // seleciona somente se o clique começar dentro da área
                     m_selecionado = m_mouse_cima;
                     m_pipe_offset = m_buffer.size();
@@ -103,22 +97,6 @@ namespace BECOMMONS_NS {
              */
             std::string obterBuffer() const {
                 return m_buffer;
-            }
-            /**
-             * Verifica se o cursor está dentro dos limites da caixa.
-             */
-            bool mouseEmCima() {
-                dvet2 m = inputs::obterMousePos();
-                bool dentro = (
-                    m.x > m_estilo.m_limites.x && 
-                    m.x < m_estilo.m_limites.x + m_estilo.m_limites.z &&
-                    m.y > m_estilo.m_limites.y &&
-                    m.y < m_estilo.m_limites.y + m_estilo.m_limites.w
-                );
-                m_mouse_cima = dentro;
-
-                if(!area_detectada_texto)area_detectada_texto = m_mouse_cima;
-                return dentro;
             }
             void inserirLetra(char c) {
                 if (c == '\0') return;
