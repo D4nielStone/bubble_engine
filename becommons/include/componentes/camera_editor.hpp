@@ -33,7 +33,9 @@ SOFTWARE.
 namespace BECOMMONS_NS {
     struct camera_editor : camera
     {
-        float sens = 10.f, mousex_antigo, mousey_antigo;
+        float interpolacao = 0.3f, sens = 10.f, mousex_antigo = 0, mousey_antigo = 0;
+        float pitch = 0.f;
+        float yaw = 0.f;
         camera_editor(); 
         ~camera_editor();
         void atualizarMovimentacao();

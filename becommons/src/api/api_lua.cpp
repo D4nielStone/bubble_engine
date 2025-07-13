@@ -22,22 +22,7 @@
  * @file api_lua.cpp
  */
 
-#include "api/api_lua.hpp"
-#include "nucleo/fase.hpp"
-#include "nucleo/projeto.hpp"
-#include "componentes/renderizador.hpp"
-#include "componentes/transformacao.hpp"
-#include "componentes/terreno.hpp"
-#include "componentes/codigo.hpp"
-#include "sistemas/sistema_de_fisica.hpp"
-#include "os/janela.hpp"
-#include "inputs/inputs.hpp"
-#include "util/malha.hpp"
-#include "util/vertice.hpp"
-#include "api/mat.hpp"
-#include "util/vetor2.hpp"
-#include "util/vetor3.hpp"
-#include "util/vetor4.hpp"
+#include "becommons/becommons.hpp"
 
 using namespace BECOMMONS_NS;
 
@@ -134,6 +119,9 @@ void becommons::api::definirClasses(sol::state& lua) {
             "posicao", &transformacao::posicao,
             "escala", &transformacao::escala,
             "rotacao", &transformacao::rotacao,
+            "rotacionar", &transformacao::rotacionar,
+            "mover", &transformacao::mover,
+            "escalonar", &transformacao::escalonar,
             "alvo", &transformacao::alvo,
             "olharEntidade", &transformacao::olharEntidade
             );
@@ -176,8 +164,20 @@ void becommons::api::definirClasses(sol::state& lua) {
             "salvarFase",  &projeto::salvarFase,
             "carregarFase", &projeto::carregarFase,
             "carregarFases", &projeto::carregarFases,
-            "obterFaseAtual", &projeto::obterFaseAtual
+            "obterFaseAtual", &projeto::obterFaseAtual,
+            "interface", &projeto::m_interface,
+            "renderizador", &projeto::m_render,
+            "codigo", &projeto::m_codigo,
+            "fisica", &projeto::m_fisica
             );
+    lua.new_usertype<caixa>("caixa",
+            sol::call_constructor, sol::constructors<sol::types<>>(),
+            "botao", static_cast<elementos::botao* (caixa::*)(const std::function<void()>&, const std::string&)>(&caixa::adicionar)
+            );
+    lua.new_usertype<interface>("interface",
+        sol::call_constructor, sol::constructors<sol::types<>>(),
+        "obterRaiz", &interface::obterRaiz
+    );
 }
 void becommons::api::definirNamespaces(sol::state& lua) {
     auto bubble = lua["bubble"].get_or_create<sol::table>(); /// < namespace bubble na api

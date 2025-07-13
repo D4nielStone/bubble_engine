@@ -25,14 +25,12 @@ SOFTWARE.
  */
 
 #include "componentes/camera_editor.hpp"
-
+#include "api/mat.hpp"
 #include "depuracao/debug.hpp"
 #include "os/janela.hpp"
 
 using namespace BECOMMONS_NS;
-
-camera_editor::camera_editor()
-{
+camera_editor::camera_editor() : camera(false) {
     ativarFB(); // Ativa framebuffer
     mousex_antigo = inputs::obterMousePos().x;
     mousey_antigo = inputs::obterMousePos().y;
@@ -47,6 +45,13 @@ bool camera_editor::analizar(const rapidjson::Value& value) {
     bool b = true;
     b = b == true ? transform->analizar(value) : false;
     b = camera::analizar(value);
+    pitch = transform->rotacao.x;
+    yaw = transform->rotacao.y;
+    
+    if(value.HasMember("sens"))
+        sens = value["sens"].GetFloat();
+    if(value.HasMember("suav"))
+        interpolacao = value["suav"].GetFloat();
     return true;
 }
 
@@ -56,31 +61,38 @@ camera_editor::~camera_editor() {
         
 bool camera_editor::serializar(rapidjson::Value& value, rapidjson::Document::AllocatorType& allocator) const {
     camera::serializar(value, allocator);
+    value.AddMember("sens", sens, allocator);
+    value.AddMember("suav", interpolacao, allocator);
     transform->serializar(value, allocator);
     return true;
 }
 
-void camera_editor::atualizarMovimentacao()
-{
-    float delta = janela::obterInstancia().m_tempo.obterDeltaTime();
-
+void camera_editor::atualizarMovimentacao() {
     // Mouse rotation
     float mousex_atual = inputs::obterMousePos().x;
     float mousey_atual = inputs::obterMousePos().y;
     // Movement
-    if (inputs::obter(inputs::W)) mover(glm::vec3(0, 0, sens * delta));
-    if (inputs::obter(inputs::A)) mover(glm::vec3(-sens * delta, 0, 0));
-    if (inputs::obter(inputs::S)) mover(glm::vec3(0, 0, -sens * delta));
-    if (inputs::obter(inputs::D)) mover(glm::vec3(sens * delta, 0, 0));
+    if (inputs::obter(inputs::W)) transform->mover(0, 0, sens);
+    if (inputs::obter(inputs::A)) transform->mover(-sens, 0, 0);
+    if (inputs::obter(inputs::S)) transform->mover(0, 0, -sens);
+    if (inputs::obter(inputs::D)) transform->mover(sens, 0, 0);
+    if (inputs::obter(inputs::ESPACO)) transform->mover(0, sens, 0);
+    if (inputs::obter(inputs::E_SHIFT)) transform->mover(0, -sens, 0);
 
-    if (inputs::obter(inputs::MOUSE_E))
-    {
+    if (inputs::obter(inputs::MOUSE_E)) {
         float mx = mousex_antigo - mousex_atual;
         float my = mousey_antigo - mousey_atual;
-        transform->rotacionar({my * 0.1f, -mx * 0.1f, 0.f}); 
-        fvet3 rot = transform->obterRotacao();
-        transform->definirRotacao(fvet3(glm::clamp(rot.x, -89.f, 89.f), rot.y, rot.z));
-    }
-    mousex_antigo = mousex_atual;
+    
+        // Atualiza os ângulos acumulados
+        pitch += my * 0.1f;
+        yaw   -= mx * 0.1f;
+    
+        // Limita o pitch
+        pitch = glm::clamp(pitch, -89.f, 89.f);
+    
+    };
+    // Aplica diretamente
+    transform->rotacao = lerp(transform->rotacao, fvet3(pitch, yaw, 0.f), interpolacao);
     mousey_antigo = mousey_atual;
+    mousex_antigo = mousex_atual;
 }

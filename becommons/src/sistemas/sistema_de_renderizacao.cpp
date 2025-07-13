@@ -41,6 +41,20 @@
 using namespace BECOMMONS_NS;
 
 void sistema_renderizacao::calcularTransformacao(transformacao* t) {
+    fvet3 rot = t->obterRotacao();
+    float yaw = glm::radians(rot.y);
+    float pitch = glm::radians(rot.x);
+
+    fvet3 frente = fvet3(
+        cos(yaw) * cos(pitch),
+        sin(pitch),
+        sin(yaw) * cos(pitch)
+    );
+
+    t->forward = frente.normalizar();
+    t->cima = fvet3(0.f , 1.f, 0.f);
+    t->direita = fvet3(glm::normalize(glm::cross(t->cima.to_glm(), t->forward.to_glm())));
+    t->cima = fvet3(glm::normalize(glm::cross(t->forward.to_glm(), t->direita.to_glm())));
     glm::mat4 matrizmodelo = glm::mat4(1.f);
     if (t->usandoAlvo()) {
         matrizmodelo = glm::translate(glm::mat4(1.f), t->obterPosicao().to_glm()); // Aplica a translação
@@ -49,16 +63,15 @@ void sistema_renderizacao::calcularTransformacao(transformacao* t) {
 	} 
 	else {
 		matrizmodelo = glm::translate(glm::mat4(1.f), t->obterPosicao().to_glm()); // Aplica a translação
-		matrizmodelo = glm::rotate(matrizmodelo, glm::radians(t->obterRotacao().x), glm::vec3(1.f, 0.f, 0.f));
-		matrizmodelo = glm::rotate(matrizmodelo, glm::radians(t->obterRotacao().y), glm::vec3(0.f, 1.f, 0.f));
 		matrizmodelo = glm::rotate(matrizmodelo, glm::radians(t->obterRotacao().z), glm::vec3(0.f, 0.f, 1.f));
+		matrizmodelo = glm::rotate(matrizmodelo, glm::radians(t->obterRotacao().y), glm::vec3(0.f, 1.f, 0.f));
+		matrizmodelo = glm::rotate(matrizmodelo, glm::radians(t->obterRotacao().x), glm::vec3(1.f, 0.f, 0.f));
 		matrizmodelo = glm::scale(matrizmodelo, t->obterEscala().to_glm());       // Aplica a escala
 	}
 	t->definirMatrizModelo(matrizmodelo);
 }
 
 void sistema_renderizacao::atualizar() {
-   
     auto reg = projeto_atual->obterFaseAtual()->obterRegistro();
     reg->cada<camera>([&](const uint32_t ent){
             auto cam = reg->obter<camera>(ent);
@@ -66,7 +79,9 @@ void sistema_renderizacao::atualizar() {
             if (cam.get() == camera_principal || !cam->flag_fb) return;
             atualizarCamera(cam.get());
             });
-    atualizarCamera(camera_principal);
+    if (camera_principal) {
+        atualizarCamera(camera_principal);
+    }
 } 
 
 void sistema_renderizacao::inicializar()
@@ -108,9 +123,15 @@ void sistema_renderizacao::atualizarCamera(camera* cam)
 
 
             auto s = trr->m_shader;
+            auto &lg = projeto_atual->obterFaseAtual()->luz_global;
             s.use();
+            s.setVec3("dirLight.direction", lg->direcao);
+            s.setVec3("dirLight.color", lg->cor);
+            s.setVec3("dirLight.ambient", lg->ambiente);
+            s.setFloat("dirLight.intensity", lg->intensidade);
+
             s.setMat4("view", glm::value_ptr(cam->obtViewMatrix()));
-            s.setVec3("viewPos", cam->posicao.x, cam->posicao.y, cam->posicao.z);
+            s.setVec3("viewPos", cam->transform->posicao.x, cam->transform->posicao.y, cam->transform->posicao.z);
             s.setMat4("projection", glm::value_ptr(cam->obtProjectionMatrix()));
             s.setMat4("modelo", glm::value_ptr(transform->obterMatrizModelo()));
             
@@ -125,11 +146,16 @@ void sistema_renderizacao::atualizarCamera(camera* cam)
                 return;
             }
 
-
+            auto &lg = projeto_atual->obterFaseAtual()->luz_global;
             auto s = render->m_modelo->obterShader();
             s.use();
+            s.setVec3("dirLight.direction", lg->direcao);
+            s.setVec3("dirLight.color", lg->cor);
+            s.setVec3("dirLight.ambient", lg->ambiente);
+            s.setFloat("dirLight.intensity", lg->intensidade);
+            
             s.setMat4("view", glm::value_ptr(cam->obtViewMatrix()));
-            s.setVec3("viewPos", cam->posicao.x, cam->posicao.y, cam->posicao.z);
+            s.setVec3("viewPos", cam->transform->posicao.x, cam->transform->posicao.y, cam->transform->posicao.z);
             s.setMat4("projection", glm::value_ptr(cam->obtProjectionMatrix()));
             s.setMat4("modelo", glm::value_ptr(transform->obterMatrizModelo()));
             

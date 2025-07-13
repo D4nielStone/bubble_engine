@@ -36,7 +36,7 @@ void interface::atualizarLJ(caixa* it_caixa) {
     const bool is_horizontal = it_caixa->m_estilo.m_orientacao_modular == estilo::orientacao::horizontal;
     if (!deveAtualizar(it_caixa)) return;
 
-    float mais_largo = 20.f;
+    float mais_largo = 10.f;
     float acumulado_largura = 0.f;
     size_t n_filhos = it_caixa->m_filhos.size();
 
@@ -73,7 +73,7 @@ void interface::atualizarAJ(caixa* it_caixa) {
     const bool is_horizontal = it_caixa->m_estilo.m_orientacao_modular == estilo::orientacao::horizontal;
     if (!deveAtualizar(it_caixa)) return;
 
-    float mais_alto = 20.f;
+    float mais_alto = 10.f;
     float acumulado_altura = 0.f;
     size_t n_filhos = it_caixa->m_filhos.size();
     bool quebra_linha = false;
@@ -139,6 +139,10 @@ void interface::desenhar(caixa* c) {
 
 interface::interface() {
     m_raiz = std::make_unique<caixa>();
+}
+
+caixa* interface::obterRaiz() {
+    return m_raiz.get();
 }
 
 void interface::inicializar() {

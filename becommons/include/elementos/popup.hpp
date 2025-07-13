@@ -33,6 +33,7 @@ namespace BECOMMONS_NS {
         class popup : public area_de_toque {
             private:
                 botao* m_referencia {nullptr};
+                bool prevMouseE = false;
                 int x_antigo = 0;
                 int y_antigo = 0;
                 float m_velocidade_lerp = 13.f;
@@ -40,6 +41,7 @@ namespace BECOMMONS_NS {
 
                 popup() {
                     m_estilo.m_orientacao_modular = estilo::orientacao::vertical;
+                    m_estilo.m_ativo = false;
                 }
                 void configurar() override {
                     if (m_pai && m_pai->tipo() == tipo_caixa::botao)
@@ -48,13 +50,35 @@ namespace BECOMMONS_NS {
                     m_estilo.m_cor_borda = cor(0.07f);
                     m_estilo.m_flag_estilo |= flag_estilo::largura_justa | flag_estilo::altura_justa;
                     m_estilo.m_padding_geral = {3, 3};
+                    m_estilo.m_ativo = false;
                 }
                 void atualizar() override {
-                    if(!m_referencia) return;
+                    if (!m_referencia) return;
+
+                    // Detecta borda de clique
+                    bool mouseE = janela::obterInstancia().m_inputs.obter(inputs::MOUSE_E);
+                    bool mousePressedEdge = (mouseE && !prevMouseE);
+                    prevMouseE = mouseE;
+
+                    // Se for clique único...
+                    if (mousePressedEdge) {
+                        if (!m_estilo.m_ativo) {
+                            if (m_referencia->pressionado()) {
+                                m_estilo.m_ativo = true;
+                                // captura posição inicial do cursor
+                                x_antigo = inputs::obterMousePos().x;
+                                y_antigo = inputs::obterMousePos().y;
+                            }
+                        } else {
+                            if (!mouseEmCima()) {
+                                m_estilo.m_ativo = false;
+                            }
+                        }
+                    } 
+
                     float dt = janela::obterInstancia().m_tempo.obterDeltaTime();
                     x_antigo = m_referencia->pressionado() ? inputs::obterMousePos().x : x_antigo;
                     y_antigo = m_referencia->m_pressionado ? inputs::obterMousePos().y : y_antigo;
-                    m_estilo.m_ativo = m_estilo.m_ativo ? m_referencia->mouseEmCima() || mouseEmCima() : m_referencia->m_pressionado;
                     float mais_largo = 20.f, cursorx = 0.f;
                     float mais_alto = 20.f, cursory = 0.f;
                     cursorx = m_estilo.m_padding_geral.x;
@@ -82,7 +106,7 @@ namespace BECOMMONS_NS {
                             // Verifica a quebra de linha IMEDIATAMENTE
                             if (filho->tem(flag_estilo::quebrar_linha)) {
                                 // Avança para a próxima coluna
-                                cursor_x += largura_coluna_atual + m_estilo.m_padding_geral.x;
+                                cursor_x += largura_coluna_atual + m_estilo.m_padding_geral.x*2;
                                 
                                 // Atualiza a largura total necessária
                                 max_largura_total = std::max(max_largura_total, cursor_x);
@@ -107,7 +131,7 @@ namespace BECOMMONS_NS {
                             max_largura_total = std::max(max_largura_total, cursor_x);
              
                             if (filho->tem(flag_estilo::quebrar_linha)) {
-                                cursor_y += altura_linha_atual + m_estilo.m_padding_geral.y;
+                                cursor_y += altura_linha_atual + m_estilo.m_padding_geral.y*2;
                                 max_altura_total = std::max(max_altura_total, cursor_y);
                                 cursor_x = m_estilo.m_padding_geral.x;
                                 altura_linha_atual = 0.f;

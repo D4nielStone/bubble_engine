@@ -23,7 +23,7 @@
  */
 
 #include "glad.h"
-#include "arquivadores/shader.hpp"
+#include "nucleo/projeto.hpp"
 #include <filesystem>
 #include "assets/shaders_na_memoria.hpp"
 
@@ -55,15 +55,15 @@ const char* shaderException::what() const noexcept {
 }
 
 shader::shader(const char* vertexPath, const char* fragmentPath) {
-    compilar(vertexPath, fragmentPath);
+    vert = vertexPath; frag = fragmentPath;
+    compilar();
 }
 
-void shader::compilar(const char* vertexPath, const char* fragmentPath) {
-    vert = vertexPath; frag = fragmentPath;
+void shader::compilar() {
     // Verifica se o shader já foi compilado
-    if(shaders.find(fragmentPath) != shaders.end())
+    if(shaders.find(frag) != shaders.end())
     {
-        ID = shaders[fragmentPath];
+        ID = shaders[frag];
         return;
     }
     // Cria o programa shader
@@ -85,16 +85,16 @@ void shader::compilar(const char* vertexPath, const char* fragmentPath) {
     vshaderFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
     vshaderFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
 
-    if (!std::filesystem::exists(vertexPath) || !std::filesystem::exists(fragmentPath))
+    if (!std::filesystem::exists(vert) || !std::filesystem::exists(frag))
     {
         // Verifica se o shader está na memória
-        if (shader_memoria.find(std::filesystem::path(vertexPath).filename().string()) != shader_memoria.end()) {
-            vertexshaderSource = shader_memoria.at(std::filesystem::path(vertexPath).filename().string());
+        if (shader_memoria.find(std::filesystem::path(vert).filename().string()) != shader_memoria.end()) {
+            vertexshaderSource = shader_memoria.at(std::filesystem::path(vert).filename().string());
         }
         else
             return;
-        if (shader_memoria.find(std::filesystem::path(fragmentPath).filename().string()) != shader_memoria.end()) {
-            fragmentshaderSource = shader_memoria.at(std::filesystem::path(fragmentPath).filename().string());
+        if (shader_memoria.find(std::filesystem::path(frag).filename().string()) != shader_memoria.end()) {
+            fragmentshaderSource = shader_memoria.at(std::filesystem::path(frag).filename().string());
         }
         else
             return;
@@ -102,8 +102,8 @@ void shader::compilar(const char* vertexPath, const char* fragmentPath) {
     else
     {
         try {
-            vshaderFile.open(vertexPath);
-            fshaderFile.open(fragmentPath);
+            vshaderFile.open(vert);
+            fshaderFile.open(frag);
             std::stringstream vshaderStream, fshaderStream;
 
             vshaderStream << vshaderFile.rdbuf();
@@ -142,19 +142,16 @@ void shader::compilar(const char* vertexPath, const char* fragmentPath) {
     glDeleteShader(fragmentshader);
 
     
-    shaders[fragmentPath] = ID;
+    shaders[frag] = ID;
 }
 
 void shader::use() 
 {
-    if(shaders.find(frag) != shaders.end())
-    {
+    if(shaders.find(frag) != shaders.end()) {
         glUseProgram(ID);
     }
-    else
-    {
-        compilar(vert.c_str(), frag.c_str());
-
+    else {
+        compilar();
     }
 }
 

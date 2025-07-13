@@ -72,6 +72,7 @@ std::unordered_map<std::string, inputs::chave> mapa_string = {
            {"E_ALT",      inputs::E_ALT},   
            {"D_ALT",      inputs::D_ALT},   
            {"BACKSPACE",  inputs::BACKSPACE},
+           {"ESPACO",     inputs::ESPACO},
            {"ENTER",      inputs::ENTER},   
            {"KP_ENTER",   inputs::KP_ENTER},
            {"DELETE",     inputs::DELETE},  

@@ -23,6 +23,7 @@
  */
 
 #include "glad.h"
+#include "arquivadores/shader.hpp"
 #include "depuracao/debug.hpp"
 #include "componentes/camera.hpp"
 #include "componentes/transformacao.hpp"
@@ -44,13 +45,13 @@ void camera::desenharFB() const
     if(viewport_ptr)
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, viewport_ptr->z, viewport_ptr->w, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
     else
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, viewportFBO.x, viewportFBO.y, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, janela::obterInstancia().tamanho.x, janela::obterInstancia().tamanho.y, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
         glBindTexture(GL_TEXTURE_2D, 0);
         glBindRenderbuffer(GL_RENDERBUFFER, rbo);
     if(viewport_ptr)
         glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, viewport_ptr->z, viewport_ptr->w);
     else
-        glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, viewportFBO.x, viewportFBO.y);
+        glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, janela::obterInstancia().tamanho.x, janela::obterInstancia().tamanho.y);
         glBindRenderbuffer(GL_RENDERBUFFER, 0);
         glBindFramebuffer(GL_FRAMEBUFFER, fbo);
     }
@@ -73,12 +74,13 @@ camera::~camera()
 
 camera::camera(const bool orth)
     : flag_orth(orth) {
+    projeto_atual->fila_opengl.push([&](){
+        m_skybox = new skybox();
+    });
 }
         
 bool camera::analizar(const rapidjson::Value& value)
 {
-    m_skybox = new skybox();
-	
     if(value.HasMember("fov"))
         fov = value["fov"].GetFloat();
     if(value.HasMember("zfar"))
@@ -131,6 +133,7 @@ bool camera::serializar(rapidjson::Value& value, rapidjson::Document::AllocatorT
 }
 void camera::ativarFB()
 {
+    if(flag_fb) return;
     flag_fb = true;
 
     glGenFramebuffers(1, &fbo);
@@ -159,11 +162,9 @@ void camera::ativarFB()
 
     // Voltando ao framebuffer padr�o
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
-
 }
 
-void camera::desativarFB()
-{
+void camera::desativarFB() {
     if (!flag_fb) return;
     flag_fb = false;
 
@@ -175,54 +176,28 @@ glm::mat4 camera::obtViewMatrix() {
     if (!transform)
         transform = projeto_atual->obterFaseAtual()->obterRegistro()->obter<transformacao>(meu_objeto).get();
 
-    posicao = transform->obterPosicao();
-
-    // Recalcular os vetores de referência
-    fvet3 frente = fvet3 (
-        cos(glm::radians(transform->obterRotacao().y)) * cos(glm::radians(transform->obterRotacao().x)),    // x
-        sin(glm::radians(transform->obterRotacao().x)),                                                     // y
-        sin(glm::radians(transform->obterRotacao().y)) * cos(glm::radians(transform->obterRotacao().x))     // z
-    );
-    forward = frente.normalizar();
-
-    cima = fvet3(0.f , 1.f, 0.f);
-
-    direita = fvet3(glm::normalize(glm::cross(forward.to_glm(), cima.to_glm())));
-    cima = fvet3(glm::normalize(glm::cross(direita.to_glm(), forward.to_glm())));
-
-    // Atualiza a transformação
-    transform->definirCima(cima);
-
     fvet3 alvo;
     if (transform->usandoAlvo()) {
         alvo = transform->obterAlvo();
     }
     else {
-        alvo = posicao + forward;
+        alvo = transform->posicao + transform->forward;
     }
 
     // Agora, passa o vetor 'cima' atualizado para a viewMatrix
-    viewMatrix = glm::lookAt(posicao.to_glm(), alvo.to_glm(), cima.to_glm());
+    viewMatrix = glm::lookAt(transform->posicao.to_glm(), alvo.to_glm(), transform->cima.to_glm());
     return viewMatrix;
-}
-void camera::viewport(const ivet2& viewp)
-{
-    viewportFBO = viewp;
 }
 
 glm::mat4 camera::obtProjectionMatrix() {
     ivet2 viewp;
     if (flag_fb && !viewport_ptr)
-        viewp = viewportFBO;
+        viewp = {janela::obterInstancia().tamanho.x, janela::obterInstancia().tamanho.y};
     else if(viewport_ptr)
-    {
         viewp = {static_cast<int>(viewport_ptr->z), static_cast<int>(viewport_ptr->w)};
-        viewportFBO = viewp;
-    }
     else return glm::mat4(1.f);
 
-    if (flag_orth)
-    {
+    if (flag_orth) {
         float largura = viewp.x;
         float altura = viewp.y != 0.0f ? viewp.y : 1.0f;
         aspecto = largura / altura;
@@ -232,8 +207,7 @@ glm::mat4 camera::obtProjectionMatrix() {
         top = escala;
         projMatriz = glm::ortho(left, right, bottom, top, corte_curto, corte_longo);
     }
-    else 
-    {
+    else {
         float largura = viewp.x;
         float altura = viewp.y;
         aspecto = largura / altura;
@@ -246,7 +220,7 @@ raio camera::pontoParaRaio(const ivet2& screenPoint) const {
     fvet3 direcaoMundo = telaParaMundo(screenPoint, 0.0f);
 
     raio ray {};
-    ray.origem = posicao;
+    ray.origem = transform->posicao;
     ray.direcao = direcaoMundo.normalizar();
 
     return ray;
@@ -254,8 +228,8 @@ raio camera::pontoParaRaio(const ivet2& screenPoint) const {
 
 fvet3 camera::telaParaMundo(const ivet2 &screenPoint, float profundidade) const
 {
-    float ndcX = (2.0f * screenPoint.x) / viewportFBO.x - 1.0f;
-    float ndcY = 1.0f - (2.0f * screenPoint.y) / viewportFBO.y;
+    float ndcX = (2.0f * screenPoint.x) / janela::obterInstancia().tamanho.x - 1.0f;
+    float ndcY = 1.0f - (2.0f * screenPoint.y) / janela::obterInstancia().tamanho.y;
     fvet4 clipCoords = fvet4(ndcX, ndcY, profundidade, 1.0f);
 
     fvet4 eyeCoords = fvet4(glm::inverse(projMatriz) * clipCoords.to_glm());
@@ -276,7 +250,7 @@ ivet3 camera::mundoParaTela(const fvet3 &mundoPos) {
     if (viewport_ptr) {
         currentViewport = {static_cast<int>(viewport_ptr->z), static_cast<int>(viewport_ptr->w)};
     } else {
-        currentViewport = viewportFBO; 
+        currentViewport = {janela::obterInstancia().tamanho.x, janela::obterInstancia().tamanho.y}; 
     }
     bool visivel = true;
     if (ndcCoords.x < -1.0f || ndcCoords.x > 1.0f ||
@@ -291,15 +265,4 @@ ivet3 camera::mundoParaTela(const fvet3 &mundoPos) {
     int screenZ = visivel ? 1 : -1;
 
     return ivet3(static_cast<int>(screenX + viewport_ptr->x), static_cast<int>(screenY + viewport_ptr->y), screenZ);
-}
-
-void camera::mover(const fvet3& pos)
-{
-    if (!transform)
-        transform = projeto_atual->obterFaseAtual()->obterRegistro()->obter<transformacao>(meu_objeto).get();
-
-    // Atualiza a posição com base na entrada
-    transform->mover(forward * pos.z);  // Move para frente/trás
-    transform->mover(direita * pos.x);  // Move para os lados
-    transform->mover(cima * pos.y);     // Move para cima/baixo
 }

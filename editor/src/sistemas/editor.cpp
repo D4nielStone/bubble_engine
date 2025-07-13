@@ -23,12 +23,11 @@
  */
 
 #include <cstdlib>
-#include "util/versao.hpp"
-#include "becommons/becommons.hpp"
-#include "elementos/popup.hpp"
+#include "custom/barra_menu.hpp"
 #include "sistemas/editor.hpp"
 #include "util/runtime.hpp"
 #include <filesystem>
+#include <typeinfo>
 #include <rapidjson/document.h>
 #include <rapidjson/prettywriter.h>
 
@@ -53,9 +52,6 @@ bool gatilho_ = true; // Usado para controlar a ativação de inputs baseados em
 // Essas caixas são gerenciadas pela UI e contêm os elementos visuais
 // para manipulação de entidades e seus componentes.
 caixa* c_entidades, *c_inspetor;
-
-// Estilos de caixa pré-definidos
-estilo e, e3;
 
 // Framebuffer principal que exibe a renderização da câmera do editor.
 // O viewport da câmera é ajustado para as dimensões deste framebuffer.
@@ -93,85 +89,8 @@ void sistema_editor::adicionarCaixas() {
     ui.m_raiz->m_estilo.m_orientacao_modular = estilo::orientacao::vertical;
 
     // Configuração da seção superior da UI (barra de menu e versão)
-    auto* topo = ui.m_raiz->adicionar<caixa>();
-    topo->m_estilo.m_flag_estilo |= flag_estilo::altura_justa | flag_estilo::largura_percentual;
-    topo->m_estilo.m_largura = 1;
-
-    // Configuração da barra de menu
-    auto* barra_menu = topo->adicionar<caixa>();
-    barra_menu->m_estilo.m_flag_estilo |= flag_estilo::altura_justa | flag_estilo::alinhamento_central | flag_estilo::largura_percentual;
-    barra_menu->m_estilo.m_largura = 1;
-    barra_menu->m_estilo.m_padding_geral = {5, 5};
-    barra_menu->m_estilo.m_cor_fundo = cor(0.15f);
-
-    // Configuração da barra de versão
-    auto* barra_versao = topo->adicionar<caixa>();
-    barra_versao->m_estilo.m_flag_estilo |= flag_estilo::altura_justa | flag_estilo::largura_justa;
-    barra_versao->adicionar<elementos::texto>(BUBBLE_VERSAO_COMPLETA_STR); // Exibe a string de versão completa
-    barra_versao->m_estilo.m_cor_fundo = cor(0.11f);
-    barra_versao->m_estilo.m_padding_geral = {5, 5};
-
-    // Botão "Folder" (Arquivo) com popup para ações de salvar projeto/fase
-    auto img = std::make_unique<elementos::imagem>("folder.png");
-    img->m_estilo.m_largura = 18;
-    img->m_estilo.m_altura = 18;
-    auto* btn_folder = barra_menu->adicionar<elementos::botao>([]() {
-            // Ação principal do botão (pode ser vazia se as ações estiverem no popup)
-        }
-        , std::move(img));
-    btn_folder->m_estilo.m_cor_borda = cor(0.1f);
-    btn_folder->m_estilo.m_cor_borda.a = 1.f;
-    btn_folder->m_estilo.m_cor_fundo = cor(0.11f);
-    btn_folder->m_estilo.m_padding_geral = {2, 2};
-    e = btn_folder->m_estilo; // Reutiliza estilo para os botões do popup
-
-    auto* popup_folder = btn_folder->adicionar<elementos::popup>();
-    popup_folder->adicionar<elementos::botao>([this]() {
-            projeto_atual->salvarFases(); // Salva todas as fases do projeto
-        }, "salvar projeto", "folder.png")->m_estilo = e;
-    popup_folder->adicionar<elementos::botao>([this]() {
-            projeto_atual->salvarFase(projeto_atual->fase_atual); // Salva apenas a fase atual
-        }, "salvar fase atual", "scene.png")->m_estilo = e;
-    auto* btn_luz = popup_folder->adicionar<elementos::botao>([]()
-            {}, "luz global", "Iluminacao.png");
-    btn_luz->m_estilo = e;        
-    // Interação especial da luz direcional
-    auto lg = projeto_atual->obterFaseAtual()->luz_global;
-    auto* popup = btn_luz->adicionar<elementos::popup>();
-
-    estilo estilo_ct;
-    estilo_ct.m_cor_fundo = cor(0.14f);
-    estilo_ct.m_cor_borda = cor(0.13f);
-    estilo_ct.m_flag_estilo |= flag_estilo::largura_justa;
-    estilo_ct.m_padding_geral.x = 5;
-    popup->m_estilo.m_orientacao_modular = estilo::orientacao::horizontal;
-    popup->adicionar<elementos::caixa_de_texto>("x", &lg->direcao.x)->m_estilo = estilo_ct;
-    popup->adicionar<elementos::caixa_de_texto>("y", &lg->direcao.y)->m_estilo = estilo_ct;
-    popup->adicionar<elementos::caixa_de_texto>("z", &lg->direcao.z)->m_estilo = estilo_ct;
-
-    // Botão "Info" para abrir link de ajuda
-    auto img1 = std::make_unique<elementos::imagem>("info.png");
-    img1->m_estilo.m_largura = 18;
-    img1->m_estilo.m_altura = 18;
-    estilo& e1 = barra_menu->adicionar<elementos::botao>([]() {
-            becommons::abrirLink("https://d4nielstone.github.io/bubble_engine/pt/md_docs_2ajuda_2ajuda.html"); // Abre o link de documentação
-        }
-        , std::move(img1))->m_estilo;
-    e1.m_cor_borda = cor(0.1f);
-    e1.m_cor_fundo = cor(0.11f);
-    e1.m_padding_geral = {2, 2};
-
-    // Botão "Cube" (provavelmente para criar nova entidade ou abrir menu de entidades)
-    auto img2 = std::make_unique<elementos::imagem>("cube.png");
-    img2->m_estilo.m_largura = 18;
-    img2->m_estilo.m_altura = 18;
-    estilo& e2 = barra_menu->adicionar<elementos::botao>([]() {
-            // Ação do botão (placeholder)
-        }
-        , std::move(img2))->m_estilo;
-    e2.m_cor_borda = cor(0.1f);
-    e2.m_cor_fundo = cor(0.11f);
-    e2.m_padding_geral = {2, 2};
+    auto* menu = ui.m_raiz->adicionar<custom::barra_menu>();
+    menu->adicionar_botao("", "cube.png", [](){});
 
     // Configuração da seção central da UI (entidades, viewport e inspetor)
     auto* center = ui.m_raiz->adicionar<caixa>();
@@ -205,38 +124,35 @@ void sistema_editor::adicionarCaixas() {
     c_inspetor->m_estilo.m_padding_geral = {2, 2};
 
     // Estilo para botões de remoção e adição de componentes
-    e3.m_flag_estilo |= flag_estilo::largura_percentual | flag_estilo::alinhamento_central;
-    e3.m_cor_borda = cor(0.1f);
-    e3.m_largura = 1;
-    e3.m_padding_geral = {5, 0};
-
-    // Botão para remover componentes (placeholder)
-    c_inspetor->adicionar<elementos::botao>([this]() {
-        // Ação de remover componente (placeholder)
-        }, std::make_unique<elementos::imagem>("remover.png", false, 0.2))->m_estilo = e3;
-
+    e2.m_flag_estilo |= flag_estilo::largura_percentual | flag_estilo::alinhamento_central;
+    e2.m_cor_borda = cor(0.1f);
+    e2.m_largura = 1;
+    e2.m_padding_geral = {5, 0};
     // Botão para adicionar componentes com popup de seleção
-    auto* btn_add_comp = c_inspetor->adicionar<elementos::botao>([this]() {
-        // Ação de adicionar componente (placeholder)
-        }, std::make_unique<elementos::imagem>("adicionar.png", false, 0.2));
-    btn_add_comp->m_estilo = e3;
+    auto* btn_add_comp = c_inspetor->adicionar<elementos::botao>(nullptr, std::make_unique<elementos::imagem>("adicionar.png", false, 0.4));
+    btn_add_comp->m_estilo = e2;
     btn_add_comp->m_estilo.m_flag_estilo |= flag_estilo::quebrar_linha;
     auto* popup_comp = btn_add_comp->adicionar<elementos::popup>();
 
     // Opções de componentes no popup "Adicionar Componente"
     popup_comp->adicionar<elementos::botao>([this]() {
+        if  (!projeto_atual->obterFaseAtual()) return;
             projeto_atual->obterFaseAtual()->obterRegistro()->adicionar<codigo>(entidade_atual);
         }, "codigo", "Codigo.png")->m_estilo = e;
     popup_comp->adicionar<elementos::botao>([this]() {
+        if  (!projeto_atual->obterFaseAtual()) return;
             projeto_atual->obterFaseAtual()->obterRegistro()->adicionar<camera>(entidade_atual);
         }, "camera", "Camera.png")->m_estilo = e;
     popup_comp->adicionar<elementos::botao>([this]() {
+        if  (!projeto_atual->obterFaseAtual()) return;
             projeto_atual->obterFaseAtual()->obterRegistro()->adicionar<terreno>(entidade_atual);
         }, "terreno", "Terreno.png")->m_estilo = e;
     popup_comp->adicionar<elementos::botao>([this]() {
+        if  (!projeto_atual->obterFaseAtual()) return;
             projeto_atual->obterFaseAtual()->obterRegistro()->adicionar<fisica>(entidade_atual);
         }, "fisica", "Fisica.png")->m_estilo = e;
     popup_comp->adicionar<elementos::botao>([this]() {
+        if  (!projeto_atual->obterFaseAtual()) return;
             projeto_atual->obterFaseAtual()->obterRegistro()->adicionar<renderizador>(entidade_atual);
         }, "renderizador", "Renderizador.png")->m_estilo = e;
 }
@@ -251,7 +167,7 @@ void sistema_editor::inicializar() {
 
     // Carrega a configuração da câmera do editor a partir de um arquivo JSON.
     // Se o arquivo não existir ou houver erro de parse, um erro é emitido.
-    auto _usr = projeto_atual->diretorioDoProjeto + "/usr";
+    auto _usr = projeto_atual->m_diretorio + "/usr";
     std::stringstream sb;
     if (std::filesystem::exists(_usr + "/cam.json")) {
         std::ifstream file(_usr + "/cam.json");
@@ -269,6 +185,10 @@ void sistema_editor::inicializar() {
     projeto_atual->m_render.definirCamera(&cam); // Define a câmera do editor para renderização
     ui.inicializar();
     adicionarCaixas(); // Constrói a interface do editor
+
+    // Carrega fase de forma asíncrona
+    std::thread load_level(&projeto::carregarFase, projeto_atual, projeto_atual->m_lancamento);
+    load_level.detach();
 }
 
 /**
@@ -276,7 +196,7 @@ void sistema_editor::inicializar() {
  * Cria o diretório 'usr' se não existir e serializa os dados da câmera.
  */
 void sistema_editor::salvarEditor() {
-    auto _usr = projeto_atual->diretorioDoProjeto + "/usr";
+    auto _usr = projeto_atual->m_diretorio + "/usr";
     if(!std::filesystem::exists(_usr))
         std::filesystem::create_directory(_usr); // Cria o diretório se não existir
 
@@ -309,6 +229,9 @@ void sistema_editor::chamarInputs() {
     if(inputs::obter(inputs::F2)) {
         executarRuntime();
     }
+    if(inputs::obter(inputs::F3)) {
+        projeto_atual->obterFaseAtual()->iniciar();
+    }
     // Gerencia inputs com a tecla CTRL pressionada para evitar repetições
     if(inputs::obter(inputs::E_CTRL)) {
         if(gatilho_ && inputs::obter(inputs::A)) {
@@ -337,6 +260,7 @@ void sistema_editor::chamarInputs() {
  * com o editor.
  */
 void sistema_editor::atualizarGizmo() {
+    if  (!projeto_atual->obterFaseAtual()) return;
     auto reg = projeto_atual->obterFaseAtual()->obterRegistro();
 
     // 1. Identificar entidades que foram removidas
@@ -437,9 +361,8 @@ void sistema_editor::atualizarGizmo() {
         c_inspetor->m_filhos.clear();
         pop_ups.clear(); 
 
-        c_inspetor->adicionar<elementos::botao>([](){ /* Ação de remover */ }, std::make_unique<elementos::imagem>("remover.png", false, 0.2))->m_estilo = e3;
-        auto* btn_add_comp = c_inspetor->adicionar<elementos::botao>([](){ /* Ação de adicionar */ }, std::make_unique<elementos::imagem>("adicionar.png", false, 0.2));
-        btn_add_comp->m_estilo = e3;
+        auto* btn_add_comp = c_inspetor->adicionar<elementos::botao>(nullptr, std::make_unique<elementos::imagem>("adicionar.png", false, 0.2));
+        btn_add_comp->m_estilo = e2;
         btn_add_comp->m_estilo.m_flag_estilo |= flag_estilo::quebrar_linha;
         auto* popup_comp = btn_add_comp->adicionar<elementos::popup>();
 
@@ -501,10 +424,26 @@ void sistema_editor::atualizarGizmo() {
                                 std::string arquivo = cdg_ptr->arquivoCompleto;
                                 abrirNoTerminal(editor, arquivo);
                                 }, "abrir " + _arquivo + "\ncom " + _editor, "Codigo.png");
+                        comp_pop->adicionar<elementos::botao>([reg, entidade](){ 
+                            reg->remover<codigo>(entidade);
+                        }, "remover", "remover.png");
+                    }
+                }
+                else if (nome_comp == "Fisica") {
+                    auto fis_ptr = reg->obter<fisica>(entidade_atual);
+                    int entidade = entidade_atual;
+                    if (fis_ptr) {
+                        comp_pop->m_estilo.m_orientacao_modular = estilo::orientacao::vertical;
+                        comp_pop->adicionar<elementos::texto>("massa")                          ;
+                        comp_pop->adicionar<elementos::caixa_de_texto>("...", &fis_ptr->m_massa)    ;
+                        comp_pop->adicionar<elementos::botao>([reg, entidade](){ 
+                            reg->remover<fisica>(entidade);
+                        }, "remover", "remover.png");
                     }
                 }
                 else if (nome_comp == "Camera") {
                     auto cam_ptr = reg->obter<camera>(entidade_atual);
+                    int entidade = entidade_atual;
                     if (cam_ptr) {
                         comp_pop->m_estilo.m_orientacao_modular = estilo::orientacao::vertical;
                         comp_pop->adicionar<elementos::texto>("foco de visao")                          ;
@@ -517,6 +456,9 @@ void sistema_editor::atualizarGizmo() {
                         comp_pop->adicionar<elementos::caixa_de_texto>("...", &cam_ptr->escala)         ;
                         comp_pop->adicionar<elementos::botao>(&cam_ptr->m_use_skybox, "usar skybox", "Camera.png");
                         comp_pop->adicionar<elementos::botao>(&cam_ptr->flag_orth, "ortografica", "Camera.png");
+                        comp_pop->adicionar<elementos::botao>([reg, entidade](){ 
+                            reg->remover<camera>(entidade);
+                        }, "remover", "remover.png");
                     }
                 }
             }
@@ -560,7 +502,7 @@ void sistema_editor::atualizar() {
  */
 void sistema_editor::executarRuntime() {
     // Inicia o runtime com o diretório do projeto
-    iniciarRuntime({projeto_atual->diretorioDoProjeto});
+    iniciarRuntime({projeto_atual->m_diretorio});
 
     // Se já houver uma thread rodando, não cria outra
     if (rodando.load()) return;

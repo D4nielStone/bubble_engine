@@ -58,7 +58,8 @@ namespace BECOMMONS_NS {
         void gerarBuffers();
         void inicializar() override;
         void atualizar() override;
-        
+    
+        caixa* obterRaiz();
         std::set<caixa*> pos_render;
         std::unique_ptr<caixa> m_raiz;
         glm::mat4 projecao_viewport;

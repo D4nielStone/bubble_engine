@@ -69,7 +69,7 @@ int main(int argv, char* argc[])
 		depuracao::emitir(info, "Iniciando projeto em:" + DIR_PADRAO);
 		
 		becommons::projeto runtime(DIR_PADRAO);
-	    runtime.obterFaseAtual()->iniciar();
+	    runtime.carregarFase(runtime.m_lancamento);
 	    runtime.rodar();
 	}
 	catch(const std::exception& e)

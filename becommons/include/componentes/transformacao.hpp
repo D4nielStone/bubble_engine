@@ -44,7 +44,8 @@ SOFTWARE.
 namespace BECOMMONS_NS {
 	class transformacao : public componente {
     public:
-		fvet3 cima, posicao, rotacao, escala;
+		fvet3 cima, posicao, rotacao, escala, 
+		      forward, direita;
 		fvet3* alvo;
 		bool m_usar_alvo, m_alvo_novo{ false };
 		glm::mat4 matrizmodelo;
@@ -70,9 +71,9 @@ namespace BECOMMONS_NS {
         void definirEscala(const fvet3&);
         void definirRotacao(const fvet3&);
         void definirRotacao(const fvet4&);
-        void mover(const fvet3&);
-        void rotacionar(const fvet3&);
-        void escalonar(const fvet3&);
+        void mover(float, float, float);
+        void rotacionar(float, float, float);
+        void escalonar(float, float, float);
 		void olharEntidade(const uint32_t& ent);
 		void olharVetor(const fvet3& pos);
 

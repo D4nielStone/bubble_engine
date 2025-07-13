@@ -37,12 +37,13 @@ namespace BECOMMONS_NS {
     public:
 		modelo* m_modelo;
 		static constexpr mascara mascara = COMPONENTE_RENDER;
-		renderizador(modelo* malha) : m_modelo(malha) {
+		renderizador(modelo* malha) {
+            m_modelo = malha;
 		}
+
         bool analizar(const rapidjson::Value& value) override
         {
-            if(value.HasMember("modelo") && value["modelo"].IsString())
-            {
+            if(value.HasMember("modelo") && value["modelo"].IsString()) {
                 auto m_diretorio = std::string(value["modelo"].GetString());
                 if(m_modelo) delete m_modelo;
                 m_modelo = new modelo(m_diretorio.c_str());
@@ -55,12 +56,14 @@ namespace BECOMMONS_NS {
             value.AddMember("modelo", rapidjson::Value(m_modelo->obterDiretorio().c_str(), allocator), allocator);
             return true;
         };
-        
-		renderizador(const char* m_diretorio = "/cubo") : m_modelo(new modelo(m_diretorio)) {};
-		~renderizador()
-		{
-			for(auto& malha : m_modelo->malhas)
-			{
+
+		renderizador(const char* m_diretorio = "/cubo") : m_modelo(new modelo(m_diretorio)) {
+            projeto_atual->fila_opengl.push([&](){
+                    m_modelo->carregar();
+            });
+		};
+		~renderizador() {
+			for(auto& malha : m_modelo->malhas) {
 				malha.descarregar();
 			}
 			delete m_modelo;

@@ -70,8 +70,6 @@ namespace BECOMMONS_NS {
             {mascara::COMPONENTE_CAM                       ,"Camera"},
             {mascara::COMPONENTE_TERRENO                   ,"Terreno"}
         };
-        // Id da entidade ECS atual
-        // Todo componente deve ter um e ele é utilizado para encontrar o "eu" (entidade do componente de código) para a api lua.
 		uint32_t meu_objeto{ 0 };
 		componente() = default;
 		virtual ~componente() = default;

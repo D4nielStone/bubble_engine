@@ -112,12 +112,11 @@ void imageLoader::carregarImagem(const std::string& filepath)
         carregado = true;
         return;
     }
-     depuracao::emitir(debug, "imageLoader", "nova imagem: " + filepath);
 
     const std::string nome_arquivo = std::filesystem::path(filepath).filename().string();
-    if (imagems_memoria.find(nome_arquivo) != imagems_memoria.end())
-    {
+    if (imagems_memoria.find(nome_arquivo) != imagems_memoria.end()) {
         embutida(imagems_memoria.at(nome_arquivo).first, imagems_memoria.at(nome_arquivo).second);
+        imagens_carregadas[filepath] = std::make_shared<imageLoader>(*this);
         return;
     }
     // Determina o formato da imagem  
@@ -127,12 +126,14 @@ void imageLoader::carregarImagem(const std::string& filepath)
     }
 
     if (format == FIF_UNKNOWN) {
+        depuracao::emitir(erro, "image loader", "erro ao carregar: " + filepath);
         return;
     }
 
     // Carrega a imagem  
     FIBITMAP* bitmap = FreeImage_Load(format, path);
     if (!bitmap) {
+        depuracao::emitir(erro, "image loader", "erro ao carregar: " + filepath);
         return;
     }
 
@@ -141,6 +142,7 @@ void imageLoader::carregarImagem(const std::string& filepath)
     FreeImage_Unload(bitmap);
 
     if (!converted) {
+        depuracao::emitir(erro, "image loader", "erro ao carregar: " + filepath);
         return;
     }
 
@@ -169,6 +171,7 @@ void imageLoader::carregarImagem(const std::string& filepath)
     flipVertical();
     imagens_carregadas[filepath] = std::make_shared<imageLoader>(*this);
 
+    depuracao::emitir(debug, "image loader", "nova imagem: " + filepath);
 }
 void imageLoader::embutida(BYTE* data, const unsigned int tamanho) 
 {

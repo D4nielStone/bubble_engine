@@ -32,6 +32,7 @@ SOFTWARE.
 #include <filesystem>
 #include <map>
 #include "depuracao/debug.hpp"
+#include "depuracao/assert.hpp"
 #include "arquivadores/imageloader.hpp"
 #include "assets/objetos/cubo.hpp"
 #include "assets/objetos/esfera.hpp"
@@ -43,11 +44,9 @@ using namespace BECOMMONS_NS;
 std::map<std::string, malha> primitivas =  { {"cubo", malha_cubo}, {"esfera", malha_esfera}
 };
 
-modelo::modelo(const char* diretorio) {
-    carregarModelo(std::filesystem::absolute(diretorio).string().c_str());
+modelo::modelo(const char* diretorio) : diretorio(diretorio) {
 }
-modelo::modelo(const std::string& diretorio) {
-    carregarModelo(std::filesystem::absolute(diretorio).string().c_str());
+modelo::modelo(const std::string& diretorio) : diretorio(diretorio) {
 }
 malha& modelo::obterMalha(size_t i) {
     if(i < malhas.size()) {
@@ -57,32 +56,29 @@ malha& modelo::obterMalha(size_t i) {
 }
 void modelo::desenhar() {
     for(auto& malha : malhas)
-        malha.desenhar(m_shader);
+        malha.desenhar(*m_shader);
 }
 
 shader& modelo::obterShader() {
-    return m_shader;
+    return *m_shader;
 }
 
 void modelo::definirShader(const shader& s) {
-    m_shader = s;
+    *m_shader = s;
 }
         
 std::string modelo::obterDiretorio() const {
     return diretorio;
 }
 
-void modelo::carregarModelo(const std::string& path) {
+void modelo::carregar() {
+    m_shader = new shader();
+    auto path = diretorio;
     malhas.clear();
     if(primitivas.find(std::filesystem::path(path).filename().string()) != primitivas.end()) {
         diretorio = path;
         malhas.push_back(primitivas[std::filesystem::path(path).filename().string()]);
         malhas.back().carregar();
-        malhas.back().m_material.definirUniforme("dirLight.direction", &projeto_atual->obterFaseAtual()->luz_global->direcao);
-        malhas.back().m_material.definirUniforme("dirLight.ambient", &projeto_atual->obterFaseAtual()->luz_global->ambiente);
-        malhas.back().m_material.definirUniforme("dirLight.color", &projeto_atual->obterFaseAtual()->luz_global->cor);
-        malhas.back().m_material.definirUniforme("dirLight.intensity", &projeto_atual->obterFaseAtual()->luz_global->intensidade);
-        malhas.back().m_material.definirUniforme("resolution", &janela::obterInstancia().tamanho);
         return;
     }
     Assimp::Importer importer;
@@ -215,11 +211,6 @@ malha modelo::processarMalha(aiMesh* mesh, const aiScene* scene) {
     bmat.definirUniforme("use_tex_normal", false);
     bmat.definirUniforme("use_tex_ao", false);
     bmat.definirUniforme("use_tex_height", false);
-    bmat.definirUniforme("dirLight.direction", &projeto_atual->obterFaseAtual()->luz_global->direcao);
-    bmat.definirUniforme("dirLight.ambient", &projeto_atual->obterFaseAtual()->luz_global->ambiente);
-    bmat.definirUniforme("dirLight.color", &projeto_atual->obterFaseAtual()->luz_global->cor);
-    bmat.definirUniforme("dirLight.intensity", &projeto_atual->obterFaseAtual()->luz_global->intensidade);
-    bmat.definirUniforme("resolution", &janela::obterInstancia().tamanho);
 
     for (auto& [nome, tex] : bmat.texturas) {
         bmat.definirUniforme(std::string("use_") + nome, true);

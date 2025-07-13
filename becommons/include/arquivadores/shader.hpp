@@ -60,12 +60,16 @@ namespace BECOMMONS_NS {
         unsigned int ID;
 
         // constructor reads and builds the shader
-        shader() { compilar("phong.vert", "phong.frag"); };
+        shader() { 
+            vert = "phong.vert";
+            frag = "phong.frag";
+            compilar(); 
+        };
         shader(const char* vertexPath, const char* fragmentPath);
         // use/activate the shader
         void use();
         // utility uniform functions
-        void compilar(const char* vertexPath, const char* fragmentPath);
+        void compilar();
         void setBool (const std::string& name, const bool& value) const;
         void setInt  (const std::string& name, const int& value) const;
         void setFloat(const std::string& name, const float& value) const;

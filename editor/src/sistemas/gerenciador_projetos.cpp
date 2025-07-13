@@ -24,6 +24,7 @@
 #include "becommons/becommons.hpp"
 #include "editor_namespace.hpp"
 #include "sistemas/editor.hpp"
+#include "custom/barra_menu.hpp"
 #include "sistemas/gerenciador_projetos.hpp"
 
 using namespace EDITOR_NS;
@@ -233,7 +234,14 @@ void gerenciador_projetos::abrirProjeto(const std::string& caminho) {
  */
 void gerenciador_projetos::configurarUI() {
     // Configura a caixa raiz da UI.
-    auto& raiz = ui.m_raiz;
+    ui.m_raiz->m_estilo.m_orientacao_modular = estilo::orientacao::vertical;
+    auto* menu = ui.m_raiz->adicionar<custom::barra_menu>();
+    menu->adicionar_botao("", "folder.png", [](){});
+
+    auto* raiz = ui.m_raiz->adicionar<caixa>();
+    raiz->m_estilo.m_flag_estilo |= flag_estilo::largura_percentual | flag_estilo::altura_percentual;
+    raiz->m_estilo.m_largura = 1;
+    raiz->m_estilo.m_altura = 1;
 
     // Configura a barra lateral esquerda para listar os projetos.
     barra_lateral = raiz->adicionar<caixa>();
@@ -319,8 +327,8 @@ void gerenciador_projetos::iniciar() {
     // Gera a instância da janela para o gerenciador de projetos.
     janela::gerarInstancia("gerenciador de projetos | Daniel O. dos Santos© Bubble 2025", false, {640, 480}, "folder.png");
 
-    configurarUI(); // Configura a interface gráfica do gerenciador.
     ui.inicializar(); // Inicializa o sistema de UI.
+    configurarUI(); // Configura a interface gráfica do gerenciador.
 
     // Loop principal do gerenciador de projetos.
     // Continua executando enquanto a janela não for solicitada a fechar.
@@ -345,8 +353,26 @@ void gerenciador_projetos::buscarProjetos() {
     for (const auto& entry : std::filesystem::directory_iterator(DIR_PADRAO)) {
         if (entry.is_directory()) {
             auto dir = entry.path().string();
-            // Tenta analisar o arquivo de configuração do projeto.
-            auto doc = projeto::analisarProjeto(dir);
+            // Procura recursivamente por config.json
+            if(std::filesystem::exists(dir))
+                for (const auto& entry : std::filesystem::recursive_directory_iterator(dir)) {
+                    if (entry.is_regular_file() && entry.path().filename() == "config.json") {
+                        dir = entry.path().parent_path().string();
+                    }
+                }
+            else    
+                throw  std::runtime_error("Diretório do projeto inexistente.");
+        
+            std::string full_path = dir + "/config.json";
+            
+            // Executa o parsing
+            std::ifstream file(full_path);
+            std::stringstream sb;
+            sb << file.rdbuf();
+            file.close();
+        
+            rapidjson::Document doc;
+            doc.Parse(sb.str().c_str());
             if(!doc.HasMember("nome")) throw std::runtime_error("Analisando projetos do gerenciador de projetos: Projeto sem nome.");
             std::string nome = doc["nome"].GetString();
             projetos[nome] = dir; // Armazena o nome e o diretório do projeto.

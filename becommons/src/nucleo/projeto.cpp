@@ -32,6 +32,8 @@
 #include "depuracao/debug.hpp"
 
 #include <string>
+#include <future>
+#include <thread>
 #include <iostream>
 #include <rapidjson/rapidjson.h>
 #include <memory>
@@ -44,35 +46,53 @@
 
 using namespace BECOMMONS_NS;
 
-// Main loop
+// Retorna fase quando for encontrada
+std::shared_ptr<fase> projeto::obterFase(const std::string& nome) {
+    if(m_fases.find(nome) == m_fases.end()) return nullptr;
+    else return m_fases[nome];
+}
+
 void projeto::rodar() {
-    m_render.inicializar();
-    while(!janela::deveFechar()) {
+    if (!janela::temInstancia()) throw std::runtime_error("Janela não instânciada.");
+    
+    while (!janela::deveFechar()) {
+        // Atualiza eventos glfw
 		janela::obterInstancia().poll();
-        if(obterFaseAtual() && obterFaseAtual()->rodando) {
-            if(!m_fisica.init) m_fisica.inicializar();
-            m_fisica.atualizar();        
-            if(!m_codigo.init) m_codigo.inicializar();
-            m_codigo.atualizar();        
-        }
-        m_render.atualizar();        
-        if(obterFaseAtual() && obterFaseAtual()->rodando) {
-            if(!m_interface.init) {
-                if(m_render.camera_principal) {
-                auto cam = m_render.camera_principal;
-                cam->ativarFB();
-                m_interface.inicializar();
-                auto framebuffer_ptr = std::make_unique<elementos::imagem>(cam->textura, true);
-                cam->viewport_ptr = &framebuffer_ptr->m_estilo.m_limites;
-                m_interface.m_raiz = std::move(framebuffer_ptr);
-                }
+
+		// Atualiza e renderiza fase atual
+        if(obterFaseAtual()) {
+            // Executa funções opengl de outras threads
+            while(!fila_opengl.empty()) {
+                auto func = fila_opengl.front();
+                func();
+                fila_opengl.pop();
             }
-            m_interface.atualizar();        
+        
+            // Atualiza/Inicializa sistemas pra quando a fase for iniciada
+            if (obterFaseAtual()->rodando) {
+                if(!m_codigo.init) m_codigo.inicializar();
+                m_codigo.atualizar();        
+                if(!m_fisica.init) m_fisica.inicializar();
+                m_fisica.atualizar();        
+            }
+
+            // Inicializa sistema de renderização
+            if (!m_render.init) m_render.inicializar();
+            m_render.atualizar();        
+                
+            if(obterFaseAtual()->rodando) {
+                if(!m_interface.init) {
+                    m_interface.inicializar();
+                }
+                m_interface.atualizar();    
+            }
         }
+        // Atualiza sistemas complementares
         for (auto& s : sistemas) {
             if(!s->init) s->inicializar();
             s->atualizar();        
         }
+        // Desenha o frame 
 		janela::obterInstancia().swap();
 	}
 }
@@ -80,29 +100,29 @@ void projeto::rodar() {
 projeto::~projeto() {
 }
 
-projeto::projeto(std::string &diretorio) {
+projeto::projeto(const std::string& diretorio) : m_diretorio(diretorio) {
     // Torna projeto atual
     projeto_atual = this;
-    auto doc = analisarProjeto(diretorio);
-    diretorioDoProjeto = diretorio;
-    criarJanela(doc);
+    analisar();
+    criarJanela();
 }
+
 projeto::projeto() {
 }
 
-rapidjson::Document projeto::analisarProjeto(std::string& path) {
-    // procura recursivamente por config.json
-    std::string caminhoEncontrado = path;
-    
-    if(std::filesystem::exists(path))
-    for (const auto& entry : std::filesystem::recursive_directory_iterator(path)) {
+void projeto::analisar() {
+    // Procura recursivamente por config.json
+    if(std::filesystem::exists(m_diretorio))
+        for (const auto& entry : std::filesystem::recursive_directory_iterator(m_diretorio)) {
             if (entry.is_regular_file() && entry.path().filename() == "config.json") {
-                caminhoEncontrado = entry.path().parent_path().string();
+                m_diretorio = entry.path().parent_path().string();
             }
         }
+    else    
+        throw  std::runtime_error("Diretório do projeto inexistente.");
 
-    std::string full_path = caminhoEncontrado + "/config.json";
-
+    std::string full_path = m_diretorio + "/config.json";
+    
     // Executa o parsing
     std::ifstream file(full_path);
     std::stringstream sb;
@@ -112,83 +132,69 @@ rapidjson::Document projeto::analisarProjeto(std::string& path) {
     rapidjson::Document doc;
     doc.Parse(sb.str().c_str());
 
-    path = caminhoEncontrado;
-
-    if (doc.HasParseError()) {
-        throw  std::runtime_error("Erro ao analisar o JSON de configuração.");
-    } else {
-        depuracao::emitir(info, "Projeto " + std::string(doc["nome"].GetString()) + " encontrado em: " + path);
+    /*      ERROS     */
+    if(!doc.HasMember("nome") || !doc["nome"].IsString()) {
+        throw  std::runtime_error("Defina o nome em config!");
     }
 
-    return doc;
+    if(!doc.HasMember("lancamento") || !doc["lancamento"].IsString()) {
+        throw  std::runtime_error("Defina o lançamento em config!");
+    }
+
+    if(!doc.HasMember("janela") || !doc["janela"].IsObject()) {
+        throw  std::runtime_error("Defina a janela em config!");
+    }
+
+    if(!doc["janela"].GetObject().HasMember("largura") || !doc["janela"].GetObject()["largura"].IsInt()) {
+        throw  std::runtime_error("Defina a largura da janela em config!");
+    }
+
+    if(!doc["janela"].GetObject().HasMember("altura") || !doc["janela"].GetObject()["altura"].IsInt()) {
+        throw  std::runtime_error("Defina a altura da janela em config!");
+    }
+
+    if(!doc["janela"].GetObject().HasMember("titulo") || !doc["janela"].GetObject()["titulo"].IsString()) {
+        throw  std::runtime_error("Defina o título da janela em config!");
+    }
+
+    if(!doc["janela"].GetObject().HasMember("icone") || !doc["janela"].GetObject()["icone"].IsString()) {
+        throw  std::runtime_error("Defina o ícone da janela em config!");
+    }
+
+    m_nome = doc["nome"].GetString();
+    m_nome_janela = doc["janela"].GetObject()["titulo"].GetString();
+    m_lancamento = doc["lancamento"].GetString();
+    m_icone = doc["janela"].GetObject()["icone"].GetString();
+    m_altura = doc["janela"].GetObject()["altura"].GetInt();
+    m_largura = doc["janela"].GetObject()["largura"].GetInt();
+
+    if (doc.HasParseError())
+        throw  std::runtime_error("Erro ao analisar o JSON de configuração do projeto.");
+    else
+        depuracao::emitir(info, "Projeto " + m_nome + " encontrado em: " + m_diretorio);
 }
 
-void projeto::criarJanela(rapidjson::Document& doc) {
-    /*      ERROS     */
-    if(doc.HasParseError()) 
-    {
-        depuracao::emitir(erro, "Parse do projeto!");
-        return;
-    }
-
-    if(!doc.HasMember("lancamento") || !doc["lancamento"].IsString())
-    {
-        depuracao::emitir(erro, "Defina fase de lancamento em config!");
-        return;
-    }
-    if(!doc.HasMember("janela") || !doc["janela"].IsObject())
-    {
-        depuracao::emitir(erro, "Defina janela em config!");
-        return;
-    }
-    if(!doc["janela"].GetObject().HasMember("largura") || !doc["janela"].GetObject()["largura"].IsInt())
-    {
-        depuracao::emitir(erro, "Defina largura da janela em config!");
-        return;
-    }   
-    if(!doc["janela"].GetObject().HasMember("altura") || !doc["janela"].GetObject()["altura"].IsInt())
-    {
-        depuracao::emitir(erro, "Defina altura da janela em config!");
-        return;
-    }   
-    if(!doc["janela"].GetObject().HasMember("titulo") || !doc["janela"].GetObject()["titulo"].IsString())
-    {
-        depuracao::emitir(erro, "Defina titulo da janela em config!");
-        return;
-    }    
-    if(!doc["janela"].GetObject().HasMember("icone") || !doc["janela"].GetObject()["icone"].IsString())
-    {
-        depuracao::emitir(erro, "Defina icone da janela em config!");
-        return;
-    }   
-    /*              */
-
-    const char* nome_janela = doc["janela"].GetObject()["titulo"].GetString();
-    std::string icon_path = doc["janela"].GetObject()["icone"].GetString();
-
+void projeto::criarJanela() {
     // Cria uma instância global de janela.
-    janela::gerarInstancia(nome_janela, false,
-     fvet2(doc["janela"].GetObject()["largura"].GetInt(), doc["janela"].GetObject()["altura"].GetInt()),
-    (diretorioDoProjeto + "/" + icon_path).c_str());
-
-    // Cria fase atual
-    carregarFase(doc["lancamento"].GetString());
+    janela::gerarInstancia(m_nome_janela.c_str(), false,
+     fvet2(m_largura, m_altura),
+    (m_diretorio + "/" + m_icone).c_str());
 }
 
 void projeto::carregarFase(const std::string &n) {
-    auto nome = diretorioDoProjeto + n;
+    auto nome = m_diretorio + n;
     depuracao::emitir(info, "carregando fase em: " + nome + ".fase");
     
-    // Torna atual
-    fase_atual = nome;
     // Adiciona ao map de m_fases
     m_fases[nome] = std::make_shared<fase>(nome + ".fase");
-
+    
     m_fases[nome]->carregar();
+    // Torna atual
+    fase_atual = nome;
 }
 
 void projeto::carregarFases() {
-    for(auto& entry : std::filesystem::directory_iterator(diretorioDoProjeto)) {
+    for(auto& entry : std::filesystem::directory_iterator(m_diretorio)) {
         if(entry.is_regular_file() && entry.path().extension() == ".fase") {
             auto nome = entry.path().string();
             depuracao::emitir(info, "carregando fase em: " + nome);

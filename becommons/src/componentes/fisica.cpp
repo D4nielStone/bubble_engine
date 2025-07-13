@@ -24,16 +24,33 @@
 
 #include "componentes/fisica.hpp"
 #include "depuracao/assert.hpp"
+#include "depuracao/debug.hpp"
 #include "nucleo/projeto.hpp"
 
 using namespace BECOMMONS_NS;
 
-fisica::fisica(bool estatico, const formas e_forma) : e_forma(e_forma) {
-    m_massa = estatico ? 0 : 1;
-
+bool fisica::analizar(const rapidjson::Value& value) {
+    posicao_inicial = btVector3(0, 0, 0);
+    escala_inicial = btVector3(1, 1, 1);
+    if(value.HasMember("massa"))
+        m_massa = value["massa"].GetFloat();
+    if (value.HasMember("posicao") && value["posicao"].IsArray()) {
+        const auto& pos = value["posicao"].GetArray();
+        if (pos.Size() == 3 && pos[0].IsNumber() && pos[1].IsNumber() && pos[2].IsNumber()) {
+            posicao_inicial = btVector3(pos[0].GetFloat(), pos[1].GetFloat(), pos[2].GetFloat());
+        }
+    }
+    if (value.HasMember("escala") && value["escala"].IsArray()) {
+        const auto& pos = value["escala"].GetArray();
+        if (pos.Size() == 3 && pos[0].IsNumber() && pos[1].IsNumber() && pos[2].IsNumber()) {
+            escala_inicial = btVector3(pos[0].GetFloat(), pos[1].GetFloat(), pos[2].GetFloat());
+        }
+    }
+    
+    // Define forma bt
     switch (e_forma) {
         case formas::forma_caixa:
-            m_forma = new btBoxShape(btVector3(0.5f, 0.5f, 0.5f));
+            m_forma = new btBoxShape(escala_inicial);
             break;
         case formas::forma_esfera:
             m_forma = new btSphereShape(0.5f);
@@ -55,16 +72,45 @@ fisica::fisica(bool estatico, const formas e_forma) : e_forma(e_forma) {
             break;
     }
 
-
     btVector3 inertia(0, 0, 0);
     if(m_massa > 0) m_forma->calculateLocalInertia(m_massa, inertia);
-    m_estado_de_movimento = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 0, 0)));
+    m_estado_de_movimento = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), posicao_inicial));
     btRigidBody::btRigidBodyConstructionInfo rigidBodyCI(m_massa, m_estado_de_movimento, m_forma, inertia);
     m_corpo_rigido = new btRigidBody(rigidBodyCI);
+
+    return true;
+}
+bool fisica::serializar(rapidjson::Value& value, rapidjson::Document::AllocatorType& allocator) const {
+    value.AddMember("massa", m_massa, allocator);
+    
+    // posição Vetor 3
+    rapidjson::Value pos(rapidjson::kArrayType);
+    fvet3 posicao = fvet3(0.f);
+    posicao = projeto_atual->obterFaseAtual()->obterRegistro()->obter<transformacao>(meu_objeto)->posicao;
+    pos.PushBack(posicao.x, allocator);
+    pos.PushBack(posicao.y, allocator);
+    pos.PushBack(posicao.z, allocator);
+    value.AddMember("posicao", pos, allocator);
+    // escala Vetor 3
+    rapidjson::Value esc(rapidjson::kArrayType);
+    fvet3 escala = fvet3(1.f);
+    escala = projeto_atual->obterFaseAtual()->obterRegistro()->obter<transformacao>(meu_objeto)->escala;
+    esc.PushBack(escala.x, allocator);
+    esc.PushBack(escala.y, allocator);
+    esc.PushBack(escala.z, allocator);
+    value.AddMember("escala", esc, allocator);
+
+    return true;
+}
+
+fisica::fisica(bool estatico, const formas e_forma) : e_forma(e_forma) {
+    // Define massa inicial
+    m_massa = estatico ? 0 : 1;
 }
 
 // Destrutor
 fisica::~fisica() {
+    depuracao::emitir(debug, "fisica", "descarregando");
     if(m_corpo_rigido && projeto_atual)projeto_atual->m_fisica.remover(m_corpo_rigido);
     if(m_corpo_rigido)delete m_corpo_rigido;
     if(m_estado_de_movimento)delete m_estado_de_movimento;

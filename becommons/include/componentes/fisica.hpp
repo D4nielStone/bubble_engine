@@ -45,6 +45,9 @@ namespace BECOMMONS_NS {
         formas e_forma;
         fisica(bool estatico = false, const formas m_forma = formas::forma_caixa);
         virtual ~fisica();
+        
+        bool analizar(const rapidjson::Value&) override;
+        bool serializar(rapidjson::Value& value, rapidjson::Document::AllocatorType& allocator) const override;
 
         void definirModelo(modelo*);
         void definirForca(const fvet3& vetor);
@@ -55,10 +58,11 @@ namespace BECOMMONS_NS {
         void definirRestituicao(const float fator);
         void definirRaioCCD(const float fator);
         fvet3 obterVelocidade() const;
-        unsigned int m_massa;
+        float m_massa;
         modelo* m_modelo{ nullptr };
         btCollisionShape* m_forma{ nullptr };
         btDefaultMotionState* m_estado_de_movimento{ nullptr };
         btRigidBody* m_corpo_rigido{ nullptr };
+        btVector3 posicao_inicial, escala_inicial;
     };
 }

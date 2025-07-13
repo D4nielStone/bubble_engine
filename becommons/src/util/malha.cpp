@@ -28,6 +28,7 @@
 #include "glad.h"
 #include "util/malha.hpp"
 #include "util/material.hpp"
+#include "nucleo/projeto.hpp"
 #include "depuracao/debug.hpp"
 #include "util/vertice.hpp"
 #include "sistemas/sistema_de_renderizacao.hpp"
@@ -101,6 +102,7 @@ void malha::carregar() {
         }
     }
 
+    projeto_atual->fila_opengl.push([&](){
     glGenVertexArrays(1, &m_VAO);
     glGenBuffers(1, &m_VBO);
     glGenBuffers(1, &m_EBO);
@@ -126,25 +128,26 @@ void malha::carregar() {
 
     glBindVertexArray(0);
     m_carregado = true;
+    });
 }
 
 void malha::desenhar(shader &shader) {
-    if(m_sobrepor)
-        glDepthFunc(GL_ALWAYS);
+        if(m_sobrepor)
+            glDepthFunc(GL_ALWAYS);
+        
+        m_material.usar(shader);
     
-    m_material.usar(shader);
-
-    glBindVertexArray(m_VAO);
-
-    if (m_instancias.empty()) {
-        glDrawElements(GL_TRIANGLES, m_indices.size(), GL_UNSIGNED_INT, 0);
-    } else {
-        glDrawElementsInstanced(GL_TRIANGLES, m_indices.size(), GL_UNSIGNED_INT, 0, m_instancias.size());
-    }
-    glBindVertexArray(0);
-
-    if(m_sobrepor)
-        glDepthFunc(GL_LESS);
+        glBindVertexArray(m_VAO);
+    
+        if (m_instancias.empty()) {
+            glDrawElements(GL_TRIANGLES, m_indices.size(), GL_UNSIGNED_INT, 0);
+        } else {
+            glDrawElementsInstanced(GL_TRIANGLES, m_indices.size(), GL_UNSIGNED_INT, 0, m_instancias.size());
+        }
+        glBindVertexArray(0);
+    
+        if(m_sobrepor)
+            glDepthFunc(GL_LESS);
 }
         
 bool malha::estaCarregado() const {

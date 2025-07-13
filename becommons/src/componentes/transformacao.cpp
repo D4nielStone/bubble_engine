@@ -147,17 +147,24 @@ void  transformacao::definirRotacao(const fvet4& v) {
     rotacao = fvet3(euler);
 }
 
-void  transformacao::mover(const fvet3& v) {
-    posicao += v;
+void transformacao::mover(float v1, float v2, float v3) {
+    float delta = janela::obterInstancia().m_tempo.obterDeltaTime();
+
+    // Atualiza a posição com base na entrada
+    posicao += forward * v3 * delta;  // Move para frente/trás
+    posicao += direita * v1 * delta;  // Move para os lados
+    posicao += cima * v2 * delta;     // Move para cima/baixo
 }
     
-void  transformacao::escalonar(const fvet3& v) {
-    escala += v;
+void  transformacao::escalonar(float v1, float v2, float v3) {
+    float delta = janela::obterInstancia().m_tempo.obterDeltaTime();
+    escala += fvet3(v1,v2,v3)*delta;
 }
         
-void  transformacao::rotacionar(const fvet3& v) {
+void  transformacao::rotacionar(float v1, float v2, float v3) {
     m_usar_alvo = false;
-    rotacao += v;
+    float delta = janela::obterInstancia().m_tempo.obterDeltaTime();
+    rotacao += fvet3(v1,v2,v3)*delta;
 }
 
 void  transformacao::olharEntidade(const uint32_t& ent) {

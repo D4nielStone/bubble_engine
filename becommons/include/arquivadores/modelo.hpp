@@ -41,7 +41,7 @@ namespace BECOMMONS_NS {
         shader& obterShader();
         void definirShader(const shader&);
         void desenhar();
-        void carregarModelo(const std::string& path);
+        void carregar();
         std::string obterDiretorio() const;
         std::vector<malha> malhas;
 
@@ -51,6 +51,6 @@ namespace BECOMMONS_NS {
         static bool temTextura(aiMaterial*, const aiTextureType&);
     protected:
         std::string diretorio;
-        shader m_shader;
+        shader* m_shader{nullptr};
     };
 }

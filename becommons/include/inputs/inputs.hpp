@@ -81,6 +81,7 @@ namespace BECOMMONS_NS {
              E_ALT =           GLFW_KEY_LEFT_ALT,         
              D_ALT =           GLFW_KEY_RIGHT_ALT,        
              BACKSPACE =       GLFW_KEY_BACKSPACE,        
+             ESPACO =          GLFW_KEY_SPACE,        
              ENTER =           GLFW_KEY_ENTER,            
              KP_ENTER =        GLFW_KEY_KP_ENTER,         
              DELETE =          GLFW_KEY_DELETE,           

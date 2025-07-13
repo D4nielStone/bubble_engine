@@ -75,10 +75,8 @@ void fase::salvar()
     }
 }
 
-void fase::descarregar()
-{
+void fase::descarregar() {
     carregada = false;
-    reg.entidades.clear();
 }
 
 fase::fase(const char* diretorio) : luz_global(std::make_shared<luz_direcional>()), diretorio(diretorio)
@@ -99,6 +97,8 @@ void fase::pausar()
 
 void fase::parar()
 {
+	if (rodando != true)
+		return;
 	depuracao::emitir(debug, "fase", "Parando");
 	// TODO: snapshot para retornar o rodando do registro
 	rodando = false;
@@ -106,10 +106,10 @@ void fase::parar()
 
 void fase::iniciar()
 {
-	depuracao::emitir(debug, "fase", "Iniciando");
 	if (rodando != false)
 		return;
     rodando = true;
+	depuracao::emitir(debug, "fase", "Iniciando");
 }
 
 registro* fase::obterRegistro()
@@ -239,14 +239,14 @@ void fase::serializar(const std::string& diretorio)
             componente_v.AddMember("tipo", "camera", allocator);
             if(mask == componente::COMPONENTE_RENDER)
             componente_v.AddMember("tipo", "renderizador", allocator);
-            if(mask == componente::COMPONENTE_LUZ_DIRECIONAL)
-            componente_v.AddMember("tipo", "luz_direcional", allocator);
             if(mask == componente::COMPONENTE_TRANSFORMACAO)
             componente_v.AddMember("tipo", "transformacao", allocator);
             if(mask == componente::COMPONENTE_CODIGO)
             componente_v.AddMember("tipo", "codigo", allocator);
             if(mask == componente::COMPONENTE_TERRENO)
             componente_v.AddMember("tipo", "terreno", allocator);
+            if(mask == componente::COMPONENTE_FISICA)
+            componente_v.AddMember("tipo", "fisica", allocator);
 
             componente->serializar(componente_v, allocator);
             componentes_v.PushBack(componente_v, allocator);

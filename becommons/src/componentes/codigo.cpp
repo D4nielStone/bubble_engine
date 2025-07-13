@@ -36,7 +36,7 @@
 using namespace BECOMMONS_NS;
 
 codigo::codigo(const std::string& arquivo) : arquivo(arquivo) {
-    arquivoCompleto = projeto_atual->diretorioDoProjeto + arquivo; 
+    arquivoCompleto = projeto_atual->m_diretorio + arquivo; 
 
 	estado_lua.open_libraries(sol::lib::base);
 
@@ -56,7 +56,7 @@ void codigo::iniciar() {
 bool codigo::analizar(const rapidjson::Value& value) {
     if(!value.HasMember("diretorio")) return false;
     arquivo = value["diretorio"].GetString();
-    arquivoCompleto = projeto_atual->diretorioDoProjeto + arquivo; 
+    arquivoCompleto = projeto_atual->m_diretorio + arquivo; 
 
 	estado_lua.open_libraries(sol::lib::base);
 
