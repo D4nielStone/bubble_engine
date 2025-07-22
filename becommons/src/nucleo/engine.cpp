@@ -23,29 +23,45 @@
  */
 
 #include "nucleo/engine.hpp"
-#include "os/sistema.hpp"
+#include "util/versao.hpp"
 
-// Main function
-int main(int argc, char* argv[]) {
-    // Definir diretório do projeto
-    std::string diretorio_jogos = becommons::obterDiretorioHome() + "/bubble engine/jogos";
-    if(!std::filesystem::exists(diretorio_jogos))
-        if(!std::filesystem::create_directories(diretorio_jogos)) return -1;
+using namespace BECOMMONS_NS;
 
-    if (argc > 1) {
-        diretorio_jogos = argv[1];
+motor::motor() : m_tempo(std::make_unique<tempo>()), m_inputs(std::make_unique<inputs>()){
+}
+motor::~motor() {}
+
+void motor::iniciar() {
+    /**
+     * logs de inicialização
+     */
+    depuracao::emitir(debug, "motor", "Olá Bubble!");
+    depuracao::emitir(debug, "motor", "Iniciando Bubble Engine " + std::string(BUBBLE_VERSAO_COMPLETA_STR));
+    /**
+     * inicializa splash screen
+     */
+    std::thread splash([](){
+        auto splash = new janela(janela::splash_screen);
+    });
+    thread.join();
+}
+void motor::rodar(const exec& gm) {
+    m_game_mode = gm;
+    mainloop();
+}
+void motor::finalizar() {}
+
+motor& becommons::motor::obter() {
+    static motor instance;
+    return instance;
+}
+void motor::definirDiretorio(const std::string& path) {
+    m_games_dir = path;
+}
+void motor::mainloop() {
+    if(janela::temInstancia())
+    while(!janela::deveFechar()) {
+        janela::obterInstancia().poll();
+        janela::obterInstancia().swap();
     }
-
-    try {
-        // Executa o motor com o diretório de jogos
-        auto& be = becommons::motor::obter();
-        be.definirDiretorio(diretorio_jogos);
-        be.iniciar();
-        be.rodar(becommons::exec::editor);
-    }
-    catch (const std::exception& e) {
-        depuracao::emitir(erro, e.what());
-    }
-
-    return 0;
 }

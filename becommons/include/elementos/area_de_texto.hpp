@@ -25,6 +25,7 @@
 
 #pragma once
 #include "becommons_namespace.hpp"
+#include "nucleo/engine.hpp"
 #include "util/caixa.hpp"
 #include "inputs/inputs.hpp"
 #include "os/janela.hpp"
@@ -80,7 +81,7 @@ namespace BECOMMONS_NS {
                 m_mouse_cima = mouseEmCima();
 
                 if (m_mouse_cima && s_contagem_areas <= 1) {
-                    janela::obterInstancia().defCursor(janela::cursor::i);
+                    janela::obterInstancia().definirCursor(janela::cursor::i);
                 }
                 if (justPressed) {
                     // seleciona somente se o clique começar dentro da área
@@ -121,11 +122,11 @@ namespace BECOMMONS_NS {
             void atualizarBuffer() {
                 m_pipe_offset = m_buffer.size();
                 
-                auto &input = janela::obterInstancia().m_inputs;
-                if(input.m_backspace_pressionado || input.m_backspace_repetido)
+                auto &input = motor::obter().m_inputs;
+                if(input->m_backspace_pressionado || input->m_backspace_repetido)
                     apagar();
-                else if(input.m_letra_pressionada)
-                    inserirLetra(input.m_ultima_letra);
+                else if(input->m_letra_pressionada)
+                    inserirLetra(input->m_ultima_letra);
                 if(num_ptr) {
                     if(m_buffer.empty() || m_buffer == "." || m_buffer == "-") *num_ptr = 0;
                     else *num_ptr = std::stof(m_buffer);

@@ -19,33 +19,56 @@
  * LIABILITY, WHETHER IN AN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
- * @file main.cpp
+ * @file engine.hpp
+ *
+ * - Processar input do sistema operacional (janela, eventos).
+ *
+ * - Atualizar a lógica do jogo (física, scripts, animações).
+ *
+ * - Renderizar a cena.
+ *
+ * - Repetir.
  */
 
-#include "nucleo/engine.hpp"
-#include "os/sistema.hpp"
+#pragma once
+#include <string>
+#include <memory>
+#include <filesystem>
+#include "depuracao/debug.hpp"
+#include "os/janela.hpp"
+#include "os/tempo.hpp"
+#include "inputs/inputs.hpp"
+#include "sistemas/sistema_de_renderizacao.hpp"
 
-// Main function
-int main(int argc, char* argv[]) {
-    // Definir diretório do projeto
-    std::string diretorio_jogos = becommons::obterDiretorioHome() + "/bubble engine/jogos";
-    if(!std::filesystem::exists(diretorio_jogos))
-        if(!std::filesystem::create_directories(diretorio_jogos)) return -1;
+/**
+ * Inclusão da engine
+ */
 
-    if (argc > 1) {
-        diretorio_jogos = argv[1];
-    }
+namespace BECOMMONS_NS {
+    enum class exec {
+        editor, jogo
+    };
 
-    try {
-        // Executa o motor com o diretório de jogos
-        auto& be = becommons::motor::obter();
-        be.definirDiretorio(diretorio_jogos);
-        be.iniciar();
-        be.rodar(becommons::exec::editor);
-    }
-    catch (const std::exception& e) {
-        depuracao::emitir(erro, e.what());
-    }
+    class motor {
+    public:
+        motor();
+        ~motor();
+        
+        void iniciar();
+        void definirDiretorio(const std::string&);
+        void rodar(const exec&);
+        void finalizar();
 
-    return 0;
+        static motor& obter();
+        void mainloop();
+
+        bool m_rodando = false;
+        exec m_game_mode;
+        std::unique_ptr<janela> m_janela;
+        std::unique_ptr<sistema_renderizacao> m_renderer;
+        std::unique_ptr<inputs> m_inputs;
+        std::unique_ptr<tempo> m_tempo;
+        //std::unique_ptr<gerenciador_cenas> m_gerenciador_cenas;
+        std::string m_games_dir;
+    };
 }

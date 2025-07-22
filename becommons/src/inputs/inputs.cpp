@@ -22,14 +22,15 @@
  * @file inputs.cpp
  */
 
-#include "glad.h"
-#include "inputs/inputs.hpp"
+#include <glad.h>
 #include <iostream>
 #include <unordered_map>
 #include <stdexcept>
+#include <GLFW/glfw3.h>
+#include "inputs/inputs.hpp"
 #include "depuracao/debug.hpp"
 #include "nucleo/fase.hpp"
-#include <GLFW/glfw3.h>
+#include "nucleo/engine.hpp"
 #include "os/janela.hpp"
 
 using namespace BECOMMONS_NS;
@@ -90,37 +91,37 @@ void inputs::soltar(const inputs::chave& key) {
     m_chaves[key] = false;
 }
 bool inputs::obter(const inputs::chave& key) {
-    auto &input = janela::obterInstancia().m_inputs;
-    return input.m_chaves[key];
+    auto &input = motor::obter().m_inputs;
+    return input->m_chaves[key];
 }
 bool inputs::obter_str(const std::string& key) {
-    auto &input = janela::obterInstancia().m_inputs;
+    auto &input = motor::obter().m_inputs;
     inputs::chave key_ = mapa_string[key];
-    return input.m_chaves[key_];
+    return input->m_chaves[key_];
 }
 
 void BECOMMONS_NS::keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods) {
-    auto &input = janela::obterInstancia().m_inputs;
-    input.m_mods = mods;
-    input.m_estado_tecla = action;
+    auto &input = motor::obter().m_inputs;
+    input->m_mods = mods;
+    input->m_estado_tecla = action;
     
     inputs::chave mappedKey = static_cast<inputs::chave>(key);
     if (action == GLFW_PRESS || action == GLFW_REPEAT) {
-        input.pressionar(mappedKey);
+        input->pressionar(mappedKey);
     }
     else if (action == GLFW_RELEASE) {
-        input.soltar(mappedKey);
+        input->soltar(mappedKey);
     }
     if (key == GLFW_KEY_BACKSPACE) {
         if (action == GLFW_PRESS) {
-            input.m_backspace_pressionado = true;
-            input.m_backspace_segura = true;
+            input->m_backspace_pressionado = true;
+            input->m_backspace_segura = true;
         }
         else if (action == GLFW_REPEAT) {
-            input.m_backspace_repetido = true;
+            input->m_backspace_repetido = true;
         }
         else if (action == GLFW_RELEASE) {
-            input.m_backspace_segura = false;
+            input->m_backspace_segura = false;
         }
     }
 
@@ -150,36 +151,36 @@ void BECOMMONS_NS::keyCallback(GLFWwindow* window, int key, int scancode, int ac
 }
 void BECOMMONS_NS::mousePosCallback(GLFWwindow* window, double x, double y)
 {
-    auto& input = janela::obterInstancia().m_inputs;
-    input.m_mousex = x;
-    input.m_mousey = y;
+    auto& input = motor::obter().m_inputs;
+    input->m_mousex = x;
+    input->m_mousey = y;
 }
 
 void BECOMMONS_NS::mouseButtonCallback(GLFWwindow* window, int button, int action, int mods)
 {
-    auto& input = janela::obterInstancia().m_inputs;
+    auto& input = motor::obter().m_inputs;
     
-    input.m_estado_mouse = action;
-    input.m_mods = mods;
+    input->m_estado_mouse = action;
+    input->m_mods = mods;
 
     inputs::chave mappedKey = static_cast<inputs::chave>(button);
     if (action == GLFW_PRESS || action == GLFW_REPEAT) {
-        input.pressionar(mappedKey);
+        input->pressionar(mappedKey);
     }
     else if (action == GLFW_RELEASE) {
-        input.soltar(mappedKey);
+        input->soltar(mappedKey);
     }
 }
 
 void BECOMMONS_NS::charCallback(GLFWwindow* window, unsigned int codepoint)
 {
-    auto& input = janela::obterInstancia().m_inputs;
+    auto& input = motor::obter().m_inputs;
 
-    input.m_ultima_letra = static_cast<char>(codepoint);
-    input.m_letra_pressionada = true;
+    input->m_ultima_letra = static_cast<char>(codepoint);
+    input->m_letra_pressionada = true;
 }
 
 dvet2 inputs::obterMousePos() {
-    auto& input = janela::obterInstancia().m_inputs;
-   return dvet2(input.m_mousex, input.m_mousey);
+    auto& input = motor::obter().m_inputs;
+   return dvet2(input->m_mousex, input->m_mousey);
 };

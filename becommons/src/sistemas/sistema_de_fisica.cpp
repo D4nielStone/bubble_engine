@@ -23,6 +23,7 @@
  */
 
 #include "becommons_namespace.hpp"
+#include "nucleo/engine.hpp"
 #include "sistemas/sistema_de_fisica.hpp"
 #include "depuracao/debug.hpp"
 #include "nucleo/fase.hpp"
@@ -70,7 +71,7 @@ void sistema_fisica::atualizar() {
         f->m_corpo_rigido->setMotionState(f->m_estado_de_movimento);
     });
     
-    mundoDinamico->stepSimulation(janela::obterInstancia().m_tempo.obterDeltaTime() * velocidade, 10, 1.f/60);
+    mundoDinamico->stepSimulation(motor::obter().m_tempo->obterDeltaTime() * velocidade, 10, 1.f/60);
     
     // Atualiza a transformacao
     reg->cada<fisica, transformacao>([&](const uint32_t entidade) {

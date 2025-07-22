@@ -59,9 +59,9 @@ fase::~fase()
 void fase::carregar()
 {
     if(carregada)
-    descarregar();
+        descarregar();
+    depuracao::emitir(debug, "fase", "carregando");
     carregada = true;
-    
 	analizar(diretorio);	
 }
 
@@ -77,6 +77,7 @@ void fase::salvar()
 
 void fase::descarregar() {
     carregada = false;
+    depuracao::emitir(debug, "fase", "descarregando");
 }
 
 fase::fase(const char* diretorio) : luz_global(std::make_shared<luz_direcional>()), diretorio(diretorio)
@@ -100,7 +101,7 @@ void fase::parar()
 	if (rodando != true)
 		return;
 	depuracao::emitir(debug, "fase", "Parando");
-	// TODO: snapshot para retornar o rodando do registro
+	carregar();
 	rodando = false;
 }
 

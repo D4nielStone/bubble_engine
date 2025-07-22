@@ -191,11 +191,10 @@ glm::mat4 camera::obtViewMatrix() {
 
 glm::mat4 camera::obtProjectionMatrix() {
     ivet2 viewp;
-    if (flag_fb && !viewport_ptr)
+    if (!viewport_ptr)
         viewp = {janela::obterInstancia().tamanho.x, janela::obterInstancia().tamanho.y};
     else if(viewport_ptr)
         viewp = {static_cast<int>(viewport_ptr->z), static_cast<int>(viewport_ptr->w)};
-    else return glm::mat4(1.f);
 
     if (flag_orth) {
         float largura = viewp.x;

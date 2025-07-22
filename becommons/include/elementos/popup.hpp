@@ -56,7 +56,7 @@ namespace BECOMMONS_NS {
                     if (!m_referencia) return;
 
                     // Detecta borda de clique
-                    bool mouseE = janela::obterInstancia().m_inputs.obter(inputs::MOUSE_E);
+                    bool mouseE = motor::obter().m_inputs->obter(inputs::MOUSE_E);
                     bool mousePressedEdge = (mouseE && !prevMouseE);
                     prevMouseE = mouseE;
 
@@ -76,7 +76,7 @@ namespace BECOMMONS_NS {
                         }
                     } 
 
-                    float dt = janela::obterInstancia().m_tempo.obterDeltaTime();
+                    float dt = motor::obter().m_tempo->obterDeltaTime();
                     x_antigo = m_referencia->pressionado() ? inputs::obterMousePos().x : x_antigo;
                     y_antigo = m_referencia->m_pressionado ? inputs::obterMousePos().y : y_antigo;
                     float mais_largo = 20.f, cursorx = 0.f;

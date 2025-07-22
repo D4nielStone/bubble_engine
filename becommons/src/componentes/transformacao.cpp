@@ -148,7 +148,7 @@ void  transformacao::definirRotacao(const fvet4& v) {
 }
 
 void transformacao::mover(float v1, float v2, float v3) {
-    float delta = janela::obterInstancia().m_tempo.obterDeltaTime();
+    float delta = motor::obter().m_tempo->obterDeltaTime();
 
     // Atualiza a posição com base na entrada
     posicao += forward * v3 * delta;  // Move para frente/trás
@@ -157,13 +157,13 @@ void transformacao::mover(float v1, float v2, float v3) {
 }
     
 void  transformacao::escalonar(float v1, float v2, float v3) {
-    float delta = janela::obterInstancia().m_tempo.obterDeltaTime();
+    float delta = motor::obter().m_tempo->obterDeltaTime();
     escala += fvet3(v1,v2,v3)*delta;
 }
         
 void  transformacao::rotacionar(float v1, float v2, float v3) {
     m_usar_alvo = false;
-    float delta = janela::obterInstancia().m_tempo.obterDeltaTime();
+    float delta = motor::obter().m_tempo->obterDeltaTime();
     rotacao += fvet3(v1,v2,v3)*delta;
 }
 

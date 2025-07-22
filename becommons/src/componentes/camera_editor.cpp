@@ -25,6 +25,7 @@ SOFTWARE.
  */
 
 #include "componentes/camera_editor.hpp"
+#include "inputs/inputs.hpp"
 #include "api/mat.hpp"
 #include "depuracao/debug.hpp"
 #include "os/janela.hpp"
@@ -73,9 +74,9 @@ void camera_editor::atualizarMovimentacao() {
     float mousey_atual = inputs::obterMousePos().y;
     // Movement
     if (inputs::obter(inputs::W)) transform->mover(0, 0, sens);
-    if (inputs::obter(inputs::A)) transform->mover(-sens, 0, 0);
+    if (inputs::obter(inputs::A)) transform->mover(sens, 0, 0);
     if (inputs::obter(inputs::S)) transform->mover(0, 0, -sens);
-    if (inputs::obter(inputs::D)) transform->mover(sens, 0, 0);
+    if (inputs::obter(inputs::D)) transform->mover(-sens, 0, 0);
     if (inputs::obter(inputs::ESPACO)) transform->mover(0, sens, 0);
     if (inputs::obter(inputs::E_SHIFT)) transform->mover(0, -sens, 0);
 

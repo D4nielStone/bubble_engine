@@ -36,23 +36,25 @@
 #include "elementos/imagem.hpp"
 #include "elementos/texto.hpp"
 #include "util/vetor4.hpp"
+#include "os/janela.hpp"
 
 namespace BECOMMONS_NS { 
 	static GLuint VAO, VBO, EBO;
     struct interface : sistema {
         void desenhar(caixa*);
-        static void atualizarLJ(caixa*);
-        static void atualizarAJ(caixa*);
-        static void atualizarHDTF(caixa*, std::function<void(caixa*)>);
-        static bool deveAtualizar(caixa*);
-        static void chamarFuncoes(caixa*);
+        void atualizarLJ(caixa*);
+        void atualizarAJ(caixa*);
+        void atualizarHDTF(caixa*, std::function<void(caixa*)>);
+        void chamarFuncoes(caixa*);
         void configOpenglState() const;
+        bool deveAtualizar(caixa*);
         void deconfigOpenglState() const;
         void processarDimensaoModular(caixa*, fvet2&, fvet2&);
         void organizarLinha(caixa*, bool, const ivet2 , const fvet2&, const fvet2&, fvet2&);
         void processarModular(caixa*);
         void atualizarFilhos(caixa*);
         interface();
+        interface(janela*);
         ~interface();
 
         void gerarBuffers();
@@ -63,6 +65,7 @@ namespace BECOMMONS_NS {
         std::set<caixa*> pos_render;
         std::unique_ptr<caixa> m_raiz;
         glm::mat4 projecao_viewport;
+        janela* m_window = nullptr;
     };
 }
 // \see interface.cpp

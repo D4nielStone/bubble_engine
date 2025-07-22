@@ -63,9 +63,9 @@ void sistema_renderizacao::calcularTransformacao(transformacao* t) {
 	} 
 	else {
 		matrizmodelo = glm::translate(glm::mat4(1.f), t->obterPosicao().to_glm()); // Aplica a translação
-		matrizmodelo = glm::rotate(matrizmodelo, glm::radians(t->obterRotacao().z), glm::vec3(0.f, 0.f, 1.f));
-		matrizmodelo = glm::rotate(matrizmodelo, glm::radians(t->obterRotacao().y), glm::vec3(0.f, 1.f, 0.f));
-		matrizmodelo = glm::rotate(matrizmodelo, glm::radians(t->obterRotacao().x), glm::vec3(1.f, 0.f, 0.f));
+		matrizmodelo = glm::rotate(matrizmodelo, glm::radians(-t->obterRotacao().z), glm::vec3(0.f, 0.f, 1.f));
+		matrizmodelo = glm::rotate(matrizmodelo, glm::radians(-t->obterRotacao().y), glm::vec3(0.f, 1.f, 0.f));
+		matrizmodelo = glm::rotate(matrizmodelo, glm::radians(-t->obterRotacao().x), glm::vec3(1.f, 0.f, 0.f));
 		matrizmodelo = glm::scale(matrizmodelo, t->obterEscala().to_glm());       // Aplica a escala
 	}
 	t->definirMatrizModelo(matrizmodelo);

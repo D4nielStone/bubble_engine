@@ -139,6 +139,12 @@ void interface::desenhar(caixa* c) {
 
 interface::interface() {
     m_raiz = std::make_unique<caixa>();
+    m_window = &janela::obterInstancia();
+}
+
+interface::interface(janela* window) {
+    m_raiz = std::make_unique<caixa>();
+    m_window = window;
 }
 
 caixa* interface::obterRaiz() {
@@ -212,9 +218,9 @@ bool interface::deveAtualizar(caixa* it_caixa) {
     }
 
     // Atualização forçada por evento de entrada
-    if(janela::temInstancia() 
-            && (janela::obterInstancia().m_inputs.m_estado_mouse == GLFW_PRESS 
-                || janela::obterInstancia().m_inputs.m_estado_tecla == GLFW_PRESS)) {
+    if(m_window
+            && (motor::obter().m_inputs->m_estado_mouse == GLFW_PRESS 
+                || motor::obter().m_inputs->m_estado_tecla == GLFW_PRESS)) {
         return true;
     }
     it_caixa->m_estilo_antigo = it_caixa->m_estilo;
@@ -225,11 +231,11 @@ void interface::configOpenglState() const {
     glCullFace(GL_FRONT);
     glDisable(GL_DEPTH_TEST);
     glViewport(0, 0,
-janela::obterInstancia().tamanho.x,
-janela::obterInstancia().tamanho.y
+        m_window->tamanho.x,
+        m_window->tamanho.y
             );
     glClear(GL_COLOR_BUFFER_BIT);
-    glClearColor(0, 0, 0, 1);
+    glClearColor(0, 0, 0, 0);
 }
 
 void interface::deconfigOpenglState() const {
@@ -240,21 +246,20 @@ void interface::deconfigOpenglState() const {
 void interface::atualizar() {
     configOpenglState();
 
-    janela::obterInstancia().defCursor(janela::cursor::seta);
-    projecao_viewport = glm::ortho(0.f, static_cast<float>(janela::obterTamanhoJanela().x),
-        static_cast<float>(janela::obterTamanhoJanela().y), 0.f);
+    m_window->definirCursor(janela::cursor::seta);
+    projecao_viewport = glm::ortho(0.f, static_cast<float>(m_window->tamanho.x),
+        static_cast<float>(m_window->tamanho.y), 0.f);
     // atualiza dimensões da m_raiz
     if(!m_raiz) throw std::runtime_error("Raiz não definida!");
     m_raiz->m_estilo.m_limites = {0.f, 0.f,
-        static_cast<float>(janela::obterTamanhoJanela().x),
-        static_cast<float>(janela::obterTamanhoJanela().y)};
+        static_cast<float>(m_window->tamanho.x),
+        static_cast<float>(m_window->tamanho.y)};
 
     // reseta a flag de detecção de toque
     s_contagem_areas = 0;
-
-    atualizarHDTF(m_raiz.get(), chamarFuncoes);
-    atualizarHDTF(m_raiz.get(), atualizarLJ);
-    atualizarHDTF(m_raiz.get(), atualizarAJ); 
+    atualizarHDTF(m_raiz.get(), [this](auto* no) { chamarFuncoes(no); });
+    atualizarHDTF(m_raiz.get(), [this](auto* no) { atualizarLJ(no); });
+    atualizarHDTF(m_raiz.get(), [this](auto* no) { atualizarAJ(no); });
     atualizarFilhos(m_raiz.get());
     desenhar(m_raiz.get());
     glEnable(GL_SCISSOR_TEST);
@@ -262,7 +267,7 @@ void interface::atualizar() {
         if(filho->m_estilo.m_ativo) {
         glScissor(
             filho->m_estilo.m_limites.x,
-            janela::obterTamanhoJanela().y - filho->m_estilo.m_limites.y - filho->m_estilo.m_limites.w + 1.f,
+            m_window->tamanho.y - filho->m_estilo.m_limites.y - filho->m_estilo.m_limites.w + 1.f,
             filho->m_estilo.m_limites.z + 1.f,
             filho->m_estilo.m_limites.w
         );

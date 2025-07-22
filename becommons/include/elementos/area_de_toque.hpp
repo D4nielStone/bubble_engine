@@ -28,6 +28,7 @@
 #pragma once
 #include <functional>
 #include "becommons_namespace.hpp"
+#include "nucleo/engine.hpp"
 #include "util/caixa.hpp"
 #include "inputs/inputs.hpp"
 #include "os/janela.hpp"
@@ -57,7 +58,7 @@ namespace BECOMMONS_NS {
                 // Caso dentro do campo
                 if(mouseEmCima() && s_contagem_areas <= 1) {
                     // Define cursor para mão
-                    janela::obterInstancia().defCursor(janela::cursor::mao);
+                    janela::obterInstancia().definirCursor(janela::cursor::mao);
                     // Caso o gatilho esteja desativado e o mouse esquerdo tocado
                     if(!m_gatilho && inputs::obter(inputs::MOUSE_E)) {
                         m_arrastando = true;

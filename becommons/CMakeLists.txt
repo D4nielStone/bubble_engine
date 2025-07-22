@@ -66,6 +66,7 @@ target_sources(becommons PRIVATE
     src/componentes/terreno.cpp
     src/inputs/inputs.cpp
     src/nucleo/fase.cpp
+    src/nucleo/engine.cpp
     src/sistemas/sistema_de_codigo.cpp
     src/sistemas/sistema_de_fisica.cpp
     src/sistemas/sistema_de_renderizacao.cpp

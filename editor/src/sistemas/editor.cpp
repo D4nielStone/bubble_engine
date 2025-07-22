@@ -220,21 +220,21 @@ void sistema_editor::salvarEditor() {
  */
 void sistema_editor::chamarInputs() {
     // Salva o editor e o projeto, e inicia o runtime
-    if(inputs::obter(inputs::F1)) {
-        salvarEditor();
-        projeto_atual->salvarFases();
-        executarRuntime();
-    }
-    // Apenas roda a versão mais recente do runtime
-    if(inputs::obter(inputs::F2)) {
-        executarRuntime();
-    }
-    if(inputs::obter(inputs::F3)) {
-        projeto_atual->obterFaseAtual()->iniciar();
-    }
     // Gerencia inputs com a tecla CTRL pressionada para evitar repetições
     if(inputs::obter(inputs::E_CTRL)) {
-        if(gatilho_ && inputs::obter(inputs::A)) {
+        if(inputs::obter(inputs::R)) {
+            salvarEditor();
+            projeto_atual->salvarFases();
+            executarRuntime();
+        } 
+        else if(gatilho_ && inputs::obter(inputs::F3)) {
+            if(projeto_atual->obterFaseAtual()->rodando)
+                projeto_atual->obterFaseAtual()->parar();
+            else
+                projeto_atual->obterFaseAtual()->iniciar();
+            gatilho_ = false;
+        }
+        else if(gatilho_ && inputs::obter(inputs::A)) {
             projeto_atual->obterFaseAtual()->obterRegistro()->criar(); // Cria nova entidade
             gatilho_ = false;
         } else if(gatilho_ && inputs::obter(inputs::X)) {
@@ -244,7 +244,7 @@ void sistema_editor::chamarInputs() {
             salvarEditor(); // Salva configurações do editor
             projeto_atual->salvarFases(); // Salva todas as fases do projeto
             gatilho_ = false;
-        } else if(!inputs::obter(inputs::X) && !inputs::obter(inputs::A) && !inputs::obter(inputs::S)) {
+        } else if(!inputs::obter(inputs::R) && !inputs::obter(inputs::F3) && !inputs::obter(inputs::X) && !inputs::obter(inputs::A) && !inputs::obter(inputs::S)) {
             gatilho_ = true; // Reinicia o gatilho quando nenhuma das teclas é pressionada
         }
     }
@@ -415,14 +415,13 @@ void sistema_editor::atualizarGizmo() {
                     auto cdg_ptr = reg->obter<codigo>(entidade_atual);
                     if (cdg_ptr) {
                         comp_pop->m_estilo.m_orientacao_modular = estilo::orientacao::vertical;
-                        std::string _editor = obterEDT();
+                        std::string _editor = obterEditor();
                         std::string _arquivo = std::filesystem::path(cdg_ptr->arquivoCompleto).filename().string();
                         int entidade = entidade_atual;
                         comp_pop->adicionar<elementos::botao>([reg, entidade](){
                                 auto cdg_ptr = reg->obter<codigo>(entidade);
-                                std::string editor = obterEDT();
                                 std::string arquivo = cdg_ptr->arquivoCompleto;
-                                abrirNoTerminal(editor, arquivo);
+                                abrirArquivo(arquivo);
                                 }, "abrir " + _arquivo + "\ncom " + _editor, "Codigo.png");
                         comp_pop->adicionar<elementos::botao>([reg, entidade](){ 
                             reg->remover<codigo>(entidade);
