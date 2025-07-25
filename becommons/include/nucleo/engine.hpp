@@ -60,7 +60,8 @@ namespace BECOMMONS_NS {
         void finalizar();
 
         static motor& obter();
-        void mainloop();
+        void initRuntime();
+        void initEditor();
 
         bool m_rodando = false;
         exec m_game_mode;

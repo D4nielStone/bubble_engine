@@ -39,8 +39,11 @@ int main(int argc, char* argv[]) {
     try {
         // Executa o motor com o diretório de jogos
         auto& be = becommons::motor::obter();
+        // Define diretório padrão de jogos
         be.definirDiretorio(diretorio_jogos);
+        // Inicia o motor
         be.iniciar();
+        // Inicia loop principal
         be.rodar(becommons::exec::jogo);
     }
     catch (const std::exception& e) {

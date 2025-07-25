@@ -53,7 +53,7 @@ namespace BECOMMONS_NS {
             // \return retorna documento json do projeto
             void analisar();
             // \brief inicia mainloop
-            void rodar();
+            void update();
             // \brief cria janela glfw e inicia contexto opengl
             void criarJanela();
             // \brief salva todas as fases do projeto

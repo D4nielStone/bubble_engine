@@ -39,45 +39,66 @@ using namespace BECOMMONS_NS;
 
 static janela* instanciaAtual {nullptr};
 
-// Callback de erro
+// \brief Callback de erro glfw
 void errorCallback(int error, const char* description) {
-    std::cerr << "GLFW Error (" << error << "): " << description << std::endl;
+    depuracao::emitir(erro, "janela", " (" + std::to_string(error) + "): " + std::string(description));
 }
+
+// \brief Define o estado atual do cursor do mouse
 void janela::definirCursor(const cursor c) {
     m_cursor = c;
 }
 
+// \returns Se a instância é válida
 bool janela::temInstancia() {
-    return instanciaAtual;
+    return instanciaAtual != nullptr;
 }
 
+// \returns Instância global atual
 janela& janela::obterInstancia() {
-    if (!temInstancia())
-       throw std::runtime_error("Instância da janela não foi gerada!");
     return *instanciaAtual;
 }
             
+// \returns Se a janela global glfw foi fechada
 bool janela::deveFechar() {
     return glfwWindowShouldClose(janela::obterInstancia().window);
 }
 
+// \brief Gera uma nova instância global
+// \param ´cfg´ Define  o tipo de janela baseado na sua configuração
 void janela::gerarInstancia(const configuracao cfg) {
     if(instanciaAtual) delete instanciaAtual;
+    depuracao::emitir(debug, "janela", "Nova instância");
     instanciaAtual = new janela(cfg);
 }
+
+// \brief Gera uma nova instância global
+// \param ´nome' Nome da janela
+// \param ´bounds' Dimensões da janela
+// \param ´icon_path' Ícone minimizado da janela
 void janela::gerarInstancia(const char* nome, fvet2 bounds , const char* icon_path ) {
     if(instanciaAtual) delete instanciaAtual;
+    depuracao::emitir(debug, "janela", "Nova instância");
     instanciaAtual = new janela(nome, bounds, icon_path);
 }
+
+// \brief Gera uma intância global
+// \param ´nome' Nome da janela
+// \param ´f' Flag que informa se a janela será maximizada
+// \param ´bounds' Dimensões da janela
+// \param ´icon_path' Ícone minimizado da janela
 void janela::gerarInstancia(const char* nome, const bool f, fvet2 bounds , const char* icon_path ) {
     if(instanciaAtual) delete instanciaAtual;
+    depuracao::emitir(debug, "janela", "Nova instância");
     instanciaAtual = new janela(nome, f, bounds, icon_path);
 }
 
+// \returns Tamanho da instância atual
 ivet2 janela::obterTamanhoJanela() {
     return janela::obterInstancia().tamanho;
 };
 
+// \brief Posiciona o mouse da `Instância`
 void janela::posicionarCursor(double x, double y) {
     auto& input = motor::obter().m_inputs;
     
@@ -86,11 +107,14 @@ void janela::posicionarCursor(double x, double y) {
     glfwSetCursorPos(janela::obterInstancia().window, x, y);
 }
 
+// \brief Destrutor padrão
+// Descarrega shader opengl e limpa registro de fontes carregadas
 janela::~janela() {
     descarregarShaders();
     gerenciadorFontes::limparFontes();
 }
 
+// \brief Construtor baseado em :`configuracao`
 janela::janela(const configuracao cfg) {
     switch (cfg) {
         case janela::padrao:
@@ -166,6 +190,7 @@ janela::janela(const configuracao cfg) {
     }
 }
 
+// \brief Construtor baseado em :`nome`, `bounds` e `icon_path`
 janela::janela(const char* nome, fvet2 bounds, const char* icon_path) {
     glfwSetErrorCallback(errorCallback);
     // inicia glfw
@@ -212,6 +237,7 @@ janela::janela(const char* nome, fvet2 bounds, const char* icon_path) {
     tamanho.x = tam.z;
 }
 
+// \brief Construtor baseado em :`nome`, `f`, `bounds` e `icon_path`
 janela::janela(const char* nome, const bool f, fvet2 bounds , const char* icon_path) {
     glfwSetErrorCallback(errorCallback);
     // inicia glfw
@@ -287,15 +313,18 @@ void janela::swap()  {
     motor::obter().m_tempo->calcularDT();
 }
 
+// \brief Define viewport baseado no tamanho da janela
 void janela::viewport() const {
     glViewport(0, 0, tamanho.x, tamanho.y);
 }
 
+// \brief Define um novo nome para a janela
 void janela::nome(const char* novo_nome) {
     glfwSetWindowTitle(window, novo_nome);
     m_nome = novo_nome;
 }
 
+// \returns Obtém o nome atual da janela
 std::string janela::nome() const {
     return m_nome;
 }

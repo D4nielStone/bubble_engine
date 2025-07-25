@@ -52,49 +52,40 @@ std::shared_ptr<fase> projeto::obterFase(const std::string& nome) {
     else return m_fases[nome];
 }
 
-void projeto::rodar() {
-    if (!janela::temInstancia()) throw std::runtime_error("Janela não instânciada.");
+void projeto::update() {
+	// Atualiza e renderiza fase atual
+    if(obterFaseAtual()) {
+        // Executa funções opengl de outras threads
+        while(!fila_opengl.empty()) {
+            auto func = fila_opengl.front();
+            func();
+            fila_opengl.pop();
+        }
     
-    while (!janela::deveFechar()) {
-        // Atualiza eventos glfw
-		janela::obterInstancia().poll();
-
-		// Atualiza e renderiza fase atual
-        if(obterFaseAtual()) {
-            // Executa funções opengl de outras threads
-            while(!fila_opengl.empty()) {
-                auto func = fila_opengl.front();
-                func();
-                fila_opengl.pop();
-            }
-        
-            // Atualiza/Inicializa sistemas pra quando a fase for iniciada
-            if (obterFaseAtual()->rodando) {
-                if(!m_codigo.init) m_codigo.inicializar();
-                m_codigo.atualizar();        
-                if(!m_fisica.init) m_fisica.inicializar();
-                m_fisica.atualizar();        
-            }
-
-            // Inicializa sistema de renderização
-            if (!m_render.init) m_render.inicializar();
-            m_render.atualizar();        
-                
-            if(obterFaseAtual()->rodando) {
-                if(!m_interface.init) {
-                    m_interface.inicializar();
-                }
-                m_interface.atualizar();    
-            }
+        // Atualiza/Inicializa sistemas pra quando a fase for iniciada
+        if (obterFaseAtual()->rodando) {
+            if(!m_codigo.init) m_codigo.inicializar();
+            m_codigo.atualizar();        
+            if(!m_fisica.init) m_fisica.inicializar();
+            m_fisica.atualizar();        
         }
-        // Atualiza sistemas complementares
-        for (auto& s : sistemas) {
-            if(!s->init) s->inicializar();
-            s->atualizar();        
+
+        // Inicializa sistema de renderização
+        if (!m_render.init) m_render.inicializar();
+        m_render.atualizar();        
+            
+        if(obterFaseAtual()->rodando) {
+            if(!m_interface.init) {
+                m_interface.inicializar();
+            }
+            m_interface.atualizar();    
         }
-        // Desenha o frame 
-		janela::obterInstancia().swap();
-	}
+    }
+    // Atualiza sistemas complementares
+    for (auto& s : sistemas) {
+        if(!s->init) s->inicializar();
+        s->atualizar();        
+    }
 }
 
 projeto::~projeto() {

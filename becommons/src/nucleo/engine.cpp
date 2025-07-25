@@ -23,6 +23,7 @@
  */
 
 #include "nucleo/engine.hpp"
+#include "nucleo/projeto.hpp"
 #include "util/versao.hpp"
 
 using namespace BECOMMONS_NS;
@@ -39,15 +40,40 @@ void motor::iniciar() {
     depuracao::emitir(debug, "motor", "Iniciando Bubble Engine " + std::string(BUBBLE_VERSAO_COMPLETA_STR));
     /**
      * inicializa splash screen
-     */
+     
     std::thread splash([](){
         auto splash = new janela(janela::splash_screen);
     });
     thread.join();
+     */
 }
+
+void motor::initEditor() {
+    // Inicializa projeto com o diretório do jogo
+    becommons::projeto runtime(m_games_dir);
+    if(janela::temInstancia())
+    while(!janela::deveFechar()) {
+        janela::obterInstancia().poll();
+        runtime.update();
+        janela::obterInstancia().swap();
+    }
+}
+
+void motor::initRuntime() {
+    // Inicializa projeto com o diretório do jogo
+    becommons::projeto runtime(m_games_dir);
+    if(janela::temInstancia())
+    while(!janela::deveFechar()) {
+        janela::obterInstancia().poll();
+        runtime.update();
+        janela::obterInstancia().swap();
+    }
+}
+
 void motor::rodar(const exec& gm) {
     m_game_mode = gm;
-    mainloop();
+    if(gm == exec::jogo) initRuntime();
+    else                 initEditor();
 }
 void motor::finalizar() {}
 
@@ -57,11 +83,4 @@ motor& becommons::motor::obter() {
 }
 void motor::definirDiretorio(const std::string& path) {
     m_games_dir = path;
-}
-void motor::mainloop() {
-    if(janela::temInstancia())
-    while(!janela::deveFechar()) {
-        janela::obterInstancia().poll();
-        janela::obterInstancia().swap();
-    }
 }
