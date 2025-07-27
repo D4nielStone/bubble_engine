@@ -65,10 +65,10 @@ namespace BECOMMONS_NS {
 
         bool m_rodando = false;
         exec m_game_mode;
-        std::unique_ptr<janela> m_janela;
-        std::unique_ptr<sistema_renderizacao> m_renderer;
-        std::unique_ptr<inputs> m_inputs;
-        std::unique_ptr<tempo> m_tempo;
+        //std::unique_ptr<janela> m_janela;
+        std::shared_ptr<sistema_renderizacao> m_renderer;
+        std::shared_ptr<inputs> m_inputs;
+        std::shared_ptr<tempo> m_tempo;
         //std::unique_ptr<gerenciador_cenas> m_gerenciador_cenas;
         std::string m_games_dir;
     };

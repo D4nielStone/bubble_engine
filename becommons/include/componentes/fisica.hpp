@@ -53,6 +53,8 @@ namespace BECOMMONS_NS {
         void definirForca(const fvet3& vetor);
         void definirVelocidade(const fvet3& vetor);
         void definirFatorLinear(const fvet3& fator);
+        void definirPosicao(const fvet3& fator);
+        void definirPosicao(const float x, const float y, const float z);
         void definirFatorAngular(const fvet3& fator);
         void definirFriccao(const float fator);
         void definirRestituicao(const float fator);

@@ -52,5 +52,16 @@ namespace BECOMMONS_NS {
 	static inline float dist(const float& a, const float& b) {
 		return std::abs(a - b);
 	}
+	static inline float dist(const fvet2& a, const fvet2& b) {
+	    float dx = b.x - a.x;
+        float dy = b.y - a.y;
+        return std::sqrt(dx * dx + dy * dy);
+    }
+	static inline float dist(const fvet3& a, const fvet3& b) {
+	    float dx = b.x - a.x;
+        float dy = b.y - a.y;
+        float dz = b.z - a.z;
+        return std::sqrt(dx * dx + dy * dy + dz * dz);
+    }
 }
 // @see api_lua.cpp

@@ -53,24 +53,6 @@ sistema_fisica::~sistema_fisica() {
 void sistema_fisica::atualizar() {
     auto reg = projeto_atual->obterFaseAtual()->obterRegistro();
     
-    // Atualiza a física
-    reg->cada<fisica, transformacao>([&](const uint32_t entidade) {
-        auto f = reg->obter<fisica>(entidade);
-        auto t = reg->obter<transformacao>(entidade);
-
-        btTransform bt;
-        btQuaternion btRot;
-        // define posicao
-        bt.setOrigin(t->posicao.to_btvec());
-        // define rotação
-        btRot.setEulerZYX(t->rotacao.y, t->rotacao.x, t->rotacao.z); 
-        bt.setRotation(btRot); 
-
-        f->m_estado_de_movimento->setWorldTransform(bt); 
-        f->m_corpo_rigido->activate();
-        f->m_corpo_rigido->setMotionState(f->m_estado_de_movimento);
-    });
-    
     mundoDinamico->stepSimulation(motor::obter().m_tempo->obterDeltaTime() * velocidade, 10, 1.f/60);
     
     // Atualiza a transformacao

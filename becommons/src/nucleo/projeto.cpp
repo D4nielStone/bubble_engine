@@ -46,12 +46,6 @@
 
 using namespace BECOMMONS_NS;
 
-// Retorna fase quando for encontrada
-std::shared_ptr<fase> projeto::obterFase(const std::string& nome) {
-    if(m_fases.find(nome) == m_fases.end()) return nullptr;
-    else return m_fases[nome];
-}
-
 void projeto::update() {
 	// Atualiza e renderiza fase atual
     if(obterFaseAtual()) {
@@ -74,12 +68,12 @@ void projeto::update() {
         if (!m_render.init) m_render.inicializar();
         m_render.atualizar();        
             
-        if(obterFaseAtual()->rodando) {
+        /*if(obterFaseAtual()->rodando) {
             if(!m_interface.init) {
                 m_interface.inicializar();
             }
             m_interface.atualizar();    
-        }
+        }*/
     }
     // Atualiza sistemas complementares
     for (auto& s : sistemas) {
@@ -91,9 +85,16 @@ void projeto::update() {
 projeto::~projeto() {
 }
 
+// Retorna fase quando for encontrada
+std::shared_ptr<fase> projeto::obterFase(const std::string& nome) {
+    if(m_fases.find(nome) == m_fases.end()) return nullptr;
+    else return m_fases[nome];
+}
+
 projeto::projeto(const std::string& diretorio) : m_diretorio(diretorio) {
     // Torna projeto atual
     projeto_atual = this;
+    // Parse do arquivo de configuração
     analisar();
     criarJanela();
 }
@@ -106,14 +107,17 @@ void projeto::analisar() {
     if(std::filesystem::exists(m_diretorio))
         for (const auto& entry : std::filesystem::recursive_directory_iterator(m_diretorio)) {
             if (entry.is_regular_file() && entry.path().filename() == "config.json") {
-                m_diretorio = entry.path().parent_path().string();
+                m_diretorio = entry.path().parent_path().string() + "/";
             }
         }
     else    
-        throw  std::runtime_error("Diretório do projeto inexistente.");
+        throw  std::runtime_error("Erro: Diretório do projeto inexistente.");
 
-    std::string full_path = m_diretorio + "/config.json";
-    
+    std::string full_path = m_diretorio + "config.json";
+        
+    if(!std::filesystem::exists(full_path))
+        throw  std::runtime_error("Erro: Configuração do projeto inexistente. Talvez o projeto seja muito antigo");
+
     // Executa o parsing
     std::ifstream file(full_path);
     std::stringstream sb;

@@ -28,7 +28,7 @@
 
 using namespace BECOMMONS_NS;
 
-motor::motor() : m_tempo(std::make_unique<tempo>()), m_inputs(std::make_unique<inputs>()){
+motor::motor() : m_tempo(std::make_shared<tempo>()), m_inputs(std::make_shared<inputs>()){
 }
 motor::~motor() {}
 
@@ -62,6 +62,8 @@ void motor::initEditor() {
 void motor::initRuntime() {
     // Inicializa projeto com o diretório do jogo
     becommons::projeto runtime(m_games_dir);
+    runtime.carregarFase(runtime.m_lancamento);
+    runtime.obterFaseAtual()->iniciar();
     if(janela::temInstancia())
     while(!janela::deveFechar()) {
         janela::obterInstancia().poll();

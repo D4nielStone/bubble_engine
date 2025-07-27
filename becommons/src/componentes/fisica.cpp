@@ -167,6 +167,24 @@ void fisica::definirFatorLinear(const fvet3& fator) {
         m_corpo_rigido->activate(); 
         m_corpo_rigido->setLinearFactor(fator.to_btvec()); 
 }
+void fisica::definirPosicao(const float x, const float y, const float z) {
+    definirPosicao(fvet3{x, y, z});
+}
+
+void fisica::definirPosicao(const fvet3& fator) {
+    if (!m_corpo_rigido) return;
+
+    m_corpo_rigido->activate(); // Garante que o corpo não esteja "adormecido"
+    
+    btTransform transform = m_corpo_rigido->getWorldTransform(); // Obtém a transformação atual
+    transform.setOrigin(fator.to_btvec()); // Altera apenas a posição (origem)
+    m_corpo_rigido->setWorldTransform(transform); // Define a nova transformação
+
+    // Também atualiza o estado de movimento
+    if (m_estado_de_movimento) {
+        m_estado_de_movimento->setWorldTransform(transform);
+    }
+}
 
 void fisica::definirFatorAngular(const fvet3& fator){
         m_corpo_rigido->activate(); 

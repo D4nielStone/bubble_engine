@@ -48,6 +48,7 @@
 #include "entidades/entidade.hpp"
 #include "inputs/inputs.hpp"
 #include "nucleo/fase.hpp"
+#include "nucleo/engine.hpp"
 #include "nucleo/projeto.hpp"
 #include "nucleo/registro.hpp"
 #include "sistemas/sistema.hpp"

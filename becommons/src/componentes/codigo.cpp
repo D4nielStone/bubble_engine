@@ -46,6 +46,7 @@ codigo::codigo(const std::string& arquivo) : arquivo(arquivo) {
 
 void codigo::iniciar() {
     auto bubble = estado_lua["bubble"].get_or_create<sol::table>();
+    estado_lua["eu"] = std::make_shared<api::entidade>(meu_objeto);
     bubble["meuID"] = meu_objeto;
     bubble["janela"] = &janela::obterInstancia();
 	estado_lua.script_file(arquivoCompleto);
