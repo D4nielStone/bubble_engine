@@ -28,15 +28,16 @@
 #include "nucleo/projeto.hpp"
 #include "api/mat.hpp"
 #include "inputs/inputs.hpp"
+#include "nucleo/engine.hpp"
 #include "os/janela.hpp"
 #include "depuracao/debug.hpp"
 #include "os/sistema.hpp"
 #include <cmath>
 
-using namespace BECOMMONS_NS;
+using namespace becommons;
 
 codigo::codigo(const std::string& arquivo) : arquivo(arquivo) {
-    arquivoCompleto = projeto_atual->m_diretorio + arquivo; 
+    arquivoCompleto = motor::obter().m_projeto->m_diretorio + arquivo; 
 
 	estado_lua.open_libraries(sol::lib::base);
 
@@ -46,8 +47,9 @@ codigo::codigo(const std::string& arquivo) : arquivo(arquivo) {
 
 void codigo::iniciar() {
     auto bubble = estado_lua["bubble"].get_or_create<sol::table>();
+    estado_lua["eu"] = std::make_shared<api::entidade>(meu_objeto);
     bubble["meuID"] = meu_objeto;
-    bubble["janela"] = &janela::obterInstancia();
+    bubble["janela"] = motor::obter().m_janela.get();
 	estado_lua.script_file(arquivoCompleto);
     // Obtém as funções globais
     f_atualizar = estado_lua["atualizar"];
@@ -56,7 +58,7 @@ void codigo::iniciar() {
 bool codigo::analizar(const rapidjson::Value& value) {
     if(!value.HasMember("diretorio")) return false;
     arquivo = value["diretorio"].GetString();
-    arquivoCompleto = projeto_atual->m_diretorio + arquivo; 
+    arquivoCompleto = motor::obter().m_projeto->m_diretorio + arquivo; 
 
 	estado_lua.open_libraries(sol::lib::base);
 

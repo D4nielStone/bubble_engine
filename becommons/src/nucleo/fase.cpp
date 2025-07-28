@@ -46,7 +46,7 @@ SOFTWARE.
 #include <rapidjson/prettywriter.h>
 
 using namespace rapidjson;
-using namespace BECOMMONS_NS;
+using namespace becommons;
 
 fase::fase() : m_nome(""), luz_global(std::make_shared<luz_direcional>())
 {
@@ -142,7 +142,7 @@ void fase::analizarEntidades(const Document& doc)
 	{
 		if(entidade.HasMember("id") && entidade["id"].IsInt())
             id = entidade["id"].GetInt();
-        BECOMMONS_NS::entidade ent = reg.criar(id);
+        becommons::entidade ent = reg.criar(id);
 		
 		// Itera os componentes
 		if (!entidade.HasMember("componentes") && entidade["componentes"].IsArray())

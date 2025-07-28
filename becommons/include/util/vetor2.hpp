@@ -28,11 +28,10 @@ SOFTWARE.
 #include <cmath>
 #include <type_traits>
 #include <bullet/btBulletDynamicsCommon.h>
-#include "becommons_namespace.hpp"
 #include "glm/glm.hpp"
 /* Definição da estrutura vetor2 */
 
-namespace BECOMMONS_NS {
+namespace becommons {
     template<class T>
     struct vetor2 {
         T x, y;
@@ -154,6 +153,6 @@ namespace BECOMMONS_NS {
     };
 }
 
-typedef BECOMMONS_NS::vetor2<float> fvet2;
-typedef BECOMMONS_NS::vetor2<double> dvet2;
-typedef BECOMMONS_NS::vetor2<int> ivet2;
+typedef becommons::vetor2<float> fvet2;
+typedef becommons::vetor2<double> dvet2;
+typedef becommons::vetor2<int> ivet2;

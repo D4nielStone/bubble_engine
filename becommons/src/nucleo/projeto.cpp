@@ -23,7 +23,6 @@
  */
 
 
-#include "becommons_namespace.hpp"
 #include "os/janela.hpp"
 #include "nucleo/projeto.hpp"
 #include "sistemas/sistema_de_fisica.hpp"
@@ -44,70 +43,13 @@
 #include <filesystem>
 #include <GLFW/glfw3.h>
 
-using namespace BECOMMONS_NS;
-
-// Retorna fase quando for encontrada
-std::shared_ptr<fase> projeto::obterFase(const std::string& nome) {
-    if(m_fases.find(nome) == m_fases.end()) return nullptr;
-    else return m_fases[nome];
-}
-
-void projeto::rodar() {
-    if (!janela::temInstancia()) throw std::runtime_error("Janela não instânciada.");
-    
-    while (!janela::deveFechar()) {
-        // Atualiza eventos glfw
-		janela::obterInstancia().poll();
-
-		// Atualiza e renderiza fase atual
-        if(obterFaseAtual()) {
-            // Executa funções opengl de outras threads
-            while(!fila_opengl.empty()) {
-                auto func = fila_opengl.front();
-                func();
-                fila_opengl.pop();
-            }
-        
-            // Atualiza/Inicializa sistemas pra quando a fase for iniciada
-            if (obterFaseAtual()->rodando) {
-                if(!m_codigo.init) m_codigo.inicializar();
-                m_codigo.atualizar();        
-                if(!m_fisica.init) m_fisica.inicializar();
-                m_fisica.atualizar();        
-            }
-
-            // Inicializa sistema de renderização
-            if (!m_render.init) m_render.inicializar();
-            m_render.atualizar();        
-                
-            if(obterFaseAtual()->rodando) {
-                if(!m_interface.init) {
-                    m_interface.inicializar();
-                }
-                m_interface.atualizar();    
-            }
-        }
-        // Atualiza sistemas complementares
-        for (auto& s : sistemas) {
-            if(!s->init) s->inicializar();
-            s->atualizar();        
-        }
-        // Desenha o frame 
-		janela::obterInstancia().swap();
-	}
-}
+using namespace becommons;
 
 projeto::~projeto() {
 }
 
 projeto::projeto(const std::string& diretorio) : m_diretorio(diretorio) {
-    // Torna projeto atual
-    projeto_atual = this;
     analisar();
-    criarJanela();
-}
-
-projeto::projeto() {
 }
 
 void projeto::analisar() {
@@ -115,14 +57,17 @@ void projeto::analisar() {
     if(std::filesystem::exists(m_diretorio))
         for (const auto& entry : std::filesystem::recursive_directory_iterator(m_diretorio)) {
             if (entry.is_regular_file() && entry.path().filename() == "config.json") {
-                m_diretorio = entry.path().parent_path().string();
+                m_diretorio = entry.path().parent_path().string() + "/";
             }
         }
     else    
-        throw  std::runtime_error("Diretório do projeto inexistente.");
+        throw  std::runtime_error("Erro: Diretório do projeto inexistente.");
 
-    std::string full_path = m_diretorio + "/config.json";
-    
+    std::string full_path = m_diretorio + "config.json";
+        
+    if(!std::filesystem::exists(full_path))
+        throw  std::runtime_error("Erro: Configuração do projeto inexistente. Talvez o projeto seja muito antigo");
+
     // Executa o parsing
     std::ifstream file(full_path);
     std::stringstream sb;
@@ -172,54 +117,4 @@ void projeto::analisar() {
         throw  std::runtime_error("Erro ao analisar o JSON de configuração do projeto.");
     else
         depuracao::emitir(info, "Projeto " + m_nome + " encontrado em: " + m_diretorio);
-}
-
-void projeto::criarJanela() {
-    // Cria uma instância global de janela.
-    janela::gerarInstancia(m_nome_janela.c_str(), false,
-     fvet2(m_largura, m_altura),
-    (m_diretorio + "/" + m_icone).c_str());
-}
-
-void projeto::carregarFase(const std::string &n) {
-    auto nome = m_diretorio + n;
-    depuracao::emitir(info, "carregando fase em: " + nome + ".fase");
-    
-    // Adiciona ao map de m_fases
-    m_fases[nome] = std::make_shared<fase>(nome + ".fase");
-    
-    m_fases[nome]->carregar();
-    // Torna atual
-    fase_atual = nome;
-}
-
-void projeto::carregarFases() {
-    for(auto& entry : std::filesystem::directory_iterator(m_diretorio)) {
-        if(entry.is_regular_file() && entry.path().extension() == ".fase") {
-            auto nome = entry.path().string();
-            depuracao::emitir(info, "carregando fase em: " + nome);
-            m_fases[nome] = std::make_shared<fase>(nome);
-            m_fases[nome]->carregar();
-        }
-    }
-}
-
-std::shared_ptr<fase> projeto::obterFaseAtual() {
-    if(m_fases.find(fase_atual) != m_fases.end())
-	    return m_fases[fase_atual];
-    else
-        return nullptr;
-}
-
-void projeto::salvarFases() {
-    for(auto& [nome, fase] : m_fases) {
-        salvarFase(nome);
-    }
-}
-void projeto::salvarFase(const std::string& nome) {
-    depuracao::emitir(info, "salvando fase " + nome);
-    if(m_fases.find(nome) != m_fases.end())
-        m_fases[nome]->salvar();
-    else
-        depuracao::emitir(erro, "fase inexistente.");
 }

@@ -1,6 +1,6 @@
 #include "componentes/luz_direcional.hpp"
 
-using namespace BECOMMONS_NS;
+using namespace becommons;
 
 bool luz_direcional::analizar(const rapidjson::Value& value)
 {

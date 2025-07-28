@@ -25,12 +25,11 @@
 #pragma once
 #include <assimp/scene.h>
 #include <filesystem>
-#include "becommons_namespace.hpp"
 #include "util/malha.hpp"
 #include <iostream>
 #include "shader.hpp"
 
-namespace BECOMMONS_NS {
+namespace becommons {
     class modelo {
     public:
         modelo() = default;

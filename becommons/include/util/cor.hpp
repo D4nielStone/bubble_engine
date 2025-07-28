@@ -25,10 +25,9 @@
  */
 
 #pragma once
-#include "becommons_namespace.hpp"
 #include <algorithm>
 // Definição da estrutura cor
-namespace BECOMMONS_NS {
+namespace becommons {
     struct cor
     {
         float r = 1.f, g = 1.f, b = 1.f, a = 1.f;

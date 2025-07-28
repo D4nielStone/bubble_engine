@@ -33,10 +33,9 @@ SOFTWARE.
 #include <deque>
 #include <memory>
 #include <functional>
-#include "becommons_namespace.hpp"
 #include "entidades/entidade.hpp"
 
-namespace BECOMMONS_NS {
+namespace becommons {
     /**
 	* @struct registro
 	* @brief gerencia as entidades

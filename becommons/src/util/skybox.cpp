@@ -22,14 +22,13 @@
  * @file skybox.cpp
  */
 
-#include "becommons_namespace.hpp"
 #include "util/skybox.hpp"
-#include "nucleo/projeto.hpp"
+#include "nucleo/engine.hpp"
 
-using namespace BECOMMONS_NS;
+using namespace becommons;
 
 skybox::skybox() : modelo("cubo"){
-    projeto_atual->fila_opengl.push([&](){
+    motor::obter().fila_opengl.push([&](){
     id_skybox = textureLoader::obterInstancia().carregarSkyboxMemoria( 
             {
             "skybox_right.png",

@@ -24,14 +24,12 @@
  */
 
 #pragma once
-#include "becommons_namespace.hpp"
-#include "nucleo/engine.hpp"
 #include "util/caixa.hpp"
 #include "inputs/inputs.hpp"
 #include "os/janela.hpp"
 #include <cmath>
 
-namespace BECOMMONS_NS {
+namespace becommons {
     namespace elementos {
         /** 
          * @struct area_de_texto
@@ -73,26 +71,7 @@ namespace BECOMMONS_NS {
              * A seleção só ocorre quando há transição de não pressionado para pressionado
              * dentro da área de toque, evitando cliques já iniciados fora.
              */
-            bool selecionado() {
-                bool pressionado = inputs::obter(inputs::MOUSE_E) || inputs::obter(inputs::ENTER);
-                bool justPressed = pressionado && !m_mouse_antes_pressionado;
-
-                // atualiza flag de cursor sobre a área
-                m_mouse_cima = mouseEmCima();
-
-                if (m_mouse_cima && s_contagem_areas <= 1) {
-                    janela::obterInstancia().definirCursor(janela::cursor::i);
-                }
-                if (justPressed) {
-                    // seleciona somente se o clique começar dentro da área
-                    m_selecionado = m_mouse_cima;
-                    m_pipe_offset = m_buffer.size();
-                }
-
-                // atualiza estado para o próximo frame
-                m_mouse_antes_pressionado = pressionado;
-                return m_selecionado;
-            }
+            bool selecionado();
             /**
              * Obtenção do buffer de texto
              */
@@ -119,22 +98,7 @@ namespace BECOMMONS_NS {
                 m_buffer.pop_back();
                 m_pipe_offset = m_buffer.size();
             }
-            void atualizarBuffer() {
-                m_pipe_offset = m_buffer.size();
-                
-                auto &input = motor::obter().m_inputs;
-                if(input->m_backspace_pressionado || input->m_backspace_repetido)
-                    apagar();
-                else if(input->m_letra_pressionada)
-                    inserirLetra(input->m_ultima_letra);
-                if(num_ptr) {
-                    if(m_buffer.empty() || m_buffer == "." || m_buffer == "-") *num_ptr = 0;
-                    else *num_ptr = std::stof(m_buffer);
-                } else if (str_ptr) {
-                    *str_ptr = m_buffer;
-                }
-                m_teclado_foi_solto = false;
-            }
+            void atualizarBuffer();      
         };
     }
 }

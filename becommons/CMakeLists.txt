@@ -50,8 +50,12 @@ target_include_directories(becommons PUBLIC ${CMAKE_SOURCE_DIR}/src)
 
 # Fontes do projeto
 target_sources(becommons PRIVATE
-    src/api/api_lua.cpp
+    src/nucleo/projeto.cpp
+    src/nucleo/fase.cpp
+    src/nucleo/engine.cpp
+    src/nucleo/levelmanager.cpp
     ../libs/glad/glad.c
+    src/api/api_lua.cpp
     src/arquivadores/fonte.cpp
     src/nucleo/registro.cpp
     src/arquivadores/imageloader.cpp
@@ -64,17 +68,18 @@ target_sources(becommons PRIVATE
     src/componentes/fisica.cpp
     src/componentes/transformacao.cpp
     src/componentes/terreno.cpp
+    src/componentes/renderizador.cpp
     src/inputs/inputs.cpp
-    src/nucleo/fase.cpp
-    src/nucleo/engine.cpp
     src/sistemas/sistema_de_codigo.cpp
     src/sistemas/sistema_de_fisica.cpp
     src/sistemas/sistema_de_renderizacao.cpp
     src/sistemas/interface.cpp
-    src/nucleo/projeto.cpp
     src/util/malha.cpp
     src/util/skybox.cpp
     src/util/material.cpp
+    src/elementos/area_de_toque.cpp
+    src/elementos/popup.cpp
+    src/elementos/area_de_texto.cpp
     src/os/janela.cpp
 )
 

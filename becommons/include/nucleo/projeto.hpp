@@ -29,7 +29,6 @@
 #include <functional>
 #include <rapidjson/document.h>
 #include <memory>
-#include "becommons_namespace.hpp"
 #include "fase.hpp"
 #include "sistemas/sistema.hpp"
 #include "sistemas/sistema_de_fisica.hpp"
@@ -37,56 +36,19 @@
 #include "sistemas/sistema_de_codigo.hpp"
 #include "sistemas/interface.hpp"
 
-namespace BECOMMONS_NS {
+namespace becommons {
     class projeto {
         public:
-            std::queue<std::function<void()>> fila_opengl;
+            // Variáveis de configuração
             std::string m_diretorio, m_nome, m_lancamento, m_icone, m_nome_janela;
             int m_largura, m_altura;
-            // \brief construtor para carregar arquivos do projeto.
-            // \param diretorio 
-            projeto(const std::string& diretorio);
-            projeto();
+            // \brief Construtor para carregar configuração do projeto.
+            // \param diretorio
+            projeto(const std::string&);
             ~projeto();
-
+        private:
             // \brief carregar arquivo de configuração e define diretório e outros.
             // \return retorna documento json do projeto
             void analisar();
-            // \brief inicia mainloop
-            void rodar();
-            // \brief cria janela glfw e inicia contexto opengl
-            void criarJanela();
-            // \brief salva todas as fases do projeto
-            void salvarFases();
-            // \brief salva fase pelo nome
-            // \param nome nome da fase
-            void salvarFase(const std::string& nome);
-            // \brief carrega todas as fases da pasta do projeto
-            void carregarFases();
-            // \brief carrega fase pelo nome no diretório do projeto e torna atual
-            // \param nome diretório e nome da fase
-            void carregarFase(const std::string& nome);
-            // \brief obtenção de uma fase dentro da lista da fases carregadas
-            // \param nome diretório da fase
-	        // \return ponteiro inteligente da fase
-	        std::shared_ptr<fase> obterFase(const std::string& nome);
-	        // \brief obtenção da fase atualmente em execução
-	        // \return retorna ponteiro da fase atual
-	        std::shared_ptr<fase> obterFaseAtual();
-
-            sistema_fisica m_fisica;
-            sistema_renderizacao m_render;
-            sistema_codigo m_codigo;
-            interface m_interface;
-            std::vector<sistema*> sistemas;
-            // \brief id para fase atual
-            std::string fase_atual;
-        private:
-            // \brief cria projeto com cubo, luz direcional e código de rotação.
-            void criarProjetoVazio(const std::string& path, const char* nome);
-            // \brief vetor de fases carregadas
-            std::unordered_map<std::string, std::shared_ptr<fase>> m_fases;
     };
-    // \brief Instância global do projeto atual
-    inline projeto* projeto_atual{nullptr}; 
 }

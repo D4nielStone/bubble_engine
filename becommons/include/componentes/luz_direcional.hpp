@@ -25,12 +25,11 @@ SOFTWARE.
  */
 
 #pragma once
-#include "becommons_namespace.hpp"
 #include "componente.hpp"
 #include "util/vetor3.hpp"
 #include "util/cor.hpp"
 
-namespace BECOMMONS_NS {
+namespace becommons {
     struct luz_direcional : public componente
     {
         fvet3 direcao, ambiente, cor; float intensidade = 1.f;

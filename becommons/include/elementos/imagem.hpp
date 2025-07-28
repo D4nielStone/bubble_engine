@@ -35,9 +35,8 @@ SOFTWARE.
 #include "util/textura.hpp"
 #include "arquivadores/shader.hpp"
 #include "arquivadores/imageloader.hpp"
-#include "becommons_namespace.hpp"
 
-namespace BECOMMONS_NS{
+namespace becommons{
     namespace elementos{
 	    class imagem : public area_de_toque {
         public:

@@ -28,11 +28,10 @@ SOFTWARE.
 #include <cmath>
 #include <type_traits>
 #include <bullet/btBulletDynamicsCommon.h>
-#include "becommons_namespace.hpp"
 #include "glm/glm.hpp"
 /* Definição da estrutura vetor3 */
 
-namespace BECOMMONS_NS {
+namespace becommons {
     template<class T>
     struct vetor3 {
         T x, y, z;
@@ -175,6 +174,6 @@ namespace BECOMMONS_NS {
     };
 }
 
-typedef BECOMMONS_NS::vetor3<float> fvet3;
-typedef BECOMMONS_NS::vetor3<double> dvet3;
-typedef BECOMMONS_NS::vetor3<int> ivet3;
+typedef becommons::vetor3<float> fvet3;
+typedef becommons::vetor3<double> dvet3;
+typedef becommons::vetor3<int> ivet3;

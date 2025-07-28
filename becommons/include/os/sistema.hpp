@@ -30,10 +30,9 @@
 #include <fstream>
 #include <unistd.h>
 #include <limits.h>
-#include "becommons_namespace.hpp"
 #include "depuracao/debug.hpp"
 
-namespace BECOMMONS_NS {
+namespace becommons {
     inline static std::string obterDiretorioHome() {
         #ifdef WIN32
             // Definir mais tarde

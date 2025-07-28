@@ -32,7 +32,7 @@ SOFTWARE.
 #include "util/vetor3.hpp"
 #include <iostream>
 
-using namespace BECOMMONS_NS;
+using namespace becommons;
 
 bool terreno::analizar(const rapidjson::Value& value) {
     if(value.HasMember("heightmap") && value["heightmap"].IsString())

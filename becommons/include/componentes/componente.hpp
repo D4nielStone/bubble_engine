@@ -32,9 +32,8 @@ SOFTWARE.
 #include <rapidjson/document.h>
 #include <rapidjson/writer.h>
 #include <rapidjson/stringbuffer.h>
-#include "becommons_namespace.hpp"
 
-namespace BECOMMONS_NS {
+namespace becommons {
 	// Operadores bit a bit para mascara
 
 	/**

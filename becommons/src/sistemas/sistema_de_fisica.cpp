@@ -22,17 +22,15 @@
  * @file sistema_de_fisica.cpp
  */
 
-#include "becommons_namespace.hpp"
 #include "nucleo/engine.hpp"
 #include "sistemas/sistema_de_fisica.hpp"
 #include "depuracao/debug.hpp"
-#include "nucleo/fase.hpp"
-#include "nucleo/projeto.hpp"
+#include "nucleo/engine.hpp"
 #include "os/janela.hpp"
 #include "componentes/transformacao.hpp"
 #include "componentes/fisica.hpp"
 
-using namespace BECOMMONS_NS;
+using namespace becommons;
 
 sistema_fisica::sistema_fisica() : velocidade(1.f) {
     configColisao = new btDefaultCollisionConfiguration();
@@ -51,25 +49,7 @@ sistema_fisica::~sistema_fisica() {
 }
 
 void sistema_fisica::atualizar() {
-    auto reg = projeto_atual->obterFaseAtual()->obterRegistro();
-    
-    // Atualiza a física
-    reg->cada<fisica, transformacao>([&](const uint32_t entidade) {
-        auto f = reg->obter<fisica>(entidade);
-        auto t = reg->obter<transformacao>(entidade);
-
-        btTransform bt;
-        btQuaternion btRot;
-        // define posicao
-        bt.setOrigin(t->posicao.to_btvec());
-        // define rotação
-        btRot.setEulerZYX(t->rotacao.y, t->rotacao.x, t->rotacao.z); 
-        bt.setRotation(btRot); 
-
-        f->m_estado_de_movimento->setWorldTransform(bt); 
-        f->m_corpo_rigido->activate();
-        f->m_corpo_rigido->setMotionState(f->m_estado_de_movimento);
-    });
+    auto reg = motor::obter().m_levelmanager->obterFaseAtual()->obterRegistro();
     
     mundoDinamico->stepSimulation(motor::obter().m_tempo->obterDeltaTime() * velocidade, 10, 1.f/60);
     
@@ -90,7 +70,7 @@ void sistema_fisica::atualizar() {
 void sistema_fisica::inicializar() {
     sistema::inicializar();
     depuracao::emitir(info, "fisica", "iniciando sistema.");
-    auto reg = projeto_atual->obterFaseAtual()->obterRegistro();
+    auto reg = motor::obter().m_levelmanager->obterFaseAtual()->obterRegistro();
     reg->cada<fisica, transformacao>([reg, this](const uint32_t entidade) {
             /// adiciona corpos rigidos
             auto comp_fisica = reg->obter<fisica>(entidade);

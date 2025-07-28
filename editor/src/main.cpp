@@ -28,20 +28,20 @@
 // Main function
 int main(int argc, char* argv[]) {
     // Definir diretório do projeto
-    std::string diretorio_jogos = becommons::obterDiretorioHome() + "/bubble engine/jogos";
-    if(!std::filesystem::exists(diretorio_jogos))
-        if(!std::filesystem::create_directories(diretorio_jogos)) return -1;
+    std::string jogo = becommons::obterDiretorioHome() + "/bubble engine/jogos";
+    if(!std::filesystem::exists(jogo))
+        if(!std::filesystem::create_directories(jogo)) return -1;
 
     if (argc > 1) {
-        diretorio_jogos = argv[1];
+        jogo = argv[1];
     }
 
     try {
-        // Executa o motor com o diretório de jogos
-        auto& be = becommons::motor::obter();
-        be.definirDiretorio(diretorio_jogos);
-        be.iniciar();
-        be.rodar(becommons::exec::editor);
+
+        // Cria o motor com o diretório do jogo
+        auto be = becommons::motor(jogo);
+        be.iniciar(becommons::exec::editor);
+        be.rodar();
     }
     catch (const std::exception& e) {
         depuracao::emitir(erro, e.what());

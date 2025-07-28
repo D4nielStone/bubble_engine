@@ -26,7 +26,6 @@
 #include <glad.h>
 #include <memory>
 #include <set>
-#include "becommons_namespace.hpp"
 #include "sistemas/sistema.hpp"
 #include "arquivadores/imageloader.hpp"
 #include "arquivadores/fonte.hpp"
@@ -38,7 +37,7 @@
 #include "util/vetor4.hpp"
 #include "os/janela.hpp"
 
-namespace BECOMMONS_NS { 
+namespace becommons { 
 	static GLuint VAO, VBO, EBO;
     struct interface : sistema {
         void desenhar(caixa*);

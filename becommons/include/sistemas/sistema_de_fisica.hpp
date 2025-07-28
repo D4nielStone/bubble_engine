@@ -45,7 +45,7 @@ public:
     }
 };
 
-namespace BECOMMONS_NS {
+namespace becommons {
     struct sistema_fisica : sistema {
          sistema_fisica();
         ~sistema_fisica();

@@ -27,7 +27,7 @@
 #include <filesystem>
 #include "assets/shaders_na_memoria.hpp"
 
-using namespace BECOMMONS_NS;
+using namespace becommons;
 
 // Mapeia os shaders na memória para facilitar o acesso aos shaders embutidos
 inline const std::unordered_map<std::string, const char*> shader_memoria{
@@ -43,7 +43,7 @@ inline const std::unordered_map<std::string, const char*> shader_memoria{
     {"phong.frag", phong_frag}
 };
 
-void BECOMMONS_NS::descarregarShaders()
+void becommons::descarregarShaders()
 {
     shaders.clear();
 }
@@ -175,7 +175,7 @@ void shader::setMat3(const std::string& name, const float* value) const {
     glUniformMatrix3fv(glGetUniformLocation(ID, name.c_str()), 1, GL_FALSE, value);
 }
 
-void shader::setCor(const std::string& name, const BECOMMONS_NS::cor& cor) const {
+void shader::setCor(const std::string& name, const becommons::cor& cor) const {
     glUniform4f(glGetUniformLocation(ID, name.c_str()), cor.r, cor.g, cor.b, cor.a);
 }
 

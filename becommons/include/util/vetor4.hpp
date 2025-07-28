@@ -27,11 +27,10 @@ SOFTWARE.
 #pragma once
 #include <cmath>
 #include <glm/glm.hpp>
-#include "becommons_namespace.hpp"
 #include <btBulletDynamicsCommon.h>
 /* Definição da estrutura vetor4 */
 
-namespace BECOMMONS_NS {
+namespace becommons {
     template<class T>
     struct vetor4
     {
@@ -185,6 +184,6 @@ namespace BECOMMONS_NS {
         }
     };
 }
-typedef BECOMMONS_NS::vetor4<float> fvet4;
-typedef BECOMMONS_NS::vetor4<double> dvet4;
-typedef BECOMMONS_NS::vetor4<int> ivet4;
+typedef becommons::vetor4<float> fvet4;
+typedef becommons::vetor4<double> dvet4;
+typedef becommons::vetor4<int> ivet4;

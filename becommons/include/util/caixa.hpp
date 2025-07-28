@@ -36,9 +36,8 @@
 #include <glm/glm.hpp>
 #include "arquivadores/shader.hpp"
 #include "inputs/inputs.hpp"
-#include "becommons_namespace.hpp"
 
-namespace BECOMMONS_NS {
+namespace becommons {
     
     // \enum flag_estilo
     // Flags que definem o estilo da caixa. Também controlam o alinhamento e estilo dos filhos.

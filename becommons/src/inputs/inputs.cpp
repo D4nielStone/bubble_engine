@@ -33,7 +33,7 @@
 #include "nucleo/engine.hpp"
 #include "os/janela.hpp"
 
-using namespace BECOMMONS_NS;
+using namespace becommons;
         
 std::unordered_map<std::string, inputs::chave> mapa_string = {    
            {"Q",          inputs::Q},       
@@ -100,7 +100,7 @@ bool inputs::obter_str(const std::string& key) {
     return input->m_chaves[key_];
 }
 
-void BECOMMONS_NS::keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods) {
+void becommons::keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods) {
     auto &input = motor::obter().m_inputs;
     input->m_mods = mods;
     input->m_estado_tecla = action;
@@ -149,14 +149,14 @@ void BECOMMONS_NS::keyCallback(GLFWwindow* window, int key, int scancode, int ac
         }
     }
 }
-void BECOMMONS_NS::mousePosCallback(GLFWwindow* window, double x, double y)
+void becommons::mousePosCallback(GLFWwindow* window, double x, double y)
 {
     auto& input = motor::obter().m_inputs;
     input->m_mousex = x;
     input->m_mousey = y;
 }
 
-void BECOMMONS_NS::mouseButtonCallback(GLFWwindow* window, int button, int action, int mods)
+void becommons::mouseButtonCallback(GLFWwindow* window, int button, int action, int mods)
 {
     auto& input = motor::obter().m_inputs;
     
@@ -172,7 +172,7 @@ void BECOMMONS_NS::mouseButtonCallback(GLFWwindow* window, int button, int actio
     }
 }
 
-void BECOMMONS_NS::charCallback(GLFWwindow* window, unsigned int codepoint)
+void becommons::charCallback(GLFWwindow* window, unsigned int codepoint)
 {
     auto& input = motor::obter().m_inputs;
 

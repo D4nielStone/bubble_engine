@@ -29,13 +29,12 @@
 #include <map>
 #include <unordered_map>
 #include <ft2build.h>
-#include "becommons_namespace.hpp"
 #include "util/vetor2.hpp"
 #include FT_FREETYPE_H
 #include <functional>
 
 /// namespace becommons
-namespace BECOMMONS_NS {
+namespace becommons {
     /// @struct carectere
     /// Estrutura base da letra.
     struct caractere
@@ -54,7 +53,7 @@ namespace BECOMMONS_NS {
 /// Diretório e id da fonte respectivamente.
 typedef std::pair<std::string, unsigned int> t_FonteID;
 /// Define std::unordered_map<char32_t, caractere> como t_Caracteres.
-typedef std::unordered_map<char32_t, BECOMMONS_NS::caractere> t_Caracteres;
+typedef std::unordered_map<char32_t, becommons::caractere> t_Caracteres;
 /// Define std::map<t_FonteID, t_Caracteres> como Fontes 
 typedef std::unordered_map<t_FonteID, t_Caracteres> t_Fontes;
 /// Hash para t_FonteID
@@ -68,7 +67,7 @@ namespace std {
         }
     };
 }
-namespace BECOMMONS_NS {
+namespace becommons {
 
     /// @class gerenciadorFontes
     /// Gerencia as fontes caregadas.

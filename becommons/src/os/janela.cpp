@@ -23,7 +23,6 @@
  */
 
 #include <stdexcept>
-#include "becommons_namespace.hpp"
 #include "glad.h"
 #include "GLFW/glfw3.h"
 #include "os/janela.hpp"
@@ -35,72 +34,57 @@
 #include "arquivadores/fonte.hpp"
 #include "inputs/inputs.hpp"
 
-using namespace BECOMMONS_NS;
+using namespace becommons;
 
 static janela* instanciaAtual {nullptr};
 
-// Callback de erro
+// \brief Callback de erro glfw
 void errorCallback(int error, const char* description) {
-    std::cerr << "GLFW Error (" << error << "): " << description << std::endl;
+    depuracao::emitir(erro, "janela", " (" + std::to_string(error) + "): " + std::string(description));
 }
+
+// \brief Define o estado atual do cursor do mouse
 void janela::definirCursor(const cursor c) {
     m_cursor = c;
 }
-
-bool janela::temInstancia() {
-    return instanciaAtual;
-}
-
-janela& janela::obterInstancia() {
-    if (!temInstancia())
-       throw std::runtime_error("Instância da janela não foi gerada!");
-    return *instanciaAtual;
-}
             
+// \returns Se a janela global glfw foi fechada
 bool janela::deveFechar() {
-    return glfwWindowShouldClose(janela::obterInstancia().window);
+    return glfwWindowShouldClose(window);
 }
 
-void janela::gerarInstancia(const configuracao cfg) {
-    if(instanciaAtual) delete instanciaAtual;
-    instanciaAtual = new janela(cfg);
-}
-void janela::gerarInstancia(const char* nome, fvet2 bounds , const char* icon_path ) {
-    if(instanciaAtual) delete instanciaAtual;
-    instanciaAtual = new janela(nome, bounds, icon_path);
-}
-void janela::gerarInstancia(const char* nome, const bool f, fvet2 bounds , const char* icon_path ) {
-    if(instanciaAtual) delete instanciaAtual;
-    instanciaAtual = new janela(nome, f, bounds, icon_path);
-}
-
+// \returns Tamanho da instância atual
 ivet2 janela::obterTamanhoJanela() {
-    return janela::obterInstancia().tamanho;
+    return tamanho;
 };
 
+// \brief Posiciona o mouse da `Instância`
 void janela::posicionarCursor(double x, double y) {
     auto& input = motor::obter().m_inputs;
     
     input->m_mousex = x;
     input->m_mousey = y;
-    glfwSetCursorPos(janela::obterInstancia().window, x, y);
+    glfwSetCursorPos(window, x, y);
 }
 
+// \brief Destrutor padrão
+// Descarrega shader opengl e limpa registro de fontes carregadas
 janela::~janela() {
     descarregarShaders();
     gerenciadorFontes::limparFontes();
 }
-
+/*
+// \brief Construtor baseado em :`configuracao`
 janela::janela(const configuracao cfg) {
     switch (cfg) {
         case janela::padrao:
-            janela::gerarInstancia("default");
+            janela::janela("default");
         break;  
         case janela::splash_screen:
             const char* icon_path = "icon.ico";
             const char *nome = "splash";
             fvet2 bounds = {50.f, 50.f};
-            /* splash screen */        
+            // splash screen         
             glfwSetErrorCallback(errorCallback);
             // inicia glfw
             if (!glfwInit()) {
@@ -164,8 +148,9 @@ janela::janela(const configuracao cfg) {
                 glfwSwapBuffers(window);
             }
     }
-}
+}*/
 
+// \brief Construtor baseado em :`nome`, `bounds` e `icon_path`
 janela::janela(const char* nome, fvet2 bounds, const char* icon_path) {
     glfwSetErrorCallback(errorCallback);
     // inicia glfw
@@ -212,6 +197,7 @@ janela::janela(const char* nome, fvet2 bounds, const char* icon_path) {
     tamanho.x = tam.z;
 }
 
+// \brief Construtor baseado em :`nome`, `f`, `bounds` e `icon_path`
 janela::janela(const char* nome, const bool f, fvet2 bounds , const char* icon_path) {
     glfwSetErrorCallback(errorCallback);
     // inicia glfw
@@ -287,15 +273,18 @@ void janela::swap()  {
     motor::obter().m_tempo->calcularDT();
 }
 
+// \brief Define viewport baseado no tamanho da janela
 void janela::viewport() const {
     glViewport(0, 0, tamanho.x, tamanho.y);
 }
 
+// \brief Define um novo nome para a janela
 void janela::nome(const char* novo_nome) {
     glfwSetWindowTitle(window, novo_nome);
     m_nome = novo_nome;
 }
 
+// \returns Obtém o nome atual da janela
 std::string janela::nome() const {
     return m_nome;
 }

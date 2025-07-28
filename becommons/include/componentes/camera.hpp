@@ -32,7 +32,6 @@ SOFTWARE.
 #include <glm/ext/matrix_clip_space.hpp>
 #include <glm/ext/matrix_transform.hpp>
 #include <memory>
-#include "becommons_namespace.hpp"
 #include "componente.hpp"
 #include "transformacao.hpp"
 #include "util/skybox.hpp"
@@ -40,7 +39,7 @@ SOFTWARE.
 #include "util/cor.hpp"
 #include "util/raio.hpp"
 
-namespace BECOMMONS_NS {
+namespace becommons {
 	/**
 	 * @class camera
 	 * @brief componente que facilita a manipuacao da matriz de visualizacao e projeco

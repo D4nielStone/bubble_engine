@@ -23,12 +23,11 @@
  */
 
 #pragma once
-#include "becommons_namespace.hpp"
 #include "arquivadores/modelo.hpp"
 #include "componente.hpp"
 #include "util/vetor3.hpp"
 
-namespace BECOMMONS_NS {
+namespace becommons {
     struct fisica : componente {
         static constexpr mascara mascara { COMPONENTE_FISICA };
 
@@ -53,6 +52,8 @@ namespace BECOMMONS_NS {
         void definirForca(const fvet3& vetor);
         void definirVelocidade(const fvet3& vetor);
         void definirFatorLinear(const fvet3& fator);
+        void definirPosicao(const fvet3& fator);
+        void definirPosicao(const float x, const float y, const float z);
         void definirFatorAngular(const fvet3& fator);
         void definirFriccao(const float fator);
         void definirRestituicao(const float fator);

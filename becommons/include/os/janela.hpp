@@ -28,10 +28,9 @@
 #include <unordered_map>
 #include <glad.h>
 #include <GLFW/glfw3.h>
-#include "becommons_namespace.hpp"
 #include "util/vetor2.hpp"
 
-namespace BECOMMONS_NS {
+namespace becommons {
 	/**
 	* @class janela
 	* @brief facilita o uso da janela glfw
@@ -46,35 +45,31 @@ namespace BECOMMONS_NS {
             re_h= 0x00036005,
             re_v= 0x00036006
         };
-        enum configuracao : uint8_t {
+        /*enum configuracao : uint8_t {
             padrao          = 0,
             splash_screen =   1
         };
-        static bool deveFechar();
-        static void posicionarCursor                   (double x, double y);
-        static ivet2 obterTamanhoJanela                ();
-        static bool temInstancia();
-        static janela& obterInstancia();
-        static void gerarInstancia(const configuracao cfg = padrao);
-        static void gerarInstancia(const char* nome, fvet2 bounds = fvet2(600, 400), const char* icon_path = nullptr);
-    	static void gerarInstancia(const char* nome, const bool f, fvet2 bounds = fvet2(600, 400), const char* icon_path = nullptr);
 
-        std::string m_nome{""};
-    	ivet2 tamanho;
-    	GLFWwindow* window;
-    	janela(const configuracao);
+    	janela(const configuracao cfg = padrao);*/
     	janela(const char* nome, fvet2 bounds = fvet2(600, 400), const char* icon_path = nullptr);
     	janela(const char* nome, const bool f, fvet2 bounds = fvet2(600, 400), const char* icon_path = nullptr);
     	~janela();
+
+        bool deveFechar();
+        void posicionarCursor                   (double x, double y);
+        ivet2 obterTamanhoJanela                ();
     	void poll();
         void definirCursor(const cursor c);
     	void swap();
 		void viewport() const;
         std::string nome() const;
     	void nome(const char* novo_nome);
-        janela() = default;
+
+        std::string m_nome{""};
+    	ivet2 tamanho;
+    	GLFWwindow* window;
     private:
-        configuracao config;
+        //configuracao config;
         cursor m_cursor = cursor::seta;
 	    cursor m_cursor_antigo = cursor::seta;
 	};

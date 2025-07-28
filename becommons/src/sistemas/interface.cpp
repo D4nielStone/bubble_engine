@@ -22,15 +22,15 @@
  * @file interface.cpp
  */
 
-#include "becommons_namespace.hpp"
 #include "sistemas/interface.hpp"
 #include "os/janela.hpp"
+#include "nucleo/engine.hpp"
 #include "depuracao/debug.hpp"
 #include "elementos/popup.hpp"
 #include <cmath>
 #include <functional>
 
-using namespace BECOMMONS_NS;
+using namespace becommons;
 
 void interface::atualizarLJ(caixa* it_caixa) {
     const bool is_horizontal = it_caixa->m_estilo.m_orientacao_modular == estilo::orientacao::horizontal;
@@ -137,11 +137,13 @@ void interface::desenhar(caixa* c) {
     }
 }
 
+// \brief Inicia com a janela da engine
 interface::interface() {
     m_raiz = std::make_unique<caixa>();
-    m_window = &janela::obterInstancia();
+    m_window = motor::obter().m_janela.get();
 }
 
+// \brief Inicia com uma janela própria
 interface::interface(janela* window) {
     m_raiz = std::make_unique<caixa>();
     m_window = window;

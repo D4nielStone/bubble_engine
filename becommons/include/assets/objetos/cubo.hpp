@@ -25,13 +25,12 @@ SOFTWARE.
  */
 
 #pragma once
-#include "becommons_namespace.hpp"
 #include "util/malha.hpp"
 #include "util/material.hpp"
 #include "util/vertice.hpp"
 #include <vector>
 
-using namespace BECOMMONS_NS;
+using namespace becommons;
 
 std::vector<vertice> vertices = {
     // Positions (8 vertices matching the OBJ file)

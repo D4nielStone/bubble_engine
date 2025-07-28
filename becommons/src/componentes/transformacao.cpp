@@ -1,36 +1,33 @@
-
-/** @copyright 
-MIT License
-Copyright (c) 2025 Daniel Oliveira
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE. 
-*/
-/**
+/** \copyright 
+ * MIT License
+ * Copyright (c) 2025 Daniel Oliveira
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
  * @file transformacao.cpp
  */
 
 #include "componentes/transformacao.hpp"
 #include "nucleo/fase.hpp"
-#include "nucleo/projeto.hpp"
+#include "nucleo/engine.hpp"
 #include "os/janela.hpp"
 
-using namespace BECOMMONS_NS;
+using namespace becommons;
 
 transformacao::transformacao(const fvet3& p, const fvet3& r, const fvet3& e) :
 			posicao(p), cima(fvet3(0.f, 1.f, 0.f)),
@@ -169,10 +166,10 @@ void  transformacao::rotacionar(float v1, float v2, float v3) {
 
 void  transformacao::olharEntidade(const uint32_t& ent) {
     m_usar_alvo = true;
-	if (!projeto_atual->obterFaseAtual()->obterRegistro()->tem<transformacao>(ent))return;
+	if (!motor::obter().m_levelmanager->obterFaseAtual()->obterRegistro()->tem<transformacao>(ent))return;
 	if(m_alvo_novo) delete alvo;
 	m_alvo_novo = false;
-	alvo = &projeto_atual->obterFaseAtual()->obterRegistro()->obter<transformacao>(ent)->posicao;
+	alvo = &motor::obter().m_levelmanager->obterFaseAtual()->obterRegistro()->obter<transformacao>(ent)->posicao;
 }
 		
 void  transformacao::olharVetor(const fvet3& pos) {

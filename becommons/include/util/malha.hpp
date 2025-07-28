@@ -27,13 +27,12 @@
 #pragma once
 #include <vector>
 #include <glm/glm.hpp>
-#include "becommons_namespace.hpp"
 #include "material.hpp"
 #include "vertice.hpp"
 #include "componentes/transformacao.hpp"
 #include "arquivadores/shader.hpp"
 
-namespace BECOMMONS_NS {
+namespace becommons {
     /**
      * \class malha
      * \brief Gerencia os vertices, indices, material e ect.

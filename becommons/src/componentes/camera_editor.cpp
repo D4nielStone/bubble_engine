@@ -30,7 +30,7 @@ SOFTWARE.
 #include "depuracao/debug.hpp"
 #include "os/janela.hpp"
 
-using namespace BECOMMONS_NS;
+using namespace becommons;
 camera_editor::camera_editor() : camera(false) {
     ativarFB(); // Ativa framebuffer
     mousex_antigo = inputs::obterMousePos().x;

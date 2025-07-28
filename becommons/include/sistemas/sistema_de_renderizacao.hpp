@@ -28,7 +28,7 @@
 #include "componentes/transformacao.hpp"
 #include <memory>
 
-namespace BECOMMONS_NS {
+namespace becommons {
 	struct sistema_renderizacao : sistema {
         camera* camera_principal{ nullptr };
 	    void definirCamera(camera*);
