@@ -62,9 +62,8 @@
 #include "componentes/renderizador.hpp"
 #include "componentes/transformacao.hpp"
 #include "componentes/camera.hpp"
-#include "becommons_namespace.hpp"
 
-namespace BECOMMONS_NS {
+namespace becommons {
     namespace api {
         // \struct entidade
         // \brief Estrutura para api lua

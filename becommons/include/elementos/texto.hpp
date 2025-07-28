@@ -25,9 +25,8 @@ SOFTWARE.
  */
 
 #pragma once
-#include "becommons_namespace.hpp"
 
-namespace BECOMMONS_NS{
+namespace becommons{
     namespace elementos{
             enum class flags_texto : uint32_t
             {

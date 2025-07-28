@@ -23,12 +23,11 @@
  */
 
 #pragma once
-#include "becommons_namespace.hpp"
 #include "arquivadores/modelo.hpp"
 #include "componente.hpp"
 #include "util/vetor3.hpp"
 
-namespace BECOMMONS_NS {
+namespace becommons {
     struct fisica : componente {
         static constexpr mascara mascara { COMPONENTE_FISICA };
 

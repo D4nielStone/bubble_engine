@@ -28,7 +28,7 @@ SOFTWARE.
 #include <string>
 #include <glad.h>
 
-namespace BECOMMONS_NS {
+namespace becommons {
     struct textura {
         unsigned int id{0};
         std::string path{""};

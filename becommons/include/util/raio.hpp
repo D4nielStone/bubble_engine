@@ -28,9 +28,8 @@ SOFTWARE.
 #include <glm/glm.hpp>
 #include "vetor3.hpp"
 #include <bullet/btBulletDynamicsCommon.h>
-#include "becommons_namespace.hpp"
 
-namespace BECOMMONS_NS {
+namespace becommons {
     // Estrutura para armazenar os resultados do Raycast
     struct raio
     {

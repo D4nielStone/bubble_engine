@@ -22,7 +22,6 @@
  * @file sistema_de_renderizacao.cpp
  */
 
-#include "becommons_namespace.hpp"
 #include "glad.h"
 #include "sistemas/sistema_de_renderizacao.hpp"
 #include "componentes/renderizador.hpp"
@@ -30,7 +29,7 @@
 #include "componentes/luz_pontual.hpp"
 #include "componentes/camera.hpp"
 #include "componentes/terreno.hpp"
-#include "nucleo/fase.hpp"
+#include "nucleo/engine.hpp"
 #include "arquivadores/shader.hpp"
 #include "glm/gtc/type_ptr.hpp"
 #include "os/janela.hpp"
@@ -38,7 +37,7 @@
 
 #define MAX_LPS 5
 
-using namespace BECOMMONS_NS;
+using namespace becommons;
 
 void sistema_renderizacao::calcularTransformacao(transformacao* t) {
     fvet3 rot = t->obterRotacao();
@@ -72,7 +71,7 @@ void sistema_renderizacao::calcularTransformacao(transformacao* t) {
 }
 
 void sistema_renderizacao::atualizar() {
-    auto reg = projeto_atual->obterFaseAtual()->obterRegistro();
+    auto reg = motor::obter().m_levelmanager->obterFaseAtual()->obterRegistro();
     reg->cada<camera>([&](const uint32_t ent){
             auto cam = reg->obter<camera>(ent);
             if (!camera_principal) camera_principal = cam.get();
@@ -87,7 +86,7 @@ void sistema_renderizacao::atualizar() {
 void sistema_renderizacao::inicializar()
 {
     sistema::inicializar();
-    auto reg = projeto_atual->obterFaseAtual()->obterRegistro();
+    auto reg = motor::obter().m_levelmanager->obterFaseAtual()->obterRegistro();
     
     glCullFace(GL_BACK);
 }
@@ -98,7 +97,7 @@ void sistema_renderizacao::definirCamera(camera* cam)
 
 void sistema_renderizacao::atualizarCamera(camera* cam)
 {
-        auto reg = projeto_atual->obterFaseAtual()->obterRegistro();
+        auto reg = motor::obter().m_levelmanager->obterFaseAtual()->obterRegistro();
 
         if (!cam) {
             return;
@@ -123,7 +122,7 @@ void sistema_renderizacao::atualizarCamera(camera* cam)
 
 
             auto s = trr->m_shader;
-            auto &lg = projeto_atual->obterFaseAtual()->luz_global;
+            auto &lg = motor::obter().m_levelmanager->obterFaseAtual()->luz_global;
             s.use();
             s.setVec3("dirLight.direction", lg->direcao);
             s.setVec3("dirLight.color", lg->cor);
@@ -146,7 +145,7 @@ void sistema_renderizacao::atualizarCamera(camera* cam)
                 return;
             }
 
-            auto &lg = projeto_atual->obterFaseAtual()->luz_global;
+            auto &lg = motor::obter().m_levelmanager->obterFaseAtual()->luz_global;
             auto s = render->m_modelo->obterShader();
             s.use();
             s.setVec3("dirLight.direction", lg->direcao);
@@ -166,6 +165,6 @@ void sistema_renderizacao::atualizarCamera(camera* cam)
             glBindFramebuffer(GL_FRAMEBUFFER, 0);
             glClearColor(1, 1, 1, 1);
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-            glViewport(0, 0, janela::obterInstancia().tamanho.x, janela::obterInstancia().tamanho.y);
+            glViewport(0, 0, motor::obter().m_janela->tamanho.x, motor::obter().m_janela->tamanho.y);
         }
     }

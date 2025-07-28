@@ -23,13 +23,12 @@
  */
 
 #pragma once
-#include "becommons_namespace.hpp"
 #include "arquivadores/shader.hpp"
 #include "arquivadores/imageloader.hpp"
 #include "arquivadores/modelo.hpp"
 #include <glm/glm.hpp>
 
-namespace BECOMMONS_NS {
+namespace becommons {
     class skybox : protected modelo {
     public:
         unsigned int id_skybox = 0;

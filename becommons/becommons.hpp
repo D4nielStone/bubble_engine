@@ -9,7 +9,6 @@
  * 
  */
 #pragma once
-#include "becommons_namespace.hpp"
 #include "util/versao.hpp"
 #include "util/vetor2.hpp"
 #include "util/vetor3.hpp"

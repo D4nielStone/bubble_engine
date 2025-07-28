@@ -24,16 +24,15 @@
  * @file malha.cpp
  */
 
-#include "becommons_namespace.hpp"
 #include "glad.h"
 #include "util/malha.hpp"
 #include "util/material.hpp"
-#include "nucleo/projeto.hpp"
+#include "nucleo/engine.hpp"
 #include "depuracao/debug.hpp"
 #include "util/vertice.hpp"
 #include "sistemas/sistema_de_renderizacao.hpp"
 
-using namespace BECOMMONS_NS;
+using namespace becommons;
 
 
 malha::malha(const std::vector<vertice>& vertices, const std::vector<unsigned int>& indices, const material& material) :
@@ -102,7 +101,7 @@ void malha::carregar() {
         }
     }
 
-    projeto_atual->fila_opengl.push([&](){
+    motor::obter().fila_opengl.push([&](){
     glGenVertexArrays(1, &m_VAO);
     glGenBuffers(1, &m_VBO);
     glGenBuffers(1, &m_EBO);

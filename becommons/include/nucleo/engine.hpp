@@ -39,37 +39,50 @@
 #include "os/tempo.hpp"
 #include "inputs/inputs.hpp"
 #include "sistemas/sistema_de_renderizacao.hpp"
+#include "sistemas/interface.hpp"
+#include "sistemas/sistema_de_codigo.hpp"
+#include "sistemas/sistema_de_fisica.hpp"
+#include "levelmanager.hpp"
+#include "nucleo/projeto.hpp"
 
-/**
- * Inclusão da engine
- */
-
-namespace BECOMMONS_NS {
-    enum class exec {
-        editor, jogo
+namespace becommons {
+    enum class exec : char {
+        editor =    'E',
+        jogo =      'G'
     };
 
     class motor {
+    private:
+        void criarJanela();
+        // \brief Sistemas adicionados no mainloop
+        std::vector<sistema*> sistemas;
+        bool m_rodando = false;
+        exec m_game_mode;
     public:
-        motor();
+        // \brief Construtor padrão
+        // \param diretório do projeto à ser trabalhado
+        motor(const std::string&);
         ~motor();
         
-        void iniciar();
-        void definirDiretorio(const std::string&);
-        void rodar(const exec&);
+        void iniciar(const exec&);
+        void rodar();
         void finalizar();
 
         static motor& obter();
-        void initRuntime();
-        void initEditor();
 
-        bool m_rodando = false;
-        exec m_game_mode;
-        //std::unique_ptr<janela> m_janela;
+        exec obterTipo() const;
+        bool rodando() const;
+
+        std::shared_ptr<janela> m_janela;
+        std::shared_ptr<projeto> m_projeto;
         std::shared_ptr<sistema_renderizacao> m_renderer;
+        std::shared_ptr<sistema_fisica> m_fisica;
+        std::shared_ptr<sistema_codigo> m_codigo;
+        std::shared_ptr<interface> m_interface;
         std::shared_ptr<inputs> m_inputs;
         std::shared_ptr<tempo> m_tempo;
-        //std::unique_ptr<gerenciador_cenas> m_gerenciador_cenas;
-        std::string m_games_dir;
+        std::shared_ptr<levelmanager> m_levelmanager;
+        // \brief Fila para chamadas opengl na thread principal
+        std::queue<std::function<void()>> fila_opengl;
     };
 }

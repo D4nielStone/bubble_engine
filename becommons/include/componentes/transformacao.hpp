@@ -28,7 +28,6 @@ SOFTWARE.
  */
 
 #pragma once
-#include "becommons_namespace.hpp"
 #include "componente.hpp"
 #include "util/vetor2.hpp"
 #include "util/vetor3.hpp"
@@ -41,7 +40,7 @@ SOFTWARE.
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/gtx/quaternion.hpp>
 
-namespace BECOMMONS_NS {
+namespace becommons {
 	class transformacao : public componente {
     public:
 		fvet3 cima, posicao, rotacao, escala, 

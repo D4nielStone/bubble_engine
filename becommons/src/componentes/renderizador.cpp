@@ -19,53 +19,29 @@
  * LIABILITY, WHETHER IN AN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
- * @see fase.cpp
+ * @file renderizador.cpp
  */
 
+#include "componentes/renderizador.hpp"
+#include "nucleo/engine.hpp"
 
-#pragma once
-#include <string>
-#include <memory>
-#include <rapidjson/document.h>
-#include "registro.hpp"
-#include "componentes/luz_direcional.hpp"
+using namespace becommons;
 
-/**
- * @struct fase
- */
-
-namespace becommons {
-	struct fase : public std::enable_shared_from_this<fase> {
-		bool rodando{false};
-        std::shared_ptr<luz_direcional> luz_global = nullptr;
-	    /// @brief Construtores
-		fase(const char* diretorio);
-		fase(const std::string& diretorio);
-		fase();
-		~fase();
-
-		/// @brief obtém nome
-		/// @return string do nome da fase
-		std::string nome() const;
-        void nome(const std::string&);
-
-        /// @brief deifni estado de run
-		void pausar();
-		void parar();
-		void iniciar();
-
-
-		void carregar();
-		void salvar();
-		void descarregar();
-		registro* obterRegistro();
-	private:
-	    void analizarEntidades(const rapidjson::Document&);
-	    bool carregada{false};
-		void analizar(const std::string& diretorio);
-		void serializar(const std::string& diretorio);
-        std::string diretorio;
-		registro reg;
-		std::string m_nome {""};
-	};
-}
+bool renderizador::analizar(const rapidjson::Value& value) {
+            if(m_modelo) delete m_modelo;
+            if(value.HasMember("modelo") && value["modelo"].IsString()) {
+                auto m_diretorio = std::string(value["modelo"].GetString());
+                if (std::filesystem::exists(m_diretorio)) m_modelo = new modelo(m_diretorio);
+                else                                      m_modelo = new modelo(motor::obter().m_projeto->m_diretorio + m_diretorio);
+            }
+            else return false;
+			return true;
+        };
+		
+renderizador::renderizador(const char* m_diretorio) {
+            if (std::filesystem::exists(m_diretorio)) m_modelo = new modelo(m_diretorio);
+            else                                      m_modelo = new modelo(motor::obter().m_projeto->m_diretorio + m_diretorio);
+            motor::obter().fila_opengl.push([&](){
+                    m_modelo->carregar();
+            });
+		};

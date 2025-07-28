@@ -33,11 +33,10 @@ SOFTWARE.
 #include <assimp/scene.h>
 #include <vector>
 #include <memory>
-#include "becommons_namespace.hpp"
 #include "util/vetor2.hpp"
 
 /// namespace becommons
-namespace BECOMMONS_NS {
+namespace becommons {
     /// @class imageLoader
     /// Gerencia as imagems/texturas carregadas na engine
     class  imageLoader {

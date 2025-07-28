@@ -25,11 +25,10 @@ SOFTWARE.
  */
 
 #pragma once
-#include "becommons_namespace.hpp"
 #include "vetor2.hpp"
 #include "vetor3.hpp"
 
-namespace BECOMMONS_NS {
+namespace becommons {
 	struct vertice {
 	    vertice() = default;
 	    vertice(const fvet3& p, const fvet3& n, const fvet2& uv) : posicao(p), normal(n), uvcoords(uv) {}

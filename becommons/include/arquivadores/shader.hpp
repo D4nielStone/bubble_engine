@@ -34,13 +34,12 @@
 #include <utility>
 #include <unordered_map>
 #include <glm/gtc/type_ptr.hpp>
-#include "becommons_namespace.hpp"
 #include "util/vetor4.hpp"
 #include "util/vetor2.hpp"
 #include "util/vetor3.hpp"
 #include "util/cor.hpp"
 
-namespace BECOMMONS_NS {
+namespace becommons {
     class shaderException : public std::exception
     {
     public:

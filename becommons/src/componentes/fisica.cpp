@@ -25,9 +25,10 @@
 #include "componentes/fisica.hpp"
 #include "depuracao/assert.hpp"
 #include "depuracao/debug.hpp"
+#include "nucleo/engine.hpp"
 #include "nucleo/projeto.hpp"
 
-using namespace BECOMMONS_NS;
+using namespace becommons;
 
 bool fisica::analizar(const rapidjson::Value& value) {
     posicao_inicial = btVector3(0, 0, 0);
@@ -86,7 +87,7 @@ bool fisica::serializar(rapidjson::Value& value, rapidjson::Document::AllocatorT
     // posição Vetor 3
     rapidjson::Value pos(rapidjson::kArrayType);
     fvet3 posicao = fvet3(0.f);
-    posicao = projeto_atual->obterFaseAtual()->obterRegistro()->obter<transformacao>(meu_objeto)->posicao;
+    posicao = motor::obter().m_levelmanager->obterFaseAtual()->obterRegistro()->obter<transformacao>(meu_objeto)->posicao;
     pos.PushBack(posicao.x, allocator);
     pos.PushBack(posicao.y, allocator);
     pos.PushBack(posicao.z, allocator);
@@ -94,7 +95,7 @@ bool fisica::serializar(rapidjson::Value& value, rapidjson::Document::AllocatorT
     // escala Vetor 3
     rapidjson::Value esc(rapidjson::kArrayType);
     fvet3 escala = fvet3(1.f);
-    escala = projeto_atual->obterFaseAtual()->obterRegistro()->obter<transformacao>(meu_objeto)->escala;
+    escala = motor::obter().m_levelmanager->obterFaseAtual()->obterRegistro()->obter<transformacao>(meu_objeto)->escala;
     esc.PushBack(escala.x, allocator);
     esc.PushBack(escala.y, allocator);
     esc.PushBack(escala.z, allocator);
@@ -111,7 +112,7 @@ fisica::fisica(bool estatico, const formas e_forma) : e_forma(e_forma) {
 // Destrutor
 fisica::~fisica() {
     depuracao::emitir(debug, "fisica", "descarregando");
-    if(m_corpo_rigido && projeto_atual)projeto_atual->m_fisica.remover(m_corpo_rigido);
+    if(m_corpo_rigido) motor::obter().m_fisica->remover(m_corpo_rigido);
     if(m_corpo_rigido)delete m_corpo_rigido;
     if(m_estado_de_movimento)delete m_estado_de_movimento;
     if(m_forma)delete m_forma;

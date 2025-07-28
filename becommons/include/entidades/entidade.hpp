@@ -27,10 +27,9 @@ SOFTWARE.
 
 #pragma once
 #include <memory>
-#include "becommons_namespace.hpp"
 #include "componentes/componente.hpp"
 
-namespace BECOMMONS_NS {
+namespace becommons {
 	/**
 	 * @struct entidade
 	 * @brief todo elemento do faserio
@@ -51,8 +50,8 @@ namespace BECOMMONS_NS {
 // Implementação de std::hash para entidade
 namespace std {
 	template <>
-	struct hash<BECOMMONS_NS::entidade> {
-		std::size_t operator()(const BECOMMONS_NS::entidade& entidade) const {
+	struct hash<becommons::entidade> {
+		std::size_t operator()(const becommons::entidade& entidade) const {
 			return std::hash<uint32_t>()(entidade.id);
 		}
 	};

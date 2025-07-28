@@ -23,13 +23,12 @@
  */
 
 #pragma once
-#include "becommons_namespace.hpp"
 #include "imagem.hpp"
 #include "texto.hpp"
 #include "area_de_texto.hpp"
 #include <memory>
 
-namespace BECOMMONS_NS {
+namespace becommons {
     namespace elementos {
         class caixa_de_texto : public area_de_texto {
             private:

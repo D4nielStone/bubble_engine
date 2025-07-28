@@ -25,11 +25,10 @@ SOFTWARE.
  */
 
 #pragma once
-#include "becommons_namespace.hpp"
 #include "componente.hpp"
 #include "util/vetor3.hpp"
 
-namespace BECOMMONS_NS {
+namespace becommons {
     struct luz_pontual : public componente
     {
         fvet3 position;

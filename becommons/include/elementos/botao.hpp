@@ -23,13 +23,12 @@
  */
 
 #pragma once
-#include "becommons_namespace.hpp"
 #include "imagem.hpp"
 #include "texto.hpp"
 #include "area_de_toque.hpp"
 #include <memory>
 
-namespace BECOMMONS_NS{
+namespace becommons{
     namespace elementos{
         class botao : public area_de_toque {
         private:

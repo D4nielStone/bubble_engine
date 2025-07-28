@@ -32,10 +32,9 @@ SOFTWARE.
 #include <lua.hpp>
 #include <sol/sol.hpp>
 #include <rapidjson/rapidjson.h>
-#include "becommons_namespace.hpp"
 #include "componente.hpp"
 
-namespace BECOMMONS_NS {
+namespace becommons {
 	struct codigo : componente {
 		static constexpr mascara mascara = COMPONENTE_CODIGO;
 		std::string arquivo;

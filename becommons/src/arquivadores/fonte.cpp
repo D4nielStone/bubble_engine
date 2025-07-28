@@ -29,7 +29,7 @@ SOFTWARE.
 #include "arquivadores/fonte.hpp"
 #include "assets/fontes_na_memoria.hpp"
 
-namespace BECOMMONS_NS
+namespace becommons
 {
     std::unordered_map<std::string, std::pair<const unsigned char*, unsigned int>> fontes_memoria
     {

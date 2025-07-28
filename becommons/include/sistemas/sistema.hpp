@@ -23,9 +23,8 @@
  */
 
 #pragma once
-#include "becommons_namespace.hpp"
 
-namespace BECOMMONS_NS {
+namespace becommons {
     /**
      * @struct sistema
      * Classe base para sistemas do loop principal

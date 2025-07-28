@@ -27,10 +27,9 @@ SOFTWARE.
  */
 
 #pragma once
-#include "becommons_namespace.hpp"
 #include "camera.hpp"
 
-namespace BECOMMONS_NS {
+namespace becommons {
     struct camera_editor : camera
     {
         float interpolacao = 0.3f, sens = 10.f, mousex_antigo = 0, mousey_antigo = 0;

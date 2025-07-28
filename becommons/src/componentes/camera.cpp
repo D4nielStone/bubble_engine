@@ -28,10 +28,10 @@
 #include "componentes/camera.hpp"
 #include "componentes/transformacao.hpp"
 #include "nucleo/fase.hpp"
-#include "nucleo/projeto.hpp"
+#include "nucleo/engine.hpp"
 #include "os/janela.hpp"
 
-using namespace BECOMMONS_NS;
+using namespace becommons;
 
 void camera::desenharFB() const
 {
@@ -45,13 +45,13 @@ void camera::desenharFB() const
     if(viewport_ptr)
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, viewport_ptr->z, viewport_ptr->w, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
     else
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, janela::obterInstancia().tamanho.x, janela::obterInstancia().tamanho.y, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, motor::obter().m_janela->tamanho.x, motor::obter().m_janela->tamanho.y, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
         glBindTexture(GL_TEXTURE_2D, 0);
         glBindRenderbuffer(GL_RENDERBUFFER, rbo);
     if(viewport_ptr)
         glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, viewport_ptr->z, viewport_ptr->w);
     else
-        glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, janela::obterInstancia().tamanho.x, janela::obterInstancia().tamanho.y);
+        glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, motor::obter().m_janela->tamanho.x, motor::obter().m_janela->tamanho.y);
         glBindRenderbuffer(GL_RENDERBUFFER, 0);
         glBindFramebuffer(GL_FRAMEBUFFER, fbo);
     }
@@ -60,7 +60,7 @@ void camera::desenharFB() const
     if(viewport_ptr)
         glViewport(0, 0, viewport_ptr->z, viewport_ptr->w);
     else
-        glViewport(0, 0, janela::obterInstancia().tamanho.x, janela::obterInstancia().tamanho.y);
+        glViewport(0, 0, motor::obter().m_janela->tamanho.x, motor::obter().m_janela->tamanho.y);
 }
 
 
@@ -74,7 +74,7 @@ camera::~camera()
 
 camera::camera(const bool orth)
     : flag_orth(orth) {
-    projeto_atual->fila_opengl.push([&](){
+    motor::obter().fila_opengl.push([&](){
         m_skybox = new skybox();
     });
 }
@@ -89,8 +89,7 @@ bool camera::analizar(const rapidjson::Value& value)
 		escala = value["escala"].GetFloat();
 	if (value.HasMember("ortho"))
 		flag_orth = value["ortho"].GetBool();
-	if (value.HasMember("ceu"))
-	{
+	if (value.HasMember("ceu")) {
 		auto _ceu = value["ceu"].GetArray();
 		ceu =
 		{
@@ -174,7 +173,7 @@ void camera::desativarFB() {
 
 glm::mat4 camera::obtViewMatrix() {
     if (!transform)
-        transform = projeto_atual->obterFaseAtual()->obterRegistro()->obter<transformacao>(meu_objeto).get();
+        transform = motor::obter().m_levelmanager->obterFaseAtual()->obterRegistro()->obter<transformacao>(meu_objeto).get();
 
     fvet3 alvo;
     if (transform->usandoAlvo()) {
@@ -192,7 +191,7 @@ glm::mat4 camera::obtViewMatrix() {
 glm::mat4 camera::obtProjectionMatrix() {
     ivet2 viewp;
     if (!viewport_ptr)
-        viewp = {janela::obterInstancia().tamanho.x, janela::obterInstancia().tamanho.y};
+        viewp = {motor::obter().m_janela->tamanho.x, motor::obter().m_janela->tamanho.y};
     else if(viewport_ptr)
         viewp = {static_cast<int>(viewport_ptr->z), static_cast<int>(viewport_ptr->w)};
 
@@ -227,8 +226,8 @@ raio camera::pontoParaRaio(const ivet2& screenPoint) const {
 
 fvet3 camera::telaParaMundo(const ivet2 &screenPoint, float profundidade) const
 {
-    float ndcX = (2.0f * screenPoint.x) / janela::obterInstancia().tamanho.x - 1.0f;
-    float ndcY = 1.0f - (2.0f * screenPoint.y) / janela::obterInstancia().tamanho.y;
+    float ndcX = (2.0f * screenPoint.x) / motor::obter().m_janela->tamanho.x - 1.0f;
+    float ndcY = 1.0f - (2.0f * screenPoint.y) / motor::obter().m_janela->tamanho.y;
     fvet4 clipCoords = fvet4(ndcX, ndcY, profundidade, 1.0f);
 
     fvet4 eyeCoords = fvet4(glm::inverse(projMatriz) * clipCoords.to_glm());
@@ -249,7 +248,7 @@ ivet3 camera::mundoParaTela(const fvet3 &mundoPos) {
     if (viewport_ptr) {
         currentViewport = {static_cast<int>(viewport_ptr->z), static_cast<int>(viewport_ptr->w)};
     } else {
-        currentViewport = {janela::obterInstancia().tamanho.x, janela::obterInstancia().tamanho.y}; 
+        currentViewport = {motor::obter().m_janela->tamanho.x, motor::obter().m_janela->tamanho.y}; 
     }
     bool visivel = true;
     if (ndcCoords.x < -1.0f || ndcCoords.x > 1.0f ||

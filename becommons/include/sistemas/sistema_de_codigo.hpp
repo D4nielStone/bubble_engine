@@ -25,7 +25,7 @@
 #pragma once
 #include "sistema.hpp"
 
-namespace BECOMMONS_NS {
+namespace becommons {
 	struct sistema_codigo : sistema {
     	sistema_codigo() = default;
     	~sistema_codigo();

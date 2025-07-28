@@ -26,13 +26,12 @@
  *  SOFTWARE. 
  */
 #pragma once
-#include "becommons_namespace.hpp"
 #include "util/vetor2.hpp"
 #include "util/vetor3.hpp"
 #include "util/vetor4.hpp"
 
 /** namespace becommons */
-namespace BECOMMONS_NS {
+namespace becommons {
     static inline float lerp(const float& start, const float& end, const float& alpha) {
         return start + alpha * (end - start);
     }

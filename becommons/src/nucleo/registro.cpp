@@ -33,7 +33,7 @@ SOFTWARE.
 #include "arquivadores/shader.hpp"
 #include "depuracao/debug.hpp"
 
-using namespace BECOMMONS_NS;
+using namespace becommons;
 
 entidade registro::criar(const uint32_t id)
 {

@@ -39,7 +39,7 @@ SOFTWARE.
 #include "util/material.hpp"
 #include "nucleo/projeto.hpp"
 
-using namespace BECOMMONS_NS;
+using namespace becommons;
 
 std::map<std::string, malha> primitivas =  { {"cubo", malha_cubo}, {"esfera", malha_esfera}
 };

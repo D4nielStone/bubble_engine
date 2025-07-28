@@ -136,24 +136,24 @@ void sistema_editor::adicionarCaixas() {
 
     // Opções de componentes no popup "Adicionar Componente"
     popup_comp->adicionar<elementos::botao>([this]() {
-        if  (!projeto_atual->obterFaseAtual()) return;
-            projeto_atual->obterFaseAtual()->obterRegistro()->adicionar<codigo>(entidade_atual);
+        if  (!motor::obter().m_projeto->obterFaseAtual()) return;
+            motor::obter().m_projeto->obterFaseAtual()->obterRegistro()->adicionar<codigo>(entidade_atual);
         }, "codigo", "Codigo.png")->m_estilo = e;
     popup_comp->adicionar<elementos::botao>([this]() {
-        if  (!projeto_atual->obterFaseAtual()) return;
-            projeto_atual->obterFaseAtual()->obterRegistro()->adicionar<camera>(entidade_atual);
+        if  (!motor::obter().m_projeto->obterFaseAtual()) return;
+            motor::obter().m_projeto->obterFaseAtual()->obterRegistro()->adicionar<camera>(entidade_atual);
         }, "camera", "Camera.png")->m_estilo = e;
     popup_comp->adicionar<elementos::botao>([this]() {
-        if  (!projeto_atual->obterFaseAtual()) return;
-            projeto_atual->obterFaseAtual()->obterRegistro()->adicionar<terreno>(entidade_atual);
+        if  (!motor::obter().m_projeto->obterFaseAtual()) return;
+            motor::obter().m_projeto->obterFaseAtual()->obterRegistro()->adicionar<terreno>(entidade_atual);
         }, "terreno", "Terreno.png")->m_estilo = e;
     popup_comp->adicionar<elementos::botao>([this]() {
-        if  (!projeto_atual->obterFaseAtual()) return;
-            projeto_atual->obterFaseAtual()->obterRegistro()->adicionar<fisica>(entidade_atual);
+        if  (!motor::obter().m_projeto->obterFaseAtual()) return;
+            motor::obter().m_projeto->obterFaseAtual()->obterRegistro()->adicionar<fisica>(entidade_atual);
         }, "fisica", "Fisica.png")->m_estilo = e;
     popup_comp->adicionar<elementos::botao>([this]() {
-        if  (!projeto_atual->obterFaseAtual()) return;
-            projeto_atual->obterFaseAtual()->obterRegistro()->adicionar<renderizador>(entidade_atual);
+        if  (!motor::obter().m_projeto->obterFaseAtual()) return;
+            motor::obter().m_projeto->obterFaseAtual()->obterRegistro()->adicionar<renderizador>(entidade_atual);
         }, "renderizador", "Renderizador.png")->m_estilo = e;
 }
 
@@ -167,7 +167,7 @@ void sistema_editor::inicializar() {
 
     // Carrega a configuração da câmera do editor a partir de um arquivo JSON.
     // Se o arquivo não existir ou houver erro de parse, um erro é emitido.
-    auto _usr = projeto_atual->m_diretorio + "/usr";
+    auto _usr = motor::obter().m_projeto->m_diretorio + "/usr";
     std::stringstream sb;
     if (std::filesystem::exists(_usr + "/cam.json")) {
         std::ifstream file(_usr + "/cam.json");
@@ -182,12 +182,12 @@ void sistema_editor::inicializar() {
                 depuracao::emitir(erro, "analize da camera do editor");
         }
     }
-    projeto_atual->m_render.definirCamera(&cam); // Define a câmera do editor para renderização
+    motor::obter().m_projeto->m_render.definirCamera(&cam); // Define a câmera do editor para renderização
     ui.inicializar();
     adicionarCaixas(); // Constrói a interface do editor
 
     // Carrega fase de forma asíncrona
-    std::thread load_level(&projeto::carregarFase, projeto_atual, projeto_atual->m_lancamento);
+    std::thread load_level(&projeto::carregarFase, motor::obter().m_projeto, motor::obter().m_projeto->m_lancamento);
     load_level.detach();
 }
 
@@ -196,7 +196,7 @@ void sistema_editor::inicializar() {
  * Cria o diretório 'usr' se não existir e serializa os dados da câmera.
  */
 void sistema_editor::salvarEditor() {
-    auto _usr = projeto_atual->m_diretorio + "/usr";
+    auto _usr = motor::obter().m_projeto->m_diretorio + "/usr";
     if(!std::filesystem::exists(_usr))
         std::filesystem::create_directory(_usr); // Cria o diretório se não existir
 
@@ -224,25 +224,25 @@ void sistema_editor::chamarInputs() {
     if(inputs::obter(inputs::E_CTRL)) {
         if(inputs::obter(inputs::R)) {
             salvarEditor();
-            projeto_atual->salvarFases();
+            motor::obter().m_projeto->salvarFases();
             executarRuntime();
         } 
         else if(gatilho_ && inputs::obter(inputs::F3)) {
-            if(projeto_atual->obterFaseAtual()->rodando)
-                projeto_atual->obterFaseAtual()->parar();
+            if(motor::obter().m_projeto->obterFaseAtual()->rodando)
+                motor::obter().m_projeto->obterFaseAtual()->parar();
             else
-                projeto_atual->obterFaseAtual()->iniciar();
+                motor::obter().m_projeto->obterFaseAtual()->iniciar();
             gatilho_ = false;
         }
         else if(gatilho_ && inputs::obter(inputs::A)) {
-            projeto_atual->obterFaseAtual()->obterRegistro()->criar(); // Cria nova entidade
+            motor::obter().m_projeto->obterFaseAtual()->obterRegistro()->criar(); // Cria nova entidade
             gatilho_ = false;
         } else if(gatilho_ && inputs::obter(inputs::X)) {
-            projeto_atual->obterFaseAtual()->obterRegistro()->remover(entidade_atual); // Remove a entidade selecionada
+            motor::obter().m_projeto->obterFaseAtual()->obterRegistro()->remover(entidade_atual); // Remove a entidade selecionada
             gatilho_ = false;
         } else if(gatilho_ && inputs::obter(inputs::S)) {
             salvarEditor(); // Salva configurações do editor
-            projeto_atual->salvarFases(); // Salva todas as fases do projeto
+            motor::obter().m_projeto->salvarFases(); // Salva todas as fases do projeto
             gatilho_ = false;
         } else if(!inputs::obter(inputs::R) && !inputs::obter(inputs::F3) && !inputs::obter(inputs::X) && !inputs::obter(inputs::A) && !inputs::obter(inputs::S)) {
             gatilho_ = true; // Reinicia o gatilho quando nenhuma das teclas é pressionada
@@ -260,8 +260,8 @@ void sistema_editor::chamarInputs() {
  * com o editor.
  */
 void sistema_editor::atualizarGizmo() {
-    if  (!projeto_atual->obterFaseAtual()) return;
-    auto reg = projeto_atual->obterFaseAtual()->obterRegistro();
+    if  (!motor::obter().m_projeto->obterFaseAtual()) return;
+    auto reg = motor::obter().m_projeto->obterFaseAtual()->obterRegistro();
 
     // 1. Identificar entidades que foram removidas
     std::vector<unsigned int> ids_a_remover;
@@ -367,11 +367,11 @@ void sistema_editor::atualizarGizmo() {
         auto* popup_comp = btn_add_comp->adicionar<elementos::popup>();
 
         // Popula o popup de adicionar componentes (função auxiliar seria útil aqui)
-        popup_comp->adicionar<elementos::botao>([this]() { projeto_atual->obterFaseAtual()->obterRegistro()->adicionar<codigo>(entidade_atual); }, "codigo", "Codigo.png")->m_estilo = e;
-        popup_comp->adicionar<elementos::botao>([this]() { projeto_atual->obterFaseAtual()->obterRegistro()->adicionar<camera>(entidade_atual); }, "camera", "Camera.png")->m_estilo = e;
-        popup_comp->adicionar<elementos::botao>([this]() { projeto_atual->obterFaseAtual()->obterRegistro()->adicionar<terreno>(entidade_atual); }, "terreno", "Terreno.png")->m_estilo = e;
-        popup_comp->adicionar<elementos::botao>([this]() { projeto_atual->obterFaseAtual()->obterRegistro()->adicionar<fisica>(entidade_atual); }, "fisica", "Fisica.png")->m_estilo = e;
-        popup_comp->adicionar<elementos::botao>([this]() { projeto_atual->obterFaseAtual()->obterRegistro()->adicionar<renderizador>(entidade_atual); }, "renderizador", "Renderizador.png")->m_estilo = e;
+        popup_comp->adicionar<elementos::botao>([this]() { motor::obter().m_projeto->obterFaseAtual()->obterRegistro()->adicionar<codigo>(entidade_atual); }, "codigo", "Codigo.png")->m_estilo = e;
+        popup_comp->adicionar<elementos::botao>([this]() { motor::obter().m_projeto->obterFaseAtual()->obterRegistro()->adicionar<camera>(entidade_atual); }, "camera", "Camera.png")->m_estilo = e;
+        popup_comp->adicionar<elementos::botao>([this]() { motor::obter().m_projeto->obterFaseAtual()->obterRegistro()->adicionar<terreno>(entidade_atual); }, "terreno", "Terreno.png")->m_estilo = e;
+        popup_comp->adicionar<elementos::botao>([this]() { motor::obter().m_projeto->obterFaseAtual()->obterRegistro()->adicionar<fisica>(entidade_atual); }, "fisica", "Fisica.png")->m_estilo = e;
+        popup_comp->adicionar<elementos::botao>([this]() { motor::obter().m_projeto->obterFaseAtual()->obterRegistro()->adicionar<renderizador>(entidade_atual); }, "renderizador", "Renderizador.png")->m_estilo = e;
 
         estilo estilo_ct;
         estilo_ct.m_cor_fundo = cor(0.14f);
@@ -501,7 +501,7 @@ void sistema_editor::atualizar() {
  */
 void sistema_editor::executarRuntime() {
     // Inicia o runtime com o diretório do projeto
-    iniciarRuntime({projeto_atual->m_diretorio});
+    iniciarRuntime({motor::obter().m_projeto->m_diretorio});
 
     // Se já houver uma thread rodando, não cria outra
     if (rodando.load()) return;

@@ -24,13 +24,12 @@
 
 #pragma once
 #include <rapidjson/rapidjson.h>
-#include "becommons_namespace.hpp"
 #include "nucleo/projeto.hpp"
 #include "util/malha.hpp"
 #include "arquivadores/modelo.hpp"
 #include "componente.hpp"
 
-namespace BECOMMONS_NS {
+namespace becommons {
 	class renderizador : public componente {
     public:
 		modelo* m_modelo;
@@ -39,28 +38,13 @@ namespace BECOMMONS_NS {
             m_modelo = malha;
 		}
 
-        bool analizar(const rapidjson::Value& value) override {
-            if(m_modelo) delete m_modelo;
-            if(value.HasMember("modelo") && value["modelo"].IsString()) {
-                auto m_diretorio = std::string(value["modelo"].GetString());
-                if (std::filesystem::exists(m_diretorio)) m_modelo = new modelo(m_diretorio);
-                else                                      m_modelo = new modelo(projeto_atual->m_diretorio + m_diretorio);
-            }
-            else return false;
-			return true;
-        };
+        bool analizar(const rapidjson::Value& value) override;
         bool serializar(rapidjson::Value& value, rapidjson::Document::AllocatorType& allocator) const override {
             value.AddMember("modelo", rapidjson::Value(m_modelo->obterDiretorio().c_str(), allocator), allocator);
             return true;
         };
 
-		renderizador(const char* m_diretorio = "/cubo") {
-            if (std::filesystem::exists(m_diretorio)) m_modelo = new modelo(m_diretorio);
-            else                                      m_modelo = new modelo(projeto_atual->m_diretorio + m_diretorio);
-            projeto_atual->fila_opengl.push([&](){
-                    m_modelo->carregar();
-            });
-		};
+		renderizador(const char* m_diretorio = "/cubo");
 		~renderizador() {
 			for(auto& malha : m_modelo->malhas) {
 				malha.descarregar();

@@ -34,7 +34,7 @@ SOFTWARE.
 #include "depuracao/debug.hpp"
 #include <iostream>
 
-using namespace BECOMMONS_NS;
+using namespace becommons;
 
 static const std::map<const std::string, std::pair<BYTE*, const unsigned int>> imagems_memoria
 {
@@ -254,7 +254,7 @@ unsigned char* imageLoader::obterDados() const
     return data;
 }
 
-int BECOMMONS_NS::texturaDoArquivo(const std::string& directory,GLuint tipo_textura) {
+int becommons::texturaDoArquivo(const std::string& directory,GLuint tipo_textura) {
     // Gera um ID de textura e carrega a imagem
     unsigned int textureID;
     glGenTextures(1, &textureID);
@@ -291,7 +291,7 @@ int BECOMMONS_NS::texturaDoArquivo(const std::string& directory,GLuint tipo_text
 
     return textureID;
 }
-int BECOMMONS_NS::texturaDoArquivo(const std::string& directory, int* width_ptr , int* height_ptr) {
+int becommons::texturaDoArquivo(const std::string& directory, int* width_ptr , int* height_ptr) {
     // Gera um ID de textura e carrega a imagem
     unsigned int textureID;
     glGenTextures(1, &textureID);
@@ -330,7 +330,7 @@ int BECOMMONS_NS::texturaDoArquivo(const std::string& directory, int* width_ptr 
 
     return textureID;
 }
-int BECOMMONS_NS::texturaDoArquivo(const std::string& directory, double* width_ptr , double* height_ptr) {
+int becommons::texturaDoArquivo(const std::string& directory, double* width_ptr , double* height_ptr) {
     // Gera um ID de textura e carrega a imagem
     unsigned int textureID;
     glGenTextures(1, &textureID);
@@ -369,7 +369,7 @@ int BECOMMONS_NS::texturaDoArquivo(const std::string& directory, double* width_p
 
     return textureID;
 }
-int BECOMMONS_NS::texturaDoArquivo(unsigned char* data, unsigned int width, unsigned int height, int nrComponents) {
+int becommons::texturaDoArquivo(unsigned char* data, unsigned int width, unsigned int height, int nrComponents) {
 
     unsigned int textureID;
     glGenTextures(1, &textureID);
@@ -402,7 +402,7 @@ int BECOMMONS_NS::texturaDoArquivo(unsigned char* data, unsigned int width, unsi
     return textureID;
 }
 
-textureLoader& BECOMMONS_NS::textureLoader::obterInstancia()
+textureLoader& becommons::textureLoader::obterInstancia()
 {
     static textureLoader instance;
     return instance;

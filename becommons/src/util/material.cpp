@@ -25,7 +25,7 @@
  */
 
 #include "util/material.hpp"
-using namespace BECOMMONS_NS;
+using namespace becommons;
 
 material::material(std::map<std::string, uniforme> unifs) {
     for(auto& [nome, u] : unifs) {

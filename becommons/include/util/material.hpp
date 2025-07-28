@@ -28,7 +28,6 @@
 #include <unordered_map>
 #include <vector>
 #include <map>
-#include "becommons_namespace.hpp"
 #include "arquivadores/shader.hpp"
 #include "textura.hpp"
 #include "vetor2.hpp"
@@ -38,7 +37,7 @@
 #include <glm/gtc/type_ptr.hpp>
 #include "cor.hpp"
 
-namespace BECOMMONS_NS {
+namespace becommons {
 struct uniforme {
     enum class tipo : uint16_t{
         Float, Int, Bool, Vet2, Vet3, Vet4, Cor, Mat4,

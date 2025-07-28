@@ -23,7 +23,6 @@
  */
 
 #include <stdexcept>
-#include "becommons_namespace.hpp"
 #include "glad.h"
 #include "GLFW/glfw3.h"
 #include "os/janela.hpp"
@@ -35,7 +34,7 @@
 #include "arquivadores/fonte.hpp"
 #include "inputs/inputs.hpp"
 
-using namespace BECOMMONS_NS;
+using namespace becommons;
 
 static janela* instanciaAtual {nullptr};
 
@@ -48,54 +47,15 @@ void errorCallback(int error, const char* description) {
 void janela::definirCursor(const cursor c) {
     m_cursor = c;
 }
-
-// \returns Se a instância é válida
-bool janela::temInstancia() {
-    return instanciaAtual != nullptr;
-}
-
-// \returns Instância global atual
-janela& janela::obterInstancia() {
-    return *instanciaAtual;
-}
             
 // \returns Se a janela global glfw foi fechada
 bool janela::deveFechar() {
-    return glfwWindowShouldClose(janela::obterInstancia().window);
-}
-
-// \brief Gera uma nova instância global
-// \param ´cfg´ Define  o tipo de janela baseado na sua configuração
-void janela::gerarInstancia(const configuracao cfg) {
-    if(instanciaAtual) delete instanciaAtual;
-    depuracao::emitir(debug, "janela", "Nova instância");
-    instanciaAtual = new janela(cfg);
-}
-
-// \brief Gera uma nova instância global
-// \param ´nome' Nome da janela
-// \param ´bounds' Dimensões da janela
-// \param ´icon_path' Ícone minimizado da janela
-void janela::gerarInstancia(const char* nome, fvet2 bounds , const char* icon_path ) {
-    if(instanciaAtual) delete instanciaAtual;
-    depuracao::emitir(debug, "janela", "Nova instância");
-    instanciaAtual = new janela(nome, bounds, icon_path);
-}
-
-// \brief Gera uma intância global
-// \param ´nome' Nome da janela
-// \param ´f' Flag que informa se a janela será maximizada
-// \param ´bounds' Dimensões da janela
-// \param ´icon_path' Ícone minimizado da janela
-void janela::gerarInstancia(const char* nome, const bool f, fvet2 bounds , const char* icon_path ) {
-    if(instanciaAtual) delete instanciaAtual;
-    depuracao::emitir(debug, "janela", "Nova instância");
-    instanciaAtual = new janela(nome, f, bounds, icon_path);
+    return glfwWindowShouldClose(window);
 }
 
 // \returns Tamanho da instância atual
 ivet2 janela::obterTamanhoJanela() {
-    return janela::obterInstancia().tamanho;
+    return tamanho;
 };
 
 // \brief Posiciona o mouse da `Instância`
@@ -104,7 +64,7 @@ void janela::posicionarCursor(double x, double y) {
     
     input->m_mousex = x;
     input->m_mousey = y;
-    glfwSetCursorPos(janela::obterInstancia().window, x, y);
+    glfwSetCursorPos(window, x, y);
 }
 
 // \brief Destrutor padrão
@@ -113,18 +73,18 @@ janela::~janela() {
     descarregarShaders();
     gerenciadorFontes::limparFontes();
 }
-
+/*
 // \brief Construtor baseado em :`configuracao`
 janela::janela(const configuracao cfg) {
     switch (cfg) {
         case janela::padrao:
-            janela::gerarInstancia("default");
+            janela::janela("default");
         break;  
         case janela::splash_screen:
             const char* icon_path = "icon.ico";
             const char *nome = "splash";
             fvet2 bounds = {50.f, 50.f};
-            /* splash screen */        
+            // splash screen         
             glfwSetErrorCallback(errorCallback);
             // inicia glfw
             if (!glfwInit()) {
@@ -188,7 +148,7 @@ janela::janela(const configuracao cfg) {
                 glfwSwapBuffers(window);
             }
     }
-}
+}*/
 
 // \brief Construtor baseado em :`nome`, `bounds` e `icon_path`
 janela::janela(const char* nome, fvet2 bounds, const char* icon_path) {

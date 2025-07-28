@@ -24,22 +24,22 @@
 
 #include "becommons/becommons.hpp"
 
-using namespace BECOMMONS_NS;
+using namespace becommons;
 
 void api::entidade::destruir() const {
-	projeto_atual->obterFaseAtual()->obterRegistro()->remover(id);
+	motor::obter().m_levelmanager->obterFaseAtual()->obterRegistro()->remover(id);
 }
 
 api::entidade::entidade(const uint32_t& id) : id(id) {
-	m_renderizador = projeto_atual->obterFaseAtual()->obterRegistro()->obter<renderizador>(id).get();
-	m_transformacao = projeto_atual->obterFaseAtual()->obterRegistro()->obter<transformacao>(id).get();
-	m_camera = projeto_atual->obterFaseAtual()->obterRegistro()->obter<camera>(id).get();
-	m_fisica = projeto_atual->obterFaseAtual()->obterRegistro()->obter<fisica>(id).get();
+	m_renderizador = motor::obter().m_levelmanager->obterFaseAtual()->obterRegistro()->obter<renderizador>(id).get();
+	m_transformacao = motor::obter().m_levelmanager->obterFaseAtual()->obterRegistro()->obter<transformacao>(id).get();
+	m_camera = motor::obter().m_levelmanager->obterFaseAtual()->obterRegistro()->obter<camera>(id).get();
+	m_fisica = motor::obter().m_levelmanager->obterFaseAtual()->obterRegistro()->obter<fisica>(id).get();
 }
 
 template <typename T>
 static void registrar_vetor2(sol::state& lua, const std::string& nome) {
-    using vet = BECOMMONS_NS::vetor2<T>;
+    using vet = becommons::vetor2<T>;
 
     lua.new_usertype<vet>(nome,
         sol::constructors<sol::types<>, sol::types<T, T>>(),
@@ -71,7 +71,7 @@ static void registrar_vetor2(sol::state& lua, const std::string& nome) {
 }
 template <typename T>
 static void registrar_vetor3(sol::state* lua, const std::string& nome) {
-    using vet = BECOMMONS_NS::vetor3<T>;
+    using vet = becommons::vetor3<T>;
 
     lua->new_usertype<vet>(nome,
         sol::constructors<sol::types<>, sol::types<T, T, T>>(),
@@ -166,7 +166,7 @@ void becommons::api::definirClasses(sol::state& lua) {
             "destruir", &api::entidade::destruir
             );
     lua.new_usertype<projeto>("projeto",
-            sol::call_constructor, sol::constructors<sol::types<>>()
+            sol::call_constructor, sol::constructors<sol::types<const std::string&>>()
             );
     lua.new_usertype<inputs>("inputs",
             sol::call_constructor, sol::constructors<sol::types<>>(),
@@ -174,7 +174,7 @@ void becommons::api::definirClasses(sol::state& lua) {
             "obter", &inputs::obter_str
             );
     lua.new_usertype<motor>("motor",
-            sol::call_constructor, sol::constructors<sol::types<>>(),
+            sol::call_constructor, sol::constructors<sol::types<const std::string&>>(),
             "inputs", &motor::m_inputs,
             "renderizador", &motor::m_renderer,
             "tempo", &motor::m_tempo
@@ -190,7 +190,7 @@ void becommons::api::definirClasses(sol::state& lua) {
 }
 void becommons::api::definirNamespaces(sol::state& lua) {
     auto bubble = lua["bubble"].get_or_create<sol::table>(); /// < namespace bubble na api
-    bubble["projeto"] = projeto_atual;
+    bubble["projeto"] = motor::obter().m_projeto;
     bubble["motor"] = &motor::obter();
     bubble["dist"] = sol::overload(
         [](float a, float b) {
