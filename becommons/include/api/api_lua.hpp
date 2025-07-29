@@ -55,6 +55,7 @@
  *  \see api_lua.cpp
  */
 #pragma once
+#include <string>
 #include <cstdint>
 #include <bullet/btBulletDynamicsCommon.h>
 #include <sol/sol.hpp>
@@ -70,8 +71,10 @@ namespace becommons {
         // \note É diferente da entidade do sistema ECS, aqui serve como uma ponte para a api lua
     	struct entidade {
     	    uint32_t id;
+    	    std::string tag;
     		void destruir() const;
 	    	entidade(const uint32_t& id);
+	    	entidade(const std::string& tag);
 		   	// \name Componentes-propriedade da entidade
 		   	// Conjunto de ponteiros para a entidade na api lua
 		   	// \{

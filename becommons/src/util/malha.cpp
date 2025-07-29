@@ -39,7 +39,7 @@ malha::malha(const std::vector<vertice>& vertices, const std::vector<unsigned in
     m_vertices(vertices), m_indices(indices), m_material(material) {
 }
          
-std::vector<vertice> malha::obterVertices() const {
+std::vector<vertice>& malha::obterVertices() {
     return m_vertices;
 }
         
@@ -47,7 +47,7 @@ std::vector<transformacao> malha::obterInstancias() const {
     return m_instancias;
 }
 
-std::vector<unsigned int> malha::obterIndices() const  {
+std::vector<unsigned int>& malha::obterIndices() {
     return m_indices;
 }
         

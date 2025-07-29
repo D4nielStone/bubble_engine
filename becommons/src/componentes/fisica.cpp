@@ -23,6 +23,7 @@
  */
 
 #include "componentes/fisica.hpp"
+#include "componentes/renderizador.hpp"
 #include "depuracao/assert.hpp"
 #include "depuracao/debug.hpp"
 #include "nucleo/engine.hpp"
@@ -47,30 +48,47 @@ bool fisica::analizar(const rapidjson::Value& value) {
             escala_inicial = btVector3(pos[0].GetFloat(), pos[1].GetFloat(), pos[2].GetFloat());
         }
     }
+    if (value.HasMember("forma") && value["forma"].IsString()) {
+        const auto& form = value["forma"].GetString();
+        e_forma = s_nomes_map[std::string(form)];
+    }
     
     // Define forma bt
     switch (e_forma) {
-        case formas::forma_caixa:
+        case forma::caixa:
             m_forma = new btBoxShape(escala_inicial);
             break;
-        case formas::forma_esfera:
-            m_forma = new btSphereShape(0.5f);
+        case forma::esfera:
+            m_forma = new btSphereShape(escala_inicial.getX());
             break;
-        case formas::forma_capsula:
-            m_forma = new btCapsuleShape(0.5f, 1.8f);
+        case forma::capsula:
+            m_forma = new btCapsuleShape(escala_inicial.getX(), 1.8f);
             break;
-        case formas::forma_cilindro:
-            m_forma = new btCylinderShape(btVector3(0.5f, 0.5f, 0.5f));
+        case forma::cilindro:
+            m_forma = new btCylinderShape(escala_inicial);
             break;
-        case formas::forma_cone:
-            m_forma = new btConeShape(0.5f, 1.f);
+        case forma::cone:
+            m_forma = new btConeShape(escala_inicial.getX(), escala_inicial.getY());
             break;
-        case formas::forma_plano:
-            m_forma = new btStaticPlaneShape(btVector3(0.f, 1.f, 0.f), 1.f);
+        case forma::plano:
+            m_forma = new btStaticPlaneShape(escala_inicial, 1.f);
             break;
-        case formas::forma_malha:
-            m_forma = nullptr;
-            break;
+        case forma::malha:
+            motor::obter().fila_opengl.push([&](){
+                    auto render = motor::obter().m_levelmanager->obterFaseAtual()->obterRegistro()->obter<renderizador>(meu_objeto);
+                if(render)
+                    definirModelo(render->m_modelo);
+                else
+                    throw std::runtime_error("Física: sem renderizador na malha.");
+
+            btVector3 inertia(0, 0, 0);
+            if(m_massa > 0) m_forma->calculateLocalInertia(m_massa, inertia);
+            m_estado_de_movimento = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), posicao_inicial));
+            btRigidBody::btRigidBodyConstructionInfo rigidBodyCI(m_massa, m_estado_de_movimento, m_forma, inertia);
+            m_corpo_rigido = new btRigidBody(rigidBodyCI);
+                    });
+            return true;
+        break;
     }
 
     btVector3 inertia(0, 0, 0);
@@ -100,11 +118,13 @@ bool fisica::serializar(rapidjson::Value& value, rapidjson::Document::AllocatorT
     esc.PushBack(escala.y, allocator);
     esc.PushBack(escala.z, allocator);
     value.AddMember("escala", esc, allocator);
+    
+    value.AddMember("forma", rapidjson::Value(s_formas_map[e_forma], allocator), allocator);
 
     return true;
 }
 
-fisica::fisica(bool estatico, const formas e_forma) : e_forma(e_forma) {
+fisica::fisica(bool estatico, const forma e_forma) : e_forma(e_forma) {
     // Define massa inicial
     m_massa = estatico ? 0 : 1;
 }
@@ -122,13 +142,13 @@ fisica::~fisica() {
 void fisica::definirModelo(modelo* p_modelo) {
     if(!p_modelo) throw std::runtime_error("Física: modelo inválido.");
     m_modelo = p_modelo;
-    if(e_forma != formas::forma_malha) return;
+    if(e_forma != forma::malha) return;
 
     btTriangleIndexVertexArray* indexVertexArray = new btTriangleIndexVertexArray();
 
-    for (const auto& malha : m_modelo->malhas) {
-        const auto& vertices = malha.obterVertices();
-        const auto& indices = malha.obterIndices();
+    for (auto& malha : m_modelo->malhas) {
+        auto& vertices = malha.obterVertices();
+        auto& indices = malha.obterIndices();
 
         btIndexedMesh mesh;
         mesh.m_numTriangles = indices.size() / 3;

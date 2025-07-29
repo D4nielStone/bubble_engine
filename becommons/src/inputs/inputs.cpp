@@ -91,17 +91,15 @@ void inputs::soltar(const inputs::chave& key) {
     m_chaves[key] = false;
 }
 bool inputs::obter(const inputs::chave& key) {
-    auto &input = motor::obter().m_inputs;
-    return input->m_chaves[key];
+    return m_chaves[key];
 }
 bool inputs::obter_str(const std::string& key) {
-    auto &input = motor::obter().m_inputs;
     inputs::chave key_ = mapa_string[key];
-    return input->m_chaves[key_];
+    return m_chaves[key_];
 }
 
 void becommons::keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods) {
-    auto &input = motor::obter().m_inputs;
+    auto& input = motor::obter().m_inputs;
     input->m_mods = mods;
     input->m_estado_tecla = action;
     
@@ -181,6 +179,5 @@ void becommons::charCallback(GLFWwindow* window, unsigned int codepoint)
 }
 
 dvet2 inputs::obterMousePos() {
-    auto& input = motor::obter().m_inputs;
-   return dvet2(input->m_mousex, input->m_mousey);
+   return dvet2(m_mousex, m_mousey);
 };

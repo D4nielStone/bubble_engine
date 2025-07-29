@@ -1,4 +1,4 @@
-/** \copyright 
+/** @copyright 
  * MIT License
  * Copyright (c) 2025 Daniel Oliveira
  * 
@@ -18,34 +18,21 @@
  * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
- * @file area_de_toque.hpp
- * @author Daniel O. dos Santos
- *
- * 
+ * SOFTWARE. 
+ */
+/**
+ * @file caixa.cpp
  */
 
-#pragma once
-#include <functional>
 #include "util/caixa.hpp"
-
-namespace becommons {
-    namespace elementos {
-        // @struct area_de_toque
-        // Abstração para elementos sensíveis ao toque.
-        // Exemplo: botao
-        class area_de_toque : public caixa {
-            public:
-            // Flags de ativação
-            bool m_gatilho = false, m_pressionado, m_arrastando, m_use_funcao{ false };
-            std::function<void()> m_funcao;
-            bool* m_interruptor{nullptr};
-            // Construtor padrão
-            area_de_toque(const std::function<void()> &fctn) : m_funcao(fctn), m_use_funcao(true) {};
-            area_de_toque(bool* ptr = nullptr) : m_interruptor(ptr), m_use_funcao(false) {};
-            // Atualiza função de ativação
-            virtual bool pressionado();
-            bool arrastando();
-        };
-    }
-}
+#include "nucleo/engine.hpp"
+using namespace becommons;
+bool caixa::mouseEmCima() {
+            if(m_pai)
+            if(!m_estilo.m_ativo || !m_pai->m_estilo.m_ativo) return false;
+            // vetor2 do mouse
+            auto m = motor::obter().m_inputs->obterMousePos();
+            m_mouse_cima = (m.x > m_estilo.m_limites.x && m.x < m_estilo.m_limites.z + m_estilo.m_limites.x &&
+               m.y > m_estilo.m_limites.y && m.y < m_estilo.m_limites.w + m_estilo.m_limites.y);
+            return m_mouse_cima;
+        }

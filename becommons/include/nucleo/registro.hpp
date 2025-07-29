@@ -48,6 +48,10 @@ namespace becommons {
 		std::unordered_map<uint32_t, componente::mascara> mascaras;
 		/// Armazena componentes da entidade associada
 		std::map<uint32_t, std::map<componente::mascara, std::shared_ptr<componente>>> entidades;
+		// Armazena as tags - id
+        std::unordered_map<std::string, uint32_t> m_tags;
+		/* Cria nova entidade com tag */
+		entidade criar(const std::string& tag, const uint32_t id = 0);
 		/* Cria nova entidade */
 		entidade criar(const uint32_t id = 0);
 		/* Retorna todos os componentes da entidade */
@@ -57,6 +61,8 @@ namespace becommons {
 		void adicionar(entidade& ent, Args&&... args);
 		template <typename T, typename... Args>
 		void adicionar(uint32_t, Args&&... args);
+    	template<typename T, typename ...Args>
+    	void adicionar(const std::string& tag, Args&&... args);
 
 		/* Remove um componente a uma entidade */
 		template <typename T>
@@ -74,8 +80,21 @@ namespace becommons {
 
 		/* Obtem um componente de uma entidade */
 		template <typename T>
+		std::shared_ptr<T> obter(const std::string& entity);
+
+		/* Obtem um componente de uma entidade */
+		template <typename T>
 		std::shared_ptr<T> obter(const uint32_t& entity);
 	};
+
+	/* Definições de templates */
+	template<typename T, typename ...Args>
+	void registro::adicionar(const std::string& tag, Args&&... args) {
+		uint32_t id = m_tags[tag];
+		mascaras[id] |= T::mascara; // Atualiza a máscara no mapa auxiliar
+		entidades[id][T::mascara] = std::make_shared<T>(std::forward<Args>(args)...); // Adiciona o componente
+		entidades[id][T::mascara]->meu_objeto = id;
+	}
 
 	/* Definições de templates */
 	template<typename T, typename ...Args>
@@ -130,6 +149,21 @@ namespace becommons {
 				func(entity);
 			}
 		}
+	}
+
+	template<typename T>
+	inline std::shared_ptr<T> registro::obter(const std::string& entity)
+	{
+		if (m_tags.find(entity) != m_tags.end()) {
+    	    uint32_t id = m_tags[entity];
+    		auto it = entidades[id].find(T::mascara);
+			if(it != entidades[id].end())
+	    		return std::static_pointer_cast<T>(it->second);
+			else
+				return nullptr;
+		}
+		else
+			return nullptr;
 	}
 
 	template<typename T>

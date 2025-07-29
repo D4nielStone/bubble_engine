@@ -35,8 +35,21 @@ SOFTWARE.
 
 using namespace becommons;
 
-entidade registro::criar(const uint32_t id)
-{
+entidade registro::criar(const std::string& tag, const uint32_t id) {
+    auto it = m_tags.find(tag);
+    if (it == m_tags.end()) {
+        depuracao::emitir(debug, "registro", "nova tag: " + tag);
+        auto eu = criar(id);
+        m_tags[tag] = eu.id;
+        return eu;
+    } else {
+        depuracao::emitir(erro, "registro", "tag já sendo usada, ignorando " + tag);
+        auto eu = criar(id);
+        return eu;
+    }
+}
+
+entidade registro::criar(const uint32_t id) {
     // Se o id é 0, cria com id livre
     // se não, cria com o parâmetro "id"
     uint32_t id_atual = id;

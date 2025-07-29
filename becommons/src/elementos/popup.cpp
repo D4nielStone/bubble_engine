@@ -40,8 +40,8 @@ void elementos::popup::atualizar() {
                             if (m_referencia->pressionado()) {
                                 m_estilo.m_ativo = true;
                                 // captura posição inicial do cursor
-                                x_antigo = inputs::obterMousePos().x;
-                                y_antigo = inputs::obterMousePos().y;
+                                x_antigo = motor::obter().m_inputs->obterMousePos().x;
+                                y_antigo = motor::obter().m_inputs->obterMousePos().y;
                             }
                         } else {
                             if (!mouseEmCima()) {
@@ -51,8 +51,8 @@ void elementos::popup::atualizar() {
                     } 
 
                     float dt = motor::obter().m_tempo->obterDeltaTime();
-                    x_antigo = m_referencia->pressionado() ? inputs::obterMousePos().x : x_antigo;
-                    y_antigo = m_referencia->m_pressionado ? inputs::obterMousePos().y : y_antigo;
+                    x_antigo = m_referencia->pressionado() ? motor::obter().m_inputs->obterMousePos().x : x_antigo;
+                    y_antigo = m_referencia->m_pressionado ? motor::obter().m_inputs->obterMousePos().y : y_antigo;
                     float mais_largo = 20.f, cursorx = 0.f;
                     float mais_alto = 20.f, cursory = 0.f;
                     cursorx = m_estilo.m_padding_geral.x;

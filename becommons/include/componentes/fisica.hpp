@@ -31,18 +31,36 @@ namespace becommons {
     struct fisica : componente {
         static constexpr mascara mascara { COMPONENTE_FISICA };
 
-        enum class formas : uint8_t {
-            forma_caixa   ,
-            forma_capsula ,
-            forma_esfera  ,
-            forma_cilindro,
-            forma_cone    ,
-            forma_plano   ,
-            forma_malha   
+        enum class forma : uint8_t {
+            caixa   ,
+            capsula ,
+            esfera  ,
+            cilindro,
+            cone    ,
+            plano   ,
+            malha   
+        };
+        inline static std::unordered_map<std::string, forma> s_nomes_map = {
+            {"caixa"   ,  forma::caixa          },
+            {"capsula" ,  forma::capsula        },
+            {"esfera"  ,  forma::esfera         },
+            {"cilindro",  forma::cilindro       },
+            {"cone"    ,  forma::cone           },
+            {"plano"   ,  forma::plano          },
+            {"malha"   ,  forma::malha          }
+        };
+        inline static std::unordered_map<forma, const char*> s_formas_map = {
+            {forma::caixa   ,        "caixa"},
+            {forma::capsula ,        "capsula"},
+            {forma::esfera  ,        "esfera"},
+            {forma::cilindro,        "cilindro"},
+            {forma::cone    ,        "cone"},
+            {forma::plano   ,        "plano"},
+            {forma::malha   ,        "malha"}
         };
 
-        formas e_forma;
-        fisica(bool estatico = false, const formas m_forma = formas::forma_caixa);
+        forma e_forma;
+        fisica(bool estatico = false, const forma m_forma = forma::caixa);
         virtual ~fisica();
         
         bool analizar(const rapidjson::Value&) override;

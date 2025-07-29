@@ -137,12 +137,17 @@ void fase::analizarEntidades(const Document& doc)
 	// Cria entidade
 	uint32_t id = 0;
 	if(doc.HasMember("luz global") && doc["luz global"].IsObject())
-        luz_global->analizar(doc["luz global"]);
-	for (auto& entidade : doc["entidades"].GetArray())
-	{
+        if(!luz_global->analizar(doc["luz global"]))
+            depuracao::emitir(alerta, "fase", "Erro analisando luz global");
+	for (auto& entidade : doc["entidades"].GetArray()) {
+        becommons::entidade ent;
 		if(entidade.HasMember("id") && entidade["id"].IsInt())
             id = entidade["id"].GetInt();
-        becommons::entidade ent = reg.criar(id);
+		if(entidade.HasMember("tag") && entidade["tag"].IsString()) {
+            std::string tag = entidade["tag"].GetString();
+            ent = reg.criar(tag, id);
+        } else
+            ent = reg.criar(id);
 		
 		// Itera os componentes
 		if (!entidade.HasMember("componentes") && entidade["componentes"].IsArray())

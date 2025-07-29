@@ -39,7 +39,7 @@ using namespace becommons;
 codigo::codigo(const std::string& arquivo) : arquivo(arquivo) {
     arquivoCompleto = motor::obter().m_projeto->m_diretorio + arquivo; 
 
-	estado_lua.open_libraries(sol::lib::base);
+	estado_lua.open_libraries(sol::lib::base, sol::lib::math);
 
 	api::definirClasses(estado_lua);
 	api::definirNamespaces(estado_lua);
@@ -60,7 +60,7 @@ bool codigo::analizar(const rapidjson::Value& value) {
     arquivo = value["diretorio"].GetString();
     arquivoCompleto = motor::obter().m_projeto->m_diretorio + arquivo; 
 
-	estado_lua.open_libraries(sol::lib::base);
+	estado_lua.open_libraries(sol::lib::base, sol::lib::math);
 
 	api::definirClasses(estado_lua);
 	api::definirNamespaces(estado_lua);

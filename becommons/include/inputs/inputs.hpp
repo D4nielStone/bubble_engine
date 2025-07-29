@@ -110,14 +110,14 @@ namespace becommons {
          * \brief Define uma tecla como pressionada.
          * \param p_chave Chave que será definida
          */
-        static bool obter                  (const chave&);
+        bool obter                  (const chave&);
         /**
          * \brief Define uma tecla como pressionada.
          * \param p_chave Chave que será definida
          */
-        static bool obter_str               (const std::string&);
+        bool obter_str               (const std::string&);
 
-        static dvet2 obterMousePos         ();
+        dvet2 obterMousePos         ();
         int m_estado_mouse{ 0 }, m_estado_tecla{ 0 }, m_mods{ 0 };
         char m_ultima_letra{ '\0' };
         bool m_mouse_clicou { false }, m_letra_pressionada {false}, m_backspace_pressionado, m_backspace_segura, m_backspace_repetido;

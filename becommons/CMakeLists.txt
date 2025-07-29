@@ -74,6 +74,7 @@ target_sources(becommons PRIVATE
     src/sistemas/sistema_de_fisica.cpp
     src/sistemas/sistema_de_renderizacao.cpp
     src/sistemas/interface.cpp
+    src/util/caixa.cpp
     src/util/malha.cpp
     src/util/skybox.cpp
     src/util/material.cpp

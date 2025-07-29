@@ -27,7 +27,7 @@
 using namespace becommons;
 
 bool elementos::area_de_texto::selecionado() {
-    bool pressionado = inputs::obter(inputs::MOUSE_E) || inputs::obter(inputs::ENTER);
+    bool pressionado = motor::obter().m_inputs->obter(inputs::MOUSE_E) || motor::obter().m_inputs->obter(inputs::ENTER);
     bool justPressed = pressionado && !m_mouse_antes_pressionado;
 
     // atualiza flag de cursor sobre a área

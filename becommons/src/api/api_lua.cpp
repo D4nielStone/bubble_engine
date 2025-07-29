@@ -30,6 +30,14 @@ void api::entidade::destruir() const {
 	motor::obter().m_levelmanager->obterFaseAtual()->obterRegistro()->remover(id);
 }
 
+api::entidade::entidade(const std::string& tag) : tag(tag) {
+    id = motor::obter().m_levelmanager->obterFaseAtual()->obterRegistro()->m_tags[tag];
+	m_renderizador = motor::obter().m_levelmanager->obterFaseAtual()->obterRegistro()->obter<renderizador>(tag).get();
+	m_transformacao = motor::obter().m_levelmanager->obterFaseAtual()->obterRegistro()->obter<transformacao>(tag).get();
+	m_camera = motor::obter().m_levelmanager->obterFaseAtual()->obterRegistro()->obter<camera>(tag).get();
+	m_fisica = motor::obter().m_levelmanager->obterFaseAtual()->obterRegistro()->obter<fisica>(tag).get();
+}
+
 api::entidade::entidade(const uint32_t& id) : id(id) {
 	m_renderizador = motor::obter().m_levelmanager->obterFaseAtual()->obterRegistro()->obter<renderizador>(id).get();
 	m_transformacao = motor::obter().m_levelmanager->obterFaseAtual()->obterRegistro()->obter<transformacao>(id).get();
@@ -156,8 +164,19 @@ void becommons::api::definirClasses(sol::state& lua) {
             "parar", &fase::parar,
             "obterRegistro", &fase::obterRegistro
             );
+    lua.new_usertype<camera>("camera",
+            sol::call_constructor, sol::constructors<sol::types<const bool>>(),
+            "fov", &camera::fov,
+            "far", &camera::corte_longo,
+            "near", &camera::corte_curto,
+            "escala", &camera::escala,
+            "ativarFB", &camera::ativarFB,
+            "desativarFB", &camera::desativarFB,
+            "obterVM", &camera::obtViewMatrix,
+            "obterPM", &camera::obtProjectionMatrix
+            );
     lua.new_usertype<api::entidade>("entidade",
-            sol::call_constructor, sol::constructors<sol::types<const uint32_t&>>(),
+            sol::call_constructor, sol::constructors<sol::types<const uint32_t&>, sol::types<const std::string&>>(),
             "transformacao", &api::entidade::m_transformacao,
             "fisica", &api::entidade::m_fisica,
             "camera", &api::entidade::m_camera,

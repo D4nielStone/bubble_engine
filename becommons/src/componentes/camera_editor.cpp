@@ -25,7 +25,7 @@ SOFTWARE.
  */
 
 #include "componentes/camera_editor.hpp"
-#include "inputs/inputs.hpp"
+#include "nucleo/engine.hpp"
 #include "api/mat.hpp"
 #include "depuracao/debug.hpp"
 #include "os/janela.hpp"
@@ -33,8 +33,8 @@ SOFTWARE.
 using namespace becommons;
 camera_editor::camera_editor() : camera(false) {
     ativarFB(); // Ativa framebuffer
-    mousex_antigo = inputs::obterMousePos().x;
-    mousey_antigo = inputs::obterMousePos().y;
+    mousex_antigo = motor::obter().m_inputs->obterMousePos().x;
+    mousey_antigo = motor::obter().m_inputs->obterMousePos().y;
     transform = new transformacao();
     transform->rotacao.y = 90;
     ceu = cor(0.2, 0.2, 0.2, 1.f);
@@ -70,17 +70,17 @@ bool camera_editor::serializar(rapidjson::Value& value, rapidjson::Document::All
 
 void camera_editor::atualizarMovimentacao() {
     // Mouse rotation
-    float mousex_atual = inputs::obterMousePos().x;
-    float mousey_atual = inputs::obterMousePos().y;
+    float mousex_atual = motor::obter().m_inputs->obterMousePos().x;
+    float mousey_atual = motor::obter().m_inputs->obterMousePos().y;
     // Movement
-    if (inputs::obter(inputs::W)) transform->mover(0, 0, sens);
-    if (inputs::obter(inputs::A)) transform->mover(sens, 0, 0);
-    if (inputs::obter(inputs::S)) transform->mover(0, 0, -sens);
-    if (inputs::obter(inputs::D)) transform->mover(-sens, 0, 0);
-    if (inputs::obter(inputs::ESPACO)) transform->mover(0, sens, 0);
-    if (inputs::obter(inputs::E_SHIFT)) transform->mover(0, -sens, 0);
+    if (motor::obter().m_inputs->obter(inputs::W)) transform->mover(0, 0, sens);
+    if (motor::obter().m_inputs->obter(inputs::A)) transform->mover(sens, 0, 0);
+    if (motor::obter().m_inputs->obter(inputs::S)) transform->mover(0, 0, -sens);
+    if (motor::obter().m_inputs->obter(inputs::D)) transform->mover(-sens, 0, 0);
+    if (motor::obter().m_inputs->obter(inputs::ESPACO)) transform->mover(0, sens, 0);
+    if (motor::obter().m_inputs->obter(inputs::E_SHIFT)) transform->mover(0, -sens, 0);
 
-    if (inputs::obter(inputs::MOUSE_E)) {
+    if (motor::obter().m_inputs->obter(inputs::MOUSE_E)) {
         float mx = mousex_antigo - mousex_atual;
         float my = mousey_antigo - mousey_atual;
     

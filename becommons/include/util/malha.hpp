@@ -42,9 +42,9 @@ namespace becommons {
      public:
         malha() = default;
         malha(const std::vector<vertice>& vertices, const std::vector<unsigned int> &indices, const material& material);
-        std::vector<vertice>        obterVertices() const;
+        std::vector<vertice>&       obterVertices();
         std::vector<transformacao>  obterInstancias() const;
-        std::vector<unsigned int>   obterIndices() const;
+        std::vector<unsigned int>&  obterIndices();
         unsigned int                obterVertexArray() const;
         unsigned int                obterElementBuffer() const;
         unsigned int                obterVertexBuffer() const;

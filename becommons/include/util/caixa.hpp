@@ -213,15 +213,7 @@ namespace becommons {
         virtual void atualizar() {
         };
         // @returns Se está presionado ou não
-        bool mouseEmCima() {
-            if(m_pai)
-            if(!m_estilo.m_ativo || !m_pai->m_estilo.m_ativo) return false;
-            // vetor2 do mouse
-            auto m = inputs::obterMousePos();
-            m_mouse_cima = (m.x > m_estilo.m_limites.x && m.x < m_estilo.m_limites.z + m_estilo.m_limites.x &&
-               m.y > m_estilo.m_limites.y && m.y < m_estilo.m_limites.w + m_estilo.m_limites.y);
-            return m_mouse_cima;
-        }
+        bool mouseEmCima();
         virtual void desenhar(unsigned int ret_VAO) {
             if(!m_shader)m_shader = std::make_unique<shader>("imagem.vert", "quad.frag");
             m_material.usar(*m_shader);
