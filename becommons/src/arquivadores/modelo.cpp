@@ -55,15 +55,24 @@ malha& modelo::obterMalha(size_t i) {
     return malhas.back();
 }
 void modelo::desenhar() {
+    if (!m_shader) {
+        depuracao::emitir(alerta, "Shader não definido para modelo.");
+        return;
+    }
+
     for(auto& malha : malhas)
         malha.desenhar(*m_shader);
 }
 
 shader& modelo::obterShader() {
+    if (!m_shader)
+        throw std::runtime_error("Shader não foi definido.");
     return *m_shader;
 }
 
 void modelo::definirShader(const shader& s) {
+    if (!m_shader)
+        m_shader = std::make_unique<shader>();
     *m_shader = s;
 }
         
@@ -72,7 +81,7 @@ std::string modelo::obterDiretorio() const {
 }
 
 void modelo::carregar() {
-    m_shader = new shader();
+    m_shader = std::make_unique<shader>();
     auto path = diretorio;
     malhas.clear();
     if(primitivas.find(std::filesystem::path(path).filename().string()) != primitivas.end()) {

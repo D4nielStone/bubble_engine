@@ -39,6 +39,7 @@ layout (location = 2) in vec2 aUV;
 out vec3 Normal;
 out vec3 Position;
 out vec2 Uv;
+out vec4 FragPosLightSpace; // posição no espaço da luz
 
 uniform mat4 view;
 uniform mat4 projection;
@@ -46,6 +47,7 @@ uniform mat4 projection;
 uniform bool instancia;
 uniform int instancia_id;
 uniform mat4 modelo;
+uniform mat4 lightSpaceMatrix;
 uniform mat4 transformacoes[MAX_INSTANCIAS];
 
 void main()
@@ -54,6 +56,7 @@ void main()
 
     // Usa transformação por instância se habilitada
     mat4 model_matrix = instancia ? transformacoes[instancia_id] : modelo;
+    FragPosLightSpace = lightSpaceMatrix * (model_matrix * vec4(aPos, 1.0));
 
     Normal = mat3(transpose(inverse(model_matrix))) * aNormal;
     Position = vec3(model_matrix * vec4(aPos, 1.0));

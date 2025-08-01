@@ -37,6 +37,8 @@ inline const std::unordered_map<std::string, const char*> shader_memoria{
     {"framebuffer.frag", imagem_frag},
     {"vintage.frag", vintega_frag},
     {"texto.frag", texto_frag},
+    {"sombra.vs", sombra_vert},
+    {"sombra.fs", sombra_frag},
     {"skybox.vs", skybox_vert},
     {"skybox.fs", skybox_frag},
     {"phong.vert", phong_vert},

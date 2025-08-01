@@ -32,9 +32,9 @@ SOFTWARE.
 namespace becommons {
     struct luz_direcional : public componente
     {
-        fvet3 direcao, ambiente, cor; float intensidade = 1.f;
+        fvet3 direcao, ambiente, cor, alvo; float intensidade = 1.f, distancia;
         explicit  luz_direcional(fvet3 direcao = {-1.f, -1.f, -1.f}, fvet3 ambiente = {0.1f, 0.1f, 0.1f}, fvet3 cor = {1.f, 1.f, 1.f}, float intensidade = 1.f) :
-        direcao(direcao), ambiente(ambiente), cor(cor), intensidade(intensidade){}
+        direcao(direcao), ambiente(ambiente), cor(cor), alvo(0.f), distancia(20.f), intensidade(intensidade){}
         bool serializar(rapidjson::Value& value, rapidjson::Document::AllocatorType& allocator) const override;
         bool analizar(const rapidjson::Value& value) override;
         static constexpr mascara mascara = {COMPONENTE_LUZ_DIRECIONAL};
