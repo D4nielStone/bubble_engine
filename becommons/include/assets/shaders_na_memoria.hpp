@@ -35,3 +35,5 @@ SOFTWARE.
 #include "shaders/skybox_vert.hpp"
 #include "shaders/phong_frag.hpp"
 #include "shaders/phong_vert.hpp"
+#include "shaders/sombra_vert.hpp"
+#include "shaders/sombra_frag.hpp"

@@ -33,8 +33,10 @@ namespace becommons {
         camera* camera_principal{ nullptr };
 	    void definirCamera(camera*);
 	    sistema_renderizacao() = default;
-        static void atualizarCamera(camera*);
 	    static void calcularTransformacao(transformacao*);
+        void atualizarCamera(camera*);
+        void atualizarTransformacoes();
+        void renderizarSombras();
 		void atualizar() override;
 		void inicializar() override;
 	};

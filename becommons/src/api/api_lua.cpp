@@ -127,7 +127,8 @@ void becommons::api::definirClasses(sol::state& lua) {
             "posicionar",  sol::overload(
                     static_cast<void (fisica::*)(const float, const float, const float)>(&fisica::definirPosicao),
                     static_cast<void (fisica::*)(const fvet3&)>(&fisica::definirPosicao)
-                )
+                ),
+            "forca",  &fisica::definirForca
             );
     lua.new_usertype<transformacao>("transformacao",
             sol::call_constructor, sol::constructors<sol::types<const fvet3&, const fvet3&, const fvet3&>>(),

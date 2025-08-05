@@ -36,8 +36,14 @@
 #include "depuracao/debug.hpp"
 
 #define MAX_LPS 5
+unsigned int shadowMapFBO;
+unsigned int depthMap;
+const unsigned int SHADOW_WIDTH = 2048, SHADOW_HEIGHT = 2048;
+float near_plane = 1.0f, far_plane = 10.f;
+glm::mat4 lightView, lightProj;
 
 using namespace becommons;
+std::unique_ptr<shader> shadowShader;
 
 void sistema_renderizacao::calcularTransformacao(transformacao* t) {
     fvet3 rot = t->obterRotacao();
@@ -85,58 +91,65 @@ void sistema_renderizacao::atualizar() {
 
 void sistema_renderizacao::inicializar()
 {
+    shadowShader = std::make_unique<shader>("sombra.vs", "sombra.fs");
+        // 1) Gera e configura o depth texture
+    glGenTextures(1, &depthMap);
+    glBindTexture(GL_TEXTURE_2D, depthMap);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT,
+                 SHADOW_WIDTH, SHADOW_HEIGHT, 0,
+                 GL_DEPTH_COMPONENT, GL_FLOAT, nullptr);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
+    // opcional: definir border color = 1.0 para evitar sombras “vazando”
+    float borderColor[] = { 1,1,1,1 };
+    glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, borderColor);
+    
+    // 2) Gera e associa o FBO
+    glGenFramebuffers(1, &shadowMapFBO);
+    glBindFramebuffer(GL_FRAMEBUFFER, shadowMapFBO);
+    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, depthMap, 0);
+    // não desenhar color buffer
+    glDrawBuffer(GL_NONE);
+    glReadBuffer(GL_NONE);
+    if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
+        std::cerr << "ERROR: Shadow FBO inválido\n";
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
     sistema::inicializar();
     auto reg = motor::obter().m_levelmanager->obterFaseAtual()->obterRegistro();
-    
-    glCullFace(GL_BACK);
+
+    glEnable(GL_CULL_FACE);
 }
 void sistema_renderizacao::definirCamera(camera* cam)
 {
     camera_principal = cam;
 }
 
-void sistema_renderizacao::atualizarCamera(camera* cam)
-{
-        auto reg = motor::obter().m_levelmanager->obterFaseAtual()->obterRegistro();
+void sistema_renderizacao::atualizarTransformacoes() {
+    auto reg = motor::obter().m_levelmanager->obterFaseAtual()->obterRegistro();
 
-        if (!cam) {
-            return;
-        }
+    reg->cada<transformacao>([&](const uint32_t ent) {
+        auto transform = reg->obter<transformacao>(ent);
+        calcularTransformacao(transform.get());
+    });
+}
 
-        cam->desenharFB();
-        
-        if(cam->m_use_skybox)   cam->m_skybox->desenhar(cam->obtViewMatrix(), cam->obtProjectionMatrix());
+void sistema_renderizacao::renderizarSombras() {
+    glCullFace(GL_FRONT);
+    glViewport(0, 0, SHADOW_WIDTH, SHADOW_HEIGHT);
+    glBindFramebuffer(GL_FRAMEBUFFER, shadowMapFBO);
+    glClear(GL_DEPTH_BUFFER_BIT);
 
-        reg->cada<transformacao>([&](const uint32_t ent) {
-            auto transform = reg->obter<transformacao>(ent);
-            calcularTransformacao(transform.get());
-        });
-        reg->cada<terreno, transformacao>([&](const uint32_t ent_ren) {
-            auto trr = reg->obter<terreno>(ent_ren);
-            auto transform = reg->obter<transformacao>(ent_ren);
+    auto reg = motor::obter().m_levelmanager->obterFaseAtual()->obterRegistro();
 
-            if (!trr || !transform ) {
-                depuracao::emitir(debug, "render", "Terreno ou transformação inválida");
-                return;
-            }
-
-
-            auto s = trr->m_shader;
-            auto &lg = motor::obter().m_levelmanager->obterFaseAtual()->luz_global;
-            s.use();
-            s.setVec3("dirLight.direction", lg->direcao);
-            s.setVec3("dirLight.color", lg->cor);
-            s.setVec3("dirLight.ambient", lg->ambiente);
-            s.setFloat("dirLight.intensity", lg->intensidade);
-
-            s.setMat4("view", glm::value_ptr(cam->obtViewMatrix()));
-            s.setVec3("viewPos", cam->transform->posicao.x, cam->transform->posicao.y, cam->transform->posicao.z);
-            s.setMat4("projection", glm::value_ptr(cam->obtProjectionMatrix()));
-            s.setMat4("modelo", glm::value_ptr(transform->obterMatrizModelo()));
-            
-            trr->desenhar();
-        });
-        reg->cada<renderizador, transformacao>([&](const uint32_t ent_ren) {
+    auto &lg = motor::obter().m_levelmanager->obterFaseAtual()->luz_global;
+    lightView = glm::lookAt(glm::vec3( 0.0f, 0.0f,  0.0f)-lg->direcao.to_glm(), 
+                                  glm::vec3( 0.0f, 0.0f,  0.0f), 
+                                  glm::vec3( 0.0f, 1.0f,  0.0f));
+    float scale = 15.f;
+    lightProj = glm::ortho(-scale, scale, -scale, scale, near_plane, far_plane);
+    reg->cada<renderizador, transformacao>([&](const uint32_t ent_ren) {
             auto render = reg->obter<renderizador>(ent_ren);
             auto transform = reg->obter<transformacao>(ent_ren);
 
@@ -145,26 +158,68 @@ void sistema_renderizacao::atualizarCamera(camera* cam)
                 return;
             }
 
-            auto &lg = motor::obter().m_levelmanager->obterFaseAtual()->luz_global;
-            auto s = render->m_modelo->obterShader();
-            s.use();
-            s.setVec3("dirLight.direction", lg->direcao);
-            s.setVec3("dirLight.color", lg->cor);
-            s.setVec3("dirLight.ambient", lg->ambiente);
-            s.setFloat("dirLight.intensity", lg->intensidade);
-            
-            s.setMat4("view", glm::value_ptr(cam->obtViewMatrix()));
-            s.setVec3("viewPos", cam->transform->posicao.x, cam->transform->posicao.y, cam->transform->posicao.z);
-            s.setMat4("projection", glm::value_ptr(cam->obtProjectionMatrix()));
-            s.setMat4("modelo", glm::value_ptr(transform->obterMatrizModelo()));
-            
+            shadowShader->use();
+            shadowShader->setMat4("view", glm::value_ptr(lightView));
+            shadowShader->setMat4("projection", glm::value_ptr(lightProj));
+            shadowShader->setMat4("modelo", glm::value_ptr(transform->obterMatrizModelo()));
+            auto old_shader = render->m_modelo->obterShader();
+            render->m_modelo->definirShader(*shadowShader);
             render->m_modelo->desenhar();
+            render->m_modelo->definirShader(old_shader);
         });
-        // Caso tenha Frama buffer, limpa a tela
-        if (cam->flag_fb) {
-            glBindFramebuffer(GL_FRAMEBUFFER, 0);
-            glClearColor(1, 1, 1, 1);
-            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-            glViewport(0, 0, motor::obter().m_janela->tamanho.x, motor::obter().m_janela->tamanho.y);
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+    glCullFace(GL_BACK);
+}
+void sistema_renderizacao::atualizarCamera(camera* cam) {
+    atualizarTransformacoes();
+    glColorMask(GL_FALSE, GL_FALSE, GL_FALSE, GL_FALSE);
+    renderizarSombras();
+    glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
+
+    auto reg = motor::obter().m_levelmanager->obterFaseAtual()->obterRegistro();
+
+    // Ativa a textura de sombras
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, depthMap);
+    auto setShadowUniforms = [&](shader& s){
+        s.use();
+        s.setInt("depthMap", 0);
+        s.setFloat("near_plane", near_plane);
+        s.setFloat("far_plane", far_plane);
+        glm::mat4 lightSpace = lightProj * lightView;
+        s.setMat4("lightSpaceMatrix", glm::value_ptr(lightSpace)); 
+    };
+
+    // desenha o skybox, terreno, modelos...
+    cam->desenharFB();
+    auto view = cam->obtViewMatrix();
+    auto projection = cam->obtProjectionMatrix();
+    if (cam->m_use_skybox) cam->m_skybox->desenhar(view, projection);
+
+    reg->cada<renderizador, transformacao>([&](const uint32_t ent_ren) {
+        auto render = reg->obter<renderizador>(ent_ren);
+        auto transform = reg->obter<transformacao>(ent_ren);
+
+        if (!render || !transform || !render->m_modelo) {
+            depuracao::emitir(debug, "render", "Renderizador ou transformação inválida");
+            return;
         }
-    }
+
+        auto &lg = motor::obter().m_levelmanager->obterFaseAtual()->luz_global;
+        auto &s = render->m_modelo->obterShader();
+        s.use();
+        setShadowUniforms(s);
+        s.setVec3("dirLight.direction", lg->direcao);
+        s.setVec3("dirLight.color", lg->cor);
+        s.setVec3("dirLight.ambient", lg->ambiente);
+        s.setFloat("dirLight.intensity", lg->intensidade);
+        s.setFloat("near_plane", near_plane);
+        s.setFloat("far_plane", far_plane);
+        s.setMat4("view", glm::value_ptr(view));
+        s.setVec3("viewPos", cam->transform->posicao);
+        s.setMat4("projection", glm::value_ptr(projection));
+        s.setMat4("modelo", glm::value_ptr(transform->obterMatrizModelo()));
+        
+        render->m_modelo->desenhar();
+    });
+}

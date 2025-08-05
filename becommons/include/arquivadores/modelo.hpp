@@ -23,6 +23,7 @@
  */
 
 #pragma once
+#include <memory>
 #include <assimp/scene.h>
 #include <filesystem>
 #include "util/malha.hpp"
@@ -50,6 +51,6 @@ namespace becommons {
         static bool temTextura(aiMaterial*, const aiTextureType&);
     protected:
         std::string diretorio;
-        shader* m_shader{nullptr};
+        std::unique_ptr<shader> m_shader;
     };
 }
