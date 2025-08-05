@@ -5,6 +5,7 @@
 [![Version](https://img.shields.io/github/v/tag/d4nielstone/bubble_engine)](https://github.com/D4nielStone/bubble_engine/tags)
 [![Issues](https://img.shields.io/github/issues/d4nielstone/bubble_engine)](https://github.com/D4nielStone/bubble_engine/issues)
 [![Discussions](https://img.shields.io/github/discussions/d4nielstone/bubble_engine)](https://github.com/D4nielStone/bubble_engine/discussions)
+[![🐧 Build and Test](https://github.com/D4nielStone/bubble_engine/actions/workflows/build_and_test.yml/badge.svg)](https://github.com/D4nielStone/bubble_engine/actions/workflows/build_and_test.yml)
 
 <p align="center">
   <a href="https://d4nielstone.github.io/bubble_engine">
