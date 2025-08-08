@@ -1,30 +1,26 @@
 /** @copyright 
-MIT License
-Copyright (c) 2025 Daniel Oliveira
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE. 
-*/
-/**
- * @file modelo.cpp
+ * MIT License
+ * Copyright (c) 2025 Daniel Oliveira
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE. 
+ * @see modelo.hpp
  */
-
-#include "arquivadores/modelo.hpp"
 
 #include <assimp/Importer.hpp>
 #include <assimp/scene.h>
@@ -37,16 +33,16 @@ SOFTWARE.
 #include "assets/objetos/cubo.hpp"
 #include "assets/objetos/esfera.hpp"
 #include "util/material.hpp"
-#include "nucleo/projeto.hpp"
+#include "nucleo/engine.hpp"
 
 using namespace becommons;
 
 std::map<std::string, malha> primitivas =  { {"cubo", malha_cubo}, {"esfera", malha_esfera}
 };
 
-modelo::modelo(const char* diretorio) : diretorio(diretorio) {
+modelo::modelo(const char* m_diretorio) : m_diretorio(m_diretorio) {
 }
-modelo::modelo(const std::string& diretorio) : diretorio(diretorio) {
+modelo::modelo(const std::string& m_diretorio) : m_diretorio(m_diretorio) {
 }
 malha& modelo::obterMalha(size_t i) {
     if(i < malhas.size()) {
@@ -77,17 +73,23 @@ void modelo::definirShader(const shader& s) {
 }
         
 std::string modelo::obterDiretorio() const {
-    return diretorio;
+    return m_diretorio;
 }
 
 void modelo::carregar() {
     m_shader = std::make_unique<shader>();
-    auto path = diretorio;
+    auto path = m_diretorio;
+
     malhas.clear();
     if(primitivas.find(std::filesystem::path(path).filename().string()) != primitivas.end()) {
-        diretorio = path;
+        m_diretorio = path;
         malhas.push_back(primitivas[std::filesystem::path(path).filename().string()]);
         malhas.back().carregar();
+        return;
+    }
+    if (!std::filesystem::exists(m_diretorio)) path = motor::obter().m_projeto->m_diretorio + m_diretorio;
+    if (!std::filesystem::exists(path)) {
+        depuracao::emitir(erro, "modelo", "diretório não existe");
         return;
     }
     Assimp::Importer importer;
@@ -127,7 +129,7 @@ void modelo::carregar() {
         }
     }
 
-    diretorio = path.substr(0, path.find_last_of('\\'));
+    m_diretorio = path.substr(0, path.find_last_of('\\'));
 
     /// Processa o no principal
     processarNo(scene->mRootNode, scene);
@@ -252,7 +254,7 @@ textura modelo::carregarTextura(aiMaterial* mat, const aiTextureType& type) {
         tex.path = std::filesystem::path(str.C_Str()).filename().string();
         size_t barra = tex.path.find_last_of("/\\");
         tex.path = (barra == std::string::npos) ? tex.path : tex.path.substr(barra + 1);
-        tex.path = std::filesystem::path(diretorio).parent_path().string() + "/" + tex.path;
+        tex.path = std::filesystem::path(m_diretorio).parent_path().string() + "/" + tex.path;
         tex.id = textureLoader::obterInstancia().carregarTextura(tex.path);
     }
     return tex;

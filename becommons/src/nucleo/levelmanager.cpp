@@ -35,6 +35,54 @@ std::shared_ptr<fase> levelmanager::obter(const std::string& nome) {
     else return m_fases[nome];
 }
 
+        
+bool levelmanager::carregando() {
+    return m_carregando.load();
+}
+        
+void levelmanager::carregarAsync(const std::string& nome) {
+    if (m_carregando.load()) {
+        depuracao::emitir(info, "Já existe um carregamento em andamento.");
+        return;
+    }
+
+    m_carregando.store(true);
+    m_progresso.store(0.0f);
+
+    // Cria uma tarefa assíncrona
+    m_tarefa = std::async(std::launch::async, [this, nome]() {
+        try {
+            auto caminho = m_projeto.m_diretorio + nome;
+            depuracao::emitir(info, "Iniciando carregamento assíncrono: " + caminho + ".fase");
+
+            // Passo 1: Criar objeto fase
+            m_progresso.store(10.0f);
+            auto fasePtr = std::make_shared<fase>(caminho + ".fase");
+
+            // Passo 2: Carregar dados
+            fasePtr->carregar([&](float progresso){
+                // Callback do carregamento para atualizar porcentagem
+                m_progresso.store(10.0f + progresso * 0.9f); 
+            });
+
+            // Passo 3: Inserir no mapa
+            m_fases[caminho] = fasePtr;
+
+            // Passo final: Tornar atual
+            fase_atual = caminho;
+
+            depuracao::emitir(info, "Carregamento concluído.");
+        }
+        catch (const std::exception& e) {
+            depuracao::emitir(erro, std::string("Erro ao carregar fase: ") + e.what());
+        }
+
+        // Finaliza
+        m_progresso.store(100.0f);
+        m_carregando.store(false);
+    });
+}
+
 void levelmanager::carregar(const std::string &n) {
     auto nome = m_projeto.m_diretorio + n;
     depuracao::emitir(info, "carregando fase em: " + nome + ".fase");

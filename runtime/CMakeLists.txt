@@ -55,7 +55,8 @@ endif()
 
 # Linkagem
 if(WIN32)
-target_link_libraries(runtime PRIVATE
+    target_link_libraries(runtime 
+PUBLIC
     becommons
     lua
     glfw
@@ -70,17 +71,18 @@ target_link_libraries(runtime PRIVATE
     Bullet3Common
 )
 else()
-target_link_libraries(runtime PRIVATE 
- ${CMAKE_BINARY_DIR}/bin/becommons/libbecommons.a 
- BulletDynamics
- LinearMath 
- BulletCollision
- Bullet3Common
- glfw 
- assimp
- lua5.3
- freeimage
- freetype
+    target_link_libraries(runtime 
+PUBLIC
+    becommons
+    LinearMath 
+    BulletDynamics
+    BulletCollision
+    Bullet3Common
+    glfw 
+    assimp
+    lua5.3
+    freeimage
+    freetype
 )
 endif()
 

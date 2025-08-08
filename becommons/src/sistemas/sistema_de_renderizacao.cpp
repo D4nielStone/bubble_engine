@@ -91,6 +91,7 @@ void sistema_renderizacao::atualizar() {
 
 void sistema_renderizacao::inicializar()
 {
+    sistema::inicializar();
     shadowShader = std::make_unique<shader>("sombra.vs", "sombra.fs");
         // 1) Gera e configura o depth texture
     glGenTextures(1, &depthMap);
@@ -116,7 +117,6 @@ void sistema_renderizacao::inicializar()
     if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
         std::cerr << "ERROR: Shadow FBO inválido\n";
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
-    sistema::inicializar();
     auto reg = motor::obter().m_levelmanager->obterFaseAtual()->obterRegistro();
 
     glEnable(GL_CULL_FACE);
@@ -171,12 +171,13 @@ void sistema_renderizacao::renderizarSombras() {
     glCullFace(GL_BACK);
 }
 void sistema_renderizacao::atualizarCamera(camera* cam) {
+    auto reg = motor::obter().m_levelmanager->obterFaseAtual()->obterRegistro();
+
     atualizarTransformacoes();
     glColorMask(GL_FALSE, GL_FALSE, GL_FALSE, GL_FALSE);
     renderizarSombras();
     glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
 
-    auto reg = motor::obter().m_levelmanager->obterFaseAtual()->obterRegistro();
 
     // Ativa a textura de sombras
     glActiveTexture(GL_TEXTURE0);
@@ -190,8 +191,9 @@ void sistema_renderizacao::atualizarCamera(camera* cam) {
         s.setMat4("lightSpaceMatrix", glm::value_ptr(lightSpace)); 
     };
 
-    // desenha o skybox, terreno, modelos...
     cam->desenharFB();
+
+    // desenha o skybox, terreno, modelos...
     auto view = cam->obtViewMatrix();
     auto projection = cam->obtProjectionMatrix();
     if (cam->m_use_skybox) cam->m_skybox->desenhar(view, projection);
@@ -222,4 +224,6 @@ void sistema_renderizacao::atualizarCamera(camera* cam) {
         
         render->m_modelo->desenhar();
     });
+
+    cam->limparFB();
 }

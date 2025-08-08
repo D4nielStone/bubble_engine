@@ -26,6 +26,7 @@
 #include <glm/ext/matrix_clip_space.hpp>
 #include <glm/ext/matrix_transform.hpp>
 #include <memory>
+#include <glad.h>
 #include "componente.hpp"
 #include "transformacao.hpp"
 #include "util/skybox.hpp"
@@ -69,7 +70,8 @@ namespace becommons {
 
 		fvet4* viewport_ptr{ nullptr };
 
-		void desenharFB() const;
+		void desenharFB();
+		void limparFB() const;
         bool analizar(const rapidjson::Value&) override;
         bool serializar(rapidjson::Value& value, rapidjson::Document::AllocatorType& allocator) const override;
 
@@ -85,5 +87,8 @@ namespace becommons {
 		raio pontoParaRaio(const ivet2& screenPoint) const;
 		fvet3 telaParaMundo(const ivet2&, float) const;
         ivet3 mundoParaTela(const fvet3&);
+    private:
+        GLint prevViewport[4];
+        GLint prevFBO = 0;
 	};
 }

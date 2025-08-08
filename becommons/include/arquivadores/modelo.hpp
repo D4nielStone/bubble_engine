@@ -34,8 +34,8 @@ namespace becommons {
     class modelo {
     public:
         modelo() = default;
-        modelo(const char* diretorio); 
-        modelo(const std::string& diretorio); 
+        modelo(const char* m_diretorio); 
+        modelo(const std::string& m_diretorio); 
 
         malha& obterMalha(size_t i);
         shader& obterShader();
@@ -50,7 +50,7 @@ namespace becommons {
         textura carregarTextura(aiMaterial*, const aiTextureType&);
         static bool temTextura(aiMaterial*, const aiTextureType&);
     protected:
-        std::string diretorio;
+        std::string m_diretorio;
         std::unique_ptr<shader> m_shader;
     };
 }

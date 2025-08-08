@@ -23,24 +23,26 @@
  */
 
 #pragma once
-#include "editor_namespace.hpp"
 #include "becommons/becommons.hpp"
-#include <thread>
-#include <atomic>
+//#include <thread>
+//#include <atomic>
 
-namespace EDITOR_NS {
-    struct sistema_editor : becommons::sistema {
+namespace beeditor {
+    class sistema_editor : public becommons::sistema {
+    private:
+        void adicionarCaixas();
+    public:
         // \brief construtor
         sistema_editor();
 
-        // \brief funcoes
+        // \brief Funções herdadas
         void inicializar() override;
         void atualizar() override;
         void atualizarGizmo();
-        void adicionarCaixas();
         void chamarInputs();
         void salvarEditor();
 
+        /*
         // \brief thread
         static void executarRuntime();
         inline static std::thread threadRuntime;
@@ -48,14 +50,17 @@ namespace EDITOR_NS {
         static void monitorarRuntime();
          
         // \brief atributos
-        becommons::camera_editor cam;
-        becommons::interface ui;
+        */
+        std::shared_ptr<becommons::interface> ui;
+        std::shared_ptr<becommons::camera_editor> cam;
         bool m_salvar_ao_fechar;
+        size_t entidade_atual = 1;
+        
         size_t num_entidades_atual = 0;
         size_t num_componentes_atual = 0;
         size_t num_entidades_anterior = 0;
         size_t num_componentes_anterior = 0;
         size_t entidade_anterior = 0;
-        size_t entidade_atual = 1;
-};
+        
+    };
 }

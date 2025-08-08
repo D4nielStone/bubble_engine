@@ -29,7 +29,7 @@ else()
         /usr/include/GLFW
         /usr/include/assimp
         /usr/include/FreeImage
-        /usr/include/rapidjson
+        ../libs/rapidjson/include
         /usr/include/bullet
         /usr/include/freetype2
     )
@@ -44,7 +44,7 @@ find_package(RapidJSON REQUIRED)
 find_package(Bullet REQUIRED)
 find_package(Freetype REQUIRED)
 
-add_library(becommons STATIC)
+add_library(becommons SHARED)
 
 target_include_directories(becommons PUBLIC ${CMAKE_SOURCE_DIR}/src)
 
@@ -70,6 +70,7 @@ target_sources(becommons PRIVATE
     src/componentes/terreno.cpp
     src/componentes/renderizador.cpp
     src/inputs/inputs.cpp
+    src/sistemas/editor.cpp
     src/sistemas/sistema_de_codigo.cpp
     src/sistemas/sistema_de_fisica.cpp
     src/sistemas/sistema_de_renderizacao.cpp
@@ -105,18 +106,17 @@ target_link_libraries(becommons
     )
 else()
 target_link_libraries(becommons
-    PRIVATE
-    lua5.3
-    glfw
-    glad
-    assimp
-    FreeImage
-    rapidjson
-    Bullet
-    freetype
-    BulletCollision
-    BulletDynamics
-    Bullet3Common
+    PUBLIC
+        lua5.3
+        glfw
+        glad
+        assimp
+        freeimage
+        freetype
+        BulletCollision
+        BulletDynamics
+        LinearMath
+        Bullet3Common
 )
 
 endif()
