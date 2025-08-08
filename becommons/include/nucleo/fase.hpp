@@ -55,7 +55,7 @@ namespace becommons {
 		void iniciar();
 
 
-		void carregar();
+		void carregar(std::function<void(float)> onProgress = nullptr);
 		void salvar();
 		void descarregar();
 		registro* obterRegistro();

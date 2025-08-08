@@ -26,12 +26,16 @@
 #pragma once
 #include "fase.hpp"
 #include "projeto.hpp"
+#include <future>
 #include <memory>
 
 namespace becommons {
     class levelmanager {
     /* Level Management */
     private:
+        std::atomic_bool m_carregando{false};
+        std::atomic<float> m_progresso{0.0f};
+        std::future<void> m_tarefa;
         projeto m_projeto;
         // \brief id para fase atual
         std::string fase_atual;
@@ -49,10 +53,14 @@ namespace becommons {
         // \brief carrega fase pelo nome no diretório do projeto
         // \param nome diretório e nome da fase
         void carregar(const std::string& nome);
+        // \brief carrega fase pelo nome no diretório do projeto de forma paralela assíncrona
+        // \param nome diretório e nome da fase
+        void carregarAsync(const std::string& nome);
         // \brief carrega todas as fases da pasta do projeto
         void carregarTudo();
         // \brief salva todas as fases do projeto
         void salvarTudo();
+        bool carregando();
 	    // \brief obtenção da fase atualmente em execução
 	    // \return retorna ponteiro da fase atual
 	    std::shared_ptr<fase> obterFaseAtual();

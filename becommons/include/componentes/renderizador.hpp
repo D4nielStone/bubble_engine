@@ -39,10 +39,7 @@ namespace becommons {
 		}
 
         bool analizar(const rapidjson::Value& value) override;
-        bool serializar(rapidjson::Value& value, rapidjson::Document::AllocatorType& allocator) const override {
-            value.AddMember("modelo", rapidjson::Value(m_modelo->obterDiretorio().c_str(), allocator), allocator);
-            return true;
-        };
+        bool serializar(rapidjson::Value& value, rapidjson::Document::AllocatorType& allocator) const override;
 
 		renderizador(const char* m_diretorio = "/cubo");
 		~renderizador() {

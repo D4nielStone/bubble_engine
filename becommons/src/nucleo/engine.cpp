@@ -57,25 +57,31 @@ void motor::iniciar(const exec& gm) {
     });
     thread.join();
      */
+    // cria janela
+    criarJanela();
+    // sistema de ui do runtime
+    m_interface = std::make_shared<interface>(m_janela.get());
+
     if(m_game_mode == exec::jogo) {
-        criarJanela();
-        m_interface = std::make_shared<interface>(m_janela.get());
+        // carrega fase
         m_levelmanager->carregar(m_projeto->m_lancamento);
         m_levelmanager->obterFaseAtual()->iniciar();
     }
+    else 
+        // sistema de editor
+        m_editor = std::make_shared<beeditor::sistema_editor>();
 }
 void motor::rodar() {
     while(!m_janela->deveFechar()) {
         m_janela->poll();
+        // Executa funções opengl de outras threads
+        while(!fila_opengl.empty()) {
+            auto func = fila_opengl.front();
+            func();
+            fila_opengl.pop();
+        }
     	// Atualiza e renderiza fase atual
-        if(m_levelmanager->obterFaseAtual()) {
-            // Executa funções opengl de outras threads
-            while(!fila_opengl.empty()) {
-                auto func = fila_opengl.front();
-                func();
-                fila_opengl.pop();
-            }
-    
+        if(m_levelmanager->obterFaseAtual() && !m_levelmanager->carregando()) {
             // Atualiza/Inicializa sistemas pra quando a fase for iniciada
             if (m_levelmanager->obterFaseAtual()->rodando) {
                 if(!m_codigo->init) m_codigo->inicializar();
@@ -95,10 +101,11 @@ void motor::rodar() {
                     m_interface->atualizar();    
             }*/
         }
-        // Atualiza sistemas complementares
-        for (auto& s : sistemas) {
-            if(!s->init) s->inicializar();
-            s->atualizar();        
+            
+        if(m_game_mode == exec::editor) {
+            if(!m_editor->init)
+                m_editor->inicializar();
+            m_editor->atualizar();    
         }
         m_janela->swap();
     }

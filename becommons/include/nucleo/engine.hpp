@@ -44,6 +44,7 @@
 #include "sistemas/sistema_de_fisica.hpp"
 #include "levelmanager.hpp"
 #include "nucleo/projeto.hpp"
+#include "sistemas/editor.hpp"
 
 namespace becommons {
     enum class exec : char {
@@ -54,8 +55,6 @@ namespace becommons {
     class motor {
     private:
         void criarJanela();
-        // \brief Sistemas adicionados no mainloop
-        std::vector<sistema*> sistemas;
         bool m_rodando = false;
         exec m_game_mode;
     public:
@@ -77,6 +76,7 @@ namespace becommons {
         std::shared_ptr<projeto> m_projeto;
         std::shared_ptr<sistema_renderizacao> m_renderer;
         std::shared_ptr<sistema_fisica> m_fisica;
+        std::shared_ptr<beeditor::sistema_editor> m_editor;
         std::shared_ptr<sistema_codigo> m_codigo;
         std::shared_ptr<interface> m_interface;
         std::shared_ptr<inputs> m_inputs;

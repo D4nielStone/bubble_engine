@@ -27,21 +27,23 @@
 
 using namespace becommons;
 
+bool renderizador::serializar(rapidjson::Value& value, rapidjson::Document::AllocatorType& allocator) const {
+    value.AddMember("modelo", rapidjson::Value(m_modelo->obterDiretorio().c_str(), allocator), allocator);
+    return true;
+};
 bool renderizador::analizar(const rapidjson::Value& value) {
-            if(m_modelo) delete m_modelo;
-            if(value.HasMember("modelo") && value["modelo"].IsString()) {
-                auto m_diretorio = std::string(value["modelo"].GetString());
-                if (std::filesystem::exists(m_diretorio)) m_modelo = new modelo(m_diretorio);
-                else                                      m_modelo = new modelo(motor::obter().m_projeto->m_diretorio + m_diretorio);
-            }
-            else return false;
-			return true;
-        };
+    if(m_modelo) delete m_modelo;
+    if(value.HasMember("modelo") && value["modelo"].IsString()) {
+        auto m_diretorio = std::string(value["modelo"].GetString());
+        m_modelo = new modelo(m_diretorio);
+    }
+    else return false;
+	return true;
+};
 		
 renderizador::renderizador(const char* m_diretorio) {
-            if (std::filesystem::exists(m_diretorio)) m_modelo = new modelo(m_diretorio);
-            else                                      m_modelo = new modelo(motor::obter().m_projeto->m_diretorio + m_diretorio);
-            motor::obter().fila_opengl.push([&](){
-                    m_modelo->carregar();
-            });
-		};
+    m_modelo = new modelo(m_diretorio);
+    motor::obter().fila_opengl.push([&](){
+            m_modelo->carregar();
+    });
+};

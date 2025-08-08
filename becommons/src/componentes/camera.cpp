@@ -22,50 +22,65 @@
  * @file camera.cpp
  */
 
-#include "glad.h"
+#include "componentes/camera.hpp"
 #include "arquivadores/shader.hpp"
 #include "depuracao/debug.hpp"
-#include "componentes/camera.hpp"
 #include "componentes/transformacao.hpp"
 #include "nucleo/fase.hpp"
 #include "nucleo/engine.hpp"
 #include "os/janela.hpp"
 
 using namespace becommons;
+void camera::limparFB() const {
+    // Restaura estados
+    glBindFramebuffer(GL_FRAMEBUFFER, prevFBO);
+    glViewport(prevViewport[0], prevViewport[1], prevViewport[2], prevViewport[3]);
+}
 
-void camera::desenharFB() const
-{
+void camera::desenharFB() {
+    // Salvar estados atuais
+    glGetIntegerv(GL_FRAMEBUFFER_BINDING, &prevFBO);
+    glGetIntegerv(GL_VIEWPORT, prevViewport);
+
+    // Configuração padrão
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_CULL_FACE);
     glDepthFunc(GL_LESS);
     glDepthMask(GL_TRUE);
-    if (flag_fb)
-    {
-        glBindTexture(GL_TEXTURE_2D, textura);
-    if(viewport_ptr)
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, viewport_ptr->z, viewport_ptr->w, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
-    else
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, motor::obter().m_janela->tamanho.x, motor::obter().m_janela->tamanho.y, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
-        glBindTexture(GL_TEXTURE_2D, 0);
-        glBindRenderbuffer(GL_RENDERBUFFER, rbo);
-    if(viewport_ptr)
-        glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, viewport_ptr->z, viewport_ptr->w);
-    else
-        glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, motor::obter().m_janela->tamanho.x, motor::obter().m_janela->tamanho.y);
-        glBindRenderbuffer(GL_RENDERBUFFER, 0);
+
+    if (flag_fb) {
         glBindFramebuffer(GL_FRAMEBUFFER, fbo);
+
+        // Só recria buffers se o tamanho mudar
+        int width = viewport_ptr ? viewport_ptr->z : motor::obter().m_janela->tamanho.x;
+        int height = viewport_ptr ? viewport_ptr->w : motor::obter().m_janela->tamanho.y;
+
+        static int lastWidth = 0, lastHeight = 0;
+        if (width != lastWidth || height != lastHeight) {
+            glBindTexture(GL_TEXTURE_2D, textura);
+            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
+
+            glBindRenderbuffer(GL_RENDERBUFFER, rbo);
+            glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, width, height);
+            glBindRenderbuffer(GL_RENDERBUFFER, 0);
+
+            lastWidth = width;
+            lastHeight = height;
+        }
     }
+
+    // Limpa tela
     glClearColor(ceu.r, ceu.g, ceu.b, ceu.a);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    if(viewport_ptr)
+
+    // Define viewport
+    if (viewport_ptr)
         glViewport(0, 0, viewport_ptr->z, viewport_ptr->w);
     else
         glViewport(0, 0, motor::obter().m_janela->tamanho.x, motor::obter().m_janela->tamanho.y);
 }
 
-
-camera::~camera()
-{
+camera::~camera() {
     depuracao::emitir(debug, "camera", "descarregando");
     
     if(m_skybox)delete m_skybox;
@@ -79,8 +94,7 @@ camera::camera(const bool orth)
     });
 }
         
-bool camera::analizar(const rapidjson::Value& value)
-{
+bool camera::analizar(const rapidjson::Value& value) {
     if(value.HasMember("fov"))
         fov = value["fov"].GetFloat();
     if(value.HasMember("zfar"))
@@ -103,8 +117,7 @@ bool camera::analizar(const rapidjson::Value& value)
 
 	return true;
 }
-bool camera::serializar(rapidjson::Value& value, rapidjson::Document::AllocatorType& allocator) const
-{
+bool camera::serializar(rapidjson::Value& value, rapidjson::Document::AllocatorType& allocator) const {
     // fov
     value.AddMember("fov", fov, allocator);
 
@@ -130,8 +143,7 @@ bool camera::serializar(rapidjson::Value& value, rapidjson::Document::AllocatorT
 
     return true;
 }
-void camera::ativarFB()
-{
+void camera::ativarFB() {
     if(flag_fb) return;
     flag_fb = true;
 
@@ -224,8 +236,7 @@ raio camera::pontoParaRaio(const ivet2& screenPoint) const {
     return ray;
 }
 
-fvet3 camera::telaParaMundo(const ivet2 &screenPoint, float profundidade) const
-{
+fvet3 camera::telaParaMundo(const ivet2 &screenPoint, float profundidade) const {
     float ndcX = (2.0f * screenPoint.x) / motor::obter().m_janela->tamanho.x - 1.0f;
     float ndcY = 1.0f - (2.0f * screenPoint.y) / motor::obter().m_janela->tamanho.y;
     fvet4 clipCoords = fvet4(ndcX, ndcY, profundidade, 1.0f);

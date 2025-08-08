@@ -56,7 +56,7 @@ fase::~fase()
 {
 }
 
-void fase::carregar()
+void fase::carregar(std::function<void(float)> onProgress)
 {
     if(carregada)
         descarregar();
@@ -235,6 +235,20 @@ void fase::serializar(const std::string& diretorio)
     {
         Value entidade_v(kObjectType);
         Value componentes_v(kArrayType);
+
+        // Procurar tag pelo id
+        std::string tagEncontrada;
+        for (auto& [tag, tagId] : reg.m_tags) {
+            if (tagId == id) {
+                tagEncontrada = tag;
+                break;
+            }
+        }
+   
+        // Adicionar a tag (se existir)
+        if (!tagEncontrada.empty()) {
+            entidade_v.AddMember("tag", Value(tagEncontrada.c_str(), allocator), allocator);
+        }
 
         // Serializar componentes
         for(auto& [mask, componente] : componentes)
