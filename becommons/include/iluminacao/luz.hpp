@@ -19,38 +19,37 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE. 
- */
-/**
- * @file cor.hpp
+ * @file luz.hpp
  */
 
 #pragma once
-#include <algorithm>
+#include "util/vetor3.hpp"
+#include "util/cor.hpp"
 
-// \brief Definição da estrutura cor
 namespace becommons {
-    struct cor {
-        float r = 1.f, g = 1.f, b = 1.f, a = 1.f;
-        cor(const float& f) : r(f), g(f), b(f), a(1.f) {}
-        cor(const float& r, const float& g, const float& b, const float& a) : r(r), g(g), b(b), a(a) {};
-        cor(const float& r, const float& g, const float& b) : r(r), g(g), b(b) {};
-        cor() = default;
-        
-        // Operador de soma (+)
-        cor operator+(const cor& other) const {
-            return { r + other.r, g + other.g, b + other.b, std::min(1.f, a + other.a) };
-        }
-        // Operador de soma (+)
-        cor operator+(const float other) const {
-            return { r + other, g + other, b + other, std::min(1.f, a + other) };
-        }
-        // Operador de igualdade (==)
-        bool operator==(const cor& other) const {
-            return r == other.r && g == other.g && b == other.b && a == other.a;
-        }
-        // Operador de diferen�a (!=)
-        bool operator!=(const cor& other) const {
-            return !(*this == other);
-        }
+    // \brief Estrutura de shadow mapping para luzes que projetam sombra
+    struct mapa_sombra {
+        GLuint m_fbo;
+        GLuint m_tex_profundidade;
+        unsigned int m_largura, m_altura;
+    };
+    // \brief Base para iluminação da engine
+    struct luz {
+        enum tipo {
+            direcional, 
+            pontual,
+            holofote
+        };
+        tipo m_tipo;
+        cor m_cor { 1.f };
+        float intensidade { 1.f };
+        bool sombrear { false };
+        bool ativada { false };
+
+        mapa_sombra m_sombra;
+
+        // \brief Construtores:
+        luz(tipo t) : m_tipo(t) {/*...*/};
+        virtual ~luz() = default;
     };
 }
