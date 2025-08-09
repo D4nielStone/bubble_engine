@@ -19,26 +19,18 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE. 
- * @file luz_direcional.hpp
+ * @file direcional.hpp
  */
 
 #pragma once
-#include "componente.hpp"
-#include "util/vetor3.hpp"
-#include "util/cor.hpp"
+#include "luz.hpp"
 
-namespace becommons {
-    struct luz_direcional : public componente {
-        fvet3 direcao, ambiente, cor; 
-        float intensidade = 1.f;
-        explicit  luz_direcional(
-                fvet3 direcao = {-1.f, -1.f, -1.f},
-                fvet3 ambiente = {0.1f, 0.1f, 0.1f},
-                fvet3 cor = {1.f, 1.f, 1.f},
-                float intensidade = 1.f) :
-        direcao(direcao), ambiente(ambiente), cor(cor), intensidade(intensidade) {}
-        bool serializar(rapidjson::Value& value, rapidjson::Document::AllocatorType& allocator) const override;
-        bool analizar(const rapidjson::Value& value) override;
-        static constexpr mascara mascara = {COMPONENTE_LUZ_DIRECIONAL};
+namespace iluminacao {
+    struct direcional : public luz {
+        fvet3 m_direcao { -0.2f, -1.f, -0.3f };
+        
+        direcional() : luz(tipo::direcional) {
+            m_sombrear = true;
+        }
     };
 }

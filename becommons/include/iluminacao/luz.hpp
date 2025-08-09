@@ -25,20 +25,20 @@
 #pragma once
 #include "util/cor.hpp"
 
-namespace becommons {
+namespace iluminacao {
     // \brief Estrutura de shadow mapping para luzes que projetam sombra
     struct mapa_sombra {
         GLuint m_fbo;
         GLuint m_tex_profundidade;
         unsigned int m_largura, m_altura;
     };
+    enum class tipo {
+        direcional, 
+        pontual,
+        holofote
+    };
     // \brief Base para iluminação da engine
     struct luz {
-        enum tipo {
-            direcional, 
-            pontual,
-            holofote
-        };
         tipo m_tipo;
         cor m_cor { 1.f };
         float intensidade { 1.f };
