@@ -19,36 +19,26 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE. 
- * @file luz.hpp
+ * @file luz_direcional.hpp
  */
 
 #pragma once
+#include "componente.hpp"
+#include "util/vetor3.hpp"
 #include "util/cor.hpp"
 
 namespace becommons {
-    // \brief Estrutura de shadow mapping para luzes que projetam sombra
-    struct mapa_sombra {
-        GLuint m_fbo;
-        GLuint m_tex_profundidade;
-        unsigned int m_largura, m_altura;
-    };
-    // \brief Base para iluminação da engine
-    struct luz {
-        enum tipo {
-            direcional, 
-            pontual,
-            holofote
-        };
-        tipo m_tipo;
-        cor m_cor { 1.f };
-        float intensidade { 1.f };
-        bool sombrear { false };
-        bool ativada { false };
-
-        mapa_sombra m_sombra;
-
-        // \brief Construtores:
-        luz(tipo t) : m_tipo(t) {/*...*/};
-        virtual ~luz() = default;
+    struct luz_direcional : public componente {
+        fvet3 direcao, ambiente, cor; 
+        float intensidade = 1.f;
+        explicit  luz_direcional(
+                fvet3 direcao = {-1.f, -1.f, -1.f},
+                fvet3 ambiente = {0.1f, 0.1f, 0.1f},
+                fvet3 cor = {1.f, 1.f, 1.f},
+                float intensidade = 1.f) :
+        direcao(direcao), ambiente(ambiente), cor(cor), intensidade(intensidade) {}
+        bool serializar(rapidjson::Value& value, rapidjson::Document::AllocatorType& allocator) const override;
+        bool analizar(const rapidjson::Value& value) override;
+        static constexpr mascara mascara = {COMPONENTE_LUZ_DIRECIONAL};
     };
 }
