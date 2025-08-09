@@ -30,8 +30,8 @@ namespace iluminacao {
     struct holofote : public luz {
         fvet3 m_posicao { 0.f };
         fvet3 m_direcao { 0.f, -1.f, 0.f };
-        float m_cutoff cos(12.5f * (3.1415f / 180.f));
-        float m_outerCutoff cos(15.0f * (3.1415f / 180.f));
+        float m_cutoff = cos(12.5f * (3.1415f / 180.f));
+        float m_outerCutoff = cos(15.0f * (3.1415f / 180.f));
 
         holofote() : luz(tipo::holofote) {/*...*/}
     };

@@ -28,7 +28,9 @@
 #include <memory>
 #include <rapidjson/document.h>
 #include "registro.hpp"
-#include "componentes/luz_direcional.hpp"
+#include "iluminacao/direcional.hpp"
+#include "iluminacao/pontual.hpp"
+#include "iluminacao/holofote.hpp"
 
 /**
  * @struct fase
@@ -37,7 +39,6 @@
 namespace becommons {
 	struct fase : public std::enable_shared_from_this<fase> {
 		bool rodando{false};
-        std::shared_ptr<luz_direcional> luz_global = nullptr;
 	    /// @brief Construtores
 		fase(const char* diretorio);
 		fase(const std::string& diretorio);

@@ -24,6 +24,7 @@
 
 #pragma once
 #include "util/cor.hpp"
+#include "util/vetor3.hpp"
 
 namespace iluminacao {
     // \brief Estrutura de shadow mapping para luzes que projetam sombra
