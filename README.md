@@ -76,7 +76,7 @@ cd out
 cmake .. && cmake --build .
 ```
 
-### **Windows 7 x64**
+### **Windows 7 or eighter x64**
 
 > **Note1:** The support to Windows is actually not working
 > 
@@ -86,7 +86,7 @@ cmake .. && cmake --build .
 
 - [Git for Windows](https://git-scm.com/downloads/win)
 - [CMake for Windows](https://cmake.org/download/)
-- [MinGW-w64](https://sourceforge.net/projects/mingw-w64/) (recommended for compatibility)
+- [MinGW-w64](https://sourceforge.net/projects/mingw/) (recommended for compatibility)
 - [Python (optional)](https://www.python.org/downloads/windows/) for auxiliary scripts
 
 **2. Set up dependencies using `vcpkg`:**
