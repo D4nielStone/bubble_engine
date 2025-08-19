@@ -29,6 +29,15 @@ using namespace becommons;
 
 static motor* instance{nullptr};
 
+motor::motor() : 
+    m_tempo(std::make_shared<tempo>()),
+    m_inputs(std::make_shared<inputs>()),
+    m_renderer(std::make_shared<sistema_renderizacao>()),
+    m_fisica(std::make_shared<sistema_fisica>()),
+    m_codigo(std::make_shared<sistema_codigo>()) {
+    instance = this;
+}
+
 motor::motor(const std::string& directory) : 
     m_projeto(std::make_shared<projeto>(directory)),
     m_tempo(std::make_shared<tempo>()),
@@ -81,7 +90,7 @@ void motor::rodar() {
             fila_opengl.pop();
         }
     	// Atualiza e renderiza fase atual
-        if(m_levelmanager->obterFaseAtual() && !m_levelmanager->carregando()) {
+        if(m_levelmanager && m_levelmanager->obterFaseAtual() && !m_levelmanager->carregando()) {
             // Atualiza/Inicializa sistemas pra quando a fase for iniciada
             if (m_levelmanager->obterFaseAtual()->rodando) {
                 if(!m_codigo->init) m_codigo->inicializar();
@@ -127,10 +136,22 @@ bool motor::rodando() const {
 }
 
 void motor::criarJanela() {
+    if(m_projeto) {
     m_janela = std::make_shared<janela>(
         m_projeto->m_nome_janela.c_str(),
         false,
         fvet2(m_projeto->m_largura,
               m_projeto->m_altura),
              (m_projeto->m_diretorio + "/" + m_projeto->m_icone).c_str());
+
+    } else {
+    
+    m_janela = std::make_shared<janela>(
+	"BE: Editor © BubbleStudio",
+        true,
+        fvet2(640,
+              480),
+             "icon.ico");
+
+    }
 }

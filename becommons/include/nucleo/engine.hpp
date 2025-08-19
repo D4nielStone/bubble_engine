@@ -62,6 +62,7 @@ namespace becommons {
         // \param diretório do projeto à ser trabalhado
         motor(const std::string&);
         ~motor();
+        motor();
         
         void iniciar(const exec&);
         void rodar();

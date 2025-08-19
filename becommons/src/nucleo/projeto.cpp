@@ -60,14 +60,14 @@ void projeto::analisar() {
                 m_diretorio = entry.path().parent_path().string() + "/";
             }
         }
-    else    
-        throw  std::runtime_error("Erro: Diretório do projeto inexistente.");
 
     std::string full_path = m_diretorio + "config.json";
         
-    if(!std::filesystem::exists(full_path))
-        throw  std::runtime_error("Erro: Configuração do projeto inexistente. Talvez o projeto seja muito antigo");
-
+    
+    if(!std::filesystem::exists(full_path)) {
+	depuracao::emitir(alerta, "motor", "Abrindo sem projeto.");
+	return;
+    }
     // Executa o parsing
     std::ifstream file(full_path);
     std::stringstream sb;

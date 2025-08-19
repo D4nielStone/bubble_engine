@@ -28,19 +28,15 @@
 // Main function
 int main(int argc, char* argv[]) {
     try {
+        std::string jogo = becommons::obterDiretorioHome();
         if (argc > 1) {
-	    std::string jogo = argv[1];
+            jogo = argv[1];
+        }
 
-	    // Cria o motor com o diretório do jogo
-	    auto be = becommons::motor(jogo);
-	    be.iniciar(becommons::exec::editor);
-	    be.rodar();
-        } else {
-	    // Cria o motor sem o diretório do jogo
-	    auto be = becommons::motor();
-	    be.iniciar(becommons::exec::editor);
-	    be.rodar();
-	}
+        // Cria o motor com o diretório do jogo
+        auto be = becommons::motor(jogo);
+        be.iniciar(becommons::exec::editor);
+        be.rodar();'
     }
     catch (const std::exception& e) {
         depuracao::emitir(erro, e.what());

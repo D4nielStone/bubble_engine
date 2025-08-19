@@ -178,7 +178,7 @@ void sistema_editor::salvarEditor() {
  * Também atualiza a movimentação da câmera do editor.
  */
 void sistema_editor::chamarInputs() {
-    if(!motor::obter().m_levelmanager->obterFaseAtual() || motor::obter().m_levelmanager->carregando()) return;
+    if(!motor::obter().m_levelmanager || !motor::obter().m_levelmanager->obterFaseAtual() || motor::obter().m_levelmanager->carregando()) return;
     // Salva o editor e o projeto, e inicia o runtime
     // Gerencia inputs com a tecla CTRL pressionada para evitar repetições
     if(motor::obter().m_inputs->obter(inputs::E_CTRL)) {
@@ -220,7 +220,7 @@ void sistema_editor::chamarInputs() {
  * com o editor.
  */
 void sistema_editor::atualizarGizmo() {
-    if(!motor::obter().m_levelmanager->obterFaseAtual() || motor::obter().m_levelmanager->carregando()) return;
+    if(!motor::obter().m_levelmanager || !motor::obter().m_levelmanager->obterFaseAtual() || motor::obter().m_levelmanager->carregando()) return;
     auto reg = motor::obter().m_levelmanager->obterFaseAtual()->obterRegistro();
 
     // 1. Identificar entidades que foram removidas
@@ -462,9 +462,22 @@ void sistema_editor::inicializar() {
     ui = std::make_shared<interface>(motor::obter().m_janela.get());
     cam = std::make_shared<camera_editor>();
 
+    if (motor::obter().m_projeto) {
+		usarProjeto(motor::obter().m_projeto.get());
+	}
+
+    adicionarCaixas(); // Constrói a interface do editor
+    ui->inicializar();
+}
+
+void sistema_editor::usarProjeto(becommons::projeto* proj) {
+		
+    if (!proj)  {
+		throw std::runtime_error("motor: Projeto inválido carregado.");
+	}
     // Carrega a configuração da câmera do editor a partir de um arquivo JSON.
     // Se o arquivo não existir ou houver erro de parse, um erro é emitido.
-    auto _usr = motor::obter().m_projeto->m_diretorio + "/usr";
+    auto _usr = proj->m_diretorio + "/usr";
     std::stringstream sb;
     if (std::filesystem::exists(_usr + "/cam.json")) {
         std::ifstream file(_usr + "/cam.json");
@@ -479,15 +492,12 @@ void sistema_editor::inicializar() {
                 depuracao::emitir(erro, "analize da camera do editor");
         }
     }
-    adicionarCaixas(); // Constrói a interface do editor
-    ui->inicializar();
 
     //// Carrega fase de forma asíncrona
     motor::obter().m_levelmanager->carregarAsync(motor::obter().m_projeto->m_lancamento);
     motor::obter().m_renderer->definirCamera(cam.get()); // Define a câmera do editor para renderização
+
 }
-
-
 
 /**
  * @brief Inicia a execução do runtime do projeto em uma thread separada.

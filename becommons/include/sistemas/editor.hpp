@@ -41,6 +41,7 @@ namespace beeditor {
         void atualizarGizmo();
         void chamarInputs();
         void salvarEditor();
+		void usarProjeto(becommons::projeto*);
 
         /*
         // \brief thread
