@@ -78,6 +78,7 @@ target_sources(becommons PRIVATE
     src/util/caixa.cpp
     src/util/malha.cpp
     src/util/skybox.cpp
+    src/util/pipeline.cpp
     src/util/material.cpp
     src/elementos/area_de_toque.cpp
     src/elementos/popup.cpp

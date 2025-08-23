@@ -131,22 +131,9 @@ void malha::carregar() {
 }
 
 void malha::desenhar(shader &shader) {
-        if(m_sobrepor)
-            glDepthFunc(GL_ALWAYS);
-        
-        m_material.usar(shader);
-    
-        glBindVertexArray(m_VAO);
-    
-        if (m_instancias.empty()) {
-            glDrawElements(GL_TRIANGLES, m_indices.size(), GL_UNSIGNED_INT, 0);
-        } else {
-            glDrawElementsInstanced(GL_TRIANGLES, m_indices.size(), GL_UNSIGNED_INT, 0, m_instancias.size());
-        }
-        glBindVertexArray(0);
-    
-        if(m_sobrepor)
-            glDepthFunc(GL_LESS);
+    m_material.usar(shader);
+    glBindVertexArray(m_VAO);
+    glDrawElements(GL_TRIANGLES, m_indices.size(), GL_UNSIGNED_INT, 0);
 }
         
 bool malha::estaCarregado() const {

@@ -1,4 +1,4 @@
-/** \copyright 
+/** @copyright 
  * MIT License
  * Copyright (c) 2025 Daniel Oliveira
  * 
@@ -19,34 +19,42 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE. 
- * \file drawcall.hpp
+ * @file pipeline.cpp
  */
 
-#pragma once
-#include "material.hpp"
-#include "arquivadores/shader.hpp"
-namespace becommons {
-	struct draw_call {
-	    GLuint m_vao = 0;
-	    GLenum m_mode = GL_TRIANGLES;
-	    GLsizei m_count = 0;
-	    GLenum m_type = GL_UNSIGNED_INT;
-	    const void* m_indices = nullptr;
-	
-	    shader* m_shader; // referencia do shader
-	    material* m_material; // referencia do material/uniforms
-    };
-    // \class `pipeline`
-    // \brief Gerencia os draw calls facilitando a renderização.
-    class pipeline {
-    public:
-        pipeline();
-        void addDrawCall(const unsigned int layer, draw_call* ref);
-        void remDrawCall(draw_call* ref);
-        void limparLayer(const unsigned int layer);
-        void limpar();
-        void chamarDrawCalls();
-    private:
-        std::map<unsigned int, std::vector<draw_call*>> m_draw_calls;
-    };
+#include "util/pipeline.hpp"
+#include <algorithm>
+
+using namespace becommons;
+
+pipeline::pipeline() {}
+
+void pipeline::addDrawCall(const unsigned int layer, draw_call* ref) {
+    m_draw_calls[layer].push_back(ref);
+}
+
+void pipeline::remDrawCall(draw_call* ref) {
+    for (auto& [layer, calls] : m_draw_calls) {
+        calls.erase(std::remove(calls.begin(), calls.end(), ref), calls.end());
+    }
+}
+
+void pipeline::limparLayer(const unsigned int layer) {
+    m_draw_calls[layer].clear();
+}
+
+void pipeline::limpar() {
+    m_draw_calls.clear();
+}
+
+void pipeline::chamarDrawCalls() {
+    for (auto& [layer, calls] : m_draw_calls) {
+        for (auto* dc : calls) {
+            if (dc) {
+                dc->m_material->usar(*dc->m_shader);
+                glBindVertexArray(dc->m_vao);
+                glDrawElements(dc->m_mode, dc->m_count, dc->m_type, dc->m_indices);
+            }
+        }
+    }
 }
