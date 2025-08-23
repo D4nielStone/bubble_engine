@@ -145,7 +145,8 @@ namespace becommons{
             
                 return alturaLinha * static_cast<float>(numLinhas);
             }
-            void desenhar(unsigned int ret_VAO) override {
+            // TODO: adicionar obterDrawCalls
+            /*void desenhar(unsigned int ret_VAO) override {
                 limites_iniciais = m_estilo.m_limites;
 
                 const auto& chs = gerenciadorFontes::obterInstancia().obter(m_texto_fonte, m_texto_escala);
@@ -178,7 +179,7 @@ namespace becommons{
                     m_estilo.m_altura = obterAltura(m_texto_frase);
                 }
                 m_estilo.m_limites = {limites_iniciais.x, limites_iniciais.y, m_estilo.m_largura, m_estilo.m_altura};
-            };
+            };*/
         };
     } // elementos
 } // namespace becommons

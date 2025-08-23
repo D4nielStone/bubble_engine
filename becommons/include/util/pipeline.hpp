@@ -45,6 +45,7 @@ namespace becommons {
         void remDrawCall(draw_call* ref);
         void limparLayer(const unsigned int layer);
         void limpar();
+        static void chamarDrawCall(draw_call*);
         void chamarDrawCalls();
     private:
         std::map<unsigned int, std::vector<draw_call*>> m_draw_calls;

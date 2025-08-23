@@ -89,6 +89,10 @@ void sistema_renderizacao::atualizar() {
     }
 } 
 
+camera* sistema_renderizacao::obterCameraPrincipal() {
+    return camera_principal;
+}
+
 void sistema_renderizacao::inicializar()
 {
     sistema::inicializar();

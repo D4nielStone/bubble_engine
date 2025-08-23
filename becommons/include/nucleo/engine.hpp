@@ -45,6 +45,7 @@
 #include "levelmanager.hpp"
 #include "nucleo/projeto.hpp"
 #include "sistemas/editor.hpp"
+#include "util/pipeline.hpp"
 
 namespace becommons {
     enum class exec : char {
@@ -57,6 +58,12 @@ namespace becommons {
         void criarJanela();
         bool m_rodando = false;
         exec m_game_mode;
+        void atualizarSistemas();
+        void processarFuncoesOpengl();
+        void shadowPass();   
+        void geometryPass(camera*); 
+        void uiPass(camera*);       
+
     public:
         // \brief Construtor padrão
         // \param diretório do projeto à ser trabalhado
@@ -83,7 +90,6 @@ namespace becommons {
         std::shared_ptr<inputs> m_inputs;
         std::shared_ptr<tempo> m_tempo;
         std::shared_ptr<levelmanager> m_levelmanager;
-        // \brief Fila para chamadas opengl na thread principal
         std::queue<std::function<void()>> fila_opengl;
     };
 }

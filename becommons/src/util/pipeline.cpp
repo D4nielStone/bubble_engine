@@ -47,14 +47,17 @@ void pipeline::limpar() {
     m_draw_calls.clear();
 }
 
+void pipeline::chamarDrawCall(draw_call* dc) {
+    if (dc) {
+        dc->m_material->usar(*dc->m_shader);
+        glBindVertexArray(dc->m_vao);
+        glDrawElements(dc->m_mode, dc->m_count, dc->m_type, dc->m_indices);
+    }
+}
 void pipeline::chamarDrawCalls() {
     for (auto& [layer, calls] : m_draw_calls) {
         for (auto* dc : calls) {
-            if (dc) {
-                dc->m_material->usar(*dc->m_shader);
-                glBindVertexArray(dc->m_vao);
-                glDrawElements(dc->m_mode, dc->m_count, dc->m_type, dc->m_indices);
-            }
+            chamarDrawCall(dc);
         }
     }
 }

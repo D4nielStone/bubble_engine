@@ -30,6 +30,7 @@
 #include "arquivadores/imageloader.hpp"
 #include "arquivadores/fonte.hpp"
 #include "util/caixa.hpp"
+#include "util/pipeline.hpp"
 #include "elementos/botao.hpp"
 #include "elementos/caixa_de_texto.hpp"
 #include "elementos/imagem.hpp"
@@ -38,7 +39,6 @@
 #include "os/janela.hpp"
 
 namespace becommons { 
-	static GLuint VAO, VBO, EBO;
     struct interface : sistema {
         void desenhar(caixa*);
         void atualizarLJ(caixa*);
@@ -63,6 +63,7 @@ namespace becommons {
         caixa* obterRaiz();
         std::set<caixa*> pos_render;
         std::unique_ptr<caixa> m_raiz;
+        pipeline m_pipeline;
         glm::mat4 projecao_viewport;
         janela* m_window = nullptr;
     };

@@ -26,6 +26,7 @@
 
 #pragma once
 #include <string>    
+#include <glad.h>
 #include <memory>
 #include <vector>
 #include "material.hpp"
@@ -36,9 +37,10 @@
 #include <glm/glm.hpp>
 #include "arquivadores/shader.hpp"
 #include "inputs/inputs.hpp"
+#include "pipeline.hpp"
 
 namespace becommons {
-    
+    inline static GLuint VAO, EBO, VBO;
     // \enum flag_estilo
     // Flags que definem o estilo da caixa. Também controlam o alinhamento e estilo dos filhos.
     enum class flag_estilo : uint8_t {
@@ -209,17 +211,64 @@ namespace becommons {
             return false;
         }
         virtual void configurar() {
+            /*----------------quad---------------*/
+        
+            // definiçãoo de dados do quadrado (posição e UV)
+            float vertices[] = {
+                // posição (x, y)    // UV (u, v)
+                0.0f, 0.0f,        0.0f, 0.0f, // Inferior esquerdo
+                 1.0f, 0.0f,        1.0f, 0.0f, // Inferior direito
+                 1.0f,  1.0f,        1.0f, 1.0f, // Superior direito
+                0.0f,  1.0f,        0.0f, 1.0f  // Superior esquerdo
+            };
+
+            // indices para formar dois triângulos
+            unsigned int indices[] = {
+                0, 1, 2, // primeiro triângulo
+                2, 3, 0  // segundo triângulo
+            };
+
+            // geração de VAO, VBO e EBO
+            glGenVertexArrays(1, &VAO);
+            glGenBuffers(1, &VBO);
+            glGenBuffers(1, &EBO);
+
+            // configuração do VAO
+            glBindVertexArray(VAO);
+
+            // configuração do VBO (dados do quadrado)
+            glBindBuffer(GL_ARRAY_BUFFER, VBO);
+            glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+
+            // configuração do EBO (indices)
+            glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+            glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+
+            // configuração do atributo de posição (layout location = 0)
+            glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)0);
+            glEnableVertexAttribArray(0);
+
+            // configuração do atributo UV (layout location = 1)
+            glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)(2 * sizeof(float)));
+            glEnableVertexAttribArray(1);
+
+            glBindVertexArray(0);
         };
         virtual void atualizar() {
         };
         // @returns Se está presionado ou não
         bool mouseEmCima();
-        virtual void desenhar(unsigned int ret_VAO) {
+        draw_call obterDrawCall() {
             if(!m_shader)m_shader = std::make_unique<shader>("imagem.vert", "quad.frag");
-            m_material.usar(*m_shader);
-            glBindVertexArray(ret_VAO);
-            glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-            glBindVertexArray(0);
+            return {
+                VAO,
+                GL_TRIANGLES,
+                6,
+                GL_UNSIGNED_INT,
+                nullptr,
+                m_shader.get(),
+                &m_material
+            };
         };
     };
 }

@@ -122,7 +122,7 @@ void interface::atualizarHDTF(caixa* it_caixa, std::function<void(caixa*)> func)
 void interface::desenhar(caixa* c) {
     if(c) {
     c->m_projecao = projecao_viewport;
-    c->desenhar(VAO);
+    //c->desenhar(VAO);
     for(auto& filho : c->m_filhos)
     {
         if (filho->tipo() == tipo_caixa::popup && filho->m_estilo.m_ativo) {

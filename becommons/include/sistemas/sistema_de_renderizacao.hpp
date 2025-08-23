@@ -29,8 +29,11 @@
 #include <memory>
 
 namespace becommons {
-	struct sistema_renderizacao : sistema {
+	class sistema_renderizacao : public sistema {
+    private:
         camera* camera_principal{ nullptr };
+    public:
+        camera* obterCameraPrincipal();
 	    void definirCamera(camera*);
 	    sistema_renderizacao() = default;
 	    static void calcularTransformacao(transformacao*);
