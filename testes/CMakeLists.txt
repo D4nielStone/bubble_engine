@@ -72,8 +72,8 @@ target_link_libraries(testes PRIVATE
 )
 else()
 target_link_libraries(testes PRIVATE 
-    ${CMAKE_BINARY_DIR}/bin/becommons/libbecommons.a 
- BulletDynamics
+ becommons
+    BulletDynamics
  LinearMath 
  BulletCollision
  Bullet3Common
@@ -91,5 +91,5 @@ find_library(BULLET_COLLISION_LIBRARY BulletCollision)
 find_library(BULLET_LINEAR_MATH_LIBRARY LinearMath)
 
 add_custom_command(TARGET testes POST_BUILD
-    COMMAND $<TARGET_FILE:testes>
+    COMMAND gdb $<TARGET_FILE:testes>
 )

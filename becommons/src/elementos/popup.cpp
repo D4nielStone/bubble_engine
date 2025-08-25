@@ -117,8 +117,8 @@ void elementos::popup::atualizar() {
                     m_estilo.m_limites.z = std::lerp(m_estilo.m_limites.z, max_largura_total, m_velocidade_lerp * dt);
                     m_estilo.m_limites.w = std::lerp(m_estilo.m_limites.w, max_altura_total, m_velocidade_lerp * dt);
 
-                    bool pode_aparecer_direita = (x_antigo + m_estilo.m_limites.z) < motor::obter().m_janela->tamanho.x;
-                    bool pode_aparecer_abaixo = (y_antigo + m_estilo.m_limites.w) < motor::obter().m_janela->tamanho.y;
+                    bool pode_aparecer_direita = (x_antigo + m_estilo.m_limites.z) < motor::obter().m_janela->obterTamanho().x;
+                    bool pode_aparecer_abaixo = (y_antigo + m_estilo.m_limites.w) < motor::obter().m_janela->obterTamanho().y;
 
                     float novo_x = pode_aparecer_direita ? x_antigo : x_antigo - m_estilo.m_limites.z;
                     float novo_y = pode_aparecer_abaixo ? y_antigo : y_antigo - m_estilo.m_limites.w ;

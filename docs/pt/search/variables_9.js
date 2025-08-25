@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['tamanho_0',['tamanho',['../structBECOMMONS__NS_1_1caractere.html#aeb9b952854cb283b9ca4211f0c2af0b4',1,'BECOMMONS_NS::caractere']]]
+  ['tamanho_0',['tamanho',['../structbecommons_1_1caractere.html#a95a35cef07786a50bf3e1de7c4e6157e',1,'becommons::caractere']]]
 ];

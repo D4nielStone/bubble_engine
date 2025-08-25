@@ -52,8 +52,8 @@ void camera::desenharFB() {
         glBindFramebuffer(GL_FRAMEBUFFER, fbo);
 
         // Só recria buffers se o tamanho mudar
-        int width = viewport_ptr ? viewport_ptr->z : motor::obter().m_janela->tamanho.x;
-        int height = viewport_ptr ? viewport_ptr->w : motor::obter().m_janela->tamanho.y;
+        int width = viewport_ptr ? viewport_ptr->z : motor::obter().m_janela->obterTamanho().x;
+        int height = viewport_ptr ? viewport_ptr->w : motor::obter().m_janela->obterTamanho().y;
 
         static int lastWidth = 0, lastHeight = 0;
         if (width != lastWidth || height != lastHeight) {
@@ -77,7 +77,7 @@ void camera::desenharFB() {
     if (viewport_ptr)
         glViewport(0, 0, viewport_ptr->z, viewport_ptr->w);
     else
-        glViewport(0, 0, motor::obter().m_janela->tamanho.x, motor::obter().m_janela->tamanho.y);
+        glViewport(0, 0, motor::obter().m_janela->obterTamanho().x, motor::obter().m_janela->obterTamanho().y);
 }
 
 camera::~camera() {
@@ -203,7 +203,7 @@ glm::mat4 camera::obtViewMatrix() {
 glm::mat4 camera::obtProjectionMatrix() {
     ivet2 viewp;
     if (!viewport_ptr)
-        viewp = {motor::obter().m_janela->tamanho.x, motor::obter().m_janela->tamanho.y};
+        viewp = {motor::obter().m_janela->obterTamanho().x, motor::obter().m_janela->obterTamanho().y};
     else if(viewport_ptr)
         viewp = {static_cast<int>(viewport_ptr->z), static_cast<int>(viewport_ptr->w)};
 
@@ -237,8 +237,8 @@ raio camera::pontoParaRaio(const ivet2& screenPoint) const {
 }
 
 fvet3 camera::telaParaMundo(const ivet2 &screenPoint, float profundidade) const {
-    float ndcX = (2.0f * screenPoint.x) / motor::obter().m_janela->tamanho.x - 1.0f;
-    float ndcY = 1.0f - (2.0f * screenPoint.y) / motor::obter().m_janela->tamanho.y;
+    float ndcX = (2.0f * screenPoint.x) / motor::obter().m_janela->obterTamanho().x - 1.0f;
+    float ndcY = 1.0f - (2.0f * screenPoint.y) / motor::obter().m_janela->obterTamanho().y;
     fvet4 clipCoords = fvet4(ndcX, ndcY, profundidade, 1.0f);
 
     fvet4 eyeCoords = fvet4(glm::inverse(projMatriz) * clipCoords.to_glm());
@@ -259,7 +259,7 @@ ivet3 camera::mundoParaTela(const fvet3 &mundoPos) {
     if (viewport_ptr) {
         currentViewport = {static_cast<int>(viewport_ptr->z), static_cast<int>(viewport_ptr->w)};
     } else {
-        currentViewport = {motor::obter().m_janela->tamanho.x, motor::obter().m_janela->tamanho.y}; 
+        currentViewport = {motor::obter().m_janela->obterTamanho().x, motor::obter().m_janela->obterTamanho().y}; 
     }
     bool visivel = true;
     if (ndcCoords.x < -1.0f || ndcCoords.x > 1.0f ||

@@ -112,34 +112,46 @@ $(document).ready(function(){initNavTree('mat_8hpp_source.html',''); initResizab
 <div class="contents">
 <a href="mat_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span> </div>
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="preprocessor">#pragma once</span></div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="preprocessor">#include &quot;becommons_namespace.hpp&quot;</span></div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="preprocessor">#include &quot;<a class="code" href="vetor2_8hpp.html">util/vetor2.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="preprocessor">#include &quot;<a class="code" href="vetor3_8hpp.html">util/vetor3.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="preprocessor">#include &quot;<a class="code" href="vetor4_8hpp.html">util/vetor4.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceBECOMMONS__NS.html">BECOMMONS_NS</a> {</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">float</span> lerp(<span class="keyword">const</span> <span class="keywordtype">float</span>&amp; start, <span class="keyword">const</span> <span class="keywordtype">float</span>&amp; end, <span class="keyword">const</span> <span class="keywordtype">float</span>&amp; alpha) {</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>        <span class="keywordflow">return</span> start + alpha * (end - start);</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    }</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    <span class="keyword">static</span> <span class="keyword">inline</span> fvet2 lerp(<span class="keyword">const</span> fvet2&amp; start, <span class="keyword">const</span> fvet2&amp; end, <span class="keyword">const</span> <span class="keywordtype">float</span>&amp; alpha) {</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>        <span class="keywordflow">return</span> fvet2(</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>                start.x + alpha * (end.x - start.x),</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>                start.y + alpha * (end.y - start.y)</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>                );</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    }</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    <span class="keyword">static</span> <span class="keyword">inline</span> fvet3 lerp(<span class="keyword">const</span> fvet3&amp; start, <span class="keyword">const</span> fvet3&amp; end, <span class="keyword">const</span> <span class="keywordtype">float</span>&amp; alpha) {</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>        <span class="keywordflow">return</span> fvet3(</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>                start.x + alpha * (end.x - start.x),</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>                start.y + alpha * (end.y - start.y),</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>                start.z + alpha * (end.z - start.z)</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>                );</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    }</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">float</span> dist(<span class="keyword">const</span> <span class="keywordtype">float</span>&amp; a, <span class="keyword">const</span> <span class="keywordtype">float</span>&amp; b) {</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>        <span class="keywordflow">return</span> std::abs(a - b);</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    }</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>}</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="comment">// @see api_lua.cpp</span></div>
-<div class="ttc" id="anamespaceBECOMMONS__NS_html"><div class="ttname"><a href="namespaceBECOMMONS__NS.html">BECOMMONS_NS</a></div><div class="ttdoc">namespace becommons</div><div class="ttdef"><b>Definition</b> fonte.cpp:33</div></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="preprocessor">#include &quot;<a class="code" href="vetor2_8hpp.html">util/vetor2.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="preprocessor">#include &quot;<a class="code" href="vetor3_8hpp.html">util/vetor3.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="preprocessor">#include &quot;<a class="code" href="vetor4_8hpp.html">util/vetor4.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacebecommons.html">becommons</a> {</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">float</span> lerp(<span class="keyword">const</span> <span class="keywordtype">float</span>&amp; start, <span class="keyword">const</span> <span class="keywordtype">float</span>&amp; end, <span class="keyword">const</span> <span class="keywordtype">float</span>&amp; alpha) {</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>        <span class="keywordflow">return</span> start + alpha * (end - start);</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    }</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    <span class="keyword">static</span> <span class="keyword">inline</span> <a class="code hl_class" href="structbecommons_1_1vetor2.html">fvet2</a> lerp(<span class="keyword">const</span> <a class="code hl_class" href="structbecommons_1_1vetor2.html">fvet2</a>&amp; start, <span class="keyword">const</span> <a class="code hl_class" href="structbecommons_1_1vetor2.html">fvet2</a>&amp; end, <span class="keyword">const</span> <span class="keywordtype">float</span>&amp; alpha) {</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>        <span class="keywordflow">return</span> <a class="code hl_class" href="structbecommons_1_1vetor2.html">fvet2</a>(</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>                start.x + alpha * (end.x - start.x),</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>                start.y + alpha * (end.y - start.y)</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>                );</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    }</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    <span class="keyword">static</span> <span class="keyword">inline</span> <a class="code hl_class" href="structbecommons_1_1vetor3.html">fvet3</a> lerp(<span class="keyword">const</span> <a class="code hl_class" href="structbecommons_1_1vetor3.html">fvet3</a>&amp; start, <span class="keyword">const</span> <a class="code hl_class" href="structbecommons_1_1vetor3.html">fvet3</a>&amp; end, <span class="keyword">const</span> <span class="keywordtype">float</span>&amp; alpha) {</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>        <span class="keywordflow">return</span> <a class="code hl_class" href="structbecommons_1_1vetor3.html">fvet3</a>(</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>                start.x + alpha * (end.x - start.x),</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>                start.y + alpha * (end.y - start.y),</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>                start.z + alpha * (end.z - start.z)</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>                );</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    }</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">float</span> dist(<span class="keyword">const</span> <span class="keywordtype">float</span>&amp; a, <span class="keyword">const</span> <span class="keywordtype">float</span>&amp; b) {</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>        <span class="keywordflow">return</span> std::abs(a - b);</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    }</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">float</span> dist(<span class="keyword">const</span> <a class="code hl_class" href="structbecommons_1_1vetor2.html">fvet2</a>&amp; a, <span class="keyword">const</span> <a class="code hl_class" href="structbecommons_1_1vetor2.html">fvet2</a>&amp; b) {</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>        <span class="keywordtype">float</span> dx = b.x - a.x;</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        <span class="keywordtype">float</span> dy = b.y - a.y;</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>        <span class="keywordflow">return</span> std::sqrt(dx * dx + dy * dy);</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    }</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">float</span> dist(<span class="keyword">const</span> <a class="code hl_class" href="structbecommons_1_1vetor3.html">fvet3</a>&amp; a, <span class="keyword">const</span> <a class="code hl_class" href="structbecommons_1_1vetor3.html">fvet3</a>&amp; b) {</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>        <span class="keywordtype">float</span> dx = b.x - a.x;</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>        <span class="keywordtype">float</span> dy = b.y - a.y;</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>        <span class="keywordtype">float</span> dz = b.z - a.z;</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>        <span class="keywordflow">return</span> std::sqrt(dx * dx + dy * dy + dz * dz);</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    }</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>}</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><span class="comment">// @see api_lua.cpp</span></div>
+<div class="ttc" id="anamespacebecommons_html"><div class="ttname"><a href="namespacebecommons.html">becommons</a></div><div class="ttdoc">namespace becommons</div><div class="ttdef"><b>Definition</b> fonte.cpp:33</div></div>
+<div class="ttc" id="astructbecommons_1_1vetor2_html"><div class="ttname"><a href="structbecommons_1_1vetor2.html">becommons::vetor2&lt; float &gt;</a></div></div>
+<div class="ttc" id="astructbecommons_1_1vetor3_html"><div class="ttname"><a href="structbecommons_1_1vetor3.html">becommons::vetor3&lt; float &gt;</a></div></div>
 <div class="ttc" id="avetor2_8hpp_html"><div class="ttname"><a href="vetor2_8hpp.html">vetor2.hpp</a></div></div>
 <div class="ttc" id="avetor3_8hpp_html"><div class="ttname"><a href="vetor3_8hpp.html">vetor3.hpp</a></div></div>
 <div class="ttc" id="avetor4_8hpp_html"><div class="ttname"><a href="vetor4_8hpp.html">vetor4.hpp</a></div></div>

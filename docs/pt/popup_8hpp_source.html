@@ -112,60 +112,49 @@ $(document).ready(function(){initNavTree('popup_8hpp_source.html',''); initResiz
 <div class="contents">
 <a href="popup_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span> </div>
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="preprocessor">#pragma once</span></div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="preprocessor">#include &quot;becommons_namespace.hpp&quot;</span></div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="preprocessor">#include &quot;<a class="code" href="area__de__toque_8hpp.html">area_de_toque.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="preprocessor">#include &lt;memory&gt;</span></div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="preprocessor">#include &lt;cmath&gt;</span></div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceBECOMMONS__NS.html">BECOMMONS_NS</a> {</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    <span class="keyword">namespace </span>elementos {</div>
-<div class="foldopen" id="foldopen00033" data-start="{" data-end="};">
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="classBECOMMONS__NS_1_1elementos_1_1popup.html">   33</a></span>        <span class="keyword">class </span><a class="code hl_class" href="classBECOMMONS__NS_1_1elementos_1_1popup.html">popup</a> : <span class="keyword">public</span> <a class="code hl_class" href="classBECOMMONS__NS_1_1elementos_1_1area__de__toque.html">area_de_toque</a> {</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>            <span class="keyword">private</span>:</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>                <a class="code hl_class" href="classBECOMMONS__NS_1_1elementos_1_1botao.html">botao</a>* m_referencia {<span class="keyword">nullptr</span>};</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>            <span class="keyword">public</span>:</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>                <a class="code hl_class" href="classBECOMMONS__NS_1_1elementos_1_1popup.html">popup</a>() {</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>                }</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>                <span class="keywordtype">void</span> configurar()<span class="keyword"> override </span>{</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>                    <span class="keywordflow">if</span> (m_pai &amp;&amp; m_pai-&gt;tipo() == tipo_caixa::botao)</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>                        m_referencia = <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="classBECOMMONS__NS_1_1elementos_1_1botao.html">botao</a>*<span class="keyword">&gt;</span>(m_pai);</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>                    m_estilo.m_cor_fundo = <a class="code hl_struct" href="structBECOMMONS__NS_1_1cor.html">cor</a>(0.1f);</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>                    m_estilo.m_cor_borda = <a class="code hl_struct" href="structBECOMMONS__NS_1_1cor.html">cor</a>(0.07f);</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>                    m_estilo.m_flag_estilo |= flag_estilo::largura_justa | flag_estilo::altura_justa;</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>                    m_estilo.m_orientacao_modular = estilo::orientacao::vertical;</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>                    m_estilo.m_padding_geral = {3, 3};</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>                }</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>                <span class="keywordtype">void</span> atualizar()<span class="keyword"> override </span>{</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>                    <span class="keywordflow">if</span>(!m_referencia) <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>                    m_estilo.m_ativo = m_estilo.m_ativo ? m_referencia-&gt;mouseEmCima() || mouseEmCima() : m_referencia-&gt;mouseEmCima();</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>                    <span class="keywordtype">float</span> mais_largo = 20.f;</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>                    m_estilo.m_limites.w = m_estilo.m_padding_geral.y;</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>                    <span class="keywordflow">for</span>(<span class="keyword">auto</span>&amp; filho : m_filhos) {</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>                        mais_largo = std::max(filho-&gt;m_estilo.m_limites.z+m_estilo.m_padding_geral.x*2, mais_largo);</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>                        m_estilo.m_limites.w += filho-&gt;m_estilo.m_limites.w + m_estilo.m_padding_geral.y;</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>                    }</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>                    <span class="keywordflow">if</span>(m_estilo.m_ativo) {</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>                        m_estilo.m_limites.z = std::lerp&lt;float&gt;(m_estilo.m_limites.z, mais_largo, 0.5);</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>                        m_estilo.m_limites.x = std::lerp&lt;float&gt;(m_estilo.m_limites.x, m_referencia-&gt;m_estilo.m_limites.x- m_estilo.m_limites.z + 5, 0.1);</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>                    } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>                        m_estilo.m_limites.z = 20;</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>                        m_estilo.m_limites.x = m_referencia-&gt;m_estilo.m_limites.x;</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>                    }</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>                    m_estilo.m_limites.y = m_referencia-&gt;m_estilo.m_limites.y;</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>                }</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>                tipo_caixa tipo()<span class="keyword"> const override </span>{</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>                    <span class="keywordflow">return</span> tipo_caixa::popup;</div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>                }</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>        };</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="preprocessor">#include &quot;<a class="code" href="area__de__toque_8hpp.html">area_de_toque.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="preprocessor">#include &lt;memory&gt;</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="preprocessor">#include &lt;cmath&gt;</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacebecommons.html">becommons</a> {</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    <span class="keyword">namespace </span>elementos {</div>
+<div class="foldopen" id="foldopen00032" data-start="{" data-end="};">
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno"><a class="line" href="classbecommons_1_1elementos_1_1popup.html">   32</a></span>        <span class="keyword">class </span><a class="code hl_class" href="classbecommons_1_1elementos_1_1popup.html">popup</a> : <span class="keyword">public</span> <a class="code hl_class" href="classbecommons_1_1elementos_1_1area__de__toque.html">area_de_toque</a> {</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>            <span class="keyword">private</span>:</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>                <a class="code hl_class" href="classbecommons_1_1elementos_1_1botao.html">botao</a>* m_referencia {<span class="keyword">nullptr</span>};</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>                <span class="keywordtype">bool</span> prevMouseE = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>                <span class="keywordtype">int</span> x_antigo = 0;</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>                <span class="keywordtype">int</span> y_antigo = 0;</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>                <span class="keywordtype">float</span> m_velocidade_lerp = 13.f;</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>            <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>                <a class="code hl_class" href="classbecommons_1_1elementos_1_1popup.html">popup</a>() {</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>                    m_estilo.m_orientacao_modular = estilo::orientacao::vertical;</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>                    m_estilo.m_ativo = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>                }</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>                <span class="keywordtype">void</span> configurar()<span class="keyword"> override </span>{</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>                    <span class="keywordflow">if</span> (m_pai &amp;&amp; m_pai-&gt;tipo() == tipo_caixa::botao)</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>                        m_referencia = <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="classbecommons_1_1elementos_1_1botao.html">botao</a>*<span class="keyword">&gt;</span>(m_pai);</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>                    m_estilo.m_cor_fundo = <a class="code hl_struct" href="structbecommons_1_1cor.html">cor</a>(0.1f);</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>                    m_estilo.m_cor_borda = <a class="code hl_struct" href="structbecommons_1_1cor.html">cor</a>(0.07f);</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>                    m_estilo.m_flag_estilo |= flag_estilo::largura_justa | flag_estilo::altura_justa;</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>                    m_estilo.m_padding_geral = {3, 3};</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>                    m_estilo.m_ativo = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>                }</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>                <span class="keywordtype">void</span> atualizar() <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>                tipo_caixa tipo()<span class="keyword"> const override </span>{</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>                    <span class="keywordflow">return</span> tipo_caixa::popup;</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>                }</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>        };</div>
 </div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    }</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>}</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    }</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>}</div>
 <div class="ttc" id="aarea__de__toque_8hpp_html"><div class="ttname"><a href="area__de__toque_8hpp.html">area_de_toque.hpp</a></div></div>
-<div class="ttc" id="aclassBECOMMONS__NS_1_1elementos_1_1area__de__toque_html"><div class="ttname"><a href="classBECOMMONS__NS_1_1elementos_1_1area__de__toque.html">BECOMMONS_NS::elementos::area_de_toque</a></div><div class="ttdef"><b>Definition</b> area_de_toque.hpp:41</div></div>
-<div class="ttc" id="aclassBECOMMONS__NS_1_1elementos_1_1botao_html"><div class="ttname"><a href="classBECOMMONS__NS_1_1elementos_1_1botao.html">BECOMMONS_NS::elementos::botao</a></div><div class="ttdef"><b>Definition</b> botao.hpp:34</div></div>
-<div class="ttc" id="aclassBECOMMONS__NS_1_1elementos_1_1popup_html"><div class="ttname"><a href="classBECOMMONS__NS_1_1elementos_1_1popup.html">BECOMMONS_NS::elementos::popup</a></div><div class="ttdef"><b>Definition</b> popup.hpp:33</div></div>
-<div class="ttc" id="anamespaceBECOMMONS__NS_html"><div class="ttname"><a href="namespaceBECOMMONS__NS.html">BECOMMONS_NS</a></div><div class="ttdoc">namespace becommons</div><div class="ttdef"><b>Definition</b> fonte.cpp:33</div></div>
-<div class="ttc" id="astructBECOMMONS__NS_1_1cor_html"><div class="ttname"><a href="structBECOMMONS__NS_1_1cor.html">BECOMMONS_NS::cor</a></div><div class="ttdef"><b>Definition</b> cor.hpp:33</div></div>
+<div class="ttc" id="aclassbecommons_1_1elementos_1_1area__de__toque_html"><div class="ttname"><a href="classbecommons_1_1elementos_1_1area__de__toque.html">becommons::elementos::area_de_toque</a></div><div class="ttdef"><b>Definition</b> area_de_toque.hpp:37</div></div>
+<div class="ttc" id="aclassbecommons_1_1elementos_1_1botao_html"><div class="ttname"><a href="classbecommons_1_1elementos_1_1botao.html">becommons::elementos::botao</a></div><div class="ttdef"><b>Definition</b> botao.hpp:33</div></div>
+<div class="ttc" id="aclassbecommons_1_1elementos_1_1popup_html"><div class="ttname"><a href="classbecommons_1_1elementos_1_1popup.html">becommons::elementos::popup</a></div><div class="ttdef"><b>Definition</b> popup.hpp:32</div></div>
+<div class="ttc" id="anamespacebecommons_html"><div class="ttname"><a href="namespacebecommons.html">becommons</a></div><div class="ttdoc">namespace becommons</div><div class="ttdef"><b>Definition</b> fonte.cpp:33</div></div>
+<div class="ttc" id="astructbecommons_1_1cor_html"><div class="ttname"><a href="structbecommons_1_1cor.html">becommons::cor</a></div><div class="ttdef"><b>Definition</b> cor.hpp:32</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

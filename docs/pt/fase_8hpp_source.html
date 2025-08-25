@@ -110,62 +110,60 @@ $(document).ready(function(){initNavTree('fase_8hpp_source.html',''); initResiza
   <div class="headertitle"><div class="title">fase.hpp</div></div>
 </div><!--header-->
 <div class="contents">
-<a href="fase_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span> </div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="preprocessor">#pragma once</span></div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="preprocessor">#include &lt;string&gt;</span></div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="preprocessor">#include &lt;memory&gt;</span></div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="preprocessor">#include &lt;rapidjson/document.h&gt;</span></div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="preprocessor">#include &quot;becommons_namespace.hpp&quot;</span></div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="preprocessor">#include &quot;<a class="code" href="registro_8hpp.html">registro.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="preprocessor">#include &quot;<a class="code" href="luz__direcional_8hpp.html">componentes/luz_direcional.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceBECOMMONS__NS.html">BECOMMONS_NS</a> {</div>
-<div class="foldopen" id="foldopen00044" data-start="{" data-end="};">
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno"><a class="line" href="structBECOMMONS__NS_1_1fase.html">   44</a></span>    <span class="keyword">struct </span><a class="code hl_struct" href="structBECOMMONS__NS_1_1fase.html">fase</a> : <span class="keyword">public</span> std::enable_shared_from_this&lt;fase&gt;</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    {</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>        <span class="keywordtype">bool</span> rodando{<span class="keyword">false</span>};</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>        std::shared_ptr&lt;luz_direcional&gt; luz_global = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>        <a class="code hl_struct" href="structBECOMMONS__NS_1_1fase.html">fase</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* diretorio);</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>        <a class="code hl_struct" href="structBECOMMONS__NS_1_1fase.html">fase</a>(<span class="keyword">const</span> std::string&amp; diretorio);</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>        <a class="code hl_struct" href="structBECOMMONS__NS_1_1fase.html">fase</a>();</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>        <a class="code hl_struct" href="structBECOMMONS__NS_1_1fase.html">~fase</a>();</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        std::string <a class="code hl_function" href="structBECOMMONS__NS_1_1fase.html#a4e9fac024c64eb9836d08bb9b76bd6cb">nome</a>() <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>        <span class="keywordtype">void</span> nome(<span class="keyword">const</span> std::string&amp;);</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="structBECOMMONS__NS_1_1fase.html#a4fa8c13068a7937233d88472f5fbd82e">pausar</a>();</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>        <span class="keywordtype">void</span> parar();</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>        <span class="keywordtype">void</span> iniciar();</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>        <span class="keywordtype">void</span> carregar();</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>        <span class="keywordtype">void</span> salvar();</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>        <span class="keywordtype">void</span> descarregar();</div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>        <a class="code hl_struct" href="structBECOMMONS__NS_1_1registro.html">registro</a>* obterRegistro();</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    <span class="keyword">private</span>:</div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>        <span class="keywordtype">void</span> analizarEntidades(<span class="keyword">const</span> rapidjson::Document&amp;);</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>        <span class="keywordtype">bool</span> carregada{<span class="keyword">false</span>};</div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>        <span class="keywordtype">void</span> analizar(<span class="keyword">const</span> std::string&amp; diretorio);</div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>        <span class="keywordtype">void</span> serializar(<span class="keyword">const</span> std::string&amp; diretorio);</div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>        std::string diretorio;</div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>        <a class="code hl_struct" href="structBECOMMONS__NS_1_1registro.html">registro</a> reg;</div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>        std::string m_nome {<span class="stringliteral">&quot;&quot;</span>};</div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>    };</div>
+<div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span> </div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="preprocessor">#pragma once</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="preprocessor">#include &lt;memory&gt;</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="preprocessor">#include &lt;rapidjson/document.h&gt;</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="preprocessor">#include &quot;<a class="code" href="registro_8hpp.html">registro.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="preprocessor">#include &quot;<a class="code" href="luz__direcional_8hpp.html">componentes/luz_direcional.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacebecommons.html">becommons</a> {</div>
+<div class="foldopen" id="foldopen00038" data-start="{" data-end="};">
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno"><a class="line" href="structbecommons_1_1fase.html">   38</a></span>    <span class="keyword">struct </span><a class="code hl_struct" href="structbecommons_1_1fase.html">fase</a> : <span class="keyword">public</span> std::enable_shared_from_this&lt;fase&gt; {</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>        <span class="keywordtype">bool</span> rodando{<span class="keyword">false</span>};</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>        std::shared_ptr&lt;luz_direcional&gt; luz_global = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        <a class="code hl_struct" href="structbecommons_1_1fase.html">fase</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* diretorio);</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>        <a class="code hl_struct" href="structbecommons_1_1fase.html">fase</a>(<span class="keyword">const</span> std::string&amp; diretorio);</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        <a class="code hl_struct" href="structbecommons_1_1fase.html">fase</a>();</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>        <a class="code hl_struct" href="structbecommons_1_1fase.html">~fase</a>();</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>        std::string <a class="code hl_function" href="structbecommons_1_1fase.html#a4e9fac024c64eb9836d08bb9b76bd6cb">nome</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="structbecommons_1_1fase.html#a4e9fac024c64eb9836d08bb9b76bd6cb">nome</a>(<span class="keyword">const</span> std::string&amp;);</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="structbecommons_1_1fase.html#a4fa8c13068a7937233d88472f5fbd82e">pausar</a>();</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>        <span class="keywordtype">void</span> parar();</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>        <span class="keywordtype">void</span> iniciar();</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span> </div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>        <span class="keywordtype">void</span> carregar(std::function&lt;<span class="keywordtype">void</span>(<span class="keywordtype">float</span>)&gt; onProgress = <span class="keyword">nullptr</span>);</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>        <span class="keywordtype">void</span> salvar();</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>        <span class="keywordtype">void</span> descarregar();</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>        <a class="code hl_struct" href="structbecommons_1_1registro.html">registro</a>* obterRegistro();</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    <span class="keyword">private</span>:</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>        <span class="keywordtype">void</span> analizarEntidades(<span class="keyword">const</span> rapidjson::Document&amp;);</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>        <span class="keywordtype">bool</span> carregada{<span class="keyword">false</span>};</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>        <span class="keywordtype">void</span> analizar(<span class="keyword">const</span> std::string&amp; diretorio);</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>        <span class="keywordtype">void</span> serializar(<span class="keyword">const</span> std::string&amp; diretorio);</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>        std::string diretorio;</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>        <a class="code hl_struct" href="structbecommons_1_1registro.html">registro</a> reg;</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>        std::string m_nome {<span class="stringliteral">&quot;&quot;</span>};</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    };</div>
 </div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>}</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>}</div>
 <div class="ttc" id="aluz__direcional_8hpp_html"><div class="ttname"><a href="luz__direcional_8hpp.html">luz_direcional.hpp</a></div></div>
-<div class="ttc" id="anamespaceBECOMMONS__NS_html"><div class="ttname"><a href="namespaceBECOMMONS__NS.html">BECOMMONS_NS</a></div><div class="ttdoc">namespace becommons</div><div class="ttdef"><b>Definition</b> fonte.cpp:33</div></div>
+<div class="ttc" id="anamespacebecommons_html"><div class="ttname"><a href="namespacebecommons.html">becommons</a></div><div class="ttdoc">namespace becommons</div><div class="ttdef"><b>Definition</b> fonte.cpp:33</div></div>
 <div class="ttc" id="aregistro_8hpp_html"><div class="ttname"><a href="registro_8hpp.html">registro.hpp</a></div><div class="ttdoc">Inclusoes e definições relacionadas à registro.</div></div>
-<div class="ttc" id="astructBECOMMONS__NS_1_1fase_html"><div class="ttname"><a href="structBECOMMONS__NS_1_1fase.html">BECOMMONS_NS::fase</a></div><div class="ttdef"><b>Definition</b> fase.hpp:45</div></div>
-<div class="ttc" id="astructBECOMMONS__NS_1_1fase_html_a4e9fac024c64eb9836d08bb9b76bd6cb"><div class="ttname"><a href="structBECOMMONS__NS_1_1fase.html#a4e9fac024c64eb9836d08bb9b76bd6cb">BECOMMONS_NS::fase::nome</a></div><div class="ttdeci">std::string nome() const</div><div class="ttdoc">obtém nome</div><div class="ttdef"><b>Definition</b> fase.cpp:124</div></div>
-<div class="ttc" id="astructBECOMMONS__NS_1_1fase_html_a4fa8c13068a7937233d88472f5fbd82e"><div class="ttname"><a href="structBECOMMONS__NS_1_1fase.html#a4fa8c13068a7937233d88472f5fbd82e">BECOMMONS_NS::fase::pausar</a></div><div class="ttdeci">void pausar()</div><div class="ttdoc">deifni estado de run</div><div class="ttdef"><b>Definition</b> fase.cpp:94</div></div>
-<div class="ttc" id="astructBECOMMONS__NS_1_1registro_html"><div class="ttname"><a href="structBECOMMONS__NS_1_1registro.html">BECOMMONS_NS::registro</a></div><div class="ttdoc">gerencia as entidades</div><div class="ttdef"><b>Definition</b> registro.hpp:46</div></div>
+<div class="ttc" id="astructbecommons_1_1fase_html"><div class="ttname"><a href="structbecommons_1_1fase.html">becommons::fase</a></div><div class="ttdef"><b>Definition</b> fase.hpp:38</div></div>
+<div class="ttc" id="astructbecommons_1_1fase_html_a4e9fac024c64eb9836d08bb9b76bd6cb"><div class="ttname"><a href="structbecommons_1_1fase.html#a4e9fac024c64eb9836d08bb9b76bd6cb">becommons::fase::nome</a></div><div class="ttdeci">std::string nome() const</div><div class="ttdoc">obtém nome</div><div class="ttdef"><b>Definition</b> fase.cpp:125</div></div>
+<div class="ttc" id="astructbecommons_1_1fase_html_a4fa8c13068a7937233d88472f5fbd82e"><div class="ttname"><a href="structbecommons_1_1fase.html#a4fa8c13068a7937233d88472f5fbd82e">becommons::fase::pausar</a></div><div class="ttdeci">void pausar()</div><div class="ttdoc">deifni estado de run</div><div class="ttdef"><b>Definition</b> fase.cpp:93</div></div>
+<div class="ttc" id="astructbecommons_1_1registro_html"><div class="ttname"><a href="structbecommons_1_1registro.html">becommons::registro</a></div><div class="ttdoc">gerencia as entidades</div><div class="ttdef"><b>Definition</b> registro.hpp:45</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_0394786a11e0dfde3dca27fdccf84bfd.html">becommons</a></li><li class="navelem"><a class="el" href="dir_9a744b5567c265deacf566b467d8af59.html">include</a></li><li class="navelem"><a class="el" href="dir_6d1d8208ac4b46200d5c1cb355b49c73.html">nucleo</a></li><li class="navelem"><a class="el" href="fase_8hpp.html">fase.hpp</a></li>
+    <li class="navelem"><a class="el" href="dir_0394786a11e0dfde3dca27fdccf84bfd.html">becommons</a></li><li class="navelem"><a class="el" href="dir_9a744b5567c265deacf566b467d8af59.html">include</a></li><li class="navelem"><a class="el" href="dir_6d1d8208ac4b46200d5c1cb355b49c73.html">nucleo</a></li><li class="navelem"><b>fase.hpp</b></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>

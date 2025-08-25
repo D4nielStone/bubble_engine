@@ -1,5 +1,5 @@
 var caixa_8hpp =
 [
-    [ "BECOMMONS_NS::estilo", "structBECOMMONS__NS_1_1estilo.html", null ],
-    [ "BECOMMONS_NS::caixa", "classBECOMMONS__NS_1_1caixa.html", null ]
+    [ "becommons::estilo", "structbecommons_1_1estilo.html", null ],
+    [ "becommons::caixa", "classbecommons_1_1caixa.html", null ]
 ];

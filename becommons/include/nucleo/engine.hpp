@@ -54,7 +54,6 @@ namespace becommons {
 
     class motor {
     private:
-        void criarJanela();
         bool m_rodando = false;
         exec m_game_mode;
     public:
@@ -64,6 +63,13 @@ namespace becommons {
         ~motor();
         motor();
         
+        void criarJanela();
+
+        // injeção para testes
+        void setJanelaFactory(std::function<std::shared_ptr<ijanela>()> factory) {
+            m_janela_factory = std::move(factory);
+        }
+
         void iniciar(const exec&);
         void rodar();
         void finalizar();
@@ -73,7 +79,10 @@ namespace becommons {
         exec obterTipo() const;
         bool rodando() const;
 
-        std::shared_ptr<janela> m_janela;
+        // ijanela, base que permite alteração da factory
+        std::shared_ptr<ijanela> m_janela;
+        std::function<std::shared_ptr<ijanela>()> m_janela_factory; // função que cria a janela
+
         std::shared_ptr<projeto> m_projeto;
         std::shared_ptr<sistema_renderizacao> m_renderer;
         std::shared_ptr<sistema_fisica> m_fisica;

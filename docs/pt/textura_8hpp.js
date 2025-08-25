@@ -1,4 +1,4 @@
 var textura_8hpp =
 [
-    [ "BECOMMONS_NS::textura", "structBECOMMONS__NS_1_1textura.html", null ]
+    [ "becommons::textura", "structbecommons_1_1textura.html", null ]
 ];

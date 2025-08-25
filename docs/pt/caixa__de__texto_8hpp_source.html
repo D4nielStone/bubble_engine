@@ -112,28 +112,28 @@ $(document).ready(function(){initNavTree('caixa__de__texto_8hpp_source.html','')
 <div class="contents">
 <a href="caixa__de__texto_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span> </div>
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="preprocessor">#pragma once</span></div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="preprocessor">#include &quot;becommons_namespace.hpp&quot;</span></div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="preprocessor">#include &quot;<a class="code" href="elementos_2imagem_8hpp.html">imagem.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="preprocessor">#include &quot;<a class="code" href="elementos_2texto_8hpp.html">texto.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="preprocessor">#include &quot;<a class="code" href="area__de__texto_8hpp.html">area_de_texto.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="preprocessor">#include &lt;memory&gt;</span></div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceBECOMMONS__NS.html">BECOMMONS_NS</a> {</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    <span class="keyword">namespace </span>elementos {</div>
-<div class="foldopen" id="foldopen00034" data-start="{" data-end="};">
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno"><a class="line" href="classBECOMMONS__NS_1_1elementos_1_1caixa__de__texto.html">   34</a></span>        <span class="keyword">class </span><a class="code hl_class" href="classBECOMMONS__NS_1_1elementos_1_1caixa__de__texto.html">caixa_de_texto</a> : <span class="keyword">public</span> <a class="code hl_struct" href="classBECOMMONS__NS_1_1elementos_1_1area__de__texto.html">area_de_texto</a> {</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>            <span class="keyword">private</span>:</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>                std::string m_etiqueta {<span class="stringliteral">&quot;&quot;</span>};</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>                <a class="code hl_struct" href="structBECOMMONS__NS_1_1cor.html">cor</a> m_cor_antiga, m_acrescimo_cor { 0.1f, 0.1f, 0.1f };</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>                <span class="keywordtype">float</span> m_borda_antiga, m_acrescimo_borda { 1.f };</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>                std::string m_display {<span class="stringliteral">&quot;&quot;</span>};</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>                <a class="code hl_class" href="classBECOMMONS__NS_1_1elementos_1_1texto.html">elementos::texto</a>* m_texto_ptr;</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>            <span class="keyword">public</span>:</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>                <a class="code hl_class" href="classBECOMMONS__NS_1_1elementos_1_1caixa__de__texto.html">caixa_de_texto</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>                <a class="code hl_class" href="classBECOMMONS__NS_1_1elementos_1_1caixa__de__texto.html">caixa_de_texto</a>(<span class="keyword">const</span> std::string&amp; etiqueta, <span class="keyword">const</span> std::string&amp; buffer_ini = <span class="stringliteral">&quot;&quot;</span>) : m_etiqueta(etiqueta) {m_buffer = buffer_ini;};</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>                <a class="code hl_class" href="classBECOMMONS__NS_1_1elementos_1_1caixa__de__texto.html">caixa_de_texto</a>(<span class="keyword">const</span> std::string&amp; etiqueta, std::string* buffer) : m_etiqueta(etiqueta), <a class="code hl_struct" href="classBECOMMONS__NS_1_1elementos_1_1area__de__texto.html">area_de_texto</a>(buffer) {};</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>                <a class="code hl_class" href="classBECOMMONS__NS_1_1elementos_1_1caixa__de__texto.html">caixa_de_texto</a>(<span class="keyword">const</span> std::string&amp; etiqueta, <span class="keywordtype">float</span>* f_ptr) : m_etiqueta(etiqueta), <a class="code hl_struct" href="classBECOMMONS__NS_1_1elementos_1_1area__de__texto.html">area_de_texto</a>(f_ptr) {};</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>                <span class="keywordtype">void</span> configurar()<span class="keyword"> override </span>{</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="preprocessor">#include &quot;<a class="code" href="imagem_8hpp.html">imagem.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="preprocessor">#include &quot;<a class="code" href="texto_8hpp.html">texto.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="preprocessor">#include &quot;<a class="code" href="area__de__texto_8hpp.html">area_de_texto.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="preprocessor">#include &lt;memory&gt;</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacebecommons.html">becommons</a> {</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    <span class="keyword">namespace </span>elementos {</div>
+<div class="foldopen" id="foldopen00033" data-start="{" data-end="};">
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="classbecommons_1_1elementos_1_1caixa__de__texto.html">   33</a></span>        <span class="keyword">class </span><a class="code hl_class" href="classbecommons_1_1elementos_1_1caixa__de__texto.html">caixa_de_texto</a> : <span class="keyword">public</span> <a class="code hl_struct" href="classbecommons_1_1elementos_1_1area__de__texto.html">area_de_texto</a> {</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>            <span class="keyword">private</span>:</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>                std::string m_etiqueta {<span class="stringliteral">&quot;&quot;</span>};</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>                <a class="code hl_struct" href="structbecommons_1_1cor.html">cor</a> m_cor_antiga, m_acrescimo_cor { 0.1f, 0.1f, 0.1f };</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>                <span class="keywordtype">float</span> m_borda_antiga, m_acrescimo_borda { 1.f };</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>                std::string m_display {<span class="stringliteral">&quot;&quot;</span>};</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>                <a class="code hl_class" href="classbecommons_1_1elementos_1_1texto.html">elementos::texto</a>* m_texto_ptr;</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>            <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>                <a class="code hl_class" href="classbecommons_1_1elementos_1_1caixa__de__texto.html">caixa_de_texto</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>                <a class="code hl_class" href="classbecommons_1_1elementos_1_1caixa__de__texto.html">caixa_de_texto</a>(<span class="keyword">const</span> std::string&amp; etiqueta, <span class="keyword">const</span> std::string&amp; buffer_ini = <span class="stringliteral">&quot;&quot;</span>) : m_etiqueta(etiqueta) {m_buffer = buffer_ini;};</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>                <a class="code hl_class" href="classbecommons_1_1elementos_1_1caixa__de__texto.html">caixa_de_texto</a>(<span class="keyword">const</span> std::string&amp; etiqueta, std::string* buffer) : m_etiqueta(etiqueta), <a class="code hl_struct" href="classbecommons_1_1elementos_1_1area__de__texto.html">area_de_texto</a>(buffer) {};</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>                <a class="code hl_class" href="classbecommons_1_1elementos_1_1caixa__de__texto.html">caixa_de_texto</a>(<span class="keyword">const</span> std::string&amp; etiqueta, <span class="keywordtype">float</span>* f_ptr) : m_etiqueta(etiqueta), <a class="code hl_struct" href="classbecommons_1_1elementos_1_1area__de__texto.html">area_de_texto</a>(f_ptr) {};</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>                <span class="keywordtype">void</span> configurar()<span class="keyword"> override </span>{</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>                    m_filhos.clear();</div>
 <div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>                    m_estilo.m_padding_geral = { 5, 2 };</div>
 <div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>                    m_estilo.m_flag_estilo |= flag_estilo::modular;</div>
 <div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>                    m_borda_antiga = m_estilo.m_espessura_borda;</div>
@@ -144,37 +144,38 @@ $(document).ready(function(){initNavTree('caixa__de__texto_8hpp_source.html','')
 <div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>                        m_texto_ptr-&gt;m_texto_flags |= flags_texto::alinhamento_central;</div>
 <div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>                    <span class="keywordflow">if</span>(tem(flag_estilo::alinhamento_fim))</div>
 <div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>                        m_texto_ptr-&gt;m_texto_flags |= flags_texto::alinhamento_fim;</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>                };</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>                <span class="keywordtype">void</span> atualizar() {</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>                    <span class="comment">// estilo</span></div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>                    m_estilo.m_cor_borda = <a class="code hl_function" href="classBECOMMONS__NS_1_1elementos_1_1area__de__texto.html#a4540b1cd13feaef981384ec9ded9cc5a">selecionado</a>() ? m_cor_antiga + m_acrescimo_cor : m_cor_antiga;</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>                    m_estilo.m_espessura_borda = m_selecionado ? m_borda_antiga + m_acrescimo_borda : m_borda_antiga;</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>                    <span class="comment">// buffer</span></div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>                    <span class="keywordflow">if</span>(m_selecionado) atualizarBuffer();</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>                    <span class="keywordflow">if</span>(m_buffer.empty() &amp;&amp; !m_etiqueta.empty()) {</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>                        m_display = m_etiqueta; m_texto_ptr-&gt;m_estilo.m_cor_fundo.a = 0.5;</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>                    }</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>                    <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>                        m_display = m_buffer; m_texto_ptr-&gt;m_estilo.m_cor_fundo.a = 1;</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>                    }</div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>                    m_estilo.m_altura = m_texto_ptr-&gt;obterAltura(m_display) + m_estilo.m_padding_geral.y * 2;</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span> </div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>                    m_texto_ptr-&gt;m_estilo.m_largura = m_texto_ptr-&gt;obterLargura(m_texto_ptr-&gt;m_texto_frase);</div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>                    m_texto_ptr-&gt;m_estilo.m_altura = m_texto_ptr-&gt;obterAltura(m_texto_ptr-&gt;m_texto_frase);</div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>                }</div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>        };</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>                    <span class="keywordflow">if</span>(!tem(flag_estilo::largura_percentual)) m_estilo.m_flag_estilo |= flag_estilo::largura_justa;</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>                };</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>                <span class="keywordtype">void</span> atualizar() {</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>                    <span class="comment">// estilo</span></div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>                    m_estilo.m_cor_borda = <a class="code hl_function" href="classbecommons_1_1elementos_1_1area__de__texto.html#aa2af6c287ba1c8a0f8bc15179cdfa0f6">selecionado</a>() ? m_cor_antiga + m_acrescimo_cor : m_cor_antiga;</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>                    m_estilo.m_espessura_borda = m_selecionado ? m_borda_antiga + m_acrescimo_borda : m_borda_antiga;</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>                    <span class="comment">// buffer</span></div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>                    <span class="keywordflow">if</span>(m_selecionado) atualizarBuffer();</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>                    <span class="keywordflow">if</span>(m_buffer.empty() &amp;&amp; !m_etiqueta.empty()) {</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>                        m_display = m_etiqueta; m_texto_ptr-&gt;m_estilo.m_cor_fundo.a = 0.5;</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>                    }</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>                    <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>                        m_display = m_buffer; m_texto_ptr-&gt;m_estilo.m_cor_fundo.a = 1;</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>                    }</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>                    m_estilo.m_altura = m_texto_ptr-&gt;obterAltura(m_display) + m_estilo.m_padding_geral.y * 2;</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span> </div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>                    m_texto_ptr-&gt;m_estilo.m_largura = m_texto_ptr-&gt;obterLargura(m_texto_ptr-&gt;m_texto_frase);</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>                    m_texto_ptr-&gt;m_estilo.m_altura = m_texto_ptr-&gt;obterAltura(m_texto_ptr-&gt;m_texto_frase);</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>                }</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>        };</div>
 </div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    } </div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>}</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>    } </div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>}</div>
 <div class="ttc" id="aarea__de__texto_8hpp_html"><div class="ttname"><a href="area__de__texto_8hpp.html">area_de_texto.hpp</a></div></div>
-<div class="ttc" id="aclassBECOMMONS__NS_1_1elementos_1_1area__de__texto_html"><div class="ttname"><a href="classBECOMMONS__NS_1_1elementos_1_1area__de__texto.html">BECOMMONS_NS::elementos::area_de_texto</a></div><div class="ttdef"><b>Definition</b> area_de_texto.hpp:40</div></div>
-<div class="ttc" id="aclassBECOMMONS__NS_1_1elementos_1_1area__de__texto_html_a4540b1cd13feaef981384ec9ded9cc5a"><div class="ttname"><a href="classBECOMMONS__NS_1_1elementos_1_1area__de__texto.html#a4540b1cd13feaef981384ec9ded9cc5a">BECOMMONS_NS::elementos::area_de_texto::selecionado</a></div><div class="ttdeci">bool selecionado()</div><div class="ttdef"><b>Definition</b> area_de_texto.hpp:78</div></div>
-<div class="ttc" id="aclassBECOMMONS__NS_1_1elementos_1_1caixa__de__texto_html"><div class="ttname"><a href="classBECOMMONS__NS_1_1elementos_1_1caixa__de__texto.html">BECOMMONS_NS::elementos::caixa_de_texto</a></div><div class="ttdef"><b>Definition</b> caixa_de_texto.hpp:34</div></div>
-<div class="ttc" id="aclassBECOMMONS__NS_1_1elementos_1_1texto_html"><div class="ttname"><a href="classBECOMMONS__NS_1_1elementos_1_1texto.html">BECOMMONS_NS::elementos::texto</a></div><div class="ttdef"><b>Definition</b> elementos/texto.hpp:50</div></div>
-<div class="ttc" id="aelementos_2imagem_8hpp_html"><div class="ttname"><a href="elementos_2imagem_8hpp.html">imagem.hpp</a></div></div>
-<div class="ttc" id="aelementos_2texto_8hpp_html"><div class="ttname"><a href="elementos_2texto_8hpp.html">texto.hpp</a></div></div>
-<div class="ttc" id="anamespaceBECOMMONS__NS_html"><div class="ttname"><a href="namespaceBECOMMONS__NS.html">BECOMMONS_NS</a></div><div class="ttdoc">namespace becommons</div><div class="ttdef"><b>Definition</b> fonte.cpp:33</div></div>
-<div class="ttc" id="astructBECOMMONS__NS_1_1cor_html"><div class="ttname"><a href="structBECOMMONS__NS_1_1cor.html">BECOMMONS_NS::cor</a></div><div class="ttdef"><b>Definition</b> cor.hpp:33</div></div>
+<div class="ttc" id="aclassbecommons_1_1elementos_1_1area__de__texto_html"><div class="ttname"><a href="classbecommons_1_1elementos_1_1area__de__texto.html">becommons::elementos::area_de_texto</a></div><div class="ttdef"><b>Definition</b> area_de_texto.hpp:39</div></div>
+<div class="ttc" id="aclassbecommons_1_1elementos_1_1area__de__texto_html_aa2af6c287ba1c8a0f8bc15179cdfa0f6"><div class="ttname"><a href="classbecommons_1_1elementos_1_1area__de__texto.html#aa2af6c287ba1c8a0f8bc15179cdfa0f6">becommons::elementos::area_de_texto::selecionado</a></div><div class="ttdeci">bool selecionado()</div><div class="ttdef"><b>Definition</b> area_de_texto.cpp:29</div></div>
+<div class="ttc" id="aclassbecommons_1_1elementos_1_1caixa__de__texto_html"><div class="ttname"><a href="classbecommons_1_1elementos_1_1caixa__de__texto.html">becommons::elementos::caixa_de_texto</a></div><div class="ttdef"><b>Definition</b> caixa_de_texto.hpp:33</div></div>
+<div class="ttc" id="aclassbecommons_1_1elementos_1_1texto_html"><div class="ttname"><a href="classbecommons_1_1elementos_1_1texto.html">becommons::elementos::texto</a></div><div class="ttdef"><b>Definition</b> texto.hpp:49</div></div>
+<div class="ttc" id="aimagem_8hpp_html"><div class="ttname"><a href="imagem_8hpp.html">imagem.hpp</a></div></div>
+<div class="ttc" id="anamespacebecommons_html"><div class="ttname"><a href="namespacebecommons.html">becommons</a></div><div class="ttdoc">namespace becommons</div><div class="ttdef"><b>Definition</b> fonte.cpp:33</div></div>
+<div class="ttc" id="astructbecommons_1_1cor_html"><div class="ttname"><a href="structbecommons_1_1cor.html">becommons::cor</a></div><div class="ttdef"><b>Definition</b> cor.hpp:32</div></div>
+<div class="ttc" id="atexto_8hpp_html"><div class="ttname"><a href="texto_8hpp.html">texto.hpp</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

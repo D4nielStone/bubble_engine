@@ -49,12 +49,12 @@ void janela::definirCursor(const cursor c) {
 }
             
 // \returns Se a janela global glfw foi fechada
-bool janela::deveFechar() {
+bool janela::deveFechar() const {
     return glfwWindowShouldClose(window);
 }
 
 // \returns Tamanho da instância atual
-ivet2 janela::obterTamanhoJanela() {
+ivet2 janela::obterTamanho() const {
     return tamanho;
 };
 
@@ -73,82 +73,6 @@ janela::~janela() {
     descarregarShaders();
     gerenciadorFontes::limparFontes();
 }
-/*
-// \brief Construtor baseado em :`configuracao`
-janela::janela(const configuracao cfg) {
-    switch (cfg) {
-        case janela::padrao:
-            janela::janela("default");
-        break;  
-        case janela::splash_screen:
-            const char* icon_path = "icon.ico";
-            const char *nome = "splash";
-            fvet2 bounds = {50.f, 50.f};
-            // splash screen         
-            glfwSetErrorCallback(errorCallback);
-            // inicia glfw
-            if (!glfwInit()) {
-                depuracao::emitir(erro, "Iniciando janela glfw");
-                abort();
-            }
-            
-            glfwWindowHint(GLFW_DECORATED, GLFW_FALSE);
-            glfwWindowHint(GLFW_FLOATING, GLFW_TRUE);
-            glfwWindowHint(GLFW_TRANSPARENT_FRAMEBUFFER, GLFW_TRUE);
-           
-            window = glfwCreateWindow(bounds.x, bounds.y, nome, NULL, NULL);
-            m_nome = nome;
-            const GLFWvidmode* mode = glfwGetVideoMode(glfwGetPrimaryMonitor());
-            glfwSetWindowPos(window,
-                 (mode->width - bounds.x) / 2,
-                 (mode->height - bounds.y) / 2);
-
-            if (!window) {
-                depuracao::emitir(erro, "Janla invalida");
-                abort();
-            };
-         
-            glfwMakeContextCurrent(window);
-         
-            if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
-                depuracao::emitir(erro, "Glad");
-                abort();
-            }
-            
-         
-            if(icon_path) {
-            imageLoader _icone(icon_path);
-            auto glfw_icone = _icone.converterParaGlfw();
-            glfwSetWindowIcon(window, 1, &glfw_icone);
-            }
-            // ativa blend
-            glEnable(GL_BLEND); 
-            glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-         
-            glEnable(GL_FRAMEBUFFER_SRGB);    
-         
-            glfwSetCursorPosCallback(window,mousePosCallback);
-            glfwSetCharCallback(window, charCallback);
-            glfwSetMouseButtonCallback(window, mouseButtonCallback);
-            glfwSetKeyCallback(window,keyCallback);
-            glfwSetWindowUserPointer(window, this);
-         
-            vetor4<int> tam{};
-            glfwGetWindowSize(window, &tam.z, &tam.w);
-            tamanho.y = tam.w;
-            tamanho.x = tam.z;
-
-            interface ui(this);
-            ui.inicializar();
-            ui.m_raiz = std::make_unique<elementos::imagem>("icon.ico");
-
-            while(!glfwWindowShouldClose(window)) {
-                glfwPollEvents();
-                ui.atualizar();
-                glfwSwapBuffers(window);
-            }
-    }
-}*/
 
 // \brief Construtor baseado em :`nome`, `bounds` e `icon_path`
 janela::janela(const char* nome, fvet2 bounds, const char* icon_path) {

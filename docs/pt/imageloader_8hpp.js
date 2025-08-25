@@ -1,5 +1,5 @@
 var imageloader_8hpp =
 [
-    [ "BECOMMONS_NS::imageLoader", "classBECOMMONS__NS_1_1imageLoader.html", "classBECOMMONS__NS_1_1imageLoader" ],
-    [ "BECOMMONS_NS::textureLoader", "classBECOMMONS__NS_1_1textureLoader.html", "classBECOMMONS__NS_1_1textureLoader" ]
+    [ "becommons::imageLoader", "classbecommons_1_1imageLoader.html", "classbecommons_1_1imageLoader" ],
+    [ "becommons::textureLoader", "classbecommons_1_1textureLoader.html", "classbecommons_1_1textureLoader" ]
 ];

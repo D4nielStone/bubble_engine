@@ -144,7 +144,7 @@ interface::interface() {
 }
 
 // \brief Inicia com uma janela própria
-interface::interface(janela* window) {
+interface::interface(ijanela* window) {
     m_raiz = std::make_unique<caixa>();
     m_window = window;
 }
@@ -233,8 +233,8 @@ void interface::configOpenglState() const {
     glCullFace(GL_FRONT);
     glDisable(GL_DEPTH_TEST);
     glViewport(0, 0,
-        m_window->tamanho.x,
-        m_window->tamanho.y
+        m_window->obterTamanho().x,
+        m_window->obterTamanho().y
             );
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glClearColor(0, 0, 0, 0);
@@ -249,13 +249,13 @@ void interface::atualizar() {
     configOpenglState();
 
     m_window->definirCursor(janela::cursor::seta);
-    projecao_viewport = glm::ortho(0.f, static_cast<float>(m_window->tamanho.x),
-        static_cast<float>(m_window->tamanho.y), 0.f);
+    projecao_viewport = glm::ortho(0.f, static_cast<float>(m_window->obterTamanho().x),
+        static_cast<float>(m_window->obterTamanho().y), 0.f);
     // atualiza dimensões da m_raiz
     if(!m_raiz) throw std::runtime_error("Raiz não definida!");
     m_raiz->m_estilo.m_limites = {0.f, 0.f,
-        static_cast<float>(m_window->tamanho.x),
-        static_cast<float>(m_window->tamanho.y)};
+        static_cast<float>(m_window->obterTamanho().x),
+        static_cast<float>(m_window->obterTamanho().y)};
 
     // reseta a flag de detecção de toque
     s_contagem_areas = 0;
@@ -269,7 +269,7 @@ void interface::atualizar() {
         if(filho->m_estilo.m_ativo) {
         glScissor(
             filho->m_estilo.m_limites.x,
-            m_window->tamanho.y - filho->m_estilo.m_limites.y - filho->m_estilo.m_limites.w + 1.f,
+            m_window->obterTamanho().y - filho->m_estilo.m_limites.y - filho->m_estilo.m_limites.w + 1.f,
             filho->m_estilo.m_limites.z + 1.f,
             filho->m_estilo.m_limites.w
         );

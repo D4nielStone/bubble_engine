@@ -109,6 +109,14 @@ $(document).ready(function(){initNavTree('classEDITOR__NS_1_1gerenciador__projet
   <div class="headertitle"><div class="title">EDITOR_NS::gerenciador_projetos Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+<div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Collaboration diagram for EDITOR_NS::gerenciador_projetos:</div>
+<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-0-content" class="dyncontent" style="display:none;">
+<div class="center"><img src="classEDITOR__NS_1_1gerenciador__projetos__coll__graph.png" border="0" usemap="#aEDITOR__NS_1_1gerenciador__projetos_coll__map" alt="Collaboration graph"/></div>
+<!-- MAP 0 -->
+<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -129,9 +137,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>buscarProjetos</b> ()
 <tr class="memitem:a92d9adb49bb1bcbc2252413e70911e85" id="r_a92d9adb49bb1bcbc2252413e70911e85"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEDITOR__NS_1_1gerenciador__projetos.html#a92d9adb49bb1bcbc2252413e70911e85">removerProjeto</a> (const std::string &amp;)</td></tr>
 <tr class="memdesc:a92d9adb49bb1bcbc2252413e70911e85"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove um projeto existente. Exclui recursivamente o diretório do projeto e atualiza a lista de projetos. O projeto selecionado é redefinido para "nenhum" ou para o primeiro projeto disponível.  <br /></td></tr>
 <tr class="separator:a92d9adb49bb1bcbc2252413e70911e85"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af5189c91d8f1a663cbaebfa8cb58efae" id="r_af5189c91d8f1a663cbaebfa8cb58efae"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEDITOR__NS_1_1gerenciador__projetos.html#af5189c91d8f1a663cbaebfa8cb58efae">criarProjetoPadrao</a> (const std::string &amp;novo_diretorio, const char *nome)</td></tr>
-<tr class="memdesc:af5189c91d8f1a663cbaebfa8cb58efae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cria um novo projeto padrão com uma estrutura inicial de entidades. Este método gera o diretório do projeto, um arquivo de configuração <code>config.json</code>, uma fase padrão <code>main.fase</code> com entidades predefinidas (luz, plano, cubo com script) e um script Lua de exemplo.  <br /></td></tr>
-<tr class="separator:af5189c91d8f1a663cbaebfa8cb58efae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4895644cbb0ecfa707a1dedd42de9782" id="r_a4895644cbb0ecfa707a1dedd42de9782"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEDITOR__NS_1_1gerenciador__projetos.html#a4895644cbb0ecfa707a1dedd42de9782">criarProjeto</a> (const std::string &amp;novo_diretorio, const char *nome, const bool padrao=false)</td></tr>
+<tr class="memdesc:a4895644cbb0ecfa707a1dedd42de9782"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cria um novo projeto com uma estrutura inicial. Este método gera o diretório do projeto, um arquivo de configuração <code>config.json</code>, uma fase padrão <code>main.fase</code> com entidades predefinidas (luz, plano, cubo com script) e um script Lua de exemplo.  <br /></td></tr>
+<tr class="separator:a4895644cbb0ecfa707a1dedd42de9782"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa46dafb7cc85308148529e3fc92c2644" id="r_aa46dafb7cc85308148529e3fc92c2644"><td class="memItemLeft" align="right" valign="top"><a id="aa46dafb7cc85308148529e3fc92c2644" name="aa46dafb7cc85308148529e3fc92c2644"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>iniciar</b> ()</td></tr>
 <tr class="memdesc:aa46dafb7cc85308148529e3fc92c2644"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inicia o gerenciador de projetos. Este é o ponto de entrada principal para a aplicação do gerenciador. Inicializa recursos gráficos, verifica e cria o diretório padrão de projetos, configura a janela e a UI, e inicia o loop de eventos principal. <br /></td></tr>
@@ -149,10 +157,10 @@ std::string&#160;</td><td class="memItemRight" valign="bottom"><b>m_projeto_sele
 std::string&#160;</td><td class="memItemRight" valign="bottom"><b>buffer_projeto</b> {&quot;&quot;}</td></tr>
 <tr class="separator:af06eb0f1fcd1eb2d47b8b53c1768001c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae466de76d1bf010b9e23c6dcf1d2d0aa" id="r_ae466de76d1bf010b9e23c6dcf1d2d0aa"><td class="memItemLeft" align="right" valign="top"><a id="ae466de76d1bf010b9e23c6dcf1d2d0aa" name="ae466de76d1bf010b9e23c6dcf1d2d0aa"></a>
-caixa *&#160;</td><td class="memItemRight" valign="bottom"><b>barra_lateral</b> {nullptr}</td></tr>
+<a class="el" href="classbecommons_1_1caixa.html">caixa</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>barra_lateral</b> {nullptr}</td></tr>
 <tr class="separator:ae466de76d1bf010b9e23c6dcf1d2d0aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4527f82268a9b34d4ae3971c09d2e6a7" id="r_a4527f82268a9b34d4ae3971c09d2e6a7"><td class="memItemLeft" align="right" valign="top"><a id="a4527f82268a9b34d4ae3971c09d2e6a7" name="a4527f82268a9b34d4ae3971c09d2e6a7"></a>
-becommons::interface&#160;</td><td class="memItemRight" valign="bottom"><b>ui</b></td></tr>
+<a class="el" href="structbecommons_1_1interface.html">becommons::interface</a>&#160;</td><td class="memItemRight" valign="bottom"><b>ui</b></td></tr>
 <tr class="separator:a4527f82268a9b34d4ae3971c09d2e6a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af43b4625e6e8bb0d148855a90c3f586e" id="r_af43b4625e6e8bb0d148855a90c3f586e"><td class="memItemLeft" align="right" valign="top"><a id="af43b4625e6e8bb0d148855a90c3f586e" name="af43b4625e6e8bb0d148855a90c3f586e"></a>
 std::string&#160;</td><td class="memItemRight" valign="bottom"><b>DIR_PADRAO</b></td></tr>
@@ -212,14 +220,14 @@ std::string&#160;</td><td class="memItemRight" valign="bottom"><b>DIR_PADRAO</b>
 
 </div>
 </div>
-<a id="af5189c91d8f1a663cbaebfa8cb58efae" name="af5189c91d8f1a663cbaebfa8cb58efae"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af5189c91d8f1a663cbaebfa8cb58efae">&#9670;&#160;</a></span>criarProjetoPadrao()</h2>
+<a id="a4895644cbb0ecfa707a1dedd42de9782" name="a4895644cbb0ecfa707a1dedd42de9782"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4895644cbb0ecfa707a1dedd42de9782">&#9670;&#160;</a></span>criarProjeto()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void gerenciador_projetos::criarProjetoPadrao </td>
+          <td class="memname">void gerenciador_projetos::criarProjeto </td>
           <td>(</td>
           <td class="paramtype">const std::string &amp;&#160;</td>
           <td class="paramname"><em>novo_diretorio</em>, </td>
@@ -228,7 +236,13 @@ std::string&#160;</td><td class="memItemRight" valign="bottom"><b>DIR_PADRAO</b>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>nome</em>&#160;</td>
+          <td class="paramname"><em>nome</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const bool&#160;</td>
+          <td class="paramname"><em>padrao</em> = <code>false</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -238,11 +252,12 @@ std::string&#160;</td><td class="memItemRight" valign="bottom"><b>DIR_PADRAO</b>
       </table>
 </div><div class="memdoc">
 
-<p>Cria um novo projeto padrão com uma estrutura inicial de entidades. Este método gera o diretório do projeto, um arquivo de configuração <code>config.json</code>, uma fase padrão <code>main.fase</code> com entidades predefinidas (luz, plano, cubo com script) e um script Lua de exemplo. </p>
+<p>Cria um novo projeto com uma estrutura inicial. Este método gera o diretório do projeto, um arquivo de configuração <code>config.json</code>, uma fase padrão <code>main.fase</code> com entidades predefinidas (luz, plano, cubo com script) e um script Lua de exemplo. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">novo_diretorio</td><td>O diretório pai onde o novo projeto será criado. </td></tr>
     <tr><td class="paramname">nome</td><td>O nome do novo projeto. </td></tr>
+    <tr><td class="paramname">padrao</td><td>Flag para criar estrutura padrão. </td></tr>
   </table>
   </dd>
 </dl>

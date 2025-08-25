@@ -111,20 +111,22 @@ $(document).ready(function(){initNavTree('luz__direcional_8hpp_source.html','');
 </div><!--header-->
 <div class="contents">
 <a href="luz__direcional_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span> </div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="preprocessor">#pragma once</span></div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="preprocessor">#include &quot;becommons_namespace.hpp&quot;</span></div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="preprocessor">#include &quot;<a class="code" href="componente_8hpp.html">componente.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="preprocessor">#include &quot;<a class="code" href="vetor3_8hpp.html">util/vetor3.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="preprocessor">#include &quot;<a class="code" href="cor_8hpp.html">util/cor.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceBECOMMONS__NS.html">BECOMMONS_NS</a> {</div>
-<div class="foldopen" id="foldopen00034" data-start="{" data-end="};">
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno"><a class="line" href="structBECOMMONS__NS_1_1luz__direcional.html">   34</a></span>    <span class="keyword">struct </span><a class="code hl_struct" href="structBECOMMONS__NS_1_1luz__direcional.html">luz_direcional</a> : <span class="keyword">public</span> <a class="code hl_struct" href="structBECOMMONS__NS_1_1componente.html">componente</a></div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    {</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>        fvet3 direcao, ambiente, <a class="code hl_struct" href="structBECOMMONS__NS_1_1cor.html">cor</a>; <span class="keywordtype">float</span> intensidade = 1.f;</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>        <a class="code hl_struct" href="structBECOMMONS__NS_1_1luz__direcional.html">luz_direcional</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>        <span class="keyword">explicit</span>  <a class="code hl_struct" href="structBECOMMONS__NS_1_1luz__direcional.html">luz_direcional</a>(fvet3 direcao, fvet3 ambiente, fvet3 <a class="code hl_struct" href="structBECOMMONS__NS_1_1cor.html">cor</a>, <span class="keywordtype">float</span> intensidade) :</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>        direcao(direcao), ambiente(ambiente), <a class="code hl_struct" href="structBECOMMONS__NS_1_1cor.html">cor</a>(<a class="code hl_struct" href="structBECOMMONS__NS_1_1cor.html">cor</a>), intensidade(intensidade){}</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="preprocessor">#pragma once</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="preprocessor">#include &quot;<a class="code" href="componente_8hpp.html">componente.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="preprocessor">#include &quot;<a class="code" href="vetor3_8hpp.html">util/vetor3.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="preprocessor">#include &quot;<a class="code" href="cor_8hpp.html">util/cor.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacebecommons.html">becommons</a> {</div>
+<div class="foldopen" id="foldopen00031" data-start="{" data-end="};">
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno"><a class="line" href="structbecommons_1_1luz__direcional.html">   31</a></span>    <span class="keyword">struct </span><a class="code hl_struct" href="structbecommons_1_1luz__direcional.html">luz_direcional</a> : <span class="keyword">public</span> <a class="code hl_struct" href="structbecommons_1_1componente.html">componente</a> {</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>        <a class="code hl_class" href="structbecommons_1_1vetor3.html">fvet3</a> direcao, ambiente, <a class="code hl_struct" href="structbecommons_1_1cor.html">cor</a>; </div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>        <span class="keywordtype">float</span> intensidade = 1.f;</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>        <span class="keyword">explicit</span>  <a class="code hl_struct" href="structbecommons_1_1luz__direcional.html">luz_direcional</a>(</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>                <a class="code hl_class" href="structbecommons_1_1vetor3.html">fvet3</a> direcao = {-1.f, -1.f, -1.f},</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>                <a class="code hl_class" href="structbecommons_1_1vetor3.html">fvet3</a> ambiente = {0.1f, 0.1f, 0.1f},</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>                <a class="code hl_class" href="structbecommons_1_1vetor3.html">fvet3</a> <a class="code hl_struct" href="structbecommons_1_1cor.html">cor</a> = {1.f, 1.f, 1.f},</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>                <span class="keywordtype">float</span> intensidade = 1.f) :</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>        direcao(direcao), ambiente(ambiente), <a class="code hl_struct" href="structbecommons_1_1cor.html">cor</a>(<a class="code hl_struct" href="structbecommons_1_1cor.html">cor</a>), intensidade(intensidade) {}</div>
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>        <span class="keywordtype">bool</span> serializar(rapidjson::Value&amp; value, rapidjson::Document::AllocatorType&amp; allocator) <span class="keyword">const override</span>;</div>
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        <span class="keywordtype">bool</span> analizar(<span class="keyword">const</span> rapidjson::Value&amp; value) <span class="keyword">override</span>;</div>
 <div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        <span class="keyword">static</span> <span class="keyword">constexpr</span> mascara mascara = {COMPONENTE_LUZ_DIRECIONAL};</div>
@@ -133,10 +135,11 @@ $(document).ready(function(){initNavTree('luz__direcional_8hpp_source.html','');
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>}</div>
 <div class="ttc" id="acomponente_8hpp_html"><div class="ttname"><a href="componente_8hpp.html">componente.hpp</a></div><div class="ttdoc">Estrutura base para componetes.</div></div>
 <div class="ttc" id="acor_8hpp_html"><div class="ttname"><a href="cor_8hpp.html">cor.hpp</a></div></div>
-<div class="ttc" id="anamespaceBECOMMONS__NS_html"><div class="ttname"><a href="namespaceBECOMMONS__NS.html">BECOMMONS_NS</a></div><div class="ttdoc">namespace becommons</div><div class="ttdef"><b>Definition</b> fonte.cpp:33</div></div>
-<div class="ttc" id="astructBECOMMONS__NS_1_1componente_html"><div class="ttname"><a href="structBECOMMONS__NS_1_1componente.html">BECOMMONS_NS::componente</a></div><div class="ttdoc">base para as funcionalidades da engine</div><div class="ttdef"><b>Definition</b> componente.hpp:45</div></div>
-<div class="ttc" id="astructBECOMMONS__NS_1_1cor_html"><div class="ttname"><a href="structBECOMMONS__NS_1_1cor.html">BECOMMONS_NS::cor</a></div><div class="ttdef"><b>Definition</b> cor.hpp:33</div></div>
-<div class="ttc" id="astructBECOMMONS__NS_1_1luz__direcional_html"><div class="ttname"><a href="structBECOMMONS__NS_1_1luz__direcional.html">BECOMMONS_NS::luz_direcional</a></div><div class="ttdef"><b>Definition</b> luz_direcional.hpp:35</div></div>
+<div class="ttc" id="anamespacebecommons_html"><div class="ttname"><a href="namespacebecommons.html">becommons</a></div><div class="ttdoc">namespace becommons</div><div class="ttdef"><b>Definition</b> fonte.cpp:33</div></div>
+<div class="ttc" id="astructbecommons_1_1componente_html"><div class="ttname"><a href="structbecommons_1_1componente.html">becommons::componente</a></div><div class="ttdoc">base para as funcionalidades da engine</div><div class="ttdef"><b>Definition</b> componente.hpp:44</div></div>
+<div class="ttc" id="astructbecommons_1_1cor_html"><div class="ttname"><a href="structbecommons_1_1cor.html">becommons::cor</a></div><div class="ttdef"><b>Definition</b> cor.hpp:32</div></div>
+<div class="ttc" id="astructbecommons_1_1luz__direcional_html"><div class="ttname"><a href="structbecommons_1_1luz__direcional.html">becommons::luz_direcional</a></div><div class="ttdef"><b>Definition</b> luz_direcional.hpp:31</div></div>
+<div class="ttc" id="astructbecommons_1_1vetor3_html"><div class="ttname"><a href="structbecommons_1_1vetor3.html">becommons::vetor3&lt; float &gt;</a></div></div>
 <div class="ttc" id="avetor3_8hpp_html"><div class="ttname"><a href="vetor3_8hpp.html">vetor3.hpp</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->

@@ -112,22 +112,23 @@ $(document).ready(function(){initNavTree('vertice_8hpp_source.html',''); initRes
 <div class="contents">
 <a href="vertice_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span> </div>
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="preprocessor">#pragma once</span></div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="preprocessor">#include &quot;becommons_namespace.hpp&quot;</span></div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="preprocessor">#include &quot;<a class="code" href="vetor2_8hpp.html">vetor2.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="preprocessor">#include &quot;<a class="code" href="vetor3_8hpp.html">vetor3.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceBECOMMONS__NS.html">BECOMMONS_NS</a> {</div>
-<div class="foldopen" id="foldopen00033" data-start="{" data-end="};">
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="structBECOMMONS__NS_1_1vertice.html">   33</a></span>    <span class="keyword">struct </span><a class="code hl_struct" href="structBECOMMONS__NS_1_1vertice.html">vertice</a> {</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>        <a class="code hl_struct" href="structBECOMMONS__NS_1_1vertice.html">vertice</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>        <a class="code hl_struct" href="structBECOMMONS__NS_1_1vertice.html">vertice</a>(<span class="keyword">const</span> fvet3&amp; p, <span class="keyword">const</span> fvet3&amp; n, <span class="keyword">const</span> fvet2&amp; uv) : posicao(p), normal(n), uvcoords(uv) {}</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>        fvet3 posicao, normal;</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>        fvet2 uvcoords;</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    };</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="preprocessor">#include &quot;<a class="code" href="vetor2_8hpp.html">vetor2.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="preprocessor">#include &quot;<a class="code" href="vetor3_8hpp.html">vetor3.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacebecommons.html">becommons</a> {</div>
+<div class="foldopen" id="foldopen00032" data-start="{" data-end="};">
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno"><a class="line" href="structbecommons_1_1vertice.html">   32</a></span>    <span class="keyword">struct </span><a class="code hl_struct" href="structbecommons_1_1vertice.html">vertice</a> {</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>        <a class="code hl_struct" href="structbecommons_1_1vertice.html">vertice</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>        <a class="code hl_struct" href="structbecommons_1_1vertice.html">vertice</a>(<span class="keyword">const</span> <a class="code hl_class" href="structbecommons_1_1vetor3.html">fvet3</a>&amp; p, <span class="keyword">const</span> <a class="code hl_class" href="structbecommons_1_1vetor3.html">fvet3</a>&amp; n, <span class="keyword">const</span> <a class="code hl_class" href="structbecommons_1_1vetor2.html">fvet2</a>&amp; uv) : posicao(p), normal(n), uvcoords(uv) {}</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>        <a class="code hl_class" href="structbecommons_1_1vetor3.html">fvet3</a> posicao, normal;</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>        <a class="code hl_class" href="structbecommons_1_1vetor2.html">fvet2</a> uvcoords;</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    };</div>
 </div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>}</div>
-<div class="ttc" id="anamespaceBECOMMONS__NS_html"><div class="ttname"><a href="namespaceBECOMMONS__NS.html">BECOMMONS_NS</a></div><div class="ttdoc">namespace becommons</div><div class="ttdef"><b>Definition</b> fonte.cpp:33</div></div>
-<div class="ttc" id="astructBECOMMONS__NS_1_1vertice_html"><div class="ttname"><a href="structBECOMMONS__NS_1_1vertice.html">BECOMMONS_NS::vertice</a></div><div class="ttdef"><b>Definition</b> vertice.hpp:33</div></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>}</div>
+<div class="ttc" id="anamespacebecommons_html"><div class="ttname"><a href="namespacebecommons.html">becommons</a></div><div class="ttdoc">namespace becommons</div><div class="ttdef"><b>Definition</b> fonte.cpp:33</div></div>
+<div class="ttc" id="astructbecommons_1_1vertice_html"><div class="ttname"><a href="structbecommons_1_1vertice.html">becommons::vertice</a></div><div class="ttdef"><b>Definition</b> vertice.hpp:32</div></div>
+<div class="ttc" id="astructbecommons_1_1vetor2_html"><div class="ttname"><a href="structbecommons_1_1vetor2.html">becommons::vetor2&lt; float &gt;</a></div></div>
+<div class="ttc" id="astructbecommons_1_1vetor3_html"><div class="ttname"><a href="structbecommons_1_1vetor3.html">becommons::vetor3&lt; float &gt;</a></div></div>
 <div class="ttc" id="avetor2_8hpp_html"><div class="ttname"><a href="vetor2_8hpp.html">vetor2.hpp</a></div></div>
 <div class="ttc" id="avetor3_8hpp_html"><div class="ttname"><a href="vetor3_8hpp.html">vetor3.hpp</a></div></div>
 </div><!-- fragment --></div><!-- contents -->

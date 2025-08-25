@@ -36,6 +36,24 @@ motor::motor() :
     m_fisica(std::make_shared<sistema_fisica>()),
     m_codigo(std::make_shared<sistema_codigo>()) {
     instance = this;
+
+    m_janela_factory = [this]() -> std::shared_ptr<ijanela> {
+        if (m_projeto) {
+            return std::static_pointer_cast<ijanela>(std::make_shared<janela>(
+                m_projeto->m_nome_janela.c_str(),
+                false,
+                fvet2(m_projeto->m_largura, m_projeto->m_altura),
+                (m_projeto->m_diretorio + "/" + m_projeto->m_icone).c_str()
+            ));
+        } else {
+            return std::static_pointer_cast<ijanela>(std::make_shared<janela>(
+                "BE: Editor © BubbleStudio",
+                true,
+                fvet2(640, 480),
+                "icon.ico"
+            ));
+        }
+    };
 }
 
 motor::motor(const std::string& directory) : 
@@ -47,6 +65,24 @@ motor::motor(const std::string& directory) :
     m_codigo(std::make_shared<sistema_codigo>()) {
     instance = this;
     m_levelmanager = std::make_shared<levelmanager>(m_projeto.get());
+
+    m_janela_factory = [this]() -> std::shared_ptr<ijanela> {
+        if (m_projeto) {
+            return std::static_pointer_cast<ijanela>(std::make_shared<janela>(
+                m_projeto->m_nome_janela.c_str(),
+                false,
+                fvet2(m_projeto->m_largura, m_projeto->m_altura),
+                (m_projeto->m_diretorio + "/" + m_projeto->m_icone).c_str()
+            ));
+        } else {
+            return std::static_pointer_cast<ijanela>(std::make_shared<janela>(
+                "BE: Editor © BubbleStudio",
+                true,
+                fvet2(640, 480),
+                "icon.ico"
+            ));
+        }
+    };
 }
 motor::~motor() {}
 
@@ -58,14 +94,7 @@ void motor::iniciar(const exec& gm) {
     depuracao::emitir(debug, "motor", "Iniciando Bubble Engine " + std::string(BUBBLE_VERSAO_COMPLETA_STR) + " ExecMode:" + (char)gm);
 
     m_game_mode = gm;
-    /**
-     * inicializa splash screen
-     
-    std::thread splash([](){
-        auto splash = new janela(janela::splash_screen);
-    });
-    thread.join();
-     */
+    
     // cria janela
     criarJanela();
     // sistema de ui do runtime
@@ -136,22 +165,5 @@ bool motor::rodando() const {
 }
 
 void motor::criarJanela() {
-    if(m_projeto) {
-    m_janela = std::make_shared<janela>(
-        m_projeto->m_nome_janela.c_str(),
-        false,
-        fvet2(m_projeto->m_largura,
-              m_projeto->m_altura),
-             (m_projeto->m_diretorio + "/" + m_projeto->m_icone).c_str());
-
-    } else {
-    
-    m_janela = std::make_shared<janela>(
-	"BE: Editor © BubbleStudio",
-        true,
-        fvet2(640,
-              480),
-             "icon.ico");
-
-    }
+    m_janela = m_janela_factory();
 }

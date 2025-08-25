@@ -117,51 +117,51 @@ $(document).ready(function(){initNavTree('inputs_8hpp_source.html',''); initResi
 <div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="preprocessor">#include &lt;unordered_map&gt;</span></div>
 <div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="preprocessor">#include &lt;functional&gt;</span></div>
 <div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="preprocessor">#include &lt;glm/glm.hpp&gt;</span></div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="preprocessor">#include &quot;becommons_namespace.hpp&quot;</span></div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="preprocessor">#include &quot;<a class="code" href="vetor2_8hpp.html">util/vetor2.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceBECOMMONS__NS.html">BECOMMONS_NS</a> {</div>
-<div class="foldopen" id="foldopen00044" data-start="{" data-end="};">
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno"><a class="line" href="classBECOMMONS__NS_1_1inputs.html">   44</a></span>    <span class="keyword">class </span><a class="code hl_class" href="classBECOMMONS__NS_1_1inputs.html">inputs</a> {</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    <span class="keyword">public</span>:</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>        <span class="keyword">enum</span> chave {    </div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>             Q =               GLFW_KEY_Q,                </div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>             W =               GLFW_KEY_W,                </div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>             E =               GLFW_KEY_E,                </div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>             R =               GLFW_KEY_R,                </div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>             T =               GLFW_KEY_T,                </div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>             Y =               GLFW_KEY_Y,                </div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>             U =               GLFW_KEY_U,                </div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>             I =               GLFW_KEY_I,                </div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>             O =               GLFW_KEY_O,                </div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>             P =               GLFW_KEY_P,                </div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>             A =               GLFW_KEY_A,                </div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>             S =               GLFW_KEY_S,                </div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>             D =               GLFW_KEY_D,                </div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>             F =               GLFW_KEY_F,                </div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>             G =               GLFW_KEY_G,                </div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>             H =               GLFW_KEY_H,                </div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>             J =               GLFW_KEY_J,                </div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>             K =               GLFW_KEY_K,                </div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>             L =               GLFW_KEY_L,                </div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>             Z =               GLFW_KEY_Z,                </div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>             X =               GLFW_KEY_X,                </div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>             C =               GLFW_KEY_C,                </div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>             V =               GLFW_KEY_V,                </div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>             B =               GLFW_KEY_B,                </div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>             N =               GLFW_KEY_N,                </div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>             M =               GLFW_KEY_M,                </div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>             DIREITA =         GLFW_KEY_RIGHT,            </div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>             ESQUERDA =        GLFW_KEY_LEFT,             </div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>             BAIXO =           GLFW_KEY_DOWN,             </div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>             CIMA =            GLFW_KEY_UP,               </div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>             E_SHIFT =         GLFW_KEY_LEFT_SHIFT,       </div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>             D_SHIFT =         GLFW_KEY_RIGHT_SHIFT,      </div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>             E_CTRL =          GLFW_KEY_LEFT_CONTROL,     </div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>             D_CTRL =          GLFW_KEY_RIGHT_CONTROL,    </div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>             E_ALT =           GLFW_KEY_LEFT_ALT,         </div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>             D_ALT =           GLFW_KEY_RIGHT_ALT,        </div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>             BACKSPACE =       GLFW_KEY_BACKSPACE,        </div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="preprocessor">#include &quot;<a class="code" href="vetor2_8hpp.html">util/vetor2.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacebecommons.html">becommons</a> {</div>
+<div class="foldopen" id="foldopen00043" data-start="{" data-end="};">
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno"><a class="line" href="classbecommons_1_1inputs.html">   43</a></span>    <span class="keyword">class </span><a class="code hl_class" href="classbecommons_1_1inputs.html">inputs</a> {</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>        <span class="keyword">enum</span> chave {    </div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>             Q =               GLFW_KEY_Q,                </div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>             W =               GLFW_KEY_W,                </div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>             E =               GLFW_KEY_E,                </div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>             R =               GLFW_KEY_R,                </div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>             T =               GLFW_KEY_T,                </div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>             Y =               GLFW_KEY_Y,                </div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>             U =               GLFW_KEY_U,                </div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>             I =               GLFW_KEY_I,                </div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>             O =               GLFW_KEY_O,                </div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>             P =               GLFW_KEY_P,                </div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>             A =               GLFW_KEY_A,                </div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>             S =               GLFW_KEY_S,                </div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>             D =               GLFW_KEY_D,                </div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>             F =               GLFW_KEY_F,                </div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>             G =               GLFW_KEY_G,                </div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>             H =               GLFW_KEY_H,                </div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>             J =               GLFW_KEY_J,                </div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>             K =               GLFW_KEY_K,                </div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>             L =               GLFW_KEY_L,                </div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>             Z =               GLFW_KEY_Z,                </div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>             X =               GLFW_KEY_X,                </div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>             C =               GLFW_KEY_C,                </div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>             V =               GLFW_KEY_V,                </div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>             B =               GLFW_KEY_B,                </div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>             N =               GLFW_KEY_N,                </div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>             M =               GLFW_KEY_M,                </div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>             DIREITA =         GLFW_KEY_RIGHT,            </div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>             ESQUERDA =        GLFW_KEY_LEFT,             </div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>             BAIXO =           GLFW_KEY_DOWN,             </div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>             CIMA =            GLFW_KEY_UP,               </div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>             E_SHIFT =         GLFW_KEY_LEFT_SHIFT,       </div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>             D_SHIFT =         GLFW_KEY_RIGHT_SHIFT,      </div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>             E_CTRL =          GLFW_KEY_LEFT_CONTROL,     </div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>             D_CTRL =          GLFW_KEY_RIGHT_CONTROL,    </div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>             E_ALT =           GLFW_KEY_LEFT_ALT,         </div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>             D_ALT =           GLFW_KEY_RIGHT_ALT,        </div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>             BACKSPACE =       GLFW_KEY_BACKSPACE,        </div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>             ESPACO =          GLFW_KEY_SPACE,        </div>
 <div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>             ENTER =           GLFW_KEY_ENTER,            </div>
 <div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>             KP_ENTER =        GLFW_KEY_KP_ENTER,         </div>
 <div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>             DELETE =          GLFW_KEY_DELETE,           </div>
@@ -176,13 +176,13 @@ $(document).ready(function(){initNavTree('inputs_8hpp_source.html',''); initResi
 <div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>             MOUSE_E =         GLFW_MOUSE_BUTTON_LEFT,    </div>
 <div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>             MOUSE_D =         GLFW_MOUSE_BUTTON_RIGHT   </div>
 <div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>        };</div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>        <a class="code hl_class" href="classBECOMMONS__NS_1_1inputs.html">inputs</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classBECOMMONS__NS_1_1inputs.html#a05d3cac6d13a5946f52ea86cd0835a4a">pressionar</a>             (<span class="keyword">const</span> chave&amp;);</div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classBECOMMONS__NS_1_1inputs.html#a44aed74979e95c156ee90fbd19bdd054">soltar</a>                 (<span class="keyword">const</span> chave&amp;);</div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>        <span class="keyword">static</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="classBECOMMONS__NS_1_1inputs.html#a6d651020c34462927b02d6119f05afc8">obter</a>                  (<span class="keyword">const</span> chave&amp;);</div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>        <span class="keyword">static</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="classBECOMMONS__NS_1_1inputs.html#afdb44b9de6d7b48b128b202098cb8d5b">obter_str</a>               (<span class="keyword">const</span> std::string&amp;);</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>        <a class="code hl_class" href="classbecommons_1_1inputs.html">inputs</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classbecommons_1_1inputs.html#a05d3cac6d13a5946f52ea86cd0835a4a">pressionar</a>             (<span class="keyword">const</span> chave&amp;);</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classbecommons_1_1inputs.html#a44aed74979e95c156ee90fbd19bdd054">soltar</a>                 (<span class="keyword">const</span> chave&amp;);</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>        <span class="keywordtype">bool</span> <a class="code hl_function" href="classbecommons_1_1inputs.html#a6d651020c34462927b02d6119f05afc8">obter</a>                  (<span class="keyword">const</span> chave&amp;);</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>        <span class="keywordtype">bool</span> <a class="code hl_function" href="classbecommons_1_1inputs.html#afdb44b9de6d7b48b128b202098cb8d5b">obter_str</a>               (<span class="keyword">const</span> std::string&amp;);</div>
 <div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span> </div>
-<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>        <span class="keyword">static</span> dvet2 obterMousePos         ();</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>        <a class="code hl_struct" href="structbecommons_1_1vetor2.html">dvet2</a> obterMousePos         ();</div>
 <div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>        <span class="keywordtype">int</span> m_estado_mouse{ 0 }, m_estado_tecla{ 0 }, m_mods{ 0 };</div>
 <div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>        <span class="keywordtype">char</span> m_ultima_letra{ <span class="charliteral">&#39;\0&#39;</span> };</div>
 <div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>        <span class="keywordtype">bool</span> m_mouse_clicou { <span class="keyword">false</span> }, m_letra_pressionada {<span class="keyword">false</span>}, m_backspace_pressionado, m_backspace_segura, m_backspace_repetido;</div>
@@ -197,12 +197,13 @@ $(document).ready(function(){initNavTree('inputs_8hpp_source.html',''); initResi
 <div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>    <span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> <span class="keywordtype">void</span> mouseButtonCallback     (GLFWwindow* , <span class="keywordtype">int</span> , <span class="keywordtype">int</span> , <span class="keywordtype">int</span> );</div>
 <div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>    <span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> <span class="keywordtype">void</span> charCallback            (GLFWwindow* , <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> );</div>
 <div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>}</div>
-<div class="ttc" id="aclassBECOMMONS__NS_1_1inputs_html"><div class="ttname"><a href="classBECOMMONS__NS_1_1inputs.html">BECOMMONS_NS::inputs</a></div><div class="ttdoc">Centraliza os inputs da janela glfw.</div><div class="ttdef"><b>Definition</b> inputs.hpp:44</div></div>
-<div class="ttc" id="aclassBECOMMONS__NS_1_1inputs_html_a05d3cac6d13a5946f52ea86cd0835a4a"><div class="ttname"><a href="classBECOMMONS__NS_1_1inputs.html#a05d3cac6d13a5946f52ea86cd0835a4a">BECOMMONS_NS::inputs::pressionar</a></div><div class="ttdeci">void pressionar(const chave &amp;)</div><div class="ttdoc">Define uma tecla como pressionada.</div><div class="ttdef"><b>Definition</b> inputs.cpp:86</div></div>
-<div class="ttc" id="aclassBECOMMONS__NS_1_1inputs_html_a44aed74979e95c156ee90fbd19bdd054"><div class="ttname"><a href="classBECOMMONS__NS_1_1inputs.html#a44aed74979e95c156ee90fbd19bdd054">BECOMMONS_NS::inputs::soltar</a></div><div class="ttdeci">void soltar(const chave &amp;)</div><div class="ttdoc">Define uma tecla como solta.</div><div class="ttdef"><b>Definition</b> inputs.cpp:90</div></div>
-<div class="ttc" id="aclassBECOMMONS__NS_1_1inputs_html_a6d651020c34462927b02d6119f05afc8"><div class="ttname"><a href="classBECOMMONS__NS_1_1inputs.html#a6d651020c34462927b02d6119f05afc8">BECOMMONS_NS::inputs::obter</a></div><div class="ttdeci">static bool obter(const chave &amp;)</div><div class="ttdoc">Define uma tecla como pressionada.</div><div class="ttdef"><b>Definition</b> inputs.cpp:93</div></div>
-<div class="ttc" id="aclassBECOMMONS__NS_1_1inputs_html_afdb44b9de6d7b48b128b202098cb8d5b"><div class="ttname"><a href="classBECOMMONS__NS_1_1inputs.html#afdb44b9de6d7b48b128b202098cb8d5b">BECOMMONS_NS::inputs::obter_str</a></div><div class="ttdeci">static bool obter_str(const std::string &amp;)</div><div class="ttdoc">Define uma tecla como pressionada.</div><div class="ttdef"><b>Definition</b> inputs.cpp:97</div></div>
-<div class="ttc" id="anamespaceBECOMMONS__NS_html"><div class="ttname"><a href="namespaceBECOMMONS__NS.html">BECOMMONS_NS</a></div><div class="ttdoc">namespace becommons</div><div class="ttdef"><b>Definition</b> fonte.cpp:33</div></div>
+<div class="ttc" id="aclassbecommons_1_1inputs_html"><div class="ttname"><a href="classbecommons_1_1inputs.html">becommons::inputs</a></div><div class="ttdoc">Centraliza os inputs da janela glfw.</div><div class="ttdef"><b>Definition</b> inputs.hpp:43</div></div>
+<div class="ttc" id="aclassbecommons_1_1inputs_html_a05d3cac6d13a5946f52ea86cd0835a4a"><div class="ttname"><a href="classbecommons_1_1inputs.html#a05d3cac6d13a5946f52ea86cd0835a4a">becommons::inputs::pressionar</a></div><div class="ttdeci">void pressionar(const chave &amp;)</div><div class="ttdoc">Define uma tecla como pressionada.</div><div class="ttdef"><b>Definition</b> inputs.cpp:86</div></div>
+<div class="ttc" id="aclassbecommons_1_1inputs_html_a44aed74979e95c156ee90fbd19bdd054"><div class="ttname"><a href="classbecommons_1_1inputs.html#a44aed74979e95c156ee90fbd19bdd054">becommons::inputs::soltar</a></div><div class="ttdeci">void soltar(const chave &amp;)</div><div class="ttdoc">Define uma tecla como solta.</div><div class="ttdef"><b>Definition</b> inputs.cpp:90</div></div>
+<div class="ttc" id="aclassbecommons_1_1inputs_html_a6d651020c34462927b02d6119f05afc8"><div class="ttname"><a href="classbecommons_1_1inputs.html#a6d651020c34462927b02d6119f05afc8">becommons::inputs::obter</a></div><div class="ttdeci">bool obter(const chave &amp;)</div><div class="ttdoc">Define uma tecla como pressionada.</div><div class="ttdef"><b>Definition</b> inputs.cpp:93</div></div>
+<div class="ttc" id="aclassbecommons_1_1inputs_html_afdb44b9de6d7b48b128b202098cb8d5b"><div class="ttname"><a href="classbecommons_1_1inputs.html#afdb44b9de6d7b48b128b202098cb8d5b">becommons::inputs::obter_str</a></div><div class="ttdeci">bool obter_str(const std::string &amp;)</div><div class="ttdoc">Define uma tecla como pressionada.</div><div class="ttdef"><b>Definition</b> inputs.cpp:96</div></div>
+<div class="ttc" id="anamespacebecommons_html"><div class="ttname"><a href="namespacebecommons.html">becommons</a></div><div class="ttdoc">namespace becommons</div><div class="ttdef"><b>Definition</b> fonte.cpp:33</div></div>
+<div class="ttc" id="astructbecommons_1_1vetor2_html"><div class="ttname"><a href="structbecommons_1_1vetor2.html">becommons::vetor2</a></div><div class="ttdef"><b>Definition</b> vetor2.hpp:36</div></div>
 <div class="ttc" id="avetor2_8hpp_html"><div class="ttname"><a href="vetor2_8hpp.html">vetor2.hpp</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->

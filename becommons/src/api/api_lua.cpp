@@ -144,7 +144,7 @@ void becommons::api::definirClasses(sol::state& lua) {
     // - nucleo
     lua.new_usertype<janela>("janela",
             sol::call_constructor, sol::constructors<sol::types<const char*>>(),
-            "tamanho", &janela::tamanho, // ivet2
+            "obterTamanho", &janela::obterTamanho, // ivet2
             "nome", sol::overload(
                     static_cast<std::string (janela::*)() const>(&janela::nome)            // get
                 ),

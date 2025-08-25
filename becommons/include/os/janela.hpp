@@ -31,45 +31,65 @@
 #include "util/vetor2.hpp"
 
 namespace becommons {
-	/**
-	* @class janela
-	* @brief facilita o uso da janela glfw
-	* @brief cuida dos callbacks, parametros iniciais etc.
-	*/
-	class janela {
+	class ijanela{
     public:
-        enum class cursor : int {
+        enum class cursor : uint32_t {
             mao = 0x00036004,
             i   = 0x00036002,
             seta= 0x00036001,
             re_h= 0x00036005,
             re_v= 0x00036006
         };
-        /*enum configuracao : uint8_t {
-            padrao          = 0,
-            splash_screen =   1
-        };
+        ijanela() = default;
+        virtual ~ijanela() = default;
 
-    	janela(const configuracao cfg = padrao);*/
+        // Processa eventos (no real: glfwPollEvents)
+        virtual void poll() {};
+
+        // Troca buffers / apresenta frame
+        virtual void swap() {};
+
+        // Retorna true se a janela deve fechar
+        virtual bool deveFechar() const {return false;};
+
+        // Retorna o tamanho da janela
+        virtual ivet2 obterTamanho() const {return {100,100};};
+
+        // Posiciona o cursor da janela
+        virtual void posicionarCursor(double x, double y) {};
+
+        // Define o estado do cursor
+        virtual void definirCursor(const cursor c) {};
+
+        // Efetua o viewprt gráfico com as dimenções da janela
+		virtual void viewport() const {};
+    };
+    /**
+	* @class janela
+	* @brief facilita o uso da janela glfw
+	* @brief cuida dos callbacks, parametros iniciais etc.
+	*/
+	class janela : public ijanela {
+    public:
     	janela(const char* nome, fvet2 bounds = fvet2(600, 400), const char* icon_path = nullptr);
     	janela(const char* nome, const bool f, fvet2 bounds = fvet2(600, 400), const char* icon_path = nullptr);
     	~janela();
 
-        bool deveFechar();
-        void posicionarCursor                   (double x, double y);
-        ivet2 obterTamanhoJanela                ();
-    	void poll();
-        void definirCursor(const cursor c);
-    	void swap();
-		void viewport() const;
-        std::string nome() const;
-    	void nome(const char* novo_nome);
+    	void poll                               () override;
+    	void swap                               () override;
+        bool deveFechar                         () const override;
+		void viewport                           () const override;
+        ivet2 obterTamanho                      () const override;
+        void posicionarCursor                   (double x, double y) override;
+        void definirCursor                      (const cursor c) override;
 
-        std::string m_nome{""};
-    	ivet2 tamanho;
+        std::string nome                        () const;
+    	void nome                               (const char* novo_nome);
+        
     	GLFWwindow* window;
     private:
-        //configuracao config;
+    	ivet2 tamanho;
+        std::string m_nome{""};
         cursor m_cursor = cursor::seta;
 	    cursor m_cursor_antigo = cursor::seta;
 	};

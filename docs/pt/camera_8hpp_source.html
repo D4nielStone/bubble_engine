@@ -110,84 +110,85 @@ $(document).ready(function(){initNavTree('camera_8hpp_source.html',''); initResi
   <div class="headertitle"><div class="title">camera.hpp</div></div>
 </div><!--header-->
 <div class="contents">
-<a href="camera_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span> </div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="preprocessor">#pragma once</span></div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="preprocessor">#include &lt;glm/ext/matrix_clip_space.hpp&gt;</span></div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="preprocessor">#include &lt;glm/ext/matrix_transform.hpp&gt;</span></div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="preprocessor">#include &lt;memory&gt;</span></div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="preprocessor">#include &quot;becommons_namespace.hpp&quot;</span></div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="preprocessor">#include &quot;<a class="code" href="componente_8hpp.html">componente.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="preprocessor">#include &quot;<a class="code" href="transformacao_8hpp.html">transformacao.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="preprocessor">#include &quot;<a class="code" href="skybox_8hpp.html">util/skybox.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="preprocessor">#include &quot;<a class="code" href="vetor3_8hpp.html">util/vetor3.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="preprocessor">#include &quot;<a class="code" href="cor_8hpp.html">util/cor.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="preprocessor">#include &quot;<a class="code" href="raio_8hpp.html">util/raio.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceBECOMMONS__NS.html">BECOMMONS_NS</a> {</div>
-<div class="foldopen" id="foldopen00048" data-start="{" data-end="};">
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno"><a class="line" href="classBECOMMONS__NS_1_1camera.html">   48</a></span>    <span class="keyword">class </span><a class="code hl_class" href="classBECOMMONS__NS_1_1camera.html">camera</a> : <span class="keyword">public</span> <a class="code hl_struct" href="structBECOMMONS__NS_1_1componente.html">componente</a> {</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    <span class="keyword">public</span>:</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>        <a class="code hl_class" href="classBECOMMONS__NS_1_1skybox.html">skybox</a>* m_skybox{<span class="keyword">nullptr</span>};</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        <span class="keywordtype">bool</span> m_use_skybox { <span class="keyword">false</span> };</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>        <a class="code hl_struct" href="structBECOMMONS__NS_1_1cor.html">cor</a> ceu             {0.43F, 0.78F, 0.86F, 1.0F};</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>        fvet3 forward, direita, cima, posicao;</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>        <a class="code hl_class" href="classBECOMMONS__NS_1_1transformacao.html">transformacao</a>* transform{ <span class="keyword">nullptr</span> };</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span> </div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>        glm::mat4 viewMatrix = glm::mat4(1.f), projMatriz = glm::mat4(1.f);</div>
+<div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span> </div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="preprocessor">#pragma once</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="preprocessor">#include &lt;glm/ext/matrix_clip_space.hpp&gt;</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="preprocessor">#include &lt;glm/ext/matrix_transform.hpp&gt;</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="preprocessor">#include &lt;memory&gt;</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="preprocessor">#include &lt;glad.h&gt;</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="preprocessor">#include &quot;<a class="code" href="componente_8hpp.html">componente.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="preprocessor">#include &quot;<a class="code" href="transformacao_8hpp.html">transformacao.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="preprocessor">#include &quot;<a class="code" href="skybox_8hpp.html">util/skybox.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="preprocessor">#include &quot;<a class="code" href="vetor3_8hpp.html">util/vetor3.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="preprocessor">#include &quot;<a class="code" href="cor_8hpp.html">util/cor.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="preprocessor">#include &quot;<a class="code" href="raio_8hpp.html">util/raio.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacebecommons.html">becommons</a> {</div>
+<div class="foldopen" id="foldopen00042" data-start="{" data-end="};">
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno"><a class="line" href="classbecommons_1_1camera.html">   42</a></span>    <span class="keyword">class </span><a class="code hl_class" href="classbecommons_1_1camera.html">camera</a> : <span class="keyword">public</span> <a class="code hl_struct" href="structbecommons_1_1componente.html">componente</a> {</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>        <a class="code hl_class" href="classbecommons_1_1skybox.html">skybox</a>* m_skybox{<span class="keyword">nullptr</span>};</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>        <span class="keywordtype">bool</span> m_use_skybox { <span class="keyword">false</span> };</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>        <a class="code hl_struct" href="structbecommons_1_1cor.html">cor</a> ceu             {0.43F, 0.78F, 0.86F, 1.0F};</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>        <a class="code hl_class" href="classbecommons_1_1transformacao.html">transformacao</a>* transform{ <span class="keyword">nullptr</span> };</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>        glm::mat4 viewMatrix = glm::mat4(1.f), projMatriz = glm::mat4(1.f);</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span> </div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> fbo, <a class="code hl_struct" href="structbecommons_1_1textura.html">textura</a>, rbo;</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>        <span class="keywordtype">float</span> fov           { 75.f };</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>        <span class="keywordtype">float</span> aspecto       { 0.f };</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>        <span class="keywordtype">float</span> corte_curto   { 0.1f }; </div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>        <span class="keywordtype">float</span> corte_longo   { 300.f };</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>        <span class="keywordtype">float</span> escala        { 5.f };</div>
 <div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>        <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> fbo, <a class="code hl_struct" href="structBECOMMONS__NS_1_1textura.html">textura</a>, rbo;</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>        <span class="keywordtype">float</span> left, top, bottom, right;</div>
 <div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span> </div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>        <span class="keywordtype">float</span> fov           { 75.f };</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>        <span class="keywordtype">float</span> aspecto       { 0.f };</div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>        <span class="keywordtype">float</span> corte_curto   { 0.1f }; </div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>        <span class="keywordtype">float</span> corte_longo   { 300.f };</div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>        <span class="keywordtype">float</span> escala        { 5.f };</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span> </div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>        <span class="keywordtype">float</span> left, top, bottom, right;</div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span> </div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>        <span class="keywordtype">bool</span> flag_orth      { <span class="keyword">false</span> };</div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>        <span class="keywordtype">bool</span> flag_fb        { <span class="keyword">false</span> };</div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span> </div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>        <span class="keyword">static</span> <span class="keyword">constexpr</span> mascara mascara = COMPONENTE_CAM;</div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span> </div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>        fvet4* viewport_ptr{ <span class="keyword">nullptr</span> };</div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>        ivet2 viewportFBO{ 400, 400 };</div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span> </div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>        <span class="keywordtype">void</span> desenharFB() <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>        <span class="keywordtype">bool</span> analizar(<span class="keyword">const</span> rapidjson::Value&amp;) <span class="keyword">override</span>;</div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>        <span class="keywordtype">bool</span> serializar(rapidjson::Value&amp; value, rapidjson::Document::AllocatorType&amp; allocator) <span class="keyword">const override</span>;</div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span> </div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>        <a class="code hl_class" href="classBECOMMONS__NS_1_1camera.html">~camera</a>();</div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>        <a class="code hl_class" href="classBECOMMONS__NS_1_1camera.html">camera</a>(<span class="keyword">const</span> <span class="keywordtype">bool</span> ortho = <span class="keyword">false</span>);</div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span> </div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>        <span class="keywordtype">void</span> ativarFB();</div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>        <span class="keywordtype">void</span> desativarFB();</div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>        glm::mat4 obtViewMatrix();</div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>        <span class="keywordtype">void</span> viewport(<span class="keyword">const</span> ivet2&amp; viewp);</div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span> </div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>        glm::mat4 obtProjectionMatrix();</div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span> </div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>        <a class="code hl_struct" href="structBECOMMONS__NS_1_1raio.html">raio</a> pontoParaRaio(<span class="keyword">const</span> ivet2&amp; screenPoint) <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>        fvet3 telaParaMundo(<span class="keyword">const</span> ivet2&amp;, <span class="keywordtype">float</span>) <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>        ivet3 mundoParaTela(<span class="keyword">const</span> fvet3&amp;);</div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>        </div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>        <span class="keywordtype">void</span> mover(<span class="keyword">const</span> fvet3&amp; pos);</div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>    };</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>        <span class="keywordtype">bool</span> flag_orth      { <span class="keyword">false</span> };</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>        <span class="keywordtype">bool</span> flag_fb        { <span class="keyword">false</span> };</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span> </div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>        <span class="keyword">static</span> <span class="keyword">constexpr</span> mascara mascara = COMPONENTE_CAM;</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span> </div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>        <a class="code hl_class" href="structbecommons_1_1vetor4.html">fvet4</a>* viewport_ptr{ <span class="keyword">nullptr</span> };</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span> </div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>        <span class="keywordtype">void</span> desenharFB();</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>        <span class="keywordtype">void</span> limparFB() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>        <span class="keywordtype">bool</span> analizar(<span class="keyword">const</span> rapidjson::Value&amp;) <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>        <span class="keywordtype">bool</span> serializar(rapidjson::Value&amp; value, rapidjson::Document::AllocatorType&amp; allocator) <span class="keyword">const override</span>;</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span> </div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>        <a class="code hl_class" href="classbecommons_1_1camera.html">~camera</a>();</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>        <a class="code hl_class" href="classbecommons_1_1camera.html">camera</a>(<span class="keyword">const</span> <span class="keywordtype">bool</span> ortho = <span class="keyword">false</span>);</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span> </div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>        <span class="keywordtype">void</span> ativarFB();</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>        <span class="keywordtype">void</span> desativarFB();</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>        glm::mat4 obtViewMatrix();</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span> </div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>        glm::mat4 obtProjectionMatrix();</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span> </div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>        <a class="code hl_struct" href="structbecommons_1_1raio.html">raio</a> pontoParaRaio(<span class="keyword">const</span> <a class="code hl_class" href="structbecommons_1_1vetor2.html">ivet2</a>&amp; screenPoint) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>        <a class="code hl_class" href="structbecommons_1_1vetor3.html">fvet3</a> telaParaMundo(<span class="keyword">const</span> <a class="code hl_class" href="structbecommons_1_1vetor2.html">ivet2</a>&amp;, <span class="keywordtype">float</span>) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>        <a class="code hl_struct" href="structbecommons_1_1vetor3.html">ivet3</a> mundoParaTela(<span class="keyword">const</span> <a class="code hl_class" href="structbecommons_1_1vetor3.html">fvet3</a>&amp;);</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>    <span class="keyword">private</span>:</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>        GLint prevViewport[4];</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>        GLint prevFBO = 0;</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>    };</div>
 </div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>}</div>
-<div class="ttc" id="aclassBECOMMONS__NS_1_1camera_html"><div class="ttname"><a href="classBECOMMONS__NS_1_1camera.html">BECOMMONS_NS::camera</a></div><div class="ttdoc">componente que facilita a manipuacao da matriz de visualizacao e projeco</div><div class="ttdef"><b>Definition</b> camera.hpp:48</div></div>
-<div class="ttc" id="aclassBECOMMONS__NS_1_1skybox_html"><div class="ttname"><a href="classBECOMMONS__NS_1_1skybox.html">BECOMMONS_NS::skybox</a></div><div class="ttdef"><b>Definition</b> skybox.hpp:36</div></div>
-<div class="ttc" id="aclassBECOMMONS__NS_1_1transformacao_html"><div class="ttname"><a href="classBECOMMONS__NS_1_1transformacao.html">BECOMMONS_NS::transformacao</a></div><div class="ttdef"><b>Definition</b> transformacao.hpp:45</div></div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>}</div>
+<div class="ttc" id="aclassbecommons_1_1camera_html"><div class="ttname"><a href="classbecommons_1_1camera.html">becommons::camera</a></div><div class="ttdoc">componente que facilita a manipuacao da matriz de visualizacao e projeco</div><div class="ttdef"><b>Definition</b> camera.hpp:42</div></div>
+<div class="ttc" id="aclassbecommons_1_1skybox_html"><div class="ttname"><a href="classbecommons_1_1skybox.html">becommons::skybox</a></div><div class="ttdef"><b>Definition</b> skybox.hpp:32</div></div>
+<div class="ttc" id="aclassbecommons_1_1transformacao_html"><div class="ttname"><a href="classbecommons_1_1transformacao.html">becommons::transformacao</a></div><div class="ttdef"><b>Definition</b> transformacao.hpp:44</div></div>
 <div class="ttc" id="acomponente_8hpp_html"><div class="ttname"><a href="componente_8hpp.html">componente.hpp</a></div><div class="ttdoc">Estrutura base para componetes.</div></div>
 <div class="ttc" id="acor_8hpp_html"><div class="ttname"><a href="cor_8hpp.html">cor.hpp</a></div></div>
-<div class="ttc" id="anamespaceBECOMMONS__NS_html"><div class="ttname"><a href="namespaceBECOMMONS__NS.html">BECOMMONS_NS</a></div><div class="ttdoc">namespace becommons</div><div class="ttdef"><b>Definition</b> fonte.cpp:33</div></div>
+<div class="ttc" id="anamespacebecommons_html"><div class="ttname"><a href="namespacebecommons.html">becommons</a></div><div class="ttdoc">namespace becommons</div><div class="ttdef"><b>Definition</b> fonte.cpp:33</div></div>
 <div class="ttc" id="araio_8hpp_html"><div class="ttname"><a href="raio_8hpp.html">raio.hpp</a></div></div>
 <div class="ttc" id="askybox_8hpp_html"><div class="ttname"><a href="skybox_8hpp.html">skybox.hpp</a></div></div>
-<div class="ttc" id="astructBECOMMONS__NS_1_1componente_html"><div class="ttname"><a href="structBECOMMONS__NS_1_1componente.html">BECOMMONS_NS::componente</a></div><div class="ttdoc">base para as funcionalidades da engine</div><div class="ttdef"><b>Definition</b> componente.hpp:45</div></div>
-<div class="ttc" id="astructBECOMMONS__NS_1_1cor_html"><div class="ttname"><a href="structBECOMMONS__NS_1_1cor.html">BECOMMONS_NS::cor</a></div><div class="ttdef"><b>Definition</b> cor.hpp:33</div></div>
-<div class="ttc" id="astructBECOMMONS__NS_1_1raio_html"><div class="ttname"><a href="structBECOMMONS__NS_1_1raio.html">BECOMMONS_NS::raio</a></div><div class="ttdef"><b>Definition</b> raio.hpp:36</div></div>
-<div class="ttc" id="astructBECOMMONS__NS_1_1textura_html"><div class="ttname"><a href="structBECOMMONS__NS_1_1textura.html">BECOMMONS_NS::textura</a></div><div class="ttdef"><b>Definition</b> textura.hpp:32</div></div>
+<div class="ttc" id="astructbecommons_1_1componente_html"><div class="ttname"><a href="structbecommons_1_1componente.html">becommons::componente</a></div><div class="ttdoc">base para as funcionalidades da engine</div><div class="ttdef"><b>Definition</b> componente.hpp:44</div></div>
+<div class="ttc" id="astructbecommons_1_1cor_html"><div class="ttname"><a href="structbecommons_1_1cor.html">becommons::cor</a></div><div class="ttdef"><b>Definition</b> cor.hpp:32</div></div>
+<div class="ttc" id="astructbecommons_1_1raio_html"><div class="ttname"><a href="structbecommons_1_1raio.html">becommons::raio</a></div><div class="ttdef"><b>Definition</b> raio.hpp:35</div></div>
+<div class="ttc" id="astructbecommons_1_1textura_html"><div class="ttname"><a href="structbecommons_1_1textura.html">becommons::textura</a></div><div class="ttdef"><b>Definition</b> textura.hpp:32</div></div>
+<div class="ttc" id="astructbecommons_1_1vetor2_html"><div class="ttname"><a href="structbecommons_1_1vetor2.html">becommons::vetor2&lt; int &gt;</a></div></div>
+<div class="ttc" id="astructbecommons_1_1vetor3_html"><div class="ttname"><a href="structbecommons_1_1vetor3.html">becommons::vetor3&lt; float &gt;</a></div></div>
+<div class="ttc" id="astructbecommons_1_1vetor4_html"><div class="ttname"><a href="structbecommons_1_1vetor4.html">becommons::vetor4&lt; float &gt;</a></div></div>
 <div class="ttc" id="atransformacao_8hpp_html"><div class="ttname"><a href="transformacao_8hpp.html">transformacao.hpp</a></div><div class="ttdoc">Calcula a mtriz de modelo para um objeto 3d qualquer.</div></div>
 <div class="ttc" id="avetor3_8hpp_html"><div class="ttname"><a href="vetor3_8hpp.html">vetor3.hpp</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
@@ -195,7 +196,7 @@ $(document).ready(function(){initNavTree('camera_8hpp_source.html',''); initResi
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_0394786a11e0dfde3dca27fdccf84bfd.html">becommons</a></li><li class="navelem"><a class="el" href="dir_9a744b5567c265deacf566b467d8af59.html">include</a></li><li class="navelem"><a class="el" href="dir_111f21dc146a617cd827120506a93450.html">componentes</a></li><li class="navelem"><a class="el" href="camera_8hpp.html">camera.hpp</a></li>
+    <li class="navelem"><a class="el" href="dir_0394786a11e0dfde3dca27fdccf84bfd.html">becommons</a></li><li class="navelem"><a class="el" href="dir_9a744b5567c265deacf566b467d8af59.html">include</a></li><li class="navelem"><a class="el" href="dir_111f21dc146a617cd827120506a93450.html">componentes</a></li><li class="navelem"><b>camera.hpp</b></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>

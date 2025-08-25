@@ -1,7 +1,26 @@
 var searchData=
 [
-  ['_7ecodigo_0',['~codigo',['../structBECOMMONS__NS_1_1codigo.html#aa42de340fedcad2ccba58467b9e9b043',1,'BECOMMONS_NS::codigo']]],
-  ['_7egerenciadorfontes_1',['~gerenciadorFontes',['../classBECOMMONS__NS_1_1gerenciadorFontes.html#a534c07c64c9c1d78f15d99e0fc5e8ec6',1,'BECOMMONS_NS::gerenciadorFontes']]],
-  ['_7eimageloader_2',['~imageLoader',['../classBECOMMONS__NS_1_1imageLoader.html#a7fea217ee6f2f74991336d55680eb16c',1,'BECOMMONS_NS::imageLoader']]],
-  ['_7esistema_3',['~sistema',['../structBECOMMONS__NS_1_1sistema.html#af1f58163bac418be20ec9dc999474e6c',1,'BECOMMONS_NS::sistema']]]
+  ['tópicos_3a_0',['Principais tópicos:',['../md_docs_2ajuda_2ajuda.html#autotoc_md32',1,'']]],
+  ['t_5fcaracteres_1',['t_Caracteres',['../fonte_8hpp.html#aeb8e3d54c6ada6361efd9c6523376445',1,'fonte.hpp']]],
+  ['t_5ffonteid_2',['t_FonteID',['../fonte_8hpp.html#ae5f3440f66ae3e835e5503a1991156c6',1,'fonte.hpp']]],
+  ['t_5ffontes_3',['t_Fontes',['../fonte_8hpp.html#ab50d54a0a26081cdc3ff54ce28c8752d',1,'fonte.hpp']]],
+  ['table_20bubble_4',['Table Bubble',['../group__Bubble.html#autotoc_md33',1,'']]],
+  ['tamanho_5',['tamanho',['../structbecommons_1_1caractere.html#a95a35cef07786a50bf3e1de7c4e6157e',1,'becommons::caractere']]],
+  ['tempo_6',['tempo',['../structbecommons_1_1tempo.html',1,'becommons']]],
+  ['tempo_2ehpp_7',['tempo.hpp',['../tempo_8hpp.html',1,'']]],
+  ['terreno_8',['terreno',['../structbecommons_1_1terreno.html',1,'becommons']]],
+  ['terreno_2ecpp_9',['terreno.cpp',['../terreno_8cpp.html',1,'']]],
+  ['terreno_2ehpp_10',['terreno.hpp',['../terreno_8hpp.html',1,'']]],
+  ['testes_11',['testes',['../testes_2src_2main_8cpp.html#main',1,'Orquestração de execução de testes'],['../testes_2src_2main_8cpp.html#bubble_gui_layout',1,'Regras e exemplos verificados por testes']]],
+  ['testes_20registro_5ftestes_20assert_5f_12',['5) INFRAESTRUTURA DE TESTES (registro_testes, ASSERT_*)',['../testes_2src_2main_8cpp.html#autotoc_md10',1,'']]],
+  ['testes_2fsrc_2fmain_2ecpp_13',['main.cpp',['../testes_2src_2main_8cpp.html',1,'']]],
+  ['texto_14',['texto',['../classbecommons_1_1elementos_1_1texto.html',1,'becommons::elementos']]],
+  ['texto_2ehpp_15',['texto.hpp',['../texto_8hpp.html',1,'']]],
+  ['textura_16',['textura',['../structbecommons_1_1textura.html',1,'becommons']]],
+  ['textura_2ehpp_17',['textura.hpp',['../textura_8hpp.html',1,'']]],
+  ['textureloader_18',['textureloader',['../classbecommons_1_1textureLoader.html#ad6df8cb81ed2c636c4254b9ab1e09d10',1,'becommons::textureLoader::textureLoader(const textureLoader &amp;)=delete'],['../classbecommons_1_1textureLoader.html#a65077f86bddb381c523d4479d4da807c',1,'becommons::textureLoader::textureLoader()'],['../classbecommons_1_1textureLoader.html',1,'becommons::textureLoader']]],
+  ['the_20project_19',['About the Project',['../index.html#autotoc_md17',1,'']]],
+  ['transformacao_20',['transformacao',['../classbecommons_1_1transformacao.html',1,'becommons']]],
+  ['transformacao_2ecpp_21',['transformacao.cpp',['../transformacao_8cpp.html',1,'']]],
+  ['transformacao_2ehpp_22',['transformacao.hpp',['../transformacao_8hpp.html',1,'']]]
 ];

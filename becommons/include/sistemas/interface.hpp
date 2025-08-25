@@ -53,7 +53,7 @@ namespace becommons {
         void processarModular(caixa*);
         void atualizarFilhos(caixa*);
         interface();
-        interface(janela*);
+        interface(ijanela*);
         ~interface();
 
         void gerarBuffers();
@@ -64,7 +64,7 @@ namespace becommons {
         std::set<caixa*> pos_render;
         std::unique_ptr<caixa> m_raiz;
         glm::mat4 projecao_viewport;
-        janela* m_window = nullptr;
+        ijanela* m_window = nullptr;
     };
 }
 // \see interface.cpp

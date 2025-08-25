@@ -1,18 +1,16 @@
 var searchData=
 [
-  ['m_5ffases_0',['m_fases',['../structBECOMMONS__NS_1_1projeto.html#a64c66febf33d42cbbbf64838dcddbf57',1,'BECOMMONS_NS::projeto']]],
-  ['malha_1',['malha',['../group__Malha.html#autotoc_md32',1,'classe Malha'],['../group__Malha.html#autotoc_md31',1,'Malha'],['../group__Malha.html',1,'Malha'],['../classBECOMMONS__NS_1_1malha.html',1,'BECOMMONS_NS::malha']]],
-  ['malha_2ecpp_2',['malha.cpp',['../malha_8cpp.html',1,'']]],
-  ['malha_2ehpp_3',['malha.hpp',['../malha_8hpp.html',1,'']]],
-  ['mascaras_4',['mascaras',['../structBECOMMONS__NS_1_1registro.html#ababc759798ebf7256db4f9c11e82354a',1,'BECOMMONS_NS::registro']]],
-  ['mat_2ehpp_5',['mat.hpp',['../mat_8hpp.html',1,'']]],
-  ['material_6',['material',['../structBECOMMONS__NS_1_1material.html',1,'BECOMMONS_NS']]],
-  ['material_2ehpp_7',['material.hpp',['../material_8hpp.html',1,'']]],
-  ['meuid_8',['meuid',['../group__MeuID.html#autotoc_md28',1,'Constante meuID'],['../group__MeuID.html',1,'MeuID']]],
-  ['modelo_9',['modelo',['../classBECOMMONS__NS_1_1modelo.html',1,'BECOMMONS_NS']]],
-  ['modelo_2ecpp_10',['modelo.cpp',['../modelo_8cpp.html',1,'']]],
-  ['modelo_2ehpp_11',['modelo.hpp',['../modelo_8hpp.html',1,'']]],
-  ['monitorarruntime_12',['monitorarRuntime',['../structEDITOR__NS_1_1sistema__editor.html#a3022cf36ee4ee8557e4b4633a7d02127',1,'EDITOR_NS::sistema_editor']]],
-  ['mouseemcima_13',['mouseEmCima',['../classBECOMMONS__NS_1_1elementos_1_1area__de__texto.html#ac1e7033165139bde952f41ae4230aaa9',1,'BECOMMONS_NS::elementos::area_de_texto']]],
-  ['mycontactcallback_14',['MyContactCallback',['../classMyContactCallback.html',1,'']]]
+  ['fase_0',['fase',['../testes_2src_2main_8cpp.html#autotoc_md6',1,'3) FASE'],['../structbecommons_1_1fase.html',1,'becommons::fase'],['../structfase.html',1,'fase'],['../structbecommons_1_1fase.html#a3134bfed75712b5d6cb79107fb04be6a',1,'becommons::fase::fase()']]],
+  ['fase_2ecpp_1',['fase.cpp',['../fase_8cpp.html',1,'']]],
+  ['fisica_2',['fisica',['../structbecommons_1_1fisica.html',1,'becommons']]],
+  ['fisica_2ecpp_3',['fisica.cpp',['../fisica_8cpp.html',1,'']]],
+  ['fisica_2ehpp_4',['fisica.hpp',['../fisica_8hpp.html',1,'']]],
+  ['flipvertical_5',['flipVertical',['../classbecommons_1_1imageLoader.html#a5222e6548e0dba8fb0eec431f8133b23',1,'becommons::imageLoader']]],
+  ['fonte_2ecpp_6',['fonte.cpp',['../fonte_8cpp.html',1,'']]],
+  ['fonte_2ehpp_7',['fonte.hpp',['../fonte_8hpp.html',1,'']]],
+  ['fontes_8',['fontes',['../classbecommons_1_1gerenciadorFontes.html#a2f2ded5890bd67a61b4e8149dd295911',1,'becommons::gerenciadorFontes']]],
+  ['ft_9',['ft',['../classbecommons_1_1gerenciadorFontes.html#afde45f2cc9691c497e7f8c2c5833a130',1,'becommons::gerenciadorFontes']]],
+  ['fvet2_20fvet3_20fvet4_10',['1) UTILS — Vetores (fvet2, fvet3, fvet4)',['../testes_2src_2main_8cpp.html#autotoc_md2',1,'']]],
+  ['fvet3_20fvet4_11',['1) UTILS — Vetores (fvet2, fvet3, fvet4)',['../testes_2src_2main_8cpp.html#autotoc_md2',1,'']]],
+  ['fvet4_12',['1) UTILS — Vetores (fvet2, fvet3, fvet4)',['../testes_2src_2main_8cpp.html#autotoc_md2',1,'']]]
 ];
