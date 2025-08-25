@@ -20,6 +20,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE. 
  * @file editor.hpp
+ * \brief O editor deve disponibilizar uma interface para a manipulação da engine pelo usuário comum. Isso também inclui gerar uma interface gráfica.
  */
 
 #pragma once

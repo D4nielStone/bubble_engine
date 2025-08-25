@@ -822,9 +822,14 @@ void testarSistemas()
 
 int main()
 {
-    depuracao::debug_ativo = false;
 	testarUtils();
     testarNucleo();
     testarSistemas();
-    return testes.rodarTestes();
+    try {
+        return testes.rodarTestes();
+    } 
+    catch (const std::exception& e) {
+        depuracao::emitir(erro, e.what());
+        return -1;
+    }
 }

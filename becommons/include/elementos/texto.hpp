@@ -58,7 +58,7 @@ namespace becommons{
                     becommons::cor color,
                     const unsigned int escala = 12,
                     const flags_texto flags = flags_texto::padrao,
-                    const std::string path_fonte = "noto_sans.regular.ttf") : m_texto_frase(frase)
+                    const std::string path_fonte = "consolas.ttf") : m_texto_frase(frase)
                 , m_texto_fonte(path_fonte)
                 , m_texto_escala(escala)
                 , m_texto_flags(flags)
@@ -71,7 +71,7 @@ namespace becommons{
             texto(const std::string frase,
                     const unsigned int escala = 12,
                     const flags_texto flags = flags_texto::padrao,
-                    const std::string path_fonte = "noto_sans.regular.ttf") : m_texto_frase(frase)
+                    const std::string path_fonte = "consolas.ttf") : m_texto_frase(frase)
                 , m_texto_fonte(path_fonte)
                 , m_texto_escala(escala)
                 , m_texto_flags(flags)
@@ -84,7 +84,7 @@ namespace becommons{
             texto(std::string* frase,
                     const unsigned int escala = 12,
                     const flags_texto flags = flags_texto::padrao,
-                    const std::string path_fonte = "noto_sans.regular.ttf") : m_texto_frase_ptr(frase)
+                    const std::string path_fonte = "consolas.ttf") : m_texto_frase_ptr(frase)
                 , m_texto_fonte(path_fonte)
                 , m_texto_escala(escala)
                 , m_texto_flags(flags)

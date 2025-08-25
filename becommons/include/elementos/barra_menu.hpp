@@ -45,31 +45,27 @@ namespace custom {
                 p_barra_menu = adicionar<caixa>();
                 p_barra_menu->m_estilo.m_flag_estilo |= flag_estilo::largura_percentual;
                 p_barra_menu->m_estilo.m_largura = 1;
-                p_barra_menu->m_estilo.m_altura = 19;
-                p_barra_menu->m_estilo.m_padding_geral = {1, 1};
+                p_barra_menu->m_estilo.m_altura = 18;
+                p_barra_menu->m_estilo.m_padding_geral = {1, 0};
                 p_barra_menu->m_estilo.m_cor_fundo = cor(0.135f);
-                p_barra_menu->m_estilo.m_cor_borda = cor(0.11f);
+                p_barra_menu->m_estilo.m_cor_borda = cor(0.4f);
 
                 // Configuração da barra de versão
                 auto* barra_versao = adicionar<caixa>();
                 barra_versao->m_estilo.m_flag_estilo |= flag_estilo::altura_justa | flag_estilo::largura_justa;
                 barra_versao->adicionar<elementos::texto>(BUBBLE_VERSAO_COMPLETA_STR); // Exibe a string de versão completa
                 barra_versao->m_estilo.m_cor_fundo = cor(0.11f);
-                barra_versao->m_estilo.m_padding_geral = {1, 1};
+            }
+            void adicionar_botao(const std::string& nome, const std::function<void()>& func) {
+                // Cria o botão
+                auto* btn = p_barra_menu->adicionar<elementos::botao>(func, nome);
+                btn->m_estilo.m_cor_fundo.a = 0.f;
+                e = btn->m_estilo; // guarda como estilo de botoes
             }
             void adicionar_botao(const std::string& nome, const std::string& icone, const std::function<void()>& func) {
-                // Cria imagem
-                auto img = std::make_unique<elementos::imagem>(icone);
-                img->m_estilo.m_largura = 12;
-                img->m_estilo.m_altura = 12;
-
                 // Cria o botão
-                auto* btn = p_barra_menu->adicionar<elementos::botao>(func, std::move(img));
-                btn->m_estilo.m_cor_borda = cor(0.09f);
-                btn->m_estilo.m_cor_fundo = cor(0.1f);
-                btn->m_estilo.m_padding_geral = {2, 2};
-                if(!nome.empty())
-                    btn->adicionar<elementos::texto>(nome);
+                auto* btn = p_barra_menu->adicionar<elementos::botao>(func, nome, icone, 18);
+                btn->m_estilo.m_cor_fundo.a = 0.f;
                 e = btn->m_estilo; // guarda como estilo de botoes
             }
     };

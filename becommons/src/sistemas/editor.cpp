@@ -88,8 +88,8 @@ void sistema_editor::adicionarCaixas() {
 
     // Configuração da seção superior da UI (barra de menu e versão)
     auto* menu = ui->m_raiz->adicionar<custom::barra_menu>();
-    menu->adicionar_botao("Files", "folder.png", [](){});
-    menu->adicionar_botao("View", "cube.png", [](){});
+    menu->adicionar_botao(" files", [](){});
+    menu->adicionar_botao(" view", [](){});
 
     // Configuração da seção central da UI (entidades, viewport e inspetor)
     auto* center = ui->m_raiz->adicionar<caixa>();
@@ -468,8 +468,8 @@ void sistema_editor::inicializar() {
 		usarProjeto(motor::obter().m_projeto.get());
 	}
 
-    adicionarCaixas(); // Constrói a interface do editor
     ui->inicializar();
+    adicionarCaixas(); // Constrói a interface do editor
 }
 
 void sistema_editor::usarProjeto(becommons::projeto* proj) {

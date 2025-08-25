@@ -91,5 +91,5 @@ find_library(BULLET_COLLISION_LIBRARY BulletCollision)
 find_library(BULLET_LINEAR_MATH_LIBRARY LinearMath)
 
 add_custom_command(TARGET testes POST_BUILD
-    COMMAND gdb $<TARGET_FILE:testes>
+    COMMAND $<TARGET_FILE:testes>
 )
