@@ -88,6 +88,8 @@ void sistema_editor::adicionarCaixas() {
 
     // Configuração da seção superior da UI (barra de menu e versão)
     auto* menu = ui->m_raiz->adicionar<custom::barra_menu>();
+    menu->adicionar_botao("Files", "folder.png", [](){});
+    menu->adicionar_botao("View", "cube.png", [](){});
 
     // Configuração da seção central da UI (entidades, viewport e inspetor)
     auto* center = ui->m_raiz->adicionar<caixa>();
@@ -123,7 +125,7 @@ void sistema_editor::adicionarCaixas() {
     e2.m_largura = 1;
     e2.m_padding_geral = {5, 0};
     // Botão para adicionar componentes com popup de seleção
-    auto* btn_add_comp = c_inspetor->adicionar<elementos::botao>(nullptr, std::make_unique<elementos::imagem>("adicionar.png", false, 0.4));
+    auto* btn_add_comp = c_inspetor->adicionar<elementos::botao>(nullptr, std::make_unique<elementos::imagem>("adicionar.png", false, 0.3));
     btn_add_comp->m_estilo = e2;
     btn_add_comp->m_estilo.m_flag_estilo |= flag_estilo::quebrar_linha;
     auto* popup_comp = btn_add_comp->adicionar<elementos::popup>();
@@ -270,7 +272,7 @@ void sistema_editor::atualizarGizmo() {
             // Entidade é nova ou não tinha botão: Adicionar
             auto* btn_entidade = c_entidades->adicionar<elementos::botao>([this, id]() {
                 entidade_atual = id;
-            }, std::make_unique<elementos::imagem>("cube.png", false, 0.2f)); // Talvez exibir o nome da entidade aqui?
+            }, std::make_unique<elementos::imagem>("cube.png", false, 0.15f)); // Talvez exibir o nome da entidade aqui?
             botoes_entidades[id] = btn_entidade;
         }
         // Se o botão já existe, não precisamos fazer nada específico, a menos que 
@@ -289,7 +291,7 @@ void sistema_editor::atualizarGizmo() {
 
                 auto* btn_icone = framebuffer->adicionar<elementos::botao>([this, id]() {
                     entidade_atual = id;
-                }, std::make_unique<elementos::imagem>(nome_comp_icone + ".png", false, 0.2f));
+                }, std::make_unique<elementos::imagem>(nome_comp_icone + ".png", false, 0.15f));
                 btn_icone->m_estilo.m_cor_borda.a = 0;
                 icones_entidades[id] = btn_icone;
 

@@ -1,18 +1,5 @@
 var searchData=
 [
-  ['path_0',['path',['../classbecommons_1_1imageLoader.html#ab69b55057cedf0aa584275a4b0ad97b2',1,'becommons::imageLoader']]],
-  ['pausar_1',['pausar',['../structbecommons_1_1fase.html#a4fa8c13068a7937233d88472f5fbd82e',1,'becommons::fase']]],
-  ['ponteiro_5ft_2',['ponteiro_t',['../unionbecommons_1_1uniforme_1_1ponteiro__t.html',1,'becommons::uniforme']]],
-  ['popup_3',['popup',['../classbecommons_1_1elementos_1_1popup.html',1,'becommons::elementos']]],
-  ['popup_2ecpp_4',['popup.cpp',['../popup_8cpp.html',1,'']]],
-  ['popup_2ehpp_5',['popup.hpp',['../popup_8hpp.html',1,'']]],
-  ['por_20testes_6',['Regras e exemplos verificados por testes',['../testes_2src_2main_8cpp.html#bubble_gui_layout',1,'']]],
-  ['pressionar_7',['pressionar',['../classbecommons_1_1inputs.html#a05d3cac6d13a5946f52ea86cd0835a4a',1,'becommons::inputs']]],
-  ['principais_20tópicos_3a_8',['Principais tópicos:',['../md_docs_2ajuda_2ajuda.html#autotoc_md32',1,'']]],
-  ['processarmalha_9',['processarMalha',['../classbecommons_1_1modelo.html#aa5f81eba8ef321a96fde5d71d5c22272',1,'becommons::modelo']]],
-  ['project_10',['About the Project',['../index.html#autotoc_md17',1,'']]],
-  ['project_20example_11',['Project Example',['../index.html#autotoc_md20',1,'']]],
-  ['projeto_12',['projeto',['../group__Projeto.html#autotoc_md35',1,'classe Projeto'],['../classbecommons_1_1projeto.html',1,'becommons::projeto'],['../group__Projeto.html',1,'Projeto']]],
-  ['projeto_2ecpp_13',['projeto.cpp',['../projeto_8cpp.html',1,'']]],
-  ['projeto_2ehpp_14',['projeto.hpp',['../projeto_8hpp.html',1,'']]]
+  ['width_0',['width',['../classbecommons_1_1imageLoader.html#a364ca65d9597006c83195ec232c8dc82',1,'becommons::imageLoader']]],
+  ['windows_207_20x64_1',['Windows 7 x64',['../index.html#autotoc_md12',1,'']]]
 ];

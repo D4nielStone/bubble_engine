@@ -72,6 +72,18 @@ void janela::posicionarCursor(double x, double y) {
 janela::~janela() {
     descarregarShaders();
     gerenciadorFontes::limparFontes();
+
+    if (window) {
+        glfwDestroyWindow(window);
+        window = nullptr;
+    }
+    if(!s_cursors.empty()) {
+        for (auto& [_, cur] : s_cursors) {
+            if (cur) glfwDestroyCursor(cur);
+        }
+        s_cursors.clear();
+    }
+    glfwTerminate();
 }
 
 // \brief Construtor baseado em :`nome`, `bounds` e `icon_path`
@@ -97,6 +109,13 @@ janela::janela(const char* nome, fvet2 bounds, const char* icon_path) {
         abort();
     }
     
+    if(s_cursors.empty()) {
+        s_cursors[cursor::mao] = glfwCreateStandardCursor((int)cursor::mao);
+        s_cursors[cursor::i] = glfwCreateStandardCursor((int)cursor::i);
+        s_cursors[cursor::seta] = glfwCreateStandardCursor((int)cursor::seta);
+        s_cursors[cursor::re_h] = glfwCreateStandardCursor((int)cursor::re_h);
+        s_cursors[cursor::re_v] = glfwCreateStandardCursor((int)cursor::re_v);
+    }
 
     if(icon_path) {
     imageLoader _icone(icon_path);
@@ -140,6 +159,13 @@ if(f)
 
     glfwMakeContextCurrent(window);
 
+    if(s_cursors.empty()) {
+        s_cursors[cursor::mao] = glfwCreateStandardCursor((int)cursor::mao);
+        s_cursors[cursor::i] = glfwCreateStandardCursor((int)cursor::i);
+        s_cursors[cursor::seta] = glfwCreateStandardCursor((int)cursor::seta);
+        s_cursors[cursor::re_h] = glfwCreateStandardCursor((int)cursor::re_h);
+        s_cursors[cursor::re_v] = glfwCreateStandardCursor((int)cursor::re_v);
+    }
 
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
         depuracao::emitir(erro, "Glad");
@@ -187,9 +213,9 @@ void janela::poll() {
 
 void janela::swap()  {
     if(m_cursor != m_cursor_antigo)  {
-        auto cursor_glfw = glfwCreateStandardCursor((int)m_cursor);
+        auto cursor_glfw = s_cursors[m_cursor];
         if(cursor_glfw)
-        glfwSetCursor(window, cursor_glfw);
+            glfwSetCursor(window, cursor_glfw);
         m_cursor_antigo = m_cursor;
     }
     motor::obter().m_inputs->m_letra_pressionada = false;

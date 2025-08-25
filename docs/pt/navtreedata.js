@@ -25,18 +25,18 @@
 var NAVTREE =
 [
   [ "Bubble Engine", "index.html", [
-    [ "About the Project", "index.html#autotoc_md17", null ],
-    [ "Bubble GUI", "index.html#autotoc_md18", [
-      [ "Project Example", "index.html#autotoc_md20", null ],
-      [ "Contributing", "index.html#autotoc_md23", null ],
-      [ "Installation", "index.html#autotoc_md25", [
-        [ "Linux (Debian/Ubuntu-based distros)", "index.html#autotoc_md26", null ],
-        [ "Windows 7 x64", "index.html#autotoc_md27", null ],
-        [ "Youtube", "index.html#autotoc_md29", null ]
+    [ "About the Project", "index.html#autotoc_md2", null ],
+    [ "Bubble GUI", "index.html#autotoc_md3", [
+      [ "Project Example", "index.html#autotoc_md5", null ],
+      [ "Contributing", "index.html#autotoc_md8", null ],
+      [ "Installation", "index.html#autotoc_md10", [
+        [ "Linux (Debian/Ubuntu-based distros)", "index.html#autotoc_md11", null ],
+        [ "Windows 7 x64", "index.html#autotoc_md12", null ],
+        [ "Youtube", "index.html#autotoc_md14", null ]
       ] ]
     ] ],
     [ "Ajuda", "md_docs_2ajuda_2ajuda.html", [
-      [ "Principais tópicos:", "md_docs_2ajuda_2ajuda.html#autotoc_md32", null ]
+      [ "Principais tópicos:", "md_docs_2ajuda_2ajuda.html#autotoc_md17", null ]
     ] ],
     [ "Topics", "topics.html", "topics" ],
     [ "Namespaces", "namespaces.html", [
@@ -56,7 +56,6 @@ var NAVTREE =
       [ "File List", "files.html", "files_dup" ],
       [ "File Members", "globals.html", [
         [ "All", "globals.html", null ],
-        [ "Functions", "globals_func.html", null ],
         [ "Typedefs", "globals_type.html", null ]
       ] ]
     ] ]
@@ -66,7 +65,7 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "annotated.html",
-"imagem_8hpp.html"
+"imageloader_8hpp_source.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

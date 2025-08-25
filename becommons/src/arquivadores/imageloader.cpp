@@ -1,26 +1,24 @@
 /** @copyright 
-MIT License
-Copyright (c) 2025 Daniel Oliveira
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE. 
-*/
-/**
+ * MIT License
+ * Copyright (c) 2025 Daniel Oliveira
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE. 
  * @file imageloader.cpp
  */
 
@@ -36,8 +34,7 @@ SOFTWARE.
 
 using namespace becommons;
 
-static const std::map<const std::string, std::pair<BYTE*, const unsigned int>> imagems_memoria
-{
+static const std::map<const std::string, std::pair<BYTE*, const unsigned int>> imagems_memoria {
     {"abrir.png", std::pair(abrir_png, abrir_png_len)},
     {"adicionar.png", std::pair(adicionar_png, adicionar_png_len)},
     {"remover.png", std::pair(remover_png, remover_png_len)},
@@ -68,7 +65,13 @@ static const std::map<const std::string, std::pair<BYTE*, const unsigned int>> i
     {"folder.png", std::pair(folder_png, folder_png_len)}
 };
 void imageLoader::shutdown() { 
-    FreeImage_DeInitialise(); textureLoader::obterInstancia().texturasCarregadas.clear(); imagens_carregadas.clear(); 
+    FreeImage_DeInitialise();
+    for (auto& kv : textureLoader::obterInstancia().texturasCarregadas) {
+        GLuint id = kv.second;
+        if (glIsTexture(id)) glDeleteTextures(1, &id);
+    }
+    textureLoader::obterInstancia().texturasCarregadas.clear();
+    imagens_carregadas.clear(); 
 }
 void imageLoader::init() { 
     imageLoader::shutdown(); FreeImage_Initialise(); 
@@ -76,39 +79,31 @@ void imageLoader::init() {
 imageLoader::imageLoader() {
 }
 imageLoader::imageLoader(const std::string& filepath)
-    : width(0), height(0), channels(0), data(nullptr), path(filepath.c_str()), carregado(false)
-{
+    : width(0), height(0), channels(0), data(nullptr), path(filepath.c_str()), carregado(false) {
     carregarImagem(filepath);
 }
-imageLoader::~imageLoader()
-{
-    if (data) {
-        //delete[] data;
-        data = nullptr; // Precau��o para evitar acesso duplo
-    }
+imageLoader::~imageLoader() {
 }
-void imageLoader::flipVertical()
-{
+void imageLoader::flipVertical() {
+    if (!data) return;
     int rowSize = width * channels;
-    unsigned char* tempRow = new unsigned char[rowSize];
+    std::vector<unsigned char> tempRow(rowSize);
+    unsigned char* ptr = data->data();
     for (int y = 0; y < height / 2; ++y) {
-        unsigned char* row1 = data + y * rowSize;
-        unsigned char* row2 = data + (height - 1 - y) * rowSize;
-        memcpy(tempRow, row1, rowSize);
+        unsigned char* row1 = ptr + y * rowSize;
+        unsigned char* row2 = ptr + (height - 1 - y) * rowSize;
+        memcpy(tempRow.data(), row1, rowSize);
         memcpy(row1, row2, rowSize);
-        memcpy(row2, tempRow, rowSize);
+        memcpy(row2, tempRow.data(), rowSize);
     }
-    delete[] tempRow;
 }
-void imageLoader::carregarImagem(const std::string& filepath)
-{
+void imageLoader::carregarImagem(const std::string& filepath) {
     auto it = imagens_carregadas.find(filepath);
-    if (it != imagens_carregadas.end())
-    {
-        data = imagens_carregadas[filepath]->data;
-        channels = imagens_carregadas[filepath]->channels;
-        width = imagens_carregadas[filepath]->width;
-        height = imagens_carregadas[filepath]->height;
+    if (it != imagens_carregadas.end()) {
+        this->data = imagens_carregadas[filepath]->buffer;
+        this->channels = imagens_carregadas[filepath]->channels;
+        this->width = imagens_carregadas[filepath]->width;
+        this->height = imagens_carregadas[filepath]->height;
         carregado = true;
         return;
     }
@@ -116,7 +111,12 @@ void imageLoader::carregarImagem(const std::string& filepath)
     const std::string nome_arquivo = std::filesystem::path(filepath).filename().string();
     if (imagems_memoria.find(nome_arquivo) != imagems_memoria.end()) {
         embutida(imagems_memoria.at(nome_arquivo).first, imagems_memoria.at(nome_arquivo).second);
-        imagens_carregadas[filepath] = std::make_shared<imageLoader>(*this);
+        imagens_carregadas[filepath] = std::make_shared<infoimg>(
+            this->data,
+            this->width,
+            this->height,
+            this->channels
+                );
         return;
     }
     // Determina o formato da imagem  
@@ -146,87 +146,93 @@ void imageLoader::carregarImagem(const std::string& filepath)
         return;
     }
 
-    // Obt�m as dimens�es da imagem  
+    // Obt m as dimens es da imagem  
     width = FreeImage_GetWidth(converted);
     height = FreeImage_GetHeight(converted);
     channels = 4;  // RGBA  
-
-    // Aloca mem�ria para os dados da imagem  
-    data = new unsigned char[width * height * channels];
+    
     unsigned char* bits = FreeImage_GetBits(converted);
 
-    // Copia os dados e corrige a ordem dos canais (ARGB para RGBA)  
+    // Aloca mem ria para os dados da imagem  
+    auto buffer = std::make_shared<std::vector<unsigned char>>(width * height * channels);
+    unsigned char* ptr = buffer->data();
+    
     for (int i = 0; i < width * height; ++i) {
-        data[i * 4 + 0] = bits[i * 4 + 2]; // R  
-        data[i * 4 + 1] = bits[i * 4 + 1]; // G  
-        data[i * 4 + 2] = bits[i * 4 + 0]; // B  
-        data[i * 4 + 3] = bits[i * 4 + 3]; // A  
+        ptr[i * 4 + 0] = bits[i * 4 + 2]; // R
+        ptr[i * 4 + 1] = bits[i * 4 + 1]; // G
+        ptr[i * 4 + 2] = bits[i * 4 + 0]; // B
+        ptr[i * 4 + 3] = bits[i * 4 + 3]; // A
     }
-
+    
+    this->data = buffer;
 
     FreeImage_Unload(converted);
 
     // Indica que a imagem foi carregada com sucesso  
     carregado = true;
     flipVertical();
-    imagens_carregadas[filepath] = std::make_shared<imageLoader>(*this);
+        imagens_carregadas[filepath] = std::make_shared<infoimg>(
+            this->data,
+            this->width,
+            this->height,
+            this->channels
+                );
 
     depuracao::emitir(debug, "image loader", "nova imagem: " + filepath);
 }
-void imageLoader::embutida(BYTE* data, const unsigned int tamanho) 
-{
-    // Cria um stream de mem�ria com o buffer da imagem
+void imageLoader::embutida(BYTE* data, const unsigned int tamanho) {
     FIMEMORY* memoryStream = FreeImage_OpenMemory(data, tamanho);
     if (!memoryStream) {
-        fprintf(stderr, "Erro ao criar o stream de mem�ria.");
+        fprintf(stderr, "Erro ao criar o stream de memoria.");
         return;
     }
 
-    // Detecta o formato da imagem no stream de mem�ria
     FREE_IMAGE_FORMAT format = FreeImage_GetFileTypeFromMemory(memoryStream, 0);
-    if (format == FIF_UNKNOWN) {
-        format = FIF_PNG;
-    }
+    if (format == FIF_UNKNOWN) format = FIF_PNG;
 
-    // Carrega a imagem do stream de mem�ria
     FIBITMAP* bitmap_ = FreeImage_LoadFromMemory(format, memoryStream, 0);
-
     if (!bitmap_) {
         fprintf(stderr, "Erro ao carregar a imagem.");
         FreeImage_CloseMemory(memoryStream);
         return;
     }
-    // Converte a imagem para 32 bits  
+
     FIBITMAP* bitmap = FreeImage_ConvertTo32Bits(bitmap_);
-    // Obt�m as propriedades da imagem (largura, altura, canais, dados)
-    width = FreeImage_GetWidth(bitmap);     // Largura da imagem
-    height = FreeImage_GetHeight(bitmap);   // Altura da imagem
-    channels = FreeImage_GetBPP(bitmap)/8; // Canais de cor (assumindo 8 bits por canal)
-
-    // Aloca mem�ria para os dados da imagem  
-    this->data = new unsigned char[width * height * channels];
-    unsigned char* bits = FreeImage_GetBits(bitmap);
-
-    // Copia os dados e corrige a ordem dos canais (ARGB para RGBA)  
-    for (int i = 0; i < width * height; ++i) {
-        this->data[i * 4 + 0] = bits[i * 4 + 2]; // R  
-        this->data[i * 4 + 1] = bits[i * 4 + 1]; // G  
-        this->data[i * 4 + 2] = bits[i * 4 + 0]; // B  
-        this->data[i * 4 + 3] = bits[i * 4 + 3]; // A  
+    if (!bitmap) {
+        FreeImage_Unload(bitmap_);
+        FreeImage_CloseMemory(memoryStream);
+        fprintf(stderr, "Erro ao converter a imagem.");
+        return;
     }
 
-    // Libera os recursos
-    FreeImage_Unload(bitmap);
+    // Processa bitmap (obtém width/height/bits)...
+    width = FreeImage_GetWidth(bitmap);
+    height = FreeImage_GetHeight(bitmap);
+    channels = 4; // ConvertTo32Bits garante 4 canais
+
+    unsigned char* bits = FreeImage_GetBits(bitmap);
+    auto buffer = std::make_shared<std::vector<unsigned char>>(width * height * channels);
+    unsigned char* ptr = buffer->data();
+
+    for (unsigned int i = 0; i < (unsigned int)(width * height); ++i) {
+        ptr[i*4 + 0] = bits[i*4 + 2];
+        ptr[i*4 + 1] = bits[i*4 + 1];
+        ptr[i*4 + 2] = bits[i*4 + 0];
+        ptr[i*4 + 3] = bits[i*4 + 3];
+    }
+
+    this->data = buffer;
+
+    // Liberar ambos os bitmaps e a memória do stream
+    FreeImage_Unload(bitmap);   // convertido
+    FreeImage_Unload(bitmap_);  // original carregado da memória
     FreeImage_CloseMemory(memoryStream);
 
-    // Indica que a imagem foi carregada com sucesso  
     carregado = true;
     flipVertical();
-
-    return;
 }
-GLFWimage imageLoader::converterParaGlfw()
-{
+
+GLFWimage imageLoader::converterParaGlfw() {
     GLFWimage image = {};
     if (!carregado) {
         return image;
@@ -234,24 +240,21 @@ GLFWimage imageLoader::converterParaGlfw()
 
     image.width = width;
     image.height = height;
-    image.pixels = data;
+    image.pixels = obterDados();
     return image;
 }
-int imageLoader::obterLargura() const
-{
+int imageLoader::obterLargura() const {
     return width;
 }
-int imageLoader::obterAltura() const
-{
+int imageLoader::obterAltura() const {
     return height;
 }
-int imageLoader::obterCanal() const
-{
+int imageLoader::obterCanal() const {
     return channels;
 }
-unsigned char* imageLoader::obterDados() const
-{
-    return data;
+unsigned char* imageLoader::obterDados() const {
+    if (!data) return nullptr;
+    return const_cast<unsigned char*>(data->data());
 }
 
 int becommons::texturaDoArquivo(const std::string& directory,GLuint tipo_textura) {
@@ -384,7 +387,7 @@ int becommons::texturaDoArquivo(unsigned char* data, unsigned int width, unsigne
             format = GL_RGBA;
 
         glBindTexture(GL_TEXTURE_2D, textureID);
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_SRGB_ALPHA, 500, 500, 0, format, GL_UNSIGNED_BYTE, data);
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_SRGB_ALPHA, width, height, 0, format, GL_UNSIGNED_BYTE, data);
         glGenerateMipmap(GL_TEXTURE_2D);
 
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
@@ -402,17 +405,15 @@ int becommons::texturaDoArquivo(unsigned char* data, unsigned int width, unsigne
     return textureID;
 }
 
-textureLoader& becommons::textureLoader::obterInstancia()
-{
+textureLoader& becommons::textureLoader::obterInstancia() {
     static textureLoader instance;
     return instance;
 }
 
-GLuint textureLoader::carregarTextura(const std::string& caminho, int *width, int *height)
-{
-    // Verificar se a textura j� foi carregada
+GLuint textureLoader::carregarTextura(const std::string& caminho, int *width, int *height) {
+    // Verificar se a textura j  foi carregada
     if (texturasCarregadas.find(caminho) != texturasCarregadas.end()) {
-        return texturasCarregadas[caminho]; // Retorna ID da textura j� carregada
+        return texturasCarregadas[caminho]; // Retorna ID da textura j  carregada
     }
 
     // Carregar nova textura
@@ -425,7 +426,7 @@ GLuint textureLoader::carregarTextura(const std::string& caminho, int *width, in
 GLuint textureLoader::carregarTextura(const std::string& caminho, ivet2& vet2) {
     // Verificar se a textura já foi carregada
     if (texturasCarregadas.find(caminho) != texturasCarregadas.end()) {
-        return texturasCarregadas[caminho]; // Retorna ID da textura j� carregada
+        return texturasCarregadas[caminho]; // Retorna ID da textura j  carregada
     }
 
     int width, height;
@@ -442,7 +443,7 @@ GLuint textureLoader::carregarTextura(const std::string& caminho, ivet2& vet2) {
 GLuint textureLoader::carregarTextura(const std::string& caminho, fvet2& vet2) {
     // Verificar se a textura já foi carregada
     if (texturasCarregadas.find(caminho) != texturasCarregadas.end()) {
-        return texturasCarregadas[caminho]; // Retorna ID da textura j� carregada
+        return texturasCarregadas[caminho]; // Retorna ID da textura j  carregada
     }
 
     int width, height;
@@ -456,11 +457,10 @@ GLuint textureLoader::carregarTextura(const std::string& caminho, fvet2& vet2) {
     return id;
 }
 
-GLuint textureLoader::carregarTextura(const std::string& caminho, double *width, double *height)
-{
-    // Verificar se a textura j� foi carregada
+GLuint textureLoader::carregarTextura(const std::string& caminho, double *width, double *height) {
+    // Verificar se a textura j  foi carregada
     if (texturasCarregadas.find(caminho) != texturasCarregadas.end()) {
-        return texturasCarregadas[caminho]; // Retorna ID da textura j� carregada
+        return texturasCarregadas[caminho]; // Retorna ID da textura j  carregada
     }
 
     // Carregar nova textura
@@ -469,11 +469,10 @@ GLuint textureLoader::carregarTextura(const std::string& caminho, double *width,
 
     return id;
 }
-GLuint textureLoader::carregarTextura(const std::string& caminho)
-{
-    // Verificar se a textura j� foi carregada
+GLuint textureLoader::carregarTextura(const std::string& caminho) {
+    // Verificar se a textura j  foi carregada
     if (texturasCarregadas.find(caminho) != texturasCarregadas.end()) {
-        return texturasCarregadas[caminho]; // Retorna ID da textura j� carregada
+        return texturasCarregadas[caminho]; // Retorna ID da textura j  carregada
     }
 
     // Carregar nova textura
@@ -515,8 +514,7 @@ GLuint textureLoader::carregarSkybox(const char* path_pai, std::vector<std::stri
     return textureID;
 }
 
-GLuint textureLoader::carregarAiTexture(const aiTexture* texture)
-{
+GLuint textureLoader::carregarAiTexture(const aiTexture* texture) {
     GLuint ID{};
     if (texture) {
         FIMEMORY* fiMemory = FreeImage_OpenMemory(reinterpret_cast<BYTE*>(texture->pcData), texture->mWidth);

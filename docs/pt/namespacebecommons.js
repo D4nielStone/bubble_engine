@@ -12,6 +12,7 @@ var namespacebecommons =
     [ "fase", "structbecommons_1_1fase.html", "structbecommons_1_1fase" ],
     [ "fisica", "structbecommons_1_1fisica.html", null ],
     [ "gerenciadorFontes", "classbecommons_1_1gerenciadorFontes.html", "classbecommons_1_1gerenciadorFontes" ],
+    [ "ijanela", "classbecommons_1_1ijanela.html", null ],
     [ "imageLoader", "classbecommons_1_1imageLoader.html", "classbecommons_1_1imageLoader" ],
     [ "inputs", "classbecommons_1_1inputs.html", "classbecommons_1_1inputs" ],
     [ "interface", "structbecommons_1_1interface.html", "structbecommons_1_1interface" ],

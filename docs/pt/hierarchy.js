@@ -47,9 +47,11 @@ var hierarchy =
     [ "becommons::gerenciadorFontes", "classbecommons_1_1gerenciadorFontes.html", null ],
     [ "std::hash< becommons::entidade >", "structstd_1_1hash_3_01becommons_1_1entidade_01_4.html", null ],
     [ "std::hash< t_FonteID >", "structstd_1_1hash_3_01t__FonteID_01_4.html", null ],
+    [ "becommons::ijanela", "classbecommons_1_1ijanela.html", [
+      [ "becommons::janela", "classbecommons_1_1janela.html", null ]
+    ] ],
     [ "becommons::imageLoader", "classbecommons_1_1imageLoader.html", null ],
     [ "becommons::inputs", "classbecommons_1_1inputs.html", null ],
-    [ "becommons::janela", "classbecommons_1_1janela.html", null ],
     [ "becommons::levelmanager", "classbecommons_1_1levelmanager.html", null ],
     [ "becommons::malha", "classbecommons_1_1malha.html", null ],
     [ "becommons::material", "structbecommons_1_1material.html", null ],

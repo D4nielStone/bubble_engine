@@ -106,7 +106,6 @@ $(document).ready(function(){initNavTree('classbecommons_1_1motor.html',''); ini
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
-<a href="#pri-methods">Private Member Functions</a> &#124;
 <a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="classbecommons_1_1motor-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">becommons::motor Class Reference</div></div>
@@ -118,6 +117,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ad98a195db612b6c430bddc41cee6fb6f" id="r_ad98a195db612b6c430bddc41cee6fb6f"><td class="memItemLeft" align="right" valign="top"><a id="ad98a195db612b6c430bddc41cee6fb6f" name="ad98a195db612b6c430bddc41cee6fb6f"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>motor</b> (const std::string &amp;)</td></tr>
 <tr class="separator:ad98a195db612b6c430bddc41cee6fb6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2a92b7d3334e2f547f28fbb25db8300c" id="r_a2a92b7d3334e2f547f28fbb25db8300c"><td class="memItemLeft" align="right" valign="top"><a id="a2a92b7d3334e2f547f28fbb25db8300c" name="a2a92b7d3334e2f547f28fbb25db8300c"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>criarJanela</b> ()</td></tr>
+<tr class="separator:a2a92b7d3334e2f547f28fbb25db8300c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7609e13f56c9273af40b06dce643dbab" id="r_a7609e13f56c9273af40b06dce643dbab"><td class="memItemLeft" align="right" valign="top"><a id="a7609e13f56c9273af40b06dce643dbab" name="a7609e13f56c9273af40b06dce643dbab"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setJanelaFactory</b> (std::function&lt; std::shared_ptr&lt; <a class="el" href="classbecommons_1_1ijanela.html">ijanela</a> &gt;()&gt; factory)</td></tr>
+<tr class="separator:a7609e13f56c9273af40b06dce643dbab"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8962aae577acb172c0837955cf4e2bfb" id="r_a8962aae577acb172c0837955cf4e2bfb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbecommons_1_1motor.html#a8962aae577acb172c0837955cf4e2bfb">iniciar</a> (const exec &amp;)</td></tr>
 <tr class="separator:a8962aae577acb172c0837955cf4e2bfb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af43c84dbc4fef85a7e6abd8b13a755fd" id="r_af43c84dbc4fef85a7e6abd8b13a755fd"><td class="memItemLeft" align="right" valign="top"><a id="af43c84dbc4fef85a7e6abd8b13a755fd" name="af43c84dbc4fef85a7e6abd8b13a755fd"></a>
@@ -141,9 +146,12 @@ static <a class="el" href="classbecommons_1_1motor.html">motor</a> &amp;&#160;</
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:a7cfc00a3b199e45d3c97eaff692a049d" id="r_a7cfc00a3b199e45d3c97eaff692a049d"><td class="memItemLeft" align="right" valign="top"><a id="a7cfc00a3b199e45d3c97eaff692a049d" name="a7cfc00a3b199e45d3c97eaff692a049d"></a>
-std::shared_ptr&lt; <a class="el" href="classbecommons_1_1janela.html">janela</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>m_janela</b></td></tr>
-<tr class="separator:a7cfc00a3b199e45d3c97eaff692a049d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1d4bac71b9f8ef57a85bd2f87cef59a0" id="r_a1d4bac71b9f8ef57a85bd2f87cef59a0"><td class="memItemLeft" align="right" valign="top"><a id="a1d4bac71b9f8ef57a85bd2f87cef59a0" name="a1d4bac71b9f8ef57a85bd2f87cef59a0"></a>
+std::shared_ptr&lt; <a class="el" href="classbecommons_1_1ijanela.html">ijanela</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>m_janela</b></td></tr>
+<tr class="separator:a1d4bac71b9f8ef57a85bd2f87cef59a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a169aa7c6c6efffeefe932d514e18c35a" id="r_a169aa7c6c6efffeefe932d514e18c35a"><td class="memItemLeft" align="right" valign="top"><a id="a169aa7c6c6efffeefe932d514e18c35a" name="a169aa7c6c6efffeefe932d514e18c35a"></a>
+std::function&lt; std::shared_ptr&lt; <a class="el" href="classbecommons_1_1ijanela.html">ijanela</a> &gt;()&gt;&#160;</td><td class="memItemRight" valign="bottom"><b>m_janela_factory</b></td></tr>
+<tr class="separator:a169aa7c6c6efffeefe932d514e18c35a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa4aafec7f8724160c8c20effefd7fc24" id="r_aa4aafec7f8724160c8c20effefd7fc24"><td class="memItemLeft" align="right" valign="top"><a id="aa4aafec7f8724160c8c20effefd7fc24" name="aa4aafec7f8724160c8c20effefd7fc24"></a>
 std::shared_ptr&lt; <a class="el" href="classbecommons_1_1projeto.html">projeto</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>m_projeto</b></td></tr>
 <tr class="separator:aa4aafec7f8724160c8c20effefd7fc24"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -175,12 +183,6 @@ std::shared_ptr&lt; <a class="el" href="classbecommons_1_1levelmanager.html">lev
 std::queue&lt; std::function&lt; void()&gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>fila_opengl</b></td></tr>
 <tr class="separator:aceecbb88f89ef95f8cac97c86b1deb59"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
-Private Member Functions</h2></td></tr>
-<tr class="memitem:a2a92b7d3334e2f547f28fbb25db8300c" id="r_a2a92b7d3334e2f547f28fbb25db8300c"><td class="memItemLeft" align="right" valign="top"><a id="a2a92b7d3334e2f547f28fbb25db8300c" name="a2a92b7d3334e2f547f28fbb25db8300c"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>criarJanela</b> ()</td></tr>
-<tr class="separator:a2a92b7d3334e2f547f28fbb25db8300c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
 <tr class="memitem:a841175ea26efb5f74194066e2753dd40" id="r_a841175ea26efb5f74194066e2753dd40"><td class="memItemLeft" align="right" valign="top"><a id="a841175ea26efb5f74194066e2753dd40" name="a841175ea26efb5f74194066e2753dd40"></a>
@@ -207,8 +209,6 @@ exec&#160;</td><td class="memItemRight" valign="bottom"><b>m_game_mode</b></td><
       </table>
 </div><div class="memdoc">
 <p>logs de inicialização</p>
-<p>inicializa splash screen</p>
-<p>std::thread splash([](){ auto splash = new janela(janela::splash_screen); }); thread.join();</p>
 
 </div>
 </div>

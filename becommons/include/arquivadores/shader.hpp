@@ -65,6 +65,7 @@ namespace becommons {
             compilar(); 
         };
         shader(const char* vertexPath, const char* fragmentPath);
+        ~shader();
         // use/activate the shader
         void use();
         // utility uniform functions

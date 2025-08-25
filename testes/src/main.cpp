@@ -20,8 +20,46 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  * \file main.cpp
+ *
+ * @brief Sumário de testes
+ *
+ * @author Daniel Oliveira
+ * @details
+ * Resumo compacto das responsabilidades e API esperada para os módulos cobertos
+ * pelos testes em `main.cpp`. Usar este bloco como referência no topo dos
+ * módulos principais.
+ *
+ * @section utils Vetores (fvet2, fvet3, fvet4)
+ * - Responsabilidade: operações componente-a-componente, comparações, normalizar e norma.
+ * - API mínima: operadores + - * / (vetor, escalar), ==, !=, void normalizar(), float tamanho() const.
+ * - Invariantes: normalizar trata comprimento ~0 (eps), comparar floats com eps.
+ *
+ * @section nucleo ECS (registro / entidade / componente)
+ * - Responsabilidade: criar entidades, adicionar/obter/remover componentes tipados, iterar por combinação de componentes.
+ * - API mínima: entidade criar(); template adicionar<T>(entidade/id); tem<T>(id); obter<T>(id); remover<T>(id); cada<Ts...>(callback).
+ * - Invariantes: criar() gera id único; remover é idempotente; entidade sem componentes é removida do mapa.
+ *
+ * @section fase Level / parsing
+ * - Responsabilidade: representar e carregar fase a partir de texto (JSON).
+ * - API mínima: explicit fase(const std::string&); void carregar(); std::string nome() const.
+ * - Invariantes: carregar() sinaliza erro em parse; nome() consistente após carregar().
+ *
+ * @section bubble_gui UI (interface / caixa)
+ * - Responsabilidade: árvore de caixas, cálculo de limites (x,y,z=largura,w=altura), padding, layouts modular (h/v), percentuais, flags (modular, largura_percentual, quebrar_linha, ativo).
+ * - API mínima: caixa::adicionar<T>(); interface::atualizarFilhos(caixa*).
+ * - Regras-chave: atualizarFilhos(nullptr) lança; inativo não altera filhos; percentuais tratam m_largura como peso; atualizar é recursivo.
+ *
+ * @section test_runner Infra de testes
+ * - Responsabilidade: registrar/rodar casos e prover asserts.
+ * - API mínima: registro_testes::classe(cat, nome); adicionar(nome, lambda); int rodarTestes();
+ * - Asserções: ASSERT_EQUAL, ASSERT_TRUE, ASSERT_APPROX_EQUAL, ASSERT_THROW, ASSERT_NO_THROW.
+ *
+ * @section main Orquestração
+ * - Fluxo: desativar logs, registrar testes (testarUtils, testarNucleo, testarSistemas), return testes.rodarTestes().
+ *
+ * @note Recomendações rápidas:
+ * - Usar float eps centralizado; evitar UAF ao remover componentes durante iterações (marcar-para-remover); usar enum class + operadores bitwise para flags.
  */
-
 
 #include <iostream>
 #include "registro_testes.hpp"
@@ -780,228 +818,6 @@ void testarSistemas()
 {
     testarBubbleGUI();
 }
-
-/**
- * @brief Sumário de responsabilidades da engine
- *
- * @author Daniel Oliveira
- * @copyright MIT License
- *
- * @details
- * Comentários Doxygen a serem colocados no topo do projeto / módulos principais.
- * Contém: Responsibilities, Invariantes, Assinaturas sugeridas e Observações
- * para as partes testadas pelos testes em `main.cpp`.
- *
- * ======================================================================
- * 1) UTILS — Vetores (fvet2, fvet3, fvet4)
- * ======================================================================
- *
- * @section utils_vectors Responsabilidade
- * Fornecer tipos de vetores (fvet2, fvet3, fvet4) com operações aritméticas
- * básicas, comparações, normalização e cálculo de norma euclidiana.
- *
- * @subsection utils_vectors_funcs Operações esperadas / API sugerida
- * - Operadores binários componente-a-componente:
- *   - fvetN operator+(const fvetN& a, const fvetN& b);
- *   - fvetN operator-(const fvetN& a, const fvetN& b);
- *   - fvetN operator*(const fvetN& a, const fvetN& b);
- *   - fvetN operator/(const fvetN& a, const fvetN& b);
- * - Operadores com escalar (float):
- *   - fvetN operator+(const fvetN& a, float s);
- *   - fvetN operator-(const fvetN& a, float s);
- *   - fvetN operator*(const fvetN& a, float s);
- *   - fvetN operator/(const fvetN& a, float s);
- * - Comparações:
- *   - bool operator==(const fvetN& a, const fvetN& b);
- *   - bool operator!=(const fvetN& a, const fvetN& b);
- * - Normalização e norma:
- *   - void normalizar();           ///< normaliza (com proteção contra zero)
- *   - float tamanho() const;       ///< norma Euclidiana
- *
- * @subsection utils_vectors_invariants Invariantes e cuidados
- * - Operações devem ser definidas componente-a-componente.
- * - `normalizar()` deve tratar vetor de comprimento ~0 (usar eps).
- * - Usar comparações aproximadas (float_equal) quando necessário.
- * - Evitar UB para NaN/Inf; documentar comportamento.
- *
- * @note
- * Recomenda-se utilitário: `inline bool float_equal(float a, float b, float eps = 1e-6f);`
- *
- * ======================================================================
- * 2) NÚCLEO — Registro / Entidade / Componente (ECS simplificado)
- * ======================================================================
- *
- * @section nucleo_ecs Responsabilidade
- * Implementar um ECS básico que permita:
- * - criar entidades únicas,
- * - adicionar/obter/remover componentes tipados,
- * - iterar sobre entidades que tenham um conjunto específico de componentes,
- * - manter máscaras (bitfield) de componentes por entidade,
- * - limpar (remover) entidades sem componentes restantes.
- *
- * @subsection nucleo_ecs_funcs API sugerida (assinaturas)
- * @code
- * struct entidade { uint32_t id; uint32_t mascara; };
- *
- * class registro {
- * public:
- *   entidade criar();
- *
- *   template<typename T> void adicionar(entidade e);        // adiciona componente T
- *   template<typename T> bool tem(uint32_t id) const;      // verifica presença
- *   template<typename T> T* obter(uint32_t id);            // retorna ponteiro ou nullptr
- *   template<typename T> void remover(uint32_t id);        // idempotente
- *
- *   template<typename... Ts>
- *   void cada(std::function<void(uint32_t)> f);            // itera entidades com TODOS Ts
- *
- *   uint32_t obterComponentes(uint32_t id) const;          // máscara combinada
- *
- *   std::unordered_map<uint32_t, entidade> entidades;
- * };
- * @endcode
- *
- * @subsection nucleo_ecs_invariants Invariantes e expectativas
- * - `criar()` deve gerar `id` único; máscara inicial inclui TRANSFORMACAO.
- * - `adicionar<T>` deve inicializar `meu_objeto = id` (conforme testes).
- * - `remover<T>` é segura mesmo quando componente inexistente.
- * - `cada<CompA,CompB>` itera apenas entidades que possuam todas as máscaras (bitwise &).
- * - Quando todos os componentes são removidos, a entidade deve ser removida do mapa `entidades`.
- *
- * @warning
- * Evitar use-after-free ao remover componentes durante iterações; documentar política de reuso de IDs.
- *
- * ======================================================================
- * 3) FASE
- * ======================================================================
- *
- * @section fase Responsabilidade
- * Representar e carregar dados de uma fase/level a partir de texto (JSON ou similar).
- *
- * @subsection fase_funcs API sugerida
- * @code
- * class fase {
- * public:
- *   explicit fase(const std::string& source);
- *   void carregar();               // parseia `source` e popula membros
- *   std::string nome() const;      // retorna nome da fase
- * private:
- *   std::string m_source;
- *   std::string m_nome;
- * };
- * @endcode
- *
- * @subsection fase_invariants Invariantes e cuidados
- * - `carregar()` deve tratar erros de parse (lançar ou retornar estado de erro).
- * - `nome()` deve retornar valor consistente se `carregar()` foi bem-sucedido.
- *
- * ======================================================================
- * 4) SISTEMAS — INTERFACE (interface / caixa)
- * ======================================================================
- *
- * @section bubble_gui Responsabilidade
- * Sistema de UI com hierarquia de caixas (containers) capaz de:
- * - manter uma árvore (interface -> raiz -> caixas filhas),
- * - calcular/atualizar limites (x, y, z=largura, w=altura) dos filhos,
- * - aplicar padding geral e padding por filho,
- * - suportar layout modular (orientação horizontal/vertical),
- * - suportar larguras/alturas fixas e percentuais (peso / crescimento),
- * - flags de estilo: modular, largura_percentual, quebrar_linha, ativo/inativo,
- * - atualização recursiva (netos também são atualizados).
- *
- * @subsection bubble_gui_data Estruturas de estilo/caixa (exemplo)
- * @code
- * struct estilo {
- *   fvet4 m_limites;         // x, y, z=largura, w=altura
- *   fvet2 m_padding;         // padding individual (left/top)
- *   fvet2 m_padding_geral;   // padding geral do container
- *   float m_largura;         // valor fixo ou peso quando largura_percentual
- *   float m_altura;
- *   uint32_t m_flag_estilo;  // bitflags (modular, largura_percentual, quebrar_linha)
- *   enum orientacao { horizontal, vertical } m_orientacao_modular;
- *   bool m_ativo;
- * };
- *
- * class caixa {
- * public:
- *   template<typename T> T* adicionar();   // cria e retorna ponteiro para filho
- *   estilo m_estilo;
- *   std::vector<caixa*> filhos;
- * };
- *
- * class interface {
- * public:
- *   caixa* m_raiz;
- *   void atualizarFilhos(caixa* parent);
- * };
- * @endcode
- *
- * @subsection bubble_gui_layout Regras e exemplos verificados por testes
- * - `atualizarFilhos(nullptr)` deve lançar `std::runtime_error`.
- * - Se `parent->m_estilo.m_ativo == false`, `atualizarFilhos(parent)` não altera os limites dos filhos.
- * - Layout horizontal com dimensões fixas:
- *   - posição X do primeiro filho = padding_geral.x + child->m_estilo.m_padding.x
- *   - largura do filho = child->m_estilo.m_largura
- * - Percentuais / crescimento modular:
- *   - Se `flag_estilo & largura_percentual` então `m_largura` é tratada como peso.
- *   - espaço_disponivel = parent.largura - somatório(padding e paddings entre filhos)
- *   - largura_filho = peso_filho / soma_pesos * espaço_disponivel
- * - Layout vertical espelha regras para alturas (limites.w).
- * - Padding geral e padding por filho afetam posições x/y esperadas.
- * - `quebrar_linha` força avanço na coordenada Y (ex.: próximo filho começa em Y + linha_size).
- * - Atualização é recursiva: ao atualizar parent, filhos e netos são atualizados.
- *
- * @subsection bubble_gui_invariants Cuidados / notas de implementação
- * - Trabalhar com floats e preservar precisões (ex.: 42.5f).
- * - Evitar divisões por zero quando soma de pesos == 0 (tratar como distribuição igual).
- * - Definir comportamento quando padding excede tamanho do pai (clamping ou overflow controlado).
- * - `atualizarFilhos` deve ser determinística e sem efeitos colaterais não documentados.
- *
- * ======================================================================
- * 5) INFRAESTRUTURA DE TESTES (registro_testes, ASSERT_*)
- * ======================================================================
- *
- * @section test_runner Responsabilidade
- * Registrar e executar testes organizados por classes e nomes, prover asserções:
- * - testes.classe(categoria, nome);
- * - testes.adicionar(nomeCaso, lambda);
- * - testes.rodarTestes() -> int (exit code)
- *
- * Macros/helpers esperados:
- * - ASSERT_EQUAL(a, b)
- * - ASSERT_TRUE(expr)
- * - ASSERT_APPROX_EQUAL(a, b, eps)
- * - ASSERT_THROW(expr, exception_type)
- * - ASSERT_NO_THROW(expr)
- *
- * @note
- * Mensagens descritivas em falhas facilitam debugging; o runner pode continuar rodando casos mesmo após falhas.
- *
- * ======================================================================
- * 6) main() — Orquestração
- * ======================================================================
- *
- * @section main Orquestração de execução de testes
- * - desativa `depuracao::debug_ativo` se aplicável;
- * - chama as funções que registram os testes:
- *   - testarUtils();
- *   - testarNucleo();
- *   - testarSistemas();
- * - retorna `testes.rodarTestes();` como código de saída do processo.
- *
- * ======================================================================
- * Observações gerais e recomendações de implementação
- * ======================================================================
- * - Use enum class para flags + operadores bitwise inline para clareza.
- * - Centralizar constantes (ex.: limites padrão 20x20, epsilon para floats).
- * - Documentar política de IDs (reuso / incremento).
- * - Garantir que remover componentes durante laços não cause UAF; definir política
- *   (ex.: marcação para remoção e limpeza pós-iteração).
- * - Implementar comparações de float com epsilon em utilitário comum.
- * - Validar e documentar comportamento com valores especiais (NaN / Inf).
- *
- * ======================================================================
- */
 
 
 int main()

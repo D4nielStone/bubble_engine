@@ -43,26 +43,25 @@ namespace custom {
 
                 // Configuração da barra de menu
                 p_barra_menu = adicionar<caixa>();
-                p_barra_menu->m_estilo.m_flag_estilo |= flag_estilo::alinhamento_central | flag_estilo::largura_percentual;
+                p_barra_menu->m_estilo.m_flag_estilo |= flag_estilo::largura_percentual;
                 p_barra_menu->m_estilo.m_largura = 1;
-                p_barra_menu->m_estilo.m_altura = 22;
+                p_barra_menu->m_estilo.m_altura = 19;
                 p_barra_menu->m_estilo.m_padding_geral = {1, 1};
                 p_barra_menu->m_estilo.m_cor_fundo = cor(0.135f);
                 p_barra_menu->m_estilo.m_cor_borda = cor(0.11f);
 
                 // Configuração da barra de versão
                 auto* barra_versao = adicionar<caixa>();
-                barra_versao->m_estilo.m_flag_estilo |= flag_estilo::largura_justa;
+                barra_versao->m_estilo.m_flag_estilo |= flag_estilo::altura_justa | flag_estilo::largura_justa;
                 barra_versao->adicionar<elementos::texto>(BUBBLE_VERSAO_COMPLETA_STR); // Exibe a string de versão completa
-                barra_versao->m_estilo.m_altura = 22;
                 barra_versao->m_estilo.m_cor_fundo = cor(0.11f);
                 barra_versao->m_estilo.m_padding_geral = {1, 1};
             }
             void adicionar_botao(const std::string& nome, const std::string& icone, const std::function<void()>& func) {
                 // Cria imagem
                 auto img = std::make_unique<elementos::imagem>(icone);
-                img->m_estilo.m_largura = 16;
-                img->m_estilo.m_altura = 16;
+                img->m_estilo.m_largura = 12;
+                img->m_estilo.m_altura = 12;
 
                 // Cria o botão
                 auto* btn = p_barra_menu->adicionar<elementos::botao>(func, std::move(img));

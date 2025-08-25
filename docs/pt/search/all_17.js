@@ -1,32 +1,4 @@
 var searchData=
 [
-  ['salvareditor_0',['salvarEditor',['../classbeeditor_1_1sistema__editor.html#a2f246309bc8938e3b52af5a8eb756347',1,'beeditor::sistema_editor']]],
-  ['script_20lua_3a_1',['Exemplo de uso no script lua:',['../api__lua_8hpp.html#autotoc_md0',1,'']]],
-  ['selecionado_2',['selecionado',['../classbecommons_1_1elementos_1_1area__de__texto.html#aa2af6c287ba1c8a0f8bc15179cdfa0f6',1,'becommons::elementos::area_de_texto']]],
-  ['shader_3',['shader',['../classbecommons_1_1shader.html',1,'becommons']]],
-  ['shader_2ecpp_4',['shader.cpp',['../shader_8cpp.html',1,'']]],
-  ['shader_2ehpp_5',['shader.hpp',['../shader_8hpp.html',1,'']]],
-  ['shaderexception_6',['shaderException',['../classbecommons_1_1shaderException.html',1,'becommons']]],
-  ['shutdown_7',['shutdown',['../classbecommons_1_1imageLoader.html#a4dc5406ce88a1a295f19c15a45102cb4',1,'becommons::imageLoader']]],
-  ['simplificado_8',['2) NÚCLEO — Registro / Entidade / Componente (ECS simplificado)',['../testes_2src_2main_8cpp.html#autotoc_md4',1,'']]],
-  ['sistema_9',['sistema',['../structbecommons_1_1sistema.html',1,'becommons::sistema'],['../structbecommons_1_1sistema.html#a5412b5f3ade6b9bda273b9f0483354a1',1,'becommons::sistema::sistema()']]],
-  ['sistema_5fcodigo_10',['sistema_codigo',['../structbecommons_1_1sistema__codigo.html',1,'becommons']]],
-  ['sistema_5fde_5fcodigo_2ecpp_11',['sistema_de_codigo.cpp',['../sistema__de__codigo_8cpp.html',1,'']]],
-  ['sistema_5fde_5fcodigo_2ehpp_12',['sistema_de_codigo.hpp',['../sistema__de__codigo_8hpp.html',1,'']]],
-  ['sistema_5fde_5ffisica_2ecpp_13',['sistema_de_fisica.cpp',['../sistema__de__fisica_8cpp.html',1,'']]],
-  ['sistema_5fde_5ffisica_2ehpp_14',['sistema_de_fisica.hpp',['../sistema__de__fisica_8hpp.html',1,'']]],
-  ['sistema_5fde_5frenderizacao_2ecpp_15',['sistema_de_renderizacao.cpp',['../sistema__de__renderizacao_8cpp.html',1,'']]],
-  ['sistema_5fde_5frenderizacao_2ehpp_16',['sistema_de_renderizacao.hpp',['../sistema__de__renderizacao_8hpp.html',1,'']]],
-  ['sistema_5feditor_17',['sistema_editor',['../classbeeditor_1_1sistema__editor.html',1,'beeditor::sistema_editor'],['../classbeeditor_1_1sistema__editor.html#a83cd53a7ca1d38aa048089cb03041669',1,'beeditor::sistema_editor::sistema_editor()']]],
-  ['sistema_5ffisica_18',['sistema_fisica',['../structbecommons_1_1sistema__fisica.html',1,'becommons']]],
-  ['sistema_5frenderizacao_19',['sistema_renderizacao',['../structbecommons_1_1sistema__renderizacao.html',1,'becommons']]],
-  ['sistemas_20—_20bubble_5fgui_20interface_20caixa_20',['4) SISTEMAS — BUBBLE_GUI (interface / caixa)',['../testes_2src_2main_8cpp.html#autotoc_md8',1,'']]],
-  ['sistemas_2fsistema_2ehpp_21',['sistema.hpp',['../sistemas_2sistema_8hpp.html',1,'']]],
-  ['skybox_22',['skybox',['../classbecommons_1_1skybox.html',1,'becommons']]],
-  ['skybox_2ecpp_23',['skybox.cpp',['../skybox_8cpp.html',1,'']]],
-  ['skybox_2ehpp_24',['skybox.hpp',['../skybox_8hpp.html',1,'']]],
-  ['soltar_25',['soltar',['../classbecommons_1_1inputs.html#a44aed74979e95c156ee90fbd19bdd054',1,'becommons::inputs']]],
-  ['std_26',['std',['../namespacestd.html',1,'']]],
-  ['sugerida_27',['sugerida',['../testes_2src_2main_8cpp.html#fase_funcs',1,'API sugerida'],['../testes_2src_2main_8cpp.html#utils_vectors_funcs',1,'Operações esperadas / API sugerida']]],
-  ['sugerida_20assinaturas_28',['API sugerida (assinaturas)',['../testes_2src_2main_8cpp.html#nucleo_ecs_funcs',1,'']]]
+  ['youtube_0',['Youtube',['../index.html#autotoc_md14',1,'']]]
 ];

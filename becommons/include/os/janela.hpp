@@ -69,6 +69,7 @@ namespace becommons {
 	* @brief facilita o uso da janela glfw
 	* @brief cuida dos callbacks, parametros iniciais etc.
 	*/
+    static std::unordered_map<ijanela::cursor, GLFWcursor*> s_cursors;
 	class janela : public ijanela {
     public:
     	janela(const char* nome, fvet2 bounds = fvet2(600, 400), const char* icon_path = nullptr);

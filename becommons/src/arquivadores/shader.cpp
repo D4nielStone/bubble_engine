@@ -23,6 +23,7 @@
  */
 
 #include "glad.h"
+#include "depuracao/debug.hpp"
 #include "nucleo/projeto.hpp"
 #include <filesystem>
 #include "assets/shaders_na_memoria.hpp"
@@ -45,8 +46,11 @@ inline const std::unordered_map<std::string, const char*> shader_memoria{
     {"phong.frag", phong_frag}
 };
 
-void becommons::descarregarShaders()
-{
+void becommons::descarregarShaders() {
+    depuracao::emitir(alerta, "shader", "Descarregando shaders.");
+    for (auto& [name, programID] : shaders) {
+        glDeleteProgram(programID);
+    }
     shaders.clear();
 }
 
@@ -146,7 +150,8 @@ void shader::compilar() {
     
     shaders[frag] = ID;
 }
-
+shader::~shader() {
+}
 void shader::use() 
 {
     if(shaders.find(frag) != shaders.end()) {

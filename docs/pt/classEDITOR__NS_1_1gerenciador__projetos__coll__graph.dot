@@ -23,6 +23,5 @@ digraph "EDITOR_NS::gerenciador_projetos"
   Node9 -> Node8 [id="edge9_Node000008_Node000009",dir="back",color="steelblue1",style="solid",tooltip=" "];
   Node9 [id="Node000009",label="becommons::sistema",height=0.2,width=0.4,color="gray40", fillcolor="white", style="filled",URL="$structbecommons_1_1sistema.html",tooltip=" "];
   Node10 -> Node8 [id="edge10_Node000008_Node000010",dir="back",color="darkorchid3",style="dashed",tooltip=" ",label=" m_window",fontcolor="grey" ];
-  Node10 [id="Node000010",label="becommons::janela",height=0.2,width=0.4,color="gray40", fillcolor="white", style="filled",URL="$classbecommons_1_1janela.html",tooltip="facilita o uso da janela glfw"];
-  Node5 -> Node10 [id="edge11_Node000010_Node000005",dir="back",color="darkorchid3",style="dashed",tooltip=" ",label=" tamanho",fontcolor="grey" ];
+  Node10 [id="Node000010",label="becommons::ijanela",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled",URL="$classbecommons_1_1ijanela.html",tooltip=" "];
 }
