@@ -48,6 +48,14 @@ namespace becommons {
                 start.z + alpha * (end.z - start.z)
                 );
     }
+    static inline fvet4 lerp(const fvet4& start, const fvet4& end, const float& alpha) {
+        return fvet4(
+                start.x + alpha * (end.x - start.x),
+                start.y + alpha * (end.y - start.y),
+                start.z + alpha * (end.z - start.z),
+                start.w + alpha * (end.w - start.w)
+                );
+    }
 	static inline float dist(const float& a, const float& b) {
 		return std::abs(a - b);
 	}

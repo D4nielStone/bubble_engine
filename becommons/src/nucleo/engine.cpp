@@ -111,6 +111,7 @@ void motor::iniciar(const exec& gm) {
 }
 void motor::rodar() {
     while(!m_janela->deveFechar()) {
+        m_tempo->calcularDeltaTime();
         m_janela->poll();
         // Executa funções opengl de outras threads
         while(!fila_opengl.empty()) {

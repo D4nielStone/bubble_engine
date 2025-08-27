@@ -220,7 +220,6 @@ void janela::swap()  {
     }
     motor::obter().m_inputs->m_letra_pressionada = false;
     glfwSwapBuffers(window);
-    motor::obter().m_tempo->calcularDT();
 }
 
 // \brief Define viewport baseado no tamanho da janela

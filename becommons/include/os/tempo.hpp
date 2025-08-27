@@ -36,11 +36,10 @@ namespace becommons {
         double obterDeltaTime() {
             return delta.count();
         }
-        void calcularDT()
-        {
+        void calcularDeltaTime() {
             auto tempoAtual = std::chrono::high_resolution_clock::now();
             delta = tempoAtual - tempoCorrido;
-            tempoCorrido = tempoAtual; // Atualiza o �ltimo tempo
+            tempoCorrido = tempoAtual; // Atualiza o último tempo
         }
 
         std::chrono::duration<double> delta;

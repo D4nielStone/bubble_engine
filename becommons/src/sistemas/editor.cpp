@@ -23,6 +23,7 @@
  */
 
 #include <cstdlib>
+#include "api/mat.hpp"
 #include "elementos/barra_menu.hpp"
 #include "sistemas/editor.hpp"
 #include <filesystem>
@@ -181,7 +182,7 @@ public:
         }
     
         // só acessa se ainda houver tabs válidas
-        m_tabs[tab_atual]->m_estilo.m_limites = bounds;
+        m_tabs[tab_atual]->m_estilo.m_limites = becommons::lerp(m_tabs[tab_atual]->m_estilo.m_limites, bounds,motor::obter().m_tempo->obterDeltaTime()*3);
     }
 }
 };
