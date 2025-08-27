@@ -30,7 +30,6 @@ SOFTWARE.
 #include <string>
 #include <iostream>
 #include <sstream>
-#define _DEBUG
 
 enum nivel {
     info,
