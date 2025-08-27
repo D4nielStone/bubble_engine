@@ -47,9 +47,9 @@ motor::motor() :
             ));
         } else {
             return std::static_pointer_cast<ijanela>(std::make_shared<janela>(
-                "BE: Editor © BubbleStudio",
-                true,
-                fvet2(640, 480),
+                "Bubble Editor©",
+                false,
+                fvet2(700, 480),
                 "icon.ico"
             ));
         }
@@ -76,9 +76,9 @@ motor::motor(const std::string& directory) :
             ));
         } else {
             return std::static_pointer_cast<ijanela>(std::make_shared<janela>(
-                "BE: Editor © BubbleStudio",
-                true,
-                fvet2(640, 480),
+                "Bubble Editor©",
+                false,
+                fvet2(700, 480),
                 "icon.ico"
             ));
         }

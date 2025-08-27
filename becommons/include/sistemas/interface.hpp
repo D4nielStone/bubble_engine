@@ -59,6 +59,7 @@ namespace becommons {
         void gerarBuffers();
         void inicializar() override;
         void atualizar() override;
+        void renderizar();
     
         caixa* obterRaiz();
         std::set<caixa*> pos_render;

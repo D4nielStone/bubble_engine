@@ -45,7 +45,7 @@ namespace custom {
                 p_barra_menu = adicionar<caixa>();
                 p_barra_menu->m_estilo.m_flag_estilo |= flag_estilo::largura_percentual;
                 p_barra_menu->m_estilo.m_largura = 1;
-                p_barra_menu->m_estilo.m_altura = 18;
+                p_barra_menu->m_estilo.m_altura = 17;
                 p_barra_menu->m_estilo.m_padding_geral = {1, 0};
                 p_barra_menu->m_estilo.m_cor_fundo = cor(0.135f);
                 p_barra_menu->m_estilo.m_cor_borda = cor(0.4f);
@@ -55,6 +55,7 @@ namespace custom {
                 barra_versao->m_estilo.m_flag_estilo |= flag_estilo::altura_justa | flag_estilo::largura_justa;
                 barra_versao->adicionar<elementos::texto>(BUBBLE_VERSAO_COMPLETA_STR); // Exibe a string de versão completa
                 barra_versao->m_estilo.m_cor_fundo = cor(0.11f);
+                barra_versao->m_estilo.m_cor_borda = cor(0.2f);
             }
             void adicionar_botao(const std::string& nome, const std::function<void()>& func) {
                 // Cria o botão
@@ -66,6 +67,7 @@ namespace custom {
                 // Cria o botão
                 auto* btn = p_barra_menu->adicionar<elementos::botao>(func, nome, icone, 18);
                 btn->m_estilo.m_cor_fundo.a = 0.f;
+                btn->m_estilo.m_padding.y = 1.f;
                 e = btn->m_estilo; // guarda como estilo de botoes
             }
     };

@@ -42,7 +42,7 @@ namespace beeditor {
         void atualizarGizmo();
         void chamarInputs();
         void salvarEditor();
-		void usarProjeto(becommons::projeto*);
+		void abrirProjeto(becommons::projeto*);
 
         /*
         // \brief thread
@@ -56,13 +56,5 @@ namespace beeditor {
         std::shared_ptr<becommons::interface> ui;
         std::shared_ptr<becommons::camera_editor> cam;
         bool m_salvar_ao_fechar;
-        size_t entidade_atual = 1;
-        
-        size_t num_entidades_atual = 0;
-        size_t num_componentes_atual = 0;
-        size_t num_entidades_anterior = 0;
-        size_t num_componentes_anterior = 0;
-        size_t entidade_anterior = 0;
-        
     };
 }
