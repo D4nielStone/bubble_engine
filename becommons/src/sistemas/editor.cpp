@@ -32,6 +32,19 @@
 
 using namespace becommons;
 using namespace beeditor;
+class header;
+class painel : public caixa {
+public:
+    bool callback_remocao {false};
+    std::string label;
+    painel(const std::string& label = "panel") : label(label) {
+        m_estilo.m_orientacao_modular = estilo::orientacao::vertical;
+        m_estilo.m_cor_fundo = cor(0.10f);
+        m_estilo.m_cor_borda = cor(0.13f);
+        m_estilo.m_padding_geral = {2, 2};
+        adicionar<header>(label);
+    }
+};
 
 /** \class header: 
  *  \brief ´header´ é uma caixa que funciona como a aba de uma janela. Pode ser em abas ou janela única.
@@ -46,6 +59,7 @@ public:
         m_estilo.m_padding_geral = {2, 2};
         adicionar<elementos::texto>(label)->m_estilo.m_flag_estilo |= flag_estilo::largura_percentual;
         adicionar<elementos::botao>([this](){
+            static_cast<painel*>(m_pai)->callback_remocao = true;
             motor::obter().fila_opengl.push([this](){
                 m_pai->remover(this);
                 m_pai->m_pai->remover(m_pai);
@@ -61,23 +75,11 @@ public:
     }
 };
 
-class painel : public caixa {
-public:
-    std::string label;
-    painel(const std::string& label = "panel") : label(label) {
-        m_estilo.m_orientacao_modular = estilo::orientacao::vertical;
-        m_estilo.m_cor_fundo = cor(0.10f);
-        m_estilo.m_cor_borda = cor(0.13f);
-        m_estilo.m_padding_geral = {2, 2};
-        adicionar<header>(label);
-    }
-};
-
 class container : public caixa {
 private:
     std::vector<painel*> m_tabs;
     unsigned int tab_atual{0};
-    std::shared_ptr<container> filho;
+    std::shared_ptr<container> filho{nullptr};
     container* pai {nullptr};
     float porcao = 0.5f;
     bool dividiu{false};
@@ -86,7 +88,20 @@ public:
     container() {
         m_estilo.m_flag_estilo = flag_estilo::nenhuma;
     }
-    container* split(estilo::orientacao o = estilo::orientacao::horizontal, float porcao_inicial = 0.5f) {
+    void unsplit() {
+        if(filho) {
+            std::cout <<"US\n";
+            filho->unsplit();
+            for(auto* tab : filho->m_tabs) {
+                remover_tab(tab);
+            }
+            filho->m_tabs.clear();
+            filho.reset();
+            filho = nullptr;
+            dividiu = false;
+        }
+    }
+    container* split(float porcao_inicial = 0.5f, estilo::orientacao o = estilo::orientacao::horizontal) {
         m_estilo.m_orientacao_modular = o;
         porcao = std::clamp(porcao_inicial, 0.0f, 1.0f);
         filho = std::make_shared<container>();
@@ -99,13 +114,29 @@ public:
         m_tabs.push_back(p);
         tab_atual = m_tabs.size() - 1;
     }
+    void remover_tab(painel* p) {
+    auto it = std::find(m_tabs.begin(), m_tabs.end(), p);
+    if (it != m_tabs.end()) {
+            m_tabs.erase(it);
+            if (m_tabs.empty() && pai) {
+                    // se container ficou vazio, desmonta split
+            pai->unsplit();
+            } else {
+                tab_atual = std::min(tab_atual, (unsigned int)(m_tabs.size() - 1));
+            }
+        }
+        if (p->m_pai) {
+            p->m_pai->remover(p); // remove da hierarquia visual
+        }
+    }
+
     void recurssividade() {
         porcao = std::clamp(porcao, 0.0f, 1.0f);
         float pb = 1.0f - porcao;
 
         const fvet4* referencia = nullptr;
         if (pai) {
-            referencia = &pai->bounds;
+            referencia = &bounds;
         } else {
             referencia = &m_estilo.m_limites; // fallback (root absoluto)
         }
@@ -115,7 +146,11 @@ public:
         float pw = referencia->z; // largura
         float ph = referencia->w; // altura
 
-        if (dividiu && filho) {
+        if (dividiu && filho) { 
+            if (filho->m_tabs.empty()) {
+                unsplit();
+                return;
+            }
             if (m_estilo.m_orientacao_modular == estilo::orientacao::horizontal) {
                 // coluna A | B  (divide largura)
                 bounds = { px, py, pw * porcao, ph };                      // esquerda/topo do split
@@ -127,12 +162,28 @@ public:
             }
             // atualiza recursivamente o filho (se existir)
             filho->recurssividade();
+        } else {
+            bounds = *referencia;
         }
         
         if (!m_tabs.empty()) {
-            m_tabs[tab_atual]->m_estilo.m_limites = bounds;
+        // remove tabs inválidas
+        auto it = std::remove_if(m_tabs.begin(), m_tabs.end(),
+                [](painel* ptr) {
+                    return ptr->callback_remocao;
+                });
+        if (it != m_tabs.end()) {
+            m_tabs.erase(it, m_tabs.end());
+            if (m_tabs.empty()) {
+                return; // não há mais tabs
+            }
+            tab_atual = std::min(tab_atual, (unsigned int)(m_tabs.size() - 1));
         }
+    
+        // só acessa se ainda houver tabs válidas
+        m_tabs[tab_atual]->m_estilo.m_limites = bounds;
     }
+}
 };
 
 namespace paineis {
@@ -269,11 +320,15 @@ void sistema_editor::adicionarCaixas() {
     // Não importa de que container o painel é filho, apenas que ele seja inserido no loop da interface.
     // Isto pois os containers não precisam usar o vetor m_filhos, apenas usar suas referências na segmentação.
     p_entidades = dock->adicionar<paineis::entity>();
-    p_files = dock->adicionar<paineis::file_manager>();
+    p_editor = dock->adicionar<paineis::editor>(cam.get());
+    //p_files = dock->adicionar<paineis::file_manager>();
+    p_inspetor = dock->adicionar<paineis::inspector>();
     
     dock->tab(p_entidades);
-    auto* baixo = dock->split();
-    baixo->tab(p_files);
+    auto* meio = dock->split(0.2);
+    meio->tab(p_editor);
+    auto* fim = meio->split(0.6);
+    fim->tab(p_inspetor);
  }
 /**
  * @brief Salva as configurações da câmera e do estado do editor em um arquivo JSON.

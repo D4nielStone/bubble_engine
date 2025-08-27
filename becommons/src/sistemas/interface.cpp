@@ -33,6 +33,7 @@
 using namespace becommons;
 
 void interface::atualizarLJ(caixa* it_caixa) {
+    if(!it_caixa) return;
     const bool is_horizontal = it_caixa->m_estilo.m_orientacao_modular == estilo::orientacao::horizontal;
     if (!deveAtualizar(it_caixa)) return;
 
@@ -70,6 +71,7 @@ void interface::atualizarLJ(caixa* it_caixa) {
     }
 }
 void interface::atualizarAJ(caixa* it_caixa) {
+    if(!it_caixa) return;
     const bool is_horizontal = it_caixa->m_estilo.m_orientacao_modular == estilo::orientacao::horizontal;
     if (!deveAtualizar(it_caixa)) return;
 
@@ -111,6 +113,7 @@ void interface::atualizarAJ(caixa* it_caixa) {
 
 // Atualizar Hierarquia De Traz pra Frente
 void interface::atualizarHDTF(caixa* it_caixa, std::function<void(caixa*)> func) {
+    if(!it_caixa) return;
     // Percorre os filhos de trás pra frente
     for (auto it = it_caixa->m_filhos.rbegin(); it != it_caixa->m_filhos.rend(); ++it) {
         // Chama recursivamente antes de atualizar a caixa atual
@@ -211,6 +214,7 @@ void interface::gerarBuffers()
 }
 
 bool interface::deveAtualizar(caixa* it_caixa) {
+    if(!it_caixa) return false;
     if (!it_caixa->m_estilo.m_ativo) {
         return false; // Não atualiza caso a caixa esteja desativada 
     }
@@ -470,6 +474,10 @@ void interface::atualizarFilhos(caixa* it_caixa) {
 
     // Atualiza recursivamente os filhos
     for (auto& filho : it_caixa->m_filhos) {
+        if(!filho) {
+            it_caixa->remover(filho.get());
+            continue;
+        }
         atualizarFilhos(filho.get());
     }
 }
