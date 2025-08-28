@@ -25,8 +25,6 @@
 
 #pragma once
 #include "becommons/becommons.hpp"
-//#include <thread>
-//#include <atomic>
 
 namespace beeditor {
     class sistema_editor : public becommons::sistema {
@@ -43,18 +41,18 @@ namespace beeditor {
         void chamarInputs();
         void salvarEditor();
 		void abrirProjeto(becommons::projeto*);
-
-        /*
-        // \brief thread
-        static void executarRuntime();
-        inline static std::thread threadRuntime;
-        inline static std::atomic<bool> rodando{false};
-        static void monitorarRuntime();
          
-        // \brief atributos
-        */
         std::shared_ptr<becommons::interface> ui;
         std::shared_ptr<becommons::camera_editor> cam;
         bool m_salvar_ao_fechar;
+        
+        // Declaração global para acesso rápido às caixas de entidades e inspetor.
+        // Essas caixas são gerenciadas pela UI e contêm os elementos visuais
+        // para manipulação de entidades e seus componentes.
+        becommons::paineis::entity* m_entidades; 
+        becommons::paineis::inspector* m_inspetor;
+        becommons::paineis::editor* m_editor;
+        becommons::paineis::file_manager* m_files;
+        becommons::container* dock;
     };
 }

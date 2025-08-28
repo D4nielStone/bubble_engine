@@ -283,6 +283,7 @@ void interface::atualizar() {
     atualizarHDTF(m_raiz.get(), [this](auto* no) { atualizarLJ(no); });
     atualizarHDTF(m_raiz.get(), [this](auto* no) { atualizarAJ(no); });
     atualizarFilhos(m_raiz.get());
+    m_raiz->atualizar();
 }
 
 
@@ -466,7 +467,6 @@ void interface::chamarFuncoes(caixa* it_caixa) {
     for (auto& filho : it_caixa->m_filhos) {
         chamarFuncoes(filho.get());
     }
-    it_caixa->atualizar();
 }
 void interface::atualizarFilhos(caixa* it_caixa) {
     if (!it_caixa) throw std::runtime_error("Caixa nula sendo atualizada.");
