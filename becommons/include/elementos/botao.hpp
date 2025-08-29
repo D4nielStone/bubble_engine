@@ -72,7 +72,7 @@ namespace becommons{
                 m_filhos.push_back(std::move(m_imagem));
                 
                 if(txt.empty()) return;
-                auto m_texto = std::make_unique<texto>(txt);
+                auto m_texto = std::make_unique<texto>(txt, size);
                 m_estilo.m_limites.z += m_texto->obterLargura(txt);
                 m_filhos.push_back(std::move(m_texto));
             }
@@ -87,7 +87,7 @@ namespace becommons{
                 old_fundo_alpha = m_estilo.m_cor_fundo.a;
 
                 if(txt.empty()) return;
-                auto m_texto = std::make_unique<texto>(txt);
+                auto m_texto = std::make_unique<texto>(txt, size);
                 m_estilo.m_limites.z += m_texto->obterLargura(txt);
                 m_filhos.push_back(std::move(m_texto));
             }

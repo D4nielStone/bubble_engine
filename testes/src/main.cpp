@@ -810,8 +810,53 @@ void testarBubbleGUI()
         child1->m_estilo.m_flag_estilo =  becommons::flag_estilo::quebrar_linha;
         ui.atualizarFilhos(&box);
         //- Verificação:
-        ASSERT_EQUAL(child1->m_estilo.m_limites.y, 0);
-        ASSERT_EQUAL(child2->m_estilo.m_limites.y, 20);
+        ASSERT_EQUAL(child1->m_estilo.m_limites, fvet4(0, 0, 20, 20));
+        ASSERT_EQUAL(child2->m_estilo.m_limites, fvet4(0, 20, 20, 20));
+        
+        //- Preparação:
+        box.m_estilo.m_orientacao_modular = estilo::orientacao::vertical;
+        ui.atualizarFilhos(&box);
+        
+        //- Verificação:
+        ASSERT_EQUAL(child1->m_estilo.m_limites, fvet4(0, 0, 20, 20));
+        ASSERT_EQUAL(child2->m_estilo.m_limites, fvet4(20, 0, 20, 20));
+    });
+    // Teste 12 : Teste do container
+    testes.adicionar("contanier_horizontal", []() {
+        //- Preparação:
+        becommons::container box; 
+        box.m_estilo.m_limites = {0, 0, 100, 100};
+        auto [child1, child2] = box.split(0.2); // divisão horizontal
+        box.atualizar();
+        //- Verificação:
+        ASSERT_EQUAL(child1->m_estilo.m_limites, fvet4(0, 0, 20, 100));
+        ASSERT_EQUAL(child2->m_estilo.m_limites, fvet4(20, 0, 80, 100));
+    });
+    // Teste 13 : Teste do container
+    testes.adicionar("contanier_vertical", []() {
+        //- Preparação:
+        becommons::container box; 
+        box.m_estilo.m_limites = {0, 0, 100, 100};
+        auto [child1, child2] = box.split(0.2, estilo::orientacao::vertical); // divisão horizontal
+        box.atualizar();
+        //- Verificação:
+        ASSERT_EQUAL(child1->m_estilo.m_limites, fvet4(0, 0, 100, 20));
+        ASSERT_EQUAL(child2->m_estilo.m_limites, fvet4(0, 20, 100, 80));
+    });
+    // Teste 14 : Teste do container
+    testes.adicionar("contanier_triplo", []() {
+        //- Preparação:
+        becommons::container box; 
+        box.m_estilo.m_limites = {0, 0, 100, 100};
+        auto [up, down] = box.split(0.5, estilo::orientacao::vertical); // divisão vertical
+        auto [u_left, u_right] = up->split(0.5); // divisão horizontal
+        auto [d_left, d_right] = down->split(0.2); // divisão horizontal
+        box.atualizar();
+        //- Verificação:
+        ASSERT_EQUAL(u_left->m_estilo.m_limites, fvet4(0, 0, 50, 50));
+        ASSERT_EQUAL(u_right->m_estilo.m_limites, fvet4(50, 0, 50, 50));
+        ASSERT_EQUAL(d_left->m_estilo.m_limites, fvet4(0, 50, 20, 50));
+        ASSERT_EQUAL(d_right->m_estilo.m_limites, fvet4(20, 50, 80, 50));
     });
 }
 void testarSistemas()

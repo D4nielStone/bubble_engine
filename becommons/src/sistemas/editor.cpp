@@ -165,11 +165,12 @@ void sistema_editor::inicializar() {
     cam = std::make_shared<camera_editor>();
 
     ui->inicializar();
-    adicionarCaixas(); // Constrói a interface do editor
 
     if (motor::obter().m_projeto) {
 		abrirProjeto(motor::obter().m_projeto.get());
 	}
+
+    adicionarCaixas(); // Constrói a interface do editor
 }
 
 void sistema_editor::abrirProjeto(becommons::projeto* proj) {

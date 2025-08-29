@@ -142,8 +142,8 @@ namespace becommons {
      * \class caixa
      * \brief funciona como uma div em css
      */
-    enum class tipo_caixa : uint8_t {
-         base, container, texto, botao, imagem, popup, caixa_de_texto 
+    enum class tipo_caixa : uint16_t {
+         base, menu_bar, header, container, texto, botao, imagem, popup, caixa_de_texto 
     };
     class caixa {
     public:

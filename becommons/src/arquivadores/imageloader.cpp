@@ -35,6 +35,9 @@
 using namespace becommons;
 
 static const std::map<const std::string, std::pair<BYTE*, const unsigned int>> imagems_memoria {
+    {"tool.png", std::pair(tool_png, tool_png_len)},
+    {"python.png", std::pair(python_png, python_png_len)},
+    {"lua.png", std::pair(lua_png, lua_png_len)},
     {"abrir.png", std::pair(abrir_png, abrir_png_len)},
     {"adicionar.png", std::pair(adicionar_png, adicionar_png_len)},
     {"remover.png", std::pair(remover_png, remover_png_len)},

@@ -40,6 +40,7 @@ namespace becommons {
     class header : public caixa {
     public:
         header(const std::string& label);
+        tipo_caixa tipo() const override { return tipo_caixa::header; };
         void atualizar() override;
     };
 
@@ -59,7 +60,9 @@ namespace becommons {
     namespace paineis {
         class file_manager : public painel {
         public:
-            file_manager() : painel("file manager") {}
+            file_manager();
+            void atualizar() override;
+            void research(const std::string& dir);
         };
         class entity : public painel {
         private:
@@ -67,7 +70,7 @@ namespace becommons {
             uint32_t entidade_selecionada;
             size_t old_contage = 0;
         public:
-            entity() : painel("entity register") {}
+            entity();
             uint32_t obter() const { return entidade_selecionada; }
             void atualizar() override;
         };

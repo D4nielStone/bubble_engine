@@ -36,6 +36,9 @@ namespace custom {
         public:
             barra_menu() = default;
 
+            tipo_caixa tipo() const override {
+                return tipo_caixa::menu_bar;
+            }
             void configurar() override {
                 m_filhos.clear();
                 m_estilo.m_flag_estilo |= flag_estilo::altura_justa | flag_estilo::largura_percentual;

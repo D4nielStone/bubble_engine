@@ -30,6 +30,7 @@ painel::painel(const std::string& label) : label(label) {
     m_estilo.m_cor_fundo = cor(0.10f);
     m_estilo.m_cor_borda = cor(0.13f);
     m_estilo.m_padding_geral = {1, 1};
+    adicionar<header>(label);
 }
 header::header(const std::string& label) {
     m_estilo.m_flag_estilo |= flag_estilo::altura_justa;
@@ -37,6 +38,7 @@ header::header(const std::string& label) {
     m_estilo.m_cor_fundo = cor(0.065f);
     m_estilo.m_cor_borda = cor(0.32f);
     m_estilo.m_padding_geral = {2, 2};
+    adicionar<elementos::texto>(label);
 }
 void header::atualizar() {
     caixa::atualizar();
@@ -46,16 +48,8 @@ container::container() {
 }
         
 void container::unsplit() {
-    /*if(filho) {
-        filho->unsplit();
-        for(auto* tab : filho->m_filhos) {
-            remover_tab(tab);
-        }
-        filho->m_filhos.clear();
-        filho.reset();
-        filho = nullptr;
-        dividiu = false;
-    }*/
+    dividiu = false;
+    m_filhos.clear();
 }
         
 std::pair<container*, container*>  container::split(float porcao_inicial, estilo::orientacao o) {
@@ -90,9 +84,19 @@ void container::atualizar() {
     } else
     if (!m_filhos.empty()) {
         m_filhos[tab_atual]->m_estilo.m_limites = becommons::lerp(m_filhos[tab_atual]->m_estilo.m_limites, m_estilo.m_limites,motor::obter().m_tempo->obterDeltaTime()*10);
+        // header
+        if (!m_filhos[tab_atual]->m_filhos.empty())
+        if(m_filhos[tab_atual]->m_filhos[0]->tipo() == tipo_caixa::header) {
+        m_filhos[tab_atual]->m_filhos[0]->m_estilo.m_limites = m_filhos[tab_atual]->m_estilo.m_limites;
+        m_filhos[tab_atual]->m_filhos[0]->m_estilo.m_limites.w = 22;
+        m_filhos[tab_atual]->m_filhos[0]->m_estilo.m_altura = 22;
+        m_filhos[tab_atual]->m_filhos[0]->m_estilo.m_largura = m_filhos[tab_atual]->m_estilo.m_limites.z;
+        }
     }
     caixa::atualizar();
 }
+            
+paineis::entity::entity() : painel("entity register") {}
 void paineis::entity::atualizar() {
     if(!motor::obter().m_levelmanager || !motor::obter().m_levelmanager->obterFaseAtual() || motor::obter().m_levelmanager->carregando()) return;
     auto reg = motor::obter().m_levelmanager->obterFaseAtual()->obterRegistro();
@@ -104,11 +108,12 @@ void paineis::entity::atualizar() {
 
     if (registro_atualizou) {
         m_filhos.clear();
+        adicionar<header>(label);
         for(auto& [id, comps] : reg->entidades) {
             adicionar<elementos::botao>([&, id]() {
                 entidade_selecionada = id;
                 std::cout << "entidade selecionada:" << id <<"\n";
-            }, "entity." + std::to_string(id), "cube.png"); 
+            }, "entity." + std::to_string(id), "cube.png", 12); 
             registro_atualizou = false;
         }
     }
@@ -143,4 +148,72 @@ paineis::editor::editor(camera* cam) : painel("editor view") {
     framebuffer->m_estilo.m_largura = 1;
     framebuffer->m_estilo.m_altura = 1;
     cam->viewport_ptr = &framebuffer->m_estilo.m_limites; // Associa o viewport da câmera aos limites do framebuffer
+}
+paineis::file_manager::file_manager() : painel("file manager") {
+    auto* context = adicionar<caixa>();
+    context->m_estilo.m_flag_estilo |= flag_estilo::largura_percentual | flag_estilo::altura_percentual;
+    context->m_estilo.m_altura = 1;
+    context->m_estilo.m_largura = 1;
+    context->m_estilo.m_padding_geral = {2, 2};
+
+    auto* barra_lateral = context->adicionar<caixa>();
+    barra_lateral->m_estilo.m_flag_estilo |= flag_estilo::largura_justa | flag_estilo::altura_percentual;
+    barra_lateral->m_estilo.m_cor_fundo = cor(0.07f);
+    barra_lateral->m_estilo.m_cor_borda = cor(0.2f);
+    barra_lateral->m_estilo.m_altura = 1;
+    barra_lateral->m_estilo.m_orientacao_modular = estilo::orientacao::vertical;
+    barra_lateral->m_estilo.m_padding_geral = {5, 2};
+    auto* barra_central = context->adicionar<caixa>();
+    barra_central->m_estilo.m_flag_estilo |= flag_estilo::largura_percentual | flag_estilo::altura_percentual;
+    barra_central->m_estilo.m_cor_fundo = cor(0.07f);
+    barra_central->m_estilo.m_cor_borda = cor(0.2f);
+    barra_central->m_estilo.m_altura = 1;
+    barra_central->m_estilo.m_largura = 1;
+    barra_central->m_estilo.m_padding_geral = {5, 2};
+    research(motor::obter().m_projeto->m_diretorio);
+}
+void paineis::file_manager::research(const std::string& dir) {
+    static int scl = 12;
+    auto* barra_lateral = m_filhos[1]->m_filhos[0].get();
+    barra_lateral->m_filhos.clear();
+    if (motor::obter().m_projeto) {
+        for(auto entry : std::filesystem::directory_iterator(dir)) {
+            auto path = entry.path();
+            if (std::filesystem::is_regular_file(entry.path())) {
+                if (entry.path().extension() == ".fase") {
+                    barra_lateral->adicionar<elementos::botao>([&]() {
+                    }, entry.path().filename(), "scene.png", scl);
+                } else
+                if (entry.path().extension() == ".lua") {
+                    barra_lateral->adicionar<elementos::botao>([&]() {
+                    }, entry.path().filename(), "lua.png", scl);
+                } else
+                if (entry.path().extension() == ".py") {
+                    barra_lateral->adicionar<elementos::botao>([&]() {
+                    }, entry.path().filename(), "python.png", scl);
+                }
+                if (entry.path().extension() == ".obj") {
+                    barra_lateral->adicionar<elementos::botao>([&]() {
+                    }, entry.path().filename(), "Renderizador.png", scl);
+                }
+                if (entry.path().extension() == ".json") {
+                    barra_lateral->adicionar<elementos::botao>([&]() {
+                    }, entry.path().filename(), "tool.png", scl);
+                }
+            } else {
+                barra_lateral->adicionar<elementos::botao>([this, path]() {
+                motor::obter().fila_opengl.push([this, path]() {
+                    research(path);
+                });
+                }, entry.path().filename(), "folder.png", scl);
+            }
+        }
+    }
+    barra_lateral->adicionar<elementos::botao>([this, dir]() {
+    motor::obter().fila_opengl.push([this, dir]() {
+        research(std::filesystem::path(dir).parent_path().string());
+    });
+    }, "back ..");
+}
+void paineis::file_manager::atualizar() {
 }

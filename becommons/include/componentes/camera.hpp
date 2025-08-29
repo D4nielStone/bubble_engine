@@ -67,6 +67,8 @@ namespace becommons {
 		bool flag_fb		{ false };
 
 		static constexpr mascara mascara = COMPONENTE_CAM;
+        mutable int lastWidth = 0, lastHeight = 0; 
+
 
 		fvet4* viewport_ptr{ nullptr };
 

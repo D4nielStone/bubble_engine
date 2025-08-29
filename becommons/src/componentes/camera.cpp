@@ -55,7 +55,6 @@ void camera::desenharFB() {
         int width = viewport_ptr ? viewport_ptr->z : motor::obter().m_janela->obterTamanho().x;
         int height = viewport_ptr ? viewport_ptr->w : motor::obter().m_janela->obterTamanho().y;
 
-        static int lastWidth = 0, lastHeight = 0;
         if (width != lastWidth || height != lastHeight) {
             glBindTexture(GL_TEXTURE_2D, textura);
             glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
@@ -208,7 +207,7 @@ glm::mat4 camera::obtProjectionMatrix() {
         viewp = {static_cast<int>(viewport_ptr->z), static_cast<int>(viewport_ptr->w)};
 
     if (flag_orth) {
-        float largura = viewp.x;
+        float largura = viewp.x != 0.0f ? viewp.x : 1.0f;
         float altura = viewp.y != 0.0f ? viewp.y : 1.0f;
         aspecto = largura / altura;
         left = -escala * aspecto;
@@ -218,8 +217,8 @@ glm::mat4 camera::obtProjectionMatrix() {
         projMatriz = glm::ortho(left, right, bottom, top, corte_curto, corte_longo);
     }
     else {
-        float largura = viewp.x;
-        float altura = viewp.y;
+        float largura = viewp.x != 0.0f ? viewp.x : 1.0f;
+        float altura = viewp.y != 0.0f ? viewp.y : 1.0f;
         aspecto = largura / altura;
         projMatriz = glm::perspective(glm::radians(fov), aspecto, corte_curto, corte_longo);
     }
