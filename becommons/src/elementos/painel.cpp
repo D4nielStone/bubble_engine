@@ -24,7 +24,7 @@
 
 #include <filesystem>
 #include <string>
-#include "elementos/texto.hpp"
+#include "becommons/becommons.hpp"
 #include "elementos/painel.hpp"
 using namespace becommons;
 
@@ -38,37 +38,52 @@ painel::painel(const std::string& label) : label(label) {
 header::header(const std::string& label) {
     m_estilo.m_flag_estilo |= flag_estilo::altura_justa;
     m_estilo.m_largura = 1;
-    m_estilo.m_cor_fundo = cor(0.065f);
-    m_estilo.m_cor_borda = cor(0.32f);
-    m_estilo.m_padding_geral = {2, 2};
-    adicionar<elementos::texto>(label);
+    m_estilo.m_cor_fundo = cor(0.072f);
+    m_estilo.m_cor_borda = cor(0.065f);
+    m_estilo.m_padding_geral = {4, 0};
+    adicionar<elementos::texto>(label, 12);
 }
 void header::atualizar() {
     caixa::atualizar();
 }
             
-paineis::entity::entity() : painel("entity register") {}
+paineis::entity::entity() : painel("entity register") {
+    auto* context = adicionar<caixa>();
+    context->m_estilo.m_flag_estilo |= flag_estilo::largura_percentual | flag_estilo::altura_percentual;
+    context->m_estilo.m_altura = 1;
+    context->m_estilo.m_largura = 1;
+    
+    auto* barra_lateral = context->adicionar<caixa>();
+    barra_lateral->m_estilo.m_flag_estilo |= flag_estilo::largura_percentual | flag_estilo::altura_percentual;
+    barra_lateral->m_estilo.m_largura = 1;
+    barra_lateral->m_estilo.m_cor_fundo = cor(0.08f);
+    barra_lateral->m_estilo.m_orientacao_modular = estilo::orientacao::vertical;
+    barra_lateral->m_estilo.m_padding_geral = {2, 2};
+    auto* barra_lateral_d = context->adicionar<caixa>();
+    barra_lateral_d->m_estilo.m_flag_estilo |= flag_estilo::largura_justa | flag_estilo::altura_percentual;
+    barra_lateral_d->m_estilo.m_cor_fundo = cor(0.07f);
+    barra_lateral_d->m_estilo.m_orientacao_modular = estilo::orientacao::vertical;
+    barra_lateral_d->m_estilo.m_padding_geral = {2, 2};
+}
 void paineis::entity::atualizar() {
     if(!motor::obter().m_levelmanager || !motor::obter().m_levelmanager->obterFaseAtual() || motor::obter().m_levelmanager->carregando()) return;
     auto reg = motor::obter().m_levelmanager->obterFaseAtual()->obterRegistro();
     
     if (old_contage != reg->entidades.size()) {
         old_contage = reg->entidades.size();
-        registro_atualizou = true;
-    }
-
-    if (registro_atualizou) {
-        m_filhos.clear();
-        adicionar<header>(label);
+    motor::obter().fila_opengl.push([this, reg]() {
+        m_filhos[1]->m_filhos[0]->m_filhos.clear();
+        m_filhos[1]->m_filhos[1]->m_filhos.clear();
         for(auto& [id, comps] : reg->entidades) {
-            adicionar<elementos::botao>([&, id]() {
+            m_filhos[1]->m_filhos[0]->adicionar<elementos::botao>([this, id]() {
                 entidade_selecionada = id;
-                std::cout << "entidade selecionada:" << id <<"\n";
             }, "entity." + std::to_string(id), "cube.png", 12); 
-            registro_atualizou = false;
+            m_filhos[1]->m_filhos[1]->adicionar<elementos::botao>([reg, id]() {
+                reg->remover(id);
+            }, "", "remover.png", 16); 
         }
+    });
     }
-    caixa::atualizar();
 }
 
 paineis::inspector::inspector() : painel("inspector editor") {
@@ -160,6 +175,7 @@ void paineis::file_manager::research(const std::string& dir) {
             }
         }
     }
+    if(std::filesystem::exists(dir))
     barra_lateral->adicionar<elementos::botao>([this, dir]() {
     motor::obter().fila_opengl.push([this, dir]() {
         research(std::filesystem::path(dir).parent_path().string());

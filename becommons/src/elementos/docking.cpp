@@ -22,9 +22,7 @@
  * @file area_de_texto.cpp
  */
 
-#include <filesystem>
-#include <string>
-#include "elementos/texto.hpp"
+#include "becommons/becommons.hpp"
 #include "elementos/painel.hpp"
 using namespace becommons;
 
