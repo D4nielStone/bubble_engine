@@ -19,41 +19,25 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE. 
- * @file editor.hpp
- * \brief O editor deve disponibilizar uma interface para a manipulação da engine pelo usuário comum. Isso também inclui gerar uma interface gráfica.
+ * @file area_de_texto.hpp
+ * @author Daniel O. dos Santos
  */
 
 #pragma once
-#include "becommons/becommons.hpp"
-#include "elementos/painel.hpp"
+#include "util/caixa.hpp"
+#include "elementos/imagem.hpp"
 
-namespace beeditor {
-    class sistema_editor : public becommons::sistema {
+namespace becommons {
+    class container : public caixa {
     private:
-        void adicionarCaixas();
+        unsigned int tab_atual{0};
+        float porcao = 0.5f;
+        bool dividiu{false};
     public:
-        // \brief construtor
-        sistema_editor();
-
-        // \brief Funções herdadas
-        void inicializar() override;
+        container();
+        void unsplit();
+        std::pair<container*, container*> split(float porcao_inicial = 0.5f, estilo::orientacao o = estilo::orientacao::horizontal);
         void atualizar() override;
-        void atualizarGizmo();
-        void chamarInputs();
-        void salvarEditor();
-		void abrirProjeto(becommons::projeto*);
-         
-        std::shared_ptr<becommons::interface> ui;
-        std::shared_ptr<becommons::camera_editor> cam;
-        bool m_salvar_ao_fechar;
-        
-        // Declaração global para acesso rápido às caixas de entidades e inspetor.
-        // Essas caixas são gerenciadas pela UI e contêm os elementos visuais
-        // para manipulação de entidades e seus componentes.
-        becommons::paineis::entity* m_entidades; 
-        becommons::paineis::inspector* m_inspetor;
-        becommons::paineis::editor* m_editor;
-        becommons::paineis::file_manager* m_files;
-        becommons::container* dock;
+        tipo_caixa tipo() const override {return tipo_caixa::container;};
     };
-}
+} // becommons

@@ -142,8 +142,8 @@ namespace becommons {
      * \class caixa
      * \brief funciona como uma div em css
      */
-    enum class tipo_caixa : uint8_t {
-        base, texto, botao, imagem, popup, caixa_de_texto 
+    enum class tipo_caixa : uint16_t {
+         base, menu_bar, header, container, texto, botao, imagem, popup, caixa_de_texto 
     };
     class caixa {
     public:
@@ -211,10 +211,15 @@ namespace becommons {
         virtual void configurar() {
         };
         virtual void atualizar() {
+            for(auto& filho : m_filhos) {
+                filho->atualizar();
+            }
         };
         // @returns Se está presionado ou não
         bool mouseEmCima();
         virtual void desenhar(unsigned int ret_VAO) {
+            if(m_pai)
+            m_projecao = m_pai->m_projecao;
             if(!m_shader)m_shader = std::make_unique<shader>("imagem.vert", "quad.frag");
             m_material.usar(*m_shader);
             glBindVertexArray(ret_VAO);

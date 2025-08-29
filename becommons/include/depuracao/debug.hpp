@@ -45,7 +45,6 @@ namespace depuracao
 
     inline void emitir(const nivel& n, const std::string& msg)
     {
-        #ifdef _DEBUG
         std::string prefixo_nivel, cor;
         switch (n)
         {
@@ -59,12 +58,10 @@ namespace depuracao
         msgs << prefixo_nivel<< msg << std::endl;
         std::cout << cor << prefixo_nivel << "\033[0m" << msg << "\033[0m" << std::endl;
         msg_str = msgs.str();
-        #endif
     }
 
     inline void emitir(const nivel& n, const std::string& prefixo, const std::string& msg)
     {
-        #ifdef _DEBUG
         std::string prefixo_nivel, cor;
         switch (n)
         {
@@ -78,7 +75,6 @@ namespace depuracao
         msgs << prefixo_nivel << " [" << prefixo << "]" << msg << std::endl;
         std::cout << cor << prefixo_nivel << " [" << prefixo << "] \033[0m" << msg << "\033[0m" << std::endl;
         msg_str = msgs.str();
-        #endif
     }
 
     inline std::string* obterMensagens() {

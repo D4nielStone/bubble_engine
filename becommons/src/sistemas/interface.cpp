@@ -128,7 +128,7 @@ void interface::desenhar(caixa* c) {
     c->desenhar(VAO);
     for(auto& filho : c->m_filhos)
     {
-        if (filho->tipo() == tipo_caixa::popup && filho->m_estilo.m_ativo) {
+        if ((filho->tipo() == tipo_caixa::popup || filho->tipo() == tipo_caixa::menu_bar) && filho->m_estilo.m_ativo) {
             pos_render.insert(filho.get());
             continue;
         }
@@ -280,9 +280,12 @@ void interface::atualizar() {
     // reseta a flag de detecção de toque
     s_contagem_areas = 0;
     chamarFuncoes(m_raiz.get());
-    atualizarHDTF(m_raiz.get(), [this](auto* no) { atualizarLJ(no); });
-    atualizarHDTF(m_raiz.get(), [this](auto* no) { atualizarAJ(no); });
+    atualizarHDTF(m_raiz.get(), [this](auto* no) { 
+            atualizarLJ(no);
+            atualizarAJ(no);
+            });
     atualizarFilhos(m_raiz.get());
+    m_raiz->atualizar();
 }
 
 
@@ -466,7 +469,6 @@ void interface::chamarFuncoes(caixa* it_caixa) {
     for (auto& filho : it_caixa->m_filhos) {
         chamarFuncoes(filho.get());
     }
-    it_caixa->atualizar();
 }
 void interface::atualizarFilhos(caixa* it_caixa) {
     if (!it_caixa) throw std::runtime_error("Caixa nula sendo atualizada.");
