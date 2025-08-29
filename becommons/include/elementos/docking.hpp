@@ -28,22 +28,6 @@
 #include "elementos/imagem.hpp"
 
 namespace becommons {
-    class painel : public caixa {
-    public:
-        bool callback_remocao {false};
-        std::string label;
-        painel(const std::string& label = "panel");
-    };
-    /** \class header: 
-     *  \brief ´header´ é uma caixa que funciona como a aba de uma janela. Pode ser em abas ou janela única.
-     */
-    class header : public caixa {
-    public:
-        header(const std::string& label);
-        tipo_caixa tipo() const override { return tipo_caixa::header; };
-        void atualizar() override;
-    };
-
     class container : public caixa {
     private:
         unsigned int tab_atual{0};
@@ -56,32 +40,4 @@ namespace becommons {
         void atualizar() override;
         tipo_caixa tipo() const override {return tipo_caixa::container;};
     };
-
-    namespace paineis {
-        class file_manager : public painel {
-        public:
-            file_manager();
-            void atualizar() override;
-            void research(const std::string& dir);
-        };
-        class entity : public painel {
-        private:
-            bool registro_atualizou = true;
-            uint32_t entidade_selecionada;
-            size_t old_contage = 0;
-        public:
-            entity();
-            uint32_t obter() const { return entidade_selecionada; }
-            void atualizar() override;
-        };
-        class inspector : public painel {
-        public:
-            inspector();
-        };
-        class editor : public painel {
-        public:
-            elementos::imagem* framebuffer;
-            editor(camera* cam);
-        };
-    } // paineis
 } // becommons

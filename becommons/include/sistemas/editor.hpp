@@ -25,6 +25,7 @@
 
 #pragma once
 #include "becommons/becommons.hpp"
+#include "elementos/painel.hpp"
 
 namespace beeditor {
     class sistema_editor : public becommons::sistema {
