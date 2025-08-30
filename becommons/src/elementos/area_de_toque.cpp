@@ -34,7 +34,7 @@ bool elementos::area_de_toque::pressionado() {
                     m_gatilho = false;
 
                 // Caso dentro do campo
-                if(mouseEmCima() && s_contagem_areas <= 1) {
+                if(mouseEmCima()) {
                     // Define cursor para mão
                     motor::obter().m_janela->definirCursor(janela::cursor::mao);
                     // Caso o gatilho esteja desativado e o mouse esquerdo tocado

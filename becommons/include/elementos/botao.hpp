@@ -96,6 +96,7 @@ namespace becommons{
             }
             void atualizar() override {
                 m_estilo.m_cor_borda.a = mouseEmCima() ? old_fundo_alpha : old_fundo_alpha*0.1f;
+                caixa::atualizar();
             }
             void configurar() override {
                 m_estilo.m_flag_estilo |= tem(flag_estilo::largura_percentual) ? flag_estilo::modular : flag_estilo::largura_justa | flag_estilo::altura_justa | flag_estilo::modular;

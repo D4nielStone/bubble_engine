@@ -38,8 +38,6 @@ namespace beeditor {
         // \brief Funções herdadas
         void inicializar() override;
         void atualizar() override;
-        void atualizarGizmo();
-        void chamarInputs();
         void salvarEditor();
 		void abrirProjeto(becommons::projeto*);
          
