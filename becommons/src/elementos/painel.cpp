@@ -136,7 +136,10 @@ paineis::file_manager::file_manager() : painel("file manager") {
     barra_central->m_estilo.m_altura = 1;
     barra_central->m_estilo.m_largura = 1;
     barra_central->m_estilo.m_padding_geral = {5, 2};
+    if (motor::obter().m_projeto)
     research(motor::obter().m_projeto->m_diretorio);
+    else
+    research(obterDiretorioHome());
 }
 void paineis::file_manager::research(const std::string& dir) {
     static int scl = 12;
@@ -147,8 +150,7 @@ void paineis::file_manager::research(const std::string& dir) {
             auto path = entry.path();
             if (std::filesystem::is_regular_file(entry.path())) {
                 if (entry.path().extension() == ".fase") {
-                    barra_lateral->adicionar<elementos::botao>([&]() {
-                    }, entry.path().filename(), "scene.png", scl);
+                    barra_lateral->adicionar<elementos::botao>(nullptr , entry.path().filename(), "scene.png", scl);
                 } else
                 if (entry.path().extension() == ".lua") {
                     barra_lateral->adicionar<elementos::botao>([&]() {
@@ -159,8 +161,10 @@ void paineis::file_manager::research(const std::string& dir) {
                     }, entry.path().filename(), "python.png", scl);
                 }
                 if (entry.path().extension() == ".obj") {
-                    barra_lateral->adicionar<elementos::botao>([&]() {
-                    }, entry.path().filename(), "Renderizador.png", scl);
+                    auto* pop = barra_lateral->adicionar<elementos::botao>(nullptr , entry.path().filename(), "Renderizador.png", scl)->adicionar<elementos::popup>(false);
+                    pop->adicionar<elementos::botao>([path]() {
+                            motor::obter().importarModelo(path);
+                            }, "import to scene", "abrir.png", 12);
                 }
                 if (entry.path().extension() == ".json") {
                     barra_lateral->adicionar<elementos::botao>([&]() {
@@ -175,6 +179,7 @@ void paineis::file_manager::research(const std::string& dir) {
             }
         }
     }
+    if (!dir.empty())
     if(std::filesystem::exists(dir))
     barra_lateral->adicionar<elementos::botao>([this, dir]() {
     motor::obter().fila_opengl.push([this, dir]() {
@@ -183,4 +188,5 @@ void paineis::file_manager::research(const std::string& dir) {
     }, "back ..");
 }
 void paineis::file_manager::atualizar() {
+    caixa::atualizar();
 }

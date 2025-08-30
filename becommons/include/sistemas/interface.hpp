@@ -62,7 +62,7 @@ namespace becommons {
         void renderizar();
     
         caixa* obterRaiz();
-        std::set<caixa*> pos_render;
+        std::vector<caixa*> pos_render;
         std::unique_ptr<caixa> m_raiz;
         glm::mat4 projecao_viewport;
         ijanela* m_window = nullptr;

@@ -90,16 +90,13 @@ void motor::iniciar(const exec& gm) {
     /**
      * logs de inicialização
      */
-    depuracao::emitir(debug, "motor", "Olá Mundo!");
-    depuracao::emitir(debug, "motor", "Iniciando Bubble Engine " + std::string(BUBBLE_VERSAO_COMPLETA_STR) + " ExecMode:" + (char)gm);
+    depuracao::emitir(info, "motor", "olá Mundo!");
+    depuracao::emitir(info, "motor", "iniciando Bubble Engine " + std::string(BUBBLE_VERSAO_COMPLETA_STR) + " ExecMode:" + (char)gm);
 
     m_game_mode = gm;
     
     // cria janela
     criarJanela();
-    // sistema de ui do runtime
-    m_interface = std::make_shared<interface>(m_janela.get());
-
     if(m_game_mode == exec::jogo) {
         // carrega fase
         m_levelmanager->carregar(m_projeto->m_lancamento);
@@ -110,15 +107,18 @@ void motor::iniciar(const exec& gm) {
         m_editor = std::make_shared<beeditor::sistema_editor>();
 }
 void motor::rodar() {
-    while(!m_janela->deveFechar()) {
-        m_tempo->calcularDeltaTime();
-        m_janela->poll();
+    while(m_janela && !m_janela->deveFechar()) {
         // Executa funções opengl de outras threads
         while(!fila_opengl.empty()) {
             auto func = fila_opengl.front();
             func();
             fila_opengl.pop();
         }
+
+        if(!m_janela) return;
+        
+        m_tempo->calcularDeltaTime();
+        m_janela->poll();
     	// Atualiza e renderiza fase atual
         if(m_levelmanager && m_levelmanager->obterFaseAtual() && !m_levelmanager->carregando()) {
             // Atualiza/Inicializa sistemas pra quando a fase for iniciada
@@ -149,8 +149,38 @@ void motor::rodar() {
         m_janela->swap();
     }
 }
+        
+void motor::abrirProjeto(const std::string& directory) {
+    if(m_projeto) m_projeto.reset();    
+    m_projeto = (std::make_shared<projeto>(directory));
+    
+    if(m_levelmanager) m_levelmanager.reset();    
+    m_levelmanager = std::make_shared<levelmanager>(m_projeto.get());
+
+    if(m_game_mode == exec::editor) {
+        if(m_editor) m_editor->abrirProjeto(m_projeto.get());    
+    }
+}
+void motor::importarModelo(const std::string& directory) {
+    if(m_levelmanager && m_levelmanager->obterFaseAtual() && !m_levelmanager->carregando()) {
+        auto ent = m_levelmanager->obterFaseAtual()->obterRegistro()->criar(); // cria nova entidade
+        m_levelmanager->obterFaseAtual()->obterRegistro()->adicionar<renderizador>(ent, directory.c_str());
+    }
+}
 
 void motor::finalizar() {
+    depuracao::emitir(alerta, "motor", "finalizando...");
+    fila_opengl.push([this]() {
+    m_inputs.reset();
+    m_codigo.reset();
+    m_fisica.reset();
+    m_tempo.reset();
+    m_renderer.reset();
+    m_levelmanager.reset();
+    m_editor.reset();
+    m_projeto.reset();
+    m_janela.reset();
+    });
 }
 
 motor& becommons::motor::obter() {

@@ -63,8 +63,11 @@ namespace becommons {
         ~motor();
         motor();
         
-        void criarJanela();
+        // helpers
+        void abrirProjeto(const std::string&);
+        void importarModelo(const std::string&);
 
+        void criarJanela();
         // injeção para testes
         void setJanelaFactory(std::function<std::shared_ptr<ijanela>()> factory) {
             m_janela_factory = std::move(factory);

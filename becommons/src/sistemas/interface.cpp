@@ -126,10 +126,10 @@ void interface::desenhar(caixa* c) {
     if(c) {
     c->m_projecao = projecao_viewport;
     c->desenhar(VAO);
-    for(auto& filho : c->m_filhos)
-    {
+    for(auto& filho : c->m_filhos) {
         if ((filho->tipo() == tipo_caixa::popup || filho->tipo() == tipo_caixa::menu_bar) && filho->m_estilo.m_ativo) {
-            pos_render.insert(filho.get());
+            pos_render.push_back(filho.get());
+            if (filho->tipo() == tipo_caixa::popup)
             continue;
         }
         if(     filho->m_estilo.m_limites.x < c->m_estilo.m_limites.x + c->m_estilo.m_limites.z
@@ -254,7 +254,7 @@ void interface::renderizar() {
     configOpenglState();
     desenhar(m_raiz.get());
     glEnable(GL_SCISSOR_TEST);
-    for(auto& filho : pos_render) {
+    for(auto* filho : pos_render) {
         if(filho->m_estilo.m_ativo) {
         glScissor(
             filho->m_estilo.m_limites.x,
@@ -265,6 +265,7 @@ void interface::renderizar() {
         desenhar(filho);
         }
     }
+    pos_render.clear();
     deconfigOpenglState();
 }
 void interface::atualizar() {
@@ -278,7 +279,6 @@ void interface::atualizar() {
         static_cast<float>(m_window->obterTamanho().y)};
 
     // reseta a flag de detecção de toque
-    s_contagem_areas = 0;
     chamarFuncoes(m_raiz.get());
     atualizarHDTF(m_raiz.get(), [this](auto* no) { 
             atualizarLJ(no);

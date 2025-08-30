@@ -53,15 +53,15 @@ projeto::projeto(const std::string& diretorio) : m_diretorio(diretorio) {
 }
 
 void projeto::analisar() {
-    // Procura recursivamente por config.json
+    // Procura recursivamente por projeto.bubble
     if(std::filesystem::exists(m_diretorio))
         for (const auto& entry : std::filesystem::recursive_directory_iterator(m_diretorio)) {
-            if (entry.is_regular_file() && entry.path().filename() == "config.json") {
+            if (entry.is_regular_file() && entry.path().filename() == "projeto.bubble") {
                 m_diretorio = entry.path().parent_path().string() + "/";
             }
         }
 
-    std::string full_path = m_diretorio + "config.json";
+    std::string full_path = m_diretorio + "projeto.bubble";
         
     
     if(!std::filesystem::exists(full_path)) {

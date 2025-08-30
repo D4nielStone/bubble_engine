@@ -48,18 +48,28 @@ sistema_editor::sistema_editor() : m_salvar_ao_fechar(true) {
  */
 void sistema_editor::adicionarCaixas() {
     // Configuração da caixa raiz (root UI element)
-    ui->m_raiz->m_estilo.m_orientacao_modular = estilo::orientacao::vertical;
+    ui->obterRaiz()->m_estilo.m_orientacao_modular = estilo::orientacao::vertical;
 
     // Configuração da seção superior da UI (barra de menu e versão)
-    auto* menu = ui->m_raiz->adicionar<custom::barra_menu>();
-    menu->adicionar_botao(" File ", [](){});
+    auto* menu = ui->obterRaiz()->adicionar<custom::barra_menu>();
+    
+    auto* popup_file = menu->adicionar_botao(" File ", [](){})->adicionar<elementos::popup>();
     menu->adicionar_botao("Edit ", [](){});
     menu->adicionar_botao("View ", [](){});
     menu->adicionar_botao("Help ", [](){});
 
+    popup_file->adicionar<elementos::botao>([](){
+            motor::obter().finalizar();
+            }, "Exit");
+    popup_file->adicionar<elementos::botao>([](){
+            if(motor::obter().m_levelmanager)
+            motor::obter().m_levelmanager->salvarTudo();
+            motor::obter().m_editor->salvarEditor();
+            }, "Save all");
+
     // Configurando ambiente com containers
     // O container principal [dock] irá preencher a tela a-baixo da menubar
-    dock = ui->m_raiz->adicionar<container>();
+    dock = ui->obterRaiz()->adicionar<container>();
     dock->m_estilo.m_flag_estilo |= flag_estilo::largura_percentual | flag_estilo::altura_percentual;
     dock->m_estilo.m_largura = 1;
     dock->m_estilo.m_altura = 1;
@@ -77,7 +87,8 @@ void sistema_editor::adicionarCaixas() {
  * Cria o diretório 'usr' se não existir e serializa os dados da câmera.
  */
 void sistema_editor::salvarEditor() {
-    auto _usr = motor::obter().m_projeto->m_diretorio + "/usr";
+    if(!motor::obter().m_projeto) return;
+    auto _usr = motor::obter().m_projeto->m_diretorio + "/.usr";
     if(!std::filesystem::exists(_usr))
         std::filesystem::create_directory(_usr); // Cria o diretório se não existir
 
@@ -93,57 +104,8 @@ void sistema_editor::salvarEditor() {
     doc.Accept(writer);
     ofs << buffer.GetString();
 }
-
-/**
- * @brief Gerencia os inputs do usuário para ações do editor.
- * Inclui atalhos para salvar, rodar o runtime, criar/remover entidades e salvar fases.
- * Também atualiza a movimentação da câmera do editor.
- */
-bool gatilho_ = true;
-void sistema_editor::chamarInputs() {
-    if(!motor::obter().m_levelmanager || !motor::obter().m_levelmanager->obterFaseAtual() || motor::obter().m_levelmanager->carregando()) return;
-    // Salva o editor e o projeto, e inicia o runtime
-    // Gerencia inputs com a tecla CTRL pressionada para evitar repetições
-    if(motor::obter().m_inputs->obter(inputs::E_CTRL)) {
-        if(motor::obter().m_inputs->obter(inputs::R)) {
-            salvarEditor();
-            motor::obter().m_levelmanager->salvarTudo();
-            //executarRuntime();
-        } 
-        else if(gatilho_ && motor::obter().m_inputs->obter(inputs::F3)) {
-            if(motor::obter().m_levelmanager->obterFaseAtual()->rodando)
-                motor::obter().m_levelmanager->obterFaseAtual()->parar();
-            else
-                motor::obter().m_levelmanager->obterFaseAtual()->iniciar();
-            gatilho_ = false;
-        }
-        else if(gatilho_ && motor::obter().m_inputs->obter(inputs::A)) {
-            motor::obter().m_levelmanager->obterFaseAtual()->obterRegistro()->criar(); // Cria nova entidade
-            gatilho_ = false;
-        } else if(gatilho_ && motor::obter().m_inputs->obter(inputs::X)) {
-            motor::obter().m_levelmanager->obterFaseAtual()->obterRegistro()->remover(m_entidades->obter()); // Remove a entidade selecionada
-            gatilho_ = false;
-        } else if(gatilho_ && motor::obter().m_inputs->obter(inputs::S)) {
-            salvarEditor(); // Salva configurações do editor
-            motor::obter().m_levelmanager->salvarTudo(); // Salva todas as fases do projeto
-            gatilho_ = false;
-        } else if(!motor::obter().m_inputs->obter(inputs::R) && !motor::obter().m_inputs->obter(inputs::F3) && !motor::obter().m_inputs->obter(inputs::X) && !motor::obter().m_inputs->obter(inputs::A) && !motor::obter().m_inputs->obter(inputs::S)) {
-            gatilho_ = true; // Reinicia o gatilho quando nenhuma das teclas é pressionada
-        }
-    }
-    cam->atualizarMovimentacao(); // Atualiza a posição e orientação da câmera
-    sistema_renderizacao::calcularTransformacao(cam->transform); // Recalcula a matriz de transformação da câmera
-    if(m_salvar_ao_fechar && motor::obter().m_janela->deveFechar()) {
-        salvarEditor(); // Salva o editor se a janela estiver fechando e a flag estiver ativa
-    }
-}
         
-/**
- * @brief Atualiza os icones de interface interativos
- * com o editor.
- */
-void sistema_editor::atualizarGizmo() {
-}
+
 /**
  * @brief Atualiza o estado do editor em cada frame.
  * Gerencia inputs, atualiza as caixas da UI, sincroniza a lista de entidades
@@ -151,7 +113,10 @@ void sistema_editor::atualizarGizmo() {
  */
 
 void sistema_editor::atualizar() {
-    chamarInputs();
+    cam->atualizarMovimentacao(); // Atualiza a posição e orientação da câmera
+    sistema_renderizacao::calcularTransformacao(cam->transform); // Recalcula a matriz de transformação da câmera
+    if(m_salvar_ao_fechar && motor::obter().m_janela->deveFechar()) salvarEditor();
+
     ui->atualizar();
     ui->renderizar();
 }
@@ -181,7 +146,7 @@ void sistema_editor::abrirProjeto(becommons::projeto* proj) {
 	}
     // Carrega a configuração da câmera do editor a partir de um arquivo JSON.
     // Se o arquivo não existir ou houver erro de parse, um erro é emitido.
-    auto _usr = proj->m_diretorio + "/usr";
+    auto _usr = proj->m_diretorio + "/.usr";
     std::stringstream sb;
     if (std::filesystem::exists(_usr + "/cam.json")) {
         std::ifstream file(_usr + "/cam.json");

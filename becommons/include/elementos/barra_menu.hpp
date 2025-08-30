@@ -60,18 +60,19 @@ namespace custom {
                 barra_versao->m_estilo.m_cor_fundo = cor(0.11f);
                 barra_versao->m_estilo.m_cor_borda = cor(0.2f);
             }
-            void adicionar_botao(const std::string& nome, const std::function<void()>& func) {
+            elementos::botao* adicionar_botao(const std::string& nome, const std::function<void()>& func) {
                 // Cria o botão
                 auto* btn = p_barra_menu->adicionar<elementos::botao>(func, nome);
                 btn->m_estilo.m_cor_fundo.a = 0.f;
                 e = btn->m_estilo; // guarda como estilo de botoes
+                return btn;
             }
-            void adicionar_botao(const std::string& nome, const std::string& icone, const std::function<void()>& func) {
+            elementos::botao* adicionar_botao(const std::string& nome, const std::string& icone, const std::function<void()>& func) {
                 // Cria o botão
                 auto* btn = p_barra_menu->adicionar<elementos::botao>(func, nome, icone, 18);
                 btn->m_estilo.m_cor_fundo.a = 0.f;
                 btn->m_estilo.m_padding.y = 1.f;
-                e = btn->m_estilo; // guarda como estilo de botoes
+                return btn;
             }
     };
 }

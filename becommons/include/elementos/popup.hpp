@@ -36,9 +36,10 @@ namespace becommons {
                 int x_antigo = 0;
                 int y_antigo = 0;
                 float m_velocidade_lerp = 13.f;
+                bool m_esquerdo = true;
             public:
 
-                popup() {
+                popup(bool e = true) : m_esquerdo(e) {
                     m_estilo.m_orientacao_modular = estilo::orientacao::vertical;
                     m_estilo.m_ativo = false;
                 }
