@@ -160,7 +160,9 @@ void paineis::file_manager::research(const std::string& dir) {
                     barra_lateral->adicionar<elementos::botao>([&]() {
                     }, entry.path().filename(), "python.png", scl);
                 }
-                if (entry.path().extension() == ".obj") {
+                if (entry.path().extension() == ".obj"||
+                    entry.path().extension() == ".fbx"||
+                    entry.path().extension() == ".dae") {
                     auto* pop = barra_lateral->adicionar<elementos::botao>(nullptr , entry.path().filename(), "Renderizador.png", scl)->adicionar<elementos::popup>(false);
                     pop->adicionar<elementos::botao>([path]() {
                             motor::obter().importarModelo(path);
