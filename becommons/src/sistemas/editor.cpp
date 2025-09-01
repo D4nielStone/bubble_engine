@@ -77,10 +77,11 @@ void sistema_editor::adicionarCaixas() {
     auto [top, bottom] = dock->split(0.6, estilo::orientacao::vertical);
     auto [esquerda_panel, meio_dock] = top->split(0.2);
     auto [meio_panel, direita_panel] = meio_dock->split(0.6);
-    m_entidades = esquerda_panel->adicionar<paineis::entity>();
-    m_editor = meio_panel->adicionar<paineis::editor>(cam.get());
-    m_inspetor = direita_panel->adicionar<paineis::inspector>();
-    m_files = bottom->adicionar<paineis::file_manager>();
+    m_entidades = esquerda_panel->tab<paineis::entity>();
+    m_editor = meio_panel->tab<paineis::editor>(cam.get());
+    m_inspetor = direita_panel->tab<paineis::inspector>();
+    m_files = bottom->tab<paineis::file_manager>();
+    bottom->tab<paineis::assets_manager>();
  }
 /**
  * @brief Salva as configurações da câmera e do estado do editor em um arquivo JSON.

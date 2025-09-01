@@ -147,7 +147,9 @@ namespace becommons {
     };
     class caixa {
     public:
-        caixa() : m_projecao(1.f) {
+        static inline unsigned long long next_id = 0;
+        unsigned long long uid;
+        caixa() : uid(next_id++), m_projecao(1.f) {
             m_material.definirUniforme("quadrado", &m_estilo.m_limites);
             m_material.definirUniforme("cor_borda", &m_estilo.m_cor_borda);
             m_material.definirUniforme("cor", &m_estilo.m_cor_fundo);

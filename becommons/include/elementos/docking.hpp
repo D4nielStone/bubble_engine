@@ -26,15 +26,23 @@
 #pragma once
 #include "util/caixa.hpp"
 #include "elementos/imagem.hpp"
+#include "elementos/painel.hpp"
 
 namespace becommons {
     class container : public caixa {
     private:
-        unsigned int tab_atual{0};
         float porcao = 0.5f;
         bool dividiu{false};
     public:
         container();
+        template <typename T, typename ...Args>
+        T* tab(Args&&... args) {
+            if(dividiu) return nullptr;
+            caixa* h;
+            m_filhos.empty() ? h = adicionar<header>() : h = m_filhos[0].get();
+            auto* ptr = h->adicionar<T>(std::forward<Args>(args)...);
+            return ptr;
+        }
         void unsplit();
         std::pair<container*, container*> split(float porcao_inicial = 0.5f, estilo::orientacao o = estilo::orientacao::horizontal);
         void atualizar() override;
