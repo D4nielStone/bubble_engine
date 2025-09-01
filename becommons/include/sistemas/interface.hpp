@@ -52,6 +52,8 @@ namespace becommons {
         void organizarLinha(caixa*, bool, const ivet2 , const fvet2&, const fvet2&, fvet2&);
         void processarModular(caixa*);
         void atualizarFilhos(caixa*);
+        void inserir(caixa*);
+        void remover(caixa*);
         interface();
         interface(ijanela*);
         ~interface();
@@ -62,7 +64,7 @@ namespace becommons {
         void renderizar();
     
         caixa* obterRaiz();
-        std::vector<caixa*> pos_render;
+        std::map<unsigned long long, caixa*> pos_render;
         std::unique_ptr<caixa> m_raiz;
         glm::mat4 projecao_viewport;
         ijanela* m_window = nullptr;

@@ -128,7 +128,7 @@ void interface::desenhar(caixa* c) {
     c->desenhar(VAO);
     for(auto& filho : c->m_filhos) {
         if ((filho->tipo() == tipo_caixa::popup || filho->tipo() == tipo_caixa::menu_bar) && filho->m_estilo.m_ativo) {
-            pos_render.push_back(filho.get());
+            inserir(filho.get());
             if (filho->tipo() == tipo_caixa::popup)
             continue;
         }
@@ -254,7 +254,7 @@ void interface::renderizar() {
     configOpenglState();
     desenhar(m_raiz.get());
     glEnable(GL_SCISSOR_TEST);
-    for(auto* filho : pos_render) {
+    for(auto [id, filho] : pos_render) {
         if(filho->m_estilo.m_ativo) {
         glScissor(
             filho->m_estilo.m_limites.x,
@@ -265,7 +265,6 @@ void interface::renderizar() {
         desenhar(filho);
         }
     }
-    pos_render.clear();
     deconfigOpenglState();
 }
 void interface::atualizar() {
@@ -482,4 +481,10 @@ void interface::atualizarFilhos(caixa* it_caixa) {
         }
         atualizarFilhos(filho.get());
     }
+}
+void interface::inserir(caixa* c) {
+    pos_render[c->uid] = c;
+}
+void interface::remover(caixa* c) {
+    pos_render.erase(c->uid);
 }

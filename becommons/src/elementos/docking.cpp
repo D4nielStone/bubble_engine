@@ -66,15 +66,9 @@ void container::atualizar() {
         }
     } else
     if (!m_filhos.empty()) {
-        m_filhos[tab_atual]->m_estilo.m_limites = becommons::lerp(m_filhos[tab_atual]->m_estilo.m_limites, m_estilo.m_limites,motor::obter().m_tempo->obterDeltaTime()*10);
-        // header
-        if (!m_filhos[tab_atual]->m_filhos.empty())
-        if(m_filhos[tab_atual]->m_filhos[0]->tipo() == tipo_caixa::header) {
-        m_filhos[tab_atual]->m_filhos[0]->m_estilo.m_limites = m_filhos[tab_atual]->m_estilo.m_limites;
-        m_filhos[tab_atual]->m_filhos[0]->m_estilo.m_limites.w = 22;
-        m_filhos[tab_atual]->m_filhos[0]->m_estilo.m_altura = 22;
-        m_filhos[tab_atual]->m_filhos[0]->m_estilo.m_largura = m_filhos[tab_atual]->m_estilo.m_limites.z;
-        }
+        // m_filhos[0] = header
+        // m_filhos[0]->m_filhos = paineis
+        m_filhos[0]->m_estilo.m_limites = becommons::lerp(m_filhos[0]->m_estilo.m_limites, m_estilo.m_limites,motor::obter().m_tempo->obterDeltaTime()*10);
     }
     caixa::atualizar();
 }
