@@ -39,20 +39,19 @@ uniform vec4 quadrado;
 uniform vec4 cor_borda; // Cor da borda
 uniform int tamanho_bordas;
 out vec4 FragColor;
-void main()
-{
-    // Detectar borda com base nas coordenadas UV
-    if (cor_borda.w != 0) {
-        float bordax = tamanho_bordas / quadrado.z;
-        float borday = tamanho_bordas / quadrado.w;
-        if (Uv.x < bordax || Uv.x > 1.0 - bordax || Uv.y < borday || Uv.y > 1.0 - borday)
-        {
-            FragColor = cor_borda; // Cor da borda
-            return;
-        }
-    }
 
-    // Define a cor final do fragmento
-    FragColor = cor;
+void main() {
+	float raio = 2.f;
+    vec2 pos = quadrado.zw * Uv;
+    vec2 halfSize = quadrado.zw / 2;
+    vec2 d = abs(pos - halfSize)  - (halfSize - vec2(raio));
+    float dist = length(max(d, 0.0)) - raio;
+    if(dist > 0.0) discard;
+
+    if (dist > -tamanho_bordas) {
+        FragColor = cor_borda;
+    } else {
+        FragColor = cor;
+    }
 }
 )";
