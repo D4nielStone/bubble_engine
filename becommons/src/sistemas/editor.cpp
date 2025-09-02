@@ -52,11 +52,13 @@ void sistema_editor::adicionarCaixas() {
 
     // Configuração da seção superior da UI (barra de menu e versão)
     auto* menu = ui->obterRaiz()->adicionar<custom::barra_menu>();
+    menu->uid = 9998; // id para mostrar no último layer
     
     auto* popup_file = menu->adicionar_botao(" File ", [](){})->adicionar<elementos::popup>();
     menu->adicionar_botao("Edit ", [](){});
     menu->adicionar_botao("View ", [](){});
     menu->adicionar_botao("Help ", [](){});
+    popup_file->uid = 9999; // id para mostrar no último layer
 
     popup_file->adicionar<elementos::botao>([](){
             motor::obter().finalizar();
@@ -75,11 +77,10 @@ void sistema_editor::adicionarCaixas() {
     dock->m_estilo.m_altura = 1;
     
     auto [top, bottom] = dock->split(0.6, estilo::orientacao::vertical);
-    auto [esquerda_panel, meio_dock] = top->split(0.2);
-    auto [meio_panel, direita_panel] = meio_dock->split(0.6);
+    auto [esquerda_panel, meio_panel] = top->split(0.2);
     m_entidades = esquerda_panel->tab<paineis::entity>();
     m_editor = meio_panel->tab<paineis::editor>(cam.get());
-    m_inspetor = direita_panel->tab<paineis::inspector>();
+    m_inspetor = esquerda_panel->tab<paineis::inspector>();
     m_files = bottom->tab<paineis::file_manager>();
     bottom->tab<paineis::assets_manager>();
  }

@@ -41,12 +41,13 @@ void elementos::popup::atualizar() {
                 x_antigo = motor::obter().m_inputs->obterMousePos().x;
                 y_antigo = motor::obter().m_inputs->obterMousePos().y;
             }
-        } else {
-            if (!mouseEmCima()) {
-                m_estilo.m_ativo = false;
-            }
         }
-    } 
+    }
+    if (motor::obter().m_inputs->obter(inputs::MOUSE_E)) {
+        if (!mouseEmCima()) {
+            m_estilo.m_ativo = false;
+        }
+    }
 
     float dt = motor::obter().m_tempo->obterDeltaTime();
     x_antigo = m_referencia->pressionado() ? motor::obter().m_inputs->obterMousePos().x : x_antigo;

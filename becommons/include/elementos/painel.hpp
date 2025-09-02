@@ -32,10 +32,13 @@ namespace becommons {
      *  \brief `header` é uma caixa que funciona como a aba de uma janela. Pode ser em abas ou janela única.
      */
     class header : public caixa {
-    private:
-        int tab_atual = 0;
-        std::vector<std::unique_ptr<elementos::area_de_toque>> m_tabs;
     public:
+        int tab_atual = 0;
+        unsigned int m_tab_l { 60 };
+        unsigned int m_tab_h { 16 };
+        cor m_cor_ativado { 0.8f, 0.66f, 0.86f, 1.f };
+        cor m_cor_desativado { 0.4f, 0.33f, 0.43f, 1.f };
+        std::vector<std::unique_ptr<elementos::area_de_toque>> m_tabs;
         header();
         tipo_caixa tipo() const override { return tipo_caixa::header; };
         void atualizar() override;

@@ -58,7 +58,7 @@ bool elementos::area_de_toque::arrastando() {
                 if(!motor::obter().m_inputs->obter(inputs::MOUSE_E))
                     m_arrastando = false;
                 // Caso dentro do campo
-                if(!m_arrastando && mouseEmCima() && motor::obter().m_inputs->obter(inputs::MOUSE_E)) {
+                if(pressionado()) {
                     m_arrastando = true;
                 }
                 return m_arrastando;
