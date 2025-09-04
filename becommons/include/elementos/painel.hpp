@@ -38,6 +38,7 @@ namespace becommons {
         unsigned int m_tab_h { 16 };
         cor m_cor_ativado { 0.8f, 0.66f, 0.86f, 1.f };
         cor m_cor_desativado { 0.4f, 0.33f, 0.43f, 1.f };
+        caixa m_utils;
         std::vector<std::unique_ptr<elementos::area_de_toque>> m_tabs;
         header();
         tipo_caixa tipo() const override { return tipo_caixa::header; };

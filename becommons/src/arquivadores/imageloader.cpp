@@ -42,6 +42,7 @@ static const std::map<const std::string, std::pair<BYTE*, const unsigned int>> i
     {"adicionar.png", std::pair(adicionar_png, adicionar_png_len)},
     {"remover.png", std::pair(remover_png, remover_png_len)},
     {"cubo_branco", std::pair(cubo_branco, cubo_branco_len)},
+    {"close.png", std::pair(close_png, close_png_len)},
     {"skybox_right.png", std::pair(DaylightBox_Right, DaylightBox_Right_size)},
     {"skybox_left.png", std::pair(DaylightBox_Left, DaylightBox_Left_size)},
     {"skybox_top.png", std::pair(DaylightBox_Top, DaylightBox_Top_size)},
