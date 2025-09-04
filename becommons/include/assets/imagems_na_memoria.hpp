@@ -26,6 +26,7 @@ SOFTWARE.
  */
 
 #pragma once
+#include "imagems/close.hpp"
 #include "imagems/adicionar.hpp"
 #include "imagems/abrir.hpp"
 #include "imagems/cubo_branco.hpp"

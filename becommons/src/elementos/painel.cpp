@@ -30,31 +30,47 @@ using namespace becommons;
 
 class tab : public elementos::area_de_toque {
 public:
+    int m_tab_id = 0;
     header* m_header;
+    elementos::texto* m_text;
+    elementos::botao* m_close;
     tab(header* m_header, const std::string& text = "tab") : m_header(m_header), area_de_toque() {
         adicionar<caixa>()->m_estilo.m_cor_fundo = m_header->m_cor_ativado;
         adicionar<caixa>()->m_estilo.m_cor_fundo = m_header->m_cor_ativado;
         m_estilo.m_padding = {1, 1};
-        adicionar<elementos::texto>(text, 12);
+        m_text = adicionar<elementos::texto>(text, 12);
+        m_close = adicionar<elementos::botao>([m_header, this](){
+                m_header->m_filhos[m_tab_id].reset();
+                }, "", "close.png", 12);
     }
     void atualizar() override {
+        if(m_close->pressionado()) return;
         /* texto */
-        m_estilo.m_limites.z = m_header->m_tab_l;
+        m_estilo.m_limites.z = m_text->obterLargura(m_text->m_texto_frase) + m_header->m_tab_h*2 + m_estilo.m_padding.x*4;
         m_estilo.m_limites.w = m_header->m_tab_h;
-        m_filhos[2]->m_estilo.m_limites.z = m_header->m_tab_l;
+        m_filhos[2]->m_estilo.m_limites.z = m_estilo.m_limites.z;
         m_filhos[2]->m_estilo.m_limites.x = m_estilo.m_limites.x + m_header->m_tab_h + m_estilo.m_padding.x;
         m_filhos[2]->m_estilo.m_limites.y = m_estilo.m_limites.y + m_estilo.m_padding.y;
         m_filhos[2]->m_estilo.m_limites.w = m_header->m_tab_h;
         /* barra de baixo */
         m_filhos[0]->m_estilo.m_limites.x = m_estilo.m_limites.x;
-        m_filhos[0]->m_estilo.m_limites.y = m_estilo.m_limites.y + m_header->m_tab_h - 2;
+        m_filhos[0]->m_estilo.m_limites.y = m_estilo.m_limites.y + m_header->m_tab_h - 4;
         m_filhos[0]->m_estilo.m_limites.z = m_estilo.m_limites.z;
-        m_filhos[0]->m_estilo.m_limites.w = 2;
+        m_filhos[0]->m_estilo.m_limites.w = 4;
         /* caixa de dentro */
         m_filhos[1]->m_estilo.m_limites.x = m_estilo.m_limites.x + m_header->m_tab_h / 2 - 2;
         m_filhos[1]->m_estilo.m_limites.y = m_estilo.m_limites.y + m_header->m_tab_h / 2 - 2;
         m_filhos[1]->m_estilo.m_limites.z = 4;
         m_filhos[1]->m_estilo.m_limites.w = 4;
+        
+        m_filhos[3]->m_filhos[0]->m_estilo.m_limites.x = m_estilo.m_limites.x + m_estilo.m_limites.z - m_header->m_tab_h;
+        m_filhos[3]->m_filhos[0]->m_estilo.m_limites.y = m_estilo.m_limites.y;
+        m_filhos[3]->m_filhos[0]->m_estilo.m_limites.z = m_header->m_tab_h;
+        m_filhos[3]->m_estilo.m_limites.x = m_estilo.m_limites.x + m_estilo.m_limites.z - m_header->m_tab_h-2;
+        m_filhos[3]->m_estilo.m_limites.y = m_estilo.m_limites.y+2;
+        m_filhos[3]->m_estilo.m_limites.z = m_header->m_tab_h-4;
+        m_filhos[3]->m_estilo.m_limites.w = m_header->m_tab_h-4;
+        m_filhos[3]->m_filhos[0]->m_estilo.m_limites = m_filhos[3]->m_estilo.m_limites;
     
         area_de_toque::atualizar();
     }
@@ -68,8 +84,7 @@ painel::painel(const std::string& label) : label(label) {
 }
 header::header() {
     m_estilo.m_flag_estilo = flag_estilo::nenhuma;
-    m_estilo.m_cor_fundo = cor(0.072f);
-    m_estilo.m_cor_borda = cor(0.065f);
+    m_estilo.m_cor_fundo = cor(0.1f);
 }
 void header::atualizar() {
     if (m_tabs.size() != m_filhos.size()) {
@@ -81,10 +96,12 @@ void header::atualizar() {
         for(auto& c : m_filhos) {
             auto p = static_cast<painel*>(c.get());
             m_tabs.push_back(std::make_unique<tab>(this, p->label));
+            static_cast<tab*>(m_tabs.back().get())->m_tab_id = m_tabs.size() - 1;
             motor::obter().m_editor->ui->inserir(m_tabs.back().get());
         }
     }
 
+    motor::obter().m_editor->ui->inserir(&m_utils);
     float cursor = m_estilo.m_limites.x + 2;
     size_t idx = 0;
     for(auto& tab : m_tabs) {
@@ -99,12 +116,12 @@ void header::atualizar() {
     // painel
     for(size_t i = 0; i < m_filhos.size(); i++) {
         if(i!=tab_atual) {
-            m_tabs[i]->m_estilo.m_cor_fundo = cor(0.07);
-            m_tabs[i]->m_filhos[0]->m_estilo.m_cor_fundo = m_cor_desativado;
-            m_tabs[i]->m_filhos[1]->m_estilo.m_cor_fundo = m_cor_desativado;
+            m_tabs[i]->m_estilo.m_cor_fundo = cor(0.03);
+            m_tabs[i]->m_filhos[0]->m_estilo.m_cor_fundo.a = 0;
+            m_tabs[i]->m_filhos[1]->m_estilo.m_cor_fundo.a = 0;
             m_filhos[i]->m_estilo.m_ativo = false;
         } else {
-            m_tabs[i]->m_estilo.m_cor_fundo = cor(0.1);
+            m_tabs[i]->m_estilo.m_cor_fundo = cor(0.07);
             m_tabs[i]->m_filhos[0]->m_estilo.m_cor_fundo = m_cor_ativado;
             m_tabs[i]->m_filhos[1]->m_estilo.m_cor_fundo = m_cor_ativado;
             m_filhos[i]->m_estilo.m_ativo = true;

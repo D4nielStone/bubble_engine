@@ -32,27 +32,21 @@
 
 using namespace becommons;
 void camera::limparFB() const {
-    // Restaura estados
+    // --- restaurar estados ---
     glBindFramebuffer(GL_FRAMEBUFFER, prevFBO);
     glViewport(prevViewport[0], prevViewport[1], prevViewport[2], prevViewport[3]);
 }
 
 void camera::desenharFB() {
-    // Salvar estados atuais
+    // salvar estados
     glGetIntegerv(GL_FRAMEBUFFER_BINDING, &prevFBO);
     glGetIntegerv(GL_VIEWPORT, prevViewport);
 
-    // Configuração padrão
-    glEnable(GL_DEPTH_TEST);
-    glEnable(GL_CULL_FACE);
-    glDepthFunc(GL_LESS);
-    glDepthMask(GL_TRUE);
-
+    // --- render no FBO ---
     if (flag_fb) {
         glBindFramebuffer(GL_FRAMEBUFFER, fbo);
 
-        // Só recria buffers se o tamanho mudar
-        int width = viewport_ptr ? viewport_ptr->z : motor::obter().m_janela->obterTamanho().x;
+        int width  = viewport_ptr ? viewport_ptr->z : motor::obter().m_janela->obterTamanho().x;
         int height = viewport_ptr ? viewport_ptr->w : motor::obter().m_janela->obterTamanho().y;
 
         if (width != lastWidth || height != lastHeight) {
@@ -66,17 +60,11 @@ void camera::desenharFB() {
             lastWidth = width;
             lastHeight = height;
         }
+
+        glViewport(0, 0, width, height);
+        glClearColor(ceu.r, ceu.g, ceu.b, ceu.a);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     }
-
-    // Limpa tela
-    glClearColor(ceu.r, ceu.g, ceu.b, ceu.a);
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-    // Define viewport
-    if (viewport_ptr)
-        glViewport(0, 0, viewport_ptr->z, viewport_ptr->w);
-    else
-        glViewport(0, 0, motor::obter().m_janela->obterTamanho().x, motor::obter().m_janela->obterTamanho().y);
 }
 
 camera::~camera() {

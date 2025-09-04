@@ -78,6 +78,12 @@ void sistema_renderizacao::calcularTransformacao(transformacao* t) {
 
 void sistema_renderizacao::atualizar() {
     auto reg = motor::obter().m_levelmanager->obterFaseAtual()->obterRegistro();
+
+    atualizarTransformacoes();
+    glColorMask(GL_FALSE, GL_FALSE, GL_FALSE, GL_FALSE);
+    renderizarSombras();
+    glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
+
     reg->cada<camera>([&](const uint32_t ent){
             auto cam = reg->obter<camera>(ent);
             if (!camera_principal) camera_principal = cam.get();
@@ -172,26 +178,19 @@ void sistema_renderizacao::renderizarSombras() {
 }
 void sistema_renderizacao::atualizarCamera(camera* cam) {
     auto reg = motor::obter().m_levelmanager->obterFaseAtual()->obterRegistro();
-
-    atualizarTransformacoes();
-    glColorMask(GL_FALSE, GL_FALSE, GL_FALSE, GL_FALSE);
-    renderizarSombras();
-    glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
-
+    cam->desenharFB();
 
     // Ativa a textura de sombras
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, depthMap);
+    glm::mat4 lightSpace = lightProj * lightView;
     auto setShadowUniforms = [&](shader& s){
         s.use();
         s.setInt("depthMap", 0);
         s.setFloat("near_plane", near_plane);
         s.setFloat("far_plane", far_plane);
-        glm::mat4 lightSpace = lightProj * lightView;
         s.setMat4("lightSpaceMatrix", glm::value_ptr(lightSpace)); 
     };
-
-    cam->desenharFB();
 
     // desenha o skybox, terreno, modelos...
     auto view = cam->obtViewMatrix();
@@ -215,8 +214,6 @@ void sistema_renderizacao::atualizarCamera(camera* cam) {
         s.setVec3("dirLight.color", lg->cor);
         s.setVec3("dirLight.ambient", lg->ambiente);
         s.setFloat("dirLight.intensity", lg->intensidade);
-        s.setFloat("near_plane", near_plane);
-        s.setFloat("far_plane", far_plane);
         s.setMat4("view", glm::value_ptr(view));
         s.setVec3("viewPos", cam->transform->posicao);
         s.setMat4("projection", glm::value_ptr(projection));
