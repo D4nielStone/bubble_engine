@@ -27,6 +27,7 @@
 #include "util/caixa.hpp"
 #include "elementos/area_de_toque.hpp"
 
+class tab;
 namespace becommons {
     /** \class header: 
      *  \brief `header` é uma caixa que funciona como a aba de uma janela. Pode ser em abas ou janela única.
@@ -38,8 +39,7 @@ namespace becommons {
         unsigned int m_tab_h { 16 };
         cor m_cor_ativado { 0.8f, 0.66f, 0.86f, 1.f };
         cor m_cor_desativado { 0.4f, 0.33f, 0.43f, 1.f };
-        caixa m_utils;
-        std::vector<std::unique_ptr<elementos::area_de_toque>> m_tabs;
+        std::vector<tab*> m_tabs;
         header();
         tipo_caixa tipo() const override { return tipo_caixa::header; };
         void atualizar() override;
@@ -55,9 +55,9 @@ namespace becommons {
     };
 
     namespace paineis {
-        class assets_manager : public painel {
+        class coding : public painel {
         public:
-            assets_manager();
+            coding();
             void atualizar() override;
             void research(const std::string& dir);
         };

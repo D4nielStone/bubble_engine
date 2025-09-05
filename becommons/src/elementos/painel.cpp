@@ -33,18 +33,13 @@ public:
     int m_tab_id = 0;
     header* m_header;
     elementos::texto* m_text;
-    elementos::botao* m_close;
     tab(header* m_header, const std::string& text = "tab") : m_header(m_header), area_de_toque() {
         adicionar<caixa>()->m_estilo.m_cor_fundo = m_header->m_cor_ativado;
         adicionar<caixa>()->m_estilo.m_cor_fundo = m_header->m_cor_ativado;
         m_estilo.m_padding = {1, 1};
         m_text = adicionar<elementos::texto>(text, 12);
-        m_close = adicionar<elementos::botao>([m_header, this](){
-                m_header->m_filhos[m_tab_id].reset();
-                }, "", "close.png", 12);
     }
     void atualizar() override {
-        if(m_close->pressionado()) return;
         /* texto */
         m_estilo.m_limites.z = m_text->obterLargura(m_text->m_texto_frase) + m_header->m_tab_h*2 + m_estilo.m_padding.x*4;
         m_estilo.m_limites.w = m_header->m_tab_h;
@@ -62,15 +57,6 @@ public:
         m_filhos[1]->m_estilo.m_limites.y = m_estilo.m_limites.y + m_header->m_tab_h / 2 - 2;
         m_filhos[1]->m_estilo.m_limites.z = 4;
         m_filhos[1]->m_estilo.m_limites.w = 4;
-        
-        m_filhos[3]->m_filhos[0]->m_estilo.m_limites.x = m_estilo.m_limites.x + m_estilo.m_limites.z - m_header->m_tab_h;
-        m_filhos[3]->m_filhos[0]->m_estilo.m_limites.y = m_estilo.m_limites.y;
-        m_filhos[3]->m_filhos[0]->m_estilo.m_limites.z = m_header->m_tab_h;
-        m_filhos[3]->m_estilo.m_limites.x = m_estilo.m_limites.x + m_estilo.m_limites.z - m_header->m_tab_h-2;
-        m_filhos[3]->m_estilo.m_limites.y = m_estilo.m_limites.y+2;
-        m_filhos[3]->m_estilo.m_limites.z = m_header->m_tab_h-4;
-        m_filhos[3]->m_estilo.m_limites.w = m_header->m_tab_h-4;
-        m_filhos[3]->m_filhos[0]->m_estilo.m_limites = m_filhos[3]->m_estilo.m_limites;
     
         area_de_toque::atualizar();
     }
@@ -87,23 +73,28 @@ header::header() {
     m_estilo.m_cor_fundo = cor(0.1f);
 }
 void header::atualizar() {
+    // -- se tabs mudou
     if (m_tabs.size() != m_filhos.size()) {
+        // -- reset
         for(auto& tab : m_tabs) {
-            motor::obter().m_editor->ui->remover(m_tabs.back().get());
-            tab.reset();
+            motor::obter().m_editor->ui->remover(m_tabs.back());
         }
         m_tabs.clear();
+
+        // -- add
         for(auto& c : m_filhos) {
+            // -- obtém o painel
             auto p = static_cast<painel*>(c.get());
-            m_tabs.push_back(std::make_unique<tab>(this, p->label));
-            static_cast<tab*>(m_tabs.back().get())->m_tab_id = m_tabs.size() - 1;
-            motor::obter().m_editor->ui->inserir(m_tabs.back().get());
+            // -- add a tab
+            m_tabs.push_back(motor::obter().m_editor->ui->adicionar<tab>(this, p->label));
+            m_tabs.back()->m_tab_id = m_tabs.size() - 1; // -- set id
         }
     }
 
-    motor::obter().m_editor->ui->inserir(&m_utils);
-    float cursor = m_estilo.m_limites.x + 2;
+    // -- cursor para posicionamento
+    float cursor = m_estilo.m_limites.x + 1;
     size_t idx = 0;
+    // -- lógica de toque
     for(auto& tab : m_tabs) {
         cursor += m_estilo.m_padding_geral.x + tab->m_estilo.m_padding.x;
         tab->m_estilo.m_limites.x = cursor;
@@ -113,7 +104,7 @@ void header::atualizar() {
         idx++;
     }
 
-    // painel
+    // -- painel
     for(size_t i = 0; i < m_filhos.size(); i++) {
         if(i!=tab_atual) {
             m_tabs[i]->m_estilo.m_cor_fundo = cor(0.03);
@@ -130,7 +121,7 @@ void header::atualizar() {
         m_filhos[i]->m_estilo.m_limites.y += m_tab_h;
         m_filhos[i]->m_estilo.m_limites.w -= m_tab_h;
         m_filhos[i]->atualizar();
-        m_tabs[i]->atualizar();
+//        m_tabs[i]->atualizar();
     }
 }
             
@@ -184,12 +175,12 @@ paineis::editor::editor(camera* cam) : painel("editor") {
     cam->viewport_ptr = &framebuffer->m_estilo.m_limites; // Associa o viewport da câmera aos limites do framebuffer
 }
 paineis::file_manager::file_manager() : painel("files") {
+/*
     auto* context = adicionar<caixa>();
     context->m_estilo.m_flag_estilo |= flag_estilo::largura_percentual | flag_estilo::altura_percentual;
     context->m_estilo.m_altura = 1;
     context->m_estilo.m_largura = 1;
     context->m_estilo.m_padding_geral = {2, 2};
-
     auto* barra_lateral = context->adicionar<caixa>();
     barra_lateral->m_estilo.m_flag_estilo |= flag_estilo::largura_justa | flag_estilo::altura_percentual;
     barra_lateral->m_estilo.m_cor_fundo = cor(0.07f);
@@ -207,9 +198,10 @@ paineis::file_manager::file_manager() : painel("files") {
     if (motor::obter().m_projeto)
     research(motor::obter().m_projeto->m_diretorio);
     else
-    research(obterDiretorioHome());
+    research(obterDiretorioHome());*/
 }
 void paineis::file_manager::research(const std::string& dir) {
+    /*
     static int scl = 12;
     auto* barra_lateral = m_filhos[0]->m_filhos[0].get();
     barra_lateral->m_filhos.clear();
@@ -278,14 +270,14 @@ void paineis::file_manager::research(const std::string& dir) {
                     pop->adicionar<elementos::botao>(nullptr, "copy", "", scl);
             }
         }
-    }
+    }*/
 }
 void paineis::file_manager::atualizar() {
     caixa::atualizar();
 }
 
-paineis::assets_manager::assets_manager() : painel("assets") {
-    auto* context = adicionar<caixa>();
+paineis::coding::coding() : painel("coding") {
+/*    auto* context = adicionar<caixa>();
     context->m_estilo.m_flag_estilo |= flag_estilo::largura_percentual | flag_estilo::altura_percentual;
     context->m_estilo.m_altura = 1;
     context->m_estilo.m_largura = 1;
@@ -309,9 +301,10 @@ paineis::assets_manager::assets_manager() : painel("assets") {
     research(motor::obter().m_projeto->m_diretorio);
     else
     research(obterDiretorioHome());
+*/
 }
-void paineis::assets_manager::research(const std::string& dir) {
+void paineis::coding::research(const std::string& dir) {
 }
-void paineis::assets_manager::atualizar() {
+void paineis::coding::atualizar() {
     caixa::atualizar();
 }

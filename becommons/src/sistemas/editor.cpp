@@ -52,22 +52,11 @@ void sistema_editor::adicionarCaixas() {
 
     // Configuração da seção superior da UI (barra de menu e versão)
     auto* menu = ui->obterRaiz()->adicionar<custom::barra_menu>();
-    menu->uid = 9998; // id para mostrar no último layer
     
-    auto* popup_file = menu->adicionar_botao(" File ", [](){})->adicionar<elementos::popup>();
+    auto* file_sec = menu->adicionar_botao(" File ", [](){});
     menu->adicionar_botao("Edit ", [](){});
     menu->adicionar_botao("View ", [](){});
     menu->adicionar_botao("Help ", [](){});
-    popup_file->uid = 9999; // id para mostrar no último layer
-
-    popup_file->adicionar<elementos::botao>([](){
-            motor::obter().finalizar();
-            }, "Exit");
-    popup_file->adicionar<elementos::botao>([](){
-            if(motor::obter().m_levelmanager)
-            motor::obter().m_levelmanager->salvarTudo();
-            motor::obter().m_editor->salvarEditor();
-            }, "Save all");
 
     // Configurando ambiente com containers
     // O container principal [dock] irá preencher a tela a-baixo da menubar
@@ -77,12 +66,25 @@ void sistema_editor::adicionarCaixas() {
     dock->m_estilo.m_altura = 1;
     
     auto [top, bottom] = dock->split(0.6, estilo::orientacao::vertical);
-    auto [esquerda_panel, meio_panel] = top->split(0.2);
+    auto [esquerda_panel, meio_dock] = top->split(0.2);
+    auto [meio_panel, direita_panel] = meio_dock->split(0.8);
     m_entidades = esquerda_panel->tab<paineis::entity>();
     m_editor = meio_panel->tab<paineis::editor>(cam.get());
-    m_inspetor = esquerda_panel->tab<paineis::inspector>();
+    m_inspetor = direita_panel->tab<paineis::inspector>();
     m_files = bottom->tab<paineis::file_manager>();
-    bottom->tab<paineis::assets_manager>();
+    bottom->tab<paineis::coding>();
+
+    // Inserção do popup no loop
+    auto* popup_file = ui->adicionar<elementos::popup>(file_sec);
+    popup_file->adicionar<elementos::botao>([](){
+            motor::obter().finalizar();
+            }, "Exit");
+    popup_file->adicionar<elementos::botao>([](){
+            if(motor::obter().m_levelmanager)
+            motor::obter().m_levelmanager->salvarTudo();
+            motor::obter().m_editor->salvarEditor();
+            }, "Save all");
+
  }
 /**
  * @brief Salva as configurações da câmera e do estado do editor em um arquivo JSON.

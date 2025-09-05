@@ -42,9 +42,8 @@ void interface::atualizarLJ(caixa* it_caixa) {
     size_t n_filhos = it_caixa->m_filhos.size();
 
     for (auto& filho : it_caixa->m_filhos) {
-        if (!deveAtualizar(filho.get()) || filho->tipo() == tipo_caixa::popup || filho->tem(flag_estilo::largura_percentual))
+        if (!deveAtualizar(filho.get()) || filho->tipo() == tipo_caixa::popup || filho->tem(flag_estilo::altura_percentual))
             continue;
-
         // --- VERTICAL: largura justa é a maior largura entre os filhos (+ paddings) ---
         if (!is_horizontal && it_caixa->tem(flag_estilo::largura_justa)) {
             float width_com_padding =
@@ -124,19 +123,14 @@ void interface::atualizarHDTF(caixa* it_caixa, std::function<void(caixa*)> func)
 }
 void interface::desenhar(caixa* c) {
     if(c) {
-    c->m_projecao = projecao_viewport;
-    c->desenhar(VAO);
-    for(auto& filho : c->m_filhos) {
-        if ((filho->tipo() == tipo_caixa::popup || filho->tipo() == tipo_caixa::menu_bar) && filho->m_estilo.m_ativo) {
-            inserir(filho.get());
-            if (filho->tipo() == tipo_caixa::popup)
-            continue;
+        c->m_projecao = projecao_viewport;
+        c->desenhar(VAO);
+        for(auto& filho : c->m_filhos) {
+            if(     filho->m_estilo.m_limites.x < c->m_estilo.m_limites.x + c->m_estilo.m_limites.z
+                    && filho->m_estilo.m_limites.y < c->m_estilo.m_limites.y + c->m_estilo.m_limites.w
+                    && filho->m_estilo.m_ativo)
+            desenhar(filho.get());
         }
-        if(     filho->m_estilo.m_limites.x < c->m_estilo.m_limites.x + c->m_estilo.m_limites.z
-                && filho->m_estilo.m_limites.y < c->m_estilo.m_limites.y + c->m_estilo.m_limites.w
-                && filho->m_estilo.m_ativo)
-        desenhar(filho.get());
-    }
     }
 }
 
@@ -159,9 +153,6 @@ caixa* interface::obterRaiz() {
 void interface::inicializar() {
     sistema::inicializar();
     gerarBuffers();
-    atualizarHDTF(m_raiz.get(), [](caixa* it_caixa) {
-            it_caixa->configurar();
-            }); 
 }
 
 interface::~interface() {
@@ -253,16 +244,16 @@ void interface::deconfigOpenglState() const {
 void interface::renderizar() {
     configOpenglState();
     desenhar(m_raiz.get());
-    glEnable(GL_SCISSOR_TEST);
-    for(auto [id, filho] : pos_render) {
+    //glEnable(GL_SCISSOR_TEST);
+    for(auto& [id, filho] : m_floating) {
         if(filho->m_estilo.m_ativo) {
-        glScissor(
+        /*glScissor(
             filho->m_estilo.m_limites.x,
             m_window->obterTamanho().y - filho->m_estilo.m_limites.y - filho->m_estilo.m_limites.w + 1.f,
             filho->m_estilo.m_limites.z + 1.f,
             filho->m_estilo.m_limites.w
-        );
-        desenhar(filho);
+        );*/
+        desenhar(filho.get());
         }
     }
     deconfigOpenglState();
@@ -277,7 +268,6 @@ void interface::atualizar() {
         static_cast<float>(m_window->obterTamanho().x),
         static_cast<float>(m_window->obterTamanho().y)};
 
-    // reseta a flag de detecção de toque
     chamarFuncoes(m_raiz.get());
     atualizarHDTF(m_raiz.get(), [this](auto* no) { 
             atualizarLJ(no);
@@ -285,6 +275,12 @@ void interface::atualizar() {
             });
     atualizarFilhos(m_raiz.get());
     m_raiz->atualizar();
+
+    for(auto& [id, filho] : m_floating) {
+        chamarFuncoes(filho.get());
+        atualizarFilhos(filho.get());
+        filho->atualizar();
+    }
 }
 
 
@@ -327,7 +323,6 @@ void interface::organizarLinha(caixa* it_caixa,
     int i = range_filhos.x;
     while (i < range_filhos.y) {
         auto& filho = it_caixa->m_filhos[i];
-        if(filho->tipo() != tipo_caixa::popup) {
         // atualiza dimenções
         filho->m_estilo.m_limites.z = filho->tem(flag_estilo::largura_percentual) ? filho->m_estilo.m_largura * unidade_crescimento.x : filho->m_estilo.m_largura;
         filho->m_estilo.m_limites.w = filho->tem(flag_estilo::altura_percentual) ? filho->m_estilo.m_altura * unidade_crescimento.y : filho->m_estilo.m_altura;
@@ -340,7 +335,6 @@ void interface::organizarLinha(caixa* it_caixa,
         } else {
             maior = std::max(maior, filho->m_estilo.m_limites.z+ filho->m_estilo.m_padding.x * 2 + it_caixa->m_estilo.m_padding_geral.x * 2); // maior largura
             cursor.y += filho->m_estilo.m_limites.w + filho->m_estilo.m_padding.y + it_caixa->m_estilo.m_padding_geral.y;
-        }
         }
         i++;
     }
@@ -457,11 +451,7 @@ void interface::processarModular(caixa* it_caixa) {
 
 void interface::chamarFuncoes(caixa* it_caixa) {
     if(!it_caixa) return;
-    if (it_caixa->tipo() == tipo_caixa::popup || it_caixa->tipo() == tipo_caixa::caixa_de_texto) {
-        if(it_caixa->mouseEmCima()) s_contagem_areas++;
-    }
     else if (it_caixa->tipo() == tipo_caixa::botao) {
-        if(it_caixa->mouseEmCima()) s_contagem_areas++;
         auto btn = static_cast<elementos::botao*>(it_caixa);
         if(btn->pressionado() && btn->m_use_funcao) btn->m_funcao();
     }
@@ -482,9 +472,7 @@ void interface::atualizarFilhos(caixa* it_caixa) {
         atualizarFilhos(filho.get());
     }
 }
-void interface::inserir(caixa* c) {
-    pos_render[c->uid] = c;
-}
+
 void interface::remover(caixa* c) {
-    pos_render.erase(c->uid);
+    m_floating.erase(c->uid);
 }

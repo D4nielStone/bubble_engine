@@ -39,13 +39,11 @@ namespace becommons {
                 bool m_esquerdo = true;
             public:
 
-                popup(bool e = true) : m_esquerdo(e) {
+                popup(botao* ref, bool e = true) : m_referencia(ref), m_esquerdo(e) {
                     m_estilo.m_orientacao_modular = estilo::orientacao::vertical;
                     m_estilo.m_ativo = false;
                 }
                 void configurar() override {
-                    if (m_pai && m_pai->tipo() == tipo_caixa::botao)
-                        m_referencia = static_cast<botao*>(m_pai);
                     m_estilo.m_cor_fundo = cor(0.1f);
                     m_estilo.m_cor_borda = cor(0.07f);
                     m_estilo.m_flag_estilo |= flag_estilo::largura_justa | flag_estilo::altura_justa;

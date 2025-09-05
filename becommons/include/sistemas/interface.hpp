@@ -52,7 +52,14 @@ namespace becommons {
         void organizarLinha(caixa*, bool, const ivet2 , const fvet2&, const fvet2&, fvet2&);
         void processarModular(caixa*);
         void atualizarFilhos(caixa*);
-        void inserir(caixa*);
+        template <typename T, typename ...Args>
+        T* adicionar(Args&&... args) {
+            auto nova_caixa = std::make_unique<T>(std::forward<Args>(args)...);
+            nova_caixa->configurar();
+            auto* ptr = nova_caixa.get();
+            m_floating[nova_caixa->uid] = std::move(nova_caixa);
+            return ptr;
+        }
         void remover(caixa*);
         interface();
         interface(ijanela*);
@@ -64,7 +71,7 @@ namespace becommons {
         void renderizar();
     
         caixa* obterRaiz();
-        std::map<unsigned long long, caixa*> pos_render;
+        std::map<unsigned long long, std::unique_ptr<caixa>> m_floating;
         std::unique_ptr<caixa> m_raiz;
         glm::mat4 projecao_viewport;
         ijanela* m_window = nullptr;
