@@ -27,6 +27,7 @@
 #include "util/caixa.hpp"
 #include "elementos/imagem.hpp"
 #include "elementos/painel.hpp"
+#include "elementos/botao.hpp"
 
 namespace becommons {
     class container : public caixa {
@@ -40,7 +41,11 @@ namespace becommons {
         T* tab(Args&&... args) {
             if(dividiu) return nullptr;
             caixa* h;
-            m_filhos.empty() ? h = adicionar<header>() : h = m_filhos[0].get();
+            if (m_filhos.empty()) {
+                h = adicionar<header>();
+                adicionar<elementos::botao>(nullptr, "", "options.png");
+            } else
+                h = m_filhos[0].get();
             auto* ptr = h->adicionar<T>(std::forward<Args>(args)...);
             return ptr;
         }

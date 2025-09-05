@@ -71,6 +71,13 @@ void container::atualizar() {
         // m_filhos[0] = header
         // m_filhos[0]->m_filhos = paineis
         m_filhos[0]->m_estilo.m_limites = becommons::lerp(m_filhos[0]->m_estilo.m_limites, m_estilo.m_limites,motor::obter().m_tempo->obterDeltaTime()*10);
+        float w = 16.f;
+        m_filhos[1]->m_estilo.m_limites = becommons::lerp(m_filhos[1]->m_estilo.m_limites, fvet4{
+            m_estilo.m_limites.x + m_estilo.m_limites.z - w,
+            m_estilo.m_limites.y,
+            w,
+            w},motor::obter().m_tempo->obterDeltaTime()*10);
+        m_filhos[1]->m_filhos[0]->m_estilo.m_limites = m_filhos[1]->m_estilo.m_limites;
     }
     caixa::atualizar();
 }
