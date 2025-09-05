@@ -32,13 +32,15 @@ container::container() {
         
 void container::unsplit() {
     dividiu = false;
-    m_filhos.clear();
+    m_containers.clear();
 }
         
 std::pair<container*, container*>  container::split(float porcao_inicial, estilo::orientacao o) {
-    m_filhos.clear();
-    auto* a = adicionar<container>();
-    auto* b = adicionar<container>();    
+    if(dividiu) return{nullptr, nullptr}; // -- evita duplicatas
+    auto* a = motor::obter().m_editor->ui->adicionar<container>();
+    auto* b = motor::obter().m_editor->ui->adicionar<container>();    
+    m_containers.push_back(a);
+    m_containers.push_back(b);
 
     m_estilo.m_orientacao_modular = o;
     porcao = std::clamp(porcao_inicial, 0.0f, 1.0f);
@@ -57,12 +59,12 @@ void container::atualizar() {
         float ph = m_estilo.m_limites.w; // altura
         if (m_estilo.m_orientacao_modular == estilo::orientacao::horizontal) {
             // coluna A | B  (divide largura)
-            m_filhos[0]->m_estilo.m_limites = { px, py, pw * porcao, ph };                      // esquerda/topo do split
-            m_filhos[1]->m_estilo.m_limites = { px + pw * porcao, py, pw * pb, ph };     // direita
+            m_containers[0]->m_estilo.m_limites = { px, py, pw * porcao, ph };                      // esquerda/topo do split
+            m_containers[1]->m_estilo.m_limites = { px + pw * porcao, py, pw * pb, ph };     // direita
         } else {
             // linha A // B  (divide altura)
-            m_filhos[0]->m_estilo.m_limites = { px, py, pw, ph * porcao };                      // topo
-            m_filhos[1]->m_estilo.m_limites = { px, py + ph * porcao, pw, ph * pb };     // bottom
+            m_containers[0]->m_estilo.m_limites = { px, py, pw, ph * porcao };                      // topo
+            m_containers[1]->m_estilo.m_limites = { px, py + ph * porcao, pw, ph * pb };     // bottom
         }
     } else
     if (!m_filhos.empty()) {

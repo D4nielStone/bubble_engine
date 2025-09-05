@@ -33,6 +33,7 @@ namespace becommons {
     private:
         float porcao = 0.5f;
         bool dividiu{false};
+        std::vector<container*> m_containers;
     public:
         container();
         template <typename T, typename ...Args>
