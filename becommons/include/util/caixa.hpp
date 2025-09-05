@@ -52,6 +52,11 @@ namespace becommons {
         largura_justa       = 1 << 6,
         altura_justa        = 1 << 7    // max = 8.
     };
+    enum class layer {
+        criacao,    // -- ordena baseado na criação
+        selecao,    //                      seleção
+        topo        //            sempre no topo
+    };
 
     inline flag_estilo operator|(flag_estilo a, flag_estilo b) {
         return static_cast<flag_estilo>(static_cast<uint32_t>(a) | static_cast<uint32_t>(b));
@@ -65,8 +70,6 @@ namespace becommons {
         a = a | b;
         return a;
     }
-    // Flag para detecções de mouse
-	static unsigned int s_contagem_areas;
 
     struct estilo {
         // \enum estilo::orientacao
@@ -148,8 +151,8 @@ namespace becommons {
     class caixa {
     public:
         static inline unsigned long long next_id = 0;
-        unsigned long long uid;
-        caixa() : uid(next_id++), m_projecao(1.f) {
+        unsigned long long m_id;
+        caixa() : m_id(next_id++), m_projecao(1.f) {
             m_material.definirUniforme("quadrado", &m_estilo.m_limites);
             m_material.definirUniforme("cor_borda", &m_estilo.m_cor_borda);
             m_material.definirUniforme("cor", &m_estilo.m_cor_fundo);

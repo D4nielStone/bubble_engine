@@ -33,7 +33,7 @@ bool elementos::area_de_texto::selecionado() {
     // atualiza flag de cursor sobre a área
     m_mouse_cima = mouseEmCima();
 
-    if (m_mouse_cima && s_contagem_areas <= 1) {
+    if (m_mouse_cima) {
         motor::obter().m_janela->definirCursor(janela::cursor::i);
     }
     if (justPressed) {

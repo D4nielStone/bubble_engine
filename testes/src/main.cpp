@@ -64,6 +64,7 @@
 #include <iostream>
 #include "registro_testes.hpp"
 #include "becommons/becommons.hpp"
+#include "elementos/docking.hpp"
 
 using namespace becommons;
 

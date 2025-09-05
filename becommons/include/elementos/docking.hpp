@@ -24,16 +24,16 @@
  */
 
 #pragma once
-#include "util/caixa.hpp"
-#include "elementos/imagem.hpp"
+#include "becommons/becommons.hpp"
 #include "elementos/painel.hpp"
-#include "elementos/botao.hpp"
 
 namespace becommons {
     class container : public caixa {
     private:
         float porcao = 0.5f;
-        bool dividiu{false};
+        bool dividiu{false}, a, floating{false};
+        fvet4 limite_flutuando {100,100,300,50};
+        container* father{nullptr};
         std::vector<container*> m_containers;
     public:
         container();
@@ -43,13 +43,19 @@ namespace becommons {
             caixa* h;
             if (m_filhos.empty()) {
                 h = adicionar<header>();
-                adicionar<elementos::botao>(nullptr, "", "options.png");
+                if(father) {
+                    auto* btn = adicionar<elementos::botao>(nullptr, "", "options.png");
+                    auto* pup = motor::obter().m_editor->ui->adicionar<elementos::popup>(btn);
+                    pup->adicionar<elementos::botao>([this](){
+                        father->unsplit(a);
+                    }, "unpin");
+                }
             } else
                 h = m_filhos[0].get();
             auto* ptr = h->adicionar<T>(std::forward<Args>(args)...);
             return ptr;
         }
-        void unsplit();
+        void unsplit(bool);
         std::pair<container*, container*> split(float porcao_inicial = 0.5f, estilo::orientacao o = estilo::orientacao::horizontal);
         void atualizar() override;
         tipo_caixa tipo() const override {return tipo_caixa::container;};

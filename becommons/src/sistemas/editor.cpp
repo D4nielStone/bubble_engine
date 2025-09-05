@@ -29,6 +29,7 @@
 #include <rapidjson/prettywriter.h>
 #include "elementos/barra_menu.hpp"
 #include "elementos/painel.hpp"
+#include "elementos/docking.hpp"
 #include "becommons/becommons.hpp"
 
 using namespace becommons;

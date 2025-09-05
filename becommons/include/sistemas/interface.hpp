@@ -55,9 +55,11 @@ namespace becommons {
         template <typename T, typename ...Args>
         T* adicionar(Args&&... args) {
             auto nova_caixa = std::make_unique<T>(std::forward<Args>(args)...);
+            int layer = 0;
             nova_caixa->configurar();
+            if (nova_caixa->tipo() == tipo_caixa::popup) layer = 100;
             auto* ptr = nova_caixa.get();
-            m_floating[nova_caixa->uid] = std::move(nova_caixa);
+            m_floating[nova_caixa->m_id + layer] = std::move(nova_caixa);
             return ptr;
         }
         void remover(caixa*);

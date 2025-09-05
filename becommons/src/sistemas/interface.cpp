@@ -474,5 +474,5 @@ void interface::atualizarFilhos(caixa* it_caixa) {
 }
 
 void interface::remover(caixa* c) {
-    m_floating.erase(c->uid);
+    m_floating.erase(c->m_id);
 }
