@@ -31,9 +31,10 @@ namespace becommons {
     class container : public caixa {
     private:
         float porcao = 0.5f;
-        bool dividiu{false}, a, floating{false};
+        bool dividiu{false}, ladoA, floating{false};
         fvet4 limite_flutuando {100,100,300,50};
         container* father{nullptr};
+        elementos::popup* m_popup{nullptr};
         std::vector<container*> m_containers;
     public:
         container();
@@ -45,9 +46,9 @@ namespace becommons {
                 h = adicionar<header>();
                 if(father) {
                     auto* btn = adicionar<elementos::botao>(nullptr, "", "options.png");
-                    auto* pup = motor::obter().m_editor->ui->adicionar<elementos::popup>(btn);
-                    pup->adicionar<elementos::botao>([this](){
-                        father->unsplit(a);
+                    m_popup = motor::obter().m_editor->ui->adicionar<elementos::popup>(btn);
+                    m_popup->adicionar<elementos::botao>([this](){
+                        father->unsplit(ladoA);
                     }, "unpin");
                 }
             } else

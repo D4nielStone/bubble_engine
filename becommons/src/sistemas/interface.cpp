@@ -277,9 +277,9 @@ void interface::atualizar() {
     m_raiz->atualizar();
 
     for(auto& [id, filho] : m_floating) {
-        chamarFuncoes(filho.get());
         atualizarFilhos(filho.get());
         filho->atualizar();
+        chamarFuncoes(filho.get());
     }
 }
 
@@ -474,5 +474,7 @@ void interface::atualizarFilhos(caixa* it_caixa) {
 }
 
 void interface::remover(caixa* c) {
-    m_floating.erase(c->m_id);
+    int layer = 0;
+    if (c->tipo() == tipo_caixa::popup) layer = 100;
+    m_floating.erase(c->m_id+layer);
 }

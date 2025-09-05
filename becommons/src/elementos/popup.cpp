@@ -27,6 +27,7 @@
 using namespace becommons;
 
 void elementos::popup::atualizar() {
+    if (m_referencia == nullptr)return;
     // Detecta borda de clique
     bool mouseE = m_esquerdo ? motor::obter().m_inputs->obter(inputs::MOUSE_E) : motor::obter().m_inputs->obter(inputs::MOUSE_D);
     bool mousePressedEdge = (mouseE && !prevMouseE);

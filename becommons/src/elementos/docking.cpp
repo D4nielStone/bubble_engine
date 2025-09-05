@@ -51,13 +51,22 @@ void container::unsplit(bool keepLeft) {
         m_containers.push_back(b);
     
         m_estilo.m_orientacao_modular = kept->m_estilo.m_orientacao_modular;
-        kept->porcao;
-        dividiu = true;
+        porcao = kept->porcao;
+        this->ladoA = kept->ladoA;
+        dividiu = kept->dividiu;
     } else {
         for (auto& f : kept->m_filhos) {
             f->m_pai = this;
             f->configurar();
             adicionar(std::move(f));
+        }
+        if(kept->m_popup) {motor::obter().m_editor->ui->remover(kept->m_popup);
+        if(father) {
+            m_popup = motor::obter().m_editor->ui->adicionar<elementos::popup>(static_cast<elementos::botao*>(m_filhos[1].get()));
+            m_popup->adicionar<elementos::botao>([this](){
+                father->unsplit(ladoA);
+            }, "unpin");
+        }
         }
     }
     // 2: tornar floating solto
@@ -83,8 +92,8 @@ std::pair<container*, container*>  container::split(float porcao_inicial, estilo
     auto* a = motor::obter().m_editor->ui->adicionar<container>();
     auto* b = motor::obter().m_editor->ui->adicionar<container>();    
     // determina seu lado a ou b
-    a->a = true;
-    b->a = false;
+    a->ladoA= true;
+    b->ladoA= false;
     a->father = this;
     b->father = this;
     m_containers.push_back(a);
