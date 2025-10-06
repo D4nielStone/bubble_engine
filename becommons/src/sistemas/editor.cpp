@@ -28,6 +28,7 @@
 #include <rapidjson/document.h>
 #include <rapidjson/prettywriter.h>
 #include "elementos/barra_menu.hpp"
+#include "elementos/gerenciador_projetos.hpp"
 #include "elementos/painel.hpp"
 #include "becommons/becommons.hpp"
 
@@ -41,12 +42,15 @@ using namespace beeditor;
  */
 sistema_editor::sistema_editor() : m_salvar_ao_fechar(true) {
 }
+        
 /**
  * @brief Adiciona e configura as caixas (containers) da interface do usuário do editor.
  * Esta função estrutura a UI em seções lógicas como topo, centro e console,
  * e configura seus estilos e comportamentos iniciais.
  */
-void sistema_editor::adicionarCaixas() {
+void sistema_editor::carregarConfiguracaoPadrao()
+{
+    ui->resetRoot();
     // Configuração da caixa raiz (root UI element)
     ui->obterRaiz()->m_estilo.m_orientacao_modular = estilo::orientacao::vertical;
 
@@ -84,8 +88,26 @@ void sistema_editor::adicionarCaixas() {
             motor::obter().m_levelmanager->salvarTudo();
             motor::obter().m_editor->salvarEditor();
             }, "Save all");
+}
+        
+void sistema_editor::carregarConfiguracaoGerenciador(){
+    // Configuração da caixa raiz (root UI element)
+    ui->obterRaiz()->m_estilo.m_orientacao_modular = estilo::orientacao::vertical;
 
- }
+    // Configuração da seção superior da UI (barra de menu e versão)
+    auto* menu = ui->obterRaiz()->adicionar<custom::barra_menu>();
+    
+    auto* file_sec = menu->adicionar_botao(" File ", [](){});
+    menu->adicionar_botao("Edit ", [](){});
+    menu->adicionar_botao("View ", [](){});
+    menu->adicionar_botao("Help ", [](){});
+    auto* cont = ui->obterRaiz()->adicionar<container>();
+    cont->m_estilo.m_flag_estilo |= flag_estilo::largura_percentual | flag_estilo::altura_percentual;
+    cont->m_estilo.m_largura = 1;
+    cont->m_estilo.m_altura = 1;
+    cont->gerarHeader();
+    cont->nova_tab<EDITOR_NS::gerenciador_projetos>(obterDiretorioHome() + "/bubble");
+}
 /**
  * @brief Salva as configurações da câmera e do estado do editor em um arquivo JSON.
  * Cria o diretório 'usr' se não existir e serializa os dados da câmera.
@@ -139,8 +161,6 @@ void sistema_editor::inicializar() {
     if (motor::obter().m_projeto) {
 		abrirProjeto(motor::obter().m_projeto.get());
 	}
-
-    adicionarCaixas(); // Constrói a interface do editor
 }
 
 void sistema_editor::abrirProjeto(becommons::projeto* proj) {

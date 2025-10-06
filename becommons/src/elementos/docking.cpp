@@ -26,8 +26,13 @@
 #include "elementos/painel.hpp"
 using namespace becommons;
 
-container::container() { 
+container::container(bool floating) { 
     m_estilo.m_flag_estilo = flag_estilo::nenhuma;
+<<<<<<< Updated upstream
+=======
+    m_cortar = true;
+    m_floating = floating;
+>>>>>>> Stashed changes
 }
         
 void container::unsplit() {
@@ -35,6 +40,61 @@ void container::unsplit() {
     m_filhos.clear();
 }
         
+<<<<<<< Updated upstream
+=======
+void container::unsplit(bool keepLeft) {
+    if (!m_dividiu || !m_a || !m_b) return;
+    m_dividiu = false;
+
+    container* kept = keepLeft ? m_b : m_a;
+    container* floating = keepLeft ? m_a : m_b;
+
+    // 1: devo herdar os filhos/containers do kept
+    container* a = kept->m_a;
+    container* b = kept->m_b;    
+    if(a && b) {
+        a->m_container_pai = this;
+        b->m_container_pai = this;
+    }
+    m_a = a;
+    m_b = b;
+    
+    for (auto& f : kept->m_filhos) {
+        f->m_pai = this;
+        adicionar(f);
+    }
+    if(kept->m_popup_close && kept->m_filhos.size() > 1) {
+        motor::obter().m_editor->ui->remover(kept->m_popup_close);
+        // remover botão
+        m_filhos.erase(m_filhos.begin() + 1);
+        gerarHeader();
+    }
+    m_estilo.m_orientacao_modular = kept->m_estilo.m_orientacao_modular;
+    m_porcao = kept->m_porcao;
+    m_dividiu = kept->m_dividiu;
+    // 2: tornar floating solto
+    // O floating fica independente
+    floating->m_dividiu = false;
+    floating->m_container_pai = nullptr;
+    floating->m_floating = true;
+    if(floating->m_popup_close && floating->m_filhos.size() > 1) {
+        motor::obter().m_editor->ui->remover(floating->m_popup_close);
+        floating->m_filhos.erase(floating->m_filhos.begin() + 1);
+        floating->gerarHeader();
+    }
+    floating->m_estilo.m_limites = {
+        floating->m_estilo.m_limites.x + floating->m_estilo.m_limites.z/4,
+        floating->m_estilo.m_limites.y + floating->m_estilo.m_limites.w/4,
+        floating->m_estilo.m_limites.z/2,
+        floating->m_estilo.m_limites.w/2
+    };
+
+    // 3: limpar referência interna
+    // O container do antigo kept deve ser deletado da loop
+    motor::obter().m_editor->ui->remover(kept);
+}
+ 
+>>>>>>> Stashed changes
 std::pair<container*, container*>  container::split(float porcao_inicial, estilo::orientacao o) {
     m_filhos.clear();
     auto* a = adicionar<container>();
@@ -66,6 +126,16 @@ void container::atualizar() {
         }
     } else
     if (!m_filhos.empty()) {
+<<<<<<< Updated upstream
+=======
+        if(m_floating) {
+            if (mouseEmCima() && motor::obter().m_inputs->obter(inputs::MOUSE_D)) {
+                motor::obter().fila_opengl.push([this]() {
+                    motor::obter().m_editor->ui->trazer(this);
+                });
+            }
+        }
+>>>>>>> Stashed changes
         // m_filhos[0] = header
         // m_filhos[0]->m_filhos = paineis
         m_filhos[0]->m_estilo.m_limites = becommons::lerp(m_filhos[0]->m_estilo.m_limites, m_estilo.m_limites,motor::obter().m_tempo->obterDeltaTime()*10);

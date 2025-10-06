@@ -38,7 +38,7 @@ int main(int argc, char* argv[]) {
         } else {
 	    // Cria o motor sem o diretório do jogo
 	    auto be = becommons::motor();
-	    be.iniciar(becommons::exec::editor);
+	    be.iniciar(becommons::exec::gerenciador);
 	    be.rodar();
 	}
     }

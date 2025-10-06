@@ -81,6 +81,7 @@ target_sources(becommons PRIVATE
     src/util/material.cpp
     src/elementos/area_de_toque.cpp
     src/elementos/popup.cpp
+    src/elementos/gerenciador_projetos.cpp
     src/elementos/docking.cpp
     src/elementos/painel.cpp
     src/elementos/area_de_texto.cpp

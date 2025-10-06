@@ -38,10 +38,10 @@ uniform vec4 cor;
 uniform vec4 quadrado;
 uniform vec4 cor_borda; // Cor da borda
 uniform int tamanho_bordas;
+uniform float raio;
 out vec4 FragColor;
 
 void main() {
-	float raio = 2.f;
     vec2 pos = quadrado.zw * Uv;
     vec2 halfSize = quadrado.zw / 2;
     vec2 d = abs(pos - halfSize)  - (halfSize - vec2(raio));

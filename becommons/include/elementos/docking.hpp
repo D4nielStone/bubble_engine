@@ -31,10 +31,25 @@
 namespace becommons {
     class container : public caixa {
     private:
+<<<<<<< Updated upstream
         float porcao = 0.5f;
         bool dividiu{false};
     public:
         container();
+=======
+        float m_porcao = 0.5f;
+        bool m_dividiu{false},
+             m_sou_a{false},
+             m_floating{false};
+        container* m_container_pai{nullptr};
+        elementos::popup* m_popup_close{nullptr};
+        container *m_a{nullptr}, *m_b{nullptr};
+    public:
+        fvet4 m_limite_flutuando{100,100,300,50};
+        container(bool floating = false);
+        header* gerarHeader();
+        // tabulaçãopara novos paineis
+>>>>>>> Stashed changes
         template <typename T, typename ...Args>
         T* tab(Args&&... args) {
             if(dividiu) return nullptr;

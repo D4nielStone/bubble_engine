@@ -88,6 +88,7 @@ namespace becommons {
         fvet4               m_limites {0, 0, 20, 20};
         cor                 m_cor_borda {0.1f, 0.1f, 0.1f, 0.f};
         cor                 m_cor_fundo {1.f, 1.f, 1.f, 0.f};
+        float               m_raio = 4.f;
         
         // Operador de diferença (!=)
         bool operator!=(const estilo& other) const {
@@ -152,6 +153,7 @@ namespace becommons {
         caixa() : uid(next_id++), m_projecao(1.f) {
             m_material.definirUniforme("quadrado", &m_estilo.m_limites);
             m_material.definirUniforme("cor_borda", &m_estilo.m_cor_borda);
+            m_material.definirUniforme("raio", &m_estilo.m_raio);
             m_material.definirUniforme("cor", &m_estilo.m_cor_fundo);
             m_material.definirUniforme("tamanho_bordas", &m_estilo.m_espessura_borda);
             m_material.definirUniforme("projecao", &m_projecao);

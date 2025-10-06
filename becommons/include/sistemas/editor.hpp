@@ -29,8 +29,6 @@
 
 namespace beeditor {
     class sistema_editor : public becommons::sistema {
-    private:
-        void adicionarCaixas();
     public:
         // \brief construtor
         sistema_editor();
@@ -40,6 +38,8 @@ namespace beeditor {
         void atualizar() override;
         void salvarEditor();
 		void abrirProjeto(becommons::projeto*);
+        void carregarConfiguracaoPadrao();
+        void carregarConfiguracaoGerenciador();
          
         std::shared_ptr<becommons::interface> ui;
         std::shared_ptr<becommons::camera_editor> cam;

@@ -60,7 +60,7 @@ static const std::map<const std::string, std::pair<BYTE*, const unsigned int>> i
     {"joystick.png", std::pair(joystick_png, joystick_png_len)},
     {"Fisica.png", std::pair(fisica_png, fisica_png_len)},
     {"Iluminacao.png", std::pair(iluminacao_png, iluminacao_png_len)},
-    {"Play.png", std::pair(play_png, play_png_len)},
+    {"play.png", std::pair(play_png, play_png_len)},
     {"Renderizador.png", std::pair(renderizador_png, renderizador_png_len)},
     {"scene.png", std::pair(scene_png, scene_png_len)},
     {"stop.png", std::pair(stop_png, stop_png_len)},

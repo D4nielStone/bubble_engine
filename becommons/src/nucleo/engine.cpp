@@ -102,9 +102,19 @@ void motor::iniciar(const exec& gm) {
         m_levelmanager->carregar(m_projeto->m_lancamento);
         m_levelmanager->obterFaseAtual()->iniciar();
     }
-    else 
+    else if(m_game_mode == exec::editor) {
         // sistema de editor
         m_editor = std::make_shared<beeditor::sistema_editor>();
+        if(!m_editor->init)
+            m_editor->inicializar();
+        m_editor->carregarConfiguracaoPadrao();
+    }
+    else if(m_game_mode == exec::gerenciador) {
+        // sistema de editor
+        m_editor = std::make_shared<beeditor::sistema_editor>();
+        m_editor->inicializar();
+        m_editor->carregarConfiguracaoGerenciador();
+    }
 }
 void motor::rodar() {
     while(m_janela && !m_janela->deveFechar()) {
@@ -141,7 +151,7 @@ void motor::rodar() {
             }*/
         }
             
-        if(m_game_mode == exec::editor) {
+        if(m_game_mode == exec::editor || m_game_mode == exec::gerenciador) {
             if(!m_editor->init)
                 m_editor->inicializar();
             m_editor->atualizar();    
@@ -157,7 +167,7 @@ void motor::abrirProjeto(const std::string& directory) {
     if(m_levelmanager) m_levelmanager.reset();    
     m_levelmanager = std::make_shared<levelmanager>(m_projeto.get());
 
-    if(m_game_mode == exec::editor) {
+    if(m_game_mode == exec::editor || m_game_mode == exec::gerenciador) {
         if(m_editor) m_editor->abrirProjeto(m_projeto.get());    
     }
 }

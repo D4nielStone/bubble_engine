@@ -61,6 +61,7 @@ namespace becommons {
             return ptr;
         }
         void remover(caixa*);
+        void resetRoot();
         interface();
         interface(ijanela*);
         ~interface();

@@ -48,6 +48,7 @@
 
 namespace becommons {
     enum class exec : char {
+        gerenciador ='P',
         editor =    'E',
         jogo =      'G'
     };

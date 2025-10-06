@@ -22,10 +22,8 @@
  */
 
 #include "becommons/becommons.hpp"
-#include "editor_namespace.hpp"
-#include "sistemas/editor.hpp"
-#include "custom/barra_menu.hpp"
-#include "sistemas/gerenciador_projetos.hpp"
+#include "elementos/docking.hpp"
+#include "elementos/gerenciador_projetos.hpp"
 
 using namespace EDITOR_NS;
 
@@ -34,19 +32,106 @@ using namespace EDITOR_NS;
  * Inicializa o diretório raiz padrão onde os projetos serão armazenados.
  * @param dir O caminho do diretório raiz padrão.
  */
-gerenciador_projetos::gerenciador_projetos(const std::string& dir) : DIR_PADRAO(dir) {
+gerenciador_projetos::gerenciador_projetos(const std::string& dir) : painel("gerenciador de projetos"), DIR_PADRAO(dir) {
+    buscarProjetos();
+    m_estilo.m_padding_geral = {2,2};
+    auto* text = adicionar<elementos::texto>("projetos encontrados:", 18, elementos::flags_texto::alinhamento_central);
+    text->m_estilo.m_flag_estilo |= flag_estilo::largura_percentual;
+    text->m_estilo.m_largura = 1;
+
+    for(auto& [nome,dir]: projetos) {
+        auto* c = adicionar<container>();
+        auto* p = c->nova_tab<painel>(nome);
+        auto* p2 = c->nova_tab<painel>("editar projeto");
+        c->m_estilo.m_flag_estilo |= flag_estilo::largura_percentual;
+        c->m_estilo.m_largura = 1;
+        c->m_estilo.m_altura = 115;
+
+        p->m_estilo.m_cor_fundo = {0.07,0.07,0.07,1.f};
+        p->m_estilo.m_flag_estilo |= flag_estilo::alinhamento_central;
+        p->m_estilo.m_orientacao_modular = estilo::orientacao::horizontal;
+
+        p->adicionar<elementos::botao>([this, dir](){
+            abrirProjeto(dir);
+                }, "", "play.png", 50);
+    }
 }
 
 /**
- * @brief Cria um novo projeto com uma estrutura inicial.
- * Este método gera o diretório do projeto, um arquivo de configuração `config.json`,
- * uma fase padrão `main.fase` com entidades predefinidas (luz, plano, cubo com script)
- * e um script Lua de exemplo.
- *
- * @param novo_diretorio O diretório pai onde o novo projeto será criado.
- * @param nome O nome do novo projeto.
- * @param padrao Flag para criar estrutura padrão.
+ * @brief Remove um projeto existente.
+ * Exclui recursivamente o diretório do projeto e atualiza a lista de projetos.
+ * O projeto selecionado é redefinido para "nenhum" ou para o primeiro projeto disponível.
+ * @param dir O caminho completo do diretório do projeto a ser removido.
  */
+void gerenciador_projetos::removerProjeto(const std::string& dir) {
+    if(std::filesystem::exists(dir)) {
+        std::filesystem::remove_all(dir); // Remove o diretório e todo o seu conteúdo
+    }
+
+    buscarProjetos(); // Atualiza a lista de projetos
+    // Define o projeto selecionado para 'nenhum' se não houver mais projetos,
+    // ou para o primeiro projeto na lista.
+    m_projeto_selecionado = projetos.empty() ? "nenhum" : projetos.begin()->first;
+}
+
+/**
+ * @brief Abre e inicia um projeto no editor.
+ * Esta função descarrega recursos existentes, destrói a janela atual (do gerenciador),
+ * inicializa uma nova instância do projeto e do sistema do editor, configura o título da janela,
+ * e inicia o loop principal do editor.
+ * @param caminho O caminho completo para o diretório do projeto a ser aberto.
+ */
+void gerenciador_projetos::abrirProjeto(const std::string& caminho) {
+    motor::obter().fila_opengl.push([caminho](){
+        motor::obter().m_editor->carregarConfiguracaoPadrao();
+        motor::obter().abrirProjeto(caminho);
+    });
+}
+
+/**
+ * @brief Busca e lista todos os projetos existentes no diretório padrão.
+ * Popula o mapa `projetos` com os nomes e caminhos dos projetos encontrados.
+ * Se a barra lateral da UI estiver disponível, atualiza dinamicamente os botões
+ * para cada projeto encontrado.
+ */
+void gerenciador_projetos::buscarProjetos() {
+    projetos.clear(); // Limpa a lista de projetos anteriores.
+    // Itera sobre os subdiretórios no DIR_PADRAO para encontrar projetos.
+    if(std::filesystem::exists(DIR_PADRAO))
+    for (const auto& entry : std::filesystem::directory_iterator(DIR_PADRAO)) {
+        if (entry.is_directory()) {
+            auto dir = entry.path().string();
+            std::string filename;
+            // Procura recursivamente por config
+            if(std::filesystem::exists(dir))
+                for (const auto& entry : std::filesystem::recursive_directory_iterator(dir)) {
+                    if (entry.is_regular_file() && entry.path().extension() == ".bubble") {
+                        dir = entry.path().parent_path().string();
+                        filename = entry.path().filename().string();
+                    }
+                }
+            else    
+                throw  std::runtime_error("Diretório do projeto inexistente.");
+        
+            std::string full_path = dir + "/" + filename;
+            if(std::filesystem::is_regular_file(full_path) == false) continue;
+            
+            // Executa o parsing
+            std::ifstream file(full_path);
+            std::stringstream sb;
+            sb << file.rdbuf();
+            file.close();
+        
+            rapidjson::Document doc;
+            doc.Parse(sb.str().c_str());
+            if(!doc.HasMember("nome")) throw std::runtime_error("Analisando projetos do gerenciador de projetos: Projeto sem nome.");
+            std::string nome = doc["nome"].GetString();
+            projetos[nome] = dir; // Armazena o nome e o diretório do projeto.
+            depuracao::emitir(info, "gerenciador_projetos", std::string("Projeto encontrado: ") + nome);
+        }
+    }
+}
+
 void gerenciador_projetos::criarProjeto(const std::string& novo_diretorio, const char* nome, const bool padrao) {
     // String JSON que define a fase inicial do projeto com entidades predefinidas.
     // Inclui uma luz direcional, um plano (cubo escalado) e um cubo com um script de rotação.
@@ -179,6 +264,7 @@ end)";
     // Atualiza a lista de projetos disponíveis após a criação do novo projeto.
     buscarProjetos();
 }
+<<<<<<< Updated upstream
 
 /**
  * @brief Remove um projeto existente.
@@ -396,3 +482,5 @@ void gerenciador_projetos::buscarProjetos() {
         }
     }
 }
+=======
+>>>>>>> Stashed changes
