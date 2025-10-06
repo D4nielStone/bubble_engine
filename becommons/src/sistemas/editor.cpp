@@ -57,10 +57,10 @@ void sistema_editor::carregarConfiguracaoPadrao()
     // Configuração da seção superior da UI (barra de menu e versão)
     auto* menu = ui->obterRaiz()->adicionar<custom::barra_menu>();
     
-    auto* file_sec = menu->adicionar_botao(" File ", [](){});
-    menu->adicionar_botao("Edit ", [](){});
-    menu->adicionar_botao("View ", [](){});
-    menu->adicionar_botao("Help ", [](){});
+    auto* file_sec = menu->adicionar_botao(" file ", [](){});
+    menu->adicionar_botao(" gerenciador de projetos", [](){
+        carregarConfiguracaoGerenciador();
+            });
 
     // Configurando ambiente com containers
     // O container principal [dock] irá preencher a tela a-baixo da menubar
@@ -72,22 +72,22 @@ void sistema_editor::carregarConfiguracaoPadrao()
     auto [top, bottom] = dock->split(0.6, estilo::orientacao::vertical);
     auto [esquerda_panel, meio_dock] = top->split(0.2);
     auto [meio_panel, direita_panel] = meio_dock->split(0.8);
-    m_entidades = esquerda_panel->tab<paineis::entity>();
-    m_editor = meio_panel->tab<paineis::editor>(cam.get());
-    m_inspetor = direita_panel->tab<paineis::inspector>();
-    m_files = bottom->tab<paineis::file_manager>();
-    bottom->tab<paineis::coding>();
+    m_entidades = esquerda_panel->nova_tab<paineis::entity>();
+    m_editor = meio_panel->nova_tab<paineis::editor>(cam.get());
+    m_inspetor = direita_panel->nova_tab<paineis::inspector>();
+    m_files = bottom->nova_tab<paineis::file_manager>();
+    bottom->nova_tab<paineis::coding>();
 
     // Inserção do popup no loop
     auto* popup_file = ui->adicionar<elementos::popup>(file_sec);
     popup_file->adicionar<elementos::botao>([](){
             motor::obter().finalizar();
-            }, "Exit");
+            }, "exit");
     popup_file->adicionar<elementos::botao>([](){
             if(motor::obter().m_levelmanager)
             motor::obter().m_levelmanager->salvarTudo();
             motor::obter().m_editor->salvarEditor();
-            }, "Save all");
+            }, "save all");
 }
         
 void sistema_editor::carregarConfiguracaoGerenciador(){
@@ -97,10 +97,7 @@ void sistema_editor::carregarConfiguracaoGerenciador(){
     // Configuração da seção superior da UI (barra de menu e versão)
     auto* menu = ui->obterRaiz()->adicionar<custom::barra_menu>();
     
-    auto* file_sec = menu->adicionar_botao(" File ", [](){});
-    menu->adicionar_botao("Edit ", [](){});
-    menu->adicionar_botao("View ", [](){});
-    menu->adicionar_botao("Help ", [](){});
+    auto* file_sec = menu->adicionar_botao(" file ", [](){});
     auto* cont = ui->obterRaiz()->adicionar<container>();
     cont->m_estilo.m_flag_estilo |= flag_estilo::largura_percentual | flag_estilo::altura_percentual;
     cont->m_estilo.m_largura = 1;

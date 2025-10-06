@@ -31,12 +31,6 @@
 namespace becommons {
     class container : public caixa {
     private:
-<<<<<<< Updated upstream
-        float porcao = 0.5f;
-        bool dividiu{false};
-    public:
-        container();
-=======
         float m_porcao = 0.5f;
         bool m_dividiu{false},
              m_sou_a{false},
@@ -48,16 +42,6 @@ namespace becommons {
         fvet4 m_limite_flutuando{100,100,300,50};
         container(bool floating = false);
         header* gerarHeader();
-        // tabulaçãopara novos paineis
->>>>>>> Stashed changes
-        template <typename T, typename ...Args>
-        T* tab(Args&&... args) {
-            if(dividiu) return nullptr;
-            caixa* h;
-            m_filhos.empty() ? h = adicionar<header>() : h = m_filhos[0].get();
-            auto* ptr = h->adicionar<T>(std::forward<Args>(args)...);
-            return ptr;
-        }
         void unsplit();
         std::pair<container*, container*> split(float porcao_inicial = 0.5f, estilo::orientacao o = estilo::orientacao::horizontal);
         void atualizar() override;
