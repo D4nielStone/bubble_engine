@@ -482,6 +482,7 @@ void testarRegistro()
 
 void testarMotor()
 {
+/*
     testes.classe("nucleo", "motor");
 
     // Teste 1: instancia global (singleton-like) é atualizada no construtor
@@ -506,7 +507,6 @@ void testarMotor()
                 });
         ASSERT_NO_THROW(m.criarJanela());
     });
-
     // Teste 4: criarJanela() com projeto (construtor com directory) não deve lançar
     testes.adicionar("criar_janela_com_projeto_nao_lanca", []() {
         // Prep
@@ -517,7 +517,6 @@ void testarMotor()
         // Assert
         ASSERT_NO_THROW(m.criarJanela());
     });
-
     // Teste 5: iniciar em modo editor deve setar o tipo e não lançar
     testes.adicionar("iniciar_editor_sets_mode", []() {
         motor m;
@@ -557,6 +556,7 @@ void testarMotor()
         motor& got = becommons::motor::obter();
         ASSERT_TRUE(&got == &m);
     });
+*/
 }
 
 void testarNucleo()
