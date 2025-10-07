@@ -513,7 +513,7 @@ void interface::resetRoot() {
     if(m_raiz == nullptr)return;
     m_floating.clear();
     m_raiz.reset();
-    m_raiz = std::make_shared<caixa>();
+    m_raiz = std::make_unique<caixa>();
 } 
 
 void interface::remover(caixa* c) {

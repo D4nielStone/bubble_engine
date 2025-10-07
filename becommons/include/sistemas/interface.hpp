@@ -54,10 +54,10 @@ namespace becommons {
         void atualizarFilhos(caixa*);
         template <typename T, typename ...Args>
         T* adicionar(Args&&... args) {
-            auto nova_caixa = std::make_unique<T>(std::forward<Args>(args)...);
+            auto nova_caixa = std::make_shared<T>(std::forward<Args>(args)...);
             nova_caixa->configurar();
             auto* ptr = nova_caixa.get();
-            m_floating[nova_caixa->uid] = std::move(nova_caixa);
+            m_floating.push_back(nova_caixa);
             return ptr;
         }
         void remover(caixa*);
@@ -72,7 +72,8 @@ namespace becommons {
         void renderizar();
     
         caixa* obterRaiz();
-        std::map<unsigned long long, std::unique_ptr<caixa>> m_floating;
+        std::vector<std::shared_ptr<caixa>> m_floating;
+        std::vector<std::shared_ptr<caixa>> m_popups;
         std::unique_ptr<caixa> m_raiz;
         glm::mat4 projecao_viewport;
         ijanela* m_window = nullptr;
