@@ -42,7 +42,7 @@ gerenciador_projetos::gerenciador_projetos(const std::string& dir) : painel("ger
     for(auto& [nome,dir]: projetos) {
         auto* c = adicionar<container>();
         auto* p = c->nova_tab<painel>(nome);
-        auto* p2 = c->nova_tab<painel>("editar projeto");
+        auto* p2 = c->nova_tab<painel>("editar");
         c->m_estilo.m_flag_estilo |= flag_estilo::largura_percentual;
         c->m_estilo.m_largura = 1;
         c->m_estilo.m_altura = 115;
@@ -54,7 +54,6 @@ gerenciador_projetos::gerenciador_projetos(const std::string& dir) : painel("ger
         p->adicionar<elementos::botao>([this, dir](){
             abrirProjeto(dir);
                 }, "", "play.png", 50);
-        }
     }
 }
 

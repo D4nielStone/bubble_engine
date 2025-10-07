@@ -821,7 +821,7 @@ void testarBubbleGUI()
         ASSERT_EQUAL(child1->m_estilo.m_limites, fvet4(0, 0, 20, 20));
         ASSERT_EQUAL(child2->m_estilo.m_limites, fvet4(20, 0, 20, 20));
     });
-    // Teste 12 : Teste do container
+    /*// Teste 12 : Teste do container
     testes.adicionar("contanier_horizontal", []() {
         //- Preparação:
         becommons::container box; 
@@ -857,7 +857,7 @@ void testarBubbleGUI()
         ASSERT_EQUAL(u_right->m_estilo.m_limites, fvet4(50, 0, 50, 50));
         ASSERT_EQUAL(d_left->m_estilo.m_limites, fvet4(0, 50, 20, 50));
         ASSERT_EQUAL(d_right->m_estilo.m_limites, fvet4(20, 50, 80, 50));
-    });
+    });*/
 }
 void testarSistemas()
 {

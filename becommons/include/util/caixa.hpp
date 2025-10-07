@@ -168,15 +168,15 @@ namespace becommons {
 
         bool m_novo_projecao, m_mouse_cima { false };
         glm::mat4 m_projecao;
-        std::unique_ptr<shader> m_shader {nullptr};
+        std::shared_ptr<shader> m_shader {nullptr};
         material m_material;
         caixa* m_pai{nullptr};
         estilo m_estilo, m_estilo_antigo;
-        std::vector<std::unique_ptr<caixa>> m_filhos;
+        std::vector<std::shared_ptr<caixa>> m_filhos;
         
         template <typename T, typename ...Args>
         T* adicionar(Args&&... args) {
-            auto nova_caixa = std::make_unique<T>(std::forward<Args>(args)...);
+            auto nova_caixa = std::make_shared<T>(std::forward<Args>(args)...);
             nova_caixa->m_pai = this;
             nova_caixa->configurar();
             auto* ptr = nova_caixa.get();
@@ -193,7 +193,7 @@ namespace becommons {
         }
         
         template <typename T>
-        T* adicionar(std::unique_ptr<T> nova_caixa) {
+        T* adicionar(std::shared_ptr<T> nova_caixa) {
             nova_caixa->m_pai = this;
             nova_caixa->configurar();
             auto* ptr = nova_caixa.get();
@@ -202,7 +202,7 @@ namespace becommons {
         }
         bool remover(caixa* alvo) {
             auto it = std::remove_if(m_filhos.begin(), m_filhos.end(),
-                [alvo](const std::unique_ptr<caixa>& ptr) {
+                [alvo](const std::shared_ptr<caixa>& ptr) {
                     return ptr.get() == alvo;
                 });
                 
@@ -224,7 +224,7 @@ namespace becommons {
         virtual void desenhar(unsigned int ret_VAO) {
             if(m_pai)
             m_projecao = m_pai->m_projecao;
-            if(!m_shader)m_shader = std::make_unique<shader>("imagem.vert", "quad.frag");
+            if(!m_shader)m_shader = std::make_shared<shader>("imagem.vert", "quad.frag");
             m_material.usar(*m_shader);
             glBindVertexArray(ret_VAO);
             glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);

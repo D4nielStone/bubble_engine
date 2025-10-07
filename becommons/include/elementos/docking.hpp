@@ -42,7 +42,16 @@ namespace becommons {
         fvet4 m_limite_flutuando{100,100,300,50};
         container(bool floating = false);
         header* gerarHeader();
-        void unsplit();
+        // tabulaçãopara novos paineis
+        template <typename T, typename ...Args>
+        T* nova_tab(Args&&... args) {
+            if(m_dividiu) return nullptr;
+            caixa* h;
+            m_filhos.empty() ? h = adicionar<header>() : h = m_filhos[0].get();
+            auto* ptr = h->adicionar<T>(std::forward<Args>(args)...);
+            return ptr;
+        }
+        void unsplit(bool);
         std::pair<container*, container*> split(float porcao_inicial = 0.5f, estilo::orientacao o = estilo::orientacao::horizontal);
         void atualizar() override;
         tipo_caixa tipo() const override {return tipo_caixa::container;};

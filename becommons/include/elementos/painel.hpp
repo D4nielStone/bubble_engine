@@ -41,6 +41,7 @@ namespace becommons {
         cor m_cor_desativado { 0.4f, 0.33f, 0.43f, 1.f };
         std::vector<tab*> m_tabs;
         header();
+        ~header();
         tipo_caixa tipo() const override { return tipo_caixa::header; };
         void atualizar() override;
     };

@@ -234,9 +234,8 @@ void interface::configOpenglState() const {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glClearColor(0, 0, 0, 0);
 }
-<<<<<<< Updated upstream
-=======
-        
+ 
+/*
 void interface::trazer(caixa* alvo) {
     if(alvo == nullptr) return;
     auto it = std::remove_if(m_floating.begin(), m_floating.end(),
@@ -252,7 +251,7 @@ void interface::trazer(caixa* alvo) {
         m_floating.push_back(ptr);
     } else return;
 }
->>>>>>> Stashed changes
+*/
 
 void interface::deconfigOpenglState() const {
     glEnable(GL_DEPTH_TEST);
@@ -264,7 +263,8 @@ void interface::renderizar() {
     configOpenglState();
     desenhar(m_raiz.get());
     //glEnable(GL_SCISSOR_TEST);
-    for(auto& [id, filho] : m_floating) {
+    for(size_t i = 0; i < m_floating.size(); i++) {
+        auto filho = m_floating[i];
         if(filho->m_estilo.m_ativo) {
         /*glScissor(
             filho->m_estilo.m_limites.x,
@@ -294,10 +294,7 @@ void interface::atualizar() {
             });
     atualizarFilhos(m_raiz.get());
     m_raiz->atualizar();
-
-<<<<<<< Updated upstream
-    for(auto& [id, filho] : m_floating) {
-=======
+/*
     for(size_t i = 0; i < m_popups.size(); i++) {
         auto filho = m_popups[i];
         if(filho == nullptr) {
@@ -308,7 +305,7 @@ void interface::atualizar() {
         chamarFuncoes(filho.get());
         atualizarFilhos(filho.get());
         filho->atualizar();
-    }
+    }*/
     for(size_t i = 0; i < m_floating.size(); i++) {
         auto filho = m_floating[i];
         if(filho == nullptr) {
@@ -316,7 +313,6 @@ void interface::atualizar() {
             continue;
         }
         //depuracao::emitir(debug, "id: " + std::to_string(filho->m_id));
->>>>>>> Stashed changes
         chamarFuncoes(filho.get());
         atualizarFilhos(filho.get());
         filho->atualizar();
@@ -515,10 +511,11 @@ void interface::atualizarFilhos(caixa* it_caixa) {
         
 void interface::resetRoot() {
     if(m_raiz == nullptr)return;
+    m_floating.clear();
     m_raiz.reset();
     m_raiz = std::make_shared<caixa>();
 } 
 
 void interface::remover(caixa* c) {
-    m_floating.erase(c->uid);
+    //m_floating.erase(c->uid);
 }

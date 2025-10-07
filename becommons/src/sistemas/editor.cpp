@@ -58,7 +58,7 @@ void sistema_editor::carregarConfiguracaoPadrao()
     auto* menu = ui->obterRaiz()->adicionar<custom::barra_menu>();
     
     auto* file_sec = menu->adicionar_botao(" file ", [](){});
-    menu->adicionar_botao(" gerenciador de projetos", [](){
+    menu->adicionar_botao(" gerenciador de projetos", [this](){
         carregarConfiguracaoGerenciador();
             });
 
