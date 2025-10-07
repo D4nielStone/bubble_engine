@@ -28,20 +28,12 @@ using namespace becommons;
 
 container::container(bool floating) { 
     m_estilo.m_flag_estilo = flag_estilo::nenhuma;
-<<<<<<< Updated upstream
-=======
-    m_cortar = true;
+    //m_cortar = true;
     m_floating = floating;
->>>>>>> Stashed changes
 }
-        
-void container::unsplit() {
-    dividiu = false;
-    m_filhos.clear();
+header* container::gerarHeader() {
+    return nullptr;
 }
-        
-<<<<<<< Updated upstream
-=======
 void container::unsplit(bool keepLeft) {
     if (!m_dividiu || !m_a || !m_b) return;
     m_dividiu = false;
@@ -94,22 +86,21 @@ void container::unsplit(bool keepLeft) {
     motor::obter().m_editor->ui->remover(kept);
 }
  
->>>>>>> Stashed changes
 std::pair<container*, container*>  container::split(float porcao_inicial, estilo::orientacao o) {
     m_filhos.clear();
     auto* a = adicionar<container>();
     auto* b = adicionar<container>();    
 
     m_estilo.m_orientacao_modular = o;
-    porcao = std::clamp(porcao_inicial, 0.0f, 1.0f);
-    dividiu = true;
+    m_porcao = std::clamp(porcao_inicial, 0.0f, 1.0f);
+    m_dividiu = true;
     return {a, b};
 }
         
 void container::atualizar() {
-    if (dividiu) { 
-        porcao = std::clamp(porcao, 0.0f, 1.0f);
-        float pb = 1.0f - porcao;
+    if (m_dividiu) { 
+        m_porcao = std::clamp(m_porcao, 0.0f, 1.0f);
+        float pb = 1.0f - m_porcao;
 
         float px = m_estilo.m_limites.x;
         float py = m_estilo.m_limites.y;
@@ -117,27 +108,15 @@ void container::atualizar() {
         float ph = m_estilo.m_limites.w; // altura
         if (m_estilo.m_orientacao_modular == estilo::orientacao::horizontal) {
             // coluna A | B  (divide largura)
-            m_filhos[0]->m_estilo.m_limites = { px, py, pw * porcao, ph };                      // esquerda/topo do split
-            m_filhos[1]->m_estilo.m_limites = { px + pw * porcao, py, pw * pb, ph };     // direita
+            m_filhos[0]->m_estilo.m_limites = { px, py, pw * m_porcao, ph };                      // esquerda/topo do split
+            m_filhos[1]->m_estilo.m_limites = { px + pw * m_porcao, py, pw * pb, ph };     // direita
         } else {
             // linha A // B  (divide altura)
-            m_filhos[0]->m_estilo.m_limites = { px, py, pw, ph * porcao };                      // topo
-            m_filhos[1]->m_estilo.m_limites = { px, py + ph * porcao, pw, ph * pb };     // bottom
+            m_filhos[0]->m_estilo.m_limites = { px, py, pw, ph * m_porcao };                      // topo
+            m_filhos[1]->m_estilo.m_limites = { px, py + ph * m_porcao, pw, ph * pb };     // bottom
         }
     } else
     if (!m_filhos.empty()) {
-<<<<<<< Updated upstream
-=======
-        if(m_floating) {
-            if (mouseEmCima() && motor::obter().m_inputs->obter(inputs::MOUSE_D)) {
-                motor::obter().fila_opengl.push([this]() {
-                    motor::obter().m_editor->ui->trazer(this);
-                });
-            }
-        }
->>>>>>> Stashed changes
-        // m_filhos[0] = header
-        // m_filhos[0]->m_filhos = paineis
         m_filhos[0]->m_estilo.m_limites = becommons::lerp(m_filhos[0]->m_estilo.m_limites, m_estilo.m_limites,motor::obter().m_tempo->obterDeltaTime()*10);
     }
     caixa::atualizar();

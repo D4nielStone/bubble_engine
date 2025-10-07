@@ -28,7 +28,6 @@
 #include "elementos/painel.hpp"
 using namespace becommons;
 
-<<<<<<< Updated upstream
 class tab : public elementos::area_de_toque {
 public:
     int m_tab_id = 0;
@@ -42,6 +41,7 @@ public:
     }
     void atualizar() override {
         /* texto */
+        if (m_header== nullptr) return;
         m_estilo.m_limites.z = m_text->obterLargura(m_text->m_texto_frase) + m_header->m_tab_h*2 + m_estilo.m_padding.x*4;
         m_estilo.m_limites.w = m_header->m_tab_h;
         m_filhos[2]->m_estilo.m_limites.z = m_estilo.m_limites.z;
@@ -49,6 +49,7 @@ public:
         m_filhos[2]->m_estilo.m_limites.y = m_estilo.m_limites.y + m_estilo.m_padding.y;
         m_filhos[2]->m_estilo.m_limites.w = m_header->m_tab_h;
         /* barra de baixo */
+        m_filhos[0]->m_estilo.m_raio = 1.f;
         m_filhos[0]->m_estilo.m_limites.x = m_estilo.m_limites.x;
         m_filhos[0]->m_estilo.m_limites.y = m_estilo.m_limites.y + m_header->m_tab_h - 4;
         m_filhos[0]->m_estilo.m_limites.z = m_estilo.m_limites.z;
@@ -62,45 +63,19 @@ public:
         area_de_toque::atualizar();
     }
 };
-=======
- tab::tab(header* m_header) : m_header(m_header), area_de_toque() {
-    adicionar<caixa>()->m_estilo.m_cor_fundo = m_header->m_cor_ativado;
-    adicionar<caixa>()->m_estilo.m_cor_fundo = m_header->m_cor_ativado;
-    m_filhos[1]->m_estilo.m_raio = 1.f;
-    m_estilo.m_padding = {1, 1};
-    m_estilo.m_flag_estilo = flag_estilo::nenhuma;
-    m_text = adicionar<elementos::texto>("tab", 12);
-}
-void tab::configurar() {}
-void tab::atualizar() {
-    /* texto */
-    m_text->m_texto_frase = m_painel->label;
-    m_estilo.m_limites.z = m_text->obterLargura(m_text->m_texto_frase) + m_header->m_tab_h*2 + m_estilo.m_padding.x*4;
-    m_estilo.m_limites.w = m_header->m_tab_h;
-    m_filhos[2]->m_estilo.m_limites.z = m_estilo.m_limites.z;
-    m_filhos[2]->m_estilo.m_limites.x = m_estilo.m_limites.x + m_header->m_tab_h + m_estilo.m_padding.x;
-    m_filhos[2]->m_estilo.m_limites.y = m_estilo.m_limites.y + m_estilo.m_padding.y;
-    m_filhos[2]->m_estilo.m_limites.w = m_header->m_tab_h;
-    /* barra de baixo */
-    m_filhos[0]->m_estilo.m_limites.x = m_estilo.m_limites.x;
-    m_filhos[0]->m_estilo.m_limites.y = m_estilo.m_limites.y + m_header->m_tab_h - 4;
-    m_filhos[0]->m_estilo.m_limites.z = m_estilo.m_limites.z;
-    m_filhos[0]->m_estilo.m_limites.w = 4;
-    /* caixa de dentro */
-    m_filhos[1]->m_estilo.m_limites.x = m_estilo.m_limites.x + m_header->m_tab_h / 2 - 2;
-    m_filhos[1]->m_estilo.m_limites.y = m_estilo.m_limites.y + m_header->m_tab_h / 2 - 2;
-    m_filhos[1]->m_estilo.m_limites.z = 4;
-    m_filhos[1]->m_estilo.m_limites.w = 4;
-
-    area_de_toque::atualizar();
-}
->>>>>>> Stashed changes
 
 painel::painel(const std::string& label) : label(label) {
     m_estilo.m_orientacao_modular = estilo::orientacao::vertical;
     m_estilo.m_cor_fundo = cor(0.10f);
     m_estilo.m_cor_borda = cor(0.13f);
     m_estilo.m_padding_geral = {1, 1};
+}
+header::~header() {
+    // -- reset
+    for(auto& tab : m_tabs) {
+        motor::obter().m_editor->ui->remover(m_tabs.back());
+    }
+    m_tabs.clear();
 }
 header::header() {
     m_estilo.m_flag_estilo = flag_estilo::nenhuma;
