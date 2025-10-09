@@ -52,12 +52,17 @@ void levelmanager::carregarAsync(const std::string& nome) {
     // Cria uma tarefa assíncrona
     m_tarefa = std::async(std::launch::async, [this, nome]() {
         try {
-            auto caminho = m_projeto.m_diretorio + nome;
+            
+            std::string caminho;
+            if(std::filesystem::exists(nome) == false)
+                caminho = m_projeto.m_diretorio + nome + ".fase";
+            else
+                caminho = nome;
             depuracao::emitir(info, "Iniciando carregamento assíncrono: " + caminho + ".fase");
 
             // Passo 1: Criar objeto fase
             m_progresso.store(10.0f);
-            auto fasePtr = std::make_shared<fase>(caminho + ".fase");
+            auto fasePtr = std::make_shared<fase>(caminho);
 
             // Passo 2: Carregar dados
             fasePtr->carregar([&](float progresso){

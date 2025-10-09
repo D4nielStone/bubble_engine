@@ -44,6 +44,7 @@ SOFTWARE.
 #include <typeinfo>
 #include "depuracao/debug.hpp"
 #include <rapidjson/prettywriter.h>
+#include "nucleo/engine.hpp"
 
 using namespace rapidjson;
 using namespace becommons;
@@ -58,11 +59,10 @@ fase::~fase()
 
 void fase::carregar(std::function<void(float)> onProgress)
 {
-    if(carregada)
-        descarregar();
+    if(carregada) return;
     depuracao::emitir(debug, "fase", "carregando");
-    carregada = true;
 	analizar(diretorio);	
+    carregada = true;
 }
 
 void fase::salvar()
@@ -76,8 +76,10 @@ void fase::salvar()
 }
 
 void fase::descarregar() {
-    carregada = false;
+    if(carregada==false) return;
+    reg.limpar();
     depuracao::emitir(debug, "fase", "descarregando");
+    carregada = false;
 }
 
 fase::fase(const char* diretorio) : luz_global(std::make_shared<luz_direcional>()), diretorio(diretorio)
@@ -101,7 +103,10 @@ void fase::parar()
 	if (rodando != true)
 		return;
 	depuracao::emitir(debug, "fase", "Parando");
-	carregar();
+    motor::obter().fila_opengl.push([this](){
+	    descarregar();
+        motor::obter().m_levelmanager->carregarAsync(diretorio);
+            });
 	rodando = false;
 }
 
@@ -110,6 +115,8 @@ void fase::iniciar()
 	if (rodando != false)
 		return;
     rodando = true;
+	carregar();
+    motor::obter().m_codigo->inicializar();
 	depuracao::emitir(debug, "fase", "Iniciando");
 }
 
@@ -169,6 +176,7 @@ void fase::analizarEntidades(const Document& doc)
 			if      (tipo_str == "camera") {
 			    reg.adicionar<camera>(ent);
 			    auto cam = reg.obter<camera>(ent.id);
+                motor::obter().m_renderer->adicionarCamera(cam.get());
                 if(!cam->analizar(componente)) {
                     depuracao::emitir(erro, "fase", "Problemas analizando camera");
                     return;

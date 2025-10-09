@@ -64,12 +64,19 @@ void camera::desenharFB() {
         glViewport(0, 0, width, height);
         glClearColor(ceu.r, ceu.g, ceu.b, ceu.a);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    }else{
+        int width  = viewport_ptr ? viewport_ptr->z : motor::obter().m_janela->obterTamanho().x;
+        int height = viewport_ptr ? viewport_ptr->w : motor::obter().m_janela->obterTamanho().y;
+        glViewport(0, 0, width, height);
+        glClearColor(ceu.r, ceu.g, ceu.b, ceu.a);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     }
 }
 
 camera::~camera() {
     depuracao::emitir(debug, "camera", "descarregando");
     
+    motor::obter().m_renderer->removerCamera(this);
     if(m_skybox)delete m_skybox;
     desativarFB();
 }

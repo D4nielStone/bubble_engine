@@ -43,7 +43,7 @@ namespace becommons {
 	*/
 	struct registro
 	{
-	    ~registro(){entidades.clear(); mascaras.clear();}
+	    ~registro(){limpar();}
 		/// Armazena mascara da entidade associada
 		std::unordered_map<uint32_t, componente::mascara> mascaras;
 		/// Armazena componentes da entidade associada
@@ -54,6 +54,7 @@ namespace becommons {
 		entidade criar(const std::string& tag, const uint32_t id = 0);
 		/* Cria nova entidade */
 		entidade criar(const uint32_t id = 0);
+        void limpar();
 		/* Retorna todos os componentes da entidade */
 		componente::mascara obterComponentes(const uint32_t& id) const;
 		/* Adiciona um componente a uma entidade */

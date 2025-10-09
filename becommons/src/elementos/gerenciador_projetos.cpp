@@ -55,6 +55,9 @@ gerenciador_projetos::gerenciador_projetos(const std::string& dir) : painel("ger
         p->adicionar<elementos::botao>([this, dir](){
             abrirProjeto(dir);
                 }, "", "play.png", 50);
+        p->adicionar<elementos::botao>([this, dir](){
+            removerProjeto(dir);
+                }, "", "remover.png", 50);
     }
 }
 
@@ -84,8 +87,8 @@ void gerenciador_projetos::removerProjeto(const std::string& dir) {
  */
 void gerenciador_projetos::abrirProjeto(const std::string& caminho) {
     motor::obter().fila_opengl.push([caminho](){
-        motor::obter().m_editor->carregarConfiguracaoPadrao();
         motor::obter().abrirProjeto(caminho);
+        motor::obter().m_editor->carregarConfiguracaoPadrao();
     });
 }
 
@@ -201,11 +204,8 @@ void gerenciador_projetos::criarProjeto(const std::string& novo_diretorio, const
     // String Lua para o script de rotação de exemplo.
     auto codigo_string = R"(-- Autor Daniel O. © 2025
 local vel= 6
-local eu = entidade(bubble.meuID)
 function atualizar()
-    eu.transformacao.rotacao.y = eu.transformacao.rotacao.y + vel
-    eu.transformacao.rotacao.x = eu.transformacao.rotacao.x + vel
-    eu.transformacao.rotacao.z = eu.transformacao.rotacao.z + vel
+    eu.transformacao:rotacionar(vel,vel,vel)
 end)";
 
     // Cria o diretório raiz do novo projeto (e seus pais, se necessário).
@@ -231,7 +231,7 @@ end)";
     newDoc.AddMember("janela", _janela, allocator);
 
     // Salva o JSON de configuração no arquivo 'config.json' dentro do diretório do projeto.
-    std::ofstream ofs(diretorioDoProjeto + "/config.json");
+    std::ofstream ofs(diretorioDoProjeto + "/projeto.bubble");
     if (ofs.is_open()) {
         rapidjson::StringBuffer buffer;
         rapidjson::Writer<rapidjson::StringBuffer> writer(buffer);

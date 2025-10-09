@@ -61,9 +61,11 @@ void sistema_editor::carregarConfiguracaoPadrao()
     menu->adicionar_botao("projects", [this](){
         auto* cont = ui->adicionar<container>(true);
         cont->nova_tab<EDITOR_NS::gerenciador_projetos>(obterDiretorioHome() + "/bubble");
-        cont->m_estilo.m_limites = ui->m_raiz->m_estilo.m_limites / 1.5f;
-        cont->m_estilo.m_limites.x += cont->m_estilo.m_limites.z/2;
-        cont->m_estilo.m_limites.y += cont->m_estilo.m_limites.w/2;
+        cont->m_estilo.m_limites = ui->m_raiz->m_estilo.m_limites;
+        cont->m_estilo.m_limites.x += 30;
+        cont->m_estilo.m_limites.y += 30;
+        cont->m_estilo.m_limites.z -= 60;
+        cont->m_estilo.m_limites.w -= 60;
             });
 
     // Configurando ambiente com containers
@@ -78,6 +80,7 @@ void sistema_editor::carregarConfiguracaoPadrao()
     auto [meio_panel, direita_panel] = meio_dock->split(0.8);
     m_entidades = esquerda_panel->nova_tab<paineis::entity>();
     m_editor = meio_panel->nova_tab<paineis::editor>(cam.get());
+    auto* m_game = meio_panel->nova_tab<paineis::jogo>();
     m_inspetor = direita_panel->nova_tab<paineis::inspector>();
     m_files = bottom->nova_tab<paineis::file_manager>();
     bottom->nova_tab<paineis::coding>();
@@ -186,9 +189,9 @@ void sistema_editor::abrirProjeto(becommons::projeto* proj) {
         }
     }
 
-    //// Carrega fase de forma asíncrona
+    motor::obter().m_renderer->adicionarExtra(cam.get()); // adiciona a câmera do editor para renderização
+    // Carrega fase de forma asíncrona
     motor::obter().m_levelmanager->carregarAsync(motor::obter().m_projeto->m_lancamento);
-    motor::obter().m_renderer->definirCamera(cam.get()); // Define a câmera do editor para renderização
 }
 
 /**

@@ -77,6 +77,7 @@ std::string modelo::obterDiretorio() const {
 }
 
 void modelo::carregar() {
+    if(m_shader == nullptr)
     m_shader = std::make_unique<shader>();
     auto path = m_diretorio;
 

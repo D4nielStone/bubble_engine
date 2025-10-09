@@ -82,6 +82,15 @@ namespace becommons {
         public:
             inspector();
         };
+        class jogo : public painel {
+        public:
+            elementos::imagem* framebuffer;
+            jogo();
+            void play();
+            void pause();
+            void stop();
+            void atualizar() override;
+        };
         class editor : public painel {
         public:
             elementos::imagem* framebuffer;

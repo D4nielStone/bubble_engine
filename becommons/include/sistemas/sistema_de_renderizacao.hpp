@@ -27,11 +27,16 @@
 #include "componentes/camera.hpp"
 #include "componentes/transformacao.hpp"
 #include <memory>
+#include <set>
 
 namespace becommons {
 	struct sistema_renderizacao : sistema {
-        camera* camera_principal{ nullptr };
-	    void definirCamera(camera*);
+        std::set<camera*> cameras;
+        std::set<camera*> cameras_extra;
+	    void adicionarExtra(camera*);
+	    void removerExtra(camera*);
+	    void adicionarCamera(camera*);
+	    void removerCamera(camera*);
 	    sistema_renderizacao() = default;
 	    static void calcularTransformacao(transformacao*);
         void atualizarCamera(camera*);

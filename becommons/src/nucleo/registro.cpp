@@ -35,6 +35,17 @@ SOFTWARE.
 
 using namespace becommons;
 
+void registro::limpar() {
+    for(auto [id, par] : entidades) {
+        for(auto [mask, comp] : par) {
+            if(comp)
+                comp.reset();
+        }
+    }
+    entidades.clear(); 
+    mascaras.clear();
+    m_tags.clear();
+}
 entidade registro::criar(const std::string& tag, const uint32_t id) {
     auto it = m_tags.find(tag);
     if (it == m_tags.end()) {

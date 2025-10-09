@@ -84,16 +84,29 @@ void sistema_renderizacao::atualizar() {
     renderizarSombras();
     glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
 
-    reg->cada<camera>([&](const uint32_t ent){
-            auto cam = reg->obter<camera>(ent);
-            if (!camera_principal) camera_principal = cam.get();
-            if (cam.get() == camera_principal || !cam->flag_fb) return;
-            atualizarCamera(cam.get());
-            });
-    if (camera_principal) {
-        atualizarCamera(camera_principal);
-    }
+    for(auto* cam : cameras) {
+        if (!cam) return;
+        atualizarCamera(cam);
+    };
+    for(auto* cam : cameras_extra) {
+        if (!cam) return;
+        atualizarCamera(cam);
+    };
 } 
+	    
+void sistema_renderizacao::adicionarExtra(camera* cam) {
+    cameras_extra.insert(cam);
+}
+void sistema_renderizacao::adicionarCamera(camera* cam) {
+    cameras.insert(cam);
+}
+	    
+void sistema_renderizacao::removerExtra(camera* cam) {
+    cameras_extra.erase(cam);
+}
+void sistema_renderizacao::removerCamera(camera* cam) {
+    cameras.erase(cam);
+}
 
 void sistema_renderizacao::inicializar()
 {
@@ -126,10 +139,6 @@ void sistema_renderizacao::inicializar()
     auto reg = motor::obter().m_levelmanager->obterFaseAtual()->obterRegistro();
 
     glEnable(GL_CULL_FACE);
-}
-void sistema_renderizacao::definirCamera(camera* cam)
-{
-    camera_principal = cam;
 }
 
 void sistema_renderizacao::atualizarTransformacoes() {

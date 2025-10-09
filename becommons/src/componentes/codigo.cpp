@@ -46,11 +46,20 @@ codigo::codigo(const std::string& arquivo) : arquivo(arquivo) {
 }
 
 void codigo::iniciar() {
+    if(std::filesystem::exists(arquivoCompleto) == false) {
+        depuracao::emitir(erro, "codigo", "arquivo" + arquivoCompleto + " não existe ou não foi encontrado.");
+        return;
+    }
     auto bubble = estado_lua["bubble"].get_or_create<sol::table>();
     estado_lua["eu"] = std::make_shared<api::entidade>(meu_objeto);
     bubble["meuID"] = meu_objeto;
     bubble["janela"] = motor::obter().m_janela.get();
-	estado_lua.script_file(arquivoCompleto);
+    try {
+    	estado_lua.script_file(arquivoCompleto);
+    } catch (const std::exception& e) {
+        depuracao::emitir(erro, "codigo", e.what());
+        return;
+    }
     // Obtém as funções globais
     f_atualizar = estado_lua["atualizar"];
 }

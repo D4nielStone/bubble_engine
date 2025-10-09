@@ -155,7 +155,12 @@ paineis::entity::entity() : painel("entities") {
     barra_lateral_d->m_estilo.m_padding_geral = {2, 2};
 }
 void paineis::entity::atualizar() {
-    if(!motor::obter().m_levelmanager || !motor::obter().m_levelmanager->obterFaseAtual() || motor::obter().m_levelmanager->carregando()) return;
+    if(!motor::obter().m_levelmanager || !motor::obter().m_levelmanager->obterFaseAtual() || motor::obter().m_levelmanager->carregando()) {
+        m_filhos[0]->m_filhos[0]->m_filhos.clear();
+        m_filhos[0]->m_filhos[1]->m_filhos.clear();
+        old_contage = 0;
+        return;
+    }
     auto reg = motor::obter().m_levelmanager->obterFaseAtual()->obterRegistro();
     
     if (old_contage != reg->entidades.size()) {
@@ -177,13 +182,69 @@ void paineis::entity::atualizar() {
 
 paineis::inspector::inspector() : painel("inspector") {
 }
+
+paineis::jogo::jogo() : painel("jogo") {
+    framebuffer = adicionar<elementos::imagem>(0, true);
+    framebuffer->m_estilo.m_flag_estilo = flag_estilo::modular | flag_estilo::largura_percentual | flag_estilo::alinhamento_central | flag_estilo::altura_percentual;
+    framebuffer->m_estilo.m_largura = 1;
+    framebuffer->m_estilo.m_altura = 1;
+    if(motor::obter().m_renderer->cameras.empty() == false) {
+    auto cam = *motor::obter().m_renderer->cameras.begin();
+    cam->viewport_ptr = &framebuffer->m_estilo.m_limites; // Associa o viewport da câmera aos limites do framebuffer
+    framebuffer->id = cam->textura;
+    }
+    auto* lateral = framebuffer->adicionar<caixa>();
+    lateral->m_estilo.m_cor_fundo = {0.07, 0.07, 0.07, 0.5};
+    lateral->m_estilo.m_padding_geral = {2,2};
+    lateral->m_estilo.m_flag_estilo |= flag_estilo::altura_justa | flag_estilo::largura_justa;
+    lateral->adicionar<elementos::botao>([this](){
+            play();
+            }, "", "play.png", 18);
+}
+            
+void paineis::jogo::play(){
+    motor::obter().fila_opengl.push([](){
+        motor::obter().m_levelmanager->obterFaseAtual()->iniciar();
+    });
+    framebuffer->m_estilo.m_flag_estilo = flag_estilo::modular | flag_estilo::largura_percentual | flag_estilo::alinhamento_fim | flag_estilo::altura_percentual;
+    m_filhos[0]->m_filhos[0]->m_filhos.clear();
+    m_filhos[0]->m_filhos[0]->adicionar<elementos::botao>([this](){
+            stop();
+            }, "", "stop.png", 18);
+}
+void paineis::jogo::pause(){
+}
+void paineis::jogo::stop(){
+    motor::obter().fila_opengl.push([](){
+        motor::obter().m_levelmanager->obterFaseAtual()->parar();
+    });
+    framebuffer->m_estilo.m_flag_estilo = flag_estilo::modular | flag_estilo::largura_percentual | flag_estilo::alinhamento_central | flag_estilo::altura_percentual;
+    m_filhos[0]->m_filhos[0]->m_filhos.clear();
+    m_filhos[0]->m_filhos[0]->adicionar<elementos::botao>([this](){
+            play();
+            }, "", "play.png", 18);
+}
+
+void paineis::jogo::atualizar() {
+    if(motor::obter().m_renderer->cameras.empty() == false) {
+    auto cam = *motor::obter().m_renderer->cameras.begin();
+    cam->ativarFB();
+    framebuffer->m_material.definirTextura("textura", {cam->textura , ""});
+    }
+    painel::atualizar();
+}
             
 paineis::editor::editor(camera* cam) : painel("editor") {
     framebuffer = adicionar<elementos::imagem>(cam->textura, true);
-    framebuffer->m_estilo.m_flag_estilo = flag_estilo::largura_percentual | flag_estilo::altura_percentual;
+    framebuffer->m_estilo.m_flag_estilo |= flag_estilo::largura_percentual | flag_estilo::altura_percentual;
     framebuffer->m_estilo.m_largura = 1;
     framebuffer->m_estilo.m_altura = 1;
     cam->viewport_ptr = &framebuffer->m_estilo.m_limites; // Associa o viewport da câmera aos limites do framebuffer
+    auto* lateral = framebuffer->adicionar<caixa>();
+    lateral->m_estilo.m_cor_fundo = {0.07, 0.07, 0.07, 0.5};
+    lateral->m_estilo.m_padding_geral = {2,2};
+    lateral->m_estilo.m_orientacao_modular = estilo::orientacao::vertical;
+    lateral->m_estilo.m_flag_estilo |= flag_estilo::altura_justa | flag_estilo::largura_justa;
 }
 paineis::file_manager::file_manager() : painel("files") {
 /*

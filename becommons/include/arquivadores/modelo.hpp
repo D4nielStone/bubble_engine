@@ -51,6 +51,6 @@ namespace becommons {
         static bool temTextura(aiMaterial*, const aiTextureType&);
     protected:
         std::string m_diretorio;
-        std::unique_ptr<shader> m_shader;
+        std::unique_ptr<shader> m_shader=nullptr;
     };
 }
