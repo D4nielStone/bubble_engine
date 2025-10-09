@@ -55,6 +55,7 @@ public:
         m_filhos[0]->m_estilo.m_limites.z = m_estilo.m_limites.z;
         m_filhos[0]->m_estilo.m_limites.w = 4;
         /* caixa de dentro */
+        m_filhos[1]->m_estilo.m_raio = 1.f;
         m_filhos[1]->m_estilo.m_limites.x = m_estilo.m_limites.x + m_header->m_tab_h / 2 - 2;
         m_filhos[1]->m_estilo.m_limites.y = m_estilo.m_limites.y + m_header->m_tab_h / 2 - 2;
         m_filhos[1]->m_estilo.m_limites.z = 4;

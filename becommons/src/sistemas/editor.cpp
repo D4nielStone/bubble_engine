@@ -58,8 +58,12 @@ void sistema_editor::carregarConfiguracaoPadrao()
     auto* menu = ui->obterRaiz()->adicionar<custom::barra_menu>();
     
     auto* file_sec = menu->adicionar_botao(" file ", [](){});
-    menu->adicionar_botao(" gerenciador de projetos", [this](){
-        carregarConfiguracaoGerenciador();
+    menu->adicionar_botao("projects", [this](){
+        auto* cont = ui->adicionar<container>(true);
+        cont->nova_tab<EDITOR_NS::gerenciador_projetos>(obterDiretorioHome() + "/bubble");
+        cont->m_estilo.m_limites = ui->m_raiz->m_estilo.m_limites / 1.5f;
+        cont->m_estilo.m_limites.x += cont->m_estilo.m_limites.z/2;
+        cont->m_estilo.m_limites.y += cont->m_estilo.m_limites.w/2;
             });
 
     // Configurando ambiente com containers
@@ -102,7 +106,6 @@ void sistema_editor::carregarConfiguracaoGerenciador(){
     cont->m_estilo.m_flag_estilo |= flag_estilo::largura_percentual | flag_estilo::altura_percentual;
     cont->m_estilo.m_largura = 1;
     cont->m_estilo.m_altura = 1;
-    cont->gerarHeader();
     cont->nova_tab<EDITOR_NS::gerenciador_projetos>(obterDiretorioHome() + "/bubble");
 }
 /**
