@@ -27,8 +27,8 @@
 using namespace becommons;
 
 container::container(bool floating) { 
+    m_estilo.m_corte = true;
     m_estilo.m_flag_estilo = flag_estilo::nenhuma;
-    //m_cortar = true;
     m_floating = floating;
 }
 header* container::gerarHeader() {
@@ -117,7 +117,10 @@ void container::atualizar() {
         }
     } else
     if (!m_filhos.empty()) {
-        m_filhos[0]->m_estilo.m_limites = becommons::lerp(m_filhos[0]->m_estilo.m_limites, m_estilo.m_limites,motor::obter().m_tempo->obterDeltaTime()*10);
+        m_filhos[0]->m_estilo.m_limites.x = m_estilo.m_limites.x;
+        m_filhos[0]->m_estilo.m_limites.y = m_estilo.m_limites.y;
+        m_filhos[0]->m_estilo.m_limites.z = std::lerp(m_filhos[0]->m_estilo.m_limites.z, m_estilo.m_limites.z,motor::obter().m_tempo->obterDeltaTime()*15);
+        m_filhos[0]->m_estilo.m_limites.w = std::lerp(m_filhos[0]->m_estilo.m_limites.w, m_estilo.m_limites.w,motor::obter().m_tempo->obterDeltaTime()*15);
     }
     caixa::atualizar();
 }

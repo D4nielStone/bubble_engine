@@ -57,12 +57,14 @@ namespace becommons{
             /// @{
             botao(const std::function<void()> &fctn, const std::string& txt) : area_de_toque(fctn) {
                 auto m_texto = std::make_unique<texto>(txt);
+                m_estilo.m_largura = m_texto->obterLargura(txt);
+                m_estilo.m_limites.z = m_texto->obterLargura(txt);
                 m_filhos.push_back(std::move(m_texto));
                 old_fundo_alpha = m_estilo.m_cor_fundo.a;
             }
             botao(bool* ptr, const std::string& txt) : area_de_toque(ptr) {
                 auto m_texto = std::make_unique<texto>(txt);
-                m_estilo.m_limites.z += m_texto->obterLargura(txt);
+                m_estilo.m_largura += m_texto->obterLargura(txt);
                 m_filhos.push_back(std::move(m_texto));
                 old_fundo_alpha = m_estilo.m_cor_fundo.a;
             }
@@ -75,7 +77,7 @@ namespace becommons{
                 }
                 if(txt.empty()) return;
                 auto m_texto = std::make_unique<texto>(txt, size);
-                m_estilo.m_limites.z += m_texto->obterLargura(txt);
+                m_estilo.m_largura += m_texto->obterLargura(txt);
                 m_filhos.push_back(std::move(m_texto));
             }
             botao(const std::function<void()> &fctn, const std::string& txt, const std::string img, const unsigned int size = 20) : area_de_toque(fctn) {
@@ -83,14 +85,14 @@ namespace becommons{
                 m_imagem->m_estilo.m_altura = size;
                 m_imagem->m_estilo.m_largura = size;
 
-                m_estilo.m_limites.z = size;
+                m_estilo.m_largura = size;
                 
                 m_filhos.push_back(std::move(m_imagem));
                 old_fundo_alpha = m_estilo.m_cor_fundo.a;
 
                 if(txt.empty()) return;
                 auto m_texto = std::make_unique<texto>(txt, size);
-                m_estilo.m_limites.z += m_texto->obterLargura(txt);
+                m_estilo.m_largura += m_texto->obterLargura(txt);
                 m_filhos.push_back(std::move(m_texto));
             }
             /// @}

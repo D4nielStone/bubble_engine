@@ -76,7 +76,8 @@ void camera::desenharFB() {
 camera::~camera() {
     depuracao::emitir(debug, "camera", "descarregando");
     
-    motor::obter().m_renderer->removerCamera(this);
+    if(motor::obter().m_renderer)
+        motor::obter().m_renderer->removerCamera(this);
     if(m_skybox)delete m_skybox;
     desativarFB();
 }

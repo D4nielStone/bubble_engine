@@ -255,25 +255,21 @@ void interface::trazer(caixa* alvo) {
 
 void interface::deconfigOpenglState() const {
     glEnable(GL_DEPTH_TEST);
-    glDisable(GL_SCISSOR_TEST);
     glCullFace(GL_BACK);
 }
 
 void interface::renderizar() {
     configOpenglState();
     desenhar(m_raiz.get());
-    //glEnable(GL_SCISSOR_TEST);
     for(size_t i = 0; i < m_floating.size(); i++) {
         auto filho = m_floating[i];
-        if(filho->m_estilo.m_ativo) {
-        /*glScissor(
-            filho->m_estilo.m_limites.x,
-            m_window->obterTamanho().y - filho->m_estilo.m_limites.y - filho->m_estilo.m_limites.w + 1.f,
-            filho->m_estilo.m_limites.z + 1.f,
-            filho->m_estilo.m_limites.w
-        );*/
+        if(filho->m_estilo.m_ativo)
         desenhar(filho.get());
-        }
+    }
+    for(size_t i = 0; i < m_popups.size(); i++) {
+        auto filho = m_popups[i];
+        if(filho->m_estilo.m_ativo)
+        desenhar(filho.get());
     }
     deconfigOpenglState();
 }
@@ -293,29 +289,16 @@ void interface::atualizar() {
             atualizarAJ(no);
             });
     atualizarFilhos(m_raiz.get());
-    m_raiz->atualizar();
-/*
-    for(size_t i = 0; i < m_popups.size(); i++) {
-        auto filho = m_popups[i];
-        if(filho == nullptr) {
-            m_popups.erase(m_popups.begin() + i);
-            continue;
-        }
-        //depuracao::emitir(debug, "id: " + std::to_string(filho->m_id));
-        chamarFuncoes(filho.get());
-        atualizarFilhos(filho.get());
-        filho->atualizar();
-    }*/
+
     for(size_t i = 0; i < m_floating.size(); i++) {
         auto filho = m_floating[i];
-        if(filho == nullptr) {
-            m_floating.erase(m_floating.begin() + i);
-            continue;
-        }
-        //depuracao::emitir(debug, "id: " + std::to_string(filho->m_id));
         chamarFuncoes(filho.get());
         atualizarFilhos(filho.get());
-        filho->atualizar();
+    }
+    for(size_t i = 0; i < m_popups.size(); i++) {
+        auto filho = m_popups[i];
+        chamarFuncoes(filho.get());
+        atualizarFilhos(filho.get());
     }
 }
 
@@ -488,7 +471,7 @@ void interface::processarModular(caixa* it_caixa) {
 void interface::chamarFuncoes(caixa* it_caixa) {
     if(!it_caixa) return;
     else if (it_caixa->tipo() == tipo_caixa::botao) {
-        auto btn = static_cast<elementos::botao*>(it_caixa);
+        auto btn = dynamic_cast<elementos::botao*>(it_caixa);
         if(btn->pressionado() && btn->m_use_funcao) btn->m_funcao();
     }
     for (auto& filho : it_caixa->m_filhos) {
@@ -498,6 +481,7 @@ void interface::chamarFuncoes(caixa* it_caixa) {
 void interface::atualizarFilhos(caixa* it_caixa) {
     if (!it_caixa) throw std::runtime_error("Caixa nula sendo atualizada.");
     if (deveAtualizar(it_caixa)) processarModular(it_caixa);
+    it_caixa->atualizar();
 
     // Atualiza recursivamente os filhos
     for (auto& filho : it_caixa->m_filhos) {
@@ -512,10 +496,19 @@ void interface::atualizarFilhos(caixa* it_caixa) {
 void interface::resetRoot() {
     if(m_raiz == nullptr)return;
     m_floating.clear();
+    m_popups.clear();
     m_raiz.reset();
     m_raiz = std::make_unique<caixa>();
 } 
 
 void interface::remover(caixa* c) {
     //m_floating.erase(c->uid);
+}
+        
+elementos::popup* interface::novo_popup(elementos::botao* ref, bool e) {
+    auto nova_caixa = std::make_shared<elementos::popup>(ref, e);
+    nova_caixa->configurar();
+    auto* ptr = nova_caixa.get();
+    m_popups.push_back(nova_caixa);
+    return ptr;
 }

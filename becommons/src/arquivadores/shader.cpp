@@ -47,7 +47,7 @@ inline const std::unordered_map<std::string, const char*> shader_memoria{
 };
 
 void becommons::descarregarShaders() {
-    depuracao::emitir(alerta, "shader", "Descarregando shaders.");
+    depuracao::emitir(info, "shader", " descarregando shaders.");
     for (auto& [name, programID] : shaders) {
         glDeleteProgram(programID);
     }

@@ -105,7 +105,7 @@ void fase::parar()
 	depuracao::emitir(debug, "fase", "Parando");
     motor::obter().fila_opengl.push([this](){
 	    descarregar();
-        motor::obter().m_levelmanager->carregarAsync(diretorio);
+	    carregar();
             });
 	rodando = false;
 }

@@ -41,30 +41,27 @@ void elementos::popup::atualizar() {
                 x_antigo = motor::obter().m_inputs->obterMousePos().x;
                 y_antigo = motor::obter().m_inputs->obterMousePos().y;
             }
-        }
-    }
-    if (motor::obter().m_inputs->obter(inputs::MOUSE_E)) {
-        if (!mouseEmCima()) {
+        } else if(mouseEmCima() == false) {
             m_estilo.m_ativo = false;
         }
     }
 
+    
     float dt = motor::obter().m_tempo->obterDeltaTime();
     x_antigo = m_referencia->pressionado() ? motor::obter().m_inputs->obterMousePos().x : x_antigo;
     y_antigo = m_referencia->m_pressionado ? motor::obter().m_inputs->obterMousePos().y : y_antigo;
-    float mais_largo = 20.f, cursorx = 0.f;
-    float mais_alto = 20.f, cursory = 0.f;
-    cursorx = m_estilo.m_padding_geral.x;
-    cursory = m_estilo.m_padding_geral.y;
-    bool quebra = false;
+    //float mais_largo = 20.f, cursorx = 0.f;
+    //float mais_alto = 20.f, cursory = 0.f;
+    //cursorx = m_estilo.m_padding_geral.x;
+    //cursory = m_estilo.m_padding_geral.y;
+    //bool quebra = false;
     // Ativado
     if (m_estilo.m_ativo) {
-    float cursor_x = m_estilo.m_padding_geral.x;
-    float cursor_y = m_estilo.m_padding_geral.y;
-    float max_largura_total = 0.f;
-    float max_altura_total = 0.f;
-    
-    if (m_estilo.m_orientacao_modular == estilo::orientacao::vertical) {
+    //float cursor_x = m_estilo.m_padding_geral.x;
+    //float cursor_y = m_estilo.m_padding_geral.y;
+    //float max_largura_total = 0.f;
+    //float max_altura_total = 0.f;
+   /* if (m_estilo.m_orientacao_modular == estilo::orientacao::vertical) {
         float largura_coluna_atual = 0.f;
 
         for (auto& filho : m_filhos) {
@@ -123,6 +120,25 @@ void elementos::popup::atualizar() {
 } else {
         // Desativado
         m_estilo.m_limites = {m_referencia->m_estilo.m_limites.x, m_referencia->m_estilo.m_limites.y, 20, 20};
+    }*/
+    float max_largura_total = 0;
+    float max_altura_total = m_estilo.m_padding_geral.x;
+    for (auto& filho : m_filhos) {
+        max_largura_total = std::max(filho->m_estilo.m_largura + (filho->m_estilo.m_padding.x + m_estilo.m_padding_geral.x)*2, max_largura_total);
+        max_altura_total += filho->m_estilo.m_limites.w  + filho->m_estilo.m_padding.y + m_estilo.m_padding_geral.y;
+    }
+    
+    m_estilo.m_limites.z = std::lerp(m_estilo.m_limites.z, max_largura_total, m_velocidade_lerp * dt);
+    m_estilo.m_limites.w = std::lerp(m_estilo.m_limites.w, max_altura_total, m_velocidade_lerp * dt);
+    
+    bool pode_aparecer_direita = (x_antigo + m_estilo.m_limites.z) < motor::obter().m_janela->obterTamanho().x;
+    bool pode_aparecer_abaixo = (y_antigo + m_estilo.m_limites.w) < motor::obter().m_janela->obterTamanho().y;
+    
+    float novo_x = pode_aparecer_direita ? x_antigo : x_antigo - m_estilo.m_limites.z;
+    float novo_y = pode_aparecer_abaixo ? y_antigo : y_antigo - m_estilo.m_limites.w ;
+
+    m_estilo.m_limites.x = std::lerp(m_estilo.m_limites.x, novo_x, m_velocidade_lerp * dt);
+    m_estilo.m_limites.y = std::lerp(m_estilo.m_limites.y, novo_y, m_velocidade_lerp * dt);
     }
     caixa::atualizar();
 }

@@ -102,10 +102,12 @@ void sistema_renderizacao::adicionarCamera(camera* cam) {
 }
 	    
 void sistema_renderizacao::removerExtra(camera* cam) {
-    cameras_extra.erase(cam);
+    if(cameras_extra.find(cam)!=cameras_extra.end())
+        cameras_extra.erase(cam);
 }
 void sistema_renderizacao::removerCamera(camera* cam) {
-    cameras.erase(cam);
+    if(cameras.find(cam)!=cameras.end())
+        cameras.erase(cam);
 }
 
 void sistema_renderizacao::inicializar()

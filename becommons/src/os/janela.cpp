@@ -174,14 +174,14 @@ if(f)
     
     // obtém verção
     const GLubyte* versao = glGetString(GL_VERSION);    
-    if(!versao) depuracao::emitir(erro, "Versão opengl não identificade.");
+    if(!versao) depuracao::emitir(erro, " versão opengl não identificade.");
     else {
-        depuracao::emitir(info, "Versão opengl: " + std::string(reinterpret_cast<const char*>(versao)) + ".");
+        depuracao::emitir(info, " versão opengl: " + std::string(reinterpret_cast<const char*>(versao)) + ".");
         int major = versao[0];
         // usar opengl legacy opengl < 3.0.
         // máquinas antigas
         if(major < 3) {
-            depuracao::emitir(alerta, "Opengl legacy detectado. Ativando modo de compatibilidade.");
+            depuracao::emitir(alerta, " opengl legacy detectado. Ativando modo de compatibilidade.");
             //modoLegado();
         }
     }

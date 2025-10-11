@@ -47,17 +47,17 @@ gerenciador_projetos::gerenciador_projetos(const std::string& dir) : painel("ger
         c->m_estilo.m_largura = 1;
         c->m_estilo.m_altura = 115;
 
-        p->m_estilo.m_padding_geral = {2,25};
+        p->m_estilo.m_padding_geral = {20,30};
         p->m_estilo.m_cor_fundo = {0.07,0.07,0.07,1.f};
         p->m_estilo.m_flag_estilo |= flag_estilo::alinhamento_central;
         p->m_estilo.m_orientacao_modular = estilo::orientacao::horizontal;
 
         p->adicionar<elementos::botao>([this, dir](){
             abrirProjeto(dir);
-                }, "", "play.png", 50);
+                }, "", "play.png", 25);
         p->adicionar<elementos::botao>([this, dir](){
             removerProjeto(dir);
-                }, "", "remover.png", 50);
+                }, "", "remover.png", 25);
     }
 }
 

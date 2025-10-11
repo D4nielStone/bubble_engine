@@ -180,7 +180,7 @@ namespace becommons{
                     m_estilo.m_largura = obterLargura(m_texto_frase);
                     m_estilo.m_altura = obterAltura(m_texto_frase);
                 }
-                m_estilo.m_limites = {limites_iniciais.x, limites_iniciais.y, m_estilo.m_largura, m_estilo.m_altura};
+                m_estilo.m_limites = {limites_iniciais.x, limites_iniciais.y, obterLargura(m_texto_frase), m_estilo.m_altura};
             };
         };
     } // elementos

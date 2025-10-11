@@ -78,6 +78,7 @@ namespace becommons {
         flag_estilo         m_flag_estilo = flag_estilo::modular;
         orientacao          m_orientacao_modular = orientacao::horizontal;  // como organiza seus filhos
         bool                m_ativo {true};
+        bool                m_corte {false};
         bool                m_ligar_la {false};            // ligar altura-largura
         bool                m_ligar_al {false};            // ligar largura-altura
         float               m_largura = 20.f;
@@ -215,9 +216,6 @@ namespace becommons {
         virtual void configurar() {
         };
         virtual void atualizar() {
-            for(auto& filho : m_filhos) {
-                filho->atualizar();
-            }
         };
         // @returns Se está presionado ou não
         bool mouseEmCima();

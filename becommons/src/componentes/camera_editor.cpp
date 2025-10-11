@@ -72,6 +72,8 @@ void camera_editor::atualizarMovimentacao() {
     // Mouse rotation
     float mousex_atual = motor::obter().m_inputs->obterMousePos().x;
     float mousey_atual = motor::obter().m_inputs->obterMousePos().y;
+    float mx = mousex_antigo - mousex_atual;
+    float my = mousey_antigo - mousey_atual;
     // Movement
     if (motor::obter().m_inputs->obter(inputs::W)) transform->mover(0, 0, sens);
     if (motor::obter().m_inputs->obter(inputs::A)) transform->mover(sens, 0, 0);
@@ -79,10 +81,7 @@ void camera_editor::atualizarMovimentacao() {
     if (motor::obter().m_inputs->obter(inputs::D)) transform->mover(-sens, 0, 0);
     if (motor::obter().m_inputs->obter(inputs::ESPACO)) transform->mover(0, sens, 0);
     if (motor::obter().m_inputs->obter(inputs::E_SHIFT)) transform->mover(0, -sens, 0);
-
     if (motor::obter().m_inputs->obter(inputs::MOUSE_E)) {
-        float mx = mousex_antigo - mousex_atual;
-        float my = mousey_antigo - mousey_atual;
     
         // Atualiza os ângulos acumulados
         pitch += my * 0.1f;
@@ -90,7 +89,6 @@ void camera_editor::atualizarMovimentacao() {
     
         // Limita o pitch
         pitch = glm::clamp(pitch, -89.f, 89.f);
-    
     };
     // Aplica diretamente
     transform->rotacao = lerp(transform->rotacao, fvet3(pitch, yaw, 0.f), interpolacao);

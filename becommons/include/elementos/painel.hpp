@@ -44,6 +44,7 @@ namespace becommons {
         ~header();
         tipo_caixa tipo() const override { return tipo_caixa::header; };
         void atualizar() override;
+        void desenhar(unsigned int) override;
     };
     /** \class painel
      *  \brief `painel` é uma derivação da caixa criada para servir como janela ou dock.
@@ -51,8 +52,11 @@ namespace becommons {
     class painel : public caixa {
     public:
         bool callback_remocao {false};
+        bool trigger = true;
+        bool m_selecionado {false};
         std::string label;
         painel(const std::string& label = "panel");
+        void atualizar() override;
     };
 
     namespace paineis {
@@ -93,8 +97,10 @@ namespace becommons {
         };
         class editor : public painel {
         public:
+            camera_editor* cam;
             elementos::imagem* framebuffer;
-            editor(camera* cam);
+            editor(camera_editor* cam);
+            void atualizar() override;
         };
     } // paineis
 }

@@ -55,11 +55,11 @@ public:
         m_filhos[0]->m_estilo.m_limites.z = m_estilo.m_limites.z;
         m_filhos[0]->m_estilo.m_limites.w = 4;
         /* caixa de dentro */
-        m_filhos[1]->m_estilo.m_raio = 1.f;
-        m_filhos[1]->m_estilo.m_limites.x = m_estilo.m_limites.x + m_header->m_tab_h / 2 - 2;
-        m_filhos[1]->m_estilo.m_limites.y = m_estilo.m_limites.y + m_header->m_tab_h / 2 - 2;
-        m_filhos[1]->m_estilo.m_limites.z = 4;
-        m_filhos[1]->m_estilo.m_limites.w = 4;
+        m_filhos[1]->m_estilo.m_raio = 3.f;
+        m_filhos[1]->m_estilo.m_limites.x = m_estilo.m_limites.x + m_header->m_tab_h / 2 - 3;
+        m_filhos[1]->m_estilo.m_limites.y = m_estilo.m_limites.y + m_header->m_tab_h / 2 - 3;
+        m_filhos[1]->m_estilo.m_limites.z = 6;
+        m_filhos[1]->m_estilo.m_limites.w = 6;
     
         area_de_toque::atualizar();
     }
@@ -71,25 +71,46 @@ painel::painel(const std::string& label) : label(label) {
     m_estilo.m_cor_borda = cor(0.13f);
     m_estilo.m_padding_geral = {1, 1};
 }
-header::~header() {
-    // -- reset
-    for(auto& tab : m_tabs) {
-        motor::obter().m_editor->ui->remover(m_tabs.back());
+void painel::atualizar() {
+    if(motor::obter().m_inputs->obter(inputs::MOUSE_E) 
+            && mouseEmCima() && m_estilo.m_ativo
+            && trigger == false ) m_selecionado = true;
+    if(motor::obter().m_inputs->obter(inputs::MOUSE_E) 
+            && (mouseEmCima() == false||m_estilo.m_ativo==false)
+            && trigger == false ) {
+        m_selecionado = false;
     }
+    if(motor::obter().m_inputs->obter(inputs::MOUSE_E)) trigger = true;
+    else trigger = false;
+    
+    m_estilo.m_cor_borda = cor(0.13f);
+    caixa::atualizar();
+}
+header::~header() {
+    for(auto& tab : m_tabs) delete tab;
     m_tabs.clear();
 }
 header::header() {
     m_estilo.m_flag_estilo = flag_estilo::nenhuma;
     m_estilo.m_cor_borda = cor(0.13f);
-    m_estilo.m_cor_fundo = cor(0.1f);
+    m_estilo.m_cor_fundo = cor(0.07f);
+}
+void header::desenhar(unsigned int vao) {
+    caixa::desenhar(vao);
+
+    for(auto& tab : m_tabs) {
+        tab->m_projecao = m_projecao;
+        tab->desenhar(vao);
+        for(auto& filho : tab->m_filhos) {
+            filho->m_projecao = m_projecao;
+            filho->desenhar(vao);
+        }
+    }
 }
 void header::atualizar() {
     // -- se tabs mudou
     if (m_tabs.size() != m_filhos.size()) {
-        // -- reset
-        for(auto& tab : m_tabs) {
-            motor::obter().m_editor->ui->remover(m_tabs.back());
-        }
+        for(auto& tab : m_tabs) delete tab;
         m_tabs.clear();
 
         // -- add
@@ -97,7 +118,7 @@ void header::atualizar() {
             // -- obtém o painel
             auto p = static_cast<painel*>(c.get());
             // -- add a tab
-            m_tabs.push_back(motor::obter().m_editor->ui->adicionar<tab>(this, p->label));
+            m_tabs.push_back(new tab(this, p->label));
             m_tabs.back()->m_tab_id = m_tabs.size() - 1; // -- set id
         }
     }
@@ -132,7 +153,12 @@ void header::atualizar() {
         m_filhos[i]->m_estilo.m_limites.y += m_tab_h;
         m_filhos[i]->m_estilo.m_limites.w -= m_tab_h;
         m_filhos[i]->atualizar();
-//        m_tabs[i]->atualizar();
+    }
+    for(auto& tab : m_tabs) {
+        tab->atualizar();
+        for(auto& filho : tab->m_filhos) {
+            filho->atualizar();
+        }
     }
 }
             
@@ -178,6 +204,7 @@ void paineis::entity::atualizar() {
         }
     });
     }
+    painel::atualizar();
 }
 
 paineis::inspector::inspector() : painel("inspector") {
@@ -203,9 +230,7 @@ paineis::jogo::jogo() : painel("jogo") {
 }
             
 void paineis::jogo::play(){
-    motor::obter().fila_opengl.push([](){
-        motor::obter().m_levelmanager->obterFaseAtual()->iniciar();
-    });
+    motor::obter().m_levelmanager->obterFaseAtual()->iniciar();
     framebuffer->m_estilo.m_flag_estilo = flag_estilo::modular | flag_estilo::largura_percentual | flag_estilo::alinhamento_fim | flag_estilo::altura_percentual;
     m_filhos[0]->m_filhos[0]->m_filhos.clear();
     m_filhos[0]->m_filhos[0]->adicionar<elementos::botao>([this](){
@@ -215,9 +240,7 @@ void paineis::jogo::play(){
 void paineis::jogo::pause(){
 }
 void paineis::jogo::stop(){
-    motor::obter().fila_opengl.push([](){
-        motor::obter().m_levelmanager->obterFaseAtual()->parar();
-    });
+    motor::obter().m_levelmanager->obterFaseAtual()->parar();
     framebuffer->m_estilo.m_flag_estilo = flag_estilo::modular | flag_estilo::largura_percentual | flag_estilo::alinhamento_central | flag_estilo::altura_percentual;
     m_filhos[0]->m_filhos[0]->m_filhos.clear();
     m_filhos[0]->m_filhos[0]->adicionar<elementos::botao>([this](){
@@ -234,7 +257,7 @@ void paineis::jogo::atualizar() {
     painel::atualizar();
 }
             
-paineis::editor::editor(camera* cam) : painel("editor") {
+paineis::editor::editor(camera_editor* cam) : painel("editor"), cam(cam) {
     framebuffer = adicionar<elementos::imagem>(cam->textura, true);
     framebuffer->m_estilo.m_flag_estilo |= flag_estilo::largura_percentual | flag_estilo::altura_percentual;
     framebuffer->m_estilo.m_largura = 1;
@@ -245,6 +268,16 @@ paineis::editor::editor(camera* cam) : painel("editor") {
     lateral->m_estilo.m_padding_geral = {2,2};
     lateral->m_estilo.m_orientacao_modular = estilo::orientacao::vertical;
     lateral->m_estilo.m_flag_estilo |= flag_estilo::altura_justa | flag_estilo::largura_justa;
+    cam->atualizarMovimentacao(); // Atualiza a posição e orientação da câmera
+    sistema_renderizacao::calcularTransformacao(cam->transform); // Recalcula a matriz de transformação da câmera
+}
+
+void paineis::editor::atualizar() {
+    if(m_selecionado) {
+        cam->atualizarMovimentacao(); // Atualiza a posição e orientação da câmera
+        sistema_renderizacao::calcularTransformacao(cam->transform); // Recalcula a matriz de transformação da câmera
+    }
+    painel::atualizar();
 }
 paineis::file_manager::file_manager() : painel("files") {
 /*

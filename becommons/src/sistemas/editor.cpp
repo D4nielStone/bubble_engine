@@ -58,15 +58,11 @@ void sistema_editor::carregarConfiguracaoPadrao()
     auto* menu = ui->obterRaiz()->adicionar<custom::barra_menu>();
     
     auto* file_sec = menu->adicionar_botao(" file ", [](){});
-    menu->adicionar_botao("projects", [this](){
-        auto* cont = ui->adicionar<container>(true);
-        cont->nova_tab<EDITOR_NS::gerenciador_projetos>(obterDiretorioHome() + "/bubble");
-        cont->m_estilo.m_limites = ui->m_raiz->m_estilo.m_limites;
-        cont->m_estilo.m_limites.x += 30;
-        cont->m_estilo.m_limites.y += 30;
-        cont->m_estilo.m_limites.z -= 60;
-        cont->m_estilo.m_limites.w -= 60;
-            });
+    auto* proj_sec = menu->adicionar_botao("projects", [](){});
+    auto* pop = ui->novo_popup(proj_sec);
+    auto* p = pop->adicionar<EDITOR_NS::gerenciador_projetos>(obterDiretorioHome() + "/bubble");
+    p->m_estilo.m_largura = 300;
+    p->m_estilo.m_altura = 300;
 
     // Configurando ambiente com containers
     // O container principal [dock] irá preencher a tela a-baixo da menubar
@@ -86,7 +82,7 @@ void sistema_editor::carregarConfiguracaoPadrao()
     bottom->nova_tab<paineis::coding>();
 
     // Inserção do popup no loop
-    auto* popup_file = ui->adicionar<elementos::popup>(file_sec);
+    auto* popup_file = ui->novo_popup(file_sec);
     popup_file->adicionar<elementos::botao>([](){
             motor::obter().finalizar();
             }, "exit");
@@ -105,6 +101,12 @@ void sistema_editor::carregarConfiguracaoGerenciador(){
     auto* menu = ui->obterRaiz()->adicionar<custom::barra_menu>();
     
     auto* file_sec = menu->adicionar_botao(" file ", [](){});
+    
+    // Inserção do popup no loop
+    auto* popup_file = ui->novo_popup(file_sec);
+    popup_file->adicionar<elementos::botao>([](){
+            motor::obter().finalizar();
+            }, "exit");
     auto* cont = ui->obterRaiz()->adicionar<container>();
     cont->m_estilo.m_flag_estilo |= flag_estilo::largura_percentual | flag_estilo::altura_percentual;
     cont->m_estilo.m_largura = 1;
@@ -142,8 +144,6 @@ void sistema_editor::salvarEditor() {
  */
 
 void sistema_editor::atualizar() {
-    cam->atualizarMovimentacao(); // Atualiza a posição e orientação da câmera
-    sistema_renderizacao::calcularTransformacao(cam->transform); // Recalcula a matriz de transformação da câmera
     if(m_salvar_ao_fechar && motor::obter().m_janela->deveFechar()) salvarEditor();
 
     ui->atualizar();
@@ -157,7 +157,6 @@ void sistema_editor::atualizar() {
 void sistema_editor::inicializar() {
     sistema::inicializar(); // Chama a inicialização da classe base
     ui = std::make_shared<interface>(motor::obter().m_janela.get());
-    cam = std::make_shared<camera_editor>();
 
     ui->inicializar();
 
@@ -171,6 +170,7 @@ void sistema_editor::abrirProjeto(becommons::projeto* proj) {
     if (!proj)  {
 		throw std::runtime_error("motor: Projeto inválido carregado.");
 	}
+    cam = std::make_shared<camera_editor>();
     // Carrega a configuração da câmera do editor a partir de um arquivo JSON.
     // Se o arquivo não existir ou houver erro de parse, um erro é emitido.
     auto _usr = proj->m_diretorio + "/.usr";

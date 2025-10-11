@@ -31,6 +31,7 @@
 #include "arquivadores/fonte.hpp"
 #include "util/caixa.hpp"
 #include "elementos/botao.hpp"
+#include "elementos/popup.hpp"
 #include "elementos/caixa_de_texto.hpp"
 #include "elementos/imagem.hpp"
 #include "elementos/texto.hpp"
@@ -60,6 +61,7 @@ namespace becommons {
             m_floating.push_back(nova_caixa);
             return ptr;
         }
+        elementos::popup* novo_popup(elementos::botao* ref, bool e = true);
         void remover(caixa*);
         void resetRoot();
         interface();
@@ -73,7 +75,7 @@ namespace becommons {
     
         caixa* obterRaiz();
         std::vector<std::shared_ptr<caixa>> m_floating;
-        std::vector<std::shared_ptr<caixa>> m_popups;
+        std::vector<std::shared_ptr<elementos::popup>> m_popups;
         std::unique_ptr<caixa> m_raiz;
         glm::mat4 projecao_viewport;
         ijanela* m_window = nullptr;
