@@ -43,6 +43,7 @@ namespace beeditor {
          
         std::shared_ptr<becommons::interface> ui;
         std::shared_ptr<becommons::camera_editor> cam;
+        uint32_t m_entidade_selecionada;
         bool m_salvar_ao_fechar;
         
         // Declaração global para acesso rápido às caixas de entidades e inspetor.

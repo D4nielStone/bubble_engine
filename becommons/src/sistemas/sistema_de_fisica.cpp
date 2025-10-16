@@ -32,13 +32,13 @@
 
 using namespace becommons;
 
-sistema_fisica::sistema_fisica() : velocidade(1.f) {
+sistema_fisica::sistema_fisica() {
     configColisao = new btDefaultCollisionConfiguration();
     expedidor = new btCollisionDispatcher(configColisao);
     faseAmpla = new btDbvtBroadphase();
     solucionador = new btSequentialImpulseConstraintSolver();
     mundoDinamico = new btDiscreteDynamicsWorld(expedidor, faseAmpla, solucionador, configColisao);
-    mundoDinamico->setGravity(btVector3(0, -9.8, 0));
+    mundoDinamico->setGravity(m_gravity);
 }
 sistema_fisica::~sistema_fisica() {
     if(solucionador)delete solucionador;
@@ -48,11 +48,37 @@ sistema_fisica::~sistema_fisica() {
     if(mundoDinamico)delete mundoDinamico;
 }
 
+void sistema_fisica::atualizarColisoes() {
+    mundoDinamico->updateAabbs();
+    mundoDinamico->performDiscreteCollisionDetection();
+}
 void sistema_fisica::atualizar() {
     auto reg = motor::obter().m_levelmanager->obterFaseAtual()->obterRegistro();
+    // Atualiza o Bullet com o transform da engine
+    reg->cada<fisica, transformacao>([&](uint32_t entidade) {
+        auto f = reg->obter<fisica>(entidade);
+        auto t = reg->obter<transformacao>(entidade);
     
-    mundoDinamico->stepSimulation(motor::obter().m_tempo->obterDeltaTime() * velocidade, 10, 1.f/60);
+        // Se o corpo não for dinâmico ou foi movido manualmente, sincroniza
+        if (f->m_corpo_rigido) { 
+            btTransform trans;
+            trans.setOrigin(btVector3(t->posicao.x, t->posicao.y, t->posicao.z));
+                
+            // Converte rotação conforme sua convenção (aqui supondo quaternion)
+            btQuaternion quaternion;
+            quaternion.setEulerZYX(t->rotacao.y, t->rotacao.x, t->rotacao.z);
+            
+            trans.setRotation(quaternion);
     
+            f->m_corpo_rigido->setWorldTransform(trans);
+            if (f->m_corpo_rigido->getMotionState())
+                f->m_corpo_rigido->getMotionState()->setWorldTransform(trans);
+        }
+    });
+
+    // atualiza
+    mundoDinamico->stepSimulation(motor::obter().m_tempo->obterDeltaTime(), m_depth);
+
     // Atualiza a transformacao
     reg->cada<fisica, transformacao>([&](const uint32_t entidade) {
         auto f = reg->obter<fisica>(entidade);
@@ -71,9 +97,39 @@ void sistema_fisica::inicializar() {
     sistema::inicializar();
     depuracao::emitir(info, "fisica", "iniciando sistema.");
     auto reg = motor::obter().m_levelmanager->obterFaseAtual()->obterRegistro();
+    
+    if(mundoDinamico) delete mundoDinamico;
+    mundoDinamico = new btDiscreteDynamicsWorld(expedidor, faseAmpla, solucionador, configColisao);
+    mundoDinamico->setGravity(btVector3(0, -9.8, 0));
+    
     reg->cada<fisica, transformacao>([reg, this](const uint32_t entidade) {
             /// adiciona corpos rigidos
             auto comp_fisica = reg->obter<fisica>(entidade);
+            auto comp_transf = reg->obter<transformacao>(entidade);
+
+            /* set position */
+            comp_fisica->definirPosicao(comp_transf->posicao);
+            btCollisionShape* shape = comp_fisica->m_corpo_rigido->getCollisionShape();
+
+            /* set scale */
+            btVector3 scale = shape->getLocalScaling();
+            scale.setX(comp_transf->escala.x); // Set X-axis scale
+            scale.setY(comp_transf->escala.y); // Set Y-axis scale
+            scale.setZ(comp_transf->escala.z); // Set Z-axis scale
+            
+            /* set rot */
+            btTransform trans;
+            comp_fisica->m_estado_de_movimento->getWorldTransform(trans);
+            
+            btQuaternion quaternion;
+            quaternion.setEulerZYX(comp_transf->rotacao.y, comp_transf->rotacao.x, comp_transf->rotacao.z);
+            trans.setRotation(quaternion);
+    
+            comp_fisica->m_corpo_rigido->setWorldTransform(trans);
+            if (comp_fisica->m_corpo_rigido->getMotionState())
+                comp_fisica->m_corpo_rigido->getMotionState()->setWorldTransform(trans);
+            shape->setLocalScaling(scale);
+            /* add body */
             mundoDinamico->addRigidBody(comp_fisica->m_corpo_rigido);
         }
     );

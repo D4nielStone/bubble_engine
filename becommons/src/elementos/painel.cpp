@@ -72,15 +72,18 @@ painel::painel(const std::string& label) : label(label) {
     m_estilo.m_padding_geral = {1, 1};
 }
 void painel::atualizar() {
-    if(motor::obter().m_inputs->obter(inputs::MOUSE_E) 
+    bool mouse = motor::obter().m_inputs->obter(inputs::MOUSE_E) ||
+        motor::obter().m_inputs->obter(inputs::MOUSE_D)          ||
+        motor::obter().m_inputs->obter(inputs::MOUSE_MEIO);
+    if(     mouse 
             && mouseEmCima() && m_estilo.m_ativo
             && trigger == false ) m_selecionado = true;
-    if(motor::obter().m_inputs->obter(inputs::MOUSE_E) 
+    if(     mouse 
             && (mouseEmCima() == false||m_estilo.m_ativo==false)
             && trigger == false ) {
         m_selecionado = false;
     }
-    if(motor::obter().m_inputs->obter(inputs::MOUSE_E)) trigger = true;
+    if(mouse) trigger = true;
     else trigger = false;
     
     m_estilo.m_cor_borda = cor(0.13f);
@@ -196,7 +199,7 @@ void paineis::entity::atualizar() {
         m_filhos[0]->m_filhos[1]->m_filhos.clear();
         for(auto& [id, comps] : reg->entidades) {
             m_filhos[0]->m_filhos[0]->adicionar<elementos::botao>([this, id]() {
-                entidade_selecionada = id;
+                motor::obter().m_editor->m_entidade_selecionada = id;
             }, "entity." + std::to_string(id), "cube.png", 12); 
             m_filhos[0]->m_filhos[1]->adicionar<elementos::botao>([reg, id]() {
                 reg->remover(id);
@@ -276,6 +279,24 @@ void paineis::editor::atualizar() {
     if(m_selecionado) {
         cam->atualizarMovimentacao(); // Atualiza a posição e orientação da câmera
         sistema_renderizacao::calcularTransformacao(cam->transform); // Recalcula a matriz de transformação da câmera
+        
+        if(motor::obter().m_inputs->obter(inputs::MOUSE_D)) {
+            // picking
+            dvet2 mouse = motor::obter().m_inputs->obterMousePos();
+            raio ray = cam->pontoParaRaio({static_cast<int>(mouse.x), static_cast<int>(mouse.y)});
+            resultadoRaio resultado = motor::obter().m_fisica->emitirRaio(ray);
+
+            auto reg = motor::obter().m_levelmanager->obterFaseAtual()->obterRegistro();
+            if(resultado.atingiu) {
+                reg->cada<fisica>([&](const uint32_t entidade){
+                    auto comp = reg->obter<fisica>(entidade);
+                    if(comp->m_corpo_rigido == resultado.objetoAtingido) {
+                        motor::obter().m_editor->m_entidade_selecionada = entidade;
+                    }
+                });
+                reg->remover(motor::obter().m_editor->m_entidade_selecionada);
+            }
+        }
     }
     painel::atualizar();
 }

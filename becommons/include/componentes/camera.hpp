@@ -87,7 +87,7 @@ namespace becommons {
 		glm::mat4 obtProjectionMatrix();
 
 		raio pontoParaRaio(const ivet2& screenPoint) const;
-		fvet3 telaParaMundo(const ivet2&, float) const;
+		fvet3 telaParaMundo(const ivet2&) const;
         ivet3 mundoParaTela(const fvet3&);
     private:
         GLint prevViewport[4];

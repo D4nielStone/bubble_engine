@@ -129,6 +129,54 @@ fisica::fisica(bool estatico, const forma e_forma) : e_forma(e_forma) {
     m_massa = estatico ? 0 : 1;
 }
 
+void fisica::configurar() {
+    posicao_inicial = btVector3(0, 0, 0);
+    escala_inicial = btVector3(1, 1, 1);
+    
+    // Define forma bt
+    switch (e_forma) {
+        case forma::caixa:
+            m_forma = new btBoxShape(escala_inicial);
+            break;
+        case forma::esfera:
+            m_forma = new btSphereShape(escala_inicial.getX());
+            break;
+        case forma::capsula:
+            m_forma = new btCapsuleShape(escala_inicial.getX(), 1.8f);
+            break;
+        case forma::cilindro:
+            m_forma = new btCylinderShape(escala_inicial);
+            break;
+        case forma::cone:
+            m_forma = new btConeShape(escala_inicial.getX(), escala_inicial.getY());
+            break;
+        case forma::plano:
+            m_forma = new btStaticPlaneShape(escala_inicial, 1.f);
+            break;
+        case forma::malha:
+            motor::obter().fila_opengl.push([&](){
+                    auto render = motor::obter().m_levelmanager->obterFaseAtual()->obterRegistro()->obter<renderizador>(meu_objeto);
+                if(render)
+                    definirModelo(render->m_modelo);
+                else
+                    throw std::runtime_error("Física: sem renderizador na malha.");
+
+            btVector3 inertia(0, 0, 0);
+            if(m_massa > 0) m_forma->calculateLocalInertia(m_massa, inertia);
+            m_estado_de_movimento = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), posicao_inicial));
+            btRigidBody::btRigidBodyConstructionInfo rigidBodyCI(m_massa, m_estado_de_movimento, m_forma, inertia);
+            m_corpo_rigido = new btRigidBody(rigidBodyCI);
+                    });
+        break;
+    }
+
+    btVector3 inertia(0, 0, 0);
+    if(m_massa > 0) m_forma->calculateLocalInertia(m_massa, inertia);
+    m_estado_de_movimento = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), posicao_inicial));
+    btRigidBody::btRigidBodyConstructionInfo rigidBodyCI(m_massa, m_estado_de_movimento, m_forma, inertia);
+    m_corpo_rigido = new btRigidBody(rigidBodyCI);
+}
+
 // Destrutor
 fisica::~fisica() {
     depuracao::emitir(debug, "fisica", "descarregando");
@@ -138,17 +186,22 @@ fisica::~fisica() {
     if(m_forma)delete m_forma;
 }
 
-// Criar forma para múltiplas malhas
 void fisica::definirModelo(modelo* p_modelo) {
     if(!p_modelo) throw std::runtime_error("Física: modelo inválido.");
     m_modelo = p_modelo;
     if(e_forma != forma::malha) return;
 
+    m_vertices_cache.clear();
+    m_indices_cache.clear();
+
     btTriangleIndexVertexArray* indexVertexArray = new btTriangleIndexVertexArray();
 
     for (auto& malha : m_modelo->malhas) {
-        auto& vertices = malha.obterVertices();
-        auto& indices = malha.obterIndices();
+        m_vertices_cache.push_back(malha.obterVertices());
+        m_indices_cache.push_back(malha.obterIndices());
+
+        auto& vertices = m_vertices_cache.back();
+        auto& indices  = m_indices_cache.back();
 
         btIndexedMesh mesh;
         mesh.m_numTriangles = indices.size() / 3;

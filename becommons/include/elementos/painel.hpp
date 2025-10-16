@@ -75,11 +75,9 @@ namespace becommons {
         class entity : public painel {
         private:
             bool registro_atualizou = true;
-            uint32_t entidade_selecionada;
             size_t old_contage = 0;
         public:
             entity();
-            uint32_t obter() const { return entidade_selecionada; }
             void atualizar() override;
         };
         class inspector : public painel {

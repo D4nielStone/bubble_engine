@@ -222,7 +222,7 @@ glm::mat4 camera::obtProjectionMatrix() {
 }
 
 raio camera::pontoParaRaio(const ivet2& screenPoint) const {
-    fvet3 direcaoMundo = telaParaMundo(screenPoint, 0.0f);
+    fvet3 direcaoMundo = telaParaMundo(screenPoint);
 
     raio ray {};
     ray.origem = transform->posicao;
@@ -231,18 +231,35 @@ raio camera::pontoParaRaio(const ivet2& screenPoint) const {
     return ray;
 }
 
-fvet3 camera::telaParaMundo(const ivet2 &screenPoint, float profundidade) const {
-    float ndcX = (2.0f * screenPoint.x) / motor::obter().m_janela->obterTamanho().x - 1.0f;
-    float ndcY = 1.0f - (2.0f * screenPoint.y) / motor::obter().m_janela->obterTamanho().y;
-    fvet4 clipCoords = fvet4(ndcX, ndcY, profundidade, 1.0f);
+fvet3 camera::telaParaMundo(const ivet2 &screenPoint) const {
+    // 1. Determinar o viewport ativo
+    fvet4 viewport;
+    if (viewport_ptr)
+        viewport = *viewport_ptr;
+    else {
+        auto size = motor::obter().m_janela->obterTamanho();
+        viewport = {0, 0, size.x, size.y};
+    }
 
-    fvet4 eyeCoords = fvet4(glm::inverse(projMatriz) * clipCoords.to_glm());
-    eyeCoords = fvet4(eyeCoords.x, eyeCoords.y, -1.0f, 0.0f);
+    // 2. Converter screenPoint para coordenadas locais do viewport
+    float localX = screenPoint.x - viewport.x;
+    float localY = screenPoint.y - viewport.y;
 
-    fvet4 worldCoords = glm::inverse(viewMatrix) * eyeCoords.to_glm();
-    return fvet3(worldCoords.x,worldCoords.y,worldCoords.z).normalizar();
+    // 3. Converter para NDC
+    float ndcX = (2.0f * localX) / viewport.z - 1.0f;
+    float ndcY = 1.0f - (2.0f * localY) / viewport.w;
+
+    fvet4 ndcPos(ndcX, ndcY, -1.0f, 1.0f);
+
+    // 4. Converter para espaço da câmera
+    fvet4 eyePos = fvet4(glm::inverse(projMatriz) * ndcPos.to_glm());
+    eyePos = fvet4(eyePos.x, eyePos.y, -1.0f, 0.0f);
+
+    // 5. Converter para espaço do mundo
+    fvet4 worldDir = fvet4(glm::inverse(viewMatrix) * eyePos.to_glm());
+
+    return fvet3(worldDir.x, worldDir.y, worldDir.z).normalizar();
 }
-
 ivet3 camera::mundoParaTela(const fvet3 &mundoPos) {
     glm::mat4 view = obtViewMatrix();
     glm::mat4 projection = obtProjectionMatrix();
@@ -267,6 +284,8 @@ ivet3 camera::mundoParaTela(const fvet3 &mundoPos) {
     float screenY = (1.0f - ndcCoords.y) * 0.5f * currentViewport.y;
 
     int screenZ = visivel ? 1 : -1;
-
+    
+    int offsetX = viewport_ptr ? viewport_ptr->x : 0;
+    int offsetY = viewport_ptr ? viewport_ptr->y : 0;
     return ivet3(static_cast<int>(screenX + viewport_ptr->x), static_cast<int>(screenY + viewport_ptr->y), screenZ);
 }

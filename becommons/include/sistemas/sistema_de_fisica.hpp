@@ -46,15 +46,22 @@ public:
 };
 
 namespace becommons {
+    enum CollisionLayers {
+        LAYER_GAME = 1 << 0,
+        LAYER_EDITOR = 1 << 1,
+        LAYER_PICKING = 1 << 2
+    };
     struct sistema_fisica : sistema {
          sistema_fisica();
         ~sistema_fisica();
 
         void atualizar() override;
+        void atualizarColisoes();
         void inicializar() override;
         bool remover(btRigidBody*& corpo);
         btDiscreteDynamicsWorld* mundo();
-        float velocidade;
+        int m_depth = 10;
+        btVector3 m_gravity = btVector3(0.f, 9.8f, 0.f);
         resultadoRaio emitirRaio(const raio& raio);
     private:
         btDefaultCollisionConfiguration* configColisao{nullptr};

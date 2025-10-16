@@ -62,10 +62,13 @@ namespace becommons {
         forma e_forma;
         fisica(bool estatico = false, const forma m_forma = forma::caixa);
         virtual ~fisica();
+        std::vector<std::vector<vertice>> m_vertices_cache;
+        std::vector<std::vector<unsigned int>> m_indices_cache;
         
         bool analizar(const rapidjson::Value&) override;
         bool serializar(rapidjson::Value& value, rapidjson::Document::AllocatorType& allocator) const override;
 
+        void configurar() override;
         void definirModelo(modelo*);
         void definirForca(const fvet3& vetor);
         void definirVelocidade(const fvet3& vetor);

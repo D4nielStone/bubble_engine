@@ -117,6 +117,7 @@ void fase::iniciar()
     rodando = true;
 	carregar();
     motor::obter().m_codigo->inicializar();
+    motor::obter().m_fisica->inicializar();
 	depuracao::emitir(debug, "fase", "Iniciando");
 }
 

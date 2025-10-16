@@ -95,6 +95,7 @@ namespace becommons {
 		mascaras[id] |= T::mascara; // Atualiza a máscara no mapa auxiliar
 		entidades[id][T::mascara] = std::make_shared<T>(std::forward<Args>(args)...); // Adiciona o componente
 		entidades[id][T::mascara]->meu_objeto = id;
+		entidades[id][T::mascara]->configurar();
 	}
 
 	/* Definições de templates */
@@ -103,6 +104,7 @@ namespace becommons {
 		mascaras[id] |= T::mascara; // Atualiza a máscara no mapa auxiliar
 		entidades[id][T::mascara] = std::make_shared<T>(std::forward<Args>(args)...); // Adiciona o componente
 		entidades[id][T::mascara]->meu_objeto = id;
+		entidades[id][T::mascara]->configurar();
 	}
 
 	template<typename T, typename ...Args>
@@ -111,6 +113,7 @@ namespace becommons {
 		ent.mascara |= mascaras[ent.id];
 		entidades[ent.id][T::mascara] = std::make_shared<T>(std::forward<Args>(args)...); // Adiciona o componente
 		entidades[ent.id][T::mascara]->meu_objeto = ent.id;
+		entidades[ent.id][T::mascara]->configurar();
 	}
 
 
