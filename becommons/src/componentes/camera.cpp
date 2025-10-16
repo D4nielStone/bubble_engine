@@ -63,13 +63,13 @@ void camera::desenharFB() {
 
         glViewport(0, 0, width, height);
         glClearColor(ceu.r, ceu.g, ceu.b, ceu.a);
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        glClear(GL_STENCIL_BUFFER_BIT | GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     }else{
         int width  = viewport_ptr ? viewport_ptr->z : motor::obter().m_janela->obterTamanho().x;
         int height = viewport_ptr ? viewport_ptr->w : motor::obter().m_janela->obterTamanho().y;
         glViewport(0, 0, width, height);
         glClearColor(ceu.r, ceu.g, ceu.b, ceu.a);
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        glClear(GL_STENCIL_BUFFER_BIT | GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     }
 }
 
@@ -238,7 +238,7 @@ fvet3 camera::telaParaMundo(const ivet2 &screenPoint) const {
         viewport = *viewport_ptr;
     else {
         auto size = motor::obter().m_janela->obterTamanho();
-        viewport = {0, 0, size.x, size.y};
+        viewport = {0.f, 0.f, static_cast<float>(size.x), static_cast<float>(size.y)};
     }
 
     // 2. Converter screenPoint para coordenadas locais do viewport

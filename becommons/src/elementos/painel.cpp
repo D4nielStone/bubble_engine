@@ -279,24 +279,25 @@ void paineis::editor::atualizar() {
     if(m_selecionado) {
         cam->atualizarMovimentacao(); // Atualiza a posição e orientação da câmera
         sistema_renderizacao::calcularTransformacao(cam->transform); // Recalcula a matriz de transformação da câmera
+        auto reg = motor::obter().m_levelmanager->obterFaseAtual()->obterRegistro();
         
-        if(motor::obter().m_inputs->obter(inputs::MOUSE_D)) {
             // picking
             dvet2 mouse = motor::obter().m_inputs->obterMousePos();
             raio ray = cam->pontoParaRaio({static_cast<int>(mouse.x), static_cast<int>(mouse.y)});
             resultadoRaio resultado = motor::obter().m_fisica->emitirRaio(ray);
 
-            auto reg = motor::obter().m_levelmanager->obterFaseAtual()->obterRegistro();
             if(resultado.atingiu) {
-                reg->cada<fisica>([&](const uint32_t entidade){
+                reg->cada<fisica, renderizador>([&](const uint32_t entidade){
                     auto comp = reg->obter<fisica>(entidade);
+                    auto compB = reg->obter<renderizador>(entidade);
                     if(comp->m_corpo_rigido == resultado.objetoAtingido) {
                         motor::obter().m_editor->m_entidade_selecionada = entidade;
+                        compB->m_outline = true;
+                    } else {
+                        compB->m_outline = false;
                     }
                 });
-                reg->remover(motor::obter().m_editor->m_entidade_selecionada);
             }
-        }
     }
     painel::atualizar();
 }

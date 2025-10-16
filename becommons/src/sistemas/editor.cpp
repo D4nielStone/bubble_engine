@@ -40,7 +40,7 @@ using namespace beeditor;
  * Inicializa a flag m_salvar_ao_fechar para garantir que o editor salve
  * as configurações ao ser encerrado.
  */
-sistema_editor::sistema_editor() : m_salvar_ao_fechar(true) {
+sistema_editor::sistema_editor() : m_salvar_ao_fechar(true), m_entidade_selecionada(1) {
 }
         
 /**

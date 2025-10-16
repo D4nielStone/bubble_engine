@@ -21,21 +21,22 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE. 
 */
 /**
- * @file shaders_na_memoria.hpp
- * @brief Includes de shader.
+ * @file skybox_frag.hpp
+ *
+ * @author Daniel O. dos Santos
+ * @date 2025-04-08
+ * @version 1.0
  */
 
-#pragma once
-#include "shaders/quad_frag.hpp"
-#include "shaders/texto_frag.hpp"
-#include "shaders/imagem_frag.hpp"
-#include "shaders/imagem_vert.hpp"
-#include "shaders/framebuffer_frag.hpp"
-#include "shaders/skybox_frag.hpp"
-#include "shaders/skybox_vert.hpp"
-#include "shaders/outline_frag.hpp"
-#include "shaders/outline_vert.hpp"
-#include "shaders/phong_frag.hpp"
-#include "shaders/phong_vert.hpp"
-#include "shaders/sombra_vert.hpp"
-#include "shaders/sombra_frag.hpp"
+
+inline const char* outline_frag =
+R"(
+// outline.frag
+#version 330 core
+out vec4 FragColor;
+
+void main() {
+    FragColor = vec4(0, 0, 1, 1);
+}
+
+)";
