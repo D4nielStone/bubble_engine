@@ -43,6 +43,7 @@ skybox::skybox() : modelo("cubo"){
     malhas.back().carregar();
 }
 void skybox::desenhar(const glm::mat4& view, const glm::mat4& proj) {
+       glDepthFunc(GL_ALWAYS);
    glBindVertexArray(malhas.back().obterVertexArray());
    
    glm::mat4 nview = glm::mat4(glm::mat3(view));
@@ -54,4 +55,5 @@ void skybox::desenhar(const glm::mat4& view, const glm::mat4& proj) {
    glDrawElements(GL_TRIANGLES, malhas.back().obterIndices().size(), GL_UNSIGNED_INT, 0);
    
    glBindVertexArray(0);
+       glDepthFunc(GL_LESS);
 }
