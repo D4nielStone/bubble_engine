@@ -56,7 +56,7 @@ namespace becommons{
             std::string* m_texto_frase_ptr{nullptr};
             texto(const std::string frase,
                     becommons::cor color,
-                    const unsigned int escala = 12,
+                    const unsigned int escala = 10,
                     const flags_texto flags = flags_texto::padrao,
                     const std::string path_fonte = "consolas.ttf") : m_texto_frase(frase)
                 , m_texto_fonte(path_fonte)
@@ -69,7 +69,7 @@ namespace becommons{
                 m_shader = (std::make_unique<shader>("imagem.vert", "texto.frag"));
             }
             texto(const std::string frase,
-                    const unsigned int escala = 12,
+                    const unsigned int escala = 10,
                     const flags_texto flags = flags_texto::padrao,
                     const std::string path_fonte = "consolas.ttf") : m_texto_frase(frase)
                 , m_texto_fonte(path_fonte)
@@ -82,7 +82,7 @@ namespace becommons{
                 m_shader = (std::make_unique<shader>("imagem.vert", "texto.frag"));
             }
             texto(std::string* frase,
-                    const unsigned int escala = 12,
+                    const unsigned int escala = 10,
                     const flags_texto flags = flags_texto::padrao,
                     const std::string path_fonte = "consolas.ttf") : m_texto_frase_ptr(frase)
                 , m_texto_fonte(path_fonte)

@@ -130,7 +130,7 @@ void sistema_fisica::inicializar() {
                 comp_fisica->m_corpo_rigido->getMotionState()->setWorldTransform(trans);
             shape->setLocalScaling(scale);
             /* add body */
-            mundoDinamico->addRigidBody(comp_fisica->m_corpo_rigido);
+            mundoDinamico->addRigidBody(comp_fisica->m_corpo_rigido, comp_fisica->m_camada, comp_fisica->m_camada);
         }
     );
 }

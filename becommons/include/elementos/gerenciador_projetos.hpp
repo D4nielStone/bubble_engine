@@ -15,12 +15,13 @@ namespace EDITOR_NS
         public:
             gerenciador_projetos(const std::string& DIR_PADRAO);
             void buscarProjetos();
+            void configCaixas();
             void abrirProjeto(const std::string&);
             void removerProjeto(const std::string&);
-            void criarProjeto(const std::string& novo_diretorio, const char* nome, const bool padrao = false);
+            void criarProjeto(const std::string& novo_diretorio, const std::string& nome, const bool padrao = false);
+            std::string m_projeto_selecionado {"nenhum"}, m_buffer_projeto {""};
         private:
             std::map<std::string, std::string> projetos;
-            std::string m_projeto_selecionado {"nenhum"}, buffer_projeto {""};
             std::string DIR_PADRAO;
             gerenciador_projetos() = default;
     };

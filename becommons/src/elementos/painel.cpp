@@ -37,7 +37,7 @@ public:
         adicionar<caixa>()->m_estilo.m_cor_fundo = m_header->m_cor_ativado;
         adicionar<caixa>()->m_estilo.m_cor_fundo = m_header->m_cor_ativado;
         m_estilo.m_padding = {1, 1};
-        m_text = adicionar<elementos::texto>(text, 12);
+        m_text = adicionar<elementos::texto>(text, 10);
     }
     void atualizar() override {
         /* texto */
@@ -200,7 +200,7 @@ void paineis::entity::atualizar() {
         for(auto& [id, comps] : reg->entidades) {
             m_filhos[0]->m_filhos[0]->adicionar<elementos::botao>([this, id]() {
                 motor::obter().m_editor->m_entidade_selecionada = id;
-            }, "entity." + std::to_string(id), "cube.png", 12); 
+            }, "entity." + std::to_string(id), "cube.png", 10); 
             m_filhos[0]->m_filhos[1]->adicionar<elementos::botao>([reg, id]() {
                 reg->remover(id);
             }, "", "remover.png", 16); 
@@ -255,6 +255,7 @@ void paineis::jogo::atualizar() {
     if(motor::obter().m_renderer->cameras.empty() == false) {
     auto cam = *motor::obter().m_renderer->cameras.begin();
     cam->ativarFB();
+    cam->viewport_ptr = &framebuffer->m_estilo.m_limites; // Associa o viewport da câmera aos limites do framebuffer
     framebuffer->m_material.definirTextura("textura", {cam->textura , ""});
     }
     painel::atualizar();
@@ -280,29 +281,31 @@ void paineis::editor::atualizar() {
         cam->atualizarMovimentacao(); // Atualiza a posição e orientação da câmera
         sistema_renderizacao::calcularTransformacao(cam->transform); // Recalcula a matriz de transformação da câmera
         auto reg = motor::obter().m_levelmanager->obterFaseAtual()->obterRegistro();
-        
+        if (motor::obter().m_inputs->obter(inputs::MOUSE_D)) {
             // picking
             dvet2 mouse = motor::obter().m_inputs->obterMousePos();
             raio ray = cam->pontoParaRaio({static_cast<int>(mouse.x), static_cast<int>(mouse.y)});
             resultadoRaio resultado = motor::obter().m_fisica->emitirRaio(ray);
 
-            if(resultado.atingiu) {
                 reg->cada<fisica, renderizador>([&](const uint32_t entidade){
                     auto comp = reg->obter<fisica>(entidade);
                     auto compB = reg->obter<renderizador>(entidade);
-                    if(comp->m_corpo_rigido == resultado.objetoAtingido) {
+                    if(resultado.atingiu && comp->m_corpo_rigido == resultado.objetoAtingido) {
                         motor::obter().m_editor->m_entidade_selecionada = entidade;
                         compB->m_outline = true;
                     } else {
                         compB->m_outline = false;
                     }
                 });
-            }
+        }
+      /*if (motor::obter().m_inputs->obter(inputs::CTRL_E) &&
+            motor::obter().m_inputs->obter(inputs::)
+                ) {
+        }*/
     }
     painel::atualizar();
 }
 paineis::file_manager::file_manager() : painel("files") {
-/*
     auto* context = adicionar<caixa>();
     context->m_estilo.m_flag_estilo |= flag_estilo::largura_percentual | flag_estilo::altura_percentual;
     context->m_estilo.m_altura = 1;
@@ -325,79 +328,9 @@ paineis::file_manager::file_manager() : painel("files") {
     if (motor::obter().m_projeto)
     research(motor::obter().m_projeto->m_diretorio);
     else
-    research(obterDiretorioHome());*/
+    research(obterDiretorioHome());
 }
 void paineis::file_manager::research(const std::string& dir) {
-    /*
-    static int scl = 12;
-    auto* barra_lateral = m_filhos[0]->m_filhos[0].get();
-    barra_lateral->m_filhos.clear();
-    if (motor::obter().m_projeto) {
-        for(auto entry : std::filesystem::directory_iterator(dir)) {
-            auto path = entry.path();
-            if (std::filesystem::is_regular_file(entry.path())) {
-                if (entry.path().extension() == ".fase") {
-                    auto* pop = barra_lateral->adicionar<elementos::botao>(
-                            nullptr,
-                            entry.path().filename(),
-                            "scene.png",
-                            scl)->adicionar<elementos::popup>(false);
-                    pop->adicionar<elementos::botao>([path]() {
-                            }, "import", "abrir.png", scl);
-                } else
-                if (entry.path().extension() == ".lua") {
-                    auto* pop = barra_lateral->adicionar<elementos::botao>(
-                            nullptr,
-                            entry.path().filename(),
-                            "lua.png",
-                            scl)->adicionar<elementos::popup>(false);
-                    pop->adicionar<elementos::botao>([path]() {
-                            }, "import", "abrir.png", scl);
-                } else
-                if (entry.path().extension() == ".py") {
-                    auto* pop = barra_lateral->adicionar<elementos::botao>(
-                            nullptr,
-                            entry.path().filename(),
-                            "python.png",
-                            scl)->adicionar<elementos::popup>(false);
-                    pop->adicionar<elementos::botao>([path]() {
-                            }, "import", "abrir.png", scl);
-                } else
-                if (entry.path().extension() == ".obj"||
-                    entry.path().extension() == ".fbx"||
-                    entry.path().extension() == ".dae") {
-                    auto* pop = barra_lateral->adicionar<elementos::botao>(
-                            nullptr,
-                            entry.path().filename(),
-                            "cubo_branco",
-                            scl)->adicionar<elementos::popup>(false);
-                    pop->adicionar<elementos::botao>([path]() {
-                            }, "import", "abrir.png", scl);
-                } else
-                if (entry.path().extension() == ".json" ||
-                    entry.path().extension() == ".bubble" ) {
-                    auto* pop = barra_lateral->adicionar<elementos::botao>(
-                            nullptr,
-                            entry.path().filename(),
-                            "tool.png",
-                            scl)->adicionar<elementos::popup>(false);
-                    pop->adicionar<elementos::botao>([path]() {
-                            }, "remove", "", scl);
-                    pop->adicionar<elementos::botao>([path]() {
-                            }, "copy", "", scl);
-                } 
-            } else 
-            {
-                    auto* pop = barra_lateral->adicionar<elementos::botao>(
-                            nullptr,
-                            entry.path().filename(),
-                            "folder.png",
-                            scl)->adicionar<elementos::popup>(false);
-                    pop->adicionar<elementos::botao>(nullptr, "remove", "", scl);
-                    pop->adicionar<elementos::botao>(nullptr, "copy", "", scl);
-            }
-        }
-    }*/
 }
 void paineis::file_manager::atualizar() {
     caixa::atualizar();

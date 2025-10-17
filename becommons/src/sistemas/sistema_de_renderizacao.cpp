@@ -90,7 +90,7 @@ void sistema_renderizacao::atualizar() {
     };
     for(auto* cam : cameras_extra) {
         if (!cam) return;
-        atualizarCamera(cam);
+        atualizarCameraExtra(cam);
     };
 } 
 	    
@@ -189,7 +189,7 @@ void sistema_renderizacao::renderizarSombras() {
     glCullFace(GL_BACK);
     */
 }
-void sistema_renderizacao::atualizarCamera(camera* cam) {
+void sistema_renderizacao::atualizarCameraExtra(camera* cam) {
     auto reg = motor::obter().m_levelmanager->obterFaseAtual()->obterRegistro();
     cam->desenharFB();
     auto view = cam->obtViewMatrix();
@@ -292,5 +292,43 @@ void sistema_renderizacao::atualizarCamera(camera* cam) {
     glStencilMask(0xFF);
     glStencilFunc(GL_ALWAYS, 1, 0xFF);   
     glEnable(GL_DEPTH_TEST); 
+    cam->limparFB();
+}
+void sistema_renderizacao::atualizarCamera(camera* cam) {
+    auto reg = motor::obter().m_levelmanager->obterFaseAtual()->obterRegistro();
+    cam->desenharFB();
+    auto view = cam->obtViewMatrix();
+    auto projection = cam->obtProjectionMatrix();
+    if (cam->m_use_skybox) cam->m_skybox->desenhar(view, projection);
+
+
+    glEnable(GL_DEPTH_TEST);
+    glCullFace(GL_BACK);
+    glDepthFunc(GL_LESS);
+  
+    /* normal draw */
+    reg->cada<renderizador, transformacao>([&](const uint32_t ent_ren) {
+        auto render = reg->obter<renderizador>(ent_ren);
+        auto transform = reg->obter<transformacao>(ent_ren);
+
+        if (!render || !transform || !render->m_modelo) {
+            depuracao::emitir(debug, "render", "Renderizador ou transformação inválida");
+            return;
+        }
+
+        auto &lg = motor::obter().m_levelmanager->obterFaseAtual()->luz_global;
+        auto s = render->m_modelo->obterShader();
+        s.use();
+        s.setVec3("dirLight.direction", lg->direcao);
+        s.setVec3("dirLight.color", lg->cor);
+        s.setVec3("dirLight.ambient", lg->ambiente);
+        s.setFloat("dirLight.intensity", lg->intensidade);
+        s.setMat4("view", glm::value_ptr(view));
+        s.setVec3("viewPos", cam->transform->posicao);
+        s.setMat4("projection", glm::value_ptr(projection));
+        s.setMat4("modelo", glm::value_ptr(transform->obterMatrizModelo()));
+        
+        render->m_modelo->desenhar();
+    });
     cam->limparFB();
 }

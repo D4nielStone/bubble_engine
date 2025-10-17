@@ -64,13 +64,15 @@ namespace becommons {
         public:
             coding();
             void atualizar() override;
-            void research(const std::string& dir);
+            void open(const std::string&);
         };
         class file_manager : public painel {
         public:
-            file_manager();
+            std::string m_directory;
+            file_manager(const std::string& base_dir);
+            void pick_file(const std::string&);
             void atualizar() override;
-            void research(const std::string& dir);
+            void research();
         };
         class entity : public painel {
         private:

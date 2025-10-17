@@ -123,8 +123,14 @@ bool fisica::serializar(rapidjson::Value& value, rapidjson::Document::AllocatorT
 
     return true;
 }
-
-fisica::fisica(bool estatico, const forma e_forma) : e_forma(e_forma) {
+        
+void fisica::definirColisao(const bool b) {
+    if(b)
+        m_corpo_rigido->setCollisionFlags(m_corpo_rigido->getCollisionFlags() | btCollisionObject::CF_NO_CONTACT_RESPONSE);
+    else
+        m_corpo_rigido->setCollisionFlags(m_corpo_rigido->getCollisionFlags() & ~btCollisionObject::CF_NO_CONTACT_RESPONSE);
+}
+fisica::fisica(bool estatico, const forma e_forma, const camada cam) : m_camada(cam), e_forma(e_forma) {
     // Define massa inicial
     m_massa = estatico ? 0 : 1;
 }

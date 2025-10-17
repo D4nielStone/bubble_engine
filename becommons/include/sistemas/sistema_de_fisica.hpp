@@ -46,11 +46,6 @@ public:
 };
 
 namespace becommons {
-    enum CollisionLayers {
-        LAYER_GAME = 1 << 0,
-        LAYER_EDITOR = 1 << 1,
-        LAYER_PICKING = 1 << 2
-    };
     struct sistema_fisica : sistema {
          sistema_fisica();
         ~sistema_fisica();
