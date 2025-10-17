@@ -61,6 +61,7 @@ void codigo::iniciar() {
         return;
     }
     // Obtém as funções globais
+    if(f_atualizar.valid()) 
     f_atualizar = estado_lua["atualizar"];
 }
 

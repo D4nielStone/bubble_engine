@@ -21,21 +21,26 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE. 
 */
 /**
- * @file shaders_na_memoria.hpp
- * @brief Includes de shader.
+ *
+ * @author Daniel O. dos Santos
+ * @date 2025-04-08
+ * @version 1.0
  */
 
-#pragma once
-#include "shaders/quad_frag.hpp"
-#include "shaders/texto_frag.hpp"
-#include "shaders/imagem_frag.hpp"
-#include "shaders/imagem_vert.hpp"
-#include "shaders/framebuffer_frag.hpp"
-#include "shaders/skybox_frag.hpp"
-#include "shaders/skybox_vert.hpp"
-#include "shaders/outline_frag.hpp"
-#include "shaders/outline_vert.hpp"
-#include "shaders/phong_frag.hpp"
-#include "shaders/phong_vert.hpp"
-#include "shaders/sombra_vert.hpp"
-#include "shaders/sombra_frag.hpp"
+
+inline const char* outline_vert = 
+R"(
+// outline.vert
+#version 330 core
+layout (location = 0) in vec3 aPos;
+layout (location = 1) in vec3 aNormal;
+
+uniform mat4 modelo;
+uniform mat4 view;
+uniform mat4 projection;
+
+void main() {
+    vec3 pos = aPos + aNormal * 0.1;
+    gl_Position = projection * view * modelo * vec4(pos, 1.0);
+}
+)";

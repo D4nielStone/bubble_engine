@@ -29,6 +29,10 @@
 
 namespace becommons {
     struct fisica : componente {
+        enum camada {
+            padrao = 1 << 0,
+            ativador = 1 << 1
+        };
         static constexpr mascara mascara { COMPONENTE_FISICA };
 
         enum class forma : uint8_t {
@@ -60,12 +64,15 @@ namespace becommons {
         };
 
         forma e_forma;
-        fisica(bool estatico = false, const forma m_forma = forma::caixa);
+        fisica(bool estatico = true, const forma m_forma = forma::caixa, const camada cam = camada::padrao);
         virtual ~fisica();
+        std::vector<std::vector<vertice>> m_vertices_cache;
+        std::vector<std::vector<unsigned int>> m_indices_cache;
         
         bool analizar(const rapidjson::Value&) override;
         bool serializar(rapidjson::Value& value, rapidjson::Document::AllocatorType& allocator) const override;
 
+        void configurar() override;
         void definirModelo(modelo*);
         void definirForca(const fvet3& vetor);
         void definirVelocidade(const fvet3& vetor);
@@ -76,8 +83,10 @@ namespace becommons {
         void definirFriccao(const float fator);
         void definirRestituicao(const float fator);
         void definirRaioCCD(const float fator);
+        void definirColisao(const bool b);
         fvet3 obterVelocidade() const;
         float m_massa;
+        camada m_camada;
         modelo* m_modelo{ nullptr };
         btCollisionShape* m_forma{ nullptr };
         btDefaultMotionState* m_estado_de_movimento{ nullptr };

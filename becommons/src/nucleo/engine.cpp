@@ -131,12 +131,14 @@ void motor::rodar() {
         m_janela->poll();
     	// Atualiza e renderiza fase atual
         if(m_levelmanager && m_levelmanager->obterFaseAtual() && !m_levelmanager->carregando()) {
+            if(!m_fisica->init) m_fisica->inicializar();
             // Atualiza/Inicializa sistemas pra quando a fase for iniciada
             if (m_levelmanager->obterFaseAtual()->rodando) {
+                m_fisica->atualizar();        
                 if(!m_codigo->init) m_codigo->inicializar();
                 m_codigo->atualizar();        
-                if(!m_fisica->init) m_fisica->inicializar();
-                m_fisica->atualizar();        
+            } else {
+                m_fisica->atualizarColisoes();        
             }
     
             // Inicializa sistema de renderização

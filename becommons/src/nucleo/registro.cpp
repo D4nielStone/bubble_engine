@@ -29,7 +29,8 @@ SOFTWARE.
 #include "nucleo/registro.hpp"
 #include "entidades/entidade.hpp"
 #include "nucleo/registro.hpp"
-#include "componentes/renderizador.hpp"
+#include "componentes/fisica.hpp"
+#include "componentes/transformacao.hpp"
 #include "arquivadores/shader.hpp"
 #include "depuracao/debug.hpp"
 
@@ -75,6 +76,7 @@ entidade registro::criar(const uint32_t id) {
     entidade ent ={ id_atual , componente::COMPONENTE_NONE };
 
     adicionar<transformacao>(ent);
+    adicionar<fisica>(ent);
 
     return ent;
 }

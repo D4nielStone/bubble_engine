@@ -42,6 +42,8 @@ inline const std::unordered_map<std::string, const char*> shader_memoria{
     {"sombra.fs", sombra_frag},
     {"skybox.vs", skybox_vert},
     {"skybox.fs", skybox_frag},
+    {"outline.vs", outline_vert},
+    {"outline.fs", outline_frag},
     {"phong.vert", phong_vert},
     {"phong.frag", phong_frag}
 };

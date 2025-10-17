@@ -48,7 +48,7 @@ namespace custom {
                 p_barra_menu = adicionar<caixa>();
                 p_barra_menu->m_estilo.m_flag_estilo |= flag_estilo::largura_percentual;
                 p_barra_menu->m_estilo.m_largura = 1;
-                p_barra_menu->m_estilo.m_altura = 17;
+                p_barra_menu->m_estilo.m_altura = 15;
                 p_barra_menu->m_estilo.m_padding_geral = {1, 0};
                 p_barra_menu->m_estilo.m_cor_fundo = cor(0.135f);
                 p_barra_menu->m_estilo.m_cor_borda = cor(0.4f);

@@ -62,12 +62,6 @@ namespace becommons{
                 m_filhos.push_back(std::move(m_texto));
                 old_fundo_alpha = m_estilo.m_cor_fundo.a;
             }
-            botao(bool* ptr, const std::string& txt) : area_de_toque(ptr) {
-                auto m_texto = std::make_unique<texto>(txt);
-                m_estilo.m_largura += m_texto->obterLargura(txt);
-                m_filhos.push_back(std::move(m_texto));
-                old_fundo_alpha = m_estilo.m_cor_fundo.a;
-            }
             botao(bool* ptr, const std::string& txt, const std::string img = "", const unsigned int size = 20) : area_de_toque(ptr) {
                 if(img.empty() == false) {
                 auto m_imagem = std::make_unique<imagem>(img);

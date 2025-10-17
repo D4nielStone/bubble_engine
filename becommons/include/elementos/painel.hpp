@@ -64,22 +64,22 @@ namespace becommons {
         public:
             coding();
             void atualizar() override;
-            void research(const std::string& dir);
+            void open(const std::string&);
         };
         class file_manager : public painel {
         public:
-            file_manager();
+            std::string m_directory;
+            file_manager(const std::string& base_dir);
+            void pick_file(const std::string&);
             void atualizar() override;
-            void research(const std::string& dir);
+            void research();
         };
         class entity : public painel {
         private:
             bool registro_atualizou = true;
-            uint32_t entidade_selecionada;
             size_t old_contage = 0;
         public:
             entity();
-            uint32_t obter() const { return entidade_selecionada; }
             void atualizar() override;
         };
         class inspector : public painel {

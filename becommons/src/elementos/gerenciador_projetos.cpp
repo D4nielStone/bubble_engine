@@ -32,17 +32,39 @@ using namespace EDITOR_NS;
  * Inicializa o diretório raiz padrão onde os projetos serão armazenados.
  * @param dir O caminho do diretório raiz padrão.
  */
-gerenciador_projetos::gerenciador_projetos(const std::string& dir) : painel("gerenciador de projetos"), DIR_PADRAO(dir) {
+gerenciador_projetos::gerenciador_projetos(const std::string& dir) : painel("project manager"), DIR_PADRAO(dir) {
     buscarProjetos();
     m_estilo.m_padding_geral = {2,2};
+
+    configCaixas();
+}
+void gerenciador_projetos::configCaixas() {
+    m_filhos.clear();
+
     auto* text = adicionar<elementos::texto>("projetos encontrados:", 18, elementos::flags_texto::alinhamento_central);
     text->m_estilo.m_flag_estilo |= flag_estilo::largura_percentual;
     text->m_estilo.m_largura = 1;
+        
+    auto* top = adicionar<caixa>();
+    top->m_estilo.m_flag_estilo |= flag_estilo::altura_justa | flag_estilo::largura_percentual;
+    top->m_estilo.m_largura = 1;
+
+    auto* c = top->adicionar<elementos::caixa_de_texto>("Novo Projeto", &m_buffer_projeto);
+    auto* btn = top->adicionar<elementos::botao>([this](){
+            criarProjeto(DIR_PADRAO, m_buffer_projeto.c_str(), false);
+            motor::obter().fila_opengl.push([this](){
+                configCaixas();
+            });
+            }, "criar");
+    btn->m_estilo.m_padding_geral = {2, 2};
+    top->m_estilo.m_cor_fundo = cor(0.07f);
+    c->m_estilo.m_cor_fundo = cor(0.07f);
+    c->m_estilo.m_flag_estilo |= flag_estilo::largura_percentual;
+    c->m_estilo.m_largura = 1;
 
     for(auto& [nome,dir]: projetos) {
         auto* c = adicionar<container>();
         auto* p = c->nova_tab<painel>(nome);
-        auto* p2 = c->nova_tab<painel>("editar");
         c->m_estilo.m_flag_estilo |= flag_estilo::largura_percentual;
         c->m_estilo.m_largura = 1;
         c->m_estilo.m_altura = 115;
@@ -57,6 +79,9 @@ gerenciador_projetos::gerenciador_projetos(const std::string& dir) : painel("ger
                 }, "", "play.png", 25);
         p->adicionar<elementos::botao>([this, dir](){
             removerProjeto(dir);
+            motor::obter().fila_opengl.push([this](){
+                configCaixas();
+            });
                 }, "", "remover.png", 25);
     }
 }
@@ -136,101 +161,51 @@ void gerenciador_projetos::buscarProjetos() {
     }
 }
 
-void gerenciador_projetos::criarProjeto(const std::string& novo_diretorio, const char* nome, const bool padrao) {
-    // String JSON que define a fase inicial do projeto com entidades predefinidas.
-    // Inclui uma luz direcional, um plano (cubo escalado) e um cubo com um script de rotação.
-    auto fase_string = 
-    R"({
-    "nome": "FaseMain",
-    "entidades":
-    []
-    })";
-    if(padrao) fase_string =
-    R"({
-    "nome": "FaseMain",
-    "entidades":
-    [
-        {
-            "id": 2,
-            "componentes":[
-                {
-                    "tipo": "renderizador",
-                    "modelo": "/cubo"
-                },
-                {
-                    "tipo": "transformacao",
-                    "posicao": [0,-2, 15],
-                    "rotacao": [0,0,0],
-                    "escala": [10, 0.25, 10]
-                }
-            ]
-        },
-        {
-            "id": 3,
-            "componentes":[
-                {
-                    "tipo": "renderizador",
-                    "modelo": "/cubo"
-                },
-                {
-                    "tipo": "transformacao",
-                    "posicao": [0,0,15],
-                    "rotacao": [0,0,0],
-                    "escala": [1, 1, 1]
-                },
-                {
-                    "tipo": "codigo",
-                    "diretorio": "/codigos/rotacao.lua"
-                }
-            ]
-        },
-        {
-            "id": 4,
-            "componentes":[
-                {
-                    "tipo": "transformacao",
-                    "posicao": [0,0,0],
-                    "rotacao": [0,90,0],
-                    "escala": [1, 1, 1]
-                },
-                {
-                    "tipo": "camera",
-                    "skybox": true
-                }
-            ]
+void gerenciador_projetos::criarProjeto(const std::string& novo_diretorio, const std::string& nome, const bool padrao) {
+    bool hasSpecialChar = false;
+    std::string specialChars = R"(/\!@#$%^&*())";
+    for (char c : nome) {
+        if (specialChars.find(c) != std::string::npos) {
+            hasSpecialChar = true;
         }
-    ]
-})";
-    // String Lua para o script de rotação de exemplo.
-    auto codigo_string = R"(-- Autor Daniel O. © 2025
-local vel= 6
-function atualizar()
-    eu.transformacao:rotacionar(vel,vel,vel)
-end)";
-
-    // Cria o diretório raiz do novo projeto (e seus pais, se necessário).
-    std::filesystem::create_directories(novo_diretorio + "/" + nome);
+    }
+    if(nome.empty() || hasSpecialChar) {
+        depuracao::emitir(erro, "gerenciador_projetos", "nome inválido.");
+        return;
+    }
+    // empty level
+    auto fase_string = 
+    R"({"nome": "main","entidades":[{"componentes":[{"tipo":"renderizador","modelo":"/cubo"}]}]})";
 
     std::string diretorioDoProjeto = novo_diretorio + "/" + nome;
+    // create project directory
+    if(std::filesystem::create_directories(diretorioDoProjeto) == false) {
+        depuracao::emitir(erro, "gerenciador_projetos", "criando diretório de novo projeto.");
+        return;
+    };
+    // create levels directory
+    if(std::filesystem::create_directories(diretorioDoProjeto + "/fases") == false) {
+        depuracao::emitir(erro, "gerenciador_projetos", "criando diretório de fases.");
+        return;
+    };
 
-    // Cria um novo documento JSON para a configuração do projeto.
+    // set up json for project
     rapidjson::Document newDoc;
     newDoc.SetObject();
     rapidjson::Document::AllocatorType& allocator = newDoc.GetAllocator();
 
-    // Adiciona as propriedades da janela ao JSON de configuração.
+    // window configs
     rapidjson::Value _janela(rapidjson::kObjectType);
     _janela.AddMember("largura", 640, allocator);
     _janela.AddMember("altura",  480, allocator);
-    _janela.AddMember("titulo",  rapidjson::Value(nome, allocator), allocator);
+    _janela.AddMember("titulo",  rapidjson::Value(nome.c_str(), allocator), allocator);
     _janela.AddMember("icone",   rapidjson::Value("scene.png", allocator), allocator);
 
-    // Adiciona as propriedades gerais do projeto ao JSON de configuração.
-    newDoc.AddMember("nome", rapidjson::Value(nome, allocator), allocator);
+    newDoc.AddMember("nome", rapidjson::Value(nome.c_str(), allocator), allocator);
     newDoc.AddMember("lancamento", rapidjson::Value("/fases/main", allocator), allocator);
     newDoc.AddMember("janela", _janela, allocator);
 
-    // Salva o JSON de configuração no arquivo 'config.json' dentro do diretório do projeto.
+    // save file
     std::ofstream ofs(diretorioDoProjeto + "/projeto.bubble");
     if (ofs.is_open()) {
         rapidjson::StringBuffer buffer;
@@ -240,27 +215,23 @@ end)";
         ofs.close();
     }
 
-    // Cria o diretório 'fases' e escreve o conteúdo da fase padrão 'main.fase'.
-    if(std::filesystem::create_directories(diretorioDoProjeto + "/fases"))
+    std::ofstream fase_file(diretorioDoProjeto + "/fases/main.fase");
+    if(fase_file.is_open())
     {
-        std::ofstream fase_file(diretorioDoProjeto + "/fases/main.fase");
-        if(fase_file.is_open())
-        {
-            fase_file << fase_string;
-            fase_file.close();
-        }
+        fase_file << fase_string;
+        fase_file.close();
     }
 
-    // Cria o diretório 'codigos' e escreve o script Lua de exemplo 'rotacao.lua'.
-    if(std::filesystem::create_directories(diretorioDoProjeto + "/codigos"))
-    {
-        std::ofstream codigo_file(diretorioDoProjeto + "/codigos/rotacao.lua");
-        if(codigo_file.is_open())
-        {
-            codigo_file << codigo_string;
-            codigo_file.close();
-        }
-    }
+    // save usr
+
+    auto _usr = diretorioDoProjeto + "/.usr";
+    std::filesystem::create_directory(_usr); // Cria o diretório se não existir
+
+    auto cam_editor = R"({"fov": 70.0,"zfar": 100.0,"escala": 100.0,"ortho": false,"ceu": [51,51,51,255],"skybox": false,"sens": 20.0,"suav": 0.10000000149011612,"posicao": [-6,4,-2],"rotacao": [-36,16,0],"escala": [1.0,1.0,1.0]})";
+
+    std::ofstream ofsB(_usr + "/cam.json");
+    ofsB << cam_editor;
+    ofsB.close();
 
     // Atualiza a lista de projetos disponíveis após a criação do novo projeto.
     buscarProjetos();

@@ -40,6 +40,7 @@ namespace becommons {
 	    sistema_renderizacao() = default;
 	    static void calcularTransformacao(transformacao*);
         void atualizarCamera(camera*);
+        void atualizarCameraExtra(camera*);
         void atualizarTransformacoes();
         void renderizarSombras();
 		void atualizar() override;

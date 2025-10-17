@@ -51,10 +51,12 @@ namespace becommons {
         ~sistema_fisica();
 
         void atualizar() override;
+        void atualizarColisoes();
         void inicializar() override;
         bool remover(btRigidBody*& corpo);
         btDiscreteDynamicsWorld* mundo();
-        float velocidade;
+        int m_depth = 10;
+        btVector3 m_gravity = btVector3(0.f, 9.8f, 0.f);
         resultadoRaio emitirRaio(const raio& raio);
     private:
         btDefaultCollisionConfiguration* configColisao{nullptr};

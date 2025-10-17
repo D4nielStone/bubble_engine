@@ -40,7 +40,7 @@ using namespace beeditor;
  * Inicializa a flag m_salvar_ao_fechar para garantir que o editor salve
  * as configurações ao ser encerrado.
  */
-sistema_editor::sistema_editor() : m_salvar_ao_fechar(true) {
+sistema_editor::sistema_editor() : m_salvar_ao_fechar(true), m_entidade_selecionada(1) {
 }
         
 /**
@@ -58,7 +58,8 @@ void sistema_editor::carregarConfiguracaoPadrao()
     auto* menu = ui->obterRaiz()->adicionar<custom::barra_menu>();
     
     auto* file_sec = menu->adicionar_botao(" file ", [](){});
-    auto* proj_sec = menu->adicionar_botao("projects", [](){});
+    auto* proj_sec = menu->adicionar_botao("projects ", [](){});
+    auto* editor_sec = menu->adicionar_botao("editor", [](){});
     auto* pop = ui->novo_popup(proj_sec);
     auto* p = pop->adicionar<EDITOR_NS::gerenciador_projetos>(obterDiretorioHome() + "/bubble");
     p->m_estilo.m_largura = 300;
@@ -83,6 +84,7 @@ void sistema_editor::carregarConfiguracaoPadrao()
 
     // Inserção do popup no loop
     auto* popup_file = ui->novo_popup(file_sec);
+    auto* popup_editor = ui->novo_popup(editor_sec);
     popup_file->adicionar<elementos::botao>([](){
             motor::obter().finalizar();
             }, "exit");
@@ -91,6 +93,12 @@ void sistema_editor::carregarConfiguracaoPadrao()
             motor::obter().m_levelmanager->salvarTudo();
             motor::obter().m_editor->salvarEditor();
             }, "save all");
+    auto* cam_sec = popup_editor->adicionar<elementos::botao>([](){}, "camera");
+    auto* popup_cam = ui->novo_popup(cam_sec);
+    popup_cam->adicionar<elementos::botao>(&cam->flag_orth, "turn ortho", "", 10);
+    popup_cam->adicionar<elementos::botao>(&cam->m_use_skybox, "turn skybox", "", 10);
+    popup_cam->adicionar<elementos::caixa_de_texto>("fov", &cam->fov);
+    popup_cam->adicionar<elementos::caixa_de_texto>("scale", &cam->escala);
 }
         
 void sistema_editor::carregarConfiguracaoGerenciador(){

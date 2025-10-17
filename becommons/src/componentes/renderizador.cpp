@@ -27,6 +27,15 @@
 
 using namespace becommons;
 
+renderizador::renderizador(modelo* m) : m_modelo(m) {
+}
+renderizador::~renderizador() {
+	for(auto& malha : m_modelo->malhas) {
+		malha.descarregar();
+	}
+	delete m_modelo;
+}
+
 bool renderizador::serializar(rapidjson::Value& value, rapidjson::Document::AllocatorType& allocator) const {
     value.AddMember("modelo", rapidjson::Value(m_modelo->obterDiretorio().c_str(), allocator), allocator);
     return true;

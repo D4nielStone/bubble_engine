@@ -33,20 +33,14 @@ namespace becommons {
 	class renderizador : public componente {
     public:
 		modelo* m_modelo;
-		static constexpr mascara mascara = COMPONENTE_RENDER;
-		renderizador(modelo* malha) {
-            m_modelo = malha;
-		}
-
+        bool m_outline = false;
+		
+        static constexpr mascara mascara = COMPONENTE_RENDER;
+		renderizador(modelo* malha);
         bool analizar(const rapidjson::Value& value) override;
         bool serializar(rapidjson::Value& value, rapidjson::Document::AllocatorType& allocator) const override;
 
 		renderizador(const char* m_diretorio = "/cubo");
-		~renderizador() {
-			for(auto& malha : m_modelo->malhas) {
-				malha.descarregar();
-			}
-			delete m_modelo;
-		}
+		~renderizador();
 	};
 }
