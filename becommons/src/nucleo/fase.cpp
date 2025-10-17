@@ -106,6 +106,7 @@ void fase::parar()
     motor::obter().fila_opengl.push([this](){
 	    descarregar();
 	    carregar();
+        motor::obter().m_fisica->inicializar();
             });
 	rodando = false;
 }
@@ -116,8 +117,8 @@ void fase::iniciar()
 		return;
     rodando = true;
 	carregar();
-    motor::obter().m_codigo->inicializar();
     motor::obter().m_fisica->inicializar();
+    motor::obter().m_codigo->inicializar();
 	depuracao::emitir(debug, "fase", "Iniciando");
 }
 

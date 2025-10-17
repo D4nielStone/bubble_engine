@@ -79,7 +79,7 @@ void sistema_editor::carregarConfiguracaoPadrao()
     m_editor = meio_panel->nova_tab<paineis::editor>(cam.get());
     auto* m_game = meio_panel->nova_tab<paineis::jogo>();
     m_inspetor = direita_panel->nova_tab<paineis::inspector>();
-    m_files = bottom->nova_tab<paineis::file_manager>();
+    m_files = bottom->nova_tab<paineis::file_manager>(motor::obter().m_projeto->m_diretorio);
     bottom->nova_tab<paineis::coding>();
 
     // Inserção do popup no loop

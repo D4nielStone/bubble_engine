@@ -305,17 +305,18 @@ void paineis::editor::atualizar() {
     }
     painel::atualizar();
 }
-paineis::file_manager::file_manager() : painel("files") {
+paineis::file_manager::file_manager(const std::string& base_dir) : m_directory(base_dir), painel("files") {
     auto* context = adicionar<caixa>();
     context->m_estilo.m_flag_estilo |= flag_estilo::largura_percentual | flag_estilo::altura_percentual;
     context->m_estilo.m_altura = 1;
     context->m_estilo.m_largura = 1;
     context->m_estilo.m_padding_geral = {2, 2};
     auto* barra_lateral = context->adicionar<caixa>();
-    barra_lateral->m_estilo.m_flag_estilo |= flag_estilo::largura_justa | flag_estilo::altura_percentual;
+    barra_lateral->m_estilo.m_flag_estilo |= flag_estilo::altura_percentual;
     barra_lateral->m_estilo.m_cor_fundo = cor(0.07f);
     barra_lateral->m_estilo.m_cor_borda = cor(0.2f);
     barra_lateral->m_estilo.m_altura = 1;
+    barra_lateral->m_estilo.m_largura = 150;
     barra_lateral->m_estilo.m_orientacao_modular = estilo::orientacao::vertical;
     barra_lateral->m_estilo.m_padding_geral = {5, 2};
     auto* barra_central = context->adicionar<caixa>();
@@ -325,45 +326,78 @@ paineis::file_manager::file_manager() : painel("files") {
     barra_central->m_estilo.m_altura = 1;
     barra_central->m_estilo.m_largura = 1;
     barra_central->m_estilo.m_padding_geral = {5, 2};
-    if (motor::obter().m_projeto)
-    research(motor::obter().m_projeto->m_diretorio);
-    else
-    research(obterDiretorioHome());
+    research(m_directory);
 }
 void paineis::file_manager::research(const std::string& dir) {
+    int scl = 11;
+    auto* barra_lateral = m_filhos[0]->m_filhos[0].get();
+    barra_lateral->m_filhos.clear();
+
+    if (motor::obter().m_projeto) {
+        for(auto entry : std::filesystem::directory_iterator(dir)) {
+            auto path = entry.path();
+            if (std::filesystem::is_directory(entry.path())) {
+                auto str = entry.path().string();
+                auto filename = entry.path().filename().string();
+                if (filename[0] == '.') continue;
+
+                auto* btn = barra_lateral->adicionar<elementos::botao>(
+                    [this, str]() {
+                        motor::obter().fila_opengl.push([this, str] {
+                            research(str);
+                        });
+                    },
+                    filename,
+                    "folder.png",
+                    scl
+                );
+            }
+        }
+        auto str = std::filesystem::path(dir).parent_path().string();
+
+        if(std::filesystem::equivalent(m_directory, dir)) return;
+        auto* btn = barra_lateral->adicionar<elementos::botao>(
+            [this, str]() {
+                motor::obter().fila_opengl.push([this, str] {
+                    research(str);
+                });
+            },
+            "..",
+            "folder.png",
+            scl
+        );
+    }
 }
+            
+std::string paineis::file_manager::pick_file(const std::string&) {
+    return "";
+}
+
 void paineis::file_manager::atualizar() {
     caixa::atualizar();
 }
 
 paineis::coding::coding() : painel("coding") {
-/*    auto* context = adicionar<caixa>();
-    context->m_estilo.m_flag_estilo |= flag_estilo::largura_percentual | flag_estilo::altura_percentual;
+    auto* context = adicionar<caixa>();
+    context->m_estilo.m_flag_estilo |= flag_estilo::largura_percentual | flag_estilo::altura_percentual | flag_estilo::alinhamento_central;
     context->m_estilo.m_altura = 1;
     context->m_estilo.m_largura = 1;
-    context->m_estilo.m_padding_geral = {2, 2};
+    context->m_estilo.m_padding_geral = {0, 10};
+    context->m_estilo.m_cor_fundo = cor(0.07f);
+    context->m_estilo.m_cor_borda = cor(0.2f);
 
-    auto* barra_lateral = context->adicionar<caixa>();
-    barra_lateral->m_estilo.m_flag_estilo |= flag_estilo::largura_justa | flag_estilo::altura_percentual;
-    barra_lateral->m_estilo.m_cor_fundo = cor(0.07f);
-    barra_lateral->m_estilo.m_cor_borda = cor(0.2f);
-    barra_lateral->m_estilo.m_altura = 1;
-    barra_lateral->m_estilo.m_orientacao_modular = estilo::orientacao::vertical;
-    barra_lateral->m_estilo.m_padding_geral = {5, 2};
-    auto* barra_central = context->adicionar<caixa>();
-    barra_central->m_estilo.m_flag_estilo |= flag_estilo::largura_percentual | flag_estilo::altura_percentual;
-    barra_central->m_estilo.m_cor_fundo = cor(0.07f);
-    barra_central->m_estilo.m_cor_borda = cor(0.2f);
-    barra_central->m_estilo.m_altura = 1;
-    barra_central->m_estilo.m_largura = 1;
-    barra_central->m_estilo.m_padding_geral = {5, 2};
-    if (motor::obter().m_projeto)
-    research(motor::obter().m_projeto->m_diretorio);
-    else
-    research(obterDiretorioHome());
-*/
+    auto* btn = context->adicionar<elementos::botao>([](){
+            }, "Importar Arquivo", "lua.png", 22);
+    // create popup for filemanager
+    auto* pop = motor::obter().m_editor->ui->novo_popup(btn);
+    auto* p = pop->adicionar<file_manager>(motor::obter().m_projeto->m_diretorio);
+    p->m_estilo.m_largura = 300;
+    p->m_estilo.m_altura = 300;
+
+    btn->m_estilo.m_cor_fundo = cor(0.07f);
+    btn->m_estilo.m_padding_geral = {2, 2};
 }
-void paineis::coding::research(const std::string& dir) {
+void paineis::coding::open(const std::string&) {
 }
 void paineis::coding::atualizar() {
     caixa::atualizar();

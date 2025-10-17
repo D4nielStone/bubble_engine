@@ -70,9 +70,9 @@ namespace becommons {
         public:
             std::string m_directory;
             file_manager(const std::string& base_dir);
-            void pick_file(const std::string&);
+            std::string pick_file(const std::string&);
             void atualizar() override;
-            void research();
+            void research(const std::string&);
         };
         class entity : public painel {
         private:
