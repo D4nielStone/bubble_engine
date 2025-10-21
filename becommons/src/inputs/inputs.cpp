@@ -122,17 +122,17 @@ void becommons::keyCallback(GLFWwindow* window, int key, int scancode, int actio
             input->m_backspace_segura = false;
         }
     }
+
     if (key == GLFW_KEY_ENTER || key == GLFW_KEY_KP_ENTER) {
         if (action == GLFW_PRESS) {
             input->m_enter_pressionado = true;
             input->m_enter_segura = true;
-        }
+        } 
+        else if (action == GLFW_RELEASE) {
+            input->m_enter_segura = false;
+        } 
         else if (action == GLFW_REPEAT) {
             input->m_enter_repetido = true;
-        }
-        else if (action == GLFW_RELEASE) {
-            input->m_enter_pressionado = false;
-            input->m_enter_segura = false;
         }
     }
 

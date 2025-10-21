@@ -186,7 +186,6 @@ void fisica::configurar() {
 // Destrutor
 fisica::~fisica() {
     depuracao::emitir(debug, "fisica", "descarregando");
-    if(m_corpo_rigido) motor::obter().m_fisica->remover(m_corpo_rigido);
     if(m_corpo_rigido)delete m_corpo_rigido;
     if(m_estado_de_movimento)delete m_estado_de_movimento;
     if(m_forma)delete m_forma;

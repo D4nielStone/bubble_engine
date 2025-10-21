@@ -128,9 +128,20 @@ void interface::desenhar(caixa* c) {
         for(auto& filho : c->m_filhos) {
             if(     filho->m_estilo.m_limites.x < c->m_estilo.m_limites.x + c->m_estilo.m_limites.z
                     && filho->m_estilo.m_limites.y < c->m_estilo.m_limites.y + c->m_estilo.m_limites.w
-                    && filho->m_estilo.m_ativo)
-            desenhar(filho.get());
+                    && filho->m_estilo.m_ativo) {
+                if(filho->m_estilo.m_corte) {
+                glEnable(GL_SCISSOR_TEST);
+                glScissor(
+                    filho->m_estilo.m_limites.x,
+                    m_window->obterTamanho().y - filho->m_estilo.m_limites.y - filho->m_estilo.m_limites.w + 1.f,
+                    filho->m_estilo.m_limites.z + 1.f,
+                    filho->m_estilo.m_limites.w
+                );
+                }
+                desenhar(filho.get());
+            }
         }
+        glDisable(GL_SCISSOR_TEST);
     }
 }
 

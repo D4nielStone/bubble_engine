@@ -42,12 +42,12 @@ namespace becommons {
             bool m_selecionado { false };
         protected:
             // armazena o estado do botão do mouse no frame anterior para detectar clique único
-            bool m_break = false;
             bool m_mouse_antes_pressionado { false }, m_teclado_foi_solto { true };
             int m_pipe_offset { 0 };
             std::string m_buffer {""}, *str_ptr {nullptr};
             float *num_ptr { nullptr };
         public:
+            bool m_break = false;
             area_de_texto() = default;
             area_de_texto(std::string* buffer) : str_ptr(buffer), m_buffer() {
                 if(buffer) m_buffer = *buffer;

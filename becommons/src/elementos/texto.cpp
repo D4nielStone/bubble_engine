@@ -122,31 +122,6 @@ float texto::obterAltura(const std::string& frase) {
             
                 return alturaLinha * static_cast<float>(numLinhas);
             }
-            
-// retorna a altura total considerando quantas linhas existem em 'frase'
-float texto::obterAltura(const std::string& frase) {
-                if (m_texto_frase_ptr) m_texto_frase = *m_texto_frase_ptr;
-                auto& caracteres = gerenciadorFontes::obterInstancia()
-                                       .obter(m_texto_fonte, m_texto_escala);
-                if (caracteres.empty()) {
-                    return 0.0f;
-                }
-            
-                // conta quantas quebras de linha existem → número de linhas = quebras + 1
-                size_t numQuebras = 0;
-                for (char32_t c : frase) {
-                    if (c == '\n') {
-                        ++numQuebras;
-                    }
-                }
-                size_t numLinhas = numQuebras + 1;
-            
-                // precisa de um método no gerenciador para expor a "altura de linha"
-                // por exemplo: gerenciadorFontes::obterAlturaLinha(fonte, escala)
-                float alturaLinha = m_texto_escala * 1.4;
-            
-                return alturaLinha * static_cast<float>(numLinhas);
-            }
 void texto::desenhar(unsigned int ret_VAO) {
                 limites_iniciais = m_estilo.m_limites;
 
@@ -181,4 +156,3 @@ void texto::desenhar(unsigned int ret_VAO) {
                 }
                 m_estilo.m_limites = {limites_iniciais.x, limites_iniciais.y, obterLargura(m_texto_frase), m_estilo.m_altura};
             };
-        };

@@ -44,6 +44,7 @@ namespace becommons {
                 caixa_de_texto(const std::string& etiqueta, float* f_ptr) : m_etiqueta(etiqueta), area_de_texto(f_ptr) {};
                 void configurar() override {
                     m_filhos.clear();
+                    m_estilo.m_corte = true;
                     m_estilo.m_padding_geral = { 5, 2 };
                     m_estilo.m_flag_estilo |= flag_estilo::modular;
                     m_borda_antiga = m_estilo.m_espessura_borda;

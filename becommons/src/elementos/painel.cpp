@@ -394,7 +394,7 @@ void paineis::file_manager::pick_file(const std::string& filtro, std::function<v
     barra_central->m_estilo.m_cor_borda = cor(0.2f);
     barra_central->m_estilo.m_altura = 1;
     barra_central->m_estilo.m_largura = 1;
-    barra_central->m_estilo.m_padding_geral = {5, 2};
+    barra_central->m_estilo.m_padding_geral = {5, 1};
     barra_central->m_estilo.m_orientacao_modular = estilo::orientacao::vertical;
 
     auto f_reload = [this, filtro, barra_central, funcao](){
@@ -413,6 +413,7 @@ void paineis::file_manager::pick_file(const std::string& filtro, std::function<v
         }
     }
     };
+    f_reload();
     // caixa de texto
     auto* c = adicionar<elementos::caixa_de_texto>("Novo arquivo " + filtro);
     auto* btnB = adicionar<elementos::botao>([this, f_reload, c, filtro](){
@@ -467,24 +468,26 @@ paineis::text_editor::text_editor(const std::string& file) : painel(std::filesys
     barra_num->m_estilo.m_flag_estilo = flag_estilo::altura_percentual | flag_estilo::largura_justa | flag_estilo::modular;
     barra_num->m_estilo.m_orientacao_modular = estilo::orientacao::vertical;
     barra_num->m_estilo.m_cor_fundo = cor(0.09f);
-    barra_num->m_estilo.m_padding_geral.y = 0;
+    barra_num->m_estilo.m_padding.y = 2;
     barra_num->m_estilo.m_altura = 1;
     txt = barra_num->adicionar<elementos::texto>("1", 10);
 }
 void paineis::text_editor::atualizar() {
     auto buffer = ct->obterBuffer();
-    if(buffer.empty()) return;
 
     // get number of lines base on \n char to add text 
+    txt->m_texto_frase = "";
     int num_lines = 1; // começa com 1, mesmo que não haja '\n'
+    if(buffer.empty() == false) {
     for (char c : buffer) {
-        if (c == '\n') ++num_lines;
+        if (c == '\n') {
+            txt->m_texto_frase += std::to_string(num_lines);
+            txt->m_texto_frase += '\n';
+            ++num_lines;
+        }
     }
-    txt->m_texto_frase = "1";
-    for(size_t n = 1; n < num_lines + 1; n++) {
-        txt->m_texto_frase += std::to_string(n);
-        txt->m_texto_frase += '\n';
     }
+    txt->m_texto_frase += std::to_string(num_lines);
     caixa::atualizar();
 }
 

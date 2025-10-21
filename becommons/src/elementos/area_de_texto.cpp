@@ -66,4 +66,7 @@ void elementos::area_de_texto::atualizarBuffer() {
                     *str_ptr = m_buffer;
                 }
                 m_teclado_foi_solto = false;
+                // resetar flags transitórias
+                input->m_enter_pressionado = false;
+                input->m_enter_repetido = false;
             }
