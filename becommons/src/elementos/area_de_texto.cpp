@@ -27,13 +27,13 @@
 using namespace becommons;
 
 bool elementos::area_de_texto::selecionado() {
-    bool pressionado = motor::obter().m_inputs->obter(inputs::MOUSE_E) || motor::obter().m_inputs->obter(inputs::ENTER);
+    bool pressionado = motor::obter().m_inputs->obter(inputs::MOUSE_E);
     bool justPressed = pressionado && !m_mouse_antes_pressionado;
 
     // atualiza flag de cursor sobre a área
     m_mouse_cima = mouseEmCima();
 
-    if (m_mouse_cima && s_contagem_areas <= 1) {
+    if (m_mouse_cima) {
         motor::obter().m_janela->definirCursor(janela::cursor::i);
     }
     if (justPressed) {
@@ -52,6 +52,8 @@ void elementos::area_de_texto::atualizarBuffer() {
                 m_pipe_offset = m_buffer.size();
                 
                 auto &input = motor::obter().m_inputs;
+                if (motor::obter().m_inputs->obter(inputs::ENTER) || motor::obter().m_inputs->obter(inputs::KP_ENTER))
+                    m_buffer += '\n'; // break line
                 if(input->m_backspace_pressionado || input->m_backspace_repetido)
                     apagar();
                 else if(input->m_letra_pressionada)

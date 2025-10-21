@@ -189,6 +189,12 @@ void gerenciador_projetos::criarProjeto(const std::string& novo_diretorio, const
         return;
     };
 
+    // create code directory
+    if(std::filesystem::create_directories(diretorioDoProjeto + "/codigos") == false) {
+        depuracao::emitir(erro, "gerenciador_projetos", "criando diretório de codigos.");
+        return;
+    };
+
     // set up json for project
     rapidjson::Document newDoc;
     newDoc.SetObject();

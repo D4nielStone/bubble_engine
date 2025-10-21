@@ -26,6 +26,7 @@
 #pragma once
 #include "util/caixa.hpp"
 #include "elementos/area_de_toque.hpp"
+#include "elementos/caixa_de_texto.hpp"
 
 class tab;
 namespace becommons {
@@ -60,17 +61,25 @@ namespace becommons {
     };
 
     namespace paineis {
+        class text_editor : public painel {
+        public:
+            elementos::caixa_de_texto* ct;
+            elementos::texto* txt;
+            text_editor(const std::string&);
+            void atualizar() override;
+        };
         class coding : public painel {
         public:
             coding();
             void atualizar() override;
-            void open(const std::string&);
+            void open(const std::string);
         };
         class file_manager : public painel {
         public:
             std::string m_directory;
             file_manager(const std::string& base_dir);
-            std::string pick_file(const std::string&);
+            void pick_file(const std::string& filtro,
+               std::function<void(const std::string)>&& funcao);
             void atualizar() override;
             void research(const std::string&);
         };

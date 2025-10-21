@@ -48,6 +48,7 @@ void elementos::popup::atualizar() {
 
     
     float dt = motor::obter().m_tempo->obterDeltaTime();
+    if(m_referencia == nullptr) return;
     x_antigo = m_referencia->pressionado() ? motor::obter().m_inputs->obterMousePos().x : x_antigo;
     y_antigo = m_referencia->m_pressionado ? motor::obter().m_inputs->obterMousePos().y : y_antigo;
     //float mais_largo = 20.f, cursorx = 0.f;

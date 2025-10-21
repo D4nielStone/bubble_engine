@@ -369,15 +369,111 @@ void paineis::file_manager::research(const std::string& dir) {
     }
 }
             
-std::string paineis::file_manager::pick_file(const std::string&) {
-    return "";
+void paineis::file_manager::pick_file(const std::string& filtro, std::function<void(const std::string)>&& funcao) {
+    m_filhos.clear();
+    auto* text = adicionar<elementos::texto>("aqruivos encontrados para o filtro " + filtro + ":", 12, elementos::flags_texto::alinhamento_central);
+    text->m_estilo.m_flag_estilo |= flag_estilo::largura_percentual;
+    text->m_estilo.m_largura = 1;
+    auto* barra_central = adicionar<caixa>();
+    barra_central->m_estilo.m_flag_estilo |= flag_estilo::largura_percentual | flag_estilo::altura_percentual;
+    barra_central->m_estilo.m_cor_fundo = cor(0.07f);
+    barra_central->m_estilo.m_cor_borda = cor(0.2f);
+    barra_central->m_estilo.m_altura = 1;
+    barra_central->m_estilo.m_largura = 1;
+    barra_central->m_estilo.m_padding_geral = {5, 2};
+    barra_central->m_estilo.m_orientacao_modular = estilo::orientacao::vertical;
+
+    auto f_reload = [this, filtro, barra_central, funcao](){
+    for (const auto& entry : std::filesystem::recursive_directory_iterator(m_directory)) {
+        if (entry.is_regular_file() && entry.path().extension() == filtro) {
+            auto str = entry.path().string();
+            barra_central->adicionar<elementos::botao>(
+                [funcao, str]() mutable {
+                    funcao(str);
+                },
+                entry.path().filename().string(),
+                "Codigo.png",
+                11
+            );
+        }
+    }
+    };
+    // caixa de texto
+    auto* c = adicionar<elementos::caixa_de_texto>("Novo arquivo " + filtro);
+    auto* btnB = adicionar<elementos::botao>([this, f_reload, c, filtro](){
+        /**/
+            auto s_buffer_c = c->obterBuffer();
+            bool hasSpecialChar = false;
+            std::string specialChars = R"(/\!@#$%^&*().)";
+            for (char c : s_buffer_c) {
+                if (specialChars.find(c) != std::string::npos) {
+                    hasSpecialChar = true;
+                }
+            }
+            if(s_buffer_c.empty() || hasSpecialChar) {
+                depuracao::emitir(erro, "caixa_de_texto", "nome inválido.");
+                return;
+            }
+            auto dir = motor::obter().m_projeto->m_diretorio + "/codigos/" + s_buffer_c + filtro;
+            std::ofstream ofs(dir);
+            if (ofs.is_open()) {
+                ofs.close();
+                depuracao::emitir(info, "painel", "arquivo " + dir + " criado.");
+                f_reload();
+            }
+        /**/
+            }, "criar");
+    btnB->m_estilo.m_padding_geral = {2, 2};
+    c->m_estilo.m_cor_fundo = cor(0.07f);
+    c->m_estilo.m_flag_estilo |= flag_estilo::largura_percentual;
+    c->m_estilo.m_largura = 1;
+    btnB->m_estilo.m_flag_estilo |= flag_estilo::largura_percentual;
+    btnB->m_estilo.m_largura = 1;
 }
 
 void paineis::file_manager::atualizar() {
     caixa::atualizar();
 }
+            
+paineis::text_editor::text_editor(const std::string& file) : painel(std::filesystem::path(file).filename().string()) {
+    std::ifstream ifs(file);
+    if(ifs.is_open() == false) return;
+    std::string fileContent(
+        (std::istreambuf_iterator<char>(ifs)),
+        std::istreambuf_iterator<char>()
+    );
+    ifs.close();
+    m_estilo.m_orientacao_modular = estilo::orientacao::horizontal;
+    ct = adicionar<elementos::caixa_de_texto>("", fileContent);
+    ct->m_estilo.m_flag_estilo = flag_estilo::altura_percentual | flag_estilo::largura_percentual | flag_estilo::modular;
+    ct->m_estilo.m_cor_fundo = cor(0.07f);
+    auto* barra_num = adicionar<caixa>();
+    barra_num->m_estilo.m_flag_estilo = flag_estilo::altura_percentual | flag_estilo::largura_justa | flag_estilo::modular;
+    barra_num->m_estilo.m_orientacao_modular = estilo::orientacao::vertical;
+    barra_num->m_estilo.m_cor_fundo = cor(0.09f);
+    barra_num->m_estilo.m_padding_geral.y = 0;
+    barra_num->m_estilo.m_altura = 1;
+    txt = barra_num->adicionar<elementos::texto>("1", 10);
+}
+void paineis::text_editor::atualizar() {
+    auto buffer = ct->obterBuffer();
+    if(buffer.empty()) return;
+
+    // get number of lines base on \n char to add text 
+    int num_lines = 1; // começa com 1, mesmo que não haja '\n'
+    for (char c : buffer) {
+        if (c == '\n') ++num_lines;
+    }
+    txt->m_texto_frase = "";
+    for(size_t n = 1; n < num_lines; n++) {
+        txt->m_texto_frase += std::to_string(n);
+        txt->m_texto_frase += '\n';
+    }
+    caixa::atualizar();
+}
 
 paineis::coding::coding() : painel("coding") {
+    m_estilo.m_orientacao_modular = estilo::orientacao::horizontal;
     auto* context = adicionar<caixa>();
     context->m_estilo.m_flag_estilo |= flag_estilo::largura_percentual | flag_estilo::altura_percentual | flag_estilo::alinhamento_central;
     context->m_estilo.m_altura = 1;
@@ -385,19 +481,37 @@ paineis::coding::coding() : painel("coding") {
     context->m_estilo.m_padding_geral = {0, 10};
     context->m_estilo.m_cor_fundo = cor(0.07f);
     context->m_estilo.m_cor_borda = cor(0.2f);
+    auto* contextB = adicionar<caixa>();
+    contextB->m_estilo.m_flag_estilo |= flag_estilo::largura_percentual | flag_estilo::altura_percentual;
+    contextB->m_estilo.m_altura = 1;
+    contextB->m_estilo.m_largura = 1;
+    contextB->m_estilo.m_padding_geral = {0, 0};
+    contextB->m_estilo.m_cor_fundo = cor(0.07f);
+    contextB->m_estilo.m_cor_borda = cor(0.2f);
+    auto* files = contextB->adicionar<container>();
+    files->m_estilo.m_flag_estilo |= flag_estilo::largura_percentual | flag_estilo::altura_percentual;
+    files->m_estilo.m_altura = 1;
+    files->m_estilo.m_largura = 1;
 
     auto* btn = context->adicionar<elementos::botao>([](){
             }, "Importar Arquivo", "lua.png", 22);
+
     // create popup for filemanager
+    auto f = [this](const std::string result){
+            open(result);
+            };
     auto* pop = motor::obter().m_editor->ui->novo_popup(btn);
     auto* p = pop->adicionar<file_manager>(motor::obter().m_projeto->m_diretorio);
+    p->pick_file(".lua", f);
     p->m_estilo.m_largura = 300;
     p->m_estilo.m_altura = 300;
 
     btn->m_estilo.m_cor_fundo = cor(0.07f);
     btn->m_estilo.m_padding_geral = {2, 2};
 }
-void paineis::coding::open(const std::string&) {
+void paineis::coding::open(const std::string file) {
+    auto* files = static_cast<container*>(m_filhos[1]->m_filhos[0].get());
+    files->nova_tab<text_editor>(file);
 }
 void paineis::coding::atualizar() {
     caixa::atualizar();
