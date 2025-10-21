@@ -479,14 +479,18 @@ void interface::processarModular(caixa* it_caixa) {
     }
 }
 
-void interface::chamarFuncoes(caixa* it_caixa) {
-    if(!it_caixa) return;
-    else if (it_caixa->tipo() == tipo_caixa::botao) {
-        auto btn = dynamic_cast<elementos::botao*>(it_caixa);
+void interface::chamarFuncoes(caixa* c) {
+    if(!c) return;
+    else if (c->tipo() == tipo_caixa::botao) {
+        auto btn = dynamic_cast<elementos::botao*>(c);
         if(btn->pressionado() && btn->m_use_funcao) btn->m_funcao();
     }
-    for (auto& filho : it_caixa->m_filhos) {
+    for (auto& filho : c->m_filhos) {
+        if(     filho->m_estilo.m_limites.x < c->m_estilo.m_limites.x + c->m_estilo.m_limites.z
+                && filho->m_estilo.m_limites.y < c->m_estilo.m_limites.y + c->m_estilo.m_limites.w
+                && filho->m_estilo.m_ativo) {
         chamarFuncoes(filho.get());
+        }
     }
 }
 void interface::atualizarFilhos(caixa* it_caixa) {

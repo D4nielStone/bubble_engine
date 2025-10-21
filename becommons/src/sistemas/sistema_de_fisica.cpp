@@ -115,7 +115,6 @@ void sistema_fisica::inicializar() {
         for (int i = mundoDinamico->getNumCollisionObjects() - 1; i >= 0; --i) {
             btCollisionObject* obj = mundoDinamico->getCollisionObjectArray()[i];
             mundoDinamico->removeCollisionObject(obj);
-            delete obj;
         }
         delete mundoDinamico;
     }
