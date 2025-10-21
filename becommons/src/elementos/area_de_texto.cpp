@@ -52,8 +52,9 @@ void elementos::area_de_texto::atualizarBuffer() {
                 m_pipe_offset = m_buffer.size();
                 
                 auto &input = motor::obter().m_inputs;
-                if (motor::obter().m_inputs->obter(inputs::ENTER) || motor::obter().m_inputs->obter(inputs::KP_ENTER))
-                    m_buffer += '\n'; // break line
+                
+                if(m_break)
+                if(input->m_enter_pressionado || input->m_enter_repetido) m_buffer += '\n'; // break line
                 if(input->m_backspace_pressionado || input->m_backspace_repetido)
                     apagar();
                 else if(input->m_letra_pressionada)

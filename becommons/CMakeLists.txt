@@ -80,6 +80,7 @@ target_sources(becommons PRIVATE
     src/util/skybox.cpp
     src/util/material.cpp
     src/elementos/area_de_toque.cpp
+    src/elementos/texto.cpp
     src/elementos/popup.cpp
     src/elementos/gerenciador_projetos.cpp
     src/elementos/docking.cpp

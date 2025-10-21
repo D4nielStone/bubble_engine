@@ -41,11 +41,24 @@ sistema_fisica::sistema_fisica() {
     mundoDinamico->setGravity(m_gravity);
 }
 sistema_fisica::~sistema_fisica() {
+    if (mundoDinamico) {
+        // Remove todos os corpos antes de deletar o mundo
+        for (int i = mundoDinamico->getNumCollisionObjects() - 1; i >= 0; --i) {
+            btCollisionObject* obj = mundoDinamico->getCollisionObjectArray()[i];
+            btRigidBody* body = btRigidBody::upcast(obj);
+            if (body && body->getMotionState()) {
+                delete body->getMotionState();
+            }
+            mundoDinamico->removeCollisionObject(obj);
+            delete obj;
+        }
+        delete mundoDinamico;
+        mundoDinamico = nullptr;
+    }
     if(solucionador)delete solucionador;
     if(faseAmpla)delete faseAmpla;
     if(expedidor)delete expedidor;
     if(configColisao)delete configColisao;
-    if(mundoDinamico)delete mundoDinamico;
 }
 
 void sistema_fisica::atualizarColisoes() {
@@ -98,7 +111,15 @@ void sistema_fisica::inicializar() {
     depuracao::emitir(info, "fisica", "iniciando sistema.");
     auto reg = motor::obter().m_levelmanager->obterFaseAtual()->obterRegistro();
     
-    if(mundoDinamico) delete mundoDinamico;
+    if (mundoDinamico) {
+        for (int i = mundoDinamico->getNumCollisionObjects() - 1; i >= 0; --i) {
+            btCollisionObject* obj = mundoDinamico->getCollisionObjectArray()[i];
+            mundoDinamico->removeCollisionObject(obj);
+            delete obj;
+        }
+        delete mundoDinamico;
+    }
+
     mundoDinamico = new btDiscreteDynamicsWorld(expedidor, faseAmpla, solucionador, configColisao);
     mundoDinamico->setGravity(btVector3(0, -9.8, 0));
     

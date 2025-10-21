@@ -329,7 +329,7 @@ paineis::file_manager::file_manager(const std::string& base_dir) : m_directory(b
     research(m_directory);
 }
 void paineis::file_manager::research(const std::string& dir) {
-    int scl = 11;
+    int scl = 10;
     auto* barra_lateral = m_filhos[0]->m_filhos[0].get();
     barra_lateral->m_filhos.clear();
 
@@ -351,6 +351,20 @@ void paineis::file_manager::research(const std::string& dir) {
                     "folder.png",
                     scl
                 );
+            } else
+            if (std::filesystem::is_regular_file(entry.path())) {
+                auto str = entry.path().string();
+                auto filename = entry.path().filename().string();
+                if (filename[0] == '.') continue;
+                if (entry.path().extension().string() == ".lua") {
+                auto* btn = barra_lateral->adicionar<elementos::botao>(
+                    [this, str]() {
+                    },
+                    filename,
+                    "Codigo.png",
+                    scl
+                );
+                }
             }
         }
         auto str = std::filesystem::path(dir).parent_path().string();
@@ -384,6 +398,7 @@ void paineis::file_manager::pick_file(const std::string& filtro, std::function<v
     barra_central->m_estilo.m_orientacao_modular = estilo::orientacao::vertical;
 
     auto f_reload = [this, filtro, barra_central, funcao](){
+    barra_central->m_filhos.clear();
     for (const auto& entry : std::filesystem::recursive_directory_iterator(m_directory)) {
         if (entry.is_regular_file() && entry.path().extension() == filtro) {
             auto str = entry.path().string();
@@ -393,7 +408,7 @@ void paineis::file_manager::pick_file(const std::string& filtro, std::function<v
                 },
                 entry.path().filename().string(),
                 "Codigo.png",
-                11
+                10
             );
         }
     }
@@ -444,9 +459,10 @@ paineis::text_editor::text_editor(const std::string& file) : painel(std::filesys
     );
     ifs.close();
     m_estilo.m_orientacao_modular = estilo::orientacao::horizontal;
-    ct = adicionar<elementos::caixa_de_texto>("", fileContent);
+    ct = adicionar<elementos::caixa_de_texto>("escreva seu codigo aqui.", fileContent);
     ct->m_estilo.m_flag_estilo = flag_estilo::altura_percentual | flag_estilo::largura_percentual | flag_estilo::modular;
     ct->m_estilo.m_cor_fundo = cor(0.07f);
+    ct->m_break = true;
     auto* barra_num = adicionar<caixa>();
     barra_num->m_estilo.m_flag_estilo = flag_estilo::altura_percentual | flag_estilo::largura_justa | flag_estilo::modular;
     barra_num->m_estilo.m_orientacao_modular = estilo::orientacao::vertical;
@@ -464,8 +480,8 @@ void paineis::text_editor::atualizar() {
     for (char c : buffer) {
         if (c == '\n') ++num_lines;
     }
-    txt->m_texto_frase = "";
-    for(size_t n = 1; n < num_lines; n++) {
+    txt->m_texto_frase = "1";
+    for(size_t n = 1; n < num_lines + 1; n++) {
         txt->m_texto_frase += std::to_string(n);
         txt->m_texto_frase += '\n';
     }
