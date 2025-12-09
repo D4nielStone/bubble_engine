@@ -111,7 +111,7 @@ target_link_libraries(becommons
 else()
 target_link_libraries(becommons
     PUBLIC
-        lua5.3
+        lua
         glfw
         glad
         assimp
