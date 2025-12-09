@@ -2,9 +2,8 @@ Bubble Engine
 ===
 
 [![Stars](https://img.shields.io/github/stars/d4nielstone/bubble_engine?style=social)](https://github.com/D4nielStone/bubble_engine/stargazers)
-[![Version](https://img.shields.io/github/v/tag/d4nielstone/bubble_engine)](https://github.com/D4nielStone/bubble_engine/tags)
+[![Version](https://img.shields.io/github/v/tag/d4nielstone/bubble_engine?label=📑Latest%20Version)](https://github.com/D4nielStone/bubble_engine/tags)
 [![Issues](https://img.shields.io/github/issues/d4nielstone/bubble_engine)](https://github.com/D4nielStone/bubble_engine/issues)
-[![Discussions](https://img.shields.io/github/discussions/d4nielstone/bubble_engine/discussions)](https://github.com/D4nielStone/bubble_engine/discussions)
 [![🐧 Build and Test](https://github.com/D4nielStone/bubble_engine/actions/workflows/build_and_test.yml/badge.svg)](https://github.com/D4nielStone/bubble_engine/actions/workflows/build_and_test.yml)
 
 <p align="center">
