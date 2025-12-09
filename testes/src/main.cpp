@@ -370,8 +370,8 @@ void testarRegistro()
         becommons::entidade e2 = reg.criar();
         
         ASSERT_TRUE(e1.id != e2.id);  // IDs devem ser diferentes
-        ASSERT_EQUAL(e1.mascara, becommons::componente::COMPONENTE_TRANSFORMACAO || becommons::componente::COMPONENTE_FISICA);
-        ASSERT_EQUAL(e2.mascara, becommons::componente::COMPONENTE_TRANSFORMACAO || becommons::componente::COMPONENTE_FISICA);
+        ASSERT_EQUAL(e1.mascara, becommons::componente::COMPONENTE_TRANSFORMACAO | becommons::componente::COMPONENTE_FISICA);
+        ASSERT_EQUAL(e2.mascara, becommons::componente::COMPONENTE_TRANSFORMACAO | becommons::componente::COMPONENTE_FISICA);
     });
 
     testes.adicionar("tem/nao_tem_componente", [](){
