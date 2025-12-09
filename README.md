@@ -154,10 +154,9 @@ vcpkg install lua:x64-mingw-static glm:x64-mingw-static glfw3:x64-mingw-static a
 git clone https://github.com/D4nielStone/bubble_engine.git
 
 cd bubble_engine
-mkdir out
-cd out
+cmake -B out
 cmake .. -DCMAKE_TOOLCHAIN_FILE=C:/vcpkg/scripts/buildsystems/vcpkg.cmake
-cmake --build . --config Release
+cmake --build out --config Release
 ```
 
 > Ensure `vcpkg` and `mingw` paths are added to your system's PATH environment variable.
