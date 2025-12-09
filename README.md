@@ -1,18 +1,33 @@
-# **Bubble Engine**
+Bubble Engine
+===
 
 [![Stars](https://img.shields.io/github/stars/d4nielstone/bubble_engine?style=social)](https://github.com/D4nielStone/bubble_engine/stargazers)
-[![License](https://img.shields.io/github/license/d4nielstone/bubble_engine)](https://github.com/D4nielStone/bubble_engine/blob/master/LICENSE)
 [![Version](https://img.shields.io/github/v/tag/d4nielstone/bubble_engine)](https://github.com/D4nielStone/bubble_engine/tags)
 [![Issues](https://img.shields.io/github/issues/d4nielstone/bubble_engine)](https://github.com/D4nielStone/bubble_engine/issues)
-[![Discussions](https://img.shields.io/github/discussions/d4nielstone/bubble_engine)](https://github.com/D4nielStone/bubble_engine/discussions)
+[![Discussions](https://img.shields.io/github/discussions/d4nielstone/bubble_engine/discussions)](https://github.com/D4nielStone/bubble_engine/discussions)
 [![🐧 Build and Test](https://github.com/D4nielStone/bubble_engine/actions/workflows/build_and_test.yml/badge.svg)](https://github.com/D4nielStone/bubble_engine/actions/workflows/build_and_test.yml)
 
 <p align="center">
   <a href="https://d4nielstone.github.io/bubble_engine">
-    <img src="https://github.com/user-attachments/assets/c5a24614-03ec-405e-8eae-55ab74326a66" width="400" alt="Bubble Engine logo">
+    <img src="https://github.com/user-attachments/assets/c5a24614-03ec-405e-8eae-55ab74326a66" width="200" alt="Bubble Engine logo">
   </a>
 </p>
+
 <hr>
+
+## 📑 Table of Contents
+- [About the Project](#about-the-project)
+- [Features](#features)
+- [Technologies](#technologies)
+- [Bubble GUI](#bubble-gui)
+- [Project Example](#project-example)
+- [Contributing](#contributing)
+- [Installation](#installation)
+  - [Linux](#linux-debianubuntu-based-distros)
+  - [Windows](#windows-7-or-eighter-x64)
+- [Youtube](#youtube)
+
+---
 
 ## **About the Project**
 
@@ -20,10 +35,48 @@
 
 This project is licensed under the [MIT License](https://choosealicense.com/licenses/mit/).
 
+---
+
+## Features
+
+- Custom 3D game engine written from scratch
+- OpenGL rendering pipeline
+- Entity/component architecture
+- Lua scripting support
+- Custom graphical user interface system (Bubble GUI)
+- Physics simulation using Bullet
+- Model loading with Assimp
+- Texture loading and management
+- Real-time lighting system
+- Scene and camera management
+
+---
+
+## Technologies
+
+- **Language:** C++
+- **Graphics API:** OpenGL
+- **Windowing/Input:** GLFW / GLAD
+- **Math:** GLM
+- **Physics:** Bullet Physics
+- **Model Loading:** Assimp
+- **Image Loading:** FreeImage
+- **Fonts/Text:** FreeType
+- **Scripting:** Lua
+- **Build System:** CMake
+- **Serialization:** RapidJSON
+
+---
+
 # **Bubble GUI**
-Bubble GUI is the graphical interface library of bubble game engine. It work's like html and css, where box or "caixa" is like a div.
+
+Bubble GUI is the graphical interface library of bubble game engine. It works like HTML and CSS, where box or "caixa" behaves like a `div`.
+
+> [!NOTE]
+> The official Bubble GUI library is currently under development; another version will be available soon.
+
 ```cpp
-    class bubble_gui : public sistema { ... }
+class bubble_gui : public sistema { ... }
 ```
 
 ---
@@ -33,7 +86,7 @@ Bubble GUI is the graphical interface library of bubble game engine. It work's l
 A **golf game** was created as a physics test. Several engine features were improved throughout its development.
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/65968911-e9cd-44c7-868b-81286b40889d" width="600" alt="Golf Game">
+  <img src="https://github.com/user-attachments/assets/65968911-e9cd-44c7-868b-81286b40889d" width="300" alt="Golf Game">
 </p>
 
 ---
