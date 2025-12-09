@@ -92,6 +92,8 @@ A **golf game** was created as a physics test. Several engine features were impr
 
 > Linux:
 
+[Demo.mp4](https://github.com/user-attachments/assets/7af13165-6852-4145-9496-038d7c344ce7)
+
 <img width="700" alt="Screenshot from 2025-10-21 22-00-32" src="https://github.com/user-attachments/assets/c8e671a2-66e8-4e0b-98a4-e4af1b260daf" />
 <img width="700" alt="Screenshot from 2025-10-21 22-01-54" src="https://github.com/user-attachments/assets/2ee80c8c-31da-4aed-8598-54293e1a0863" />
 
