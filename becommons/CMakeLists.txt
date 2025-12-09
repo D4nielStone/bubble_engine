@@ -24,7 +24,6 @@ else()
         ./include
         ../libs/glad        
         ../libs/sol2/include
-        /usr/include/lua5.3
         /usr/include/glm
         /usr/include/GLFW
         /usr/include/assimp
@@ -111,7 +110,7 @@ target_link_libraries(becommons
 else()
 target_link_libraries(becommons
     PUBLIC
-        lua
+        Lua::Lua
         glfw
         glad
         assimp
