@@ -79,7 +79,7 @@ PUBLIC
     Bullet3Common
     glfw 
     assimp
-    lua5.3
+    lua
     freeimage
     freetype
 )
