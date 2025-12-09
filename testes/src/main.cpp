@@ -370,38 +370,38 @@ void testarRegistro()
         becommons::entidade e2 = reg.criar();
         
         ASSERT_TRUE(e1.id != e2.id);  // IDs devem ser diferentes
-        ASSERT_EQUAL(e1.mascara, becommons::componente::COMPONENTE_TRANSFORMACAO);
-        ASSERT_EQUAL(e2.mascara, becommons::componente::COMPONENTE_TRANSFORMACAO);
+        ASSERT_EQUAL(e1.mascara, becommons::componente::COMPONENTE_TRANSFORMACAO || becommons::componente::COMPONENTE_FISICA);
+        ASSERT_EQUAL(e2.mascara, becommons::componente::COMPONENTE_TRANSFORMACAO || becommons::componente::COMPONENTE_FISICA);
     });
 
     testes.adicionar("tem/nao_tem_componente", [](){
         becommons::registro reg;
         becommons::entidade e = reg.criar();
     
-        ASSERT_TRUE(!reg.tem<becommons::fisica>(e.id));
-        reg.adicionar<becommons::fisica>(e);
-        ASSERT_TRUE(reg.tem<becommons::fisica>(e.id));
+        ASSERT_TRUE(!reg.tem<becommons::codigo>(e.id));
+        reg.adicionar<becommons::codigo>(e);
+        ASSERT_TRUE(reg.tem<becommons::codigo>(e.id));
     });
     
     testes.adicionar("obtendo_componente", [](){
 		becommons::registro reg;
 		becommons::entidade e = reg.criar();
 	
-		ASSERT_TRUE(!reg.tem<becommons::fisica>(e.id));
+		ASSERT_TRUE(!reg.tem<becommons::codigo>(e.id));
 
-        reg.adicionar<becommons::fisica>(e);
+        reg.adicionar<becommons::codigo>(e);
 
-		ASSERT_TRUE(reg.obter<becommons::fisica>(e.id)!=nullptr);
+		ASSERT_TRUE(reg.obter<becommons::codigo>(e.id)!=nullptr);
     });
     
     testes.adicionar("removendo_componente_nulo", [](){
             becommons::registro reg;
             becommons::entidade e = reg.criar();
         
-            ASSERT_TRUE(!reg.tem<becommons::fisica>(e.id));
-            reg.remover<becommons::fisica>(e.id);
-            ASSERT_TRUE(!reg.tem<becommons::fisica>(e.id));
-            ASSERT_TRUE(!reg.obter<becommons::fisica>(e.id));
+            ASSERT_TRUE(!reg.tem<becommons::codigo>(e.id));
+            reg.remover<becommons::codigo>(e.id);
+            ASSERT_TRUE(!reg.tem<becommons::codigo>(e.id));
+            ASSERT_TRUE(!reg.obter<becommons::codigo>(e.id));
         });
         
         testes.adicionar("adicionando_removento_componentes", [](){
@@ -445,7 +445,7 @@ void testarRegistro()
             auto e = reg.criar();
         
             int count = 0;
-            reg.cada<becommons::fisica>([&](uint32_t) { count++; });
+            reg.cada<becommons::codigo>([&](uint32_t) { count++; });
             ASSERT_EQUAL(count, 0);
         });
         
@@ -454,8 +454,10 @@ void testarRegistro()
             auto e = reg.criar();
         
             // adiciona e remove componente
-            reg.adicionar<becommons::fisica>(e);
+			// obs: fisica e transformação são padrão
+            reg.adicionar<becommons::codigo>(e);
             reg.remover<becommons::fisica>(e.id);
+            reg.remover<becommons::codigo>(e.id);
             reg.remover<becommons::transformacao>(e.id);
         
             // entidade deve ser removida do mapa
@@ -467,6 +469,7 @@ void testarRegistro()
             becommons::registro reg;
         
             reg.remover<becommons::transformacao>(1);
+            reg.remover<becommons::fisica>(1);
             reg.adicionar<CompA>(1);
             reg.adicionar<CompB>(1);
 
@@ -480,9 +483,7 @@ void testarRegistro()
         });
 }
 
-void testarMotor()
-{
-/*
+void testarMotor() {
     testes.classe("nucleo", "motor");
 
     // Teste 1: instancia global (singleton-like) é atualizada no construtor
@@ -556,7 +557,6 @@ void testarMotor()
         motor& got = becommons::motor::obter();
         ASSERT_TRUE(&got == &m);
     });
-*/
 }
 
 void testarNucleo()
@@ -821,6 +821,7 @@ void testarBubbleGUI()
         ASSERT_EQUAL(child1->m_estilo.m_limites, fvet4(0, 0, 20, 20));
         ASSERT_EQUAL(child2->m_estilo.m_limites, fvet4(20, 0, 20, 20));
     });
+	// TODO: container deve ser refatorado para uma forma de estrutura mais simples!
     /*// Teste 12 : Teste do container
     testes.adicionar("contanier_horizontal", []() {
         //- Preparação:
