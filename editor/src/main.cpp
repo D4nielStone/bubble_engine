@@ -20,28 +20,96 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE. 
 */
+
 /**
  * @file main.cpp
  */
 
 #include "editor.hpp"
+
+#include <cstdlib>
+#include <filesystem>
+#include <stdexcept>
+#include <string>
+
 using namespace EDITOR_NS;
 
-int main(int argc, char* argv[]) {
-    // Definir diretório do projeto
-    std::string DIR_PADRAO = std::string(std::getenv("HOME")) + "/bubble engine/jogos";
-    if(!std::filesystem::exists(DIR_PADRAO))
-        if(!std::filesystem::create_directories(DIR_PADRAO)) return -1;
-    if (argc > 1) {
-        DIR_PADRAO = argv[1];
+static std::filesystem::path obterDiretorioJogosPadrao() {
+#ifdef _WIN32
+
+    const char* userProfile = std::getenv("USERPROFILE");
+
+    if (userProfile && *userProfile) {
+        return std::filesystem::path(userProfile)
+            / "bubble engine"
+            / "jogos";
     }
 
+    const char* homeDrive = std::getenv("HOMEDRIVE");
+    const char* homePath = std::getenv("HOMEPATH");
+
+    if (
+        homeDrive && *homeDrive &&
+        homePath && *homePath
+    ) {
+        return std::filesystem::path(
+            std::string(homeDrive) + homePath
+        ) / "bubble engine" / "jogos";
+    }
+
+    return std::filesystem::current_path()
+        / "bubble engine"
+        / "jogos";
+
+#else
+
+    const char* home = std::getenv("HOME");
+
+    if (home && *home) {
+        return std::filesystem::path(home)
+            / "bubble engine"
+            / "jogos";
+    }
+
+    return std::filesystem::current_path()
+        / "bubble engine"
+        / "jogos";
+
+#endif
+}
+
+int main(int argc, char* argv[]) {
+
     try {
-            gerenciador_projetos gp(DIR_PADRAO);
-            gp.iniciar();
+
+        std::filesystem::path dirPadrao =
+            obterDiretorioJogosPadrao();
+
+        if (argc > 1 && argv[1] && *argv[1]) {
+            dirPadrao = std::filesystem::path(argv[1]);
         }
+
+        if (!std::filesystem::exists(dirPadrao)) {
+            std::filesystem::create_directories(dirPadrao);
+        }
+
+        if (!std::filesystem::is_directory(dirPadrao)) {
+            throw std::runtime_error(
+                "O diretorio de projetos nao e um diretorio valido: "
+                + dirPadrao.string()
+            );
+        }
+
+        gerenciador_projetos gp(dirPadrao.string());
+
+        gp.iniciar();
+
+    }
     catch (const std::exception& e) {
+
         depuracao::emitir(erro, e.what());
+
+        return -1;
     }
 
     return 0;

@@ -1,118 +1,121 @@
-cmake_minimum_required(VERSION 3.10)
-project(becommons)
+cmake_minimum_required(VERSION 3.20)
 
-set(CMAKE_CXX_STANDARD 20)
+project(becommons LANGUAGES C CXX)
 
-# Detectar plataforma
-if(WIN32)
-    message(STATUS "Configuring for Windows")
+set(CMAKE_CXX_STANDARD 23)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
 
-    # Assumir que o vcpkg foi integrado via CMAKE_TOOLCHAIN_FILE
-    # Inclui apenas diretórios locais e relativos
-    include_directories(
-        ${CMAKE_SOURCE_DIR}
-        ./include
-        ../libs/sol2/include
-        ../libs/glad
-    )
-
-else()
-    message(STATUS "Configuring for Linux")
-
-    include_directories(
-        ${CMAKE_SOURCE_DIR}
-        ./include
-        ../libs/glad        
-        ../libs/sol2/include
-        /usr/include/lua5.3
-        /usr/include/glm
-        /usr/include/GLFW
-        /usr/include/assimp
-        /usr/include/FreeImage
-        /usr/include/rapidjson
-        /usr/include/bullet
-        /usr/include/freetype2
-    )
+if(WIN32 AND NOT MSVC)
+    message(STATUS "Configuring for Windows (UCRT64/MinGW)")
 endif()
 
-# Encontrar pacotes
-find_package(Lua REQUIRED)
+find_package(Lua 5.4 REQUIRED)
 find_package(glfw3 REQUIRED)
 find_package(glm REQUIRED)
 find_package(assimp REQUIRED)
 find_package(RapidJSON REQUIRED)
-find_package(Bullet REQUIRED)
 find_package(Freetype REQUIRED)
+find_package(Bullet REQUIRED COMPONENTS
+    BulletDynamics
+    BulletCollision
+    LinearMath
+)
+
+find_path(
+    FREEIMAGE_INCLUDE_DIR
+    NAMES FreeImage.h
+    REQUIRED
+)
+
+find_library(
+    FREEIMAGE_LIBRARY
+    NAMES freeimage FreeImage
+    REQUIRED
+)
+
+message(STATUS "Lua version: ${LUA_VERSION_STRING}")
+message(STATUS "Lua include dir: ${LUA_INCLUDE_DIR}")
+message(STATUS "Lua libraries: ${LUA_LIBRARIES}")
 
 add_library(becommons STATIC)
 
-target_include_directories(becommons PUBLIC ${CMAKE_SOURCE_DIR}/src)
-
-# Fontes do projeto
-target_sources(becommons PRIVATE
-    src/api/api_lua.cpp
-    ../libs/glad/glad.c
-    src/arquivadores/fonte.cpp
-    src/nucleo/registro.cpp
-    src/arquivadores/imageloader.cpp
-    src/arquivadores/shader.cpp
-    src/arquivadores/modelo.cpp
-    src/componentes/camera.cpp
-    src/componentes/camera_editor.cpp
-    src/componentes/luz_direcional.cpp
-    src/componentes/codigo.cpp
-    src/componentes/fisica.cpp
-    src/componentes/transformacao.cpp
-    src/componentes/terreno.cpp
-    src/inputs/inputs.cpp
-    src/nucleo/fase.cpp
-    src/sistemas/sistema_de_codigo.cpp
-    src/sistemas/sistema_de_fisica.cpp
-    src/sistemas/sistema_de_renderizacao.cpp
-    src/sistemas/interface.cpp
-    src/nucleo/projeto.cpp
-    src/util/malha.cpp
-    src/util/skybox.cpp
-    src/util/material.cpp
-    src/os/janela.cpp
+target_include_directories(becommons
+    PUBLIC
+        ${CMAKE_CURRENT_SOURCE_DIR}/include
+        ${CMAKE_CURRENT_SOURCE_DIR}/../libs/sol2/include
+        ${CMAKE_CURRENT_SOURCE_DIR}/../libs/glad
+        ${BULLET_INCLUDE_DIRS}
+    PRIVATE
+        ${CMAKE_CURRENT_SOURCE_DIR}/src
+        ${FREEIMAGE_INCLUDE_DIR}
 )
 
-# Linkagem
+target_sources(becommons
+    PRIVATE
+        src/api/api_lua.cpp
+        ../libs/glad/glad.c
+        src/arquivadores/fonte.cpp
+        src/nucleo/registro.cpp
+        src/arquivadores/imageloader.cpp
+        src/arquivadores/shader.cpp
+        src/arquivadores/modelo.cpp
+        src/componentes/camera.cpp
+        src/componentes/camera_editor.cpp
+        src/componentes/luz_direcional.cpp
+        src/componentes/codigo.cpp
+        src/componentes/fisica.cpp
+        src/componentes/transformacao.cpp
+        src/componentes/terreno.cpp
+        src/inputs/inputs.cpp
+        src/nucleo/fase.cpp
+        src/sistemas/sistema_de_codigo.cpp
+        src/sistemas/sistema_de_fisica.cpp
+        src/sistemas/sistema_de_renderizacao.cpp
+        src/sistemas/interface.cpp
+        src/nucleo/projeto.cpp
+        src/util/malha.cpp
+        src/util/skybox.cpp
+        src/util/material.cpp
+        src/os/janela.cpp
+)
+
+target_link_libraries(becommons
+    PUBLIC
+        ${LUA_LIBRARIES}
+    PRIVATE
+        glfw
+        assimp::assimp
+        ${FREEIMAGE_LIBRARY}
+        Freetype::Freetype
+        ${BULLET_LIBRARIES}
+)
+
+target_include_directories(becommons
+    SYSTEM PUBLIC
+        ${LUA_INCLUDE_DIR}
+)
+
 if(WIN32)
-
-target_link_libraries(becommons
-    PRIVATE
-    lua
-    glfw
-    glad
-    assimp
-    FreeImage
-    rapidjson
-    Bullet
-    freetype
-    BulletCollision
-    BulletDynamics
-    Bullet3Common    
-    Bullet::BulletCollision
-    Bullet::LinearMath
+    target_link_libraries(becommons
+        PRIVATE
+            opengl32
+            gdi32
+            winmm
+            imm32
+            ole32
+            uuid
+            version
+            setupapi
     )
-else()
-target_link_libraries(becommons
-    PRIVATE
-    lua5.3
-    glfw
-    glad
-    assimp
-    FreeImage
-    rapidjson
-    Bullet
-    freetype
-    BulletCollision
-    BulletDynamics
-    Bullet3Common
+endif()
+
+install(
+    TARGETS becommons
+    DESTINATION lib
 )
 
-endif()
-# Instalação
-install(TARGETS becommons DESTINATION lib)
-install(DIRECTORY include/ DESTINATION include)
+install(
+    DIRECTORY include/
+    DESTINATION include
+)

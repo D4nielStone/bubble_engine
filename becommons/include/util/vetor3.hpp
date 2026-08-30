@@ -27,7 +27,7 @@ SOFTWARE.
 #pragma once
 #include <cmath>
 #include <type_traits>
-#include <bullet/btBulletDynamicsCommon.h>
+#include "btBulletDynamicsCommon.h"
 #include "becommons_namespace.hpp"
 #include "glm/glm.hpp"
 /* Definição da estrutura vetor3 */

@@ -1,10 +1,9 @@
 #include "util/runtime.hpp"
-#include "assets/runtime_embutido.hpp"
 
 bool beeditor::runtimeRodando() {
     return system("pidof runtime_embutido > /dev/null 2>&1") == 0;
 }
-void beeditor::iniciarRuntime(const std::vector<std::string>& argumentos) {
+void beeditor::iniciarRuntime(const std::vector<std::string>& argumentos) {/*
     if (beeditor::runtimeRodando()) {
         std::cout << "Runtime já está em execução. Ignorando nova instância.\n";
         return;
@@ -51,6 +50,6 @@ void beeditor::iniciarRuntime(const std::vector<std::string>& argumentos) {
     } 
     else {
         std::cerr << "Erro ao criar processo!" << std::endl;
-    }
+    }*/
 }
 
