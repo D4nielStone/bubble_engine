@@ -10,12 +10,15 @@ using namespace COMMONS_NS;
 /**
  * @brief Ativa a escrita do framebuffer da câmera
  */
-void camera::drawFB() const {
+void camera::drawFB() {
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_CULL_FACE);
     glDepthFunc(GL_LESS);
     glDepthMask(GL_TRUE);
     if (flag_fb) {
+        if (viewport_ptr) {
+            viewportFBO = *viewport_ptr;
+        }
         glBindTexture(GL_TEXTURE_2D, texture);
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, viewportFBO.x, viewportFBO.y, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
         glBindTexture(GL_TEXTURE_2D, 0);
@@ -30,10 +33,7 @@ void camera::drawFB() const {
     }
     glClearColor(ceu.r, ceu.g, ceu.b, ceu.a);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    if(viewport_ptr)
-        glViewport(0, 0, viewport_ptr->x, viewport_ptr->y);
-    else
-        glViewport(0, 0, viewportFBO.x, viewportFBO.y);
+    glViewport(0, 0, viewportFBO.x, viewportFBO.y);
 }
 
 camera::~camera()
@@ -145,6 +145,7 @@ void camera::deleteFB()
 
     glDeleteFramebuffers(1, &fbo);
     glDeleteTextures(1, &texture);
+    glDeleteRenderbuffers(1, &rbo);
 }
 
 glm::mat4 camera::getViewMatrix() {

@@ -90,6 +90,5 @@ void render_system::update(const std::shared_ptr<ecs>& reg) {
             render_component->m_modelo->draw();
         });
 
-        camera_component->deleteFB();
     });
 }

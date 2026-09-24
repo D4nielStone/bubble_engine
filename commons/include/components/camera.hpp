@@ -51,7 +51,7 @@ namespace COMMONS_NS {
 		ivec2* viewport_ptr{ nullptr };
 		ivec2 viewportFBO{ 400, 400 };
 
-		void drawFB() const;
+		void drawFB();
         bool analyze(const rapidjson::Value&) override;
         bool serialize(rapidjson::Value& value, rapidjson::Document::AllocatorType& allocator) const override;
 
@@ -60,6 +60,7 @@ namespace COMMONS_NS {
 
 		void createFB();
 		void deleteFB();
+        unsigned int framebuffer_texture() const { return texture; }
 		glm::mat4 getViewMatrix();
 		void viewport(const ivec2& viewp);
 
