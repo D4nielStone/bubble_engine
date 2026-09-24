@@ -3,69 +3,68 @@
 #include "glad.h"
 #include "GLFW/glfw3.h"
 #include "os/window.hpp"
-#include "depuracao/debug.hpp"
-#include "arquivadores/imageloader.hpp"
-#include "arquivadores/shader.hpp"
-#include "arquivadores/fonte.hpp"
+#include "debugging/debug.hpp"
+#include "loaders/image_loader.hpp"
+#include "loaders/shader.hpp"
+#include "loaders/font.hpp"
 #include "inputs/inputs.hpp"
-
 using namespace COMMONS_NS;
 
 void errorCallback(int error, const char* description) {
     std::cerr << "GLFW Error (" << error << "): " << description << std::endl;
 }
 
-bool window::temInstancia() {
-    return instanciaAtual;
+bool window::hasInstance() {
+    return instanceAtual;
 }
 
-window& window::obterInstancia() {
-    if (!temInstancia())
+window& window::get_instance() {
+    if (!hasInstance())
        throw std::runtime_error("Instância da window não foi gerada!");
-    return *instanciaAtual;
+    return *instanceAtual;
 }
-window& window::newInstance(const char* nome, fvet2 bounds , const char* icon_path ) {
-    if(instanciaAtual) delete instanciaAtual;
-    instanciaAtual = new window(nome, bounds, icon_path);
-    return *instanciaAtual;
+window& window::newInstance(const char* nome, fvector_type2 bounds , const char* icon_path ) {
+    if(instanceAtual) delete instanceAtual;
+    instanceAtual = new window(nome, bounds, icon_path);
+    return *instanceAtual;
 }
-window& window::newInstance(const char* nome, const bool f, fvet2 bounds , const char* icon_path ) {
-    if(instanciaAtual) delete instanciaAtual;
-    instanciaAtual = new window(nome, f, bounds, icon_path);
-    return *instanciaAtual;
+window& window::newInstance(const char* nome, const bool f, fvector_type2 bounds , const char* icon_path ) {
+    if(instanceAtual) delete instanceAtual;
+    instanceAtual = new window(nome, f, bounds, icon_path);
+    return *instanceAtual;
 }
 
-ivet2 window::obterTamanhoWindow() {
-    return window::obterInstancia().tamanho;
+ivector_type2 window::get_window_size() {
+    return window::get_instance().size;
 };
 
 void window::posicionarCursor(double x, double y)
 {
-    auto& input = window::obterInstancia().m_inputs;
-    
+    auto& input = window::get_instance().m_inputs;
+
     input.m_mousex = x;
     input.m_mousey = y;
-    glfwSetCursorPos(window::obterInstancia().m_window, x, y);
+    glfwSetCursorPos(window::get_instance().m_window, x, y);
 }
 
 window::~window() {
-    descarregarShaders();
-    gerenciadorFontes::limparFontes();
+    desload_shaders();
+    font_manager::limparFontes();
 }
-window::window(const char* nome, fvet2 bounds, const char* icon_path)
+window::window(const char* nome, fvector_type2 bounds, const char* icon_path)
 {
     glfwSetErrorCallback(errorCallback);
     // inicia glfw
     if (!glfwInit())
     {
-        depuracao::emitir(erro, "Iniciando window glfw");
+        debugging::emit(erro, "Iniciando window glfw");
         abort();
     }
-    
+
     m_window = glfwCreateWindow(bounds.x, bounds.y, nome, NULL, NULL);
     m_nome = nome;
     if (!m_window) {
-        depuracao::emitir(erro, "Janla invalida");
+        debugging::emit(erro, "Janla invalida");
         abort();
     };
 
@@ -73,22 +72,22 @@ window::window(const char* nome, fvet2 bounds, const char* icon_path)
 
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
     {
-        depuracao::emitir(erro, "Glad");
+        debugging::emit(erro, "Glad");
         abort();
     }
-    
+
 
     if(icon_path)
     {
-    imageLoader _icone(icon_path);
-    auto glfw_icone = _icone.converterParaGlfw();
+    image_loader _icone(icon_path);
+    auto glfw_icone = _icone.convert_to_glfw();
     glfwSetWindowIcon(m_window, 1, &glfw_icone);
     }
     // ativa blend
-    glEnable(GL_BLEND); 
+    glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-    glEnable(GL_FRAMEBUFFER_SRGB);    
+    glEnable(GL_FRAMEBUFFER_SRGB);
 
     glfwSetCursorPosCallback(m_window,mousePosCallback);
     glfwSetCharCallback(m_window, charCallback);
@@ -96,19 +95,19 @@ window::window(const char* nome, fvet2 bounds, const char* icon_path)
     glfwSetKeyCallback(m_window,keyCallback);
     glfwSetWindowUserPointer(m_window, this);
 
-    vetor4<int> tam{};
+    vector4<int> tam{};
     glfwGetWindowSize(m_window, &tam.z, &tam.w);
-    tamanho.y = tam.w;
-    tamanho.x = tam.z;
+    size.y = tam.w;
+    size.x = tam.z;
 }
 
-window::window(const char* nome, const bool f, fvet2 bounds , const char* icon_path)
+window::window(const char* nome, const bool f, fvector_type2 bounds , const char* icon_path)
 {
     glfwSetErrorCallback(errorCallback);
     // inicia glfw
     if (!glfwInit())
     {
-        depuracao::emitir(erro, "Iniciando window glfw");
+        debugging::emit(erro, "Iniciando window glfw");
         abort();
     }
 if(f)
@@ -116,7 +115,7 @@ if(f)
     m_window = glfwCreateWindow(bounds.x, bounds.y, nome, NULL, NULL);
     m_nome = nome;
     if (!m_window) {
-        depuracao::emitir(erro, "Janla invalida");
+        debugging::emit(erro, "Janla invalida");
         abort();
     };
 
@@ -124,26 +123,26 @@ if(f)
 
 
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
-        depuracao::emitir(erro, "Glad");
+        debugging::emit(erro, "Glad");
         abort();
     }
 
     if(icon_path) {
-        imageLoader _icone(icon_path);
-        auto glfw_icone = _icone.converterParaGlfw();
+        image_loader _icone(icon_path);
+        auto glfw_icone = _icone.convert_to_glfw();
         glfwSetWindowIcon(m_window, 1, &glfw_icone);
     }
     // ativa blend
-    glEnable(GL_BLEND); 
+    glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    
+
     glfwSetCursorPosCallback(m_window,mousePosCallback);
     glfwSetCharCallback(m_window, charCallback);
     glfwSetMouseButtonCallback(m_window, mouseButtonCallback);
     glfwSetKeyCallback(m_window,keyCallback);
     glfwSetWindowUserPointer(m_window, this);
 
-    glfwGetWindowSize(m_window, &tamanho.x, &tamanho.y);
+    glfwGetWindowSize(m_window, &size.x, &size.y);
 }
 void window::poll()
 {
@@ -151,26 +150,26 @@ void window::poll()
     m_inputs.m_backspace_repetido = false;
 
     glfwPollEvents();
-    glfwGetWindowSize(m_window, &tamanho.x, &tamanho.y);
+    glfwGetWindowSize(m_window, &size.x, &size.y);
 }
 
-void window::swap() 
+void window::swap()
 {
-    if(m_cursor != m_cursor_antigo) 
+    if(m_cursor != m_cursor_antigo)
     {
         auto cursor_glfw = glfwCreateStandardCursor((int)m_cursor);
         if(cursor_glfw)
         glfwSetCursor(m_window, cursor_glfw);
         m_cursor_antigo = m_cursor;
     }
-    m_tempo.calcularDT();
+    m_time.calculateDT();
     m_inputs.m_letra_pressionada = false;
     glfwSwapBuffers(m_window);
 }
 
 void window::viewport() const
 {
-    glViewport(0, 0, tamanho.x, tamanho.y);
+    glViewport(0, 0, size.x, size.y);
 }
 
 void window::nome(const char* novo_nome)

@@ -1,4 +1,4 @@
-/** @copyright 
+/** @copyright
 MIT License
 Copyright (c) 2025 Daniel Oliveira
 
@@ -18,7 +18,7 @@ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE. 
+SOFTWARE.
 */
 /**
  * @file inputs.hpp
@@ -32,97 +32,97 @@ SOFTWARE.
 #include <functional>
 #include <glm/glm.hpp>
 #include "commons_namespace.hpp"
-#include "util/vetor2.hpp"
+#include "util/vector2.hpp"
 
 namespace COMMONS_NS {
     /**
      * \class inputs
      * \brief Centraliza os inputs da window glfw
-     * \enum chave
+     * \enum key
      * \brief Facilita o uso das flags do glfw
      */
     class inputs {
     public:
-        enum chave {    
-             Q =               GLFW_KEY_Q,                
-             W =               GLFW_KEY_W,                
-             E =               GLFW_KEY_E,                
-             R =               GLFW_KEY_R,                
-             T =               GLFW_KEY_T,                
-             Y =               GLFW_KEY_Y,                
-             U =               GLFW_KEY_U,                
-             I =               GLFW_KEY_I,                
-             O =               GLFW_KEY_O,                
-             P =               GLFW_KEY_P,                
-             A =               GLFW_KEY_A,                
-             S =               GLFW_KEY_S,                
-             D =               GLFW_KEY_D,                
-             F =               GLFW_KEY_F,                
-             G =               GLFW_KEY_G,                
-             H =               GLFW_KEY_H,                
-             J =               GLFW_KEY_J,                
-             K =               GLFW_KEY_K,                
-             L =               GLFW_KEY_L,                
-             Z =               GLFW_KEY_Z,                
-             X =               GLFW_KEY_X,                
-             C =               GLFW_KEY_C,                
-             V =               GLFW_KEY_V,                
-             B =               GLFW_KEY_B,                
-             N =               GLFW_KEY_N,                
-             M =               GLFW_KEY_M,                
-             DIREITA =         GLFW_KEY_RIGHT,            
-             ESQUERDA =        GLFW_KEY_LEFT,             
-             BAIXO =           GLFW_KEY_DOWN,             
-             CIMA =            GLFW_KEY_UP,               
-             E_SHIFT =         GLFW_KEY_LEFT_SHIFT,       
-             D_SHIFT =         GLFW_KEY_RIGHT_SHIFT,      
-             E_CTRL =          GLFW_KEY_LEFT_CONTROL,     
-             D_CTRL =          GLFW_KEY_RIGHT_CONTROL,    
-             E_ALT =           GLFW_KEY_LEFT_ALT,         
-             D_ALT =           GLFW_KEY_RIGHT_ALT,        
-             BACKSPACE =       GLFW_KEY_BACKSPACE,        
-             ENTER =           GLFW_KEY_ENTER,            
-             KP_ENTER =        GLFW_KEY_KP_ENTER,         
-             DELETE =          GLFW_KEY_DELETE,           
-             F1 =              GLFW_KEY_F1,               
-             F2 =              GLFW_KEY_F2,               
-             F3 =              GLFW_KEY_F3,               
-             F4 =              GLFW_KEY_F4,               
-             F5 =              GLFW_KEY_F5,               
-             F6 =              GLFW_KEY_F6,               
-             F7 =              GLFW_KEY_F7,               
-             MOUSE_MEIO =      GLFW_MOUSE_BUTTON_MIDDLE,  
-             MOUSE_E =         GLFW_MOUSE_BUTTON_LEFT,    
-             MOUSE_D =         GLFW_MOUSE_BUTTON_RIGHT   
+        enum key {
+             Q =               GLFW_KEY_Q,
+             W =               GLFW_KEY_W,
+             E =               GLFW_KEY_E,
+             R =               GLFW_KEY_R,
+             T =               GLFW_KEY_T,
+             Y =               GLFW_KEY_Y,
+             U =               GLFW_KEY_U,
+             I =               GLFW_KEY_I,
+             O =               GLFW_KEY_O,
+             P =               GLFW_KEY_P,
+             A =               GLFW_KEY_A,
+             S =               GLFW_KEY_S,
+             D =               GLFW_KEY_D,
+             F =               GLFW_KEY_F,
+             G =               GLFW_KEY_G,
+             H =               GLFW_KEY_H,
+             J =               GLFW_KEY_J,
+             K =               GLFW_KEY_K,
+             L =               GLFW_KEY_L,
+             Z =               GLFW_KEY_Z,
+             X =               GLFW_KEY_X,
+             C =               GLFW_KEY_C,
+             V =               GLFW_KEY_V,
+             B =               GLFW_KEY_B,
+             N =               GLFW_KEY_N,
+             M =               GLFW_KEY_M,
+             DIREITA =         GLFW_KEY_RIGHT,
+             ESQUERDA =        GLFW_KEY_LEFT,
+             BAIXO =           GLFW_KEY_DOWN,
+             CIMA =            GLFW_KEY_UP,
+             E_SHIFT =         GLFW_KEY_LEFT_SHIFT,
+             D_SHIFT =         GLFW_KEY_RIGHT_SHIFT,
+             E_CTRL =          GLFW_KEY_LEFT_CONTROL,
+             D_CTRL =          GLFW_KEY_RIGHT_CONTROL,
+             E_ALT =           GLFW_KEY_LEFT_ALT,
+             D_ALT =           GLFW_KEY_RIGHT_ALT,
+             BACKSPACE =       GLFW_KEY_BACKSPACE,
+             ENTER =           GLFW_KEY_ENTER,
+             KP_ENTER =        GLFW_KEY_KP_ENTER,
+             DELETE =          GLFW_KEY_DELETE,
+             F1 =              GLFW_KEY_F1,
+             F2 =              GLFW_KEY_F2,
+             F3 =              GLFW_KEY_F3,
+             F4 =              GLFW_KEY_F4,
+             F5 =              GLFW_KEY_F5,
+             F6 =              GLFW_KEY_F6,
+             F7 =              GLFW_KEY_F7,
+             MOUSE_MEIO =      GLFW_MOUSE_BUTTON_MIDDLE,
+             MOUSE_E =         GLFW_MOUSE_BUTTON_LEFT,
+             MOUSE_D =         GLFW_MOUSE_BUTTON_RIGHT
         };
         inputs() = default;
         /**
          * \brief Define uma tecla como pressionada.
-         * \param p_chave Chave que será definida
+         * \param p_key Chave que será definida
          */
-        void pressionar             (const chave&);
+        void pressionar             (const key&);
         /**
          * \brief Define uma tecla como `solta`.
-         * \param chave Chave que será definida
+         * \param key Chave que será definida
          */
-        void soltar                 (const chave&);
+        void soltar                 (const key&);
         /**
          * \brief Define uma tecla como pressionada.
-         * \param p_chave Chave que será definida
+         * \param p_key Chave que será definida
          */
-        static bool obter                  (const chave&);
+        static bool get                  (const key&);
         /**
          * \brief Define uma tecla como pressionada.
-         * \param p_chave Chave que será definida
+         * \param p_key Chave que será definida
          */
-        static bool obter_str               (const std::string&);
+        static bool get_str               (const std::string&);
 
-        static dvet2 obterMousePos         ();
+        static dvector_type2 get_mouse_position         ();
         int m_estado_mouse{ 0 }, m_estado_tecla{ 0 }, m_mods{ 0 };
         char m_ultima_letra{ '\0' };
         bool m_mouse_clicou { false }, m_letra_pressionada {false}, m_backspace_pressionado, m_backspace_segura, m_backspace_repetido;
         double m_mousex, m_mousey;
-        std::unordered_map<chave, bool> m_chaves;
+        std::unordered_map<key, bool> m_keys;
     };
 
     // Callback de teclado GLFW

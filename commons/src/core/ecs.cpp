@@ -1,43 +1,43 @@
 #include "core/ecs.hpp"
-#include "entidades/entidade.hpp"
+#include "entities/entity.hpp"
 #include "core/ecs.hpp"
-#include "componentes/renderizador.hpp"
-#include "arquivadores/shader.hpp"
-#include "depuracao/debug.hpp"
+#include "components/renderer.hpp"
+#include "loaders/shader.hpp"
+#include "debugging/debug.hpp"
 
 using namespace COMMONS_NS;
 
-entidade ecs::criar(const uint32_t id)
+entity ecs::create(const uint32_t id)
 {
     // Se o id é 0, cria com id livre
     // se não, cria com o parâmetro "id"
-    uint32_t id_atual = id;
-    // Se tem id em uso ou é inválido( igual à 0 )
-    uint32_t proxima_entidade = 0;
-    while(id_atual == 0 || entidades.find(id_atual) != entidades.end())
+    uint32_t current_id = id;
+    // Se has id em uso ou é inválido( igual à 0 )
+    uint32_t next_entity = 0;
+    while(current_id == 0 || entities.find(current_id) != entities.end())
     {
-        proxima_entidade++;
-        id_atual = proxima_entidade;
+        next_entity++;
+        current_id = next_entity;
     }
-    depuracao::emitir(debug, "ecs", "nova entidade: " + std::to_string(id_atual));
-    entidade ent ={ id_atual , componente::COMPONENTE_NONE };
+    debugging::emit(debug, "ecs", "new entity: " + std::to_string(current_id));
+    entity ent ={ current_id , component::COMPONENTE_NONE };
 
-    adicionar<transformacao>(ent);
+    add<transform>(ent);
 
     return ent;
 }
 
-componente::mascara ecs::obterComponentes(const uint32_t& id) const {
+component::mask ecs::get_components(const uint32_t& id) const {
     auto it = mascaras.find(id);
     if (it != mascaras.end()) {
-        return it->second; // Retorna a m�scara associada � entidade.
+        return it->second; // Retorna a m�scara associada � entity.
     }
-    return componente::COMPONENTE_NONE; // Retorna uma m�scara vazia se a entidade n�o existir.
+    return component::COMPONENTE_NONE; // Retorna uma m�scara vazia se a entity n�o existir.
 }
 
-void ecs::remover(const uint32_t& ent)
+void ecs::remove(const uint32_t& ent)
 {
-    entidades[ent].clear();
-    entidades.erase(ent);
+    entities[ent].clear();
+    entities.erase(ent);
     mascaras.erase(ent);
 }

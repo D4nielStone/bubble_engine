@@ -1,4 +1,4 @@
-/** @copyright 
+/** @copyright
 MIT License
 Copyright (c) 2025 Daniel Oliveira
 
@@ -18,7 +18,7 @@ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE. 
+SOFTWARE.
 */
 /**
  * @file skybox_frag.hpp
@@ -39,6 +39,6 @@ in vec3 TexCoords;
 uniform samplerCube skybox;
 
 void main()
-{    
+{
     FragColor = texture(skybox, vec3(TexCoords.x, -TexCoords.y, TexCoords.z));
 })";

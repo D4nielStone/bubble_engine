@@ -1,4 +1,4 @@
-/** @copyright 
+/** @copyright
 MIT License
 Copyright (c) 2025 Daniel Oliveira
 
@@ -18,7 +18,7 @@ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE. 
+SOFTWARE.
 */
 /**
  * @file skybox.hpp
@@ -26,18 +26,18 @@ SOFTWARE.
 
 #pragma once
 #include "commons_namespace.hpp"
-#include "arquivadores/shader.hpp"
-#include "arquivadores/imageloader.hpp"
-#include "arquivadores/modelo.hpp"
+#include "loaders/shader.hpp"
+#include "loaders/image_loader.hpp"
+#include "loaders/model.hpp"
 #include <glm/glm.hpp>
 
 namespace COMMONS_NS {
-    class skybox : protected modelo
+    class skybox : protected model
     {
         public:
         unsigned int id_skybox = 0;
-        skybox() : modelo("cubo") {
-            id_skybox = textureLoader::obterInstancia().carregarSkyboxMemoria( 
+        skybox() : model("cube") {
+            id_skybox = texture_loader::get_instance().load_skybox_from_memory(
                     {
                     "skybox_right.png",
                     "skybox_left.png",
@@ -45,9 +45,9 @@ namespace COMMONS_NS {
                     "skybox_bottom.png",
                     "skybox_front.png",
                     "skybox_back.png"});
-            definirShader(shader("skybox.vs", "skybox.fs"));
-            malhas.back().carregar();
+            setShader(shader("skybox.vs", "skybox.fs"));
+            meshes.back().load();
         }
-        void desenhar(glm::mat4 view, glm::mat4 proj);
+        void draw(glm::mat4 view, glm::mat4 proj);
     };
 } // bubble

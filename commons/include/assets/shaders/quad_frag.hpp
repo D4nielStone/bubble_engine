@@ -1,4 +1,4 @@
-/** @copyright 
+/** @copyright
 MIT License
 Copyright (c) 2025 Daniel Oliveira
 
@@ -18,7 +18,7 @@ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE. 
+SOFTWARE.
 */
 /**
  * @file quad_frag.hpp
@@ -27,35 +27,35 @@ SOFTWARE.
  * @date 2025-04-08
  * @version 1.0
  */
-inline const char* quad_frag = 
+inline const char* quad_frag =
 
 R"(
 #version 330 core
 
 in vec2 Uv;
 
-uniform vec4 cor;
-uniform vec4 quadrado;
+uniform vec4 color;
+uniform vec4 rectangle;
 uniform vec4 cor_borda; // Cor da borda
-uniform int tamanho_bordas; // Espessura da borda em px
+uniform int border_size; // Espessura da borda em px
 
 out vec4 FragColor;
 void main()
 {
-    vec2 resolucao_textura = vec2(quadrado.z, quadrado.w);
-    float bordax = tamanho_bordas / resolucao_textura.x;
-    float borday = tamanho_bordas / resolucao_textura.y;
+    vec2 texture_resolution = vec2(rectangle.z, rectangle.w);
+    float border_x = border_size / texture_resolution.x;
+    float border_y = border_size / texture_resolution.y;
     // Detectar borda com base nas coordenadas UV
     if (cor_borda.w != 0)
     {
-        if (Uv.x < bordax || Uv.x > 1.0 - bordax || Uv.y < borday || Uv.y > 1.0 - borday)
+        if (Uv.x < border_x || Uv.x > 1.0 - border_x || Uv.y < border_y || Uv.y > 1.0 - border_y)
         {
             FragColor = cor_borda; // Cor da borda
             return;
         }
     }
 
-    // Define a cor final do fragmento
-    FragColor = cor;
+    // Define a color final do fragmento
+    FragColor = color;
 }
 )";

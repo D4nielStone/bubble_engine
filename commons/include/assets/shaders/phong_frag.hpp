@@ -1,4 +1,4 @@
-/** @copyright 
+/** @copyright
 MIT License
 Copyright (c) 2025 Daniel Oliveira
 
@@ -18,7 +18,7 @@ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE. 
+SOFTWARE.
 */
 /**
  * @file phong_frag.hpp
@@ -139,7 +139,7 @@ void main() {
     vec3 V = normalize(viewPos - Position);
 
     vec3 result;
-        // Luz ambiente com intensidade aplicada
+        // Luz ambient com intensity aplicada
         vec3 ambient = dirLight.ambient * albedo.rgb * ao * dirLight.intensity;
         // Luz direcional
         vec3 L_dir = normalize(-dirLight.direction);

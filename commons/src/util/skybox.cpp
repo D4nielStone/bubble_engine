@@ -1,4 +1,4 @@
-/** @copyright 
+/** @copyright
 MIT License
 Copyright (c) 2025 Daniel Oliveira
 
@@ -18,7 +18,7 @@ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE. 
+SOFTWARE.
 */
 /**
  * @file skybox.cpp
@@ -29,21 +29,21 @@ SOFTWARE.
 
 using namespace COMMONS_NS;
 
-void skybox::desenhar(glm::mat4 view, glm::mat4 proj)
+void skybox::draw(glm::mat4 view, glm::mat4 proj)
         {
             glDepthFunc(GL_ALWAYS);
 
-            glBindVertexArray(malhas.back().obterVertexArray());
-            
+            glBindVertexArray(meshes.back().getVertexArray());
+
             glm::mat4 nview = glm::mat4(glm::mat3(view));
-            obterShader().use();
-            obterShader().setMat4("view", glm::value_ptr(nview));
-            obterShader().setMat4("projection", glm::value_ptr(proj));
-            
+            getShader().use();
+            getShader().setMat4("view", glm::value_ptr(nview));
+            getShader().setMat4("projection", glm::value_ptr(proj));
+
             glBindTexture(GL_TEXTURE_CUBE_MAP, id_skybox);
-            glDrawElements(GL_TRIANGLES, malhas.back().obterIndices().size(), GL_UNSIGNED_INT, 0);
-            
+            glDrawElements(GL_TRIANGLES, meshes.back().getIndices().size(), GL_UNSIGNED_INT, 0);
+
             glBindVertexArray(0);
             glDepthFunc(GL_LESS);
-        
+
         }

@@ -1,4 +1,4 @@
-/** @copyright 
+/** @copyright
 MIT License
 Copyright (c) 2025 Daniel Oliveira
 
@@ -18,7 +18,7 @@ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE. 
+SOFTWARE.
 */
 /**
  * @file phong_vert.hpp
@@ -30,7 +30,7 @@ SOFTWARE.
 
 inline const char* phong_vert = R"(
 #version 330 core
-#define MAX_INSTANCIAS 128
+#define MAX_INSTANCES 128
 
 layout (location = 0) in vec3 aPos;
 layout (location = 1) in vec3 aNormal;
@@ -43,17 +43,17 @@ out vec2 Uv;
 uniform mat4 view;
 uniform mat4 projection;
 
-uniform bool instancia;
-uniform int instancia_id;
-uniform mat4 modelo;
-uniform mat4 transformacoes[MAX_INSTANCIAS];
+uniform bool instance;
+uniform int instance_id;
+uniform mat4 model;
+uniform mat4 transformacoes[MAX_INSTANCES];
 
 void main()
 {
     Uv = aUV;
 
     // Usa transformação por instância se habilitada
-    mat4 model_matrix = instancia ? transformacoes[instancia_id] : modelo;
+    mat4 model_matrix = instance ? transformacoes[instance_id] : model;
 
     Normal = mat3(transpose(inverse(model_matrix))) * aNormal;
     Position = vec3(model_matrix * vec4(aPos, 1.0));

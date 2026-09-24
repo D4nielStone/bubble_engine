@@ -5,8 +5,8 @@
 #include "glad.h"
 #include <GLFW/glfw3.h>
 #include "commons_namespace.hpp"
-#include "tempo.hpp"
-#include "util/vetor2.hpp"
+#include "time.hpp"
+#include "util/vector2.hpp"
 #include "inputs/inputs.hpp"
 
 namespace COMMONS_NS {
@@ -29,19 +29,19 @@ namespace COMMONS_NS {
 	    static void modoLegado();
         public:
             static void posicionarCursor                   (double x, double y);
-            static ivet2 obterTamanhoWindow                ();
-            static bool temInstancia();
-            static window& obterInstancia();
-            static window& newInstance(const char* nome, fvet2 bounds = fvet2(600, 400), const char* icon_path = nullptr);
-    		static window& newInstance(const char* nome, const bool f, fvet2 bounds = fvet2(600, 400), const char* icon_path = nullptr);
+            static ivector_type2 get_window_size                ();
+            static bool hasInstance();
+            static window& get_instance();
+            static window& newInstance(const char* nome, fvector_type2 bounds = fvector_type2(600, 400), const char* icon_path = nullptr);
+    		static window& newInstance(const char* nome, const bool f, fvector_type2 bounds = fvector_type2(600, 400), const char* icon_path = nullptr);
 
-    		tempo m_tempo;
+    		time m_time;
             std::string m_nome{""};
-    		ivet2 tamanho;
+    		ivector_type2 size;
     		GLFWwindow* m_window;
     		inputs m_inputs;
-    		window(const char* nome, fvet2 bounds = fvet2(600, 400), const char* icon_path = nullptr);
-    		window(const char* nome, const bool f, fvet2 bounds = fvet2(600, 400), const char* icon_path = nullptr);
+    		window(const char* nome, fvector_type2 bounds = fvector_type2(600, 400), const char* icon_path = nullptr);
+    		window(const char* nome, const bool f, fvector_type2 bounds = fvector_type2(600, 400), const char* icon_path = nullptr);
     		~window();
     		void poll();
             void loop();
@@ -55,5 +55,5 @@ namespace COMMONS_NS {
     		void nome(const char* novo_nome);
             window() = default;
 	};
-    inline static window* instanciaAtual { nullptr };
+    inline static window* instanceAtual { nullptr };
 }

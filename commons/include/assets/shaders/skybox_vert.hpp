@@ -1,4 +1,4 @@
-/** @copyright 
+/** @copyright
 MIT License
 Copyright (c) 2025 Daniel Oliveira
 
@@ -18,7 +18,7 @@ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE. 
+SOFTWARE.
 */
 /**
  * @file skybox_vert.hpp
@@ -29,7 +29,7 @@ SOFTWARE.
  */
 
 
-inline const char* skybox_vert = 
+inline const char* skybox_vert =
 R"(
 #version 330 core
 layout (location = 0) in vec3 aPos;
@@ -41,6 +41,6 @@ uniform mat4 view;
 void main()
 {
     vec4 pos = projection * view * vec4(-aPos, 1.0);
-    gl_Position = pos.xyww;      
+    gl_Position = pos.xyww;
     TexCoords = aPos;
 })";
