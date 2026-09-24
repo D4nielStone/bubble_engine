@@ -29,8 +29,8 @@ namespace COMMONS_NS {
 	struct code_system : system {
     	code_system() = default;
     	~code_system();
-    	void update() override;
-    	void setup() override;
+        void update(const std::shared_ptr<ecs>&) override;
+        void setup(const std::shared_ptr<ecs>&) override;
 	};
 }
 /** @see code_system.cpp */

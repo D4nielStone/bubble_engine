@@ -81,8 +81,8 @@ namespace COMMONS_NS {
         float               m_width = 20.f;
         float               m_height = 20.f;
         unsigned int        m_espessura_borda = 1;
-        ivector_type2               m_padding {0, 0};
-        ivector_type2               m_general_padding {0, 0};
+        ivec2               m_padding {0, 0};
+        ivec2               m_general_padding {0, 0};
         fvector_type4               m_limits {0, 0, 20, 20};
         color                 m_color_borda {0.1f, 0.1f, 0.1f, 0.f};
         color                 m_color_fundo {1.f, 1.f, 1.f, 0.f};

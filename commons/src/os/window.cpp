@@ -8,6 +8,7 @@
 #include "loaders/shader.hpp"
 #include "loaders/font.hpp"
 #include "inputs/inputs.hpp"
+#include "systems/system.hpp"
 using namespace COMMONS_NS;
 
 void errorCallback(int error, const char* description) {
@@ -34,7 +35,7 @@ window& window::newInstance(const char* nome, const bool f, fvector_type2 bounds
     return *instanceAtual;
 }
 
-ivector_type2 window::get_window_size() {
+ivec2 window::get_window_size() {
     return window::get_instance().size;
 };
 
@@ -53,6 +54,7 @@ window::~window() {
 }
 window::window(const char* nome, fvector_type2 bounds, const char* icon_path)
 {
+    m_ecs = std::make_shared<ecs>();
     glfwSetErrorCallback(errorCallback);
     // inicia glfw
     if (!glfwInit())
@@ -103,6 +105,7 @@ window::window(const char* nome, fvector_type2 bounds, const char* icon_path)
 
 window::window(const char* nome, const bool f, fvector_type2 bounds , const char* icon_path)
 {
+    m_ecs = std::make_shared<ecs>();
     glfwSetErrorCallback(errorCallback);
     // inicia glfw
     if (!glfwInit())
@@ -190,6 +193,21 @@ void window::modoLegado() {
 void window::loop() {
     while(!glfwWindowShouldClose(m_window)) {
         poll();
+        for (const auto& system : m_systems) {
+            system->update(m_ecs);
+        }
         swap();
     }
+}
+
+void window::add(const std::shared_ptr<system>& system) {
+    if (!system) {
+        throw std::invalid_argument("Não é possível adicionar um system nulo à window.");
+    }
+    system->setup(m_ecs);
+    m_systems.push_back(system);
+}
+
+std::shared_ptr<ecs> window::get_ecs() const {
+    return m_ecs;
 }

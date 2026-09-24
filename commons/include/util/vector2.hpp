@@ -150,4 +150,4 @@ namespace COMMONS_NS {
 
 typedef COMMONS_NS::vector2<float> fvector_type2;
 typedef COMMONS_NS::vector2<double> dvector_type2;
-typedef COMMONS_NS::vector2<int> ivector_type2;
+typedef COMMONS_NS::vector2<int> ivec2;

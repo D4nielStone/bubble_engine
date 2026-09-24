@@ -48,8 +48,8 @@ namespace COMMONS_NS {
 
 		static constexpr mask mask = COMPONENTE_CAM;
 
-		ivector_type2* viewport_ptr{ nullptr };
-		ivector_type2 viewportFBO{ 400, 400 };
+		ivec2* viewport_ptr{ nullptr };
+		ivec2 viewportFBO{ 400, 400 };
 
 		void drawFB() const;
         bool analyze(const rapidjson::Value&) override;
@@ -58,16 +58,16 @@ namespace COMMONS_NS {
         ~camera();
 		camera(const bool ortho = false);
 
-		void ativarFB();
-		void desativarFB();
-		glm::mat4 obtViewMatrix();
-		void viewport(const ivector_type2& viewp);
+		void createFB();
+		void deleteFB();
+		glm::mat4 getViewMatrix();
+		void viewport(const ivec2& viewp);
 
 		glm::mat4 obtProjectionMatrix();
 
 		ray point_to_ray(const fvector_type2& screenPoint) const;
 		fvector_type3 telaParaMundo(const fvector_type2& screenPoint, float profundidade) const;
-        ivector_type2 worldParaTela(const fvector_type3& worldPos);
+        ivec2 worldParaTela(const fvector_type3& worldPos);
 
 		void move(const fvector_type3& pos);
 	};

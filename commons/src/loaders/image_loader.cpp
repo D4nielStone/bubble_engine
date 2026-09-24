@@ -416,7 +416,7 @@ GLuint texture_loader::load_texture(const std::string& path, int *width, int *he
     return id;
 }
 
-GLuint texture_loader::load_texture(const std::string& path, ivector_type2& vector_type2) {
+GLuint texture_loader::load_texture(const std::string& path, ivec2& vector_type2) {
     // Verificar se a texture já foi carregada
     if (loaded_textures.find(path) != loaded_textures.end()) {
         return loaded_textures[path]; // Retorna ID da texture j� carregada

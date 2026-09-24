@@ -48,8 +48,8 @@ physics_system::~physics_system() {
     if(dynamic_world)delete dynamic_world;
 }
 
-void physics_system::update() {
-    auto reg = current_project->getFaseAtual()->getEcs();
+void physics_system::update(const std::shared_ptr<ecs>& reg) {
+    if (!reg) return;
     reg->cada<physics, transform>([&](const uint32_t entity) {
         auto f = reg->get<physics>(entity);
         auto t = reg->get<transform>(entity);
@@ -79,8 +79,8 @@ void physics_system::update() {
     });
 }
 
-void physics_system::setup() {
-    auto reg = current_project->getFaseAtual()->getEcs();
+void physics_system::setup(const std::shared_ptr<ecs>& reg) {
+    if (!reg) return;
     reg->cada<physics, transform>([reg, this](const uint32_t entity) {
             /// adiciona bodys rigidos
             auto comp_fisica = reg->get<physics>(entity);

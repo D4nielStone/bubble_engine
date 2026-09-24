@@ -1,5 +1,7 @@
 #pragma once
 #include "commons_namespace.hpp"
+#include <memory>
+#include "core/ecs.hpp"
 
 namespace COMMONS_NS {
     /**
@@ -21,11 +23,11 @@ namespace COMMONS_NS {
         /**
          * @brief Inicializa o system
          */
-        virtual void setup() = 0;
+        virtual void setup(const std::shared_ptr<ecs>&) = 0;
 
         /**
          * @brief Atualiza o system dentro do loop principal
          */
-        virtual void update() = 0;
+        virtual void update(const std::shared_ptr<ecs>&) = 0;
     };
 }

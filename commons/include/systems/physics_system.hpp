@@ -26,8 +26,8 @@ namespace COMMONS_NS {
          physics_system();
         ~physics_system();
 
-        void update() override;
-        void setup() override;
+        void update(const std::shared_ptr<ecs>&) override;
+        void setup(const std::shared_ptr<ecs>&) override;
         bool remove(btRigidBody*& body);
         btDiscreteDynamicsWorld* world();
         float speed;

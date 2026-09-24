@@ -43,7 +43,7 @@ namespace COMMONS_NS{
         public:
             box_type type() const override { return box_type::image; }
             std::string m_image_path	            { "" };
-		    ivector_type2 m_image_size                  {100, 100};
+		    ivec2 m_image_size                  {100, 100};
 		    bool m_image_flip                      { false };
             unsigned int id = 0;
             float m_scale = 1.f;

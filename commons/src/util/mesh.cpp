@@ -70,6 +70,9 @@ void mesh::unload() {
     m_loaded = false;
 }
 
+/**
+ * @brief Carrega os dados do mesh para a GPU
+ */
 void mesh::load() {
     if(m_loaded) return;
 
@@ -78,7 +81,6 @@ void mesh::load() {
     } else {
         m_material.set_uniform("instance", true);
         for (size_t i = 0; i < m_instances.size(); i++) {
-            render_system::calculateTransformacao(&m_instances[i]);
             m_material.set_uniform("transformacoes[" + std::to_string(i) + "]", m_instances[i].get_model_matrix());
         }
     }
@@ -133,7 +135,7 @@ bool mesh::isLoaded() const {
     return m_loaded;
 }
 
-bool mesh::isOverlayed?() const {
+bool mesh::isOverlayed() const {
     return m_overlayed;
 }
 

@@ -1,17 +1,26 @@
-#include "os/window.hpp"
+#include "components/camera.hpp"
+#include "components/renderer.hpp"
 #include "components/transform.hpp"
-#include "core/ecs.hpp"
+#include "os/window.hpp"
+#include "systems/render_system.hpp"
 
 int main() {
-    auto& inst = commons::window::newInstance("Janela de Teste");
-    commons::ecs ecs;
-    auto e1 = ecs.create();
-    ecs.add<commons::transform>(e1);
+    auto& window = commons::window::newInstance("Bubble Engine - exemplo 1");
+    auto scene = window.get_ecs();
 
-    inst.add([&ecs](commons::window& w) {
-        ecs.update();
-    });
-    inst.loop();
+    auto object = scene->create();
+    scene->add<commons::renderer>(object, "cube");
+    scene->get<commons::transform>(object.id)->set_position(
+        fvector_type3(0.0f, 0.0f, 0.0f)
+    );
 
+    auto camera = scene->create();
+    scene->add<commons::camera>(camera, false);
+    auto camera_transform = scene->get<commons::transform>(camera.id);
+    camera_transform->set_position(fvector_type3(0.0f, 0.0f, 5.0f));
+    camera_transform->set_rotation(fvector_type3(0.0f, -90.0f, 0.0f));
+
+    window.add<commons::render_system>();
+    window.loop();
     return 0;
 }

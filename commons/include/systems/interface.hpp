@@ -23,7 +23,7 @@ namespace COMMONS_NS {
         void configOpenglState() const;
         void deconfigOpenglState() const;
         void processarDimensaoModular(box*, fvector_type2&, fvector_type2&);
-        void organizarLinha(box*, bool, const ivector_type2 , const fvector_type2&, const fvector_type2&, fvector_type2&);
+        void organizarLinha(box*, bool, const ivec2 , const fvector_type2&, const fvector_type2&, fvector_type2&);
         void process_modular(box*);
         void update_children(box*);
         void chamarFuncoes(box*);
@@ -31,8 +31,8 @@ namespace COMMONS_NS {
         ~interface();
 
         void gerarBuffers();
-        void setup() override;
-        void update() override;
+        void setup(const std::shared_ptr<ecs>&) override;
+        void update(const std::shared_ptr<ecs>&) override;
 
         std::unique_ptr<box> m_raiz;
         glm::mat4 projecao_viewport;

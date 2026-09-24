@@ -1,47 +1,21 @@
-/** @copyright
-MIT License
-Copyright (c) 2025 Daniel Oliveira
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-*/
-/**
- * @file camera.cpp
-
 #include "glad.h"
-
 #include "debugging/debug.hpp"
 #include "components/camera.hpp"
 #include "components/transform.hpp"
-#include "core/phase.hpp"
-#include "core/project.hpp"
+#include "core/ecs.hpp"
 #include "os/window.hpp"
 
 using namespace COMMONS_NS;
 
-void camera::drawFB() const
-{
+/**
+ * @brief Ativa a escrita do framebuffer da câmera
+ */
+void camera::drawFB() const {
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_CULL_FACE);
     glDepthFunc(GL_LESS);
     glDepthMask(GL_TRUE);
-    if (flag_fb)
-    {
+    if (flag_fb) {
         glBindTexture(GL_TEXTURE_2D, texture);
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, viewportFBO.x, viewportFBO.y, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
         glBindTexture(GL_TEXTURE_2D, 0);
@@ -50,22 +24,24 @@ void camera::drawFB() const
         glBindRenderbuffer(GL_RENDERBUFFER, 0);
         glBindFramebuffer(GL_FRAMEBUFFER, fbo);
         glViewport(0, 0, viewportFBO.x, viewportFBO.y);
+    } else {
+        glBindFramebuffer(GL_FRAMEBUFFER, 0);
+        glViewport(0, 0, window::get_instance().size.x, window::get_instance().size.y);
     }
     glClearColor(ceu.r, ceu.g, ceu.b, ceu.a);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     if(viewport_ptr)
-    glViewport(0, 0, viewport_ptr->x, viewport_ptr->y);
+        glViewport(0, 0, viewport_ptr->x, viewport_ptr->y);
     else
-    glViewport(0, 0, viewportFBO.x, viewportFBO.y);
+        glViewport(0, 0, viewportFBO.x, viewportFBO.y);
 }
-
 
 camera::~camera()
 {
     debugging::emit(debug, "camera", "descarregando");
 
     if(m_skybox)delete m_skybox;
-    desativarFB();
+    deleteFB();
 }
 
 camera::camera(const bool orth)
@@ -129,7 +105,7 @@ bool camera::serialize(rapidjson::Value& value, rapidjson::Document::AllocatorTy
 
     return true;
 }
-void camera::ativarFB()
+void camera::createFB()
 {
     flag_fb = true;
 
@@ -162,7 +138,7 @@ void camera::ativarFB()
 
 }
 
-void camera::desativarFB()
+void camera::deleteFB()
 {
     if (!flag_fb) return;
     flag_fb = false;
@@ -171,9 +147,11 @@ void camera::desativarFB()
     glDeleteTextures(1, &texture);
 }
 
-glm::mat4 camera::obtViewMatrix() {
+glm::mat4 camera::getViewMatrix() {
+    if (!m_transform && reg)
+        m_transform = reg->get<transform>(my_object).get();
     if (!m_transform)
-        m_transform = current_project->getFaseAtual()->getEcs()->get<transform>(my_object).get();
+        return viewMatrix;
 
     position = m_transform->get_position();
 
@@ -187,7 +165,7 @@ glm::mat4 camera::obtViewMatrix() {
 
     up = fvector_type3(0.f , 1.f, 0.f);
 
-    right_limit = fvector_type3(glm::normalize(glm::cross(forward.to_glm(), up.to_glm())));
+    right = fvector_type3(glm::normalize(glm::cross(forward.to_glm(), up.to_glm())));
     up = fvector_type3(glm::normalize(glm::cross(right.to_glm(), forward.to_glm())));
 
     // Atualiza a transformação
@@ -205,13 +183,12 @@ glm::mat4 camera::obtViewMatrix() {
     viewMatrix = glm::lookAt(position.to_glm(), target.to_glm(), up.to_glm());
     return viewMatrix;
 }
-void camera::viewport(const ivector_type2& viewp)
-{
+void camera::viewport(const ivec2& viewp) {
     viewportFBO = viewp;
 }
 
 glm::mat4 camera::obtProjectionMatrix() {
-    ivector_type2 viewp;
+    ivec2 viewp;
     if (flag_fb && !viewport_ptr)
         viewp = viewportFBO;
     else if(viewport_ptr)
@@ -266,13 +243,13 @@ fvector_type3 camera::telaParaMundo(const fvector_type2 &screenPoint, float prof
     return fvector_type3(worldCoords.x,worldCoords.y,worldCoords.z).normalize();
 }
 
-ivector_type2 camera::worldParaTela(const fvector_type3 &worldPos)
+ivec2 camera::worldParaTela(const fvector_type3 &worldPos)
 {
     glm::vec4 clipSpacePos = projMatriz * viewMatrix * glm::vec4(worldPos.x, worldPos.y, worldPos.z, 1.0f);
 
     // Validação de w para evitar divisões inválidas
     if (clipSpacePos.w <= 0.0001f) {
-        return ivector_type2(-1, -1); // ou outro tratamento adequado
+        return ivec2(-1, -1); // ou outro tratamento adequado
     }
 
     glm::vec3 ndcPos = glm::vec3(clipSpacePos) / clipSpacePos.w;
@@ -280,7 +257,7 @@ ivector_type2 camera::worldParaTela(const fvector_type3 &worldPos)
     int screenWidth = viewport_ptr->x;
     int screenHeight = viewport_ptr->y;
 
-    ivector_type2 screenPos;
+    ivec2 screenPos;
     screenPos.x = static_cast<int>(std::round((ndcPos.x * 0.5f + 0.5f) * screenWidth));
     screenPos.y = static_cast<int>(std::round((1.0f - (ndcPos.y * 0.5f + 0.5f)) * screenHeight)); // Inverter Y
     return screenPos;
@@ -288,12 +265,13 @@ ivector_type2 camera::worldParaTela(const fvector_type3 &worldPos)
 
 void camera::move(const fvector_type3& pos)
 {
+    if (!m_transform && reg)
+        m_transform = reg->get<transform>(my_object).get();
     if (!m_transform)
-        m_transform = current_project->getFaseAtual()->getEcs()->get<transform>(my_object).get();
+        return;
 
     // Atualiza a posição com base na entrada
     m_transform->move(forward * pos.z);  // Move para frente/trás
     m_transform->move(right * pos.x);  // Move para os lados
     m_transform->move(up * pos.y);     // Move para up/baixo
 }
-*/

@@ -4,3 +4,6 @@
 [submodule "libs/rapidjson"]
 	path = libs/rapidjson
 	url = https://github.com/Tencent/rapidjson.git
+[submodule "libs/cpp-bgui"]
+	path = libs/cpp-bgui
+	url = https://github.com/D4nielStone/cpp-bgui.git

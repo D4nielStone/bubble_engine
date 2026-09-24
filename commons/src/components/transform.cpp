@@ -63,7 +63,13 @@ bool transform::serialize(rapidjson::Value& value, rapidjson::Document::Allocato
     return true;
 }
 
-glm::mat4 transform::get_model_matrix() const {
+glm::mat4 transform::get_model_matrix() {
+    matrizmodelo = glm::mat4(1.0f);
+    matrizmodelo = glm::translate(matrizmodelo, position.to_glm());
+    matrizmodelo = glm::rotate(matrizmodelo, glm::radians(rotation.x), glm::vec3(1.f, 0.f, 0.f));
+    matrizmodelo = glm::rotate(matrizmodelo, glm::radians(rotation.y), glm::vec3(0.f, 1.f, 0.f));
+    matrizmodelo = glm::rotate(matrizmodelo, glm::radians(rotation.z), glm::vec3(0.f, 0.f, 1.f));
+    matrizmodelo = glm::scale(matrizmodelo, scale.to_glm());
     return matrizmodelo;
 }
 

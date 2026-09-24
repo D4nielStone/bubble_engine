@@ -13,7 +13,7 @@ namespace COMMONS_NS {
 	* @brief gerencia as entities
 	* @brief nucleo do system ECS
 	*/
-	struct ecs
+	struct ecs : public std::enable_shared_from_this<ecs>
 	{
 	    ~ecs(){entities.clear(); mascaras.clear();}
 		/// Armazena mask da entity associada
@@ -55,6 +55,7 @@ namespace COMMONS_NS {
 		ent.mask |= mascaras[ent.id];
 		entities[ent.id][T::mask] = std::make_shared<T>(std::forward<Args>(args)...); // Adiciona o component
 		entities[ent.id][T::mask]->my_object = ent.id;
+		entities[ent.id][T::mask]->reg = shared_from_this();
 	}
 
 

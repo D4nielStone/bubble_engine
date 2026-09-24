@@ -2,12 +2,14 @@
 #include <functional>
 #include <memory>
 #include <unordered_map>
+#include <vector>
 #include "glad.h"
 #include <GLFW/glfw3.h>
 #include "commons_namespace.hpp"
 #include "time.hpp"
 #include "util/vector2.hpp"
 #include "inputs/inputs.hpp"
+#include "systems/system.hpp"
 
 namespace COMMONS_NS {
 	/**
@@ -29,7 +31,7 @@ namespace COMMONS_NS {
 	    static void modoLegado();
         public:
             static void posicionarCursor                   (double x, double y);
-            static ivector_type2 get_window_size                ();
+            static ivec2 get_window_size                ();
             static bool hasInstance();
             static window& get_instance();
             static window& newInstance(const char* nome, fvector_type2 bounds = fvector_type2(600, 400), const char* icon_path = nullptr);
@@ -37,14 +39,20 @@ namespace COMMONS_NS {
 
     		time m_time;
             std::string m_nome{""};
-    		ivector_type2 size;
+            ivec2 size;
     		GLFWwindow* m_window;
     		inputs m_inputs;
+            std::shared_ptr<ecs> m_ecs;
+            std::vector<std::shared_ptr<system>> m_systems;
     		window(const char* nome, fvector_type2 bounds = fvector_type2(600, 400), const char* icon_path = nullptr);
     		window(const char* nome, const bool f, fvector_type2 bounds = fvector_type2(600, 400), const char* icon_path = nullptr);
     		~window();
     		void poll();
             void loop();
+            void add(const std::shared_ptr<system>& system);
+            template <typename T, typename... Args>
+            std::shared_ptr<T> add(Args&&... args);
+            std::shared_ptr<ecs> get_ecs() const;
             inline void defCursor(const cursor c) {
                 if(c == m_cursor) return;
                 m_cursor = c;
@@ -56,4 +64,11 @@ namespace COMMONS_NS {
             window() = default;
 	};
     inline static window* instanceAtual { nullptr };
+
+    template <typename T, typename... Args>
+    std::shared_ptr<T> window::add(Args&&... args) {
+        auto system = std::make_shared<T>(std::forward<Args>(args)...);
+        add(system);
+        return system;
+    }
 }

@@ -7,7 +7,7 @@ using namespace COMMONS_NS;
 camera_editor::camera_editor()
 {
     m_skybox = new skybox();
-    ativarFB(); // Ativa framebuffer
+    createFB(); // Ativa framebuffer
     framebuffer_ptr = std::make_unique<elements::image>(texture, true);
     framebuffer_ptr->m_style.m_style_flag |= style_flag::largura_percentual | style_flag::altura_percentual;
     framebuffer_ptr->m_style.m_width = 1;

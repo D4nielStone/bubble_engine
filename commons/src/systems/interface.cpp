@@ -183,7 +183,7 @@ interface::interface() {
     m_raiz = std::make_unique<box>();
 }
 
-void interface::setup() {
+void interface::setup(const std::shared_ptr<ecs>&) {
     gerarBuffers();
 }
 
@@ -295,7 +295,7 @@ void interface::deconfigOpenglState() const {
     glCullFace(GL_BACK);
 }
 
-void interface::update() {
+void interface::update(const std::shared_ptr<ecs>&) {
     configOpenglState();
 
     window::get_instance().defCursor(
@@ -355,7 +355,7 @@ void interface::update() {
 void interface::organizarLinha(
     box* it_caixa,
     bool is_horizontal,
-    const ivector_type2 range_filhos,
+    const ivec2 range_filhos,
     const fvector_type2& unidade_crescimento,
     const fvector_type2& espaco_ocupado,
     fvector_type2& cursor

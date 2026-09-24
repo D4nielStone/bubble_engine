@@ -17,8 +17,8 @@ namespace COMMONS_NS {
      public:
         mesh() = default;
         mesh(const std::vector<vertex>& vertices, const std::vector<unsigned int> &indices, const material& material);
-        std::vector<vertex>        getVertices() const;
-        std::vector<transform>  getInstances() const;
+        std::vector<vertex>         getVertices() const;
+        std::vector<transform>      getInstances() const;
         std::vector<unsigned int>   getIndices() const;
         material                    getMaterial() const;
         unsigned int                getVertexArray() const;
@@ -33,13 +33,13 @@ namespace COMMONS_NS {
         void                        load();
         void                        draw(shader& shader);
         bool                        isLoaded() const;
-        bool                        isOverlayed?() const;
+        bool                        isOverlayed() const;
         ~mesh();
      private:
         bool                        m_overlayed { false },
                                     m_loaded { false };
-        std::vector<transform>  m_instances;
-        std::vector<vertex>        m_vertices;
+        std::vector<transform>      m_instances;
+        std::vector<vertex>         m_vertices;
         std::vector<unsigned int>   m_indices;
         material                    m_material;
         unsigned int                m_VAO,

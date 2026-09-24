@@ -100,7 +100,7 @@ namespace COMMONS_NS {
     public:
         static texture_loader& get_instance();
         GLuint load_texture(const std::string&, fvector_type2&);
-        GLuint load_texture(const std::string&, ivector_type2&);
+        GLuint load_texture(const std::string&, ivec2&);
         GLuint load_texture(const std::string& path, int* width, int* height);
         GLuint load_texture(const std::string& path, double* width, double* height);
         GLuint load_texture(const std::string& path);
