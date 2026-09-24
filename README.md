@@ -2,7 +2,7 @@
 
 Bubble Engine é uma engine experimental em C++ para janelas, renderização,
 física e entidades baseadas em componentes. O projeto ainda está em
-desenvolvimento e inclui um exemplo mínimo em `examples/scene1.cpp`.
+desenvolvimento e inclui um exemplo mínimo em `examples/exemplo1.cpp`.
 
 ## Dependências
 
